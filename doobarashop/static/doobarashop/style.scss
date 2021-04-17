@@ -1,0 +1,29 @@
+$back-color:  #292826;
+$identity-color: #F9D342;
+
+.body {
+    box-sizing: border-box;
+    position: relative;
+    padding: 0 0 0 0;
+  }
+
+ /* the fist header bar that contain phone and social media links */
+.top-bar {
+    background-color: $back-color;
+    position: relative;
+    width: 100%; 
+
+
+}
+
+// .top-bar-left {
+//     text-align: left;
+//     display: inline;
+// }
+
+// .top-bar-right {
+//     text-align: right;
+// }
+
+
+  
