@@ -1,14 +1,124 @@
-.body {
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-  position: relative;
+html, body {
+  margin: 0px;
+  padding: 0px;
+}
+
+/* the fist header top bar that contain phone and social media links */
+.top-bar {
+  background-color: #292826;
+  max-height: 45px;
+}
+
+.fas, .fa-phone-alt {
+  color: #F9D342;
+}
+
+.phone {
+  -webkit-transition: background-color 1s, font-size 1s, weight 1s;
+  transition: background-color 1s, font-size 1s, weight 1s;
+}
+
+.phone:hover {
+  background-color: #F9D342;
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.phone:hover .fa-phone-alt {
+  color: white;
+}
+
+.top-bar-left ul {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  color: white;
+  list-style: none;
+  font-size: 14px;
+  font-family: "Roboto",Sans-serif;
+  font-weight: 400;
+}
+
+.top-bar-left a:link {
+  color: white;
+  text-decoration: none;
+  padding-right: 20px;
+}
+
+.top-bar-right, .top-bar-left {
+  display: inline;
+}
+
+.top-bar-right {
+  float: right;
+  padding-right: 40px;
+}
+
+.social-media {
+  padding: 10px 20px 15px 20px;
+  color: white;
+  font-size: 25px;
+  -webkit-transition: background-color 1s,-webkit-transform 1s;
+  transition: background-color 1s,-webkit-transform 1s;
+  transition: background-color 1s,transform 1s;
+  transition: background-color 1s,transform 1s,-webkit-transform 1s;
+}
+
+.social-media:hover {
+  background-color: #F9D342;
+  -webkit-transform: rotate(360deg);
+          transform: rotate(360deg);
+}
+
+nav {
+  background-color: #292826;
+  border-top: 5px solid #F9D342;
+  width: 100%;
+  margin: 0 0 0 0;
   padding: 0 0 0 0;
 }
 
-/* the fist header bar that contain phone and social media links */
-.top-bar {
-  background-color: #292826;
-  position: relative;
-  width: 100%;
+.logo {
+  padding-left: 20px;
+}
+
+.logo, .search-box {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+.search-box {
+  float: right;
+  width: 20%;
+}
+
+form.search-site input[type=text] {
+  border-bottom-left-radius: 4px;
+  padding: 12px 20px;
+  font-size: 15px;
+  border: 1px solid #F9D342;
+  float: left;
+  width: 80%;
+  background: #f1f1f1;
+}
+
+form.search-site button {
+  float: left;
+  width: 20%;
+  padding: 10.5px 20px;
+  background: #F9D342;
+  color: white;
+  font-size: 17px;
+  border: 1px solid #F9D342;
+  border-left: none;
+  /* Prevent double borders */
+  cursor: pointer;
+  border-bottom-right-radius: 4px;
+}
+
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 /*# sourceMappingURL=style.css.map */

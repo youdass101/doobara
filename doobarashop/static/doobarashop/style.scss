@@ -1,29 +1,140 @@
+// defining design color style
 $back-color:  #292826;
 $identity-color: #F9D342;
 
-.body {
-    box-sizing: border-box;
-    position: relative;
-    padding: 0 0 0 0;
-  }
-
- /* the fist header bar that contain phone and social media links */
-.top-bar {
-    background-color: $back-color;
-    position: relative;
-    width: 100%; 
-
-
+// page style in general
+html, body {
+    margin: 0px; padding: 0px;
 }
 
-// .top-bar-left {
-//     text-align: left;
-//     display: inline;
-// }
+ /* the fist header top bar that contain phone and social media links */
+.top-bar {
+    background-color: $back-color;
+    max-height: 45px;
+}
 
-// .top-bar-right {
-//     text-align: right;
-// }
+// phone and cash on delivery left widget
+// phone icon color in top left bar
+.fas, .fa-phone-alt {
+    color: $identity-color;
+}
+
+// phone and number element transition animated trasition setting
+.phone {
+    transition: background-color 1s, font-size 1s, weight 1s;
+}
+
+// phone icon and number on hover transtion 
+.phone:hover {
+    background-color: $identity-color;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+// phone icon when phone class on hover to change icont color 
+.phone:hover .fa-phone-alt{
+    color: white;
+}
+
+// phone and deliver ul styling 
+.top-bar-left ul {
+    display: inline-flex;
+    color: white;
+    list-style: none;
+    font-size: 14px;
+    font-family: "Roboto",Sans-serif;
+    font-weight: 400;
+}
+
+// phone and number disable url style and add padding
+.top-bar-left a:link {
+    color:white;
+    text-decoration: none;
+    padding-right: 20px;
+}
+
+//set phone, deliver and social media element on the same line
+.top-bar-right, .top-bar-left {
+    display: inline;
+}
+
+//mode the social media element in the same line to the right 
+.top-bar-right {
+    float: right;
+    padding-right: 40px;
+}
+
+// social media icone styling and setting animated transition
+.social-media {
+    padding: 10px 20px 15px 20px;
+    color: white;
+    font-size: 25px;
+    transition: background-color 1s,transform 1s;
+}
+
+// social media icons on hover animation trasition action
+.social-media:hover {
+    background-color: $identity-color;
+    transform: rotate(360deg);
+}
+
+// navigation section style default
+nav {
+    background-color: $back-color;
+    border-top: 5px solid $identity-color;
+    width: 100%;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+}
+
+// logo image style
+.logo {
+    padding-left: 20px;
+}
+
+// set logo and search on same line
+.logo, .search-box {
+    display: inline-flex;
+}
+ // search box section style default 
+.search-box {
+    float: right;
+    width: 20%;
+}
+
+// search box form input style
+form.search-site input[type=text] {
+    border-bottom-left-radius: 4px ;
+    padding: 12px 20px;
+    font-size: 15px;
+    border: 1px solid $identity-color;
+    float: left;
+    width: 80%;
+    background: #f1f1f1;
+   
+  }
+
+  // search form button style 
+  form.search-site button {
+    float: left;
+    width: 20%;
+    padding: 10.5px 20px;
+    background: $identity-color;
+    color: white;
+    font-size: 17px;
+    border: 1px solid $identity-color;
+    border-left: none; /* Prevent double borders */
+    cursor: pointer;
+    border-bottom-right-radius: 4px ;
+  }
+
+  // It helps form input seach and button icon to align for some reason
+  * {
+    box-sizing: border-box;
+  }
+
+
+
 
 
   

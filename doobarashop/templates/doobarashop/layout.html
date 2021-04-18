@@ -3,25 +3,65 @@
 <html lang="eng">
     <head>
         <!-- MOBILE RESPONSIVILITY -->
-        <meta name="viewport" content="widt=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
         <link href="{% static 'doobarashop/style.css' %}" rel="stylesheet">
-        <script href="{% static 'doobarashop/main.js'}"></script>
+        <script href="{% static 'doobarashop/main.js'%}"></script>
+        <link href="{% static 'doobarashop/all.css' %}" rel="stylesheet">
 
         <title>{% block pagetitle %}{%endblock%}</title>
     </head>
     <body>
+        <!-- top bar contain phone deliver and social media icons -->
         <div class="top-bar">
-            <div class="tob-bar-left">
+            <!-- left section of top bar contain phone and deliver -->
+            <div class="top-bar-left">
                 <ul>
-                    <li><a href="tel:96170856471"> 70 856471</a></li>
-                    <li>Cash on delivery</li>
+                    <li class="phone"><a href="tel:96170856471"><i class="fas fa-phone-alt"></i> 70 856471</a></li>
+                    <li><i class="fas fa-dollar-sign"></i> Cash on delivery</li>
                 </ul>
             </div>
+            <!-- right top bar section contain social media icon link -->
             <div class="top-bar-right">
-                <p>Social Media</p>
+                
+                <a href="https://www.facebook.com/doobarashop" target="_blank"><i class="social-media fab fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/doobarashop/" target="_blank"><i class="social-media fab fa-instagram"></i></a>
+                <a href="https://www.youtube.com/gadgetsfreak" target="_blank"><i class="social-media fab fa-youtube"></i></a>
             </div>
         </div>
+
+        <!-- navigation area bar contail logo home url my account, search navigation and cart -->
+        <nav>
+            <!-- first top left section in navigation contain logo with home link -->
+            <div class="logo-seach">
+                <div class="logo">
+                    <a href=""> 
+                        <img src="{% static 'doobarashop/upload/images/home-automaion-doobara-logo.png' %}" alt="home automation doobara">
+                    </a>
+                </div>
+                <!-- second right top section of navigation bar contain search box  -->
+                <div class="search-box" >
+                    <form class="search-site">
+                        <!-- text input for search  -->
+                        <input class="search-input" type="text" placeholder="Search Products">
+                        <!-- button icon for search submit -->
+                        <button type="submit"><i class="fa fa-search"></i></button>
+                    </form>
+                
+                </div>
+            </div>
+            <!-- 3d left buttom section of navigatio bar contain navigation menu links -->
+            <div class="navigation-bar">
+                <div class="navigation">
+
+                </div>
+                <!-- final right buttom section of navigation bar contain cart and totla url -->
+                <div class="cart">
+
+                </div>
+
+            </div>
+        </nav>
 
         <h1>we are working hard to create things that matter</h1>
     </body>
