@@ -121,4 +121,13 @@ form.search-site button {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
 }
+
+.navigation {
+  color: white;
+  padding: 15px 0px 20px 37px;
+}
+
+.navigation a {
+  padding: 0 10px 0 0px;
+}
 /*# sourceMappingURL=style.css.map */
