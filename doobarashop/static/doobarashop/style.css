@@ -39,7 +39,7 @@ html, body {
   font-weight: 400;
 }
 
-.top-bar-left a:link {
+.myAccount, .top-bar-left a:link {
   color: white;
   text-decoration: none;
   padding-right: 20px;
@@ -90,7 +90,7 @@ nav {
 
 .search-box {
   float: right;
-  width: 20%;
+  width: 30%;
 }
 
 form.search-site input[type=text] {
@@ -117,17 +117,29 @@ form.search-site button {
   border-bottom-right-radius: 4px;
 }
 
+.myAccount {
+  padding-top: 20px;
+}
+
 * {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
 }
 
 .navigation {
-  color: white;
+  color: #F9D342;
   padding: 15px 0px 20px 37px;
+  font-size: 1.2em;
+  font-weight: 400;
 }
 
 .navigation a {
-  padding: 0 10px 0 0px;
+  padding: 0 20px 0 0px;
+}
+
+.navigation a:link {
+  color: #F9D342;
+  text-decoration: none;
+  padding-right: 20px;
 }
 /*# sourceMappingURL=style.css.map */

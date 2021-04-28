@@ -6,7 +6,6 @@ $identity-color: #F9D342;
 html, body {
     margin: 0px; padding: 0px;
 }
-
  /* the fist header top bar that contain phone and social media links */
 .top-bar {
     background-color: $back-color;
@@ -47,7 +46,7 @@ html, body {
 }
 
 // phone and number disable url style and add padding
-.top-bar-left a:link {
+.myAccount, .top-bar-left a:link {
     color:white;
     text-decoration: none;
     padding-right: 20px;
@@ -99,7 +98,7 @@ nav {
  // search box section style default 
 .search-box {
     float: right;
-    width: 20%;
+    width: 30%;
 }
 
 // search box form input style
@@ -128,19 +127,31 @@ form.search-site input[type=text] {
     border-bottom-right-radius: 4px ;
   }
 
+  .myAccount {
+    padding-top: 20px;
+  }
+
   // It helps form input seach and button icon to align for some reason
   * {
     box-sizing: border-box;
   }
 
   .navigation {
-      color: white;
+      color:$identity-color;
       padding: 15px 0px 20px 37px;
+      font-size: 1.2em;
+      font-weight: 400;
   }
 
-  .navigation a{
-      padding: 0 10px 0 0px;
+  .navigation a {
+      padding: 0 20px 0 0px;
   }
+
+  .navigation a:link {
+    color:$identity-color;
+    text-decoration: none;
+    padding-right: 20px;
+  } 
 
 
 
