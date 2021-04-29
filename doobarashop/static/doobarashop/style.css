@@ -9,7 +9,7 @@ html, body {
   max-height: 45px;
 }
 
-.fas, .fa-phone-alt {
+.fas, .fa-phone-alt, .far, .fa-user {
   color: #F9D342;
 }
 
@@ -90,7 +90,7 @@ nav {
 
 .search-box {
   float: right;
-  width: 30%;
+  width: 40%;
 }
 
 form.search-site input[type=text] {
@@ -119,6 +119,7 @@ form.search-site button {
 
 .myAccount {
   padding-top: 20px;
+  width: 50%;
 }
 
 * {
@@ -141,5 +142,33 @@ form.search-site button {
   color: #F9D342;
   text-decoration: none;
   padding-right: 20px;
+}
+
+.navigationMenuName {
+  color: white;
+}
+
+.cart {
+  float: right;
+  width: 17%;
+  color: white;
+}
+
+.navigation, .cart {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding-right: 0px;
+}
+
+.cartIcon {
+  float: right;
+}
+
+.cartUrl {
+  text-decoration: none;
+  color: white;
+  padding-right: 40px;
+  padding-left: 10px;
 }
 /*# sourceMappingURL=style.css.map */
