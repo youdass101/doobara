@@ -8,35 +8,33 @@ html, body {
     
 }
 
+// ALL NAVIGATION ICONS STYLE
+.icons {
+    color: $identity-color;
+}
+
+
+
  /* the fist header top bar that contain phone and social media links */
 .top-bar {
     background-color: $back-color;
     max-height: 45px;
 }
 
-// phone and cash on delivery left widget
-// phone icon color in top left bar
-.fas, .fa-phone-alt, .far ,.fa-user{
-    color: $identity-color;
-}
-
 // phone and number element transition animated trasition setting
 .phone {
     transition: background-color 1s, font-size 1s, weight 1s;
 }
-
 // phone icon and number on hover transtion 
 .phone:hover {
     background-color: $identity-color;
     font-weight: 500;
-    font-size: 16px;
+    border-radius: 5px;
 }
-
 // phone icon when phone class on hover to change icont color 
 .phone:hover .fa-phone-alt{
     color: white;
 }
-
 // phone and deliver ul styling 
 .top-bar-left ul {
     display: inline-flex;
@@ -46,9 +44,8 @@ html, body {
     font-family: "Roboto",Sans-serif;
     font-weight: 400;
 }
-
 // phone and number disable url style and add padding
-.myAccount, .top-bar-left a:link {
+.top-bar-left a:link {
     color:white;
     text-decoration: none;
     padding-right: 20px;
@@ -64,7 +61,6 @@ html, body {
     float: right;
     padding-right: 40px;
 }
-
 // social media icone styling and setting animated transition
 .social-media {
     padding: 10px 20px 15px 20px;
@@ -72,12 +68,12 @@ html, body {
     font-size: 25px;
     transition: background-color 1s,transform 1s;
 }
-
 // social media icons on hover animation trasition action
 .social-media:hover {
     background-color: $identity-color;
     transform: rotate(360deg);
 }
+
 
 // navigation section style default
 nav {
@@ -97,12 +93,19 @@ nav {
 .logo, .search-box {
     display: inline-flex;
 }
+
+.myAccount {
+    padding-top: 20px;
+    width: 50%;
+    color:white;
+    text-decoration: none;  
+}
+
  // search box section style default 
 .search-box {
     float: right;
     width: 40%;
 }
-
 // search box form input style
 form.search-site input[type=text] {
     border-bottom-left-radius: 4px ;
@@ -112,9 +115,7 @@ form.search-site input[type=text] {
     float: left;
     width: 80%;
     background: #f1f1f1;
-   
 }
-
   // search form button style 
 form.search-site button {
     float: left;
@@ -129,11 +130,6 @@ form.search-site button {
     border-bottom-right-radius: 4px ;
 }
 
-.myAccount {
-    padding-top: 20px;
-    width: 50%;
-    // padding-right: 10px;
-}
 
   // It helps form input seach and button icon to align for some reason
 * {
@@ -152,14 +148,11 @@ form.search-site button {
 }
 
 .navigation a:link {
-    color:$identity-color;
+    color:white;
     text-decoration: none;
     padding-right: 20px;
 } 
 
-.navigationMenuName {
-    color: white;
-}
 
 .cart {
     float: right;

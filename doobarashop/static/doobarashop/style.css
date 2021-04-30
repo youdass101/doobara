@@ -3,14 +3,14 @@ html, body {
   padding: 0px;
 }
 
+.icons {
+  color: #F9D342;
+}
+
 /* the fist header top bar that contain phone and social media links */
 .top-bar {
   background-color: #292826;
   max-height: 45px;
-}
-
-.fas, .fa-phone-alt, .far, .fa-user {
-  color: #F9D342;
 }
 
 .phone {
@@ -21,7 +21,7 @@ html, body {
 .phone:hover {
   background-color: #F9D342;
   font-weight: 500;
-  font-size: 16px;
+  border-radius: 5px;
 }
 
 .phone:hover .fa-phone-alt {
@@ -39,7 +39,7 @@ html, body {
   font-weight: 400;
 }
 
-.myAccount, .top-bar-left a:link {
+.top-bar-left a:link {
   color: white;
   text-decoration: none;
   padding-right: 20px;
@@ -88,6 +88,13 @@ nav {
   display: inline-flex;
 }
 
+.myAccount {
+  padding-top: 20px;
+  width: 50%;
+  color: white;
+  text-decoration: none;
+}
+
 .search-box {
   float: right;
   width: 40%;
@@ -117,11 +124,6 @@ form.search-site button {
   border-bottom-right-radius: 4px;
 }
 
-.myAccount {
-  padding-top: 20px;
-  width: 50%;
-}
-
 * {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
@@ -139,13 +141,9 @@ form.search-site button {
 }
 
 .navigation a:link {
-  color: #F9D342;
+  color: white;
   text-decoration: none;
   padding-right: 20px;
-}
-
-.navigationMenuName {
-  color: white;
 }
 
 .cart {

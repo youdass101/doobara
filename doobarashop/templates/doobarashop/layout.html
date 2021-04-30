@@ -7,6 +7,7 @@
         
         <link href="{% static 'doobarashop/style.css' %}" rel="stylesheet">
         <script href="{% static 'doobarashop/main.js'%}"></script>
+        <!-- Font awesome -->
         <link href="{% static 'doobarashop/all.css' %}" rel="stylesheet">
 
         <title>{% block pagetitle %}{%endblock%}</title>
@@ -14,14 +15,14 @@
     <body>
         <!-- top bar contain phone deliver and social media icons -->
         <div class="top-bar">
-            <!-- left section of top bar contain phone and deliver -->
+            <!-- PHONE AND PAYMENT ON DELIVERY left section of top bar -->
             <div class="top-bar-left">
                 <ul>
-                    <li class="phone"><a href="tel:96170856471"><i class="fas fa-phone-alt"></i> 70 856471</a></li>
-                    <li><i class="fas fa-dollar-sign"></i> Cash on delivery</li>
+                    <li class="phone"><a href="tel:96170856471"><i class="icons     fas fa-phone-alt"></i> 70 856471</a></li>
+                    <li><i class="icons fas fa-dollar-sign"></i> Cash on delivery</li>
                 </ul>
             </div>
-            <!-- right top bar section contain social media icon link -->
+            <!-- SOCIAL MEDIA ICONS right top bar section contain link -->
             <div class="top-bar-right">
                 <a href="https://www.facebook.com/doobarashop" target="_blank"><i class="social-media fab fa-facebook-f"></i></a>
                 <a href="https://www.instagram.com/doobarashop/" target="_blank"><i class="social-media fab fa-instagram"></i></a>
@@ -34,14 +35,14 @@
             <!-- first top left section in navigation contain logo with home link -->
             <div class="logo-seach">
                 <div class="logo">
-                    <a href=""> 
+                    <a href="#"> 
                         <img src="{% static 'doobarashop/upload/images/home-automaion-doobara-logo.png' %}" alt="home automation doobara">
                     </a>
                 </div>
 
                 <!-- second right top section of navigation bar contain search box  -->
                 <div class="search-box" >
-                    <a class="myAccount" href="#"><i class="far fa-user"></i> My Account</a>
+                    <a class="myAccount" href="#"><i class="icons far fa-user"></i> My Account</a>
 
                     <form class="search-site">
                         <!-- text input for search  -->
@@ -55,15 +56,15 @@
             <!-- 3d left buttom section of navigatio bar contain navigation menu links -->
             <div class="navigation-bar">
                 <div class="navigation">
-                    <a href="#"><i class="fas fa-store"></i><span class="navigationMenuName"> Shop</span></a>
-                    <a href="#"><i class="fab fa-blogger-b"></i><span class="navigationMenuName"> Blog</span></a>
-                    <a href="#"><i class="fab fa-youtube"></i><span class="navigationMenuName"> Video</span></a>
-                    <a href="#"><i class="fas fa-inbox"></i><span class="navigationMenuName"> Contact us</span></a>
+                    <a href="#"><i class="icons fas fa-store"></i><span class="navigationMenuName"> Shop</span></a>
+                    <a href="#"><i class="icons fab fa-blogger-b"></i><span class="navigationMenuName"> Blog</span></a>
+                    <a href="#"><i class="icons fab fa-youtube"></i><span class="navigationMenuName"> Video</span></a>
+                    <a href="#"><i class="icons fas fa-inbox"></i><span class="navigationMenuName"> Contact us</span></a>
 
                 </div>
                 <!-- final right buttom section of navigation bar contain cart and totla url -->
                 <div class="cart">
-                    <p ><span class="homeTotal">0.00  <a href="#" class="cartUrl"> 0 Items</span><span class="cartIcon"><i class="fas fa-shopping-cart"></i></a></span></p>
+                    <p ><span class="homeTotal">0.00  <a href="#" class="cartUrl"> 0 Items</span><span class="cartIcon"><i class="icons fas fa-shopping-cart"></i></a></span></p>
                 </div>
 
             </div>
