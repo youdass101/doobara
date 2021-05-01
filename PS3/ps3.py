@@ -13,10 +13,11 @@ import string
 
 VOWELS = 'aeiou'
 CONSONANTS = 'bcdfghjklmnpqrstvwxyz'
+WILEDCARD = '*'
 HAND_SIZE = 7
 
 SCRABBLE_LETTER_VALUES = {
-    'a': 1, 'b': 3, 'c': 3, 'd': 2, 'e': 1, 'f': 4, 'g': 2, 'h': 4, 'i': 1, 'j': 8, 'k': 5, 'l': 1, 'm': 3, 'n': 1, 'o': 1, 'p': 3, 'q': 10, 'r': 1, 's': 1, 't': 1, 'u': 1, 'v': 4, 'w': 4, 'x': 8, 'y': 4, 'z': 10
+    'a': 1, 'b': 3, 'c': 3, 'd': 2, 'e': 1, 'f': 4, 'g': 2, 'h': 4, 'i': 1, 'j': 8, 'k': 5, 'l': 1, 'm': 3, 'n': 1, 'o': 1, 'p': 3, 'q': 10, 'r': 1, 's': 1, 't': 1, 'u': 1, 'v': 4, 'w': 4, 'x': 8, 'y': 4, 'z': 10, "*": 0
 }
 
 # -----------------------------------
@@ -143,7 +144,8 @@ def deal_hand(n):
     """
     
     hand={}
-    num_vowels = int(math.ceil(n / 3))
+    num_vowels = int(math.ceil(n / 3)-1)
+    hand[WILEDCARD] = 1
 
     for i in range(num_vowels):
         x = random.choice(VOWELS)
@@ -176,8 +178,19 @@ def update_hand(hand, word):
     hand: dictionary (string -> int)    
     returns: dictionary (string -> int)
     """
+    newDict = hand.copy()
 
-    pass  # TO DO... Remove this line when you implement this function
+    for letter in word:
+        letterValue = newDict.get(letter.lower(), None)
+        if letterValue > 0:
+            newDict[letter.lower()] -= 1
+            if newDict[letter.lower()] == 0:
+                del newDict[letter.lower()]
+        else:
+            continue
+    return newDict
+
+    
 
 #
 # Problem #3: Test word validity
@@ -193,8 +206,23 @@ def is_valid_word(word, hand, word_list):
     word_list: list of lowercase strings
     returns: boolean
     """
+    if word.find("*") >= 0:
+        result = 0 
+        for v in VOWELS:
+            temp = word.replace("*", v)
+            if temp.lower() in word_list:
+                result = 1
+        if result == 0:
+            return False                 
+    elif word.lower() not in word_list:
+        return False
 
-    pass  # TO DO... Remove this line when you implement this function
+    freqDict = get_frequency_dict(word.lower())
+    for letter in word:
+        if freqDict.get(letter.lower(), 0) > hand.get(letter.lower(), 0):     
+            return False
+    
+    return True
 
 #
 # Problem #5: Playing a hand
