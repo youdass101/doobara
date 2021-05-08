@@ -70,15 +70,18 @@ class Message(object):
             self.message_text (string, determined by input text)
             self.valid_words (list, determined using helper function load_words)
         '''
-        pass #delete this line and replace with your code here
+        self.message_text = text
+        self.valid_words = load_words(WORDLIST_FILENAME)
+        print("Congrats")
 
+        
     def get_message_text(self):
         '''
         Used to safely access self.message_text outside of the class
         
         Returns: self.message_text
         '''
-        pass #delete this line and replace with your code here
+        return self.message_text
 
     def get_valid_words(self):
         '''
@@ -87,7 +90,7 @@ class Message(object):
         
         Returns: a COPY of self.valid_words
         '''
-        pass #delete this line and replace with your code here
+        return self.valid_words.copy()
 
     def build_shift_dict(self, shift):
         '''
@@ -103,7 +106,23 @@ class Message(object):
         Returns: a dictionary mapping a letter (string) to 
                  another letter (string). 
         '''
-        pass #delete this line and replace with your code here
+        alphabet = string.ascii_lowercase
+        print("this is the alphabet", alphabet)
+        dict = {}
+        alpha_len = len(alphabet)
+        print("this is the alpha len", alpha_len)
+        for i in range(alpha_len):
+            cor = i + shift
+            # print("1st coord sum", cor, alphabet[i]," to ", alphabet[cor])
+            print("over range i + shift is:", i+shift )
+            if (i + shift) > alpha_len-1:
+                print("coord was large the new is", cor)
+                cor = shift - (alpha_len - i)
+                print("coord was large the new is", cor)
+            print("this is the final coord", cor)
+            dict[alphabet[i]] = alphabet[cor]
+            dict[alphabet[i].upper()] = alphabet[cor].upper()
+        return dict
 
     def apply_shift(self, shift):
         '''
