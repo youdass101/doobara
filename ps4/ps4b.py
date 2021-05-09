@@ -106,16 +106,17 @@ class Message(object):
         Returns: a dictionary mapping a letter (string) to 
                  another letter (string). 
         '''
-        alphabet = string.ascii_lowercase
-        dict = {}
-        alpha_len = len(alphabet)
-        for i in range(alpha_len):
-            cor = i + shift
-            if (i + shift) > alpha_len - 1:
-                cor = shift - (alpha_len - i) # also work i - alpha_len + shift
-            dict[alphabet[i]] = alphabet[cor]
-            dict[alphabet[i].upper()] = alphabet[cor].upper()
-        return dict
+        if self.check_shift(shift):
+            alphabet = string.ascii_lowercase
+            dict = {}
+            alpha_len = len(alphabet)
+            for i in range(alpha_len):
+                cor = i + shift
+                if cor > alpha_len - 1:
+                    cor = shift - (alpha_len - i) # also work i - alpha_len + shift
+                dict[alphabet[i]] = alphabet[cor]
+                dict[alphabet[i].upper()] = alphabet[cor].upper()
+            return dict
 
     def apply_shift(self, shift):
         '''
@@ -129,7 +130,24 @@ class Message(object):
         Returns: the message text (string) in which every character is shifted
              down the alphabet by the input shift
         '''
-        pass #delete this line and replace with your code here
+        if self.check_shift(shift):
+            map = self.build_shift_dict(shift)
+            result = []
+            for letter in self.message_text:
+                if not letter.isalpha():
+                    result.append(letter)
+                else:
+                    result.append(map[letter])
+            return "".join(result)
+
+    def check_shift(self, shift):
+        # check is shift is integer and greater than 0 and less than 26
+
+        if not isinstance(shift, int) or shift > 26 or shift < 0:
+            print("ERROR:the shift should be a numbere greater than 0 and less than 26")
+            return False
+        else:
+            return True
 
 class PlaintextMessage(Message):
     def __init__(self, text, shift):
@@ -147,7 +165,14 @@ class PlaintextMessage(Message):
             self.message_text_encrypted (string, created using shift)
 
         '''
-        pass #delete this line and replace with your code here
+        Message.__init__(self, text)
+        if self.check_shift(shift):
+            self.shift = shift
+        else:
+            self.shift = 0 
+            print("shift is set to 0 use change_shift to fix it")
+        
+
 
     def get_shift(self):
         '''
@@ -155,7 +180,7 @@ class PlaintextMessage(Message):
         
         Returns: self.shift
         '''
-        pass #delete this line and replace with your code here
+        return self.shift
 
     def get_encryption_dict(self):
         '''
@@ -163,7 +188,7 @@ class PlaintextMessage(Message):
         
         Returns: a COPY of self.encryption_dict
         '''
-        pass #delete this line and replace with your code here
+        return self.build_shift_dict(self.shift)
 
     def get_message_text_encrypted(self):
         '''
@@ -171,7 +196,7 @@ class PlaintextMessage(Message):
         
         Returns: self.message_text_encrypted
         '''
-        pass #delete this line and replace with your code here
+        return self.apply_shift(self.shift)
 
     def change_shift(self, shift):
         '''
@@ -183,7 +208,10 @@ class PlaintextMessage(Message):
 
         Returns: nothing
         '''
-        pass #delete this line and replace with your code here
+        if self.check_shift(shift):
+            self.shift = shift
+        else:
+            print("no change has been made ")
 
 
 class CiphertextMessage(Message):
