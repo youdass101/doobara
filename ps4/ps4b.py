@@ -107,19 +107,12 @@ class Message(object):
                  another letter (string). 
         '''
         alphabet = string.ascii_lowercase
-        print("this is the alphabet", alphabet)
         dict = {}
         alpha_len = len(alphabet)
-        print("this is the alpha len", alpha_len)
         for i in range(alpha_len):
             cor = i + shift
-            # print("1st coord sum", cor, alphabet[i]," to ", alphabet[cor])
-            print("over range i + shift is:", i+shift )
-            if (i + shift) > alpha_len-1:
-                print("coord was large the new is", cor)
-                cor = shift - (alpha_len - i)
-                print("coord was large the new is", cor)
-            print("this is the final coord", cor)
+            if (i + shift) > alpha_len - 1:
+                cor = shift - (alpha_len - i) # also work i - alpha_len + shift
             dict[alphabet[i]] = alphabet[cor]
             dict[alphabet[i].upper()] = alphabet[cor].upper()
         return dict
