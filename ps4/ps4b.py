@@ -225,7 +225,7 @@ class CiphertextMessage(Message):
             self.message_text (string, determined by input text)
             self.valid_words (list, determined using helper function load_words)
         '''
-        pass #delete this line and replace with your code here
+        Message.__init__(self, text)
 
     def decrypt_message(self):
         '''
@@ -243,7 +243,23 @@ class CiphertextMessage(Message):
         Returns: a tuple of the best shift value used to decrypt the message
         and the decrypted message text using that shift value
         '''
-        pass #delete this line and replace with your code here
+        all_score = []
+
+        for i in range(26):
+            message = self.apply_shift(i).split()
+            score = 0
+            
+            for word in message:
+                if is_word(self.valid_words, word):
+                    score += 1
+            all_score.append((score))
+        print((all_score))
+        print(all_score.index(max(all_score)))
+        print(self.apply_shift(all_score.index(max(all_score))))
+        # print(all_score.index(sorted(all_score, reverse=True)[:3]))
+
+
+                
 
 if __name__ == '__main__':
 
