@@ -71,7 +71,7 @@ class SubMessage(object):
             self.valid_words (list, determined using helper function load_words)
         '''
         self.message_text = text
-        self.valid_words = load_words(file_name)
+        self.valid_words = load_words(WORDLIST_FILENAME)
     
     def get_message_text(self):
         '''
@@ -110,7 +110,16 @@ class SubMessage(object):
                  another letter (string). 
         '''
         
-        pass #delete this line and replace with your code here
+        alphabet = string.ascii_lowercase
+        dict = {}
+        for letter in alphabet:
+            if letter in VOWELS_LOWER:
+                dict[letter] = vowels_permutation[VOWELS_LOWER.index(letter)]
+                dict[letter.upper()] = vowels_permutation[VOWELS_LOWER.index(letter)].upper()
+            else:
+                dict[letter] = letter
+                dict[letter.upper()] = letter.upper()
+        return dict
     
     def apply_transpose(self, transpose_dict):
         '''
@@ -119,9 +128,16 @@ class SubMessage(object):
         Returns: an encrypted version of the message text, based 
         on the dictionary
         '''
-        
-        pass #delete this line and replace with your code here
-        
+        result = []
+        for letter in self.message_text:
+            if not letter.isalpha():
+                result.append(letter)
+            else:
+                result.append(transpose_dict[letter])
+        return "".join(result)
+
+
+
 class EncryptedSubMessage(SubMessage):
     def __init__(self, text):
         '''
@@ -133,7 +149,7 @@ class EncryptedSubMessage(SubMessage):
             self.message_text (string, determined by input text)
             self.valid_words (list, determined using helper function load_words)
         '''
-        pass #delete this line and replace with your code here
+        SubMessage.__init__(self, text)
 
     def decrypt_message(self):
         '''
@@ -153,7 +169,19 @@ class EncryptedSubMessage(SubMessage):
         
         Hint: use your function from Part 4A
         '''
-        pass #delete this line and replace with your code here
+        permutation = get_permutations(VOWELS_LOWER)
+        solutions = []
+        for seq in permutation:
+            score = 0
+            dict = self.build_transpose_dict(seq)
+            message = self.apply_transpose(dict).split()
+            for word in message:
+                if is_word(self.valid_words, word):
+                    score += 1
+            solutions.append((score, " ".join(message)))
+        return max(solutions)[1]
+                
+
     
 
 if __name__ == '__main__':
