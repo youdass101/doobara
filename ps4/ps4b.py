@@ -244,7 +244,6 @@ class CiphertextMessage(Message):
         and the decrypted message text using that shift value
         '''
         all_score = []
-
         for i in range(26):
             message = self.apply_shift(i).split()
             score = 0
@@ -252,29 +251,25 @@ class CiphertextMessage(Message):
             for word in message:
                 if is_word(self.valid_words, word):
                     score += 1
-            all_score.append((score))
-        print((all_score))
-        print(all_score.index(max(all_score)))
-        print(self.apply_shift(all_score.index(max(all_score))))
-        # print(all_score.index(sorted(all_score, reverse=True)[:3]))
-
-
-                
+            
+            all_score.append((score, i, " ".join(message)))
+   
+        return max(all_score)[1:]
 
 if __name__ == '__main__':
 
 #    #Example test case (PlaintextMessage)
-#    plaintext = PlaintextMessage('hello', 2)
-#    print('Expected Output: jgnnq')
-#    print('Actual Output:', plaintext.get_message_text_encrypted())
-#
+   plaintext = PlaintextMessage('hello', 2)
+   print('Expected Output: jgnnq')
+   print('Actual Output:', plaintext.get_message_text_encrypted())
+
 #    #Example test case (CiphertextMessage)
-#    ciphertext = CiphertextMessage('jgnnq')
-#    print('Expected Output:', (24, 'hello'))
-#    print('Actual Output:', ciphertext.decrypt_message())
+   ciphertext = CiphertextMessage('jgnnq')
+   print('Expected Output:', (24, 'hello'))
+   print('Actual Output:', ciphertext.decrypt_message())
 
-    #TODO: WRITE YOUR TEST CASES HERE
-
-    #TODO: best shift value and unencrypted story 
+  
+   story_cipher = CiphertextMessage(get_story_string())
+   print(story_cipher.decrypt_message())
     
-    pass #delete this line and replace with your code here
+
