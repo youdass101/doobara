@@ -11,6 +11,7 @@ from project_util import translate_html
 from mtTkinter import *
 from datetime import datetime
 import pytz
+import re
 
 
 #-----------------------------------------------------------------------
@@ -100,10 +101,13 @@ class PhraseTrigger(Trigger):
         self.phrase = phrase.lower()
 
     def is_phrase_in(self, text):
-        if self.phrase in text:
-            return True
-        else: 
-            return False
+        cText = re.sub(r'[^\w\s]','',text.lower()).split()
+        cPhrase = re.sub(r'[^\w\s]','',self.phrase.lower()).split()
+
+        for i in range(len(cText)):
+            if cText[i] == cPhrase[0]:
+                return cText[i:i+len(cPhrase)] == cPhrase
+            
 
 
 # Problem 3
