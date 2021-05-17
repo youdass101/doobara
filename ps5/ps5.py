@@ -135,8 +135,10 @@ class DescriptionTrigger(PhraseTrigger):
 # TODO: TimeTrigger
 # Constructor:
 #        Input: Time has to be in EST and in the format of "%d %b %Y %H:%M:%S".
-#        Convert time from string to a datetime before saving it as an attribute.
-
+class TimeTrigger(Trigger):
+    def __init__(self, time):
+        self.time = time.strptime(time, "%d %b %Y %H:%M:%S")
+        
 # Problem 6
 # TODO: BeforeTrigger and AfterTrigger
 
