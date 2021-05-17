@@ -79,7 +79,6 @@ class NewsStory(object):
         return self.pubdate
         
 
-
 #======================
 # Triggers
 #======================
@@ -101,7 +100,7 @@ class PhraseTrigger(Trigger):
         self.phrase = phrase.lower()
 
     def is_phrase_in(self, text):
-        cText = re.sub(r'[^\w\s]','',text.lower()).split()
+        cText = re.sub(r'[^\w\s]',' ',text.lower()).split()
         cPhrase = re.sub(r'[^\w\s]','',self.phrase.lower()).split()
 
         for i in range(len(cText)):
@@ -112,11 +111,23 @@ class PhraseTrigger(Trigger):
 
 # Problem 3
 class TitleTrigger(PhraseTrigger):
-    def __init__(self, phrase):
-        PhraseTrigger.__init__(self, phrase)
+    # def __init__(self, phrase):
+    #     PhraseTrigger.__init__(self, phrase)
+
+    def evaluate(self, theStory):
+        title = theStory.get_title()
+        return self.is_phrase_in(title)
+
 
 # Problem 4
-# TODO: DescriptionTrigger
+class DescriptionTrigger(PhraseTrigger):
+    # def __init__(self, phrase):
+    #     PhraseTrigger.__init__(self, phrase)
+
+    def evaluate(self, theStory):
+        description = theStory.get_description()
+        return self.is_phrase_in(description)
+        
 
 # TIME TRIGGERS
 
