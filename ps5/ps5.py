@@ -111,7 +111,9 @@ class PhraseTrigger(Trigger):
 
 
 # Problem 3
-# TODO: TitleTrigger
+class TitleTrigger(PhraseTrigger):
+    def __init__(self, phrase):
+        PhraseTrigger.__init__(self, phrase)
 
 # Problem 4
 # TODO: DescriptionTrigger
