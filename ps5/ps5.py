@@ -137,22 +137,53 @@ class DescriptionTrigger(PhraseTrigger):
 #        Input: Time has to be in EST and in the format of "%d %b %Y %H:%M:%S".
 class TimeTrigger(Trigger):
     def __init__(self, time):
-        self.time = time.strptime(time, "%d %b %Y %H:%M:%S")
+        self.time = datetime.strptime(time, "%d %b %Y %H:%M:%S").replace(tzinfo=pytz.timezone("EST"))
         
 # Problem 6
 # TODO: BeforeTrigger and AfterTrigger
+class BeforeTrigger(TimeTrigger):
+    def evaluate(self, story):
+        return story.get_pubdate().replace(tzinfo=pytz.timezone("EST")) < self.time
+    
+      
 
+class AfterTrigger(TimeTrigger):
+    def evaluate(self, story):
+        return story.get_pubdate().replace(tzinfo=pytz.timezone("EST")) > self.time
 
+        
 # COMPOSITE TRIGGERS
 
 # Problem 7
 # TODO: NotTrigger
+class NotTrigger(Trigger):
+    def __init__(self, state):
+        self.state = state
+
+    def evaluate(self, story):
+        return not self.state.evaluate(story)
+        
 
 # Problem 8
 # TODO: AndTrigger
+class AndTrigger(Trigger):
+    def __init__(self, state, other):
+        self.state = state
+        self.other = other
+    
+    def evaluate(self, story):
+        return self.state.evaluate(story) and self.other.evaluate(story)
+        
 
 # Problem 9
 # TODO: OrTrigger
+class OrTrigger(Trigger):
+    def __init__(self, state, other):
+        self.state = state
+        self.other = other
+    
+    def evaluate(self, story):
+        return self.state.evaluate(story) or self.other.evaluate(story)
 
 
 #======================
