@@ -200,7 +200,14 @@ def filter_stories(stories, triggerlist):
     # TODO: Problem 10
     # This is a placeholder
     # (we're just returning all the stories, with no filtering)
-    return stories
+    triggered_stories = []
+    for i in range(len(stories)):
+        for j in triggerlist:
+            if j.evaluate(stories[i]):
+                triggered_stories.append(stories[i])
+
+
+    return triggered_stories
 
 
 
@@ -282,7 +289,7 @@ def main_thread(master):
             stories = process("http://news.google.com/news?output=rss")
 
             # Get stories from Yahoo's Top Stories RSS news feed
-            stories.extend(process("http://news.yahoo.com/rss/topstories"))
+            # stories.extend(process("http://news.yahoo.com/rss/topstories"))
 
             stories = filter_stories(stories, triggerlist)
 
