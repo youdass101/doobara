@@ -234,26 +234,45 @@ def read_trigger_config(filename):
     # TODO: Problem 11
     # line is the list of lines that you need to parse and for which you need
     # to build triggers
+    triggers_dict = {}
+    for i in lines:
+        data = i.split(",")
+        triggers_dict[data[0]]= (data[1:])
 
-    print(lines) # for now, print it so you see what it contains!
+    ls =[]   
+    for i in triggers_dict:
+        if i == "ADD":
+            for j in triggers_dict[i]:
+                ls.append(triggers_dict[j])
+        elif triggers_dict[i][0] == "TITLE":
+            triggers_dict[i] = TitleTrigger(triggers_dict[i][1])
+        elif triggers_dict[i][0] == "DESCRIPTION":
+            triggers_dict[i] = DescriptionTrigger(triggers_dict[i][1])
+        elif triggers_dict[i][0] == "AFTER":
+            triggers_dict[i] = AfterTrigger(triggers_dict[i][1])
+        elif triggers_dict[i][0] == "AND":
+            triggers_dict[i] = AndTrigger(triggers_dict[i][1], triggers_dict[i][2])
 
+    return ls
 
 
 SLEEPTIME = 120 #seconds -- how often we poll
 
+
 def main_thread(master):
     # A sample trigger list - you might need to change the phrases to correspond
     # to what is currently in the news
+
     try:
-        t1 = TitleTrigger("election")
-        t2 = DescriptionTrigger("Trump")
-        t3 = DescriptionTrigger("Clinton")
-        t4 = AndTrigger(t2, t3)
-        triggerlist = [t1, t4]
+        # t1 = TitleTrigger("election")
+        # t2 = DescriptionTrigger("Trump")
+        # t3 = DescriptionTrigger("Clinton")
+        # t4 = AndTrigger(t2, t3)
+        # triggerlist = [t1, t4]
 
         # Problem 11
         # TODO: After implementing read_trigger_config, uncomment this line 
-        # triggerlist = read_trigger_config('triggers.txt')
+        triggerlist = read_trigger_config('triggers.txt')
         
         # HELPER CODE - you don't need to understand this!
         # Draws the popup window that displays the filtered stories
@@ -310,4 +329,5 @@ if __name__ == '__main__':
     t = threading.Thread(target=main_thread, args=(root,))
     t.start()
     root.mainloop()
+ 
 
