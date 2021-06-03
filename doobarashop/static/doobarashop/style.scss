@@ -4,7 +4,9 @@ $identity-color: #F9D342;
 
 // page style in general
 html, body {
-    margin: 0px; padding: 0px;
+    margin: 0px; 
+    padding: 0px;
+    height: 100%;
     
 }
 
@@ -12,7 +14,6 @@ html, body {
 .icons {
     color: $identity-color;
 }
-
 
 
  /* the fist header top bar that contain phone and social media links */
@@ -89,6 +90,12 @@ nav {
     padding-left: 20px;
 }
 
+ // search box section style default 
+ .search-box {
+    float: right;
+    width: 40%;
+}
+
 // set logo and search on same line
 .logo, .search-box {
     display: inline-flex;
@@ -101,11 +108,7 @@ nav {
     text-decoration: none;  
 }
 
- // search box section style default 
-.search-box {
-    float: right;
-    width: 40%;
-}
+
 // search box form input style
 form.search-site input[type=text] {
     border-bottom-left-radius: 4px ;
@@ -134,6 +137,7 @@ form.search-site button {
   // It helps form input seach and button icon to align for some reason
 * {
     box-sizing: border-box;
+
 }
 
 .navigation {
@@ -176,7 +180,21 @@ form.search-site button {
     padding-left: 10px;
 }
 
+.wrapper {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -142px; /* the bottom margin is the negative value of the footer's height */
+}
 
+.footer, .push {
+    height: 142px; /* .push must be the same height as .footer */
+}
+
+.footer {
+    background-color: $back-color;
+
+}
 
 
   
