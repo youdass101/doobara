@@ -13,7 +13,7 @@ html, body {
     font-size:13px; 
 }
 
-// ALL NAVIGATION ICONS STYLE
+// CONSTANT TO ALL NAVIGATION ICONS STYLE
 .icons {
     color: $identity-color;
 }
@@ -22,8 +22,25 @@ html, body {
  /* the fist header top bar that contain phone and social media links */
 .top-bar {
     background-color: $back-color;
-    max-height: 45px;
 }
+
+// phone and deliver ul styling 
+.top-bar-left ul {
+    display: inline-flex;
+    color: white;
+    list-style: none;
+    font-size: 14px;
+    font-family: "Roboto",Sans-serif;
+    font-weight: 400;
+}
+
+// phone and number disable url style and add padding
+.top-bar-left a:link {
+    color:white;
+    text-decoration: none;
+    padding-right: 20px;
+}
+
 
 // phone and number element transition animated trasition setting
 .phone {
@@ -38,21 +55,6 @@ html, body {
 // phone icon when phone class on hover to change icont color 
 .phone:hover .fa-phone-alt{
     color: white;
-}
-// phone and deliver ul styling 
-.top-bar-left ul {
-    display: inline-flex;
-    color: white;
-    list-style: none;
-    font-size: 14px;
-    font-family: "Roboto",Sans-serif;
-    font-weight: 400;
-}
-// phone and number disable url style and add padding
-.top-bar-left a:link {
-    color:white;
-    text-decoration: none;
-    padding-right: 20px;
 }
 
 //set phone, deliver and social media element on the same line
@@ -96,7 +98,7 @@ nav {
  // search box section style default 
  .search-box {
     float: right;
-    width: 40%;
+    width: 37%;
 }
 
 // set logo and search on same line
@@ -106,7 +108,7 @@ nav {
 
 .myAccount {
     padding-top: 20px;
-    width: 50%;
+    width: 30%;
     color:white;
     text-decoration: none;  
 }
@@ -163,7 +165,7 @@ form.search-site button {
 
 .cart {
     float: right;
-    width: 17%;
+    width: 19%;
     color: white;
 }
 
@@ -199,5 +201,69 @@ form.search-site button {
 
 }
 
+
+@media only screen and (max-device-width: 480px) {
+    .top-bar-right, .search-box, .cart{
+        display: none;
+    }
+
+    .logo {
+        padding-left: 0px;
+    }
+
+    .phone {
+        margin-left: -20px;
+    }
+    .top-bar-left a:link {
+        padding-right: 50px;
+    }
+
+    // MENU
+    /* Style the navigation menu */
+.topnav {
+  overflow: hidden;
+  background-color: #333;
+  position: relative;
+}
+
+/* Hide the links inside the navigation menu (except for logo/home) */
+.topnav #myLinks {
+  display: none;
+}
+
+/* Style navigation menu links */
+.topnav a {
+  color: white;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  display: block;
+}
+
+/* Style the hamburger menu */
+.topnav a.icon {
+  background: black;
+  display: block;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+/* Add a grey background color on mouse-over */
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+/* Style the active link (or home/logo) */
+.active {
+  background-color: #04AA6D;
+  color: white;
+}
+
+
+
+
+}
 
   
