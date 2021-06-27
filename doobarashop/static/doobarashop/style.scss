@@ -13,27 +13,38 @@ html, body {
     font-size:13px; 
 }
 
+
+// header {
+//     position: fixed;
+//     width: 100%;
+//     margin-top: -20px;
+// }
+
+
+#navigation-mobile, .mobile-menu {
+    display: none;
+}
+
 // CONSTANT TO ALL NAVIGATION ICONS STYLE
 .icons {
     color: $identity-color;
 }
 
 
- /* the fist header top bar that contain phone and social media links */
+/* the fist header top bar that contain phone and social media links */
 .top-bar {
     background-color: $back-color;
 }
 
 // phone and deliver ul styling 
 .top-bar-left ul {
-    display: inline-flex;
-    color: white;
-    list-style: none;
-    font-size: 14px;
-    font-family: "Roboto",Sans-serif;
-    font-weight: 400;
-}
-
+        display: inline-flex;
+        color: white;
+        list-style: none;
+        font-size: 14px;
+        font-family: "Roboto",Sans-serif;
+        font-weight: 400;
+    }
 // phone and number disable url style and add padding
 .top-bar-left a:link {
     color:white;
@@ -46,12 +57,14 @@ html, body {
 .phone {
     transition: background-color 1s, font-size 1s, weight 1s;
 }
+
 // phone icon and number on hover transtion 
 .phone:hover {
     background-color: $identity-color;
     font-weight: 500;
     border-radius: 5px;
 }
+
 // phone icon when phone class on hover to change icont color 
 .phone:hover .fa-phone-alt{
     color: white;
@@ -67,6 +80,7 @@ html, body {
     float: right;
     padding-right: 40px;
 }
+
 // social media icone styling and setting animated transition
 .social-media {
     padding: 10px 20px 15px 20px;
@@ -95,8 +109,8 @@ nav {
     padding-left: 20px;
 }
 
- // search box section style default 
- .search-box {
+// search box section style default 
+.search-box {
     float: right;
     width: 37%;
 }
@@ -113,7 +127,6 @@ nav {
     text-decoration: none;  
 }
 
-
 // search box form input style
 form.search-site input[type=text] {
     border-bottom-left-radius: 4px ;
@@ -124,7 +137,7 @@ form.search-site input[type=text] {
     width: 80%;
     background: #f1f1f1;
 }
-  // search form button style 
+// search form button style 
 form.search-site button {
     float: left;
     width: 20%;
@@ -138,51 +151,54 @@ form.search-site button {
     border-bottom-right-radius: 4px ;
 }
 
-
-  // It helps form input seach and button icon to align for some reason
-* {
-    box-sizing: border-box;
-
-}
-
 .navigation {
     color:$identity-color;
     padding: 15px 0px 20px 37px;
     font-size: 1.2em;
     font-weight: 400;
 }
-
+    
 .navigation a {
-      padding: 0 20px 0 0px;
+    padding: 0 20px 0 0px;
+    color: white;
 }
-
+    
 .navigation a:link {
-    color:white;
     text-decoration: none;
     padding-right: 20px;
-} 
-
+}
+        
 
 .cart {
     float: right;
     width: 19%;
     color: white;
 }
-
-.navigation, .cart {
-    display: inline-flex;
-    padding-right: 0px;
-}
+        
 
 .cartIcon {
     float: right;
 }
-
+        
 .cartUrl {
     text-decoration: none;
     color: white;
     padding-right: 40px;
     padding-left: 10px;
+}
+    
+    
+.navigation, .cart {
+    display: inline-flex;
+    padding-right: 0px;
+}
+    
+
+
+// It helps form input seach and button icon to align for some reason
+* {
+    box-sizing: border-box;
+
 }
 
 .wrapper {
@@ -201,9 +217,9 @@ form.search-site button {
 
 }
 
-
+// MOBILE RESPONISVITY STYLE
 @media only screen and (max-device-width: 480px) {
-    .top-bar-right, .search-box, .cart{
+    .top-bar-right, .search-box, .cart, .navigation, #myLinks{
         display: none;
     }
 
@@ -215,55 +231,51 @@ form.search-site button {
         margin-left: -20px;
     }
     .top-bar-left a:link {
-        padding-right: 50px;
+        padding: 0px 50px 0px 50px;
+    } 
+
+    .mobile-menu {
+        float: right;
+        display: block;
+        padding: 15px 25px 0px 0px;
+
+        .menu-btn {
+            background-color: $identity-color;
+            font-size: 30px;
+            border: $identity-color;
+        }
+    }
+    #humberger {
+        background-color: $identity-color;
     }
 
-    // MENU
-    /* Style the navigation menu */
-.topnav {
-  overflow: hidden;
-  background-color: #333;
-  position: relative;
-}
+    #navigation-mobile {
+        display: none;
+        background-color: $back-color;  
+        width: 35%;
+        float: right;
+        padding-right: 30px 0 0 0;
+        font-size: 16px;
+        
 
-/* Hide the links inside the navigation menu (except for logo/home) */
-.topnav #myLinks {
-  display: none;
-}
+        ul {
+            list-style: none;
+            padding-left: 20px;
+        }
 
-/* Style navigation menu links */
-.topnav a {
-  color: white;
-  padding: 14px 16px;
-  text-decoration: none;
-  font-size: 17px;
-  display: block;
-}
+        li {
+            padding-bottom: 7px;
+        
+        }
 
-/* Style the hamburger menu */
-.topnav a.icon {
-  background: black;
-  display: block;
-  position: absolute;
-  right: 0;
-  top: 0;
-}
+        a {
+            text-decoration: none;
+            color: white;
+        }
 
-/* Add a grey background color on mouse-over */
-.topnav a:hover {
-  background-color: #ddd;
-  color: black;
-}
-
-/* Style the active link (or home/logo) */
-.active {
-  background-color: #04AA6D;
-  color: white;
-}
-
-
-
+    }
 
 }
+
 
   

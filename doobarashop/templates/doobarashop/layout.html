@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
         <link href="{% static 'doobarashop/style.css' %}" rel="stylesheet">
-        <script href="{% static 'doobarashop/main.js'%}"></script>
+        <script src="{% static 'doobarashop/main.js'%}"></script>
         <!-- Font awesome -->
         <link href="{% static 'doobarashop/all.css' %}" rel="stylesheet">
 
@@ -40,6 +40,12 @@
                             <img src="{% static 'doobarashop/upload/images/home-automaion-doobara-logo.png' %}" alt="home automation doobara">
                         </a>
                     </div>
+                    <!-- MOBILE MENU HUMBERGER -->
+                    <div class="mobile-menu">
+                        <button type="button" id="humberger">
+                        <i class="menu-btn fas fa-bars"></i>
+                    </button>
+                    </div>
 
                     <!-- second right top section of navigation bar contain search box  -->
                     <div class="search-box" >
@@ -62,12 +68,21 @@
                         <a href="#"><i class="icons fab fa-youtube"></i><span class="navigationMenuName"> Video</span></a>
                         <a href="#"><i class="icons fas fa-inbox"></i><span class="navigationMenuName"> Contact Us</span></a>
                     </div>
+                    
                     <!-- final right buttom section of navigation bar contain cart and totla url -->
                     <div class="cart">
                         <p ><span class="homeTotal">0.00  <a href="#" class="cartUrl"> 0 Items</span><span class="cartIcon"><i class="icons fas fa-shopping-cart"></i></a></span></p>
                     </div>
                 </div>
             </nav>
+            <div id="navigation-mobile"> 
+                <ul>
+                    <li><a href="#"><i class="icons fas fa-store"></i><span class="navigationMenuName"> Shop</span></a></li>
+                    <li><a href="#"><i class="icons fab fa-blogger-b"></i><span class="navigationMenuName"> Blog</span></a></li>
+                    <li><a href="#"><i class="icons fab fa-youtube"></i><span class="navigationMenuName"> Video</span></a></li>
+                    <li><a href="#"><i class="icons fas fa-inbox"></i><span class="navigationMenuName"> Contact Us</span></a></li>
+                </ul>
+            </div>
         </header>
         
         <div class="wrapper">
