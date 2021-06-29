@@ -20,8 +20,8 @@ html, body {
 //     margin-top: -20px;
 // }
 
-
-#navigation-mobile, .mobile-menu {
+// Don't SHow mobile menu and button on desktop 
+#navigation-mobile, .mobile-menu-btn {
     display: none;
 }
 
@@ -217,6 +217,12 @@ form.search-site button {
 
 }
 
+.show {
+    display: block;
+}
+
+
+
 // MOBILE RESPONISVITY STYLE
 @media only screen and (max-device-width: 480px) {
     .top-bar-right, .search-box, .cart, .navigation, #myLinks{
@@ -227,6 +233,8 @@ form.search-site button {
         padding-left: 0px;
     }
 
+   
+
     .phone {
         margin-left: -20px;
     }
@@ -234,20 +242,33 @@ form.search-site button {
         padding: 0px 50px 0px 50px;
     } 
 
-    .mobile-menu {
+    .mobile-menu-btn {
         float: right;
         display: block;
-        padding: 15px 25px 0px 0px;
+        padding: 3px 3px 0px 0px;
 
-        .menu-btn {
+        
+        .humberger {
             background-color: $identity-color;
-            font-size: 30px;
+            font-size: 20px;
             border: $identity-color;
+            border: none;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;  
+        }
+
+        .menu-pargraph {
+            font-size: 14px;
+            vertical-align: middle;
+            padding-left: 5px;
+            margin: 0;
+            width: 100%;
         }
     }
-    #humberger {
-        background-color: $identity-color;
-    }
+
 
     #navigation-mobile {
         display: none;
@@ -274,8 +295,5 @@ form.search-site button {
         }
 
     }
-
 }
-
-
   
