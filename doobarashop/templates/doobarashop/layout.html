@@ -30,71 +30,83 @@
                     <a href="https://www.youtube.com/gadgetsfreak" target="_blank"><i class="social-media fab fa-youtube"></i></a>
                 </div>
             </div>
-
-            <!-- navigation area bar contail logo home url, my account, search navigation and cart -->
-            <nav>
-                <!-- first top left section in navigation contain logo with home link -->
-                <div class="logo-search">
-                    <div class="logo">
-                        <a href="#"> 
-                            <img src="{% static 'doobarashop/upload/images/home-automaion-doobara-logo.png' %}" alt="home automation doobara">
-                        </a>
-                    </div>
-                    <!-- MOBILE MENU HUMBERGER -->
-                    <div class ="mobile-menu-btn" >
-                        <button class="humberger" id="btnm">
-                            <i class="menu-btn fas fa-bars"></i>
-                            <span class="menu-pargraph">Menu</span>
-                        </button>
-                    </div>
-
-                    <!-- second right top section of navigation bar contain search box  -->
-                    <div class="search-box" >
-                        <a class="myAccount" href="#"><i class="icons far fa-user"></i> My Account</a>
-
-                        <form class="search-site">
-                            <!-- text input for search  -->
-                            <input class="search-input" type="text" placeholder="Search Products">
-                            <!-- button icon for search submit -->
-                            <button type="submit"><i class="fa fa-search"></i></button>
-                        </form>       
-                    </div>
-                </div>
-
-                <!-- 3d left buttom section of navigatio bar contain navigation menu links -->
-                <div class="navigation-bar">
-                    <div class="navigation">
-                        <a href="#"><i class="icons fas fa-store"></i><span class="navigationMenuName"> Shop</span></a>
-                        <a href="#"><i class="icons fab fa-blogger-b"></i><span class="navigationMenuName"> Blog</span></a>
-                        <a href="#"><i class="icons fab fa-youtube"></i><span class="navigationMenuName"> Video</span></a>
-                        <a href="#"><i class="icons fas fa-inbox"></i><span class="navigationMenuName"> Contact Us</span></a>
-                    </div>
-                    
-                    <!-- final right buttom section of navigation bar contain cart and totla url -->
-                    <div class="cart">
-                        <p ><span class="homeTotal">0.00  <a href="#" class="cartUrl"> 0 Items</span><span class="cartIcon"><i class="icons fas fa-shopping-cart"></i></a></span></p>
-                    </div>
-                </div>
-            </nav>
-            <div id="navigation-mobile"> 
-                <ul>
-                    <li><a href="#"><i class="icons fas fa-store"></i><span class="navigationMenuName"> Shop</span></a></li>
-                    <li><a href="#"><i class="icons fab fa-blogger-b"></i><span class="navigationMenuName"> Blog</span></a></li>
-                    <li><a href="#"><i class="icons fab fa-youtube"></i><span class="navigationMenuName"> Video</span></a></li>
-                    <li><a href="#"><i class="icons fas fa-inbox"></i><span class="navigationMenuName"> Contact Us</span></a></li>
-                </ul>
-            </div>
         </header>
+
+        <!-- navigation area bar contail logo home url, my account, search navigation and cart -->
+        <nav id="navbar">
+            <!-- first top left section in navigation contain logo with home link -->
+            <div class="logo-search">
+                <div class="logo">
+                    <a href="#"> 
+                        <img src="{% static 'doobarashop/upload/images/home-automaion-doobara-logo.png' %}" alt="home automation doobara">
+                    </a>
+                </div>
+                <!-- MOBILE MENU HUMBERGER -->
+                <div class ="mobile-menu-btn" >
+                    <button class="humberger" id="btnm">
+                        <i class="menu-btn fas fa-bars"></i>
+                            Menu
+                    </button>
+                </div>
+
+                <!-- second right top section of navigation bar contain search box  -->
+                <div class="search-box" >
+                    <a class="myAccount" href="#"><i class="icons far fa-user"></i> My Account</a>
+
+                    <form class="search-site">
+                        <!-- text input for search  -->
+                        <input class="search-input" type="text" placeholder="Search Products">
+                        <!-- button icon for search submit -->
+                        <button type="submit"><i class="fa fa-search"></i></button>
+                    </form>       
+                </div>
+            </div>
+
+            <!-- 3d left buttom section of navigatio bar contain navigation menu links -->
+            <div class="navigation-bar">
+                <div class="navigation">
+                    <a href="#"><i class="icons fas fa-store"></i><span class="navigationMenuName"> Shop</span></a>
+                    <a href="#"><i class="icons fab fa-blogger-b"></i><span class="navigationMenuName"> Blog</span></a>
+                    <a href="#"><i class="icons fab fa-youtube"></i><span class="navigationMenuName"> Video</span></a>
+                    <a href="#"><i class="icons fas fa-inbox"></i><span class="navigationMenuName"> Contact Us</span></a>
+                </div>
+                
+                <!-- final right buttom section of navigation bar contain cart and totla url -->
+                <div class="cart">
+                    <p ><span class="homeTotal">0.00  <a href="#" class="cartUrl"> 0 Items</span><span class="cartIcon"><i class="icons fas fa-shopping-cart"></i></a></span></p>
+                </div>
+            </div>
+        </nav>
+        <div id="navigation-mobile"> 
+            <ul>
+                <li><a href="#"><i class="icons fas fa-store"></i><span class="navigationMenuName"> Shop</span></a></li>
+                <li><a href="#"><i class="icons fab fa-blogger-b"></i><span class="navigationMenuName"> Blog</span></a></li>
+                <li><a href="#"><i class="icons fab fa-youtube"></i><span class="navigationMenuName"> Video</span></a></li>
+                <li><a href="#"><i class="icons fas fa-inbox"></i><span class="navigationMenuName"> Contact Us</span></a></li>
+            </ul>
+        </div>
         
-        <div class="wrapper">
+        <div class="content">
+            <h1>we are working hard to create things that matter</h1>
+            <h3>Sticky Navigation Example</h3>
+            <p>The navbar will stick to the top when you reach its scroll position.</p>
+            <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
+            <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
+            <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
+            <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
+            <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
+            <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
+            <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
+        
+        </div>
+        <!-- <div class="wrapper">
             <div class="push">
-                <h1>we are working hard to create things that matter</h1>
             </div>               
         </div>
         
         <div class="footer">
            
-        </div>
+        </div> -->
     </body>
 
 </html>

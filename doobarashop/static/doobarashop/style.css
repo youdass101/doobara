@@ -78,12 +78,29 @@ html, body {
           transform: rotate(360deg);
 }
 
-nav {
+#navbar {
   background-color: #292826;
   border-top: 5px solid #F9D342;
   width: 100%;
   margin: 0 0 0 0;
   padding: 0 0 0 0;
+  overflow: hidden;
+}
+
+.sticky {
+  position: fixed;
+  top: 0;
+  opacity: 80%;
+  width: 100%;
+}
+
+/* Page content */
+.content {
+  padding: 160px;
+}
+
+.sticky + .content {
+  padding-top: 60px;
 }
 
 .logo {
@@ -196,7 +213,7 @@ form.search-site button {
 }
 
 .show {
-  display: block;
+  display: block !important;
 }
 
 @media only screen and (max-device-width: 480px) {
@@ -227,13 +244,6 @@ form.search-site button {
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-  }
-  .mobile-menu-btn .menu-pargraph {
-    font-size: 14px;
-    vertical-align: middle;
-    padding-left: 5px;
-    margin: 0;
-    width: 100%;
   }
   #navigation-mobile {
     display: none;
