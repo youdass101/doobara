@@ -82,8 +82,6 @@ html, body {
   background-color: #292826;
   border-top: 5px solid #F9D342;
   width: 100%;
-  margin: 0 0 0 0;
-  padding: 0 0 0 0;
   overflow: hidden;
 }
 
@@ -96,11 +94,11 @@ html, body {
 
 /* Page content */
 .content {
-  padding: 160px;
+  padding: 10px;
 }
 
 .sticky + .content {
-  padding-top: 60px;
+  padding-top: 130px;
 }
 
 .logo {
@@ -161,6 +159,10 @@ form.search-site button {
   color: white;
 }
 
+.navigation a:hover {
+  color: #F9D342;
+}
+
 .navigation a:link {
   text-decoration: none;
   padding-right: 20px;
@@ -196,9 +198,7 @@ form.search-site button {
 }
 
 .wrapper {
-  min-height: 100%;
   height: auto !important;
-  height: 100%;
   margin: 0 auto -142px;
   /* the bottom margin is the negative value of the footer's height */
 }
@@ -219,6 +219,9 @@ form.search-site button {
 @media only screen and (max-device-width: 480px) {
   .top-bar-right, .search-box, .cart, .navigation, #myLinks {
     display: none;
+  }
+  .sticky + .content {
+    padding-top: 70px !important;
   }
   .logo {
     padding-left: 0px;
@@ -263,6 +266,16 @@ form.search-site button {
   #navigation-mobile a {
     text-decoration: none;
     color: white;
+  }
+  #mobile-footer-menu {
+    background-color: #292826;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+  }
+  #mobile-footer-menu i {
+    padding: 10px 0px 10px 20px;
   }
 }
 /*# sourceMappingURL=style.css.map */

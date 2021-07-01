@@ -94,8 +94,6 @@ html, body {
     background-color: $back-color;
     border-top: 5px solid $identity-color;
     width: 100%;
-    margin: 0 0 0 0;
-    padding: 0 0 0 0;
     overflow: hidden;
 }
 .sticky {
@@ -107,11 +105,11 @@ html, body {
 
 /* Page content */
 .content {
-    padding: 160px;
+    padding: 10px;
   }
 
 .sticky + .content {
-padding-top: 60px;
+padding-top: 130px;
 }
 
 // logo image style
@@ -175,6 +173,10 @@ form.search-site button {
     padding: 0 20px 0 0px;
     color: white;
 }
+.navigation a:hover{
+  color: $identity-color;
+
+}
 // desktop navigation link element  
 .navigation a:link {
     text-decoration: none;
@@ -215,9 +217,7 @@ form.search-site button {
 }
 // for the fotter push 
 .wrapper {
-    min-height: 100%;
     height: auto !important;
-    height: 100%;
     margin: 0 auto -142px; /* the bottom margin is the negative value of the footer's height */
 }
 // set the footer div at the end of the page 
@@ -247,6 +247,12 @@ form.search-site button {
     .top-bar-right, .search-box, .cart, .navigation, #myLinks{
         display: none;
     }
+    
+    // navigation Y axes padding on scroll 
+    .sticky + .content {
+        padding-top: 70px !important;
+    }
+
     // site logo at navigation 
     .logo {
         padding-left: 0px;
@@ -305,5 +311,20 @@ form.search-site button {
         }
 
     }
+
+    #mobile-footer-menu {   
+        background-color: $back-color;
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+    }
+
+    #mobile-footer-menu i {
+        padding: 10px 0px 10px 20px ;
+    }
+
+
+    
 }
   
