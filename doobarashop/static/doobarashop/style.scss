@@ -15,7 +15,7 @@ html, body {
 
 
 // Don't SHow mobile menu and button on desktop 
-#navigation-mobile, .mobile-menu-btn {
+#navigation-mobile, .mobile-menu-btn, #mobile-footer-menu {
     display: none;
 }
 
@@ -313,18 +313,25 @@ form.search-site button {
     }
 
     #mobile-footer-menu {   
+        display: block;
         background-color: $back-color;
         position: fixed;
         left: 0;
         bottom: 0;
         width: 100%;
+        padding: 10px 0px 0 10%;
     }
 
+    // Centering the footer navigation
+    .footer-navigation {
+        justify-content: center;
+        display: flex;
+        
+    }
+    // icons spacing
     #mobile-footer-menu i {
-        padding: 10px 0px 10px 20px ;
+        padding: 0px 10% 0px 0px ;
     }
 
-
-    
 }
   

@@ -8,7 +8,7 @@ html, body {
   font-size: 13px;
 }
 
-#navigation-mobile, .mobile-menu-btn {
+#navigation-mobile, .mobile-menu-btn, #mobile-footer-menu {
   display: none;
 }
 
@@ -268,14 +268,24 @@ form.search-site button {
     color: white;
   }
   #mobile-footer-menu {
+    display: block;
     background-color: #292826;
     position: fixed;
     left: 0;
     bottom: 0;
     width: 100%;
+    padding: 10px 0px 0 10%;
+  }
+  .footer-navigation {
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
   }
   #mobile-footer-menu i {
-    padding: 10px 0px 10px 20px;
+    padding: 0px 10% 0px 0px;
   }
 }
 /*# sourceMappingURL=style.css.map */
