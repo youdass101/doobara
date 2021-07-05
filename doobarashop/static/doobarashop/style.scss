@@ -290,7 +290,7 @@ form.search-site button {
         display: none;
         background-color: $back-color;  
         width: 35%;
-        float: right;
+        float: left;
         padding-right: 30px 0 0 0;
         font-size: 16px;
         
@@ -319,7 +319,7 @@ form.search-site button {
         left: 0;
         bottom: 0;
         width: 100%;
-        padding: 10px 0px 0 10%;
+        padding: 10px 0px 10px 10%;
     }
 
     // Centering the footer navigation
