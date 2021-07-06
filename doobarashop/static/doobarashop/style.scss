@@ -126,7 +126,7 @@ html, body {
 
 /* Slideshow container */
 .slideshow-container {
-    max-width: 1000px;
+    max-width: 100%;
     margin: auto;
   }
   
@@ -165,11 +165,11 @@ html, body {
   /* Caption text */
   .text {
     color: #f2f2f2;
+    // color: black;
     font-size: 15px;
-    padding: 8px 12px;
     position: absolute;
-    bottom: 8px;
     width: 100%;
+    margin-top: -35px;
     text-align: center;
   }
   
@@ -179,7 +179,7 @@ html, body {
     font-size: 12px;
     padding: 8px 12px;
     position: absolute;
-    top: 0;
+    
   }
   
   /* The dots/bullets/indicators */
