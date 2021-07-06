@@ -1,3 +1,5 @@
+// GLOBAL STYLE
+
 // defining design color style
 $back-color:  #292826;
 $identity-color: #F9D342;
@@ -11,83 +13,53 @@ html, body {
     line-height: 1.618; 
     font-family:Helvetica; 
     font-size:13px; 
+
+    // CONSTANT TO ALL NAVIGATION ICONS STYLE
+    .icons {
+        color: $identity-color;
+    }
 }
-
-
-// Don't SHow mobile menu and button on desktop 
-#navigation-mobile, .mobile-menu-btn, #mobile-footer-menu {
-    display: none;
-}
-
-// CONSTANT TO ALL NAVIGATION ICONS STYLE
-.icons {
-    color: $identity-color;
-}
-
 
 /* the fist header top bar that contain phone and social media links */
 .top-bar {
     background-color: $back-color;
-}
 
-// phone and deliver ul styling 
-.top-bar-left ul {
-        display: inline-flex;
-        color: white;
-        list-style: none;
-        font-size: 14px;
-        font-family: "Roboto",Sans-serif;
-        font-weight: 400;
+    // phone and deliver ul styling 
+    .top-bar-left {
+        ul {
+            display: inline-flex;
+            color: white;
+            list-style: none;
+            font-size: 14px;
+            font-family: "Roboto",Sans-serif;
+            font-weight: 400;
+            }
+
+        // phone and number disable url style and add padding
+        a:link {
+            color:white;
+            text-decoration: none;
+            padding-right: 20px;
+        }
+
+        // phone and number element transition animated trasition setting
+        .phone {
+            transition: background-color 1s, font-size 1s, weight 1s;
+        }
+
+        // phone icon and number on hover transtion 
+        .phone:hover {
+            background-color: $identity-color;
+            font-weight: 500;
+            border-radius: 5px;
+        }
+
+        // phone icon when phone class on hover to change icont color 
+        .phone:hover .fa-phone-alt{
+            color: white;
+        }
     }
-// phone and number disable url style and add padding
-.top-bar-left a:link {
-    color:white;
-    text-decoration: none;
-    padding-right: 20px;
 }
-
-
-// phone and number element transition animated trasition setting
-.phone {
-    transition: background-color 1s, font-size 1s, weight 1s;
-}
-
-// phone icon and number on hover transtion 
-.phone:hover {
-    background-color: $identity-color;
-    font-weight: 500;
-    border-radius: 5px;
-}
-
-// phone icon when phone class on hover to change icont color 
-.phone:hover .fa-phone-alt{
-    color: white;
-}
-
-//set phone, deliver and social media element on the same line
-.top-bar-right, .top-bar-left {
-    display: inline;
-}
-
-//mode the social media element in the same line to the right 
-.top-bar-right {
-    float: right;
-    padding-right: 40px;
-}
-
-// social media icone styling and setting animated transition
-.social-media {
-    padding: 10px 20px 15px 20px;
-    color: white;
-    font-size: 25px;
-    transition: background-color 1s,transform 1s;
-}
-// social media icons on hover animation trasition action
-.social-media:hover {
-    background-color: $identity-color;
-    transform: rotate(360deg);
-}
-
 
 // navigation section style default
 #navbar {
@@ -95,7 +67,16 @@ html, body {
     border-top: 5px solid $identity-color;
     width: 100%;
     overflow: hidden;
+
+    // Desktop navigation menu
+    .navigation {
+        color:$identity-color;
+        padding: 15px 0px 20px 37px;
+        font-size: 1.2em;
+        font-weight: 400;
+    }
 }
+    
 .sticky {
     position: fixed ;
     top: 0 ;
@@ -108,108 +89,11 @@ html, body {
     padding: 10px;
   }
 
-.sticky + .content {
-padding-top: 130px;
-}
-
-// logo image style
-.logo {
-    padding-left: 20px;
-}
-
-// search box section style default 
-.search-box {
-    float: right;
-    width: 37%;
-}
-
 // set logo and search on same line
 .logo, .search-box {
     display: inline-flex;
 }
-
-// My account button
-.myAccount {
-    padding-top: 20px;
-    width: 30%;
-    color:white;
-    text-decoration: none;  
-}
-
-// search box form input style
-form.search-site input[type=text] {
-    border-bottom-left-radius: 4px ;
-    padding: 12px 20px;
-    font-size: 15px;
-    border: 1px solid $identity-color;
-    float: left;
-    width: 80%;
-    background: #f1f1f1;
-}
-// search form button style 
-form.search-site button {
-    float: left;
-    width: 20%;
-    padding: 10.5px 20px;
-    background: $identity-color;
-    color: white;
-    font-size: 17px;
-    border: 1px solid $identity-color;
-    border-left: none; /* Prevent double borders */
-    cursor: pointer;
-    border-bottom-right-radius: 4px ;
-}
-
-// Desktop navigation menu
-.navigation {
-    color:$identity-color;
-    padding: 15px 0px 20px 37px;
-    font-size: 1.2em;
-    font-weight: 400;
-}
-
-// desktop navigation a element 
-.navigation a {
-    padding: 0 20px 0 0px;
-    color: white;
-}
-.navigation a:hover{
-  color: $identity-color;
-
-}
-// desktop navigation link element  
-.navigation a:link {
-    text-decoration: none;
-    padding-right: 20px;
-}
-        
-// Desktop car div
-.cart {
-    float: right;
-    width: 19%;
-    color: white;
-}
-        
-// desktop cat icon 
-.cartIcon {
-    float: right;
-}
-// desktop cart url        
-.cartUrl {
-    text-decoration: none;
-    color: white;
-    padding-right: 40px;
-    padding-left: 10px;
-}
     
- // set desktop navigation menu and cart on same row   
-.navigation, .cart {
-    display: inline-flex;
-    padding-right: 0px;
-}
-    
-
-
 // It helps form input seach and button icon to align for some reason
 * {
     box-sizing: border-box;
@@ -234,12 +118,129 @@ form.search-site button {
     display: block !important;
 }
 
+// ..........................................................
 
-// Desktop and any screen bigger than 481 px 
+// DESKTOP RESPONSIV STYLE screen bigger than 481 px 
 @media only screen and (min-device-width: 481px) {
-       
+    // Don't SHow mobile menu and button on desktop 
+    #navigation-mobile, .mobile-menu-btn, #mobile-footer-menu {
+        display: none;
+    }
+
+    //set phone, deliver and social media element on the same line
+    .top-bar-right, .top-bar-left {
+        display: inline;
+    }
+
+    //mode the social media element in the same line to the right 
+    .top-bar-right {
+        float: right;
+        padding-right: 40px;
+
+        // social media icone styling and setting animated transition
+        .social-media {
+            padding: 10px 20px 15px 20px;
+            color: white;
+            font-size: 25px;
+            transition: background-color 1s,transform 1s;
+        }
+        // social media icons on hover animation trasition action
+        .social-media:hover {
+            background-color: $identity-color;
+            transform: rotate(360deg);
+        }
+    }
+
+    .sticky + .content {
+        padding-top: 130px;
+    }
+    
+    // search box section style default 
+    .search-box {
+        float: right;
+        width: 37%;
+    }
+
+    // My account button
+    .myAccount {
+        padding-top: 20px;
+        width: 30%;
+        color:white;
+        text-decoration: none;  
+    }
+
+    // search box form input style
+    form.search-site input[type=text] {
+        border-bottom-left-radius: 4px ;
+        padding: 12px 20px;
+        font-size: 15px;
+        border: 1px solid $identity-color;
+        float: left;
+        width: 80%;
+        background: #f1f1f1;
+    }
+    // search form button style 
+    form.search-site button {
+        float: left;
+        width: 20%;
+        padding: 10.5px 20px;
+        background: $identity-color;
+        color: white;
+        font-size: 17px;
+        border: 1px solid $identity-color;
+        border-left: none; /* Prevent double borders */
+        cursor: pointer;
+        border-bottom-right-radius: 4px ;
+    }
+    
+    // logo image style
+    .logo {
+        padding-left: 20px;
+    }
+
+    // desktop navigation a element 
+    .navigation a {
+        padding: 0 20px 0 0px;
+        color: white;
+    }
+    .navigation a:hover{
+    color: $identity-color;
+
+    }
+    // desktop navigation link element  
+    .navigation a:link {
+        text-decoration: none;
+        padding-right: 20px;
+    }
+            
+    // Desktop car div
+    .cart {
+        float: right;
+        width: 19%;
+        color: white;
+            
+        // desktop cat icon 
+        .cartIcon {
+            float: right;
+        }
+        // desktop cart url        
+        .cartUrl {
+            text-decoration: none;
+            color: white;
+            padding-right: 40px;
+            padding-left: 10px;
+        }
+    }
+        
+    // set desktop navigation menu and cart on same row   
+    .navigation, .cart {
+        display: inline-flex;
+        padding-right: 0px;
+    }
     
 }
+
+// ............................................................................
 
 // MOBILE RESPONISVITY STYLE
 @media only screen and (max-device-width: 480px) {
@@ -320,17 +321,18 @@ form.search-site button {
         bottom: 0;
         width: 100%;
         padding: 10px 0px 10px 10%;
-    }
 
-    // Centering the footer navigation
-    .footer-navigation {
-        justify-content: center;
-        display: flex;
-        
-    }
-    // icons spacing
-    #mobile-footer-menu i {
-        padding: 0px 10% 0px 0px ;
+
+        // Centering the footer navigation
+        .footer-navigation {    
+            justify-content: center;
+            display: flex;
+            
+        }
+        // icons spacing
+        i {
+            padding: 0px 10% 0px 0px ;
+        }
     }
 
 }
