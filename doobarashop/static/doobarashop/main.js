@@ -1,3 +1,8 @@
+var sn;
+function snumber(n) {
+    sn = n
+}
+
 document.addEventListener('DOMContentLoaded', function(){
 
     // Mobile humberger button for menu
@@ -35,10 +40,23 @@ document.addEventListener('DOMContentLoaded', function(){
     var slideIndex = 1;
     showSlides(slideIndex);
 
+    // slider arrown control 
+    document.getElementById("prv").onclick = function() {plusSlides(-1)};
+    document.getElementById("nxt").onclick = function() {plusSlides(1)};
+
+    setInterval(function(){plusSlides(1) ; }, 5000);  
     // Next/previous controls
     function plusSlides(n) {
         showSlides(slideIndex += n);
     }
+
+    // slider image switch by dot under 
+    document.querySelectorAll(".dot").forEach (button => {
+        button.onclick = () => {
+            currentSlide(button.id)
+            
+        }
+    })     
 
     // Thumbnail image controls
     function currentSlide(n) {
@@ -63,4 +81,6 @@ document.addEventListener('DOMContentLoaded', function(){
    
     
 })
+
+
 

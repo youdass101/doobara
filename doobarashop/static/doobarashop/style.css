@@ -114,6 +114,15 @@ html .icons, body .icons {
 /* Hide the images by default */
 .mySlides {
   display: none;
+  -webkit-transition: -webkit-transform 35s;
+  transition: -webkit-transform 35s;
+  transition: transform 35s;
+  transition: transform 35s, -webkit-transform 35s;
+}
+
+.mySlides:hover {
+  -webkit-transform: scale(1.3);
+          transform: scale(1.3);
 }
 
 /* Next & previous buttons */
