@@ -12,6 +12,10 @@ html .icons, body .icons {
   color: #F9D342;
 }
 
+.imgd, .imgm {
+  display: none;
+}
+
 /* the fist header top bar that contain phone and social media links */
 .top-bar {
   background-color: #292826;
@@ -72,7 +76,7 @@ html .icons, body .icons {
 
 /* Page content */
 .content {
-  padding: 10px;
+  padding: 0px;
 }
 
 .logo, .search-box {
@@ -129,7 +133,7 @@ html .icons, body .icons {
 .prev, .next {
   cursor: pointer;
   position: absolute;
-  top: 50%;
+  top: 40%;
   width: auto;
   margin-top: -22px;
   padding: 16px;
@@ -219,6 +223,12 @@ html .icons, body .icons {
 
 @media only screen and (min-device-width: 481px) {
   #navigation-mobile, .mobile-menu-btn, #mobile-footer-menu {
+    display: none;
+  }
+  .imgd {
+    display: block;
+  }
+  .imgm {
     display: none;
   }
   .top-bar-right, .top-bar-left {
@@ -316,6 +326,17 @@ html .icons, body .icons {
 @media only screen and (max-device-width: 480px) {
   .top-bar-right, .search-box, .cart, .navigation, #myLinks {
     display: none;
+  }
+  .imgd {
+    display: none;
+  }
+  .imgm {
+    display: block;
+  }
+  .prev, .next {
+    top: 30%;
+    width: auto;
+    margin-top: -22px;
   }
   .sticky + .content {
     padding-top: 70px !important;

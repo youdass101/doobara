@@ -20,6 +20,10 @@ html, body {
     }
 }
 
+.imgd, .imgm {
+    display: none;
+}
+
 /* the fist header top bar that contain phone and social media links */
 .top-bar {
     background-color: $back-color;
@@ -86,7 +90,7 @@ html, body {
 
 /* Page content */
 .content {
-    padding: 10px;
+    padding: 0px;
   }
 
 // set logo and search on same line
@@ -122,7 +126,7 @@ html, body {
 }
 
 
-// INDEX PAGE SYLE 
+// INDEX PAGE SYLE ------------
 
 /* Slideshow container */
 .slideshow-container {
@@ -144,7 +148,7 @@ html, body {
   .prev, .next {
     cursor: pointer;
     position: absolute;
-    top: 50%;
+    top: 40%;
     width: auto;
     margin-top: -22px;
     padding: 16px;
@@ -229,6 +233,9 @@ html, body {
     #navigation-mobile, .mobile-menu-btn, #mobile-footer-menu {
         display: none;
     }
+
+    .imgd {display: block;}
+    .imgm {display: none;}
 
     //set phone, deliver and social media element on the same line
     .top-bar-right, .top-bar-left {
@@ -352,6 +359,15 @@ html, body {
     // hide all desktop element that shouldn't appear on mobile 
     .top-bar-right, .search-box, .cart, .navigation, #myLinks{
         display: none;
+    }
+
+    // Slider image change 
+    .imgd {display: none;}
+    .imgm {display: block;}
+    .prev, .next {
+        top: 30%;
+        width: auto;
+        margin-top: -22px;
     }
     
     // navigation Y axes padding on scroll 
