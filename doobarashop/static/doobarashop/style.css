@@ -132,10 +132,9 @@ html .icons, body .icons {
 /* Next & previous buttons */
 .prev, .next {
   cursor: pointer;
-  position: absolute;
-  top: 40%;
+  position: fixed;
   width: auto;
-  margin-top: -22px;
+  margin-top: -62px;
   padding: 16px;
   color: white;
   font-weight: bold;
@@ -176,23 +175,6 @@ html .icons, body .icons {
   font-size: 12px;
   padding: 8px 12px;
   position: absolute;
-}
-
-/* The dots/bullets/indicators */
-.dot {
-  cursor: pointer;
-  height: 15px;
-  width: 15px;
-  margin: 0 2px;
-  background-color: #bbb;
-  border-radius: 50%;
-  display: inline-block;
-  -webkit-transition: background-color 0.6s ease;
-  transition: background-color 0.6s ease;
-}
-
-.active, .dot:hover {
-  background-color: #717171;
 }
 
 /* Fading animation */
@@ -324,19 +306,15 @@ html .icons, body .icons {
 }
 
 @media only screen and (max-device-width: 480px) {
-  .top-bar-right, .search-box, .cart, .navigation, #myLinks {
-    display: none;
-  }
-  .imgd {
+  .top-bar-right, .search-box, .cart, .navigation, #myLinks, .dot, .imgd {
     display: none;
   }
   .imgm {
     display: block;
   }
   .prev, .next {
-    top: 30%;
     width: auto;
-    margin-top: -22px;
+    position: absolute;
   }
   .sticky + .content {
     padding-top: 70px !important;

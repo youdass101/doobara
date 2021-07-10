@@ -44,24 +44,14 @@ document.addEventListener('DOMContentLoaded', function(){
     document.getElementById("prv").onclick = function() {plusSlides(-1)};
     document.getElementById("nxt").onclick = function() {plusSlides(1)};
 
+    // Slider auto change 
     setInterval(function(){plusSlides(1) ; }, 5000);  
+
     // Next/previous controls
     function plusSlides(n) {
         showSlides(slideIndex += n);
-    }
+    }   
 
-    // slider image switch by dot under 
-    document.querySelectorAll(".dot").forEach (button => {
-        button.onclick = () => {
-            currentSlide(button.id)
-            
-        }
-    })     
-
-    // Thumbnail image controls
-    function currentSlide(n) {
-        showSlides(slideIndex = n);
-    }
 
     function showSlides(n) {
         var i;
@@ -76,10 +66,7 @@ document.addEventListener('DOMContentLoaded', function(){
             dots[i].className = dots[i].className.replace(" active", "");
         }
         slides[slideIndex-1].style.display = "block";
-        dots[slideIndex-1].className += " active";
     }
-   
-    
 })
 
 
