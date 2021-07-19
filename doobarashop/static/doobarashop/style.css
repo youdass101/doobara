@@ -303,6 +303,26 @@ html .icons, body .icons {
     display: inline-flex;
     padding-right: 0px;
   }
+  #cat-featured {
+    width: 100%;
+    padding: 0 10px 0 10px;
+  }
+  #cat-featured #cat {
+    width: 50%;
+  }
+  #cat-featured #cat .cat-title {
+    font-size: 10px;
+  }
+  #cat-featured #featured {
+    width: 50%;
+  }
+  #cat-featured #featured .product-card .card-img {
+    width: 15%;
+    background-color: yellowgreen;
+  }
+  #cat-featured #cat, #cat-featured #featured {
+    display: inline-block;
+  }
 }
 
 @media only screen and (max-device-width: 480px) {
