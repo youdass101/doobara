@@ -132,9 +132,9 @@ html .icons, body .icons {
 /* Next & previous buttons */
 .prev, .next {
   cursor: pointer;
-  position: fixed;
+  position: absolute;
+  top: 40%;
   width: auto;
-  margin-top: -62px;
   padding: 16px;
   color: white;
   font-weight: bold;
@@ -201,6 +201,57 @@ html .icons, body .icons {
   to {
     opacity: 1;
   }
+}
+
+#cat-featured {
+  width: 100%;
+  padding: 5px 0px 0 10px;
+}
+
+#cat-featured #cat {
+  width: 25%;
+  border-right: 2px solid #292826;
+  padding-right: 5px;
+}
+
+#cat-featured #cat .cat-icon {
+  width: 100%;
+  padding-left: 5px;
+}
+
+#cat-featured #cat table {
+  border-collapse: collapse;
+}
+
+#cat-featured #featured {
+  width: 74%;
+  vertical-align: top;
+  padding-left: 20px;
+}
+
+#cat-featured #featured .product-card {
+  width: 16.3%;
+  display: inline-block;
+}
+
+#cat-featured #featured .product-card .card-img {
+  width: 100%;
+  background-color: #F9D342;
+}
+
+#cat-featured #featured .product-card .card-info {
+  background-color: #F9D342;
+  margin-top: auto;
+}
+
+#cat-featured #featured .product-card .card-info p {
+  text-align: center;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+#cat-featured #cat, #cat-featured #featured {
+  display: inline-block;
 }
 
 @media only screen and (min-device-width: 481px) {
@@ -303,26 +354,6 @@ html .icons, body .icons {
     display: inline-flex;
     padding-right: 0px;
   }
-  #cat-featured {
-    width: 100%;
-    padding: 0 10px 0 10px;
-  }
-  #cat-featured #cat {
-    width: 50%;
-  }
-  #cat-featured #cat .cat-title {
-    font-size: 10px;
-  }
-  #cat-featured #featured {
-    width: 50%;
-  }
-  #cat-featured #featured .product-card .card-img {
-    width: 15%;
-    background-color: yellowgreen;
-  }
-  #cat-featured #cat, #cat-featured #featured {
-    display: inline-block;
-  }
 }
 
 @media only screen and (max-device-width: 480px) {
@@ -402,6 +433,9 @@ html .icons, body .icons {
   }
   #mobile-footer-menu i {
     padding: 0px 10% 0px 0px;
+  }
+  .prev, .next {
+    top: 25%;
   }
 }
 /*# sourceMappingURL=style.css.map */

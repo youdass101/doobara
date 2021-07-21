@@ -149,10 +149,10 @@ html, body {
   /* Next & previous buttons */
   .prev, .next {
     cursor: pointer;
-    position: fixed;
-    // top: 40%;
+    position: absolute;
+    top: 40%;
     width: auto;
-    margin-top: -62px;
+    // margin-top: -62px;
     padding: 16px;
     color: white;
     font-weight: bold;
@@ -209,6 +209,64 @@ html, body {
     from {opacity: .4}
     to {opacity: 1}
   }
+
+
+  // CATEGORY AND FEATURED ROW
+  #cat-featured {
+    width: 100%;
+    padding: 5px 0px 0 10px;
+
+    #cat  {
+        width: 25%;
+        border-right: 2px solid $back-color;
+        padding-right: 5px;
+        .cat-icon {
+            width: 100%;
+            padding-left: 5px;
+        }  
+
+        table {
+            border-collapse: collapse;   
+        }
+    }
+
+    #featured {
+        width: 74%;
+        vertical-align: top;
+        padding-left: 20px;
+        
+
+        .product-card {
+            width: 16.3%;
+            display: inline-block;
+            
+            
+            .card-img {
+                width: 100%;  
+                background-color: $identity-color;
+            }
+
+            .card-info {
+                background-color: $identity-color;
+                margin-top: auto;
+                
+
+                p {
+                    text-align: center;
+                    font-size: 15px;
+                    font-weight: 600;
+                    // height: 80px;
+                }
+                
+                
+            }
+        }
+    }
+
+    #cat, #featured {
+        display: inline-block;
+    } 
+}
 
 // ..........................................................
 
@@ -337,33 +395,6 @@ html, body {
         padding-right: 0px;
     } 
 
-    #cat-featured {
-        width: 100%;
-        padding: 0 10px 0 10px;
-
-   
-        #cat  {
-            width: 50%;
-            .cat-title {
-                font-size: 10px;
-            }  
-        }
-
-        #featured {
-            width: 50%;
-            .product-card {
-
-                .card-img {
-                    width: 15%;
-                    background-color: yellowgreen;
-                }
-            }
-        }
-
-        #cat, #featured {
-            display: inline-block;
-        } 
-    }
 }
 
 
@@ -467,6 +498,10 @@ html, body {
         i {
             padding: 0px 10% 0px 0px ;
         }
+    }
+
+    .prev, .next {
+        top: 25%;
     }
 }
   
