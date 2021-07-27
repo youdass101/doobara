@@ -214,7 +214,7 @@ html, body {
   // CATEGORY AND FEATURED ROW
   #cat-featured {
     width: 100%;
-    padding: 5px 0px 0 10px;
+    padding: 5px 0px 0px 10px;
 
     #cat  {
         padding-right: 5px;
@@ -365,6 +365,7 @@ html, body {
         .product-card {
             width: 16.3%;
             display: inline-block;
+            padding-bottom: 0px;
             
             
             .card-img {
@@ -381,7 +382,7 @@ html, body {
                     text-align: center;
                     font-size: 15px;
                     font-weight: 600;
-                    // height: 80px;
+                    
                 }
                 
                 
@@ -396,6 +397,17 @@ html, body {
     #cat  {
         width: 25%;
         border-right: 2px solid $back-color;
+    }
+
+    .feature-row { 
+        .fr1 {
+            width: 49%;
+            display: inline-block;
+
+            img {
+                width: 100%;
+            }
+        }
     }
 
 }

@@ -205,7 +205,7 @@ html .icons, body .icons {
 
 #cat-featured {
   width: 100%;
-  padding: 5px 0px 0 10px;
+  padding: 5px 0px 0px 10px;
 }
 
 #cat-featured #cat {
@@ -329,6 +329,7 @@ html .icons, body .icons {
   #featured .product-card {
     width: 16.3%;
     display: inline-block;
+    padding-bottom: 0px;
   }
   #featured .product-card .card-img {
     width: 100%;
@@ -349,6 +350,13 @@ html .icons, body .icons {
   #cat {
     width: 25%;
     border-right: 2px solid #292826;
+  }
+  .feature-row .fr1 {
+    width: 49%;
+    display: inline-block;
+  }
+  .feature-row .fr1 img {
+    width: 100%;
   }
 }
 
