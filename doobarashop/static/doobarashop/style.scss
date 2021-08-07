@@ -214,7 +214,8 @@ html, body {
   // CATEGORY AND FEATURED ROW
   #cat-featured {
     width: 100%;
-    padding: 5px 0px 0px 10px;
+    padding: 5px 0px 0px 5px;
+    
 
     #cat  {
         padding-right: 5px;
@@ -357,17 +358,15 @@ html, body {
     } 
 
     #featured {
-        width: 74%;
-        vertical-align: top;
-        padding-left: 20px;
+        width: 74.7%;
+        padding-left: 10px;
         
 
         .product-card {
             width: 16.3%;
             display: inline-block;
-            padding-bottom: 0px;
-            
-            
+            background-color: $identity-color;
+                  
             .card-img {
                 width: 100%;  
                 background-color: $identity-color;
@@ -376,16 +375,12 @@ html, body {
             .card-info {
                 background-color: $identity-color;
                 margin-top: auto;
-                
 
                 p {
                     text-align: center;
                     font-size: 15px;
-                    font-weight: 600;
-                    
-                }
-                
-                
+                    font-weight: 600;   
+                } 
             }
         }
     }
@@ -399,13 +394,25 @@ html, body {
         border-right: 2px solid $back-color;
     }
 
-    .feature-row { 
-        .fr1 {
-            width: 49%;
-            display: inline-block;
+    .add {
+        // padding-left: 2px;
+        // border: 2px solid $back-color ;
+        width: 100%;
+        
+        .feature-row { 
+            width: 100%;
+            
+        
+            .fr1 {
+                width: 49.8%;
+                display: inline-flex;
+                border: 2px solid $back-color;
+                
 
-            img {
-                width: 100%;
+                img {
+                    width: 100%;
+                    height: 100%;
+                }
             }
         }
     }
