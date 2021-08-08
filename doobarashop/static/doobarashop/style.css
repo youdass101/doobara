@@ -1,5 +1,5 @@
 html, body {
-  margin: 0px;
+  margin: 0;
   padding: 0px;
   height: 100%;
   font-weight: 400;
@@ -355,17 +355,18 @@ html .icons, body .icons {
   }
   .add .feature-row {
     width: 100%;
+    white-space: nowrap;
   }
   .add .feature-row .fr1 {
-    width: 49.8%;
-    display: -webkit-inline-box;
-    display: -ms-inline-flexbox;
-    display: inline-flex;
+    display: inline-block;
+    width: 50%;
+    margin: -2px;
     border: 2px solid #292826;
   }
   .add .feature-row .fr1 img {
     width: 100%;
     height: 100%;
+    vertical-align: top;
   }
 }
 

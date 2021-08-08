@@ -6,7 +6,7 @@ $identity-color: #F9D342;
 
 // page style in general
 html, body {
-    margin: 0px; 
+    margin: 0; 
     padding: 0px;
     height: 100%; 
     font-weight: 400;
@@ -395,23 +395,26 @@ html, body {
     }
 
     .add {
-        // padding-left: 2px;
-        // border: 2px solid $back-color ;
         width: 100%;
         
         .feature-row { 
             width: 100%;
-            
+            white-space: nowrap;
+            // line-height: 0;
         
             .fr1 {
-                width: 49.8%;
-                display: inline-flex;
-                border: 2px solid $back-color;
-                
+                display: inline-block;
+                width: 50%;
+                margin: -2px;
+                border: 2px solid $back-color; 
+                 
 
                 img {
                     width: 100%;
                     height: 100%;
+                    vertical-align: top;
+                    
+                    
                 }
             }
         }
