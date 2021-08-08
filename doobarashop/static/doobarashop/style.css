@@ -221,6 +221,33 @@ html .icons, body .icons {
   border-collapse: collapse;
 }
 
+#container {
+  padding-top: 7px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  background-color: #F9D342;
+}
+
+#container img {
+  width: 266.2px;
+}
+
+#container .product-info {
+  background-color: whitesmoke;
+  display: block;
+  left: 50%;
+}
+
+#container div {
+  padding: 0px 0px 2px 0px;
+  border-radius: 5px;
+  -webkit-box-shadow: 5px 5px #292826;
+          box-shadow: 5px 5px #292826;
+}
+
 @media only screen and (min-device-width: 481px) {
   #navigation-mobile, .mobile-menu-btn, #mobile-footer-menu {
     display: none;
