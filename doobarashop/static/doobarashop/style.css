@@ -388,6 +388,8 @@ html .icons, body .icons {
     width: 16.3%;
     display: inline-block;
     background-color: #F9D342;
+    -webkit-box-shadow: 1px 1px 4px 5px rgba(0, 0, 0, 0.5);
+            box-shadow: 1px 1px 4px 5px rgba(0, 0, 0, 0.5);
   }
   #featured .product-card .card-img {
     width: 100%;
@@ -396,11 +398,14 @@ html .icons, body .icons {
   #featured .product-card .card-info {
     background-color: #F9D342;
     margin-top: auto;
+    height: 60px;
+    margin: 0;
   }
   #featured .product-card .card-info p {
     text-align: center;
     font-size: 15px;
     font-weight: 600;
+    line-height: 15px;
   }
   #cat, #featured {
     display: inline-block;
@@ -512,6 +517,17 @@ html .icons, body .icons {
   }
   #cat {
     width: 100% !important;
+  }
+  .add {
+    width: 100%;
+  }
+  .add .feature-row .fr1 {
+    margin: -2px;
+    border: 2px solid #292826;
+  }
+  .add .feature-row .fr1 img {
+    width: 100%;
+    vertical-align: top;
   }
 }
 /*# sourceMappingURL=style.css.map */

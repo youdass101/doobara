@@ -433,7 +433,14 @@ html, body {
             width: 16.3%;
             display: inline-block;
             background-color: $identity-color;
-                  
+            box-shadow: 1px 1px 4px 5px rgba(0, 0, 0, 0.5 );
+            
+            // .card-price {
+            //     background-color: $identity-color;
+            //     margin: 0;
+                
+            // }
+
             .card-img {
                 width: 100%;  
                 background-color: $identity-color;
@@ -442,11 +449,16 @@ html, body {
             .card-info {
                 background-color: $identity-color;
                 margin-top: auto;
+                height: 60px;
+                margin: 0;
+                
 
-                p {
+
+                p { 
                     text-align: center;
                     font-size: 15px;
-                    font-weight: 600;   
+                    font-weight: 600;  
+                    line-height: 15px; 
                 } 
             }
         }
@@ -598,6 +610,26 @@ html, body {
 
     #cat {
         width: 100% !important; 
+    }
+
+    .add {
+        width: 100%;
+        
+        .feature-row { 
+            
+        
+            .fr1 {
+                margin: -2px;
+                border: 2px solid $back-color; 
+                 
+
+                img {
+                    width: 100%;
+                    vertical-align: top;
+                    
+                }
+            }
+        }
     }
 
 }
