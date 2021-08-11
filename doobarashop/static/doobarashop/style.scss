@@ -232,39 +232,67 @@ html, body {
 // SHOP PAGE 
 // product countainer grid 
 #container {
-    padding-top: 7px;
-    display: flex;
-    flex-wrap: wrap; 
+    clear: both;
+    padding: 7px 0 7px 0;
+    grid-column-gap: 4px;
+    grid-row-gap: 4px;
+    display: grid;
+    // grid-template-columns: repeat(5,1fr);
+    // all device responsive gride columns 
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    // display: flex;
+    // flex-wrap: wrap; 
     background-color: $identity-color;
     
-    img {
-        width: 266.2px;
+
+    .product {
+        margin: 0; 
+        padding: 10px 10px 15px 10px;
+        border-radius: 7px;
+        background-color: white;
+        box-shadow: 1px 1px 4px 5px rgba(0, 0, 0, 0.5 );
+    
+        img {
+            width: 100%;
+            margin: 0;
+        }
        
-    }
+    
 
-    .product-info {
-        background-color: whitesmoke;
-        display: block;
-        left: 50%;
-        
-    }
+        .product-info {
+            background-color: white;
+            position: relative;
 
-    // button {
-    //     background-color: white ;
+            .vertical-center {
+                margin: 0;
+                position: absolute;
+                left: 50%;
+                padding-bottom: 10px;
+                -ms-transform: translate(-50%, -50%);
+                transform: translate(-50%, -50%);
+            } 
+        }
 
 
-    // }
+        button {
+            color: #fff;
+            background-color: #292826;
+            font-family: "Archivo Narrow",Sans-serif;
+            font-size: 14px;
+            border-style: groove;
+            border-width: 0;
+            border-radius: 6px;
+            padding: 7px 20px 7px 20px;
+            
+        }
 
-    // p {
-    //     background-color: white ;
-    //     text-align: center;
-    // }
-
-    div {
-        padding: 0px 0px 2px 0px; 
-        // border: 2px solid white ;
-        border-radius: 5px;
-        box-shadow: 5px 5px $back-color;
+        p {
+            text-align: center;
+            font-size: 16px;
+            font-weight: 600;
+            color: $back-color;
+            padding-bottom: 5px;    
+        }
 
     }
 }
@@ -571,5 +599,6 @@ html, body {
     #cat {
         width: 100% !important; 
     }
+
 }
   

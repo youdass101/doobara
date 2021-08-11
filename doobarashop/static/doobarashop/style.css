@@ -222,30 +222,62 @@ html .icons, body .icons {
 }
 
 #container {
-  padding-top: 7px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
+  clear: both;
+  padding: 7px 0 7px 0;
+  grid-column-gap: 4px;
+  grid-row-gap: 4px;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (minmax(240px, 1fr))[auto-fit];
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   background-color: #F9D342;
 }
 
-#container img {
-  width: 266.2px;
+#container .product {
+  margin: 0;
+  padding: 10px 10px 15px 10px;
+  border-radius: 7px;
+  background-color: white;
+  -webkit-box-shadow: 1px 1px 4px 5px rgba(0, 0, 0, 0.5);
+          box-shadow: 1px 1px 4px 5px rgba(0, 0, 0, 0.5);
 }
 
-#container .product-info {
-  background-color: whitesmoke;
-  display: block;
+#container .product img {
+  width: 100%;
+  margin: 0;
+}
+
+#container .product .product-info {
+  background-color: white;
+  position: relative;
+}
+
+#container .product .product-info .vertical-center {
+  margin: 0;
+  position: absolute;
   left: 50%;
+  padding-bottom: 10px;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
 }
 
-#container div {
-  padding: 0px 0px 2px 0px;
-  border-radius: 5px;
-  -webkit-box-shadow: 5px 5px #292826;
-          box-shadow: 5px 5px #292826;
+#container .product button {
+  color: #fff;
+  background-color: #292826;
+  font-family: "Archivo Narrow",Sans-serif;
+  font-size: 14px;
+  border-style: groove;
+  border-width: 0;
+  border-radius: 6px;
+  padding: 7px 20px 7px 20px;
+}
+
+#container .product p {
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+  color: #292826;
+  padding-bottom: 5px;
 }
 
 @media only screen and (min-device-width: 481px) {
