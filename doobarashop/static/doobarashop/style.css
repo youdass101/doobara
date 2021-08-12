@@ -386,10 +386,16 @@ html .icons, body .icons {
   }
   #featured .product-card {
     width: 16.3%;
-    display: inline-block;
+    display: inline-table;
     background-color: #F9D342;
     -webkit-box-shadow: 1px 1px 4px 5px rgba(0, 0, 0, 0.5);
             box-shadow: 1px 1px 4px 5px rgba(0, 0, 0, 0.5);
+  }
+  #featured .product-card p {
+    text-align: center;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 15px;
   }
   #featured .product-card .card-img {
     width: 100%;
@@ -397,15 +403,8 @@ html .icons, body .icons {
   }
   #featured .product-card .card-info {
     background-color: #F9D342;
-    margin-top: auto;
-    height: 60px;
+    height: 50px;
     margin: 0;
-  }
-  #featured .product-card .card-info p {
-    text-align: center;
-    font-size: 15px;
-    font-weight: 600;
-    line-height: 15px;
   }
   #cat, #featured {
     display: inline-block;

@@ -431,15 +431,16 @@ html, body {
 
         .product-card {
             width: 16.3%;
-            display: inline-block;
+            display: inline-table;
             background-color: $identity-color;
             box-shadow: 1px 1px 4px 5px rgba(0, 0, 0, 0.5 );
             
-            // .card-price {
-            //     background-color: $identity-color;
-            //     margin: 0;
-                
-            // }
+            p { 
+                text-align: center;
+                font-size: 15px;
+                font-weight: 600;  
+                line-height: 15px; 
+            } 
 
             .card-img {
                 width: 100%;  
@@ -448,18 +449,12 @@ html, body {
 
             .card-info {
                 background-color: $identity-color;
-                margin-top: auto;
-                height: 60px;
+                // margin-top: auto;
+                height: 50px;
                 margin: 0;
                 
 
-
-                p { 
-                    text-align: center;
-                    font-size: 15px;
-                    font-weight: 600;  
-                    line-height: 15px; 
-                } 
+                
             }
         }
     }
