@@ -11,25 +11,25 @@ Home Automation
 <div class="slideshow-container">
 
   <!-- Full-width images with number and caption text -->
-  <div class="mySlides fade">
+  <div class="mySlides slide-fade">
     <div class="numbertext">1 / 3</div>
-    <img class="imgd" src="{% static 'doobarashop/upload/images/img1.jpg' %}" style="width:100%">
-    <img class="imgm" src="{% static 'doobarashop/upload/images/img1m.jpg' %}" style="width:100%">
-    <div class="text">Caption Text</div>
+    <img class="slider-img-desktop" src="{% static 'doobarashop/upload/images/img1.jpg' %}" style="width:100%">
+    <img class="slider-img-mobile" src="{% static 'doobarashop/upload/images/img1m.jpg' %}" style="width:100%">
+    <div class="slider-caption">Caption Text</div>
   </div>
 
-  <div class="mySlides fade">
+  <div class="mySlides slide-fade">
     <div class="numbertext">2 / 3</div>
-    <img class="imgd" src="{% static 'doobarashop/upload/images/img2.jpg' %}" style="width:100%">
-    <img class="imgm" src="{% static 'doobarashop/upload/images/img2m.jpg' %}" style="width:100%">
-    <div class="text">Caption Two</div>
+    <img class="slider-img-desktop" src="{% static 'doobarashop/upload/images/img2.jpg' %}" style="width:100%">
+    <img class="slider-img-mobile" src="{% static 'doobarashop/upload/images/img2m.jpg' %}" style="width:100%">
+    <div class="slider-caption">Caption Two</div>
   </div>
 
-  <div class="mySlides fade">
+  <div class="mySlides slide-fade">
     <div class="numbertext">3 / 3</div>
-    <img class="imgd" src="{% static 'doobarashop/upload/images/img3.jpg' %}" style="width:100%">
-    <img class="imgm" src="{% static 'doobarashop/upload/images/img3m.jpg' %}" style="width:100%">
-    <div class="text">Caption Three</div>
+    <img class="slider-img-desktop" src="{% static 'doobarashop/upload/images/img3.jpg' %}" style="width:100%">
+    <img class="slider-img-mobile" src="{% static 'doobarashop/upload/images/img3m.jpg' %}" style="width:100%">
+    <div class="slider-caption">Caption Three</div>
   </div>
 
   <!-- Next and previous buttons -->
@@ -39,7 +39,7 @@ Home Automation
 
 <!-- CATEGORY MENU AND FEATUR ROW -->
 <div id="cat-featured">
-  <div id="cat">
+  <div id="product-category">
     <table>
       <tr>
         <td><a href="#"><img class="cat-icon" src="{% static 'doobarashop/upload/images/smart-life.jpg' %}"></a></td>
@@ -58,7 +58,9 @@ Home Automation
     </table>
 
   </div>
-  <div id="featured">
+
+  <!-- featured-products PRODUCTS CARD -->
+  <div id="featured-products">
     <div class="product-card">
       <img class="card-img" src="{% static 'doobarashop/upload/images/4m.jpg' %}">
       <div class="card-info"><p >Smart PTZ Camera</p></div>
@@ -98,21 +100,21 @@ Home Automation
   </div>
 </div>
 
-<!-- Featured products ads  -->
-<div class="add">
+<!-- featured-products products ads  -->
+<div class="home-add">
   <div class="feature-row">
-    <div class="fr1">
+    <div class="single-add-home">
       <img class="card-img" src="{% static 'doobarashop/upload/images/bundel1.jpg' %}">
     </div>
-    <div class="fr1">
+    <div class="single-add-home">
       <img class="card-img" src="{% static 'doobarashop/upload/images/bundle2.jpg' %}">
     </div>
   </div>
   <div class="feature-row">
-    <div class="fr1">
+    <div class="single-add-home">
       <img class="card-img" src="{% static 'doobarashop/upload/images/bundel1.jpg' %}">
     </div>
-    <div class="fr1">
+    <div class="single-add-home">
       <img class="card-img" src="{% static 'doobarashop/upload/images/bundle2.jpg' %}">
     </div>
   </div>
