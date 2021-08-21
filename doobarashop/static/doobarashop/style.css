@@ -2,6 +2,7 @@ html, body {
   margin: 0;
   padding: 0px;
   height: 100%;
+  width: 100%;
   font-weight: 400;
   line-height: 1.618;
   font-family: Helvetica;
@@ -114,7 +115,7 @@ html .icons, body .icons {
 /* Slideshow container */
 .slideshow-container {
   max-width: 100%;
-  margin: auto;
+  margin: 0;
 }
 
 /* SLider Hide the images by default */
@@ -124,11 +125,6 @@ html .icons, body .icons {
   transition: -webkit-transform 35s;
   transition: transform 35s;
   transition: transform 35s, -webkit-transform 35s;
-}
-
-.mySlides:hover {
-  -webkit-transform: scale(1.3);
-          transform: scale(1.3);
 }
 
 /* Next & previous buttons on slider */
@@ -212,7 +208,7 @@ html .icons, body .icons {
 }
 
 #cat-featured {
-  width: 100%;
+  width: auto;
   padding: 5px 0px 0px 5px;
 }
 
@@ -291,6 +287,154 @@ html .icons, body .icons {
   font-weight: 600;
   color: #292826;
   padding-bottom: 5px;
+}
+
+#blog-carousel {
+  width: 100%;
+  padding: 10px 0 5px 0px;
+}
+
+#blog-carousel .post-card {
+  width: 48.8%;
+  background-color: #292826;
+  display: inline-block;
+  margin: 0 0 10px 10px;
+  vertical-align: top;
+  padding: 4px;
+}
+
+#blog-carousel .post-meta {
+  padding: 3px 5px 3px 30px;
+  color: white;
+  height: 140px;
+}
+
+#blog-carousel p {
+  font-size: 14px;
+}
+
+#blog-carousel img {
+  width: 100%;
+}
+
+#video-carousel {
+  width: 100%;
+  margin: 0;
+  padding: 10px 0 10px 15px;
+}
+
+#video-carousel .video-card {
+  display: inline-block;
+  background-color: #292826;
+  color: white;
+  margin: 0 0 10px 5px;
+}
+
+#video-carousel H2 {
+  padding: 0 0 0 18px;
+}
+
+#constac-us-container {
+  margin: 0;
+}
+
+#constac-us-container .contact-info {
+  background-color: #292826;
+  opacity: .7;
+  padding: 20px 0 30px 0;
+}
+
+#constac-us-container .contact-info h1 {
+  color: white;
+  text-align: center;
+  font-size: xxx-large;
+  margin: 0;
+  letter-spacing: 2px;
+}
+
+#constac-us-container .contact-info .contact-icon {
+  padding: 10px 0 15px 47%;
+}
+
+#constac-us-container .contact-info i {
+  color: white;
+  text-align: center;
+  padding-right: 15px;
+}
+
+#constac-us-container .contact-info .whatsapp {
+  color: green;
+}
+
+#constac-us-container .contact-info .contact-phone {
+  margin: 0 30%;
+  border-style: solid;
+  border-width: 5px 0;
+  border-color: #f84d43;
+}
+
+#constac-us-container #contact-form-container {
+  padding: 50px 10px 50px 10%;
+  width: 100%;
+  vertical-align: top;
+  background-color: #cde1e9;
+}
+
+#constac-us-container #contact-form-container .form-desc, #constac-us-container #contact-form-container .contact-inputs {
+  display: inline-block;
+  vertical-align: top !important;
+}
+
+#constac-us-container #contact-form-container .form-desc {
+  width: 35%;
+  margin: 0;
+}
+
+#constac-us-container #contact-form-container .form-desc h1 {
+  font-size: xx-large;
+  margin: 0;
+}
+
+#constac-us-container #contact-form-container .form-desc h2 {
+  font-size: x-large;
+}
+
+#constac-us-container #contact-form-container .form-desc p {
+  font-size: 14px;
+}
+
+#constac-us-container #contact-form-container .contact-inputs {
+  width: 64%;
+}
+
+#constac-us-container #contact-form-container .contact-inputs textarea {
+  padding: 30px 32%;
+}
+
+#constac-us-container #contact-form-container .contact-inputs #contact-submit-form {
+  width: 90%;
+}
+
+#constac-us-container #contact-form-container .contact-inputs #contact-submit-form input {
+  padding: 10px;
+  width: 100%;
+  margin: 5px;
+  border: none;
+  background-color: white;
+}
+
+#constac-us-container #contact-form-container .contact-inputs #contact-submit-form .contact-name, #constac-us-container #contact-form-container .contact-inputs #contact-submit-form .contact-email {
+  width: 47.9%;
+  display: inline-block;
+}
+
+#constac-us-container #contact-form-container .contact-inputs button {
+  padding: 10px 30px;
+  background-color: #292826;
+  color: white;
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 2px;
 }
 
 @media screen and (min-width: 481px) {
@@ -550,6 +694,16 @@ html .icons, body .icons {
   .home-add .feature-row .single-add-home img {
     width: 100%;
     vertical-align: top;
+  }
+  .post-card {
+    width: 100% !important;
+    margin: 0;
+  }
+  .contact-phone {
+    margin: 0 10% !important;
+  }
+  .contact-icon {
+    padding: 10px 0 15px 37% !important;
   }
 }
 /*# sourceMappingURL=style.css.map */

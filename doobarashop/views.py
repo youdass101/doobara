@@ -9,4 +9,12 @@ def index(request):
 def shop(request):
     return render(request, "doobarashop/shop.html")
 
+def blog(request):
+    return render(request, "doobarashop/blog.html")
+
+def video(request):
+    return render(request, "doobarashop/video.html")
+
+def contactus(request):
+    return render(request, "doobarashop/contactus.html")
 
