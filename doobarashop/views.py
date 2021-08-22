@@ -18,3 +18,6 @@ def video(request):
 def contactus(request):
     return render(request, "doobarashop/contactus.html")
 
+def myaccount(request):
+    return render(request, "doobarashop/account.html")
+
