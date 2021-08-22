@@ -2,7 +2,7 @@ html, body {
   margin: 0;
   padding: 0px;
   height: 100%;
-  width: 100%;
+  width: auto;
   font-weight: 400;
   line-height: 1.618;
   font-family: Helvetica;
@@ -334,10 +334,6 @@ html .icons, body .icons {
   padding: 0 0 0 18px;
 }
 
-#constac-us-container {
-  margin: 0;
-}
-
 #constac-us-container .contact-info {
   background-color: #292826;
   opacity: .7;
@@ -375,8 +371,7 @@ html .icons, body .icons {
 
 #constac-us-container #contact-form-container {
   padding: 50px 10px 50px 10%;
-  width: 100%;
-  vertical-align: top;
+  width: auto;
   background-color: #cde1e9;
 }
 
@@ -387,7 +382,7 @@ html .icons, body .icons {
 
 #constac-us-container #contact-form-container .form-desc {
   width: 35%;
-  margin: 0;
+  margin: 0px;
 }
 
 #constac-us-container #contact-form-container .form-desc h1 {
@@ -404,37 +399,64 @@ html .icons, body .icons {
 }
 
 #constac-us-container #contact-form-container .contact-inputs {
-  width: 64%;
+  width: 60%;
 }
 
 #constac-us-container #contact-form-container .contact-inputs textarea {
-  padding: 30px 32%;
-}
-
-#constac-us-container #contact-form-container .contact-inputs #contact-submit-form {
-  width: 90%;
+  width: 100%;
+  border: none;
+  height: 100px;
+  margin: 5px 0 0 5px;
 }
 
 #constac-us-container #contact-form-container .contact-inputs #contact-submit-form input {
   padding: 10px;
   width: 100%;
-  margin: 5px;
+  margin: 5px 0 5px 5px;
   border: none;
   background-color: white;
 }
 
 #constac-us-container #contact-form-container .contact-inputs #contact-submit-form .contact-name, #constac-us-container #contact-form-container .contact-inputs #contact-submit-form .contact-email {
-  width: 47.9%;
+  width: 49%;
   display: inline-block;
+  margin: 0;
 }
 
-#constac-us-container #contact-form-container .contact-inputs button {
+#constac-us-container #contact-form-container .contact-inputs #contact-submit-form .contact-email {
+  float: right;
+}
+
+#constac-us-container #contact-form-container .contact-inputs .contact-send-button {
+  float: right;
+  margin: 0;
+}
+
+#constac-us-container #contact-form-container .contact-inputs .contact-send-button button {
   padding: 10px 30px;
   background-color: #292826;
   color: white;
   font-weight: 600;
   font-size: 15px;
   letter-spacing: 2px;
+}
+
+#constac-us-container .inquiry-email-contact {
+  margin-top: 0px;
+  text-align: center;
+  background-color: #292826;
+  color: white;
+  border-style: solid;
+  border-width: 0 0 5px 0;
+  border-color: #F9D342;
+}
+
+#constac-us-container .inquiry-email-contact h1 {
+  margin: 0;
+}
+
+#constac-us-container .inquiry-email-contact .inquiry-email-address {
+  color: #F9D342;
 }
 
 @media screen and (min-width: 481px) {
@@ -704,6 +726,16 @@ html .icons, body .icons {
   }
   .contact-icon {
     padding: 10px 0 15px 37% !important;
+  }
+  #contact-form-container {
+    padding: 15px !important;
+  }
+  #contact-form-container .form-desc, #contact-form-container .contact-inputs {
+    width: 100% !important;
+    text-align: center;
+  }
+  #contact-form-container .contact-name, #contact-form-container .contact-email {
+    width: 100% !important;
   }
 }
 /*# sourceMappingURL=style.css.map */

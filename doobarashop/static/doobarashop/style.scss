@@ -9,7 +9,7 @@ html, body {
     margin: 0; 
     padding: 0px;
     height: 100%;
-    width: 100%; 
+    width: auto; 
     font-weight: 400;
     line-height: 1.618; 
     font-family:Helvetica; 
@@ -365,8 +365,9 @@ html, body {
     }
 }
 
+
+// CONTACT US PAGE 
 #constac-us-container {
-    margin: 0;
 
     .contact-info {
         background-color: $back-color;
@@ -405,11 +406,8 @@ html, body {
 
     #contact-form-container {
         padding: 50px 10px 50px 10%;
-        width: 100%;
-        vertical-align: top;
+        width: auto;
         background-color: rgb(205, 225, 233);
-        
-    
         
         .form-desc, .contact-inputs {
             display: inline-block;
@@ -419,54 +417,74 @@ html, body {
         
         .form-desc {
             width: 35%;
-            margin: 0;
-
+            margin: 0px;
             h1 {font-size: xx-large; margin: 0;}
             h2 {font-size: x-large;}
             p {font-size: 14px;}
-            
         }
 
         .contact-inputs {
-
-            width: 64%;
+            width: 60%;
     
             textarea {
-                padding: 30px 32% ;
+                width: 100%;
+                border: none;
+                height: 100px;   
+                margin: 5px 0 0 5px;  
             }
 
             #contact-submit-form {
-                width: 90%;
 
                 input {
                     padding: 10px;
                     width: 100%;
-                    margin: 5px ;
+                    margin: 5px 0 5px 5px ;
                     border: none;
                     background-color: white;
                 }
 
-
                 .contact-name, .contact-email {
-                    width: 47.9%;
-                    display: inline-block ;
+                    width: 49%;
+                    display: inline-block;
+                    margin: 0;
                 }
 
-                
+                .contact-email{ float: right ;} 
             }
 
-            button {
-                padding: 10px 30px;
-                background-color: $back-color;
-                color: white;
-                font-weight: 600;
-                font-size: 15px;
-                letter-spacing: 2px;
-                
+            
+            .contact-send-button {
+                float: right;
+                margin: 0;
+
+                button {
+                    padding: 10px 30px;
+                    background-color: $back-color;
+                    color: white;
+                    font-weight: 600;
+                    font-size: 15px;
+                    letter-spacing: 2px; 
+                }
             }
         }
+    }
 
-        
+    .inquiry-email-contact{
+        margin-top: 0px;
+        text-align: center;
+        background-color: $back-color;
+        color: white;
+        border-style: solid;
+        border-width: 0 0 5px 0;
+        border-color: $identity-color;
+
+        h1 {
+            margin: 0;
+        }
+
+        .inquiry-email-address {
+            color: $identity-color;
+        }
     }
 }
 
@@ -852,6 +870,18 @@ html, body {
 
     .contact-icon {
         padding: 10px 0 15px 37% !important;
+    }
+
+    #contact-form-container 
+    {
+        padding: 15px !important;
+        .form-desc, .contact-inputs {
+            width: 100% !important;
+            text-align: center;
+        }
+        .contact-name, .contact-email {
+            width: 100% !important;
+        }
     }
 
 }
