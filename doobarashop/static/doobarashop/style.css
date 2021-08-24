@@ -82,7 +82,7 @@ html .icons, body .icons {
   width: 100%;
 }
 
-/* Any Page content */
+/* Any Page content to be used for sevarel elements */
 .page-content {
   padding: 0px;
 }
@@ -127,7 +127,7 @@ html .icons, body .icons {
   transition: transform 35s, -webkit-transform 35s;
 }
 
-/* Next & previous buttons on slider */
+/* Next & previous pointer icons buttons on slider */
 .prev, .next {
   cursor: pointer;
   position: relative;
@@ -459,6 +459,76 @@ html .icons, body .icons {
   color: #F9D342;
 }
 
+#my-account-container {
+  padding: 4%;
+}
+
+#my-account-container p {
+  padding: 0 0 4% 4%;
+  font-size: 15px;
+}
+
+#my-account-container .my-account-navigation {
+  width: 20%;
+  margin: 0 !important;
+  display: inline-block;
+}
+
+#my-account-container .my-account-navigation ul li {
+  list-style: none;
+  border-style: solid;
+  border-width: 0.5px 0px;
+  border-color: gray;
+  font-size: large;
+  padding: 6% 0 5% 0;
+}
+
+#my-account-container .my-account-navigation ul li a {
+  color: #292826;
+}
+
+#my-account-container .my-account-navigation ul li a:link {
+  text-decoration: none;
+  color: black;
+}
+
+#my-account-container .my-account-navigation ul li a:hover {
+  color: #F9D342;
+}
+
+#my-account-container .my-account-navigation ul li i {
+  float: right;
+}
+
+#my-account-container #my-account-data {
+  width: 75%;
+  padding: 15px 0 0 60px;
+  display: inline-block;
+  vertical-align: top;
+}
+
+#my-account-container #my-account-data table {
+  width: 100%;
+  text-align: center;
+  border-collapse: collapse;
+}
+
+#my-account-container #my-account-data th {
+  font-size: medium;
+  background-color: whitesmoke;
+  padding: 10px 0 10px 0;
+}
+
+#my-account-container #my-account-data td {
+  font-size: 16px;
+  padding: 10px 0 10px 0;
+}
+
+#my-account-container #my-account-data td button {
+  padding: 7px;
+  border-color: transparent;
+}
+
 @media screen and (min-width: 481px) {
   #navigation-mobile, .mobile-menu-btn, #mobile-footer-menu {
     display: none;
@@ -736,6 +806,68 @@ html .icons, body .icons {
   }
   #contact-form-container .contact-name, #contact-form-container .contact-email {
     width: 100% !important;
+  }
+  #my-account-container {
+    padding: 10px;
+    margin: 0;
+  }
+  #my-account-container .my-account-navigation {
+    width: 100% !important;
+  }
+  #my-account-container .my-account-navigation ul {
+    padding: 0;
+  }
+  #my-account-container #my-account-data {
+    width: 100%;
+    padding: 0;
+    /* Force table to not be like tables anymore */
+    /* Hide table headers (but not display: none;, for accessibility) */
+    /*
+            DATA LABEL HEADER FOR EACH DATA LINE ON MOBILE
+            */
+  }
+  #my-account-container #my-account-data table, #my-account-container #my-account-data thead, #my-account-container #my-account-data tbody, #my-account-container #my-account-data th, #my-account-container #my-account-data td, #my-account-container #my-account-data tr {
+    display: block;
+  }
+  #my-account-container #my-account-data thead {
+    display: none;
+  }
+  #my-account-container #my-account-data tr {
+    border: 1px solid #ccc;
+  }
+  #my-account-container #my-account-data td {
+    /* Behave  like a "row" */
+    border: none;
+    position: relative;
+    padding-left: 50%;
+    padding-bottom: 22px;
+    font-size: large;
+  }
+  #my-account-container #my-account-data td:before {
+    /* Now like a table header */
+    position: absolute;
+    /* Top/left values mimic padding */
+    top: 6px;
+    left: 6px;
+    width: 45%;
+    padding-right: 10px;
+    white-space: nowrap;
+    font-weight: 600;
+  }
+  #my-account-container #my-account-data td:nth-of-type(1):before {
+    content: "Order";
+  }
+  #my-account-container #my-account-data td:nth-of-type(2):before {
+    content: "Date:";
+  }
+  #my-account-container #my-account-data td:nth-of-type(3):before {
+    content: "Status:";
+  }
+  #my-account-container #my-account-data td:nth-of-type(4):before {
+    content: "Total:";
+  }
+  #my-account-container #my-account-data td:nth-of-type(5):before {
+    content: "Action:";
   }
 }
 /*# sourceMappingURL=style.css.map */

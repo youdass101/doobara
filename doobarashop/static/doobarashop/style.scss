@@ -4,7 +4,7 @@
 $back-color:  #292826;
 $identity-color: #F9D342;
 
-// Layout all page style in general
+// Layout all page style Default
 html, body {
     margin: 0; 
     padding: 0px;
@@ -21,6 +21,7 @@ html, body {
     }
 }
 
+// Slider images default view 
 .slider-img-desktop, .slider-img-mobile {
     display: none;
 }
@@ -34,7 +35,7 @@ html, body {
 .header-top-bar {
     background-color: $back-color;
 
-    // phone and deliver ul styling 
+    // PHONE and deliver ul styling 
     .header-top-bar-left {
         ul {
             display: inline-flex;
@@ -43,7 +44,7 @@ html, body {
             font-size: 14px;
             font-family: "Roboto",Sans-serif;
             font-weight: 400;
-            }
+        }
 
         // phone and number disable url style and add padding
         a:link {
@@ -80,7 +81,7 @@ html, body {
     width: 100%;
     overflow: hidden;
 
-    // Desktop navigation menu
+    // Default navigation menu style
     .navigation-menu {
         color:$identity-color;
         padding: 15px 0px 20px 37px;
@@ -89,7 +90,7 @@ html, body {
     }
 }
 
-// Navigation Stick menu class 
+// Making Navigation Sticky 
 .sticky-nav {
     position: fixed ;
     top: 0 ;
@@ -97,12 +98,12 @@ html, body {
     width: 100%;
 } 
 
-/* Any Page content */
+/* Any Page content to be used for sevarel elements */
 .page-content {
     padding: 0px;
 }
 
-// set logo and search on same line
+// setting logo and search on same line
 .logo-nav, .search-box-nav {
     display: inline-flex;
 }
@@ -150,7 +151,7 @@ html, body {
     // }
 
   
-/* Next & previous buttons on slider */
+/* Next & previous pointer icons buttons on slider */
 .prev, .next {
     cursor: pointer;
     position: relative;
@@ -197,8 +198,7 @@ html, body {
     color: #f2f2f2;
     font-size: 12px;
     padding: 8px 12px;
-    position: absolute;
-    
+    position: absolute; 
 }
   
 /* Slider Fading animation effect */
@@ -227,7 +227,7 @@ html, body {
     width: auto;
     padding: 5px 0px 0px 5px;
     
-    // Product category bar
+    // Product category bar section
     #product-category  {
         padding-right: 5px;
         .cat-icon {
@@ -269,7 +269,7 @@ html, body {
             width: 100%;
             margin: 0;
         }
-        // Product name elelment 
+        // Product name  
         .product-name {
             height: 45px;
         }
@@ -299,7 +299,6 @@ html, body {
             border-width: 0;
             border-radius: 6px;
             padding: 7px 20px 7px 20px;
-            
         }
         
         // Product info text under p element
@@ -310,18 +309,15 @@ html, body {
             color: $back-color;
             padding-bottom: 5px;    
         }
-
     }
 }
 
 // BLOG PAGE STYLE START HERER 
-
 #blog-carousel {
     width: 100%;
     padding: 10px 0 5px 0px ;
     
-    
-
+    // Each post in the carousel 
     .post-card {
         width: 48.8%;
         background-color: $back-color;
@@ -329,46 +325,45 @@ html, body {
         margin: 0 0 10px 10px;
         vertical-align: top;
         padding: 4px;
-
     }
-
+    // Post Icon description 
     .post-meta {
         padding: 3px 5px 3px 30px;
         color: white;
         height: 140px;
-        
     }
-
+    // Post card paragraph styling
     p {
         font-size: 14px;
     }
-
+    //Post card image styling 
     img {
         width: 100%;
     }
 }
 
+// VIDEO PAGE CAROUSEL 
 #video-carousel {
     width: 100%;
     margin: 0;
     padding: 10px 0 10px 15px;
-
+    
+    //Each video in carousel 
     .video-card {
         display: inline-block;
         background-color: $back-color;
         color: white;
         margin: 0 0 10px 5px;
     }
-
+    // Video title 
     H2 {
         padding: 0 0 0 18px;
     }
 }
 
-
 // CONTACT US PAGE 
 #constac-us-container {
-
+    // First element in contact page phone and whatsapp
     .contact-info {
         background-color: $back-color;
         opacity: .7;
@@ -380,41 +375,40 @@ html, body {
             margin: 0;
             letter-spacing: 2px;
         }
-
+        //Phone icon and Whatsapp Icon
         .contact-icon {
             padding: 10px 0 15px 47%;
         }
-
+        // COntact awesome icons styling
         i {
             color: white;
             text-align: center;
             padding-right: 15px;
         }
-
+        // Whatsapp icon color 
         .whatsapp {
             color: green;
         }
-
+        // phone number 
         .contact-phone {
             margin: 0 30%;
             border-style: solid;
             border-width: 5px 0;
             border-color: #f84d43;
-        }
-        
+        }  
     }
 
+    // Submition contact form section 
     #contact-form-container {
         padding: 50px 10px 50px 10%;
         width: auto;
         background-color: rgb(205, 225, 233);
-        
+        //Setting form info and submition form on same line
         .form-desc, .contact-inputs {
             display: inline-block;
-            vertical-align: top !important;
-           
+            vertical-align: top !important; 
         }
-        
+        // Submition contact form infor text 
         .form-desc {
             width: 35%;
             margin: 0px;
@@ -422,7 +416,7 @@ html, body {
             h2 {font-size: x-large;}
             p {font-size: 14px;}
         }
-
+        // Form input div class contaciner 
         .contact-inputs {
             width: 60%;
     
@@ -432,9 +426,9 @@ html, body {
                 height: 100px;   
                 margin: 5px 0 0 5px;  
             }
-
+            //COntact form
             #contact-submit-form {
-
+                // input of contact sumbition form  
                 input {
                     padding: 10px;
                     width: 100%;
@@ -442,21 +436,21 @@ html, body {
                     border: none;
                     background-color: white;
                 }
-
+                // Set inline on desk
                 .contact-name, .contact-email {
                     width: 49%;
                     display: inline-block;
                     margin: 0;
                 }
-
+                // email input to float to aligh with other inputs right side 
                 .contact-email{ float: right ;} 
             }
 
-            
+            // Submition send button 
             .contact-send-button {
                 float: right;
                 margin: 0;
-
+                //Submition button element styling 
                 button {
                     padding: 10px 30px;
                     background-color: $back-color;
@@ -468,7 +462,7 @@ html, body {
             }
         }
     }
-
+    // Last section in submition page the email address 
     .inquiry-email-contact{
         margin-top: 0px;
         text-align: center;
@@ -476,15 +470,88 @@ html, body {
         color: white;
         border-style: solid;
         border-width: 0 0 5px 0;
-        border-color: $identity-color;
-
+        border-color: $identity-color ;
+        // Email address text removing margin 
         h1 {
             margin: 0;
         }
-
+        // Email address text color 
         .inquiry-email-address {
             color: $identity-color;
         }
+    }
+}
+
+// MY ACCOUNT PAGE STYLING 
+#my-account-container {
+    padding: 4%;
+    // First line of logged in user in my account page
+    p {
+        padding: 0 0 4% 4% ;
+        font-size: 15px;
+    }
+    // Left menu nevigation of account page
+    .my-account-navigation {
+        width: 20%;
+        margin: 0 !important;
+        display: inline-block;
+        ul {
+            li {
+                list-style: none;
+                border-style: solid;
+                border-width: 0.5px 0px;
+                border-color: gray;
+                font-size: large;
+                padding: 6% 0 5% 0;
+               
+                a {
+                    color: $back-color;
+
+                }
+                a:link {
+                    text-decoration: none;
+                    color: black;
+                }
+
+                a:hover {
+                    color: $identity-color;
+                }
+
+                i {
+
+                    float: right;
+                }
+            }
+        }
+    }
+    // Data for each Nav menu url 
+    #my-account-data {
+        width: 75%;
+        padding: 15px 0 0 60px;
+        display: inline-block;
+        vertical-align: top;
+        //Dashboard and orders URL table 
+        table {
+            width: 100%;
+            text-align: center;
+            border-collapse: collapse;
+            }
+
+        th {
+            font-size: medium;
+            background-color:whitesmoke ;
+            padding: 10px 0 10px 0;
+        }
+
+        td {
+            font-size: 16px;
+            padding: 10px 0 10px 0;
+
+            button {
+                padding: 7px;
+                border-color: transparent;
+            }
+        } 
     }
 }
 
@@ -498,7 +565,7 @@ html, body {
     #navigation-mobile, .mobile-menu-btn, #mobile-footer-menu {
         display: none;
     }
-
+    // SLider Switch to Desktop size one 
     .slider-img-desktop {display: block;}
     .slider-img-mobile {display: none;}
 
@@ -604,7 +671,6 @@ html, body {
         .cartIcon {
             float: right;
             font-size: 20px;
-    
         }
         // desktop cart url of items        
         .cartUrl {
@@ -625,14 +691,12 @@ html, body {
         
     // set desktop navigation menu and cart on same row   
     .navigation-menu, .cart-nav {
-        display: inline-flex;
-        
+        display: inline-flex;   
     } 
     
     // element includes the product category and featured products cards
     #cat-featured {
-        margin-left: 0.5%;
-        
+        margin-left: 0.5%; 
     }
 
     // Product category and featured products 
@@ -850,8 +914,7 @@ html, body {
                 // Single add image
                 img {
                     width: 100%;
-                    vertical-align: top;
-                    
+                    vertical-align: top;    
                 }
             }
         }
@@ -867,11 +930,11 @@ html, body {
     .contact-phone {
         margin: 0  10%!important;
     }
-
+    // CONTACT WHATSAPP AND PHONE ICONS
     .contact-icon {
         padding: 10px 0 15px 37% !important;
     }
-
+    // CONTACT SUBMITION FORM CONTAINER
     #contact-form-container 
     {
         padding: 15px !important;
@@ -884,5 +947,65 @@ html, body {
         }
     }
 
+    // My account page mobile styling
+    #my-account-container {
+        padding: 10px;
+        margin: 0;
+        // MY ACCOUNT NAVIGATION MENU FULL WIDTH
+        .my-account-navigation {
+            width: 100% !important;
+
+            ul {
+                padding: 0;
+            }
+        }
+        // MY ACCOUNT DATA OF EACH URL
+        #my-account-data {
+            width: 100%;
+            padding: 0;
+    
+            	/* Force table to not be like tables anymore */
+            table, thead, tbody, th, td, tr { 
+                display: block; 
+            }
+            
+            /* Hide table headers (but not display: none;, for accessibility) */
+            thead { 
+                display: none;
+            }
+            // LIGHT BORDER FOR EACH ROW
+            tr { border: 1px solid #ccc; }
+            // EACH DATA ON LINE
+            td { 
+                /* Behave  like a "row" */
+                border: none;
+                position: relative;
+                padding-left: 50%; 
+                padding-bottom: 22px;
+                font-size: large;
+            }
+            // DATA HEADER ON EACH LINE
+            td:before { 
+                /* Now like a table header */
+                position: absolute;
+                /* Top/left values mimic padding */
+                top: 6px;
+                left: 6px;
+                width: 45%; 
+                padding-right: 10px; 
+                white-space: nowrap;
+                font-weight: 600;
+            }
+            
+            /*
+            DATA LABEL HEADER FOR EACH DATA LINE ON MOBILE
+            */
+            td:nth-of-type(1):before { content: "Order"; }
+            td:nth-of-type(2):before { content: "Date:"; }
+            td:nth-of-type(3):before { content: "Status:"; }
+            td:nth-of-type(4):before { content: "Total:"; }
+            td:nth-of-type(5):before { content: "Action:"; }
+        }
+    }
 }
   
