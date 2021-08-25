@@ -315,14 +315,14 @@ html, body {
 // BLOG PAGE STYLE START HERER 
 #blog-carousel {
     width: 100%;
-    padding: 10px 0 5px 0px ;
+    padding: 10px 0 5px 25px ;
     
     // Each post in the carousel 
     .post-card {
-        width: 48.8%;
+        width: 48%;
         background-color: $back-color;
         display: inline-block;
-        margin: 0 0 10px 10px;
+        margin: 0 0 10px 0.5%;
         vertical-align: top;
         padding: 4px;
     }
@@ -346,14 +346,36 @@ html, body {
 #video-carousel {
     width: 100%;
     margin: 0;
-    padding: 10px 0 10px 15px;
+    padding: 10px 0 20px 10px;
     
     //Each video in carousel 
     .video-card {
+        width: 48%;
+        height: 50%;
         display: inline-block;
         background-color: $back-color;
         color: white;
-        margin: 0 0 10px 5px;
+        margin: 0 5px 10px 5px;
+
+        // Video wrapper element for screen responsivness
+        .youtube-video {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            padding-top: 56.25%; /* 16:9 Aspect Ratio (divide 9 by 16 = 0.5625) */
+          }
+        // Video Iframe resize response
+        iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            
+        }
+
     }
     // Video title 
     H2 {
@@ -419,6 +441,7 @@ html, body {
         // Form input div class contaciner 
         .contact-inputs {
             width: 60%;
+           
     
             textarea {
                 width: 100%;
@@ -921,9 +944,24 @@ html, body {
     }
 
     // BLOG PAGE SETTING MOBILITY 
-    .post-card {
-        width: 100% !important;
-        margin: 0;
+    #blog-carousel{
+        padding: 0;
+        .post-card {
+            width: 100% !important;
+            margin: 0 0 10px 0;
+        }
+    }
+
+    // VIDEO PAGE stretch
+    #video-carousel {
+        padding: 10px;
+       
+        .video-card {
+            display: block !important;
+            width: 100% !important;
+            margin: 0 !important;
+        
+        }
     }
 
     // CONTACT US PAGE RESPONSVITY
