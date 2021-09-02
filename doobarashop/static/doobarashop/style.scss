@@ -720,24 +720,39 @@ html, body {
     // element includes the product category and featured products cards
     #cat-featured {
         margin-left: 0.5%; 
+        display: flex;
+        display: -webkit-flex;
+        
     }
 
     // Product category and featured products 
-    #product-category, #featured-products {
-        display: inline-flex;
-        vertical-align: top;
+    #product-category {
+        // display: inline-flex;
+        // vertical-align: top;
+        flex: 1;
+        -webkit-flex: 1;
     } 
 
-    // Featured product elemet
     #featured-products {
-        width: 74.2%;
+        flex: 1;
+        -webkit-flex: 2.5;
+    }
+
+    // Featured product elemet
+    .product-card-container {
+        // width: 74.2%;
         padding-left: 1%;
+        display: flex;
+        display: -webkit-flex;
         
+       
         // each Product in parent product element 
         .product-card {
             margin-right: 0.4%;
             // width: 16.3%;
-            display: inline-block;
+            flex: 1;
+            -webkit-flex: 1;
+            // display: inline-block;
             background-color: $identity-color;
             box-shadow: 1px 1px 4px 5px rgba(0, 0, 0, 0.5 );
             
