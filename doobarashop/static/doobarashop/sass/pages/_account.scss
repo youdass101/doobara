@@ -1,0 +1,137 @@
+// MY ACCOUNT PAGE STYLING 
+#my-account-container {
+    padding: 4%;
+    // First line of logged in user in my account page
+    p {
+        padding: 0 0 4% 4% ;
+        font-size: 15px;
+    }
+    // Left menu nevigation of account page
+    .my-account-navigation {
+        width: 20%;
+        margin: 0 !important;
+        display: inline-block;
+        ul {
+            li {
+                list-style: none;
+                border-style: solid;
+                border-width: 0.5px 0px;
+                border-color: gray;
+                font-size: large;
+                padding: 6% 0 5% 0;
+               
+                a {
+                    color: var.$back-color;
+
+                }
+                a:link {
+                    text-decoration: none;
+                    color: black;
+                }
+
+                a:hover {
+                    color: var.$identity-color;
+                }
+
+                i {
+
+                    float: right;
+                }
+            }
+        }
+    }
+    // Data for each Nav menu url 
+    #my-account-data {
+        width: 75%;
+        padding: 15px 0 0 60px;
+        display: inline-block;
+        vertical-align: top;
+        //Dashboard and orders URL table 
+        table {
+            width: 100%;
+            text-align: center;
+            border-collapse: collapse;
+            }
+
+        th {
+            font-size: medium;
+            background-color:whitesmoke ;
+            padding: 10px 0 10px 0;
+        }
+
+        td {
+            font-size: 16px;
+            padding: 10px 0 10px 0;
+
+            button {
+                padding: 7px;
+                border-color: transparent;
+            }
+        } 
+    }
+}
+
+
+@media screen and (max-width: 480px) {
+    // My account page mobile styling
+    #my-account-container {
+        padding: 10px;
+        margin: 0;
+        // MY ACCOUNT NAVIGATION MENU FULL WIDTH
+        .my-account-navigation {
+            width: 100% !important;
+
+            ul {
+                padding: 0;
+            }
+        }
+        // MY ACCOUNT DATA OF EACH URL
+        #my-account-data {
+            width: 100%;
+            padding: 0;
+
+                /* Force table to not be like tables anymore */
+            table, thead, tbody, th, td, tr { 
+                display: block; 
+            }
+            
+            /* Hide table headers (but not display: none;, for accessibility) */
+            thead { 
+                display: none;
+            }
+            // LIGHT BORDER FOR EACH ROW
+            tr { border: 1px solid #ccc; }
+            // EACH DATA ON LINE
+            td { 
+                /* Behave  like a "row" */
+                border: none;
+                position: relative;
+                padding-left: 50%; 
+                padding-bottom: 22px;
+                font-size: large;
+            }
+            // DATA HEADER ON EACH LINE
+            td:before { 
+                /* Now like a table header */
+                position: absolute;
+                /* Top/left values mimic padding */
+                top: 6px;
+                left: 6px;
+                width: 45%; 
+                padding-right: 10px; 
+                white-space: nowrap;
+                font-weight: 600;
+            }
+            
+            /*
+            DATA LABEL HEADER FOR EACH DATA LINE ON MOBILE
+            */
+            td:nth-of-type(1):before { content: "Order"; }
+            td:nth-of-type(2):before { content: "Date:"; }
+            td:nth-of-type(3):before { content: "Status:"; }
+            td:nth-of-type(4):before { content: "Total:"; }
+            td:nth-of-type(5):before { content: "Action:"; }
+        }
+    }
+
+    }

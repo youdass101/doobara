@@ -1,0 +1,239 @@
+@use '../abstracts/variables' as var;
+// navigation section style default
+#navbar {
+    z-index: 2;
+    background-color: var.$back-color;
+    border-top: 5px solid var.$identity-color;
+    width: 100%;
+    overflow: hidden;
+
+    // Default navigation menu style
+    .navigation-menu {
+        color: var.$identity-color;
+        padding: 15px 0px 20px 37px;
+        font-size: 1.2em;
+        font-weight: 400;
+    }
+}
+
+// Making Navigation Sticky 
+.sticky-nav {
+    position: fixed ;
+    top: 0 ;
+    opacity: 80%;
+    width: 100%;
+} 
+
+/* Any Page content to be used for sevarel elements */
+.page-content {
+    padding: 0px;
+}
+
+// setting logo and search on same line
+.logo-nav, .search-box-nav {
+    display: inline-flex;
+}
+
+@media screen and (min-width: 481px) {
+    // THe body page-content position on mouse scroll dow and sticky meny activate.
+    //  this will keep the page-content after event to stay at same position regardly to stick meny
+
+    // Don't SHow mobile menu and button on desktop 
+    #navigation-mobile, .mobile-menu-btn, #mobile-footer-menu {
+        display: none;
+    }
+    .sticky-nav + .page-content {
+        padding-top: 130px;
+    }
+
+    // search box section style default 
+    .search-box-nav {
+        float: right;
+        margin-right: 2%;
+    }
+
+
+    // search box form input style
+    form.search-site input[type=text] {
+        border-bottom-left-radius: 4px ;
+        padding: 12px 20px;
+        font-size: 15px;
+        border: 1px solid var.$identity-color;
+        float: left;
+        width: 80%;
+        background: #f1f1f1;
+    }
+
+    // search form button style 
+    form.search-site button {
+        float: left;
+        width: 20%;
+        padding: 10.5px 20px;
+        background: var.$identity-color;
+        color: white;
+        font-size: 17px;
+        border: 1px solid var.$identity-color;
+        border-left: none; /* Prevent double borders */
+        cursor: pointer;
+        border-bottom-right-radius: 4px ;
+    }
+
+    // logo image style
+    .logo-nav {
+        padding-left: 20px;
+    }
+
+    // desktop navigation a element 
+    .navigation-menu a {
+        padding: 0 20px 0 0px;
+        color: white;
+    }
+
+    // Navigatopn Menu Links icons On hover
+    .navigation-menu a:hover{
+    color: var.$identity-color;
+    }
+
+    // desktop navigation menu link icons element  
+    .navigation-menu a:link {
+        text-decoration: none;
+        padding-right: 20px;
+    }
+            
+    // Desktop cart-nav section element
+    .cart-nav {
+        float: right;
+        margin-right: 2%;
+        color:var.$identity-color;
+            
+        // desktop cat icon 
+        .cartIcon {
+            float: right;
+            font-size: 20px;
+        }
+        // desktop cart url of items        
+        .cartUrl {
+            text-decoration: none;
+            color: white;
+            padding-right: 60px;
+            padding-left: 10px;
+        }
+
+        // cart number of total 
+        .homeTotal {
+            font-size: 16px;
+            .cartUrl {
+                font-size: 14px;
+            }
+        }
+    }
+        
+    // set desktop navigation menu and cart on same row   
+    .navigation-menu, .cart-nav {
+        display: inline-flex;   
+    } 
+
+    // element includes the product category and featured products cards
+    #cat-featured {
+        margin-left: 0.5%; 
+        display: flex;
+        display: -webkit-flex;
+        
+    }
+}
+
+
+@media screen and (max-width: 480px) {
+    // hide all desktop element that shouldn't appear on mobile 
+    .header-top-bar-right, .search-box-nav, .cart-nav, .navigation-menu, #myLinks, .dot, .imgd, #featured-products {
+        display: none !important;
+    }
+    // THe body page-content position on mouse scroll dow and sticky meny activate.
+    //  this will keep the co  0ntent after event to stay at same position regardly to stick meny
+    // !!! navigation Y axes padding on scroll 
+    .sticky-nav + .page-content {
+        padding-top: 70px !important;
+    }
+
+    // site logo at navigation 
+    .logo-nav {
+        padding-left: 0px;
+    }
+
+    // phone information a the top 
+    .phone-number {
+        margin-left: -20px;
+    }
+
+    // Phone and cash on delivery section first row or bar at the top, link styling 
+    .header-top-bar-left a:link {
+        padding: 0px 50px 0px 50px;
+    } 
+
+    // menu humberger button parent div
+    .mobile-menu-btn {
+        float: right;
+        display: block;
+        padding: 3px 3px 0px 0px;
+
+        // huberger Icon inside button 
+        .humberger {
+            background-color: var.$identity-color;
+            font-size: 20px;
+            border: var.$identity-color;
+            border: none;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;  
+        }
+    }
+
+    // navigation menu icons for Mobile 
+    #navigation-mobile {
+        display: none;
+        background-color: var.$back-color;  
+        width: 35%;
+        float: left;
+        padding-right: 30px 0 0 0;
+        font-size: 16px;
+        
+        ul {
+            list-style: none;
+            padding-left: 20px;
+        }
+
+        li {
+            padding-bottom: 7px;
+        }
+
+        a {
+            text-decoration: none;
+            color: white;
+        }
+    }
+
+    // Mobile footer menu
+    #mobile-footer-menu {   
+        display: block;
+        background-color: var.$back-color;
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        padding: 10px 0px 10px 10%;
+
+        // Centering the footer navigation
+        .footer-navigation {    
+            justify-content: center;
+            display: flex;
+        }
+
+        // icons spacing
+        a {
+            padding: 0px 10% 0px 0px ;
+        }
+    }
+
+    }

@@ -1,0 +1,145 @@
+// CONTACT US PAGE 
+#constac-us-container {
+    // First element in contact page phone and whatsapp
+    .contact-info {
+        background-color: var.$back-color;
+        opacity: .7;
+        padding: 20px 0 30px 0;
+        h1 {
+            color: white;
+            text-align: center;
+            font-size: xxx-large;
+            margin: 0;
+            letter-spacing: 2px;
+        }
+        //Phone icon and Whatsapp Icon
+        .contact-icon {
+            padding: 10px 0 15px 47%;
+        }
+        // COntact awesome icons styling
+        i {
+            color: white;
+            text-align: center;
+            padding-right: 15px;
+        }
+        // Whatsapp icon color 
+        .whatsapp {
+            color: green;
+        }
+        // phone number 
+        .contact-phone {
+            margin: 0 30%;
+            border-style: solid;
+            border-width: 5px 0;
+            border-color: #f84d43;
+        }  
+    }
+
+    // Submition contact form section 
+    #contact-form-container {
+        padding: 50px 10px 50px 10%;
+        width: auto;
+        background-color: rgb(205, 225, 233);
+        //Setting form info and submition form on same line
+        .form-desc, .contact-inputs {
+            display: inline-block;
+            vertical-align: top !important; 
+        }
+        // Submition contact form infor text 
+        .form-desc {
+            width: 35%;
+            margin: 0px;
+            h1 {font-size: xx-large; margin: 0;}
+            h2 {font-size: x-large;}
+            p {font-size: 14px;}
+        }
+        // Form input div class contaciner 
+        .contact-inputs {
+            width: 60%;
+           
+    
+            textarea {
+                width: 100%;
+                border: none;
+                height: 100px;   
+                margin: 5px 0 0 5px;  
+            }
+            //COntact form
+            #contact-submit-form {
+                // input of contact sumbition form  
+                input {
+                    padding: 10px;
+                    width: 100%;
+                    margin: 5px 0 5px 5px ;
+                    border: none;
+                    background-color: white;
+                }
+                // Set inline on desk
+                .contact-name, .contact-email {
+                    width: 49%;
+                    display: inline-block;
+                    margin: 0;
+                }
+                // email input to float to aligh with other inputs right side 
+                .contact-email{ float: right ;} 
+            }
+
+            // Submition send button 
+            .contact-send-button {
+                float: right;
+                margin: 0;
+                //Submition button element styling 
+                button {
+                    padding: 10px 30px;
+                    background-color: var.$back-color;
+                    color: white;
+                    font-weight: 600;
+                    font-size: 15px;
+                    letter-spacing: 2px; 
+                }
+            }
+        }
+    }
+    // Last section in submition page the email address 
+    .inquiry-email-contact{
+        margin-top: 0px;
+        text-align: center;
+        background-color: var.$back-color;
+        color: white;
+        border-style: solid;
+        border-width: 0 0 5px 0;
+        border-color: var.$identity-color ;
+        // Email address text removing margin 
+        h1 {
+            margin: 0;
+        }
+        // Email address text color 
+        .inquiry-email-address {
+            color: var.$identity-color;
+        }
+    }
+}
+
+@media screen and (max-width: 480px) {
+    // CONTACT US PAGE RESPONSVITY
+    .contact-phone {
+        margin: 0  10%!important;
+    }
+    // CONTACT WHATSAPP AND PHONE ICONS
+    .contact-icon {
+        padding: 10px 0 15px 37% !important;
+    }
+    // CONTACT SUBMITION FORM CONTAINER
+    #contact-form-container 
+    {
+        padding: 15px !important;
+        .form-desc, .contact-inputs {
+            width: 100% !important;
+            text-align: center;
+        }
+        .contact-name, .contact-email {
+            width: 100% !important;
+        }
+    }
+
+    }

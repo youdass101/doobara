@@ -1,0 +1,21 @@
+@use '../abstracts/variables' as var;
+// for the footter push to the bottom always 
+.footter-wrapper {
+    height: auto !important;
+    margin: 0 auto -142px; /* the bottom margin is the negative value of the footer's height */
+}
+
+// set the footer div at the end of the page 
+.footer, .push {
+    height: 142px; /* .push must be the same height as .footer */
+}
+
+// page footer 
+.footer {
+    background-color: var.$back-color;
+}
+
+// to be used on JS on any div display
+.show {
+    display: block !important;
+}
