@@ -1,0 +1,27 @@
+// Desktop cart-nav section element
+.cart-nav {
+    float: right;
+    margin-right: 2%;
+    color:var.$identity-color;
+        
+    // desktop cat icon 
+    .cartIcon {
+        float: right;
+        font-size: 20px;
+    }
+    // desktop cart url of items        
+    .cartUrl {
+        text-decoration: none;
+        color: white;
+        padding-right: 60px;
+        padding-left: 10px;
+    }
+
+    // cart number of total 
+    .homeTotal {
+        font-size: 16px;
+        .cartUrl {
+            font-size: 14px;
+        }
+    }
+}

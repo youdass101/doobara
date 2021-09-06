@@ -1,6 +1,6 @@
 // INDEX PAGE SYLE ------------
 // SLIDER 
-@import '../sections/slider';
+@import '../components/slider';
 // CATEGORY AND FEATURED ROW
 #cat-featured {
     width: auto;
@@ -25,6 +25,14 @@
     // SLider Switch to Desktop size one 
     .slider-img-desktop {display: block;}
     .slider-img-mobile {display: none;}
+
+    // element includes the product category and featured products cards
+    #cat-featured {
+    margin-left: 0.5%; 
+    display: flex;
+    display: -webkit-flex;
+        
+    }
 
     // Product category and featured products 
     #product-category {

@@ -1,0 +1,33 @@
+// SEARCH WIDGET COMPONENT 
+
+// search box section style default 
+.search-box-nav {
+    float: right;
+    margin-right: 2%;
+}
+
+
+// search box form input style
+form.search-site input[type=text] {
+    border-bottom-left-radius: 4px ;
+    padding: 12px 20px;
+    font-size: 15px;
+    border: 1px solid var.$identity-color;
+    float: left;
+    width: 80%;
+    background: #f1f1f1;
+}
+
+// search form button style 
+form.search-site button {
+    float: left;
+    width: 20%;
+    padding: 10.5px 20px;
+    background: var.$identity-color;
+    color: white;
+    font-size: 17px;
+    border: 1px solid var.$identity-color;
+    border-left: none; /* Prevent double borders */
+    cursor: pointer;
+    border-bottom-right-radius: 4px ;
+}

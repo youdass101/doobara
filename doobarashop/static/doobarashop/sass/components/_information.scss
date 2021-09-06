@@ -1,0 +1,33 @@
+ul {
+    display: inline-flex;
+    color: white;
+    list-style: none;
+    font-size: 14px;
+    font-family: "Roboto",Sans-serif;
+    font-weight: 400;
+}
+
+// phone and number disable url style and add padding
+a:link {
+    color:white;
+    text-decoration: none;
+    padding-right: 20px;
+}
+
+// phone and number element transition animated trasition setting
+.phone-number {
+    transition: background-color 1s, font-size 1s, weight 1s;
+}
+
+// phone icon and number on hover transition 
+.phone-number:hover {
+    background-color: var.$identity-color;
+    font-weight: 500;
+    border-radius: 5px;
+    border-color: transparent;
+}
+
+// phone icon when phone class on hover to change icont color 
+.phone-number:hover .fa-phone-alt{
+    color: white;
+}

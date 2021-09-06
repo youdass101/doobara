@@ -20,6 +20,11 @@ html .icons, body .icons {
   box-sizing: border-box;
 }
 
+/* Any Page content to be used for sevarel elements */
+.page-content {
+  padding: 0px;
+}
+
 /* the fist header top bar that contain phone and social media links */
 .header-top-bar {
   background-color: #292826;
@@ -50,24 +55,32 @@ html .icons, body .icons {
   color: white;
 }
 
-@media screen and (min-width: 481px) {
-  .header-top-bar-right, .header-top-bar-left {
-    display: inline;
+.header-top-bar-right, .header-top-bar-left {
+  display: inline;
+}
+
+.header-top-bar-right {
+  float: right;
+  padding-right: 40px;
+}
+.header-top-bar-right .social-media-nav {
+  padding: 10px 20px 15px 20px;
+  color: white;
+  font-size: 25px;
+  transition: background-color 1s, transform 1s;
+}
+.header-top-bar-right .social-media-nav:hover {
+  background-color: #F9D342;
+  transform: rotate(360deg);
+}
+
+@media screen and (max-width: 480px) {
+  .phone-number {
+    margin-left: -20px;
   }
 
-  .header-top-bar-right {
-    float: right;
-    padding-right: 40px;
-  }
-  .header-top-bar-right .social-media-nav {
-    padding: 10px 20px 15px 20px;
-    color: white;
-    font-size: 25px;
-    transition: background-color 1s, transform 1s;
-  }
-  .header-top-bar-right .social-media-nav:hover {
-    background-color: #F9D342;
-    transform: rotate(360deg);
+  .header-top-bar-left a:link {
+    padding: 0px 50px 0px 50px;
   }
 }
 #navbar {
@@ -91,124 +104,54 @@ html .icons, body .icons {
   width: 100%;
 }
 
-/* Any Page content to be used for sevarel elements */
-.page-content {
-  padding: 0px;
-}
-
 .logo-nav, .search-box-nav {
   display: inline-flex;
 }
 
-@media screen and (min-width: 481px) {
-  #navigation-mobile, .mobile-menu-btn, #mobile-footer-menu {
-    display: none;
-  }
-
-  .sticky-nav + .page-content {
-    padding-top: 130px;
-  }
-
-  .search-box-nav {
-    float: right;
-    margin-right: 2%;
-  }
-
-  form.search-site input[type=text] {
-    border-bottom-left-radius: 4px;
-    padding: 12px 20px;
-    font-size: 15px;
-    border: 1px solid #F9D342;
-    float: left;
-    width: 80%;
-    background: #f1f1f1;
-  }
-
-  form.search-site button {
-    float: left;
-    width: 20%;
-    padding: 10.5px 20px;
-    background: #F9D342;
-    color: white;
-    font-size: 17px;
-    border: 1px solid #F9D342;
-    border-left: none;
-    /* Prevent double borders */
-    cursor: pointer;
-    border-bottom-right-radius: 4px;
-  }
-
-  .logo-nav {
-    padding-left: 20px;
-  }
-
-  .navigation-menu a {
-    padding: 0 20px 0 0px;
-    color: white;
-  }
-
-  .navigation-menu a:hover {
-    color: #F9D342;
-  }
-
-  .navigation-menu a:link {
-    text-decoration: none;
-    padding-right: 20px;
-  }
-
-  .cart-nav {
-    float: right;
-    margin-right: 2%;
-    color: #F9D342;
-  }
-  .cart-nav .cartIcon {
-    float: right;
-    font-size: 20px;
-  }
-  .cart-nav .cartUrl {
-    text-decoration: none;
-    color: white;
-    padding-right: 60px;
-    padding-left: 10px;
-  }
-  .cart-nav .homeTotal {
-    font-size: 16px;
-  }
-  .cart-nav .homeTotal .cartUrl {
-    font-size: 14px;
-  }
-
-  .navigation-menu, .cart-nav {
-    display: inline-flex;
-  }
-
-  #cat-featured {
-    margin-left: 0.5%;
-    display: flex;
-    display: -webkit-flex;
-  }
+.search-box-nav {
+  float: right;
+  margin-right: 2%;
 }
+
+form.search-site input[type=text] {
+  border-bottom-left-radius: 4px;
+  padding: 12px 20px;
+  font-size: 15px;
+  border: 1px solid #F9D342;
+  float: left;
+  width: 80%;
+  background: #f1f1f1;
+}
+
+form.search-site button {
+  float: left;
+  width: 20%;
+  padding: 10.5px 20px;
+  background: #F9D342;
+  color: white;
+  font-size: 17px;
+  border: 1px solid #F9D342;
+  border-left: none;
+  /* Prevent double borders */
+  cursor: pointer;
+  border-bottom-right-radius: 4px;
+}
+
+.navigation-menu a {
+  padding: 0 20px 0 0px;
+  color: white;
+}
+
+.navigation-menu a:hover {
+  color: #F9D342;
+}
+
+.navigation-menu a:link {
+  text-decoration: none;
+  padding-right: 20px;
+}
+
 @media screen and (max-width: 480px) {
-  .header-top-bar-right, .search-box-nav, .cart-nav, .navigation-menu, #myLinks, .dot, .imgd, #featured-products {
-    display: none !important;
-  }
-
-  .sticky-nav + .page-content {
-    padding-top: 70px !important;
-  }
-
-  .logo-nav {
-    padding-left: 0px;
-  }
-
-  .phone-number {
-    margin-left: -20px;
-  }
-
-  .header-top-bar-left a:link {
-    padding: 0px 50px 0px 50px;
-  }
-
   .mobile-menu-btn {
     float: right;
     display: block;
@@ -245,7 +188,8 @@ html .icons, body .icons {
     text-decoration: none;
     color: white;
   }
-
+}
+@media screen and (max-width: 480px) {
   #mobile-footer-menu {
     display: block;
     background-color: #292826;
@@ -261,6 +205,58 @@ html .icons, body .icons {
   }
   #mobile-footer-menu a {
     padding: 0px 10% 0px 0px;
+  }
+}
+.cart-nav {
+  float: right;
+  margin-right: 2%;
+  color: #F9D342;
+}
+.cart-nav .cartIcon {
+  float: right;
+  font-size: 20px;
+}
+.cart-nav .cartUrl {
+  text-decoration: none;
+  color: white;
+  padding-right: 60px;
+  padding-left: 10px;
+}
+.cart-nav .homeTotal {
+  font-size: 16px;
+}
+.cart-nav .homeTotal .cartUrl {
+  font-size: 14px;
+}
+
+@media screen and (min-width: 481px) {
+  #navigation-mobile, .mobile-menu-btn, #mobile-footer-menu {
+    display: none;
+  }
+
+  .sticky-nav + .page-content {
+    padding-top: 130px;
+  }
+
+  .logo-nav {
+    padding-left: 20px;
+  }
+
+  .navigation-menu, .cart-nav {
+    display: inline-flex;
+  }
+}
+@media screen and (max-width: 480px) {
+  .header-top-bar-right, .search-box-nav, .cart-nav, .navigation-menu, #myLinks, .dot, .imgd, #featured-products {
+    display: none !important;
+  }
+
+  .sticky-nav + .page-content {
+    padding-top: 70px !important;
+  }
+
+  .logo-nav {
+    padding-left: 0px;
   }
 }
 .footter-wrapper {
@@ -409,6 +405,12 @@ html .icons, body .icons {
 
   .slider-img-mobile {
     display: none;
+  }
+
+  #cat-featured {
+    margin-left: 0.5%;
+    display: flex;
+    display: -webkit-flex;
   }
 
   #product-category {

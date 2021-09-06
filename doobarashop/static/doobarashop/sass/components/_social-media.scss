@@ -1,0 +1,15 @@
+//SOCIAL MEDIA ICONS 
+
+// social media icon styling and setting animated transition
+.social-media-nav {
+    padding: 10px 20px 15px 20px;
+    color: white;
+    font-size: 25px;
+    transition: background-color 1s,transform 1s;
+}
+
+// social media icons on hover animation trasition action
+.social-media-nav:hover {
+    background-color: var.$identity-color;
+    transform: rotate(360deg);
+}

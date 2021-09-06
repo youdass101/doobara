@@ -5,65 +5,31 @@
 
     // PHONE and deliver ul styling 
     .header-top-bar-left {
-        ul {
-            display: inline-flex;
-            color: white;
-            list-style: none;
-            font-size: 14px;
-            font-family: "Roboto",Sans-serif;
-            font-weight: 400;
-        }
-
-        // phone and number disable url style and add padding
-        a:link {
-            color:white;
-            text-decoration: none;
-            padding-right: 20px;
-        }
-
-        // phone and number element transition animated trasition setting
-        .phone-number {
-            transition: background-color 1s, font-size 1s, weight 1s;
-        }
-
-        // phone icon and number on hover transition 
-        .phone-number:hover {
-            background-color: var.$identity-color;
-            font-weight: 500;
-            border-radius: 5px;
-            border-color: transparent;
-        }
-
-        // phone icon when phone class on hover to change icont color 
-        .phone-number:hover .fa-phone-alt{
-            color: white;
-        }
+        @import '../components/information';
     }
 }
 
-@media screen and (min-width: 481px) {
-    //set phone, deliver and social media element on the same line
-    .header-top-bar-right, .header-top-bar-left {
-        display: inline;
+//set phone, deliver and social media element on the same line
+.header-top-bar-right, .header-top-bar-left {
+    display: inline;
+}
+
+// Set social media elements on same line on right 
+.header-top-bar-right {
+    float: right;
+    padding-right: 40px;
+
+    @import '../components/social-media';
+}
+
+@media screen and (max-width: 480px) {
+     // phone information a the top 
+     .phone-number {
+        margin-left: -20px;
     }
 
-    // Set social media elements on same line on right 
-    .header-top-bar-right {
-        float: right;
-        padding-right: 40px;
-
-        // social media icon styling and setting animated transition
-        .social-media-nav {
-            padding: 10px 20px 15px 20px;
-            color: white;
-            font-size: 25px;
-            transition: background-color 1s,transform 1s;
-        }
-
-        // social media icons on hover animation trasition action
-        .social-media-nav:hover {
-            background-color: var.$identity-color;
-            transform: rotate(360deg);
-        }
-    }
+      // Phone and cash on delivery section first row or bar at the top, link styling 
+      .header-top-bar-left a:link {
+        padding: 0px 50px 0px 50px;
+    } 
 }

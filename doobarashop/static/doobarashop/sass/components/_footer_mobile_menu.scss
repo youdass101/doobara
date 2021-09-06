@@ -1,0 +1,24 @@
+
+@media screen and (max-width: 480px) {
+// Mobile footer menu
+    #mobile-footer-menu {   
+        display: block;
+        background-color: var.$back-color;
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        padding: 10px 0px 10px 10%;
+
+        // Centering the footer navigation
+        .footer-navigation {    
+            justify-content: center;
+            display: flex;
+        }
+
+        // icons spacing
+        a {
+            padding: 0px 10% 0px 0px ;
+        }
+    }
+}
