@@ -1,3 +1,4 @@
+// VARIABLE POINTERS TO BE USED LIKE COLORS AND OTHERS/0
 @use '../abstracts/variables' as var;
 
 // navigation section style default
@@ -7,14 +8,6 @@
     border-top: 5px solid var.$identity-color;
     width: 100%;
     overflow: hidden;
-
-    // Default navigation menu style
-    .navigation-menu {
-        color: var.$identity-color;
-        padding: 15px 0px 20px 37px;
-        font-size: 1.2em;
-        font-weight: 400;
-    }
 }
 
 // Making Navigation Sticky 
@@ -49,10 +42,6 @@
     // THe body page-content position on mouse scroll dow and sticky meny activate.
     //  this will keep the page-content after event to stay at same position regardly to stick meny
 
-    // Don't SHow mobile menu and button on desktop 
-    #navigation-mobile, .mobile-menu-btn, #mobile-footer-menu {
-        display: none;
-    }
     .sticky-nav + .page-content {
         padding-top: 130px;
     }
@@ -71,7 +60,7 @@
 
 @media screen and (max-width: 480px) {
     // hide all desktop element that shouldn't appear on mobile 
-    .header-top-bar-right, .search-box-nav, .cart-nav, .navigation-menu, #myLinks, .dot, .imgd, #featured-products {
+    #myLinks, .dot, .imgd, #featured-products {
         display: none !important;
     }
     // THe body page-content position on mouse scroll dow and sticky meny activate.

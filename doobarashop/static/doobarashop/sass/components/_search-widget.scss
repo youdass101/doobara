@@ -31,3 +31,11 @@ form.search-site button {
     cursor: pointer;
     border-bottom-right-radius: 4px ;
 }
+
+//HIDE ON MOBILE 
+@media screen and (max-width: 480px) {
+    // hide all desktop element that shouldn't appear on mobile 
+    .search-box-nav {
+        display: none !important;
+    }
+}

@@ -1,3 +1,7 @@
+// SLider Switch to Desktop size one 
+.slider-img-desktop {display: block;}
+.slider-img-mobile {display: none;}
+
 /* Slideshow container */
 .slideshow-container {
     max-width: 100%;
@@ -89,6 +93,7 @@
 @media screen and (max-width: 480px) {
     // Slider image change 
     .slider-img-mobile {display: block;}
+    .slider-img-desktop {display: none;}
     // Prev and next poiters arrow alligment on slider 
     .prev, .next {
         width: auto;
@@ -105,4 +110,4 @@
         float: right;
     }
 
-    }
+}

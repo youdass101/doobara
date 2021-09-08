@@ -1,0 +1,47 @@
+// FEATURED PRODUCT CARDS BANNER 
+
+#featured-products {
+    flex: 1;
+    -webkit-flex: 2.5;
+
+    // Featured product elemet
+    .product-card-container {
+        // width: 74.2%;
+        padding-left: 1%;
+        display: flex;
+        display: -webkit-flex;
+        
+
+        // each Product in parent product element 
+        .product-card {
+            margin-right: 0.4%;
+            // width: 16.3%;
+            flex: 1;
+            -webkit-flex: 1;
+            // display: inline-block;
+            background-color: var.$identity-color;
+            box-shadow: 1px 1px 4px 5px rgba(0, 0, 0, 0.5 );
+            
+            // p element child of product-card
+            p { 
+                text-align: center;
+                font-size: 15px;
+                font-weight: 600;  
+                line-height: 15px; 
+            } 
+
+            // product-card image 
+            .card-img {
+                width: 100%;  
+                background-color: var.$identity-color;
+            }
+            
+            // Product-card information 
+            .card-info {
+                background-color: var.$identity-color;
+                height: 50px;
+                margin: 0;                
+            }
+        }
+    }
+}

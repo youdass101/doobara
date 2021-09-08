@@ -1,0 +1,33 @@
+// Each post in the carousel 
+.post-card {
+    width: 48%;
+    background-color: var.$back-color;
+    display: inline-block;
+    margin: 0 0 10px 0.5%;
+    vertical-align: top;
+    padding: 4px;
+}
+// Post Icon description 
+.post-meta {
+    padding: 3px 5px 3px 30px;
+    color: white;
+    height: 140px;
+}
+// Post card paragraph styling
+p {
+    font-size: 14px;
+}
+//Post card image styling 
+img {
+    width: 100%;
+}
+
+@media screen and (max-width: 480px) {
+    // BLOG PAGE SETTING MOBILITY 
+    .post-card {
+        width: 100% !important;
+        margin: 0 0 10px 0;
+    }
+    
+
+}

@@ -31,3 +31,16 @@ a:link {
 .phone-number:hover .fa-phone-alt{
     color: white;
 }
+
+// MOBILE STYLING
+@media screen and (max-width: 480px) {
+     // phone information a the top 
+     .phone-number {
+        margin-left: -20px;
+    }
+
+    // Phone and cash on delivery section first row or bar at the top, link styling 
+    .header-top-bar-left a:link {
+    padding: 0px 50px 0px 50px;
+    } 
+}

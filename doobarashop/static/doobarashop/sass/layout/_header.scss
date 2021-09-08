@@ -1,4 +1,5 @@
 @use '../abstracts/variables' as var;
+
 /* the fist header top bar that contain phone and social media links */
 .header-top-bar {
     background-color: var.$back-color;
@@ -15,21 +16,4 @@
 }
 
 // Set social media elements on same line on right 
-.header-top-bar-right {
-    float: right;
-    padding-right: 40px;
-
     @import '../components/social-media';
-}
-
-@media screen and (max-width: 480px) {
-     // phone information a the top 
-     .phone-number {
-        margin-left: -20px;
-    }
-
-      // Phone and cash on delivery section first row or bar at the top, link styling 
-      .header-top-bar-left a:link {
-        padding: 0px 50px 0px 50px;
-    } 
-}
