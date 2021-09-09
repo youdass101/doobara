@@ -1,15 +1,30 @@
 //SOCIAL MEDIA ICONS 
+// Set social media elements on same line on right 
+.header-top-bar-right {
+    float: right;
+    padding-right: 40px;
 
-// social media icon styling and setting animated transition
-.social-media-nav {
-    padding: 10px 20px 15px 20px;
-    color: white;
-    font-size: 25px;
-    transition: background-color 1s,transform 1s;
+    // social media icon styling and setting animated transition
+    .social-media-nav {
+        padding: 10px 20px 15px 20px;
+        color: white;
+        font-size: 25px;
+        transition: background-color 1s,transform 1s;
+    }
+
+    // social media icons on hover animation trasition action
+    .social-media-nav:hover {
+        background-color: var.$identity-color;
+        transform: rotate(360deg);
+    }
 }
 
-// social media icons on hover animation trasition action
-.social-media-nav:hover {
-    background-color: var.$identity-color;
-    transform: rotate(360deg);
+// MOBILE STYLE 
+@media screen and (max-width: 480px) {
+
+    // HIDE SOCIAL MEDIAL ICONS ON MOBILE SCREEN
+    .header-top-bar-right {
+        display: none !important;
+    }
+   
 }

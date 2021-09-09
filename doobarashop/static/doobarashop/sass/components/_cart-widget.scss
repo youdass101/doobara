@@ -25,3 +25,12 @@
         }
     }
 }
+
+// MOBILE STYLE 
+@media screen and (max-width: 480px) {
+
+    // HIDE CART SECTION ON MOBIE SCREEN 
+    .cart-nav {
+        display: none !important;
+    }
+}

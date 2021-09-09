@@ -1,5 +1,11 @@
 //PRIMARY NAVIGATION MENU
-
+ // Default navigation menu style
+ .navigation-menu {
+    color: var.$identity-color;
+    padding: 15px 0px 20px 37px;
+    font-size: 1.2em;
+    font-weight: 400;
+}
 // desktop navigation a element 
 .navigation-menu a {
     padding: 0 20px 0 0px;
@@ -15,4 +21,12 @@ color: var.$identity-color;
 .navigation-menu a:link {
     text-decoration: none;
     padding-right: 20px;
+}
+
+// HIDE ON MOBILE SCREEN
+@media screen and (max-width: 480px) {
+    // hide all desktop element that shouldn't appear on mobile 
+    .navigation-menu {
+        display: none !important;
+    }
 }

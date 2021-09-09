@@ -1,0 +1,53 @@
+// HOME PAGE HERO SECTION (EVERYTHING IN BODY LAYOUT AFTER NAV)
+
+// advertised product elements
+.home-add {
+    width: 100%;
+    
+    // featured-products advertised product row 
+    .feature-row { 
+        width: 100%;
+        white-space: nowrap;
+        // line-height: 0;
+    
+        // Single advertised product element 
+        .single-add-home {
+            display: inline-block;
+            width: 50%;
+            margin: -2px;
+            border: 2px solid var.$back-color; 
+            
+            // Image to adds element 
+            img {
+                width: 100%;
+                height: 100%;
+                vertical-align: top;
+                
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 480px) {
+
+    // product adds boxes
+    .home-add {
+        width: 100%;
+        // adds row which include 2 boxes 
+        .feature-row { 
+            
+            // SIngle add for procuct 
+            .single-add-home {
+                margin: -2px;
+                border: 2px solid var.$back-color; 
+                    
+                // Single add image
+                img {
+                    width: 100%;
+                    vertical-align: top;    
+                }
+            }
+        }
+    }
+
+}

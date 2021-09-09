@@ -1,4 +1,9 @@
+//HIDE FOOTER MENU ON MEDIA LARGER THAN 480px
+#mobile-footer-menu {
+    display: none;
+}
 
+// MOBILE SCREEN SIZE STYLE
 @media screen and (max-width: 480px) {
 // Mobile footer menu
     #mobile-footer-menu {   
