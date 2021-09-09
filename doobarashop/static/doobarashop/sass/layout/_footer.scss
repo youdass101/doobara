@@ -3,7 +3,7 @@
 .footter-wrapper {
     height: auto !important;
     margin: 0 auto -142px; /* the bottom margin is the negative value of the footer's height */
-    grid-column: span 3;
+    
 }
 
 // set the footer div at the end of the page 
@@ -14,6 +14,7 @@
 // page footer 
 .footer {
     background-color: var.$back-color;
+    grid-column: span 3;
 }
 
 // to be used on JS on any div display

@@ -99,6 +99,12 @@ header {
   overflow: hidden;
   grid-column: span 3;
 }
+#navbar .navigation-menu {
+  color: #F9D342;
+  padding: 15px 0px 20px 37px;
+  font-size: 1.2em;
+  font-weight: 400;
+}
 
 .sticky-nav {
   position: fixed;
@@ -291,7 +297,6 @@ form.search-site button {
   height: auto !important;
   margin: 0 auto -142px;
   /* the bottom margin is the negative value of the footer's height */
-  grid-column: span 3;
 }
 
 .footer, .push {
@@ -301,28 +306,29 @@ form.search-site button {
 
 .footer {
   background-color: #292826;
+  grid-column: span 3;
 }
 
 .show {
   display: block !important;
 }
 
-<<<<<<< HEAD
 .layout-grid-container {
   display: grid;
   grid-template-columns: auto auto 100px;
+  grid-gap: 10px;
 }
 
 .page-content {
   grid-column: span 3;
-=======
+}
+
 .slider-img-desktop {
   display: block;
 }
 
 .slider-img-mobile {
   display: none;
->>>>>>> 0a48daa7a94d2557903169e66c8c03ea5c0ad150
 }
 
 /* Slideshow container */
