@@ -7,6 +7,7 @@
     border-top: 5px solid var.$identity-color;
     width: 100%;
     overflow: hidden;
+    grid-column: span 3;
 
     // Default navigation menu style
     .navigation-menu {

@@ -26,6 +26,10 @@ html .icons, body .icons {
 }
 
 /* the fist header top bar that contain phone and social media links */
+header {
+  grid-column: span 3;
+}
+
 .header-top-bar {
   background-color: #292826;
 }
@@ -89,6 +93,7 @@ html .icons, body .icons {
   border-top: 5px solid #F9D342;
   width: 100%;
   overflow: hidden;
+  grid-column: span 3;
 }
 #navbar .navigation-menu {
   color: #F9D342;
@@ -263,6 +268,7 @@ form.search-site button {
   height: auto !important;
   margin: 0 auto -142px;
   /* the bottom margin is the negative value of the footer's height */
+  grid-column: span 3;
 }
 
 .footer, .push {
@@ -276,6 +282,15 @@ form.search-site button {
 
 .show {
   display: block !important;
+}
+
+.layout-grid-container {
+  display: grid;
+  grid-template-columns: auto auto 100px;
+}
+
+.page-content {
+  grid-column: span 3;
 }
 
 /* Slideshow container */

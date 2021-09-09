@@ -16,106 +16,107 @@
         <title>{% block pagetitle %}{%endblock%}</title>
     </head>
     <body>
-        <header>
-            <!-- TOP BAR contain phone deliver and social media icons -->
-            <div class="header-top-bar">
-                <!-- PHONE AND PAYMENT ON DELIVERY left section of top bar -->
-                <div class="header-top-bar-left">
+        <div class="layout-grid-container">
+            <header>
+                <!-- TOP BAR contain phone deliver and social media icons -->
+                <div class="header-top-bar">
+                    <!-- PHONE AND PAYMENT ON DELIVERY left section of top bar -->
+                    <div class="header-top-bar-left">
+                        <ul>
+                            <li class="phone-number"><a href="tel:96170856471"><i class="icons fas fa-phone-alt"></i> 70 856471</a></li>
+                            <li><i class="icons fas fa-dollar-sign"></i> Cash on delivery</li>
+                        </ul>
+                    </div>
+                    <!-- SOCIAL MEDIA ICONS right top bar section contain link -->
+                    <div class="header-top-bar-right">
+                        <a href="https://www.facebook.com/doobarashop" target="_blank"><i class="social-media-nav fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/doobarashop/" target="_blank"><i class="social-media-nav fab fa-instagram"></i></a>
+                        <a href="https://www.youtube.com/gadgetsfreak" target="_blank"><i class="social-media-nav fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </header>
+
+            <!-- NAVIGATION BAR area contain logo home url, search navigation and cart -->
+            <nav id="navbar">
+                <!-- LOGO first top left section in navigation contain logo with home link -->
+                <div class="logo-search">
+                    <div class="logo-nav">
+                        <a href="/"> 
+                            <img src="{% static 'doobarashop/upload/images/home-automaion-doobara-logo.png' %}" alt="home automation doobara">
+                        </a>
+                    </div>
+                    <!-- MOBILE MENU HUMBERGER -->
+                    <div class ="mobile-menu-btn" >
+                        <button class="humberger" id="btnm">
+                            <i class="menu-btn fas fa-bars"></i>
+                                Menu
+                        </button>
+                    </div>
+
+                    <!-- SEARCH BOX second right top section of navigation bar contain search box  -->
+                    <div class="search-box-nav" >   
+                        <form class="search-site">
+                            <!-- text input for search  -->
+                            <input class="search-input" type="text" placeholder="Search Products">
+                            <!-- button icon for search submit -->
+                            <button type="submit"><i class="fa fa-search"></i></button>
+                        </form>       
+                    </div>
+                </div>
+
+                <!-- MENU LINK ICON BAR 3d left buttom section of navigatio bar contain navigation menu links -->
+                <div class="navigation-bar">
+                    <div class="navigation-menu">
+                        <a href="shop"><i class="icons fas fa-store"></i><span class="navigationMenuName"> Shop</span></a>
+                        <a href="blog"><i class="icons fab fa-blogger-b"></i><span class="navigationMenuName"> Blog</span></a>
+                        <a href="video"><i class="icons fab fa-youtube"></i><span class="navigationMenuName"> Video</span></a>
+                        <a href="contactus"><i class="icons fas fa-inbox"></i><span class="navigationMenuName"> Contact Us</span></a>
+                        <a href="myaccount"><i class="icons fas fa-user"></i><span class="navigationMenuName"> My Account</span></a>
+                    </div>
+                    
+                    <!-- CART final right buttom section of navigation bar contain cart and totla url -->
+                    <div class="cart-nav">
+                        <p ><span class="homeTotal">$0.00  <a href="#" class="cartUrl"> 0 Items</span>
+                            <span class="cartIcon"><i class="icons fas fa-shopping-cart"></i></a></span></p>
+                    </div>
+                </div>
+                <!-- MOBILE MENU LINKS ICON (Normaly hidden) -->
+                <div id="navigation-mobile"> 
                     <ul>
-                        <li class="phone-number"><a href="tel:96170856471"><i class="icons fas fa-phone-alt"></i> 70 856471</a></li>
-                        <li><i class="icons fas fa-dollar-sign"></i> Cash on delivery</li>
+                        <li><a href="shop"><i class="icons fas fa-store"></i><span class="navigationMenuName"> Shop</span></a></li>
+                        <li><a href="blog"><i class="icons fab fa-blogger-b"></i><span class="navigationMenuName"> Blog</span></a></li>
+                        <li><a href="video"><i class="icons fab fa-youtube"></i><span class="navigationMenuName"> Video</span></a></li>
+                        <li><a href="contactus"><i class="icons fas fa-inbox"></i><span class="navigationMenuName"> Contact Us</span></a></li>
                     </ul>
                 </div>
-                <!-- SOCIAL MEDIA ICONS right top bar section contain link -->
-                <div class="header-top-bar-right">
-                    <a href="https://www.facebook.com/doobarashop" target="_blank"><i class="social-media-nav fab fa-facebook-f"></i></a>
-                    <a href="https://www.instagram.com/doobarashop/" target="_blank"><i class="social-media-nav fab fa-instagram"></i></a>
-                    <a href="https://www.youtube.com/gadgetsfreak" target="_blank"><i class="social-media-nav fab fa-youtube"></i></a>
-                </div>
+            </nav>
+    
+            <!-- PAGE BODY CONTENT SECTION  -->
+            <div class="page-content">
+                {% block body %} {%endblock%}   
             </div>
-        </header>
 
-        <!-- NAVIGATION BAR area contain logo home url, search navigation and cart -->
-        <nav id="navbar">
-            <!-- LOGO first top left section in navigation contain logo with home link -->
-            <div class="logo-search">
-                <div class="logo-nav">
-                    <a href="/"> 
-                        <img src="{% static 'doobarashop/upload/images/home-automaion-doobara-logo.png' %}" alt="home automation doobara">
-                    </a>
-                </div>
-                <!-- MOBILE MENU HUMBERGER -->
-                <div class ="mobile-menu-btn" >
-                    <button class="humberger" id="btnm">
-                        <i class="menu-btn fas fa-bars"></i>
-                            Menu
-                    </button>
-                </div>
-
-                <!-- SEARCH BOX second right top section of navigation bar contain search box  -->
-                <div class="search-box-nav" >   
-                    <form class="search-site">
-                        <!-- text input for search  -->
-                        <input class="search-input" type="text" placeholder="Search Products">
-                        <!-- button icon for search submit -->
-                        <button type="submit"><i class="fa fa-search"></i></button>
-                    </form>       
+            <!-- MOBILE FOOTER MENU -->
+            <div id="mobile-footer-menu">
+                <div class="footer-navigation">
+                <a href="/"><i class="icons fas fa-home fa-3x"></i></a>
+                <a href="shop"><i class="icons fas fa-store fa-3x"></i></a>
+                <a href="myaccount"><i class="icons fas fa-user fa-3x"></i></a>
+                <a href="#"><i class="icons fas fa-search fa-3x"></i></a>
+                <a href="cart"><i class="icons fas fa-shopping-cart fa-3x"></i></a>
                 </div>
             </div>
 
-            <!-- MENU LINK ICON BAR 3d left buttom section of navigatio bar contain navigation menu links -->
-            <div class="navigation-bar">
-                <div class="navigation-menu">
-                    <a href="shop"><i class="icons fas fa-store"></i><span class="navigationMenuName"> Shop</span></a>
-                    <a href="blog"><i class="icons fab fa-blogger-b"></i><span class="navigationMenuName"> Blog</span></a>
-                    <a href="video"><i class="icons fab fa-youtube"></i><span class="navigationMenuName"> Video</span></a>
-                    <a href="contactus"><i class="icons fas fa-inbox"></i><span class="navigationMenuName"> Contact Us</span></a>
-                    <a href="myaccount"><i class="icons fas fa-user"></i><span class="navigationMenuName"> My Account</span></a>
-                </div>
-                
-                <!-- CART final right buttom section of navigation bar contain cart and totla url -->
-                <div class="cart-nav">
-                    <p ><span class="homeTotal">$0.00  <a href="#" class="cartUrl"> 0 Items</span>
-                        <span class="cartIcon"><i class="icons fas fa-shopping-cart"></i></a></span></p>
-                </div>
+            <!-- ALL PAGES FOOTER -->
+            <div class="footter-wrapper">
+                <div class="push">
+                </div>               
             </div>
-            <!-- MOBILE MENU LINKS ICON (Normaly hidden) -->
-            <div id="navigation-mobile"> 
-                <ul>
-                    <li><a href="shop"><i class="icons fas fa-store"></i><span class="navigationMenuName"> Shop</span></a></li>
-                    <li><a href="blog"><i class="icons fab fa-blogger-b"></i><span class="navigationMenuName"> Blog</span></a></li>
-                    <li><a href="video"><i class="icons fab fa-youtube"></i><span class="navigationMenuName"> Video</span></a></li>
-                    <li><a href="contactus"><i class="icons fas fa-inbox"></i><span class="navigationMenuName"> Contact Us</span></a></li>
-                </ul>
-            </div>
-        </nav>
- 
-        <!-- PAGE BODY CONTENT SECTION  -->
-        <div class="page-content">
-            {% block body %} {%endblock%}   
-        </div>
-
-        <!-- MOBILE FOOTER MENU -->
-        <div id="mobile-footer-menu">
-            <div class="footer-navigation">
-            <a href="/"><i class="icons fas fa-home fa-3x"></i></a>
-            <a href="shop"><i class="icons fas fa-store fa-3x"></i></a>
-            <a href="myaccount"><i class="icons fas fa-user fa-3x"></i></a>
-            <a href="#"><i class="icons fas fa-search fa-3x"></i></a>
-            <a href="cart"><i class="icons fas fa-shopping-cart fa-3x"></i></a>
-            </div>
-        </div>
-
-        <!-- ALL PAGES FOOTER -->
-        <div class="footter-wrapper">
-            <div class="push">
-            </div>               
-        </div>
-        
-        <div class="footer">
-           
-        </div>  
-       
+            
+            <div class="footer">
+            
+            </div>  
+        </div>    
     </body>
 
 </html>
