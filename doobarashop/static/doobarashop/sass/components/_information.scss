@@ -1,46 +1,61 @@
-ul {
-    display: inline-flex;
-    color: white;
-    list-style: none;
-    font-size: 14px;
-    font-family: "Roboto",Sans-serif;
-    font-weight: 400;
-}
+// Importing projec variable 
+@use '../abstracts/all' as var;
 
-// phone and number disable url style and add padding
-a:link {
-    color:white;
-    text-decoration: none;
-    padding-right: 20px;
-}
+// The top bar that contain phone and payment info
+.header-top-bar-left {
+    grid-area: info;    // naming the frid area 
+    width: 100%;
+    background-color: var.$back-color;
 
-// phone and number element transition animated trasition setting
-.phone-number {
-    transition: background-color 1s, font-size 1s, weight 1s;
-}
-
-// phone icon and number on hover transition 
-.phone-number:hover {
-    background-color: var.$identity-color;
-    font-weight: 500;
-    border-radius: 5px;
-    border-color: transparent;
-}
-
-// phone icon when phone class on hover to change icont color 
-.phone-number:hover .fa-phone-alt{
-    color: white;
-}
-
-// MOBILE STYLING
-@media screen and (max-width: 480px) {
-     // phone information a the top 
-     .phone-number {
-        margin-left: -20px;
+    ul {
+        @include var.flex-default;
+        // should be created in mixin
+        color: white;
+        list-style: none; 
     }
 
-    // Phone and cash on delivery section first row or bar at the top, link styling 
-    .header-top-bar-left a:link {
-    padding: 0px 50px 0px 50px;
-    } 
+    // phone and number disable url style and add padding
+    a:link {
+        // should be created in mixin
+        color:white;
+        text-decoration: none;
+        padding-right: 20px;
+    }
+
+    // phone number element animation effect 
+    .phone-number {
+        transition: background-color 1s, font-size 1s, weight 1s;    // base style b4 transition 
+    }
+
+    // phone number on hover start transition effect 
+    .phone-number:hover {
+        background-color: var.$identity-color;
+        font-weight: 500;
+        border-radius: 5px;
+        border-color: transparent;
+    }
+
+    // phone icon when phone class on hover to change icont color 
+    .phone-number:hover .fa-phone-alt{
+        color: white;
+    }
+
+    // MOBILE STYLING
+    @media screen and (max-width: 530px) {
+        ul {
+            align-content: center;
+            justify-content: space-around;   
+            padding: 0; 
+        }
+
+        // phone information a the top 
+        // .phone-number {
+        //     margin-left: -20px;
+        // }
+
+        // Phone and cash on delivery section first row or bar at the top, link styling 
+        // .header-top-bar-left a:link {
+        // padding: 0px 50px 0px 50px;
+        // } 
+    }
 }

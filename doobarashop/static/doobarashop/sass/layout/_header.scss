@@ -1,24 +1,8 @@
-@use '../abstracts/variables' as var;
 
-/* the fist header top bar that contain phone and social media links */
-header {
-    grid-column: span 3;
+// PHONE AND CACH ON DDELIVER 
+// header top left bar, grid area name(info)
+@use '../components/information';
 
-}
-
-.header-top-bar {
-    background-color: var.$back-color;
-
-    // PHONE and deliver ul styling 
-    .header-top-bar-left {
-        @import '../components/information';
-    }
-}
-
-//set phone, deliver and social media element on the same line
-.header-top-bar-right, .header-top-bar-left {
-    display: inline;
-}
-
-// Set social media elements on same line on right 
-    @import '../components/social-media';
+// SOCIAL MEDIA ICONS
+// header top right bar, grid area name(sm) 
+@use '../components/social-media';

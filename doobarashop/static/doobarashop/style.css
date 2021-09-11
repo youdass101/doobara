@@ -25,60 +25,54 @@ html .icons, body .icons {
   padding: 0px;
 }
 
-/* the fist header top bar that contain phone and social media links */
-header {
-  grid-column: span 3;
-}
-
-.header-top-bar {
+.header-top-bar-left {
+  grid-area: info;
+  width: 100%;
   background-color: #292826;
 }
-.header-top-bar .header-top-bar-left ul {
-  display: inline-flex;
+.header-top-bar-left ul {
+  display: flex;
+  display: -webkit-flex;
   color: white;
   list-style: none;
-  font-size: 14px;
-  font-family: "Roboto", Sans-serif;
-  font-weight: 400;
 }
-.header-top-bar .header-top-bar-left a:link {
+.header-top-bar-left a:link {
   color: white;
   text-decoration: none;
   padding-right: 20px;
 }
-.header-top-bar .header-top-bar-left .phone-number {
+.header-top-bar-left .phone-number {
   transition: background-color 1s, font-size 1s, weight 1s;
 }
-.header-top-bar .header-top-bar-left .phone-number:hover {
+.header-top-bar-left .phone-number:hover {
   background-color: #F9D342;
   font-weight: 500;
   border-radius: 5px;
   border-color: transparent;
 }
-.header-top-bar .header-top-bar-left .phone-number:hover .fa-phone-alt {
+.header-top-bar-left .phone-number:hover .fa-phone-alt {
   color: white;
 }
-@media screen and (max-width: 480px) {
-  .header-top-bar .header-top-bar-left .phone-number {
-    margin-left: -20px;
+@media screen and (max-width: 530px) {
+  .header-top-bar-left ul {
+    align-content: center;
+    justify-content: space-around;
+    padding: 0;
   }
-  .header-top-bar .header-top-bar-left .header-top-bar-left a:link {
-    padding: 0px 50px 0px 50px;
-  }
-}
-
-.header-top-bar-right, .header-top-bar-left {
-  display: inline;
 }
 
 .header-top-bar-right {
-  float: right;
+  display: flex;
+  display: -webkit-flex;
+  align-items: center;
+  justify-content: flex-end;
+  grid-area: sm;
+  background-color: #292826;
   padding-right: 40px;
 }
 .header-top-bar-right .social-media-nav {
   padding: 10px 20px 15px 20px;
   color: white;
-  font-size: 25px;
   transition: background-color 1s, transform 1s;
 }
 .header-top-bar-right .social-media-nav:hover {
@@ -86,7 +80,7 @@ header {
   transform: rotate(360deg);
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 530px) {
   .header-top-bar-right {
     display: none !important;
   }
@@ -315,10 +309,15 @@ form.search-site button {
 
 .layout-grid-container {
   display: grid;
-  grid-template-columns: auto auto 100px;
-  grid-gap: 10px;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-areas: "info info info info info info sm sm sm sm sm sm";
 }
 
+@media screen and (max-width: 530px) {
+  .layout-grid-container {
+    grid-template-areas: "info info info info info info info info info info info info";
+  }
+}
 .page-content {
   grid-column: span 3;
 }

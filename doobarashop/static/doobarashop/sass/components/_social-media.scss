@@ -1,15 +1,22 @@
+@use '../abstracts/all' as var;
+
 //SOCIAL MEDIA ICONS 
 // Set social media elements on same line on right 
 .header-top-bar-right {
-    float: right;
+    @include var.flex-default;
+    align-items: center;
+    justify-content: flex-end;
+    grid-area: sm;
+    background-color: var.$back-color;
     padding-right: 40px;
+
 
     // social media icon styling and setting animated transition
     .social-media-nav {
         padding: 10px 20px 15px 20px;
         color: white;
-        font-size: 25px;
         transition: background-color 1s,transform 1s;
+       
     }
 
     // social media icons on hover animation trasition action
@@ -20,7 +27,7 @@
 }
 
 // MOBILE STYLE 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 530px) {
 
     // HIDE SOCIAL MEDIAL ICONS ON MOBILE SCREEN
     .header-top-bar-right {
