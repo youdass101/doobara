@@ -1,0 +1,41 @@
+@use '../abstracts/variables' as var;
+// Layout all page style Default
+html {
+    height: 100%;
+    width: 100%; 
+    font-weight: 400;
+    line-height: 1.618; 
+    font-family: "Helvetica Neue", Arial, Helvetica, "Liberation Sans", sans-serif;
+    font-size:13px; 
+}
+
+html, body, nav, header, h1, h2, h3, h4, h5, h6, p, ol, li, button, form, span, iframe, table {
+    margin: 0;
+    padding: 0;
+
+}
+
+// CONSTANT TO ALL NAVIGATION ICONS STYLE
+.icons {
+    color: var.$identity-color;
+}
+
+// Slider images hide on all pages by default 
+.slider-img-desktop, .slider-img-mobile {
+    display: none;
+}
+
+// All pages element border boxing 
+* {
+    box-sizing: border-box
+}
+
+/* Any Page content to be used for sevarel elements */
+.page-content {
+    padding: 0px;
+}
+
+// to be used on JS on any div display
+.show {
+    display: block !important;
+}

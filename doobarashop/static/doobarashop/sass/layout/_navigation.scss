@@ -1,69 +1,77 @@
 // VARIABLE POINTERS TO BE USED LIKE COLORS AND OTHERS/0
 @use '../abstracts/variables' as var;
 
-// navigation section style default
-#navbar {
-    z-index: 2;
+.logo-nav {
+    grid-area: logo;
     background-color: var.$back-color;
+    padding-left: 20px;
     border-top: 5px solid var.$identity-color;
-    width: 100%;
-    overflow: hidden;
-    grid-column: span 3;
 
-    // Default navigation menu style
-    .navigation-menu {
-        color: var.$identity-color;
-        padding: 15px 0px 20px 37px;
-        font-size: 1.2em;
-        font-weight: 400;
-    }
 }
+
+// navigation section style default
+// #navbar {
+//     z-index: 2;
+//     background-color: var.$back-color;
+//     border-top: 5px solid var.$identity-color;
+//     width: 100%;
+//     overflow: hidden;
+//     grid-column: span 3;
+
+//     // Default navigation menu style
+//     .navigation-menu {
+//         color: var.$identity-color;
+//         padding: 15px 0px 20px 37px;
+//         font-size: 1.2em;
+//         font-weight: 400;
+//     }
+// }
 
 // Making Navigation Sticky 
-.sticky-nav {
-    position: fixed ;
-    top: 0 ;
-    opacity: 80%;
-    width: 100%;
-} 
+// .sticky-nav {
+//     position: fixed ;
+//     top: 0 ;
+//     opacity: 80%;
+//     width: 100%;
+// } 
 
-// setting logo and search on same line
-.logo-nav, .search-box-nav {
-    display: inline-flex;
-}
+// // setting logo and search on same line
+// .logo-nav, .search-box-nav {
+//     display: inline-flex;
+// }
 
 // SEARCH ITEMS COMPONENET 
 @import '../components/search-widget';
 
 // PRIMARY NAVIGATION MENU
-@import '../components/main-menu';
+// @import '../components/main-menu';
 
 // SECONDARY MENU FOR MOBILE
 @import '../components/secondary-menu';
 
-// MOBILE FOOTER MENU
+// // MOBILE FOOTER MENU
 @import '../components/footer_mobile_menu';
 
-@import '../components/cart-widget';
+// @import '../components/cart-widget';
 
 
 @media screen and (min-width: 481px) {
     // THe body page-content position on mouse scroll dow and sticky meny activate.
     //  this will keep the page-content after event to stay at same position regardly to stick meny
 
-    .sticky-nav + .page-content {
-        padding-top: 130px;
-    }
+    // .sticky-nav + .page-content {
+    //     padding-top: 130px;
+    // }
 
     // logo image style
-    .logo-nav {
-        padding-left: 20px;
-    }
+    // .logo-nav {
+    //     padding-left: 20px;
+    // }
            
     // set desktop navigation menu and cart on same row   
-    .navigation-menu, .cart-nav {
-        display: inline-flex;   
-    } 
+    // .navigation-menu, .cart-nav {
+    //     display: inline-flex;   
+    // } 
 }
 
 
@@ -75,11 +83,11 @@
     // THe body page-content position on mouse scroll dow and sticky meny activate.
     //  this will keep the co  0ntent after event to stay at same position regardly to stick meny
     // !!! navigation Y axes padding on scroll 
-    .sticky-nav + .page-content {
-        padding-top: 70px !important;
-    }
+    // .sticky-nav + .page-content {
+    //     padding-top: 70px !important;
+    // }
     // site logo at navigation 
-    .logo-nav {
-        padding-left: 0px;
-    }
+    // .logo-nav {
+    //     padding-left: 0px;
+    // }
 }

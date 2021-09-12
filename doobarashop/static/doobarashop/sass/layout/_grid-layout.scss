@@ -2,13 +2,15 @@
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     grid-template-areas:  
-    "info info info info info info sm sm sm sm sm sm";
+    'info info info info info info sm sm sm sm sm sm'
+    'logo logo logo logo logo logo sn sn sn sn sn sn';
 }
 
 @media screen and (max-width: 530px) {
     .layout-grid-container {
         grid-template-areas:  
-        "info info info info info info info info info info info info";
+        'info info info info info info info info info info info info'
+        'logo logo logo logo logo logo logo logo logo logo logo logo';
         
 
     }

@@ -1,6 +1,7 @@
 //PRIMARY NAVIGATION MENU
  // Default navigation menu style
  .navigation-menu {
+    grid-area: menu;
     color: var.$identity-color;
     padding: 15px 0px 20px 37px;
     font-size: 1.2em;

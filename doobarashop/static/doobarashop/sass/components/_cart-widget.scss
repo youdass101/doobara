@@ -1,5 +1,6 @@
 // Desktop cart-nav section element
 .cart-nav {
+    grid-area: cart;
     float: right;
     margin-right: 2%;
     color:var.$identity-color;

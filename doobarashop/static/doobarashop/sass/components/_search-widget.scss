@@ -2,8 +2,15 @@
 
 // search box section style default 
 .search-box-nav {
-    float: right;
-    margin-right: 2%;
+    grid-area: sn;
+    background-color: var.$back-color;
+    border-top: 5px solid var.$identity-color;
+    
+    .search-site {
+        float: right;
+        padding-right: 50px;
+    }
+    
 }
 
 
@@ -14,15 +21,15 @@ form.search-site input[type=text] {
     font-size: 15px;
     border: 1px solid var.$identity-color;
     float: left;
-    width: 80%;
+    width: 220px;
     background: #f1f1f1;
 }
 
 // search form button style 
 form.search-site button {
     float: left;
-    width: 20%;
-    padding: 10.5px 20px;
+    width: 40px;
+    padding: 10.5px 10px 10.5px 10px; 
     background: var.$identity-color;
     color: white;
     font-size: 17px;
@@ -33,7 +40,14 @@ form.search-site button {
 }
 
 //HIDE ON MOBILE 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 630px) {
+    .search-site {
+        padding-right: 3px !important;
+    }
+}
+
+//HIDE ON MOBILE 
+@media screen and (max-width: 530px) {
     // hide all desktop element that shouldn't appear on mobile 
     .search-box-nav {
         display: none !important;

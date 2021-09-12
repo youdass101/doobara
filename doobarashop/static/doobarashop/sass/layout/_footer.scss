@@ -14,10 +14,7 @@
 // page footer 
 .footer {
     background-color: var.$back-color;
-    grid-column: span 3;
+    // grid-column: span 3;
 }
 
-// to be used on JS on any div display
-.show {
-    display: block !important;
-}
+

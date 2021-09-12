@@ -4,7 +4,6 @@
 // The top bar that contain phone and payment info
 .header-top-bar-left {
     grid-area: info;    // naming the frid area 
-    width: 100%;
     background-color: var.$back-color;
 
     ul {
@@ -12,6 +11,10 @@
         // should be created in mixin
         color: white;
         list-style: none; 
+
+        li {
+            align-self: center !important;
+        }
     }
 
     // phone and number disable url style and add padding
@@ -40,22 +43,13 @@
         color: white;
     }
 
+
     // MOBILE STYLING
     @media screen and (max-width: 530px) {
         ul {
-            align-content: center;
-            justify-content: space-around;   
-            padding: 0; 
+            margin: 0;
+            padding: 5px 0 5px 0;
+            justify-content: space-evenly;   
         }
-
-        // phone information a the top 
-        // .phone-number {
-        //     margin-left: -20px;
-        // }
-
-        // Phone and cash on delivery section first row or bar at the top, link styling 
-        // .header-top-bar-left a:link {
-        // padding: 0px 50px 0px 50px;
-        // } 
     }
 }
