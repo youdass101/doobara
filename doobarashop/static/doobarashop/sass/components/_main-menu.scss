@@ -2,26 +2,30 @@
  // Default navigation menu style
  .navigation-menu {
     grid-area: menu;
+    display: flex;
+    background-color: var.$back-color;
+    border-top: 5px solid var.$identity-color;
     color: var.$identity-color;
-    padding: 15px 0px 20px 37px;
+    align-items: center;
+    justify-content: space-around;
     font-size: 1.2em;
     font-weight: 400;
 }
 // desktop navigation a element 
 .navigation-menu a {
-    padding: 0 20px 0 0px;
+    // padding: 0 20px 0 0px;
     color: white;
 }
 
 // Navigatopn Menu Links icons On hover
 .navigation-menu a:hover{
-color: var.$identity-color;
+    color: var.$identity-color;
 }
 
 // desktop navigation menu link icons element  
 .navigation-menu a:link {
     text-decoration: none;
-    padding-right: 20px;
+    // padding-right: 20px;
 }
 
 // HIDE ON MOBILE SCREEN

@@ -1,13 +1,14 @@
 // Desktop cart-nav section element
 .cart-nav {
     grid-area: cart;
-    float: right;
-    margin-right: 2%;
+    background-color: var.$back-color;
+    // float: right;
+    border-top: 5px solid var.$identity-color;
     color:var.$identity-color;
         
     // desktop cat icon 
     .cartIcon {
-        float: right;
+        // float: right;
         font-size: 20px;
     }
     // desktop cart url of items        

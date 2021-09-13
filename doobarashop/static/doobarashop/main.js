@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
     // Sticky is Number
     // Get the offset position of the navbar Assign to var
-    var sticky = navbar.offsetTop;
+    // var sticky = navbar.offsetTop;
 
     // Event -> menubtn
     // MOBILE MENU ICON PRESSED (humberger) 

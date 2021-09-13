@@ -7,37 +7,35 @@
     // menu humberger button parent div
     .mobile-menu-btn {
         grid-area: mmb;
-        display: block;
-        padding-top: 3px;
+        display: flex ;
+        justify-content: center;
+        align-items: center ;
         background-color: var.$back-color;
         border-top: 5px solid var.$identity-color;
 
         // huberger Icon inside button 
         .humberger {
             display: flex;
+            justify-content: space-around !important;
+            align-items: center;
             background-color: var.$identity-color;
-            border: var.$identity-color;
             border: none;
-            
-            // padding: 16px 32px;
-            text-align: center;
-            text-decoration: none;
-            // display: inline-block;
-            font-size: 16px;  
+            width: 85px;
+            height: 40px;
+            font-size: medium;
+        }
 
-            i {
-                align-self: center;
-            }
-
-
+        // FIX FOR button not trigger when pressing on text or icon nested
+        span {
+            pointer-events: none;
         }
     }
 
     // navigation menu icons for Mobile 
     #navigation-mobile {
+        grid-area: nmm;
         background-color: var.$back-color;  
-        width: 35%;
-        float: left;
+        width: 100%;
         padding-right: 30px 0 0 0;
         font-size: 16px;
         

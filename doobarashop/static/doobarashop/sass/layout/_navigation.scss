@@ -6,7 +6,6 @@
     background-color: var.$back-color;
     padding-left: 20px;
     border-top: 5px solid var.$identity-color;
-
 }
 
 // navigation section style default
@@ -44,7 +43,7 @@
 @import '../components/search-widget';
 
 // PRIMARY NAVIGATION MENU
-// @import '../components/main-menu';
+@import '../components/main-menu';
 
 // SECONDARY MENU FOR MOBILE
 @import '../components/secondary-menu';
@@ -52,7 +51,7 @@
 // // MOBILE FOOTER MENU
 @import '../components/footer_mobile_menu';
 
-// @import '../components/cart-widget';
+@import '../components/cart-widget';
 
 
 @media screen and (min-width: 481px) {
@@ -80,6 +79,11 @@
     #myLinks, .dot, .imgd, #featured-products {
         display: none !important;
     }
+
+    .logo-nav {
+        padding-left: 0px;
+    }
+
     // THe body page-content position on mouse scroll dow and sticky meny activate.
     //  this will keep the co  0ntent after event to stay at same position regardly to stick meny
     // !!! navigation Y axes padding on scroll 

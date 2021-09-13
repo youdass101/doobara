@@ -7,7 +7,7 @@ html {
   font-size: 13px;
 }
 
-html, body, nav, header, h1, h2, h3, h4, h5, h6, p, ol, li, button, form, span, iframe, table {
+html, body {
   margin: 0;
   padding: 0;
 }
@@ -36,12 +36,12 @@ html, body, nav, header, h1, h2, h3, h4, h5, h6, p, ol, li, button, form, span, 
 .layout-grid-container {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  grid-template-areas: "info info info info info info sm sm sm sm sm sm" "logo logo logo logo logo logo sn sn sn sn sn sn";
+  grid-template-areas: "info info info info info info sm sm sm sm sm sm" "logo logo logo logo logo logo sn sn sn sn sn sn" "menu menu menu menu menu menu cart cart cart cart cart cart";
 }
 
 @media screen and (max-width: 530px) {
   .layout-grid-container {
-    grid-template-areas: "info info info info info info info info info info info info" "logo logo logo logo logo logo logo logo mmb mmb mmb mmb";
+    grid-template-areas: "info info info info info info info info info info info info" "logo logo logo logo logo logo logo logo mmb mmb mmb mmb" "nmm nmm nmm nmm nmm nmm nmm nmm nmm nmm nmm nmm";
   }
 }
 .header-top-bar-left {
@@ -157,6 +157,35 @@ form.search-site button {
     display: none !important;
   }
 }
+.navigation-menu {
+  grid-area: menu;
+  display: flex;
+  background-color: #292826;
+  border-top: 5px solid #F9D342;
+  color: #F9D342;
+  align-items: center;
+  justify-content: space-around;
+  font-size: 1.2em;
+  font-weight: 400;
+}
+
+.navigation-menu a {
+  color: white;
+}
+
+.navigation-menu a:hover {
+  color: #F9D342;
+}
+
+.navigation-menu a:link {
+  text-decoration: none;
+}
+
+@media screen and (max-width: 480px) {
+  .navigation-menu {
+    display: none !important;
+  }
+}
 #navigation-mobile, .mobile-menu-btn {
   display: none;
 }
@@ -164,28 +193,30 @@ form.search-site button {
 @media screen and (max-width: 530px) {
   .mobile-menu-btn {
     grid-area: mmb;
-    display: block;
-    padding-top: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: #292826;
     border-top: 5px solid #F9D342;
   }
   .mobile-menu-btn .humberger {
     display: flex;
+    justify-content: space-around !important;
+    align-items: center;
     background-color: #F9D342;
-    border: #F9D342;
     border: none;
-    text-align: center;
-    text-decoration: none;
-    font-size: 16px;
+    width: 85px;
+    height: 40px;
+    font-size: medium;
   }
-  .mobile-menu-btn .humberger i {
-    align-self: center;
+  .mobile-menu-btn span {
+    pointer-events: none;
   }
 
   #navigation-mobile {
+    grid-area: nmm;
     background-color: #292826;
-    width: 35%;
-    float: left;
+    width: 100%;
     padding-right: 30px 0 0 0;
     font-size: 16px;
   }
@@ -223,9 +254,40 @@ form.search-site button {
     padding: 0px 10% 0px 0px;
   }
 }
+.cart-nav {
+  grid-area: cart;
+  background-color: #292826;
+  border-top: 5px solid #F9D342;
+  color: #F9D342;
+}
+.cart-nav .cartIcon {
+  font-size: 20px;
+}
+.cart-nav .cartUrl {
+  text-decoration: none;
+  color: white;
+  padding-right: 60px;
+  padding-left: 10px;
+}
+.cart-nav .homeTotal {
+  font-size: 16px;
+}
+.cart-nav .homeTotal .cartUrl {
+  font-size: 14px;
+}
+
+@media screen and (max-width: 480px) {
+  .cart-nav {
+    display: none !important;
+  }
+}
 @media screen and (max-width: 480px) {
   #myLinks, .dot, .imgd, #featured-products {
     display: none !important;
+  }
+
+  .logo-nav {
+    padding-left: 0px;
   }
 }
 
