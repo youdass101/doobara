@@ -3,24 +3,33 @@
     display: none;
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 530px) {
     // menu humberger button parent div
     .mobile-menu-btn {
-        float: right;
+        grid-area: mmb;
         display: block;
-        padding: 3px 3px 0px 0px;
+        padding-top: 3px;
+        background-color: var.$back-color;
+        border-top: 5px solid var.$identity-color;
 
         // huberger Icon inside button 
         .humberger {
+            display: flex;
             background-color: var.$identity-color;
-            font-size: 20px;
             border: var.$identity-color;
             border: none;
-            padding: 15px 32px;
+            
+            // padding: 16px 32px;
             text-align: center;
             text-decoration: none;
-            display: inline-block;
+            // display: inline-block;
             font-size: 16px;  
+
+            i {
+                align-self: center;
+            }
+
+
         }
     }
 
