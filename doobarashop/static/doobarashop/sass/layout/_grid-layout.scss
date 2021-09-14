@@ -1,10 +1,12 @@
 .layout-grid-container {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
+
     grid-template-areas:  
     'info info info info info info sm sm sm sm sm sm'
     'logo logo logo logo logo logo sn sn sn sn sn sn'
-    "menu menu menu menu menu menu cart cart cart cart cart cart";
+    'menu menu menu menu menu menu menu menu menu cart cart cart'
+    'pc pc pc pc pc pc pc pc pc pc pc pc';
 }
 
 @media screen and (max-width: 530px) {
@@ -13,6 +15,7 @@
         'info info info info info info info info info info info info'
         'logo logo logo logo logo logo logo logo mmb mmb mmb mmb'
         'nmm nmm nmm nmm nmm nmm nmm nmm nmm nmm nmm nmm'
+        'pc pc pc pc pc pc pc pc pc pc pc pc'
         ;
     }
 

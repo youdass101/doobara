@@ -2,21 +2,17 @@
 .cart-nav {
     grid-area: cart;
     background-color: var.$back-color;
-    // float: right;
+    @include var.flex-default;
+    justify-content: space-around;
+    align-items: center;
     border-top: 5px solid var.$identity-color;
     color:var.$identity-color;
-        
-    // desktop cat icon 
-    .cartIcon {
-        // float: right;
-        font-size: 20px;
-    }
-    // desktop cart url of items        
+    flex-wrap: wrap;
+    padding-left: 15%;
+              
     .cartUrl {
         text-decoration: none;
         color: white;
-        padding-right: 60px;
-        padding-left: 10px;
     }
 
     // cart number of total 
@@ -29,7 +25,7 @@
 }
 
 // MOBILE STYLE 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 530px) {
 
     // HIDE CART SECTION ON MOBIE SCREEN 
     .cart-nav {

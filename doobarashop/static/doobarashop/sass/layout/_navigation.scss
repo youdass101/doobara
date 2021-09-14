@@ -1,11 +1,16 @@
 // VARIABLE POINTERS TO BE USED LIKE COLORS AND OTHERS/0
-@use '../abstracts/variables' as var;
+@use '../abstracts/all' as var;
 
-.logo-nav {
+#logo-nav {
     grid-area: logo;
+
     background-color: var.$back-color;
     padding-left: 20px;
     border-top: 5px solid var.$identity-color;
+    
+    img {
+        max-width: 100%;
+    }
 }
 
 // navigation section style default
@@ -27,12 +32,12 @@
 // }
 
 // Making Navigation Sticky 
-// .sticky-nav {
-//     position: fixed ;
-//     top: 0 ;
-//     opacity: 80%;
-//     width: 100%;
-// } 
+.sticky-nav {
+    position: fixed ;
+    top: 0 ;
+    opacity: 80%;
+    width: 100%;
+} 
 
 // // setting logo and search on same line
 // .logo-nav, .search-box-nav {

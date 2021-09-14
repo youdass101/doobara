@@ -33,7 +33,7 @@
             </div>
     
             <!-- LOGO first top left section in navigation contain logo with home link -->
-            <div class="logo-nav">
+            <div id="logo-nav">
                 <a href="/"> 
                     <img src="{% static 'doobarashop/upload/images/home-automaion-doobara-logo.png' %}" alt="home automation doobara">
                 </a>
@@ -62,21 +62,21 @@
             </div>
         
             <!-- MENU LINK ICON BAR 3d left buttom section of navigatio bar contain navigation menu links -->
-            <!-- <div class="navigation-bar"> -->
-                <div class="navigation-menu">
-                    <a href="shop"><i class="icons fas fa-store"></i><span class="navigationMenuName"> Shop</span></a>
-                    <a href="blog"><i class="icons fab fa-blogger-b"></i><span class="navigationMenuName"> Blog</span></a>
-                    <a href="video"><i class="icons fab fa-youtube"></i><span class="navigationMenuName"> Video</span></a>
-                    <a href="contactus"><i class="icons fas fa-inbox"></i><span class="navigationMenuName"> Contact Us</span></a>
-                    <a href="myaccount"><i class="icons fas fa-user"></i><span class="navigationMenuName"> My Account</span></a>
-                </div>
-                
-                <!-- CART final right buttom section of navigation bar contain cart and totla url -->
-                <div class="cart-nav">
-                    <p ><span class="homeTotal">$0.00  <a href="#" class="cartUrl"> 0 Items</span>
-                        <span class="cartIcon"><i class="icons fas fa-shopping-cart"></i></a></span></p>
-                </div>
-            <!-- </div> -->
+            <div class="navigation-menu">
+                <a href="shop"><i class="icons fas fa-store"></i>Shop</a>
+                <a href="blog"><i class="icons fab fa-blogger-b"></i>Blog</a>
+                <a href="video"><i class="icons fab fa-youtube"></i>Video</a>
+                <a href="contactus"><i class="icons fas fa-inbox"></i>Contact Us</a>
+                <a href="myaccount"><i class="icons fas fa-user"></i>My Account</a>
+            </div>
+            
+            <!-- CART final right buttom section of navigation bar contain cart and totla url -->
+            <div class="cart-nav">
+                <p class="homeTotal">$0.00  </p>
+                <a href="#" class="cartUrl"> 0 Items
+                    <i class="icons fas fa-shopping-cart fa-2x"></i></a>
+            </div>
+
             <!-- MOBILE MENU LINKS ICON (Normaly hidden) -->
             <div id="navigation-mobile"> 
                 <ul>

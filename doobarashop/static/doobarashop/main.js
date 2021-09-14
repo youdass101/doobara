@@ -16,11 +16,11 @@ document.addEventListener('DOMContentLoaded', function(){
 
     // Navbar is Html Element 
     // interp. navbar is mobile menu links element under id navbar
-    var navbar = document.getElementById('navbar');
+    var navbar = document.getElementById('logo-nav');
 
     // Sticky is Number
     // Get the offset position of the navbar Assign to var
-    // var sticky = navbar.offsetTop;
+    var sticky = navbar.offsetTop;
 
     // Event -> menubtn
     // MOBILE MENU ICON PRESSED (humberger) 
@@ -40,12 +40,12 @@ document.addEventListener('DOMContentLoaded', function(){
 
     // window.onscroll is event function
     // ON MOUSE SCROLL call myfunction function
-    window.onscroll = function() {myFunction()};
+    window.onscroll = function() {sticky_menu_fn()};
 
     // event -> navbar
     // ADD sticky CLASS TO NAVIGATION when scroll of default postion
     // REMOVE sticky CLASS from navigation when heigh position at top default                                
-    function myFunction() {
+    function sticky_menu_fn() {
         if (window.pageYOffset >= sticky) {
         navbar.classList.add("sticky-nav");
         } else {

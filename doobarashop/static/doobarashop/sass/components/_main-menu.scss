@@ -2,19 +2,26 @@
  // Default navigation menu style
  .navigation-menu {
     grid-area: menu;
-    display: flex;
+    @include var.flex-default;
     background-color: var.$back-color;
     border-top: 5px solid var.$identity-color;
     color: var.$identity-color;
     align-items: center;
-    justify-content: space-around;
     font-size: 1.2em;
     font-weight: 400;
 }
 // desktop navigation a element 
 .navigation-menu a {
-    // padding: 0 20px 0 0px;
+    @include var.flex-default;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding-left: 3%;
     color: white;
+
+    i, a *+*{
+        padding-right: 5px;
+    }
 }
 
 // Navigatopn Menu Links icons On hover
@@ -29,7 +36,7 @@
 }
 
 // HIDE ON MOBILE SCREEN
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 530px) {
     // hide all desktop element that shouldn't appear on mobile 
     .navigation-menu {
         display: none !important;

@@ -36,12 +36,12 @@ html, body {
 .layout-grid-container {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  grid-template-areas: "info info info info info info sm sm sm sm sm sm" "logo logo logo logo logo logo sn sn sn sn sn sn" "menu menu menu menu menu menu cart cart cart cart cart cart";
+  grid-template-areas: "info info info info info info sm sm sm sm sm sm" "logo logo logo logo logo logo sn sn sn sn sn sn" "menu menu menu menu menu menu menu menu menu cart cart cart" "pc pc pc pc pc pc pc pc pc pc pc pc";
 }
 
 @media screen and (max-width: 530px) {
   .layout-grid-container {
-    grid-template-areas: "info info info info info info info info info info info info" "logo logo logo logo logo logo logo logo mmb mmb mmb mmb" "nmm nmm nmm nmm nmm nmm nmm nmm nmm nmm nmm nmm";
+    grid-template-areas: "info info info info info info info info info info info info" "logo logo logo logo logo logo logo logo mmb mmb mmb mmb" "nmm nmm nmm nmm nmm nmm nmm nmm nmm nmm nmm nmm" "pc pc pc pc pc pc pc pc pc pc pc pc";
   }
 }
 .header-top-bar-left {
@@ -51,6 +51,7 @@ html, body {
 .header-top-bar-left ul {
   display: flex;
   display: -webkit-flex;
+  flex-wrap: wrap;
   color: white;
   list-style: none;
 }
@@ -106,11 +107,21 @@ html, body {
     display: none !important;
   }
 }
-.logo-nav {
+#logo-nav {
   grid-area: logo;
   background-color: #292826;
   padding-left: 20px;
   border-top: 5px solid #F9D342;
+}
+#logo-nav img {
+  max-width: 100%;
+}
+
+.sticky-nav {
+  position: fixed;
+  top: 0;
+  opacity: 80%;
+  width: 100%;
 }
 
 .search-box-nav {
@@ -120,7 +131,7 @@ html, body {
 }
 .search-box-nav .search-site {
   float: right;
-  padding-right: 50px;
+  padding-right: 6%;
 }
 
 form.search-site input[type=text] {
@@ -160,17 +171,26 @@ form.search-site button {
 .navigation-menu {
   grid-area: menu;
   display: flex;
+  display: -webkit-flex;
   background-color: #292826;
   border-top: 5px solid #F9D342;
   color: #F9D342;
   align-items: center;
-  justify-content: space-around;
   font-size: 1.2em;
   font-weight: 400;
 }
 
 .navigation-menu a {
+  display: flex;
+  display: -webkit-flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  padding-left: 3%;
   color: white;
+}
+.navigation-menu a i, .navigation-menu a a * + * {
+  padding-right: 5px;
 }
 
 .navigation-menu a:hover {
@@ -181,7 +201,7 @@ form.search-site button {
   text-decoration: none;
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 530px) {
   .navigation-menu {
     display: none !important;
   }
@@ -194,6 +214,7 @@ form.search-site button {
   .mobile-menu-btn {
     grid-area: mmb;
     display: flex;
+    display: -webkit-flex;
     justify-content: center;
     align-items: center;
     background-color: #292826;
@@ -201,6 +222,7 @@ form.search-site button {
   }
   .mobile-menu-btn .humberger {
     display: flex;
+    display: -webkit-flex;
     justify-content: space-around !important;
     align-items: center;
     background-color: #F9D342;
@@ -257,17 +279,18 @@ form.search-site button {
 .cart-nav {
   grid-area: cart;
   background-color: #292826;
+  display: flex;
+  display: -webkit-flex;
+  justify-content: space-around;
+  align-items: center;
   border-top: 5px solid #F9D342;
   color: #F9D342;
-}
-.cart-nav .cartIcon {
-  font-size: 20px;
+  flex-wrap: wrap;
+  padding-left: 15%;
 }
 .cart-nav .cartUrl {
   text-decoration: none;
   color: white;
-  padding-right: 60px;
-  padding-left: 10px;
 }
 .cart-nav .homeTotal {
   font-size: 16px;
@@ -276,7 +299,7 @@ form.search-site button {
   font-size: 14px;
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 530px) {
   .cart-nav {
     display: none !important;
   }
@@ -288,6 +311,217 @@ form.search-site button {
 
   .logo-nav {
     padding-left: 0px;
+  }
+}
+.page-content {
+  grid-area: pc;
+}
+
+.slider-img-desktop {
+  display: block;
+}
+
+.slider-img-mobile {
+  display: none;
+}
+
+/* Slideshow container */
+.slideshow-container {
+  max-width: 100%;
+  margin: 0;
+}
+
+/* SLider Hide the images by default */
+.mySlides {
+  display: none;
+  transition: transform 35s;
+}
+
+/* Next & previous pointer icons buttons on slider */
+.prev, .next {
+  cursor: pointer;
+  position: relative;
+  top: 30%;
+  width: auto;
+  margin-top: -62px;
+  padding: 16px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+
+.prev {
+  float: left;
+}
+
+/* Position the "next button" pointer on slider to the right */
+.next {
+  float: right;
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through on slider arrows pointers */
+.prev:hover, .next:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* SLider Caption text */
+.slider-caption {
+  color: #f2f2f2;
+  font-size: 15px;
+  position: absolute;
+  width: 100%;
+  margin-top: -35px;
+  text-align: center;
+}
+
+/* Slider image Number text (1/3 etc) */
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+}
+
+/* Slider Fading animation effect */
+.slide-fade {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 1.5s;
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade {
+  from {
+    opacity: 0.4;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fade {
+  from {
+    opacity: 0.4;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@media screen and (max-width: 480px) {
+  .slider-img-mobile {
+    display: block;
+  }
+
+  .slider-img-desktop {
+    display: none;
+  }
+
+  .prev, .next {
+    width: auto;
+    position: relative;
+    margin-top: -100px;
+  }
+
+  .prev {
+    float: left;
+  }
+
+  .next {
+    float: right;
+  }
+}
+#cat-featured {
+  width: auto;
+  padding: 5px 0px 0px 5px;
+  display: flex;
+  display: -webkit-flex;
+  margin-left: 0.5%;
+}
+#cat-featured #product-category {
+  padding-right: 5px;
+  flex: 1;
+  -webkit-flex: 1;
+  width: 25%;
+  border-right: 2px solid #292826;
+}
+#cat-featured #product-category .cat-icon {
+  width: 100%;
+  padding-left: 5px;
+}
+#cat-featured #product-category table {
+  border-collapse: collapse;
+}
+@media screen and (max-width: 480px) {
+  #cat-featured #product-category {
+    width: 100% !important;
+  }
+}
+#cat-featured #featured-products {
+  flex: 1;
+  -webkit-flex: 2.5;
+}
+#cat-featured #featured-products .product-card-container {
+  padding-left: 1%;
+  display: flex;
+  display: -webkit-flex;
+}
+#cat-featured #featured-products .product-card-container .product-card {
+  margin-right: 0.4%;
+  flex: 1;
+  -webkit-flex: 1;
+  background-color: #F9D342;
+  box-shadow: 1px 1px 4px 5px rgba(0, 0, 0, 0.5);
+}
+#cat-featured #featured-products .product-card-container .product-card p {
+  text-align: center;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 15px;
+}
+#cat-featured #featured-products .product-card-container .product-card .card-img {
+  width: 100%;
+  background-color: #F9D342;
+}
+#cat-featured #featured-products .product-card-container .product-card .card-info {
+  background-color: #F9D342;
+  height: 50px;
+  margin: 0;
+}
+
+.home-add {
+  width: 100%;
+}
+.home-add .feature-row {
+  width: 100%;
+  white-space: nowrap;
+}
+.home-add .feature-row .single-add-home {
+  display: inline-block;
+  width: 50%;
+  margin: -2px;
+  border: 2px solid #292826;
+}
+.home-add .feature-row .single-add-home img {
+  width: 100%;
+  height: 100%;
+  vertical-align: top;
+}
+
+@media screen and (max-width: 480px) {
+  .home-add {
+    width: 100%;
+  }
+  .home-add .feature-row .single-add-home {
+    margin: -2px;
+    border: 2px solid #292826;
+  }
+  .home-add .feature-row .single-add-home img {
+    width: 100%;
+    vertical-align: top;
   }
 }
 

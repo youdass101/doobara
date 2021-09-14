@@ -7,7 +7,7 @@
     // menu humberger button parent div
     .mobile-menu-btn {
         grid-area: mmb;
-        display: flex ;
+        @include var.flex-default;
         justify-content: center;
         align-items: center ;
         background-color: var.$back-color;
@@ -15,7 +15,7 @@
 
         // huberger Icon inside button 
         .humberger {
-            display: flex;
+            @include var.flex-default;
             justify-content: space-around !important;
             align-items: center;
             background-color: var.$identity-color;
