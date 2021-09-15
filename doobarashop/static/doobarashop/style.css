@@ -88,8 +88,8 @@ html, body {
   display: -webkit-flex;
   align-items: center;
   justify-content: flex-end;
-  grid-area: sm;
   background-color: #292826;
+  grid-area: sm;
   padding-right: 40px;
 }
 .header-top-bar-right .social-media-nav {
@@ -227,16 +227,16 @@ form.search-site button {
     z-index: 2;
     display: flex;
     display: -webkit-flex;
-    background-color: #292826;
-    justify-content: center;
     align-items: center;
+    justify-content: space-around;
+    background-color: #292826;
     border-top: 5px solid #F9D342;
   }
   #mobile-menu-btn .humberger {
     display: flex;
     display: -webkit-flex;
-    justify-content: space-around !important;
     align-items: center;
+    justify-content: space-around;
     background-color: #F9D342;
     border: none;
     width: 85px;
@@ -253,8 +253,8 @@ form.search-site button {
     z-index: 2;
     top: 60px;
     opacity: 80%;
-    background-color: #292826;
     width: 100%;
+    background-color: #292826;
     padding-right: 30px 0 0 0;
     font-size: 16px;
   }
@@ -296,25 +296,21 @@ form.search-site button {
   z-index: 2;
   top: 0;
   background-color: #292826;
-  padding-left: 20px;
   border-top: 5px solid #F9D342;
+  padding-left: 20px;
 }
 #logo-nav img {
   max-width: 100%;
 }
 
-.sticky-nav {
+.sticky-nav, .sticky-navb {
   position: sticky;
   top: 0;
   opacity: 80%;
   width: 100%;
 }
-
 .sticky-navb {
-  position: sticky;
-  top: 60px;
-  opacity: 80%;
-  width: 100%;
+  top: 60px !important;
 }
 
 @media screen and (max-width: 530px) {

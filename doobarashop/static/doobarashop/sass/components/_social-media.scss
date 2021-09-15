@@ -4,15 +4,16 @@
 // Set social media elements on same line on right 
 .header-top-bar-right {
     @include var.flex-default;
-    align-items: center;
-    justify-content: flex-end;
+    align-items: center;// !!!!
+    justify-content: flex-end;// !!!!
+    background-color: var.$back-color;// !!!!
     grid-area: sm;
-    background-color: var.$back-color;
     padding-right: 40px;
 
 
     // social media icon styling and setting animated transition
     .social-media-nav {
+        // this padding is to create a square on animation hover
         padding: 10px 20px 15px 20px;
         color: white;
         transition: background-color 1s,transform 1s;

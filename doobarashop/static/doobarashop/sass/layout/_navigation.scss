@@ -20,11 +20,11 @@
 // LOGO AFTER HEADER AND FIRST IN NAVIGATION (moved here for the @use later)
 #logo-nav {
     grid-area: logo;
-    z-index: 2;
+    z-index: 2; // !!!!
     top: 0;
-    background-color: var.$back-color;
+    background-color: var.$back-color; // !!!!
+    border-top: 5px solid var.$identity-color;// !!!!
     padding-left: 20px;
-    border-top: 5px solid var.$identity-color;
     
     img {
         max-width: 100%;
@@ -37,14 +37,11 @@
     top: 0 ;
     opacity: 80%;
     width: 100%;
-} 
 
-// Making second bar navigation sticky 
-.sticky-navb {
-    position: sticky ;
-    top: 60px ;
-    opacity: 80%;
-    width: 100%;
+    &b {
+        @extend .sticky-nav;
+        top: 60px !important;
+    }
 } 
 
 
