@@ -22,7 +22,7 @@
         // Centering the footer navigation
         .footer-navigation { 
             @include var.flex-default;   
-            justify-content: space-around;
+            justify-content: space-around; // !!!
         }
     }
 }

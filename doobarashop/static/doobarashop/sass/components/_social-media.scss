@@ -4,9 +4,9 @@
 // Set social media elements on same line on right 
 .header-top-bar-right {
     @include var.flex-default;
-    align-items: center;// !!!!
+    align-items: center;// !!!! 1
     justify-content: flex-end;// !!!!
-    background-color: var.$back-color;// !!!!
+    background-color: var.$back-color;// !!!! 1
     grid-area: sm;
     padding-right: 40px;
 

@@ -109,7 +109,6 @@ html, body {
 }
 #search-box-nav {
   grid-area: sn;
-  z-index: 2;
   background-color: #292826;
   border-top: 5px solid #F9D342;
 }
@@ -154,7 +153,6 @@ form.search-site button {
 }
 #navigation-menu {
   grid-area: menu;
-  z-index: 2;
   display: flex;
   display: -webkit-flex;
   background-color: #292826;
@@ -190,15 +188,14 @@ form.search-site button {
 }
 #cart-nav {
   grid-area: cart;
-  z-index: 2;
-  background-color: #292826;
   display: flex;
   display: -webkit-flex;
-  justify-content: space-around;
   align-items: center;
+  justify-content: space-around;
+  background-color: #292826;
   border-top: 5px solid #F9D342;
-  color: #F9D342;
   flex-wrap: wrap;
+  color: #F9D342;
   padding-left: 15%;
 }
 #cart-nav .cartUrl {
@@ -224,7 +221,6 @@ form.search-site button {
 @media screen and (max-width: 530px) {
   #mobile-menu-btn {
     grid-area: mmb;
-    z-index: 2;
     display: flex;
     display: -webkit-flex;
     align-items: center;
@@ -249,11 +245,6 @@ form.search-site button {
 
   #navigation-mobile {
     grid-area: nmm;
-    position: sticky;
-    z-index: 2;
-    top: 60px;
-    opacity: 80%;
-    width: 100%;
     background-color: #292826;
     padding-right: 30px 0 0 0;
     font-size: 16px;
@@ -308,6 +299,7 @@ form.search-site button {
   top: 0;
   opacity: 80%;
   width: 100%;
+  z-index: 2;
 }
 .sticky-navb {
   top: 60px !important;

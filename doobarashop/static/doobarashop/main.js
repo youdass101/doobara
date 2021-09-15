@@ -21,6 +21,7 @@ document.addEventListener('DOMContentLoaded', function(){
     var menu_nav = document.getElementById('navigation-menu');
     var cart_nav = document.getElementById('cart-nav');
     var mobile_menu_btn_nav = document.getElementById('mobile-menu-btn')
+    var mobile_nav = document.getElementById('navigation-mobile')
 
     // Sticky is Number
     // Get the offset position of the navbar Assign to var
@@ -56,12 +57,14 @@ document.addEventListener('DOMContentLoaded', function(){
         menu_nav.classList.add("sticky-navb");
         cart_nav.classList.add("sticky-navb");
         mobile_menu_btn_nav.classList.add("sticky-nav");
+        mobile_nav.classList.add("sticky-navb");
         } else {
         logo_nav.classList.remove("sticky-nav");
         search_nav.classList.remove("sticky-nav");
         menu_nav.classList.remove("sticky-navb");
         cart_nav.classList.remove("sticky-navb");
         mobile_menu_btn_nav.classList.remove("sticky-nav");
+        mobile_nav.classList.remove("sticky-navb");
         }
     }
 

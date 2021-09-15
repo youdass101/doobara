@@ -4,14 +4,13 @@
 // Desktop cart-nav section element
 #cart-nav {
     grid-area: cart;
-    z-index: 2;
-    background-color: var.$back-color;
     @include var.flex-default;
-    justify-content: space-around;
-    align-items: center;
-    border-top: 5px solid var.$identity-color;
+    align-items: center;// !!!! 1
+    justify-content: space-around;// !!!!  1
+    background-color: var.$back-color;// !!!!
+    border-top: 5px solid var.$identity-color;// !!!!
+    flex-wrap: wrap;// !!!!
     color:var.$identity-color;
-    flex-wrap: wrap;
     padding-left: 15%;
               
     .cartUrl {
