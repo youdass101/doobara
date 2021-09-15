@@ -1,6 +1,10 @@
+// VARIABLE POINTERS TO BE USED LIKE COLORS AND OTHERS/0
+@use '../abstracts/all' as var;
+
 // Desktop cart-nav section element
-.cart-nav {
+#cart-nav {
     grid-area: cart;
+    z-index: 2;
     background-color: var.$back-color;
     @include var.flex-default;
     justify-content: space-around;
@@ -24,11 +28,11 @@
     }
 }
 
-// MOBILE STYLE 
+// CART MOBILE STYLE 
 @media screen and (max-width: 530px) {
 
     // HIDE CART SECTION ON MOBIE SCREEN 
-    .cart-nav {
+    #cart-nav {
         display: none !important;
     }
 }

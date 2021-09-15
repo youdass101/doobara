@@ -1,19 +1,24 @@
+// VARIABLE POINTERS TO BE USED LIKE COLORS AND OTHERS/0
+@use '../abstracts/all' as var;
+
 // HIDE MOBILE MENU AND BUTTON 
-#navigation-mobile, .mobile-menu-btn {
+#navigation-mobile, #mobile-menu-btn {
     display: none;
 }
 
 @media screen and (max-width: 530px) {
     // menu humberger button parent div
-    .mobile-menu-btn {
+    #mobile-menu-btn {
         grid-area: mmb;
+        z-index: 2;
         @include var.flex-default;
+        background-color: var.$back-color;
         justify-content: center;
         align-items: center ;
-        background-color: var.$back-color;
+        
         border-top: 5px solid var.$identity-color;
 
-        // huberger Icon inside button 
+        // humberger Icon inside button 
         .humberger {
             @include var.flex-default;
             justify-content: space-around !important;
@@ -25,6 +30,7 @@
             font-size: medium;
         }
 
+
         // FIX FOR button not trigger when pressing on text or icon nested
         span {
             pointer-events: none;
@@ -34,6 +40,10 @@
     // navigation menu icons for Mobile 
     #navigation-mobile {
         grid-area: nmm;
+        position: sticky ;
+        z-index: 2;
+        top: 60px ;
+        opacity: 80%;
         background-color: var.$back-color;  
         width: 100%;
         padding-right: 30px 0 0 0;

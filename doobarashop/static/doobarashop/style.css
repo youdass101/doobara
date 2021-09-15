@@ -36,12 +36,12 @@ html, body {
 .layout-grid-container {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  grid-template-areas: "info info info info info info sm sm sm sm sm sm" "logo logo logo logo logo logo sn sn sn sn sn sn" "menu menu menu menu menu menu menu menu menu cart cart cart" "pc pc pc pc pc pc pc pc pc pc pc pc";
+  grid-template-areas: "info info info info info info sm sm sm sm sm sm" "logo logo logo logo logo logo sn sn sn sn sn sn" "menu menu menu menu menu menu menu menu menu cart cart cart" "pc pc pc pc pc pc pc pc pc pc pc pc" "ft ft ft ft ft ft ft ft ft ft ft ft";
 }
 
 @media screen and (max-width: 530px) {
   .layout-grid-container {
-    grid-template-areas: "info info info info info info info info info info info info" "logo logo logo logo logo logo logo logo mmb mmb mmb mmb" "nmm nmm nmm nmm nmm nmm nmm nmm nmm nmm nmm nmm" "pc pc pc pc pc pc pc pc pc pc pc pc";
+    grid-template-areas: "info info info info info info info info info info info info" "logo logo logo logo logo logo logo logo mmb mmb mmb mmb" "nmm nmm nmm nmm nmm nmm nmm nmm nmm nmm nmm nmm" "pc pc pc pc pc pc pc pc pc pc pc pc" "ft ft ft ft ft ft ft ft ft ft ft ft" "fm fm fm fm fm fm fm fm fm fm fm fm";
   }
 }
 .header-top-bar-left {
@@ -107,29 +107,13 @@ html, body {
     display: none !important;
   }
 }
-#logo-nav {
-  grid-area: logo;
-  background-color: #292826;
-  padding-left: 20px;
-  border-top: 5px solid #F9D342;
-}
-#logo-nav img {
-  max-width: 100%;
-}
-
-.sticky-nav {
-  position: fixed;
-  top: 0;
-  opacity: 80%;
-  width: 100%;
-}
-
-.search-box-nav {
+#search-box-nav {
   grid-area: sn;
+  z-index: 2;
   background-color: #292826;
   border-top: 5px solid #F9D342;
 }
-.search-box-nav .search-site {
+#search-box-nav .search-site {
   float: right;
   padding-right: 6%;
 }
@@ -164,12 +148,13 @@ form.search-site button {
   }
 }
 @media screen and (max-width: 530px) {
-  .search-box-nav {
+  #search-box-nav {
     display: none !important;
   }
 }
-.navigation-menu {
+#navigation-menu {
   grid-area: menu;
+  z-index: 2;
   display: flex;
   display: -webkit-flex;
   background-color: #292826;
@@ -179,8 +164,7 @@ form.search-site button {
   font-size: 1.2em;
   font-weight: 400;
 }
-
-.navigation-menu a {
+#navigation-menu a {
   display: flex;
   display: -webkit-flex;
   flex-wrap: wrap;
@@ -189,38 +173,66 @@ form.search-site button {
   padding-left: 3%;
   color: white;
 }
-.navigation-menu a i, .navigation-menu a a * + * {
+#navigation-menu a i, #navigation-menu a a * + * {
   padding-right: 5px;
 }
-
-.navigation-menu a:hover {
+#navigation-menu a:hover {
   color: #F9D342;
 }
-
-.navigation-menu a:link {
+#navigation-menu a:link {
   text-decoration: none;
 }
 
 @media screen and (max-width: 530px) {
-  .navigation-menu {
+  #navigation-menu {
     display: none !important;
   }
 }
-#navigation-mobile, .mobile-menu-btn {
+#cart-nav {
+  grid-area: cart;
+  z-index: 2;
+  background-color: #292826;
+  display: flex;
+  display: -webkit-flex;
+  justify-content: space-around;
+  align-items: center;
+  border-top: 5px solid #F9D342;
+  color: #F9D342;
+  flex-wrap: wrap;
+  padding-left: 15%;
+}
+#cart-nav .cartUrl {
+  text-decoration: none;
+  color: white;
+}
+#cart-nav .homeTotal {
+  font-size: 16px;
+}
+#cart-nav .homeTotal .cartUrl {
+  font-size: 14px;
+}
+
+@media screen and (max-width: 530px) {
+  #cart-nav {
+    display: none !important;
+  }
+}
+#navigation-mobile, #mobile-menu-btn {
   display: none;
 }
 
 @media screen and (max-width: 530px) {
-  .mobile-menu-btn {
+  #mobile-menu-btn {
     grid-area: mmb;
+    z-index: 2;
     display: flex;
     display: -webkit-flex;
+    background-color: #292826;
     justify-content: center;
     align-items: center;
-    background-color: #292826;
     border-top: 5px solid #F9D342;
   }
-  .mobile-menu-btn .humberger {
+  #mobile-menu-btn .humberger {
     display: flex;
     display: -webkit-flex;
     justify-content: space-around !important;
@@ -231,12 +243,16 @@ form.search-site button {
     height: 40px;
     font-size: medium;
   }
-  .mobile-menu-btn span {
+  #mobile-menu-btn span {
     pointer-events: none;
   }
 
   #navigation-mobile {
     grid-area: nmm;
+    position: sticky;
+    z-index: 2;
+    top: 60px;
+    opacity: 80%;
     background-color: #292826;
     width: 100%;
     padding-right: 30px 0 0 0;
@@ -260,61 +276,74 @@ form.search-site button {
 
 @media screen and (max-width: 480px) {
   #mobile-footer-menu {
+    grid-area: fm;
     display: block;
+    align-self: stretch;
     background-color: #292826;
     position: fixed;
-    left: 0;
     bottom: 0;
     width: 100%;
-    padding: 10px 0px 10px 10%;
+    padding: 5px 0 5px 0;
   }
   #mobile-footer-menu .footer-navigation {
-    justify-content: center;
     display: flex;
-  }
-  #mobile-footer-menu a {
-    padding: 0px 10% 0px 0px;
+    display: -webkit-flex;
+    justify-content: space-around;
   }
 }
-.cart-nav {
-  grid-area: cart;
+#logo-nav {
+  grid-area: logo;
+  z-index: 2;
+  top: 0;
   background-color: #292826;
-  display: flex;
-  display: -webkit-flex;
-  justify-content: space-around;
-  align-items: center;
+  padding-left: 20px;
   border-top: 5px solid #F9D342;
-  color: #F9D342;
-  flex-wrap: wrap;
-  padding-left: 15%;
 }
-.cart-nav .cartUrl {
-  text-decoration: none;
-  color: white;
+#logo-nav img {
+  max-width: 100%;
 }
-.cart-nav .homeTotal {
-  font-size: 16px;
+
+.sticky-nav {
+  position: sticky;
+  top: 0;
+  opacity: 80%;
+  width: 100%;
 }
-.cart-nav .homeTotal .cartUrl {
-  font-size: 14px;
+
+.sticky-navb {
+  position: sticky;
+  top: 60px;
+  opacity: 80%;
+  width: 100%;
 }
 
 @media screen and (max-width: 530px) {
-  .cart-nav {
-    display: none !important;
-  }
-}
-@media screen and (max-width: 480px) {
   #myLinks, .dot, .imgd, #featured-products {
     display: none !important;
   }
 
-  .logo-nav {
+  #logo-nav {
     padding-left: 0px;
   }
 }
 .page-content {
   grid-area: pc;
+}
+
+.footter-wrapper {
+  height: auto !important;
+  margin: 0 auto -142px;
+  /* the bottom margin is the negative value of the footer's height */
+}
+
+.footer, .push {
+  height: 142px;
+  /* .push must be the same height as .footer */
+}
+
+.footer {
+  grid-area: ft;
+  background-color: #292826;
 }
 
 .slider-img-desktop {

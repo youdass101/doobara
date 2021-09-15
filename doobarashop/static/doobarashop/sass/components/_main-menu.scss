@@ -1,7 +1,11 @@
+// VARIABLE POINTERS TO BE USED LIKE COLORS AND OTHERS/0
+@use '../abstracts/all' as var;
+
 //PRIMARY NAVIGATION MENU
  // Default navigation menu style
- .navigation-menu {
+#navigation-menu {
     grid-area: menu;
+    z-index: 2;
     @include var.flex-default;
     background-color: var.$back-color;
     border-top: 5px solid var.$identity-color;
@@ -9,36 +13,37 @@
     align-items: center;
     font-size: 1.2em;
     font-weight: 400;
-}
-// desktop navigation a element 
-.navigation-menu a {
-    @include var.flex-default;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    padding-left: 3%;
-    color: white;
 
-    i, a *+*{
-        padding-right: 5px;
+    // navigation links 
+    a {
+        @include var.flex-default;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        padding-left: 3%;
+        color: white;
+    
+        i, a *+*{
+            padding-right: 5px;
+        }
+    }
+
+    // Navigatopn Menu Links icons On hover
+    a:hover{
+        color: var.$identity-color;
+    }
+    // desktop navigation menu link icons element  
+    a:link {
+        text-decoration: none;
+        // padding-right: 20px;
     }
 }
 
-// Navigatopn Menu Links icons On hover
-.navigation-menu a:hover{
-    color: var.$identity-color;
-}
-
-// desktop navigation menu link icons element  
-.navigation-menu a:link {
-    text-decoration: none;
-    // padding-right: 20px;
-}
 
 // HIDE ON MOBILE SCREEN
 @media screen and (max-width: 530px) {
     // hide all desktop element that shouldn't appear on mobile 
-    .navigation-menu {
+    #navigation-menu {
         display: none !important;
     }
 }

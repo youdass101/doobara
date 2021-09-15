@@ -1,8 +1,11 @@
-// SEARCH WIDGET COMPONENT 
+// VARIABLE POINTERS TO BE USED LIKE COLORS AND OTHERS/0
+@use '../abstracts/all' as var;
 
+// SEARCH WIDGET COMPONENT 
 // search box section style default 
-.search-box-nav {
+#search-box-nav {
     grid-area: sn;
+    z-index: 2;
     background-color: var.$back-color;
     border-top: 5px solid var.$identity-color;
     
@@ -39,7 +42,7 @@ form.search-site button {
     border-bottom-right-radius: 4px ;
 }
 
-//HIDE ON MOBILE 
+// ALIGN ON smaller screen  
 @media screen and (max-width: 630px) {
     .search-site {
         padding-right: 3px !important;
@@ -49,7 +52,7 @@ form.search-site button {
 //HIDE ON MOBILE 
 @media screen and (max-width: 530px) {
     // hide all desktop element that shouldn't appear on mobile 
-    .search-box-nav {
+    #search-box-nav {
         display: none !important;
     }
 }

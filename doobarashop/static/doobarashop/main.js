@@ -16,11 +16,15 @@ document.addEventListener('DOMContentLoaded', function(){
 
     // Navbar is Html Element 
     // interp. navbar is mobile menu links element under id navbar
-    var navbar = document.getElementById('logo-nav');
+    var logo_nav = document.getElementById('logo-nav');
+    var search_nav = document.getElementById('search-box-nav');
+    var menu_nav = document.getElementById('navigation-menu');
+    var cart_nav = document.getElementById('cart-nav');
+    var mobile_menu_btn_nav = document.getElementById('mobile-menu-btn')
 
     // Sticky is Number
     // Get the offset position of the navbar Assign to var
-    var sticky = navbar.offsetTop;
+    var sticky = logo_nav.offsetTop;
 
     // Event -> menubtn
     // MOBILE MENU ICON PRESSED (humberger) 
@@ -47,9 +51,17 @@ document.addEventListener('DOMContentLoaded', function(){
     // REMOVE sticky CLASS from navigation when heigh position at top default                                
     function sticky_menu_fn() {
         if (window.pageYOffset >= sticky) {
-        navbar.classList.add("sticky-nav");
+        logo_nav.classList.add("sticky-nav");
+        search_nav.classList.add("sticky-nav");
+        menu_nav.classList.add("sticky-navb");
+        cart_nav.classList.add("sticky-navb");
+        mobile_menu_btn_nav.classList.add("sticky-nav");
         } else {
-        navbar.classList.remove("sticky-nav");
+        logo_nav.classList.remove("sticky-nav");
+        search_nav.classList.remove("sticky-nav");
+        menu_nav.classList.remove("sticky-navb");
+        cart_nav.classList.remove("sticky-navb");
+        mobile_menu_btn_nav.classList.remove("sticky-nav");
         }
     }
 
