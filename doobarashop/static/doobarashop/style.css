@@ -166,8 +166,8 @@ form.search-site button {
   display: flex;
   display: -webkit-flex;
   flex-wrap: wrap;
-  justify-content: center;
   align-items: center;
+  justify-content: space-around;
   padding-left: 3%;
   color: white;
 }
@@ -284,7 +284,6 @@ form.search-site button {
 }
 #logo-nav {
   grid-area: logo;
-  z-index: 2;
   top: 0;
   background-color: #292826;
   border-top: 5px solid #F9D342;

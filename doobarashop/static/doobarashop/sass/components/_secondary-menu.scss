@@ -11,18 +11,15 @@
     #mobile-menu-btn {
         grid-area: mmb;
         @include var.flex-default;
-        align-items: center ;// !!!! 1
-        justify-content: space-around;// !!!!
-        background-color: var.$back-color;// !!!! 1
-        border-top: 5px solid var.$identity-color;
+        @include var.flex-v-h-align;
+        @include var.backround-bordertop-color;
         
 
         // humberger Icon inside button 
         .humberger {
             @include var.flex-default;
-            align-items: center;// !!!!
-            justify-content: space-around;// !!!!
-            background-color: var.$identity-color;// !!!!
+            @include var.flex-v-h-align;
+            background-color: var.$identity-color;
             border: none;
             width: 85px;
             height: 40px;

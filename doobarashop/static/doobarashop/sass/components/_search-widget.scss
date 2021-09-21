@@ -5,8 +5,7 @@
 // search box section style default 
 #search-box-nav {
     grid-area: sn;
-    background-color: var.$back-color;
-    border-top: 5px solid var.$identity-color;
+    @include var.backround-bordertop-color;
     
     .search-site {
         float: right;

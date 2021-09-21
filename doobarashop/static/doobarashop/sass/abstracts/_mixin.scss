@@ -1,6 +1,30 @@
 
+@use 'variables' as var;
+
 // display flex for several browser 
 @mixin flex-default {
     display: flex;
     display: -webkit-flex;
 }
+
+@mixin flex-v-h-align {
+
+    align-items: center;
+    justify-content: space-around;
+}
+
+@mixin backround-bordertop-color {
+    background-color: var.$back-color;
+    border-top: 5px solid var.$identity-color;
+}
+
+
+
+
+
+
+
+
+
+
+

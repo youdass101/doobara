@@ -5,11 +5,9 @@
 #cart-nav {
     grid-area: cart;
     @include var.flex-default;
-    align-items: center;// !!!! 1
-    justify-content: space-around;// !!!!  1
-    background-color: var.$back-color;// !!!!
-    border-top: 5px solid var.$identity-color;// !!!!
-    flex-wrap: wrap;// !!!!
+    @include var.flex-v-h-align;
+    @include var.backround-bordertop-color;
+    flex-wrap: wrap;
     color:var.$identity-color;
     padding-left: 15%;
               
