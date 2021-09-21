@@ -1,12 +1,8 @@
 // FEATURED PRODUCT CARDS BANNER 
 
-#featured-products {
-    flex: 1;
-    -webkit-flex: 2.5;
-
     // Featured product elemet
     .product-card-container {
-        // width: 74.2%;
+        grid-area: fp;
         padding-left: 1%;
         display: flex;
         display: -webkit-flex;
@@ -44,4 +40,10 @@
             }
         }
     }
+
+@media screen and (max-width: 530px) {
+    .product-card-container {
+        display: none;
+    }
 }
+

@@ -1,19 +1,21 @@
 // HOME PAGE HERO SECTION (EVERYTHING IN BODY LAYOUT AFTER NAV)
 
 // advertised product elements
-.home-add {
-    width: 100%;
+// .home-add {
+//     width: 100%;
     
     // featured-products advertised product row 
-    .feature-row { 
-        width: 100%;
-        white-space: nowrap;
-        // line-height: 0;
+    // .add-row { 
+    //     // grid-area: ap;
+    //     grid-column: span 12;
+    //     white-space: nowrap;
+    //     // line-height: 0;
     
         // Single advertised product element 
         .single-add-home {
-            display: inline-block;
-            width: 50%;
+            grid-column: span 6;
+            // display: inline-block;
+            // width: 50%;
             margin: -2px;
             border: 2px solid var.$back-color; 
             
@@ -25,19 +27,20 @@
                 
             }
         }
-    }
-}
+    // }
+// }
 
 @media screen and (max-width: 480px) {
 
     // product adds boxes
-    .home-add {
-        width: 100%;
-        // adds row which include 2 boxes 
-        .feature-row { 
+    // .home-add {
+    //     width: 100%;
+    //     // adds row which include 2 boxes 
+    //     .feature-row { 
             
             // SIngle add for procuct 
             .single-add-home {
+                grid-column: span 12;
                 margin: -2px;
                 border: 2px solid var.$back-color; 
                     
@@ -47,7 +50,7 @@
                     vertical-align: top;    
                 }
             }
-        }
-    }
+    //     }
+    // }
 
 }

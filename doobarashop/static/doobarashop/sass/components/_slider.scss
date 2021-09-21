@@ -4,8 +4,8 @@
 
 /* Slideshow container */
 .slideshow-container {
-    max-width: 100%;
-    margin: 0;
+    grid-area: slider ;
+    
 }
   
 /* SLider Hide the images by default */
@@ -24,7 +24,6 @@
 .prev, .next {
     cursor: pointer;
     position: relative;
-    top: 30%;
     width: auto;
     margin-top: -62px;
     padding: 16px;

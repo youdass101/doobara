@@ -1,20 +1,44 @@
 // INDEX PAGE SYLE ------------
 
+// Index page grid
+#index-grid-container {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+
+    grid-template-areas: 
+    'slider slider slider slider slider slider slider slider slider slider slider slider'
+    'pcat pcat pcat fp fp fp fp fp fp fp fp fp'
+   
+    
+    
+ }
+
+@media screen and (max-width: 530px) {
+    #index-grid-container {
+        grid-template-areas:  
+        'slider slider slider slider slider slider slider slider slider slider slider slider '
+        'pcat pcat pcat pcat pcat pcat pcat pcat pcat pcat pcat pcat'
+    
+    }
+
+}
 // SLIDER 
 @import '../components/slider';
 
 // CATEGORY AND FEATURED ROW
-#cat-featured {
-    width: auto;
-    padding: 5px 0px 0px 5px;
-    display: flex;
-    display: -webkit-flex;
-    margin-left: 0.5%; 
+// #cat-featured {
+//     width: auto;
+//     padding: 5px 0px 0px 5px;
+//     display: flex;
+//     display: -webkit-flex;
+//     margin-left: 0.5%; 
     
-    // Category product menu icons 
-    @import '../components/product-category-menu';
-    @import '../components/featured-procuct-cards';
-}
+  
+// }
+
+// Category product menu icons 
+@import '../components/product-category-menu';
+@import '../components/featured-procuct-cards';
 
 @import '../sections/home_hero';
 
