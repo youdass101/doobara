@@ -4,22 +4,22 @@
 #product-category  {
     grid-area: pcat;
     // padding-right: 5px;
-    flex: 1;
-    -webkit-flex: 1;
-    border-right: 2px solid var.$back-color;    
+    @include var.flex-default;
+    // flex-flow:  row wrap;
+    flex-wrap: wrap;
+    // -webkit-flex-flow: row wrap;
+    // align-items: space-around;
+    align-content: space-around;
+    justify-content: space-around;
+    // border-right: 2px solid var.$back-color;    
     .cat-icon {
-        width: 100%;
-        padding-left: 5px;
+        width: 70px;
     }  
-
-    table {
-        border-collapse: collapse;   
-    }
 }  
 
 @media screen and (max-width: 480px) {
     // product catergory Icons
-    // #product-category {
-    //     width: 100% !important; 
-    // }
+    .cat-icon {
+        width: 67px !important;
+    }  
 }
