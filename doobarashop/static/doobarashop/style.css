@@ -467,8 +467,20 @@ form.search-site button {
   align-content: space-around;
   justify-content: space-around;
 }
-#product-category .cat-icon {
-  width: 70px;
+#product-category .icon-title-container div {
+  border: 1px solid black;
+  border-radius: 30px;
+}
+#product-category .icon-title-container div a img {
+  width: 54px;
+  height: auto;
+}
+#product-category .icon-title-container div a img svg {
+  fill: #F9D342;
+}
+#product-category .icon-title-container p {
+  text-align: center;
+  margin: 0;
 }
 
 @media screen and (max-width: 480px) {

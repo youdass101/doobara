@@ -3,18 +3,38 @@
 // Product category bar section
 #product-category  {
     grid-area: pcat;
-    // padding-right: 5px;
-    @include var.flex-default;
-    // flex-flow:  row wrap;
+    @include var.flex-default;  
     flex-wrap: wrap;
-    // -webkit-flex-flow: row wrap;
-    // align-items: space-around;
     align-content: space-around;
     justify-content: space-around;
-    // border-right: 2px solid var.$back-color;    
-    .cat-icon {
-        width: 70px;
-    }  
+
+    .icon-title-container {
+        
+            
+        div {
+            border: 1px solid black;
+            border-radius: 30px;
+
+            a{
+            
+                img {
+                    
+                    width: 54px;
+                    height: auto;
+
+                    svg {
+                    fill: var.$identity-color;
+                    }
+                } 
+            }
+        }
+
+        p {
+            text-align: center;
+            margin: 0;
+
+        }
+    } 
 }  
 
 @media screen and (max-width: 480px) {
