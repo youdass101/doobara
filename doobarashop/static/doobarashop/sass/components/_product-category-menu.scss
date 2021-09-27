@@ -10,7 +10,17 @@
 
     .icon-title-container {
         
-            
+        div:hover {
+            background-color: var.$identity-color;
+            a {
+                object {
+                    filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(331deg) brightness(104%) contrast(103%);               
+                }
+                
+            }
+          
+        }
+        
         div {
             width: 66px;
             border: 1px solid black;
@@ -18,19 +28,20 @@
             background-color: var.$back-color;
 
             a{
+                display: flex;
+                justify-items: center;
+                align-items: center;
+                align-content: center;
                 
-                img {
-                    
+                
+                object { 
                     width: 100%;
-                    
-                    fill: var.$identity-color;
-
-                    .st0 {
-                        fill: yellow;
-                    }
-                    
+                    filter: invert(94%) sepia(27%) saturate(3740%) hue-rotate(323deg) brightness(103%) contrast(95%);
+                    padding: 10px;
+                    pointer-events: none;
                 } 
-            }
+
+            }     
         }
 
         p {

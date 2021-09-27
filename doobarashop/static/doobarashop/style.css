@@ -467,18 +467,29 @@ form.search-site button {
   align-content: space-around;
   justify-content: space-around;
 }
+#product-category .icon-title-container div:hover {
+  background-color: #F9D342;
+}
+#product-category .icon-title-container div:hover a object {
+  filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(331deg) brightness(104%) contrast(103%);
+}
 #product-category .icon-title-container div {
   width: 66px;
   border: 1px solid black;
   border-radius: 30px;
   background-color: #292826;
 }
-#product-category .icon-title-container div a img {
-  width: 100%;
-  fill: #F9D342;
+#product-category .icon-title-container div a {
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  align-content: center;
 }
-#product-category .icon-title-container div a img .st0 {
-  fill: yellow;
+#product-category .icon-title-container div a object {
+  width: 100%;
+  filter: invert(94%) sepia(27%) saturate(3740%) hue-rotate(323deg) brightness(103%) contrast(95%);
+  padding: 10px;
+  pointer-events: none;
 }
 #product-category .icon-title-container p {
   text-align: center;
