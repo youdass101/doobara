@@ -5,56 +5,60 @@
     grid-area: pcat;
     @include var.flex-default;  
     flex-wrap: wrap;
-    align-content: space-around;
     justify-content: space-around;
+    align-content: center;
+    padding-top: 10px;
 
+    // Each icon and titel container
     .icon-title-container {
-        
+        min-width: 20%;
+        padding-bottom: 10px;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+        justify-content: center;
+        align-content: center;
+        align-items: center;
+
+        // nested div which contain svg icon 
         div:hover {
             background-color: var.$identity-color;
             a {
                 object {
                     filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(331deg) brightness(104%) contrast(103%);               
-                }
-                
-            }
-          
+                } 
+            } 
         }
         
+        // scg Icon container 
         div {
-            width: 66px;
+            width: 60px;
             border: 1px solid black;
             border-radius: 30px;
             background-color: var.$back-color;
 
+            // a element that contain the svg icon to make clickable as link 
             a{
                 display: flex;
                 justify-items: center;
                 align-items: center;
                 align-content: center;
                 
-                
+                // the svg icon contained in ovject element 
                 object { 
                     width: 100%;
                     filter: invert(94%) sepia(27%) saturate(3740%) hue-rotate(323deg) brightness(103%) contrast(95%);
                     padding: 10px;
                     pointer-events: none;
                 } 
-
             }     
         }
 
+        // each category Icon name 
         p {
             text-align: center;
             margin: 0;
-
         }
     } 
 }  
 
-@media screen and (max-width: 480px) {
-    // product catergory Icons
-    .cat-icon {
-        width: 67px !important;
-    }  
-}

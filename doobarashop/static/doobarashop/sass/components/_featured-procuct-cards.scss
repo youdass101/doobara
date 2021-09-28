@@ -3,45 +3,56 @@
     // Featured product elemet
     .product-card-container {
         grid-area: fp;
+        align-self: center;
         padding-left: 1%;
-        display: flex;
-        display: -webkit-flex;
+        @include var.flex-default;
+        flex-wrap: wrap;
         
+        .product-card:hover {
+            color: var.$identity-color;
+            .card-info {
+                background-color: var.$back-color;
+            }      
+        }
 
         // each Product in parent product element 
         .product-card {
-            margin-right: 0.4%;
-            // width: 16.3%;
-            flex: 1;
-            -webkit-flex: 1;
-            // display: inline-block;
+            flex: 15% !important;
+            -webkit-flex: 15%;
+            width: 15%;
+            @include var.flex-default;
+            justify-content: space-around;
+            align-content: space-between;
+            flex-direction: column;
             background-color: var.$identity-color;
+            color: var.$back-color;
             box-shadow: 1px 1px 4px 5px rgba(0, 0, 0, 0.5 );
             
             // p element child of product-card
             p { 
+                padding: 0 1% 0 1%;
                 text-align: center;
-                font-size: 15px;
+                font-size:1vw;
                 font-weight: 600;  
-                line-height: 15px; 
+                line-height: 130%; 
             } 
-
-            // product-card image 
-            .card-img {
-                width: 100%;  
-                background-color: var.$identity-color;
-            }
-            
+         
             // Product-card information 
             .card-info {
                 background-color: var.$identity-color;
-                height: 50px;
-                margin: 0;                
+                margin: 0;  
+                height: 25%;              
             }
         }
     }
 
-@media screen and (max-width: 530px) {
+@media screen and (max-width: 1206px) {
+    .product-card-container {
+        padding-left: 0;
+    }   
+}
+
+@media screen and (max-width: 760px) {
     .product-card-container {
         display: none;
     }
