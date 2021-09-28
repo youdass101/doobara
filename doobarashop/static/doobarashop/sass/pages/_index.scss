@@ -8,7 +8,8 @@
 
     grid-template-areas: 
     'slider slider slider slider slider slider slider slider slider slider slider slider'
-    'pcat pcat pcat fp fp fp fp fp fp fp fp fp'  
+    'pcat pcat pcat fp fp fp fp fp fp fp fp fp'
+    'ac ac ac ac ac ac ac ac ac ac ac ac'  
  }
 
  @media screen and (max-width: 1206px) {
@@ -17,6 +18,7 @@
         'slider slider slider slider slider slider slider slider slider slider slider slider '
         'pcat pcat pcat pcat pcat pcat pcat pcat pcat pcat pcat pcat'
         'fp fp fp fp fp fp fp fp fp fp fp fp' 
+        'ac ac ac ac ac ac ac ac ac ac ac ac'  
     }
  }
 
@@ -27,6 +29,8 @@
         grid-template-areas:  
         'slider slider slider slider slider slider slider slider slider slider slider slider '
         'pcat pcat pcat pcat pcat pcat pcat pcat pcat pcat pcat pcat'
+        'ac ac ac ac ac ac ac ac ac ac ac ac' 
+         
     }
 
 }

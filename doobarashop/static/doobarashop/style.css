@@ -336,17 +336,17 @@ form.search-site button {
 #index-grid-container {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  grid-template-areas: "slider slider slider slider slider slider slider slider slider slider slider slider" "pcat pcat pcat fp fp fp fp fp fp fp fp fp";
+  grid-template-areas: "slider slider slider slider slider slider slider slider slider slider slider slider" "pcat pcat pcat fp fp fp fp fp fp fp fp fp" "ac ac ac ac ac ac ac ac ac ac ac ac";
 }
 
 @media screen and (max-width: 1206px) {
   #index-grid-container {
-    grid-template-areas: "slider slider slider slider slider slider slider slider slider slider slider slider " "pcat pcat pcat pcat pcat pcat pcat pcat pcat pcat pcat pcat" "fp fp fp fp fp fp fp fp fp fp fp fp";
+    grid-template-areas: "slider slider slider slider slider slider slider slider slider slider slider slider " "pcat pcat pcat pcat pcat pcat pcat pcat pcat pcat pcat pcat" "fp fp fp fp fp fp fp fp fp fp fp fp" "ac ac ac ac ac ac ac ac ac ac ac ac";
   }
 }
 @media screen and (max-width: 530px) {
   #index-grid-container {
-    grid-template-areas: "slider slider slider slider slider slider slider slider slider slider slider slider " "pcat pcat pcat pcat pcat pcat pcat pcat pcat pcat pcat pcat";
+    grid-template-areas: "slider slider slider slider slider slider slider slider slider slider slider slider " "pcat pcat pcat pcat pcat pcat pcat pcat pcat pcat pcat pcat" "ac ac ac ac ac ac ac ac ac ac ac ac";
   }
 }
 .slider-img-desktop {
@@ -471,7 +471,6 @@ form.search-site button {
   flex-wrap: wrap;
   justify-content: space-around;
   align-content: center;
-  padding-top: 10px;
 }
 #product-category .icon-title-container {
   min-width: 20%;
@@ -562,13 +561,19 @@ form.search-site button {
     display: none;
   }
 }
-.single-add-home {
-  grid-column: span 6;
+.ad-container {
+  grid-area: ac;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+.ad-container .single-add-home {
+  flex: 50%;
   border: 2px solid #292826;
 }
-.single-add-home img {
-  width: 100%;
-  height: 100%;
+.ad-container .single-add-home img {
+  width: auto;
+  height: auto;
   vertical-align: top;
 }
 
