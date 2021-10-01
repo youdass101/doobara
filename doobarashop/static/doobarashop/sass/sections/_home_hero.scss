@@ -2,37 +2,26 @@
 .ad-container {
     grid-area: ac;
     display: flex;
-    flex-direction: column;
     flex-wrap: wrap;
+    padding-top: 15px;
     
     // Single advertised product element 
     .single-add-home {
         flex: 50%;
-        // grid-column: span 6;
-        // display: inline-block;
-        // width: 50%;
         border: 2px solid var.$back-color; 
         
         // Image to adds element 
         img {
-            width: auto;
-            height: auto;
+            width: 100%;
             vertical-align: top; 
         }
     }
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 720px) {
 
             // SIngle add for procuct 
             .single-add-home {
-                grid-column: span 12;
-                border: 2px solid var.$back-color; 
-                    
-                // Single add image
-                img {
-                    width: 100%;
-                    vertical-align: top;    
-                }
+                flex: 100% !important;
             }
 }

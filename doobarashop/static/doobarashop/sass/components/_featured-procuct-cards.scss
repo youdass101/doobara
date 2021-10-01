@@ -3,7 +3,7 @@
     // Featured product elemet
     .product-card-container {
         grid-area: fp;
-        align-self: center;
+        // align-self: center;
         padding-left: 1%;
         @include var.flex-default;
         flex-wrap: wrap;
@@ -57,4 +57,3 @@
         display: none;
     }
 }
-

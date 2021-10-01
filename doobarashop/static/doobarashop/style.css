@@ -476,6 +476,7 @@ form.search-site button {
   min-width: 20%;
   padding-bottom: 10px;
   display: flex;
+  display: -webkit-flex;
   flex-wrap: wrap;
   flex-direction: column;
   justify-content: center;
@@ -496,6 +497,7 @@ form.search-site button {
 }
 #product-category .icon-title-container div a {
   display: flex;
+  display: -webkit-flex;
   justify-items: center;
   align-items: center;
   align-content: center;
@@ -513,7 +515,6 @@ form.search-site button {
 
 .product-card-container {
   grid-area: fp;
-  align-self: center;
   padding-left: 1%;
   display: flex;
   display: -webkit-flex;
@@ -564,27 +565,21 @@ form.search-site button {
 .ad-container {
   grid-area: ac;
   display: flex;
-  flex-direction: column;
   flex-wrap: wrap;
+  padding-top: 15px;
 }
 .ad-container .single-add-home {
   flex: 50%;
   border: 2px solid #292826;
 }
 .ad-container .single-add-home img {
-  width: auto;
-  height: auto;
+  width: 100%;
   vertical-align: top;
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 720px) {
   .single-add-home {
-    grid-column: span 12;
-    border: 2px solid #292826;
-  }
-  .single-add-home img {
-    width: 100%;
-    vertical-align: top;
+    flex: 100% !important;
   }
 }
 
