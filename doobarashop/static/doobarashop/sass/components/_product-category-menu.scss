@@ -15,9 +15,7 @@
         @include var.flex-default;  
         flex-wrap: wrap;
         flex-direction: column;
-        justify-content: center;
         align-content: center;
-        align-items: center;
 
         // nested div which contain svg icon 
         div:hover {

@@ -1,33 +1,32 @@
 // Each post in the carousel 
+a:link {
+    text-decoration: none;
+}
 .post-card {
-    width: 48%;
+   
     background-color: var.$back-color;
-    display: inline-block;
-    margin: 0 0 10px 0.5%;
-    vertical-align: top;
-    padding: 4px;
+    display: flex;
+    flex-direction: column;
 }
-// Post Icon description 
-.post-meta {
-    padding: 3px 5px 3px 30px;
-    color: white;
-    height: 140px;
-}
+
 // Post card paragraph styling
 p {
     font-size: 14px;
+    color: white;
+    height: 100px;
+    padding-left: 15px;
+    padding-right: 10px;
 }
+
+h2 {
+    color: var.$identity-color;
+    padding-left: 16px;
+
+}
+
 //Post card image styling 
 img {
     width: 100%;
-}
-
-@media screen and (max-width: 480px) {
-    // BLOG PAGE SETTING MOBILITY 
-    .post-card {
-        width: 100% !important;
-        margin: 0 0 10px 0;
-    }
     
-
 }
+

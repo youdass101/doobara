@@ -1,34 +1,28 @@
+a:link {
+    // should be created in mixin
+    text-decoration: none;
+}
+
 // Each product element in grid 
 .shop-product {
-    margin: 0; 
     padding: 10px 10px 15px 10px;
     border-radius: 7px;
     background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     box-shadow: 1px 1px 4px 5px rgba(0, 0, 0, 0.5 );
     
+  
     //Product Image 
     img {
         width: 100%;
         margin: 0;
     }
+
     // Product name  
     .product-name {
         height: 45px;
-    }
-    
-    // Product name and price element 
-    .product-info {
-        background-color: white;
-        position: relative;
-        z-index: 1 !important;
-        .vertical-center {
-            margin: 0;
-            position: absolute;
-            left: 50%;
-            padding-bottom: 10px;
-            -ms-transform: translate(-50%, -50%);
-            transform: translate(-50%, -50%);
-        } 
     }
 
     // Add to Cart button 
@@ -41,6 +35,7 @@
         border-width: 0;
         border-radius: 6px;
         padding: 7px 20px 7px 20px;
+        cursor: pointer;
     }
     
     // Product info text under p element
@@ -49,6 +44,11 @@
         font-size: 16px;
         font-weight: 600;
         color: var.$back-color;
-        padding-bottom: 5px;    
+        margin: 0;  
+    }
+
+    .product-price {
+        padding-top: 15px;
+        color: red;
     }
 }

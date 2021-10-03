@@ -1,18 +1,20 @@
 // BLOG PAGE STYLE START HERER 
 #blog-carousel {
-    width: 100%;
-    padding: 10px 0 5px 25px ;
+    // width: 100%;
+    // padding: 10px 0 5px 25px ;
+    display: grid;
+    grid-template-columns:  1fr 1fr;
+    grid-gap: 10px;
+    padding: 5px;
 
     // SINGLE CARD IN CAROUSEL 
-    @import '../components/blog-carousel-singe-item';
-    
-    
+    @import '../components/blog-carousel-singe-item';   
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 800px) {
     // BLOG PAGE SETTING MOBILITY 
     #blog-carousel{
-        padding: 0;
+        grid-template-columns: auto ;
     }
 
 }

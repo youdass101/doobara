@@ -4,11 +4,9 @@
 #container-shop {
     clear: both;
     padding: 7px 0 7px 0;
-    grid-column-gap: 4px;
-    grid-row-gap: 4px;
+    grid-gap: 5px;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-
     background-color: var.$identity-color;
     
     @import '../components/shop-product-item-block';

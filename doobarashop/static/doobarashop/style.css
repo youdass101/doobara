@@ -479,9 +479,7 @@ form.search-site button {
   display: -webkit-flex;
   flex-wrap: wrap;
   flex-direction: column;
-  justify-content: center;
   align-content: center;
-  align-items: center;
 }
 #product-category .icon-title-container div:hover {
   background-color: #F9D342;
@@ -580,6 +578,90 @@ form.search-site button {
 @media screen and (max-width: 720px) {
   .single-add-home {
     flex: 100% !important;
+  }
+}
+#container-shop {
+  clear: both;
+  padding: 7px 0 7px 0;
+  grid-gap: 5px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  background-color: #F9D342;
+}
+#container-shop a:link {
+  text-decoration: none;
+}
+#container-shop .shop-product {
+  padding: 10px 10px 15px 10px;
+  border-radius: 7px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 1px 1px 4px 5px rgba(0, 0, 0, 0.5);
+}
+#container-shop .shop-product img {
+  width: 100%;
+  margin: 0;
+}
+#container-shop .shop-product .product-name {
+  height: 45px;
+}
+#container-shop .shop-product button {
+  color: #fff;
+  background-color: #292826;
+  font-family: "Archivo Narrow", Sans-serif;
+  font-size: 14px;
+  border-style: groove;
+  border-width: 0;
+  border-radius: 6px;
+  padding: 7px 20px 7px 20px;
+  cursor: pointer;
+}
+#container-shop .shop-product p {
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+  color: #292826;
+  margin: 0;
+}
+#container-shop .shop-product .product-price {
+  padding-top: 15px;
+  color: red;
+}
+
+#blog-carousel {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 10px;
+  padding: 5px;
+}
+#blog-carousel a:link {
+  text-decoration: none;
+}
+#blog-carousel .post-card {
+  background-color: #292826;
+  display: flex;
+  flex-direction: column;
+}
+#blog-carousel p {
+  font-size: 14px;
+  color: white;
+  height: 100px;
+  padding-left: 15px;
+  padding-right: 10px;
+}
+#blog-carousel h2 {
+  color: #F9D342;
+  padding-left: 16px;
+}
+#blog-carousel img {
+  width: 100%;
+}
+
+@media screen and (max-width: 800px) {
+  #blog-carousel {
+    grid-template-columns: auto;
   }
 }
 
