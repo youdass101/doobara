@@ -1,18 +1,19 @@
 // VIDEO PAGE CAROUSEL 
-#video-carousel {
-    width: 100%;
-    margin: 0;
-    padding: 10px 0 20px 10px;
+#video-carousel-container {
+    display: grid;
+    grid-template-columns:  1fr 1fr;
+    grid-gap: 10px;
+    padding: 5px;
     
     //Each video in carousel 
     @import '../components/youtube-video-card';
     
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 780px) {
     // VIDEO PAGE stretch
-    #video-carousel {
-        padding: 10px;
+    #video-carousel-container {
+        grid-template-columns: auto;
     }
 
 }
