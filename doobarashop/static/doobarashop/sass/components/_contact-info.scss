@@ -2,22 +2,18 @@
 .contact-info {
     background-color: var.$back-color;
     opacity: .7;
-    padding: 20px 0 30px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     h1 {
         color: white;
-        text-align: center;
-        font-size: xxx-large;
-        margin: 0;
+        font-size: 4vw;
         letter-spacing: 2px;
     }
-    //Phone icon and Whatsapp Icon
-    .contact-icon {
-        padding: 10px 0 15px 47%;
-    }
-    // COntact awesome icons styling
+  
+    // Contact awesome icons styling
     i {
         color: white;
-        text-align: center;
         padding-right: 15px;
     }
     // Whatsapp icon color 
@@ -26,20 +22,23 @@
     }
     // phone number 
     .contact-phone {
-        margin: 0 30%;
         border-style: solid;
         border-width: 5px 0;
         border-color: #f84d43;
     }  
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 750px) {
     // CONTACT US PAGE RESPONSVITY
-    .contact-phone {
-        margin: 0  10%!important;
-    }
-    // CONTACT WHATSAPP AND PHONE ICONS
-    .contact-icon {
-        padding: 10px 0 15px 37% !important;
-    }
+   .whatsapp {
+       font-size: 10vw;
+   }
+
+   .phone-icon {
+       font-size: 8vw;
+   }
+
+   h1 {
+       font-size: 6vw !important;
+   }
 }
