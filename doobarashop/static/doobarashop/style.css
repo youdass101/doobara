@@ -733,30 +733,26 @@ form.search-site button {
   }
 }
 #constac-us-container #contact-form-container {
-  padding: 50px 10px 50px 10%;
-  width: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-content: space-around;
+  align-items: center;
+  padding: 50px 0 50px 0;
   background-color: #cde1e9;
-}
-#constac-us-container #contact-form-container .form-desc, #constac-us-container #contact-form-container .contact-inputs {
-  display: inline-block;
-  vertical-align: top !important;
 }
 #constac-us-container #contact-form-container .form-desc {
   width: 35%;
-  margin: 0px;
+  padding-right: 5px;
 }
 #constac-us-container #contact-form-container .form-desc h1 {
   font-size: xx-large;
-  margin: 0;
 }
 #constac-us-container #contact-form-container .form-desc h2 {
   font-size: x-large;
 }
 #constac-us-container #contact-form-container .form-desc p {
   font-size: 14px;
-}
-#constac-us-container #contact-form-container .contact-inputs {
-  width: 60%;
 }
 #constac-us-container #contact-form-container .contact-inputs textarea {
   width: 100%;

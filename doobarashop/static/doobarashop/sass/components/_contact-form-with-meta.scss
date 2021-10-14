@@ -1,25 +1,31 @@
 // Submition contact form section 
 #contact-form-container {
-    padding: 50px 10px 50px 10%;
-    width: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-content: space-around;
+    align-items: center;
+    padding: 50px 0 50px 0;
+    // width: auto;
     background-color: rgb(205, 225, 233);
     
     //Setting form info and submition form on same line
-    .form-desc, .contact-inputs {
-        display: inline-block;
-        vertical-align: top !important; 
-    }
+    // .form-desc, .contact-inputs {
+    //     display: inline-block;
+    //     vertical-align: top !important; 
+    // }
     // Submition contact form infor text 
     .form-desc {
         width: 35%;
-        margin: 0px;
-        h1 {font-size: xx-large; margin: 0;}
+        padding-right: 5px;
+        // margin: 0px;
+        h1 {font-size: xx-large;}
         h2 {font-size: x-large;}
         p {font-size: 14px;}
     }
     // Form input div class contaciner 
     .contact-inputs {
-        width: 60%;
+        // width: 60%;
        
 
         textarea {
