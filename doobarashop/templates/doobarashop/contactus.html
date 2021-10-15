@@ -6,53 +6,50 @@ Contact Us
 {% endblock %}
 {% block body %}
 <!-- Contact page container -->
-<div id="constac-us-container">
     
-    <!-- First element Phone and whatsapp number -->
-    <div class="contact-info">
-        <h1>CONTACT US</h1>
-        <div class="contact-icon">
-            <a href="tel:96170856471" target="_blank"><i class="phone-icon fas fa-phone-alt fa-3x"></i></a>
-            <a href="https://wa.me/96170856471?text=I%27m%20interested%20in%20your%20products" target="_blank">
-                <i class="whatsapp fab fa-whatsapp fa-4x"></i>
-            </a>
-        </div>
-        <h1 class="contact-phone">70-856 471</h1>
+<!-- First element Phone and whatsapp number -->
+<div class="contact-info">
+    <h1>CONTACT US</h1>
+    <div class="contact-icon">
+        <a href="tel:96170856471" target="_blank"><i class="phone-icon fas fa-phone-alt fa-3x"></i></a>
+        <a href="https://wa.me/96170856471?text=I%27m%20interested%20in%20your%20products" target="_blank">
+            <i class="whatsapp fab fa-whatsapp fa-4x"></i>
+        </a>
+    </div>
+    <h1 class="contact-phone">70-856 471</h1>
+</div>
+
+<!-- Second element Submition form  -->
+<div id="contact-form-container">
+    <div class="form-desc">
+        <h1>Write To Us</h1>
+        <h2>How can we Help?</h2>
+        <p>We’d love to hear from you, 
+            whether you have any question 
+            about features, pricing, assistance 
+            or anything else our team is ready to answer all your questions</p>
     </div>
 
-    <!-- Second element Submition form  -->
-    <div id="contact-form-container">
-        <div class="form-desc">
-            <h1>Write To Us</h1>
-            <h2>How can we Help?</h2>
-            <p>We’d love to hear from you, 
-                whether you have any question 
-                about features, pricing, assistance 
-                or anything else our team is ready to answer all your questions</p>
-        </div>
+    <!-- Submition form inputs -->
+    <div class="contact-inputs">
+        <form id="contact-submit-form">
+            <div class="contact-name">
+            <input type="text" placeholder="Name"></div>
+            <div class="contact-email"><input type="email" placeholder="Email Address"></div>
+            <input class="contact-subject" type="text" placeholder="Subject">
+        </form>
+        <textarea class="contact-comment" name="comment" form="contact-submit-form" placeholder="Enter text here..."></textarea>
+        <div class="contact-send-button"><button>SEND</button></div>
+    </div>  
 
-       <!-- Submition form inputs -->
-        <div class="contact-inputs">
-            <form id="contact-submit-form">
-                <div class="contact-name">
-                <input type="text" placeholder="Name"></div>
-                <div class="contact-email"><input type="email" placeholder="Email Address"></div>
-                <input class="contact-subject" type="text" placeholder="Subject">
-            </form>
-            <textarea class="contact-comment" name="comment" form="contact-submit-form" placeholder="Enter text here..."></textarea>
-            <div class="contact-send-button"><button>SEND</button></div>
-        </div>  
+        <!-- Submition form description -->
 
-         <!-- Submition form description -->
-    
-    </div>
+</div>
 
-    <!-- Last element Email address  -->
-    <div class="inquiry-email-contact">
-        <h1>Email Us</h1>
-        <h1 class="inquiry-email-address">Info@doobara.com</h1>
-    </div>
-
+<!-- Last element Email address  -->
+<div class="inquiry-email-contact">
+    <h1>Email Us</h1>
+    <h1 class="inquiry-email-address">Info@doobara.com</h1>
 </div>
 
 {% endblock %}

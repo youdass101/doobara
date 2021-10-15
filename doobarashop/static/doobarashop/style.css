@@ -697,42 +697,49 @@ form.search-site button {
     grid-template-columns: auto;
   }
 }
-#constac-us-container .contact-info {
+.contact-info {
   background-color: #292826;
   opacity: 0.7;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-#constac-us-container .contact-info h1 {
+
+.contact-info h1 {
   color: white;
   font-size: 4vw;
   letter-spacing: 2px;
 }
-#constac-us-container .contact-info i {
+
+.contact-info i {
   color: white;
   padding-right: 15px;
 }
-#constac-us-container .contact-info .whatsapp {
+
+.contact-info .whatsapp {
   color: green;
 }
-#constac-us-container .contact-info .contact-phone {
+
+.contact-info .contact-phone {
   border-style: solid;
   border-width: 5px 0;
   border-color: #f84d43;
 }
+
 @media screen and (max-width: 750px) {
-  #constac-us-container .whatsapp {
+  .whatsapp {
     font-size: 10vw;
   }
-  #constac-us-container .phone-icon {
+
+  .phone-icon {
     font-size: 8vw;
   }
-  #constac-us-container h1 {
+
+  h1 {
     font-size: 6vw !important;
   }
 }
-#constac-us-container #contact-form-container {
+#contact-form-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
@@ -741,45 +748,62 @@ form.search-site button {
   padding: 50px 0 50px 0;
   background-color: #cde1e9;
 }
-#constac-us-container #contact-form-container .form-desc {
+
+#contact-form-container .form-desc {
   width: 35%;
-  padding-right: 5px;
+  padding-left: 10px;
+  align-self: flex-start;
 }
-#constac-us-container #contact-form-container .form-desc h1 {
+
+#contact-form-container .form-desc h1 {
   font-size: xx-large;
+  margin: 0;
 }
-#constac-us-container #contact-form-container .form-desc h2 {
+
+#contact-form-container .form-desc h2 {
   font-size: x-large;
+  margin: 0;
 }
-#constac-us-container #contact-form-container .form-desc p {
+
+#contact-form-container .form-desc p {
   font-size: 14px;
 }
-#constac-us-container #contact-form-container .contact-inputs textarea {
-  width: 100%;
-  border: none;
-  height: 100px;
-  margin: 5px 0 0 5px;
+
+#contact-form-container .contact-inputs {
+  padding-right: 10px;
 }
-#constac-us-container #contact-form-container .contact-inputs #contact-submit-form input {
+
+#contact-form-container .contact-inputs #contact-submit-form input {
   padding: 10px;
   width: 100%;
   margin: 5px 0 5px 5px;
   border: none;
   background-color: white;
 }
-#constac-us-container #contact-form-container .contact-inputs #contact-submit-form .contact-name, #constac-us-container #contact-form-container .contact-inputs #contact-submit-form .contact-email {
+
+#contact-form-container .contact-inputs #contact-submit-form .contact-name, #contact-form-container .contact-inputs #contact-submit-form .contact-email {
   width: 49%;
   display: inline-block;
   margin: 0;
 }
-#constac-us-container #contact-form-container .contact-inputs #contact-submit-form .contact-email {
+
+#contact-form-container .contact-inputs #contact-submit-form .contact-email {
   float: right;
 }
-#constac-us-container #contact-form-container .contact-inputs .contact-send-button {
+
+#contact-form-container .contact-inputs textarea {
+  width: 100%;
+  border: none;
+  height: 100px;
+  margin: 5px 0 0 5px;
+}
+
+#contact-form-container .contact-inputs .contact-send-button {
   float: right;
   margin: 0;
 }
-#constac-us-container #contact-form-container .contact-inputs .contact-send-button button {
+
+#contact-form-container .contact-inputs .contact-send-button button {
   padding: 10px 30px;
   background-color: #292826;
   color: white;
@@ -787,19 +811,22 @@ form.search-site button {
   font-size: 15px;
   letter-spacing: 2px;
 }
-@media screen and (max-width: 480px) {
-  #constac-us-container #contact-form-container {
+
+@media screen and (max-width: 960px) {
+  #contact-form-container {
     padding: 15px !important;
   }
-  #constac-us-container #contact-form-container .form-desc, #constac-us-container #contact-form-container .contact-inputs {
+
+  #contact-form-container .form-desc, #contact-form-container .contact-inputs {
     width: 100% !important;
     text-align: center;
   }
-  #constac-us-container #contact-form-container .contact-name, #constac-us-container #contact-form-container .contact-email {
+
+  #contact-form-container .contact-name, #contact-form-container .contact-email {
     width: 100% !important;
   }
 }
-#constac-us-container .inquiry-email-contact {
+.inquiry-email-contact {
   margin-top: 0px;
   text-align: center;
   background-color: #292826;
@@ -808,11 +835,138 @@ form.search-site button {
   border-width: 0 0 5px 0;
   border-color: #F9D342;
 }
-#constac-us-container .inquiry-email-contact h1 {
+.inquiry-email-contact h1 {
   margin: 0;
 }
-#constac-us-container .inquiry-email-contact .inquiry-email-address {
+.inquiry-email-contact .inquiry-email-address {
   color: #F9D342;
+}
+
+#my-account-container {
+  padding: 4%;
+}
+#my-account-container p {
+  padding: 0 0 4% 4%;
+  font-size: 15px;
+}
+#my-account-container .my-account-navigation {
+  width: 20%;
+  margin: 0 !important;
+  display: inline-block;
+}
+#my-account-container .my-account-navigation ul li {
+  list-style: none;
+  border-style: solid;
+  border-width: 0.5px 0px;
+  border-color: gray;
+  font-size: large;
+  padding: 6% 0 5% 0;
+}
+#my-account-container .my-account-navigation ul li a {
+  color: #292826;
+}
+#my-account-container .my-account-navigation ul li a:link {
+  text-decoration: none;
+  color: black;
+}
+#my-account-container .my-account-navigation ul li a:hover {
+  color: #F9D342;
+}
+#my-account-container .my-account-navigation ul li i {
+  float: right;
+}
+@media screen and (max-width: 480px) {
+  #my-account-container .my-account-navigation {
+    width: 100% !important;
+  }
+  #my-account-container .my-account-navigation ul {
+    padding: 0;
+  }
+}
+#my-account-container #my-account-data {
+  width: 75%;
+  padding: 15px 0 0 60px;
+  display: inline-block;
+  vertical-align: top;
+}
+#my-account-container #my-account-data table {
+  width: 100%;
+  text-align: center;
+  border-collapse: collapse;
+}
+#my-account-container #my-account-data th {
+  font-size: medium;
+  background-color: whitesmoke;
+  padding: 10px 0 10px 0;
+}
+#my-account-container #my-account-data td {
+  font-size: 16px;
+  padding: 10px 0 10px 0;
+}
+#my-account-container #my-account-data td button {
+  padding: 7px;
+  border-color: transparent;
+}
+@media screen and (max-width: 480px) {
+  #my-account-container #my-account-data {
+    width: 100%;
+    padding: 0;
+    /* Force table to not be like tables anymore */
+    /* Hide table headers (but not display: none;, for accessibility) */
+    /*
+    DATA LABEL HEADER FOR EACH DATA LINE ON MOBILE
+    */
+  }
+  #my-account-container #my-account-data table, #my-account-container #my-account-data thead, #my-account-container #my-account-data tbody, #my-account-container #my-account-data th, #my-account-container #my-account-data td, #my-account-container #my-account-data tr {
+    display: block;
+  }
+  #my-account-container #my-account-data thead {
+    display: none;
+  }
+  #my-account-container #my-account-data tr {
+    border: 1px solid #ccc;
+  }
+  #my-account-container #my-account-data td {
+    /* Behave  like a "row" */
+    border: none;
+    position: relative;
+    padding-left: 50%;
+    padding-bottom: 22px;
+    font-size: large;
+  }
+  #my-account-container #my-account-data td:before {
+    /* Now like a table header */
+    position: absolute;
+    /* Top/left values mimic padding */
+    top: 6px;
+    left: 6px;
+    width: 45%;
+    padding-right: 10px;
+    white-space: nowrap;
+    font-weight: 600;
+  }
+  #my-account-container #my-account-data td:nth-of-type(1):before {
+    content: "Order";
+  }
+  #my-account-container #my-account-data td:nth-of-type(2):before {
+    content: "Date:";
+  }
+  #my-account-container #my-account-data td:nth-of-type(3):before {
+    content: "Status:";
+  }
+  #my-account-container #my-account-data td:nth-of-type(4):before {
+    content: "Total:";
+  }
+  #my-account-container #my-account-data td:nth-of-type(5):before {
+    content: "Action:";
+  }
+}
+
+@media screen and (max-width: 480px) {
+  #my-account-container {
+    padding: 10px;
+    margin: 0;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */

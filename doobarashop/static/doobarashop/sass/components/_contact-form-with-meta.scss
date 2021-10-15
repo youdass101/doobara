@@ -1,3 +1,4 @@
+@use '../abstracts/all' as var;
 // Submition contact form section 
 #contact-form-container {
     display: flex;
@@ -17,30 +18,24 @@
     // Submition contact form infor text 
     .form-desc {
         width: 35%;
-        padding-right: 5px;
-        // margin: 0px;
-        h1 {font-size: xx-large;}
-        h2 {font-size: x-large;}
+        padding-left: 10px;
+        align-self: flex-start;
+        h1 {font-size: xx-large; margin: 0;}
+        h2 {font-size: x-large; margin: 0;}
         p {font-size: 14px;}
     }
     // Form input div class contaciner 
     .contact-inputs {
         // width: 60%;
-       
+        padding-right: 10px;
 
-        textarea {
-            width: 100%;
-            border: none;
-            height: 100px;   
-            margin: 5px 0 0 5px;  
-        }
         //COntact form
         #contact-submit-form {
             // input of contact sumbition form  
             input {
-                padding: 10px;
+                padding: 10px;   //size
                 width: 100%;
-                margin: 5px 0 5px 5px ;
+                margin: 5px 0 5px 5px ;   //space between cells 
                 border: none;
                 background-color: white;
             }
@@ -52,6 +47,13 @@
             }
             // email input to float to aligh with other inputs right side 
             .contact-email{ float: right ;} 
+        }
+
+        textarea {
+            width: 100%;
+            border: none;
+            height: 100px;   
+            margin: 5px 0 0 5px;  
         }
 
         // Submition send button 
@@ -71,7 +73,7 @@
     }
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 960px) {
     // CONTACT SUBMITION FORM CONTAINER
     #contact-form-container 
     {

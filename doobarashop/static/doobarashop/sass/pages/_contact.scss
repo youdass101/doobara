@@ -1,27 +1,26 @@
 // CONTACT US PAGE 
-#constac-us-container {
-    
-    @import '../components/contact-info';
-    @import '../components/contact-form-with-meta';
+@use '../abstracts/all' as var;
+@use '../components/contact-info';
+@use '../components/contact-form-with-meta';
 
-    
-    // Last section in submition page the email address 
-    .inquiry-email-contact{
-        margin-top: 0px;
-        text-align: center;
-        background-color: var.$back-color;
-        color: white;
-        border-style: solid;
-        border-width: 0 0 5px 0;
-        border-color: var.$identity-color ;
-        // Email address text removing margin 
-        h1 {
-            margin: 0;
-        }
-        // Email address text color 
-        .inquiry-email-address {
-            color: var.$identity-color;
-        }
+
+// Last section in submition page the email address 
+.inquiry-email-contact{
+    margin-top: 0px;
+    text-align: center;
+    background-color: var.$back-color;
+    color: white;
+    border-style: solid;
+    border-width: 0 0 5px 0;
+    border-color: var.$identity-color ;
+    // Email address text removing margin 
+    h1 {
+        margin: 0;
+    }
+    // Email address text color 
+    .inquiry-email-address {
+        color: var.$identity-color;
     }
 }
+
 
