@@ -1,5 +1,6 @@
 // MY ACCOUNT PAGE STYLING 
 .account-top-login {
+    grid-area: t;
     padding: 0 5vw 5vw 5vw;
     margin: 0;
     font-size: 15px;
@@ -7,11 +8,17 @@
 }
 
 #my-account-container {
-    display: flex;
-    align-items: stretch;
-    // align-content: flex-start;
-    justify-content: center;
-    color: var.$back-color;
+    // display: flex;
+    // align-items: stretch;
+    // // align-content: flex-start;
+    // justify-content: center;
+    display: grid;
+    // justify-content: space-around;
+    grid-template-columns: repeat(8, 1fr);
+    align-content: space-around;
+    grid-template-areas: 
+    't t t t t t t t'
+    'd d o o o o o o';
     
     // ACCOUNT NAV
     @import '../components/user-account-nav';

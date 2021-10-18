@@ -1,7 +1,9 @@
 #my-account-data {  
+    // width: auto;
     padding-top: 10px;
     align-self: flex-start;
     text-align: left;
+    grid-area: o;
     
     table {
         border-collapse: collapse;

@@ -843,18 +843,20 @@ form.search-site button {
 }
 
 .account-top-login {
+  grid-area: t;
   padding: 0 5vw 5vw 5vw;
   margin: 0;
   font-size: 15px;
 }
 
 #my-account-container {
-  display: flex;
-  align-items: stretch;
-  justify-content: center;
-  color: #292826;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  align-content: space-around;
+  grid-template-areas: "t t t t t t t t" "d d o o o o o o";
 }
 #my-account-container .my-account-navigation {
+  grid-area: d;
   padding-right: 5%;
 }
 #my-account-container .my-account-navigation ul li {
@@ -885,6 +887,7 @@ form.search-site button {
   padding-top: 10px;
   align-self: flex-start;
   text-align: left;
+  grid-area: o;
 }
 #my-account-container #my-account-data table {
   border-collapse: collapse;
