@@ -1,29 +1,20 @@
+// Left menu nevigation of account page
 .my-account-navigation {
-    grid-area: d;
-    // width: auto;
-    padding-right: 5%;
-
+    width: 20%;
+    margin: 0 !important;
+    display: inline-block;
     ul {
         li {
             list-style: none;
-            font-size: large;
             border-style: solid;
             border-width: 0.5px 0px;
             border-color: gray;
-            padding: 8% 0 7% 0;
+            font-size: large;
+            padding: 6% 0 5% 0;
            
             a {
-                display: flex;
-                justify-content: space-between;
-                
-                flex-wrap: wrap;
                 color: var.$back-color;
-
-                div {
-                    padding-right: 5vw;
-                }
             }
-
             a:link {
                 text-decoration: none;
                 color: black;
@@ -32,12 +23,30 @@
             a:hover {
                 color: var.$identity-color;
             }
+
+            i {
+                float: right;
+            }
         }
     }
 }
 
+@media screen and (max-width: 850px) {
+    // MY ACCOUNT NAVIGATION MENU FULL WIDTH
+    .my-account-navigation {
+        width: 100% !important;
 
-// @media screen and (max-width: 850px) {
-//     // MY ACCOUNT NAVIGATION MENU FULL WIDTH
-    
-// }
+        ul {
+            padding: 0;
+
+            li {
+                font-size: medium;
+                padding: 10px 0 10px 0;
+
+                a{
+                    padding-left: 7px;
+                }
+            }
+        }
+    }
+}

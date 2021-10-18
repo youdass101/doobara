@@ -1,0 +1,90 @@
+.my-account-navigation {
+    // width: 100%;
+    grid-area: d;
+
+    ul {
+        margin: auto;
+        li {
+            list-style: none;
+            font-size: large;
+            border-style: solid;
+            border-width: 0.5px 0px;
+            border-color: gray;
+            padding: 8% 0 7% 0;
+           
+            a {
+                display: flex;
+                justify-content: space-between;
+                flex-wrap: wrap;
+                color: var.$back-color;
+            }
+
+            a:link {
+                text-decoration: none;
+                color: black;
+            }
+
+            a:hover {
+                color: var.$identity-color;
+            }
+        }
+    }
+}
+
+
+@media screen and (max-width: 900px) {
+    // MY ACCOUNT NAVIGATION MENU FULL WIDTH
+    .my-account-navigation {
+        ul {
+            margin: 0px !important;
+            display: flex;
+            padding-left: 0px;
+
+            li {
+                border-width: 0.5px 0.5px ;
+                padding: 5px 15px 0px 0px ;
+                font-size: 16px;
+            
+                a {
+                    div {
+                        padding: 0px 5px 5px 5px;
+                    }
+                }
+            }
+        }
+    }
+    
+}
+
+@media screen and (max-width: 710px) {
+    // MY ACCOUNT NAVIGATION MENU FULL WIDTH
+    .my-account-navigation {
+
+        ul {
+            // display: flex;
+            flex-direction: column;
+            
+            // padding: 0 !important;
+
+            li {
+                border-width: 0.5px 0px !important;
+                font-size: large;
+                padding: 1% 0 1% 0;
+                a {
+                    // justify-content: center !important;
+                  
+                    
+                    // margin: 0px !important;
+                    div {
+                        margin: 0;
+                        padding: 0px 0px 0px 15px;
+                    }
+                     i {
+                         padding: 0px 15px 0px 0px !important;
+                     }
+                }
+            }
+        }
+    }
+    
+}

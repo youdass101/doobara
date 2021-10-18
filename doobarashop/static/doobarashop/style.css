@@ -842,39 +842,28 @@ form.search-site button {
   color: #F9D342;
 }
 
-.account-top-login {
-  grid-area: t;
-  padding: 0 5vw 5vw 5vw;
-  margin: 0;
+#my-account-container {
+  padding: 4%;
+}
+#my-account-container p {
+  padding: 0 0 4% 4%;
   font-size: 15px;
 }
-
-#my-account-container {
-  display: grid;
-  grid-template-columns: repeat(8, 1fr);
-  align-content: space-around;
-  grid-template-areas: "t t t t t t t t" "d d o o o o o o";
-}
 #my-account-container .my-account-navigation {
-  grid-area: d;
-  padding-right: 5%;
+  width: 20%;
+  margin: 0 !important;
+  display: inline-block;
 }
 #my-account-container .my-account-navigation ul li {
   list-style: none;
-  font-size: large;
   border-style: solid;
   border-width: 0.5px 0px;
   border-color: gray;
-  padding: 8% 0 7% 0;
+  font-size: large;
+  padding: 6% 0 5% 0;
 }
 #my-account-container .my-account-navigation ul li a {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
   color: #292826;
-}
-#my-account-container .my-account-navigation ul li a div {
-  padding-right: 5vw;
 }
 #my-account-container .my-account-navigation ul li a:link {
   text-decoration: none;
@@ -883,27 +872,108 @@ form.search-site button {
 #my-account-container .my-account-navigation ul li a:hover {
   color: #F9D342;
 }
+#my-account-container .my-account-navigation ul li i {
+  float: right;
+}
+@media screen and (max-width: 850px) {
+  #my-account-container .my-account-navigation {
+    width: 100% !important;
+  }
+  #my-account-container .my-account-navigation ul {
+    padding: 0;
+  }
+  #my-account-container .my-account-navigation ul li {
+    font-size: medium;
+    padding: 10px 0 10px 0;
+  }
+  #my-account-container .my-account-navigation ul li a {
+    padding-left: 7px;
+  }
+}
 #my-account-container #my-account-data {
-  padding-top: 10px;
-  align-self: flex-start;
-  text-align: left;
-  grid-area: o;
+  width: 75%;
+  padding: 15px 0 0 60px;
+  display: inline-block;
+  vertical-align: top;
 }
 #my-account-container #my-account-data table {
+  width: 100%;
+  text-align: center;
   border-collapse: collapse;
 }
-#my-account-container #my-account-data table th {
+#my-account-container #my-account-data th {
   font-size: medium;
   background-color: whitesmoke;
-  padding: 1vw 2vw 1vw 2vw;
+  padding: 10px 0 10px 0;
 }
-#my-account-container #my-account-data table td {
+#my-account-container #my-account-data td {
   font-size: 16px;
-  padding: 1vw 2vw 1vw 2vw;
+  padding: 10px 0 10px 0;
 }
-#my-account-container #my-account-data table td button {
+#my-account-container #my-account-data td button {
   padding: 7px;
-  background-color: transparent;
+  border-color: transparent;
+}
+@media screen and (max-width: 850px) {
+  #my-account-container #my-account-data {
+    width: 100%;
+    padding: 0;
+    /* Force table to not be like tables anymore */
+    /* Hide table headers (but not display: none;, for accessibility) */
+    /*
+    DATA LABEL HEADER FOR EACH DATA LINE ON MOBILE
+    */
+  }
+  #my-account-container #my-account-data table, #my-account-container #my-account-data thead, #my-account-container #my-account-data tbody, #my-account-container #my-account-data th, #my-account-container #my-account-data td, #my-account-container #my-account-data tr {
+    display: block;
+  }
+  #my-account-container #my-account-data thead {
+    display: none;
+  }
+  #my-account-container #my-account-data tr {
+    border: 1px solid #ccc;
+  }
+  #my-account-container #my-account-data td {
+    /* Behave  like a "row" */
+    border: none;
+    position: relative;
+    padding-left: 50%;
+    padding-bottom: 22px;
+    font-size: large;
+  }
+  #my-account-container #my-account-data td:before {
+    /* Now like a table header */
+    position: absolute;
+    /* Top/left values mimic padding */
+    top: 6px;
+    left: 6px;
+    width: 45%;
+    padding-right: 10px;
+    white-space: nowrap;
+    font-weight: 600;
+  }
+  #my-account-container #my-account-data td:nth-of-type(1):before {
+    content: "Order";
+  }
+  #my-account-container #my-account-data td:nth-of-type(2):before {
+    content: "Date:";
+  }
+  #my-account-container #my-account-data td:nth-of-type(3):before {
+    content: "Status:";
+  }
+  #my-account-container #my-account-data td:nth-of-type(4):before {
+    content: "Total:";
+  }
+  #my-account-container #my-account-data td:nth-of-type(5):before {
+    content: "Action:";
+  }
+}
+
+@media screen and (max-width: 850px) {
+  #my-account-container {
+    padding: 10px;
+    margin: 0;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */

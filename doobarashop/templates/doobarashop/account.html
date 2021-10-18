@@ -5,29 +5,26 @@
 Contact Us
 {% endblock %}
 {% block body %}
-
 <!-- All element wrapper  -->
 <div id="my-account-container">
-    
     <!-- Logged in User name -->
-    <div class="account-top-login"><p>You are currently logged in as Hamze Chalhoub</p></div>
-
-        <!-- User account board menu navigator -->
+    <div><p>You are currently logged in as Hamze Chalhoub</p></div>
+    <!-- User account board menu navigator -->
     <div class="my-account-navigation">
         <ul>
-            <li><a href="#"><div> Dashboard </div><i class="fas fa-tachometer-alt"></i></a></li>
-            <li><a href="#"><div> Orders </div><i class="fas fa-shopping-cart"></i></a></li>
-            <li><a href="#"><div> Wishlist </div><i class="fas fa-list-alt"></i></a></li>
-            <li><a href="#"><div> Address </div><i class="fas fa-map-marked-alt"></i></a></li>
-            <li><a href="#"><div> Account details </div><i class="fas fa-address-card"></i></a></li>
-            <li><a href="#"><div> Logout </div><i class="fas fa-sign-out-alt"></i></a></li>
+            <li><a href="#">Dashboard <i class="fas fa-tachometer-alt"></i></a></li>
+            <li><a href="#">Orders <i class="fas fa-shopping-cart"></i></a></li>
+            <li><a href="#"> Wishlist <i class="fas fa-list-alt"></i></a></li>
+            <li><a href="#">Address <i class="fas fa-map-marked-alt"></i></a></li>
+            <li><a href="#"> Account details <i class="fas fa-address-card"></i></a></li>
+            <li><a href="#">Logout <i class="fas fa-sign-out-alt"></i></a></li>
         </ul>
     </div>
 
     <!-- Data that shows when switching between Nav menu URL -->
     <div id="my-account-data">
         <!-- Dashboard data element table -->
-        <!-- <div id="my-account-dashboard"> -->
+        <div id="my-account-dashboard">
             <table>
                 <thead>
                     <tr>
@@ -43,19 +40,19 @@ Contact Us
                         <td>#12345</td>
                         <td>August 22, 2021</td>
                         <td>Processing</td>
-                        <td>$400.00 for 1 item</td>
+                        <td>$40 for 1 item</td>
                         <td><button><i class="fas fa-eye"></i> View </button></td>
                     </tr>
                     <tr>
                         <td>#4577</td>
                         <td>August 12, 2021</td>
                         <td>Processing</td>
-                        <td>$60.00 for 3 item</td>
+                        <td>$60 for 3 item</td>
                         <td><button><i class="fas fa-eye"></i> View </button></td>
                     </tr>
                 </tbody>
             </table>
-        <!-- </div> -->
+        </div>
     </div>
 </div>
 {% endblock%}
