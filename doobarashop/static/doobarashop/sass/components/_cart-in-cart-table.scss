@@ -1,0 +1,50 @@
+// Style of The product that are added to cart in cart page
+.products-in-cart {
+    border-collapse: collapse;
+
+    thead {
+        background-color: whitesmoke;
+
+        th {
+            font-size: 15px;
+            font-weight: 600;
+            text-align: left;
+            padding: 30px;
+        }
+    }
+
+    tbody {
+        tr {
+            text-align: left;
+            font-size: 14px;
+            td {
+                padding: 30px ;
+                // text-align: left !important;
+            }
+        
+            .in-cart-remove-icon {
+                font-size: 17px;
+              
+            }
+            .in-cart-img {
+                img {
+                    width: 60px; 
+                }
+            }
+            
+        }
+    }
+
+    tfoot {
+        tr {
+            .in-cart-coupon-input {
+                padding: 0px;
+                margin: 0px;
+                input {
+                    padding: 0px;
+                    margin: 0px;
+                }
+            }
+        }
+    }
+} 

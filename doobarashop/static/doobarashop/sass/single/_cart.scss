@@ -1,0 +1,9 @@
+// CART SINGLE PAGE 
+
+.cart-table-container {
+    display: flex;
+    justify-content: center ;
+    padding: 5%;
+
+    @import '../components/cart-in-cart-table';
+}

@@ -21,3 +21,6 @@ def contactus(request):
 def myaccount(request):
     return render(request, "doobarashop/account.html")
 
+def cart(request):
+    return render(request, "doobarashop/cart.html")
+
