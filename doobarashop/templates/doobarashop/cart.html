@@ -7,6 +7,7 @@ Contact Us
 {% block body %}
 <div class="cart-table-container">
     <table class="products-in-cart">
+    
         <thead>
             <tr>
                 <th class="in-cart-header-empty"></th>
@@ -44,12 +45,11 @@ Contact Us
             </tbody>
             <tfoot>
                 <tr>
-                    <td class="in-cart-coupon-input"><input type="text"></td> 
-                    <td class="in-cart-apply-coupon-button"><button>Apply coupon</button></td>
-                    <td></td>
-                    <td></td>
-                    <td class="in-cart-update-cart-button"><button>Update Cart</button></td>
-
+                    <td colspan="6" class="in-cart-footer-container">
+                        <div class="in-cart-coupon-input"><input type="text" placeholder="Coupon code"></div> 
+                        <div class="in-cart-apply-coupon-button"><button>Apply coupon</button></div>
+                        <div class="in-cart-update-cart-button"><button>Update Cart</button></div>
+                    </td>
                 </tr>
                 
             </tfoot>

@@ -1,49 +1,87 @@
 // Style of The product that are added to cart in cart page
 .products-in-cart {
     border-collapse: collapse;
+    width: 100%;
+    colgroup {
+        display: table-column;
+        
+      } 
 
     thead {
         background-color: whitesmoke;
-
         th {
-            font-size: 15px;
-            font-weight: 600;
+            font-size: 16px;
+            font-weight: 700;
             text-align: left;
-            padding: 30px;
+            padding: 30px 40px 30px 40px;
         }
+        // .in-cart-header-product {
+        //     padding-right: 10px ;
+        // }
     }
 
     tbody {
         tr {
             text-align: left;
-            font-size: 14px;
+            font-size: 15px;
+
             td {
-                padding: 30px ;
-                // text-align: left !important;
+                padding: 20px 45px 20px 45px ;
             }
-        
-            .in-cart-remove-icon {
-                font-size: 17px;
-              
+            
+            // icri Is a td class for remove
+            // for remove product from cart icon button
+            .in-cart-remove-icon   {
+                max-width: 15px;
+                padding-right: 80px;
+                div {
+                max-width: 18px !important;       
+                }
             }
+
+            //  ici is td class for product 
+            // in cart image thumbnail 
             .in-cart-img {
                 img {
                     width: 60px; 
                 }
+            } 
+            .in-cart-product-name {
+                padding-right: 90px;
+
             }
-            
         }
     }
 
     tfoot {
         tr {
-            .in-cart-coupon-input {
-                padding: 0px;
-                margin: 0px;
-                input {
-                    padding: 0px;
-                    margin: 0px;
+            .in-cart-footer-container {
+                display: flex;
+                width: 100%;
+
+                .in-cart-coupon-input {
+                    input{
+                        padding: 15px;
+                        background-color: #f2f2f2;
+                        color: #43454b;
+                        border: 0;
+                        -webkit-appearance: none;
+                        box-sizing: border-box;
+                        font-weight: 400;
+                        box-shadow: inset 0 1px 1px rgb(0 0 0 / 13%);
+                        font-size: 15px;
+                    }
                 }
+                .in-cart-apply-coupon-button {
+                    padding-left: 10px;
+                    button {
+                        padding: 10px;
+                    }
+                }
+                .in-cart-update-cart-button {
+                    float: right !important;
+                }
+                
             }
         }
     }
