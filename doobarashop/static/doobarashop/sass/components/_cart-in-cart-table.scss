@@ -35,7 +35,7 @@
                 max-width: 15px;
                 padding-right: 80px;
                 div {
-                max-width: 18px !important;       
+                    max-width: 18px !important;       
                 }
             }
 
@@ -48,7 +48,6 @@
             } 
             .in-cart-product-name {
                 padding-right: 90px;
-
             }
         }
     }
@@ -57,9 +56,11 @@
         tr {
             .in-cart-footer-container {
                 display: flex;
-                width: 100%;
-
+                justify-content: space-between;
+                
                 .in-cart-coupon-input {
+                    display: inline-flex;
+                    
                     input{
                         padding: 15px;
                         background-color: #f2f2f2;
@@ -72,12 +73,7 @@
                         font-size: 15px;
                     }
                 }
-                .in-cart-apply-coupon-button {
-                    padding-left: 10px;
-                    button {
-                        padding: 10px;
-                    }
-                }
+                
                 .in-cart-update-cart-button {
                     float: right !important;
                 }
