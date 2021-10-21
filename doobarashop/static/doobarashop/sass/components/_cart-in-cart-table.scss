@@ -26,8 +26,22 @@
                 text-align: left;
                 font-size: 15px;
 
+<<<<<<< HEAD
                 td {
                     padding: 20px 45px 20px 45px ;
+=======
+            td {
+                padding: 20px 45px 20px 45px ;
+            }
+            
+            // icri Is a td class for remove
+            // for remove product from cart icon button
+            .in-cart-remove-icon   {
+                max-width: 15px;
+                padding-right: 80px;
+                div {
+                    max-width: 18px !important;       
+>>>>>>> 97271c3105320f3697629e9fb77030b5a42cb24c
                 }
                 
                 // icri Is a td class for remove
@@ -39,6 +53,7 @@
                     max-width: 18px !important;       
                     }
                 }
+<<<<<<< HEAD
 
                 //  ici is td class for product 
                 // in cart image thumbnail 
@@ -50,9 +65,15 @@
                 .in-cart-product-name {
                     padding-right: 90px;
                 }
+=======
+            } 
+            .in-cart-product-name {
+                padding-right: 90px;
+>>>>>>> 97271c3105320f3697629e9fb77030b5a42cb24c
             }
         }
 
+<<<<<<< HEAD
         tfoot {
             tr {
                 .in-cart-footer-container {
@@ -108,6 +129,34 @@
                     }
                     
                 }
+=======
+    tfoot {
+        tr {
+            .in-cart-footer-container {
+                display: flex;
+                justify-content: space-between;
+                
+                .in-cart-coupon-input {
+                    display: inline-flex;
+                    
+                    input{
+                        padding: 15px;
+                        background-color: #f2f2f2;
+                        color: #43454b;
+                        border: 0;
+                        -webkit-appearance: none;
+                        box-sizing: border-box;
+                        font-weight: 400;
+                        box-shadow: inset 0 1px 1px rgb(0 0 0 / 13%);
+                        font-size: 15px;
+                    }
+                }
+                
+                .in-cart-update-cart-button {
+                    float: right !important;
+                }
+                
+>>>>>>> 97271c3105320f3697629e9fb77030b5a42cb24c
             }
         }
     }
