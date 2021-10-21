@@ -1,9 +1,14 @@
 // CART SINGLE PAGE 
 
-.cart-table-container {
-    display: flex;
-    justify-content: center ;
-    padding: 5%;
 
-    @import '../components/cart-in-cart-table';
+  
+@use '../components/cart-in-cart-table';
+@use '../components/cart-total-checkout';
+
+.cart-page-container {
+    display: flex;
+    flex-direction: column;
+
+ 
+    // align-items: stretch;
 }

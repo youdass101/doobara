@@ -5,56 +5,83 @@
 Contact Us
 {% endblock %}
 {% block body %}
-<div class="cart-table-container">
-    <table class="products-in-cart">
-    
-        <thead>
-            <tr>
-                <th class="in-cart-header-empty"></th>
-                <th class= "in-cart-header-empty"></th>
-                <th class="in-cart-header-product">Product</th>
-                <th class="in-cart-header-price">Price</th>
-                <th class="in-cart-header-quantity">Quantity</th>
-                <th class="in-cart-header-subtotal">Subtotal</th>
-            </tr>
-            <tbody>
+<div class="cart-page-container">
+    <div class="cart-table-container">
+        <table class="products-in-cart">
+
+            <thead>
                 <tr>
-                    <td class="in-cart-remove-icon">
-                        <div> &#x26D2; </div>
-                    </td>
-                    <td class="in-cart-img">
-                        <img src="{% static 'doobarashop/upload/images/cartthumb.jpg'%}"> 
-                    </td>
-                    <td class="in-cart-product-name"><p>Smart Plug Wifi 16 amps</p></td>
-                    <td class="in-cart-unit-price">$ 15.00</td>
-                    <td class="in-cart-product-qtt">1</td>
-                    <td class="in-cart-units-subtotal">$ 15.00</td>
+                    <th class="in-cart-header-empty"></th>
+                    <th class= "in-cart-header-empty"></th>
+                    <th class="in-cart-header-product">Product</th>
+                    <th class="in-cart-header-price">Price</th>
+                    <th class="in-cart-header-quantity">Quantity</th>
+                    <th class="in-cart-header-subtotal">Subtotal</th>
                 </tr>
-                <tr>
-                    <td class="in-cart-remove-icon">
-                        &#x26D2;
-                    </td>
-                    <td class="in-cart-img">
-                        <img src="{% static 'doobarashop/upload/images/cartthumb.jpg'%}"> 
-                    </td>
-                    <td class="in-cart-product-name"><p>Smart Plug Wifi 16 amps</p></td>
-                    <td class="in-cart-unit-price">$ 15.00</td>
-                    <td class="in-cart-product-qtt">1</td>
-                    <td class="in-cart-units-subtotal">$ 15.00</td>
-                </tr>
-            </tbody>
-            <tfoot>
-                <tr>
-                    <td colspan="6" class="in-cart-footer-container">
-                        <div class="in-cart-coupon-input"><input type="text" placeholder="Coupon code"></div> 
-                        <div class="in-cart-apply-coupon-button"><button>Apply coupon</button></div>
-                        <div class="in-cart-update-cart-button"><button>Update Cart</button></div>
-                    </td>
-                </tr>
-                
-            </tfoot>
-        </thead>
-       
-    </table>
+                <tbody>
+                    <tr>
+                        <td class="in-cart-remove-icon">
+                            <div> &#x26D2; </div>
+                        </td>
+                        <td class="in-cart-img">
+                            <img src="{% static 'doobarashop/upload/images/cartthumb.jpg'%}"> 
+                        </td>
+                        <td class="in-cart-product-name"><p>Smart Plug Wifi 16 amps</p></td>
+                        <td class="in-cart-unit-price">$ 15.00</td>
+                        <td class="in-cart-product-qtt">1</td>
+                        <td class="in-cart-units-subtotal">$ 15.00</td>
+                    </tr>
+                    <tr>
+                        <td class="in-cart-remove-icon">
+                            &#x26D2;
+                        </td>
+                        <td class="in-cart-img">
+                            <img src="{% static 'doobarashop/upload/images/cartthumb.jpg'%}"> 
+                        </td>
+                        <td class="in-cart-product-name"><p>Smart Plug Wifi 16 amps</p></td>
+                        <td class="in-cart-unit-price">$ 15.00</td>
+                        <td class="in-cart-product-qtt">1</td>
+                        <td class="in-cart-units-subtotal">$ 15.00</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="6">
+                            <div class="in-cart-footer-container">
+                            <div class="in-cart-coupon-input"><input type="text" placeholder="Coupon code"></div> 
+                            <div class="in-cart-apply-coupon-button"><button>Apply coupon</button></div>
+                            <div class="in-cart-update-cart-button"><button>Update Cart</button></div>
+                            </div>
+                        </td>
+                    </tr>
+                    
+                </tfoot>
+            </thead>
+        
+        </table>
+    </div>
+
+    <div class="cart-total-container">
+        <div>
+            <h2 class="cart-total-title"> Cart totals</h2>
+                <table>
+                    <tr>
+                        <th>Subtotal</th>
+                        <td> $ 54.50 </td>
+                    </tr>
+                    <tr>
+                        <th>Shipping </th>
+                        <td> $ 2.00 <p> some kind of message </p></td>
+                    </tr>
+                    <tr>
+                        <th>Total</th>
+                        <td>$ 55.50 </td>
+                    </tr>
+                </table>
+                <button class="cart-proceed-checkout-button">
+                    Proceed to checkout &#8594;
+                </button>  
+        </div>
+    </div>
 </div>
 {% endblock %}
