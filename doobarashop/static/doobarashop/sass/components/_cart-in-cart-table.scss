@@ -1,33 +1,51 @@
 // Style of The product that are added to cart in cart page
+@use '../abstracts/all.scss' as var;
+
+// the container of the first table 
+// where you see product in cart
 .cart-table-container {
-    display: flex;
-    justify-content: center ;
-    padding: 5%;
+    @include var.flex-default;
+    padding: 5% 0 5% 0;
+    width: 75%;
 
+    // the table class 
     .products-in-cart {
+        table-layout: auto;
         border-collapse: collapse;
-        width: 75%;
+        width: 100%;
 
+        // Table header
         thead {
             background-color: whitesmoke;
             th {
                 font-size: 16px;
                 font-weight: 700;
                 text-align: left;
-                padding: 30px 40px 30px 40px;
+                padding: 30px 10px 30px 0px;
             }
-            // .in-cart-header-product {
-            //     padding-right: 10px ;
-            // }
         }
 
+        // table body where the arbitrary data goes 
         tbody {
             tr {
-                text-align: left;
                 font-size: 15px;
 
                 td {
-                    padding: 20px 45px 20px 45px ;
+                    padding: 20px 10px 20px 0px ;
+                }
+
+                .in-cart-qtty {
+                    width: 100%;
+                    padding: 10px;
+                    background-color: #f2f2f2;
+                    color: #43454b;
+                    border: 0;
+                    -webkit-appearance: none;
+                    box-sizing: border-box;
+                    font-weight: 400;
+                    box-shadow: inset 0 1px 1px rgb(0 0 0 / 13%);
+                    text-align: center;
+                    max-width: 60px;
                 }
                 
                 // icri Is a td class for remove
@@ -35,6 +53,7 @@
                 .in-cart-remove-icon   {
                     max-width: 15px;
                     padding-right: 80px;
+
                     div {
                     max-width: 18px !important;       
                     }
@@ -53,27 +72,19 @@
             }
         }
 
+        // footer action of the tabel to apply coupan and edits
         tfoot {
             tr {
                 .in-cart-footer-container {
                     width: 100%;
-                    display: flex;
+                    @include var.flex-default;
                     align-items: center;
                     
-                    
-
                     .in-cart-coupon-input {
                         flex: 0;
                         input {
-                            padding: 15px;
-                            background-color: #f2f2f2;
-                            color: #43454b;
-                            border: 0;
-                            -webkit-appearance: none;
-                            box-sizing: border-box;
+                            @include var.input-button-style;
                             font-weight: 400;
-                            box-shadow: inset 0 1px 1px rgb(0 0 0 / 13%);
-                            font-size: 15px;
                         }
                     }
                     .in-cart-apply-coupon-button {
@@ -81,34 +92,85 @@
                         padding-left: 10px;
                         
                         button {
-                            padding: 15px;
-                            background-color: #f2f2f2;
-                            color: #43454b;
-                            border: 0;
-                            -webkit-appearance: none;
-                            box-sizing: border-box;
+                            @include var.input-button-style;
                             font-weight: 600;
-                            box-shadow: inset 0 1px 1px rgb(0 0 0 / 13%);
-                            font-size: 15px;
                         }
                     }
                     .in-cart-update-cart-button {
-                        
                         button {
-                            padding: 15px;
-                            background-color: #f2f2f2;
-                            color: #43454b;
-                            border: 0;
-                            -webkit-appearance: none;
-                            box-sizing: border-box;
+                            @include var.input-button-style;
                             font-weight: 400;
-                            box-shadow: inset 0 1px 1px rgb(0 0 0 / 13%);
-                            font-size: 15px;
                         }
-                    }
-                    
+                    }  
                 }
             }
         }
     }
 } 
+
+@media screen and (max-width: 850px) {
+    .cart-table-container {
+        width: 90%;
+        // padding 
+
+        table, thead, tbody, th, td, tr {
+            display: block;
+
+        }
+
+        thead {
+            display: none;
+        }
+
+        tr {
+            border: 1px solid #ccc;
+            
+        }
+
+        td{
+            border: none;
+            position:  relative;
+            padding-left: 50% !important;
+            padding-right: 0px !important;
+            // margin: auto;
+            font-size: large;
+            // text-align: right;
+        }
+
+        tfoot {
+
+            tr {
+            
+                td::before{
+                    content:none !important;
+                }
+
+                td {
+                    padding-left: 0px !important;
+                }
+                .in-cart-footer-container { 
+                    display: block !important;
+
+                    .in-cart-coupon-input {
+                        padding-left: 0px;
+                    }
+                }
+            }
+        }
+
+        td:before {
+            position: absolute;
+            left: 6px;
+            width: 45%;
+            padding-right: 10px;
+            white-space: nowrap;
+            font-weight: 600;
+        }
+        td:nth-of-type(1):before { content: "";}
+        td:nth-of-type(2):before { content: "";}
+        td:nth-of-type(3):before { content: "Product:";}
+        td:nth-of-type(4):before { content: "Price:";}
+        td:nth-of-type(5):before { content: "Quantity:";}
+        td:nth-of-type(6):before { content: "Subtotal:";}
+    }  
+}

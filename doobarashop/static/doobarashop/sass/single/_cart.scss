@@ -1,13 +1,15 @@
 // CART SINGLE PAGE 
 
 
-  
+@use '../abstracts/all.scss' as var;
 @use '../components/cart-in-cart-table';
 @use '../components/cart-total-checkout';
 
 .cart-page-container {
-    display: flex;
+    @include var.flex-default;
     flex-direction: column;
+    align-items: center;
+    width: 100%;
 
  
     // align-items: stretch;

@@ -18,6 +18,16 @@
     border-top: 5px solid var.$identity-color;
 }
 
+@mixin input-button-style {
+    padding: 15px;
+    background-color: #f2f2f2;
+    color: #43454b;
+    border: 0;
+    -webkit-appearance: none;
+    box-sizing: border-box;
+    box-shadow: inset 0 1px 1px rgb(0 0 0 / 13%);
+    font-size: 15px;
+}
 
 
 
