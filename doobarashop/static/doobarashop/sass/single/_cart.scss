@@ -5,6 +5,8 @@
 @use '../components/cart-in-cart-table';
 @use '../components/cart-total-checkout';
 
+
+// Cart page container
 .cart-page-container {
     @include var.flex-default;
     flex-direction: column;
