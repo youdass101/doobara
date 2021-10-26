@@ -989,7 +989,7 @@ form.search-site button {
 }
 
 .cart-table-container .products-in-cart thead {
-  background-color: whitesmoke;
+  background-color: rgba(233, 233, 233, 0.582);
 }
 
 .cart-table-container .products-in-cart thead th {
@@ -997,6 +997,10 @@ form.search-site button {
   font-weight: 700;
   text-align: left;
   padding: 30px 10px 30px 0px;
+}
+
+.cart-table-container .products-in-cart tbody {
+  background-color: rgba(245, 245, 245, 0.336);
 }
 
 .cart-table-container .products-in-cart tbody tr {
@@ -1024,6 +1028,7 @@ form.search-site button {
 .cart-table-container .products-in-cart tbody tr .in-cart-remove-icon {
   max-width: 15px;
   padding-right: 80px;
+  padding-left: 20px;
 }
 
 .cart-table-container .products-in-cart tbody tr .in-cart-remove-icon div {
@@ -1038,6 +1043,10 @@ form.search-site button {
   padding-right: 90px;
 }
 
+.cart-table-container .products-in-cart tfoot tr {
+  background-color: white;
+}
+
 .cart-table-container .products-in-cart tfoot tr .in-cart-footer-container {
   width: 100%;
   display: flex;
@@ -1047,6 +1056,7 @@ form.search-site button {
 
 .cart-table-container .products-in-cart tfoot tr .in-cart-footer-container .in-cart-coupon-input {
   flex: 0;
+  padding-top: 20px;
 }
 
 .cart-table-container .products-in-cart tfoot tr .in-cart-footer-container .in-cart-coupon-input input {
@@ -1063,6 +1073,7 @@ form.search-site button {
 
 .cart-table-container .products-in-cart tfoot tr .in-cart-footer-container .in-cart-apply-coupon-button {
   flex: 2;
+  padding-top: 20px;
   padding-left: 10px;
 }
 
@@ -1076,6 +1087,10 @@ form.search-site button {
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.13);
   font-size: 15px;
   font-weight: 600;
+}
+
+.cart-table-container .products-in-cart tfoot tr .in-cart-footer-container .in-cart-update-cart-button {
+  padding-top: 20px;
 }
 
 .cart-table-container .products-in-cart tfoot tr .in-cart-footer-container .in-cart-update-cart-button button {
@@ -1095,43 +1110,92 @@ form.search-site button {
     width: 90%;
   }
 
-  .cart-table-container table, .cart-table-container thead, .cart-table-container tbody, .cart-table-container th, .cart-table-container td, .cart-table-container tr {
+  .cart-table-container .products-in-cart table, .cart-table-container .products-in-cart thead, .cart-table-container .products-in-cart tbody, .cart-table-container .products-in-cart th, .cart-table-container .products-in-cart td, .cart-table-container .products-in-cart tr {
     display: block;
   }
 
-  .cart-table-container thead {
+  .cart-table-container .products-in-cart thead {
     display: none;
   }
 
-  .cart-table-container tr {
-    border: 1px solid #ccc;
+  .cart-table-container .products-in-cart tr {
+    background-color: #faf8f8;
+    border: 8px solid white;
   }
 
-  .cart-table-container td {
-    border: none;
+  .cart-table-container .products-in-cart .in-cart-product-name p, .cart-table-container .products-in-cart .in-cart-unit-price p, .cart-table-container .products-in-cart .in-cart-units-subtotal p {
+    text-align: right;
+    margin: 0px !important;
+  }
+
+  .cart-table-container .products-in-cart .in-cart-product-qtt {
+    display: flex;
+    justify-content: right;
+  }
+
+  .cart-table-container .products-in-cart .in-cart-product-qtt input {
+    text-align: right;
+  }
+
+  .cart-table-container .products-in-cart td {
     position: relative;
-    padding-left: 50% !important;
-    padding-right: 0px !important;
-    font-size: large;
+    padding-left: 45% !important;
+    font-size: medium;
+    padding-top: 0px !important;
   }
 
-  .cart-table-container tfoot tr td::before {
+  .cart-table-container .products-in-cart .in-cart-product-name {
+    padding-right: 10px !important;
+  }
+
+  .cart-table-container .products-in-cart .in-cart-remove-icon {
+    float: right;
+    padding-right: 20px !important;
+  }
+
+  .cart-table-container .products-in-cart tfoot tr {
+    background-color: white !important;
+  }
+
+  .cart-table-container .products-in-cart tfoot tr td::before {
     content: none !important;
   }
 
-  .cart-table-container tfoot tr td {
+  .cart-table-container .products-in-cart tfoot tr td {
     padding-left: 0px !important;
   }
 
-  .cart-table-container tfoot tr .in-cart-footer-container {
-    display: block !important;
+  .cart-table-container .products-in-cart tfoot tr .in-cart-footer-container {
+    align-items: flex-start !important;
+    flex-direction: column;
   }
 
-  .cart-table-container tfoot tr .in-cart-footer-container .in-cart-coupon-input {
+  .cart-table-container .products-in-cart tfoot tr .in-cart-footer-container div {
+    padding-bottom: 10px;
+  }
+
+  .cart-table-container .products-in-cart tfoot tr .in-cart-footer-container .in-cart-coupon-input {
+    width: 100%;
+  }
+
+  .cart-table-container .products-in-cart tfoot tr .in-cart-footer-container .in-cart-coupon-input input {
+    width: 100%;
+  }
+
+  .cart-table-container .products-in-cart tfoot tr .in-cart-footer-container .in-cart-apply-coupon-button, .cart-table-container .products-in-cart tfoot tr .in-cart-footer-container .in-cart-update-cart-button {
     padding-left: 0px;
+    width: 100%;
   }
 
-  .cart-table-container td:before {
+  .cart-table-container .products-in-cart tfoot tr .in-cart-footer-container .in-cart-apply-coupon-button button, .cart-table-container .products-in-cart tfoot tr .in-cart-footer-container .in-cart-update-cart-button button {
+    float: right;
+  }
+
+  .cart-table-container .products-in-cart tfoot tr .in-cart-footer-container .in-cart-update-cart-button {
+    padding-top: 20px;
+  }
+
+  .cart-table-container .products-in-cart td:before {
     position: absolute;
     left: 6px;
     width: 45%;
@@ -1140,27 +1204,27 @@ form.search-site button {
     font-weight: 600;
   }
 
-  .cart-table-container td:nth-of-type(1):before {
+  .cart-table-container .products-in-cart td:nth-of-type(1):before {
     content: "";
   }
 
-  .cart-table-container td:nth-of-type(2):before {
+  .cart-table-container .products-in-cart td:nth-of-type(2):before {
     content: "";
   }
 
-  .cart-table-container td:nth-of-type(3):before {
+  .cart-table-container .products-in-cart td:nth-of-type(3):before {
     content: "Product:";
   }
 
-  .cart-table-container td:nth-of-type(4):before {
+  .cart-table-container .products-in-cart td:nth-of-type(4):before {
     content: "Price:";
   }
 
-  .cart-table-container td:nth-of-type(5):before {
+  .cart-table-container .products-in-cart td:nth-of-type(5):before {
     content: "Quantity:";
   }
 
-  .cart-table-container td:nth-of-type(6):before {
+  .cart-table-container .products-in-cart td:nth-of-type(6):before {
     content: "Subtotal:";
   }
 }

@@ -1,7 +1,6 @@
 @use '../abstracts/all.scss' as var;
 
-// cart total and details to proceed checkout in cart page 
-// the container of checkout area 
+// CART CHECKOUT Container 
 .cart-total-container {
     width: 75%;
     @include var.flex-default;
@@ -11,12 +10,14 @@
     div {  
         width: 47%;
         padding: 0 0 30px 0;
-   
+        
+        // Title over checkout tabel (cart totals)
         .cart-total-title {
             font-size: x-large;
             font-weight: 300;
         }
-    
+        
+        // Check out table element 
         table {
             width: 100%;
             border-collapse: collapse;
@@ -34,7 +35,8 @@
                 background-color: rgb(252, 248, 248);
             }
         }
-        // the proceed check out button
+
+        // the proceed check out button under tabel 
         button {
             width: 100% !important;
             padding: 19px 0px 19px 0px;
@@ -46,7 +48,9 @@
     }
 }
 
+// Mobile and Tablet responsivity 
 @media screen and (max-width: 850px) {
+    // CHECKOUT CONTAINER 
     .cart-total-container {
         width: 90%;
         div {  
