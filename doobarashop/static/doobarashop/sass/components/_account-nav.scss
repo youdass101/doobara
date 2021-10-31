@@ -5,16 +5,18 @@
     display: inline-block;
     ul {
         li {
+            @include var.nav-title;
+            cursor: pointer;
             list-style: none;
             border-style: solid;
             border-width: 0.5px 0px;
             border-color: gray;
-            font-size: large;
             padding: 6% 0 5% 0;
            
             a {
                 color: var.$back-color;
             }
+            
             a:link {
                 text-decoration: none;
                 color: black;
@@ -40,7 +42,6 @@
             padding: 0;
 
             li {
-                font-size: medium;
                 padding: 10px 0 10px 0;
 
                 a{

@@ -18,9 +18,10 @@
 
     // cart number of total 
     .homeTotal {
-        font-size: 16px;
+        @include var.par-body-2;
+        color: white;
         .cartUrl {
-            font-size: 14px;
+            @include var.par-body;
         }
     }
 }

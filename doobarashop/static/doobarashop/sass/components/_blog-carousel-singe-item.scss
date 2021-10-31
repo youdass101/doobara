@@ -11,7 +11,7 @@ a:link {
 
 // Post card paragraph styling
 p {
-    font-size: 14px;
+    @include var.par-body;
     color: white;
     height: 100px;
     padding-left: 15px;

@@ -29,10 +29,70 @@
     font-size: 15px;
 }
 
-@mixin title-top {
+@mixin top-title {
     font-size: xx-large;
     font-family: Arial, Helvetica, sans-serif;
     color: var.$back-color;
+    font-weight: 600;
+}
+
+@mixin sub-title {
+    font-size: x-large;
+    font-family: Arial, Helvetica, sans-serif;
+    color: var.$back-color;
+    font-weight: 500;
+}
+
+@mixin par-title {
+    font-size: 16px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: var.$back-color;
+    font-weight: 600 ;
+}
+
+@mixin par-body {
+    font-size: 14px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color: var.$back-color;
+    font-weight: 400;
+}
+
+@mixin par-body-2 {
+    font-size: 16px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color: var.$back-color;
+    font-weight: 400;
+}
+
+@mixin header-title {
+    font-size: 15px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color: var.$back-color;
+    font-weight: 600;
+    
+}
+
+@mixin note {
+    font-size: small;
+    font-family: fantasy;
+    color: var.$back-color;
+    font-weight: 400;
+    font-style: italic;
+}
+
+@mixin nav-title {
+    font-size: 16px;
+    font-family: fantasy;
+    color: var.$back-color;
+    font-weight: 600;
+}
+
+@mixin icon-title {
+    font-size: 13px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: var.$back-color;
+    font-weight: 550;
+    
 }
 
 

@@ -9,8 +9,7 @@
     @include var.backround-bordertop-color;
     color: var.$identity-color;
     align-items: center;
-    font-size: 1.2em;
-    font-weight: 400;
+    @include var.nav-title;
 
     // navigation links 
     a {

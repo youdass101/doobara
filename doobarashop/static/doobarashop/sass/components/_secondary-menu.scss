@@ -23,9 +23,8 @@
             border: none;
             width: 85px;
             height: 40px;
-            font-size: medium;
+            @include var.par-body-2;
         }
-
 
         // FIX FOR button not trigger when pressing on text or icon nested
         span {
@@ -38,7 +37,7 @@
         grid-area: nmm;
         background-color: var.$back-color;  
         padding-right: 30px 0 0 0;
-        font-size: 16px;
+        @include var.par-body-2;
         
         ul {
             list-style: none;
