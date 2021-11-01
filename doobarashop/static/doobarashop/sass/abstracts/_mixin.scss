@@ -28,6 +28,19 @@
     box-shadow: inset 0 1px 1px rgb(0 0 0 / 13%);
     font-size: 15px;
     font-weight: 600;
+    cursor: pointer;
+}
+
+@mixin button-secondary {
+    color: #fff;
+    background-color: #292826;
+    font-family: "Archivo Narrow",Sans-serif;
+    font-size: 14px;
+    border-style: groove;
+    border-width: 0;
+    border-radius: 6px;
+    padding: 7px 20px 7px 20px;
+    cursor: pointer;
 }
 
 @mixin top-title {
@@ -100,6 +113,31 @@
     font-family: var.$secondary-font;
     color: var.$back-color;
     font-weight: 550;
+}
+
+// text color change to x
+@mixin hover-primary {
+    color: var.$identity-color;
+}
+
+// background color change to y
+@mixin hover-secondary {
+    background-color: var.$identity-color;
+    color: var.$back-color;
+ 
+}
+
+// text color change to w
+@mixin hover-third {
+    color: white;
+}
+
+// background color change to y
+@mixin hover-forth {
+    background-color: var.$back-color;
+    * {
+        color: var.$identity-color;
+        }
 }
 
 

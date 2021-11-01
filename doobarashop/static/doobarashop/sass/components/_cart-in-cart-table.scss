@@ -82,6 +82,7 @@
                     @include var.flex-default;
                     align-items: center;
                     
+                    
                     // COUPON TEXT INPUT DIV
                     .in-cart-coupon-input {
                         flex: 0;
@@ -101,6 +102,9 @@
                             @include var.input-button-style;
                             font-weight: 600;
                         }
+                        button:hover {
+                            @include var.hover-secondary;
+                        }
                     }
 
                     // UPDATE CART BUTTON DIV
@@ -108,6 +112,9 @@
                         padding-top: 20px;
                         button {
                             @include var.input-button-style;
+                        }
+                        button:hover {
+                            @include var.hover-secondary;
                         }
                     }  
                 }
@@ -193,6 +200,7 @@
                     .in-cart-footer-container { 
                         align-items: flex-start !important;
                         flex-direction: column;
+
 
                         div {
                             padding-bottom: 10px;

@@ -71,11 +71,8 @@ html, body {
 .header-top-bar-left .phone-number {
   transition: background-color 1s, font-size 1s, weight 1s;
 }
-.header-top-bar-left .phone-number:hover {
-  background-color: #F9D342;
-  font-weight: 500;
-  border-radius: 5px;
-  border-color: transparent;
+.header-top-bar-left .phone-number:hover a {
+  color: #F9D342;
 }
 .header-top-bar-left .phone-number:hover .fa-phone-alt {
   color: white;
@@ -510,6 +507,7 @@ form.search-site button {
 }
 #product-category .icon-title-container div:hover {
   background-color: #F9D342;
+  color: #292826;
 }
 #product-category .icon-title-container div:hover a object {
   filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(331deg) brightness(104%) contrast(103%);
@@ -552,7 +550,7 @@ form.search-site button {
 .product-card-container .product-card:hover .card-info {
   background-color: #292826;
 }
-.product-card-container .product-card:hover .card-info p {
+.product-card-container .product-card:hover .card-info * {
   color: #F9D342;
 }
 .product-card-container .product-card {
@@ -652,6 +650,10 @@ form.search-site button {
   border-radius: 6px;
   padding: 7px 20px 7px 20px;
   cursor: pointer;
+}
+#container-shop .shop-product button:hover {
+  background-color: #F9D342;
+  color: #292826;
 }
 #container-shop .shop-product p {
   text-align: center;
@@ -876,6 +878,7 @@ form.search-site button {
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.13);
   font-size: 15px;
   font-weight: 600;
+  cursor: pointer;
   padding: 10px 30px;
   letter-spacing: 2px;
 }
@@ -1001,6 +1004,11 @@ form.search-site button {
 #my-account-container #my-account-data td button {
   padding: 7px;
   border-color: transparent;
+  cursor: pointer;
+}
+#my-account-container #my-account-data td button:hover {
+  background-color: #F9D342;
+  color: #292826;
 }
 @media screen and (max-width: 850px) {
   #my-account-container #my-account-data {
@@ -1163,6 +1171,7 @@ form.search-site button {
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.13);
   font-size: 15px;
   font-weight: 600;
+  cursor: pointer;
 }
 
 .cart-table-container .products-in-cart tfoot tr .in-cart-footer-container .in-cart-apply-coupon-button {
@@ -1181,7 +1190,13 @@ form.search-site button {
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.13);
   font-size: 15px;
   font-weight: 600;
+  cursor: pointer;
   font-weight: 600;
+}
+
+.cart-table-container .products-in-cart tfoot tr .in-cart-footer-container .in-cart-apply-coupon-button button:hover {
+  background-color: #F9D342;
+  color: #292826;
 }
 
 .cart-table-container .products-in-cart tfoot tr .in-cart-footer-container .in-cart-update-cart-button {
@@ -1198,6 +1213,12 @@ form.search-site button {
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.13);
   font-size: 15px;
   font-weight: 600;
+  cursor: pointer;
+}
+
+.cart-table-container .products-in-cart tfoot tr .in-cart-footer-container .in-cart-update-cart-button button:hover {
+  background-color: #F9D342;
+  color: #292826;
 }
 
 @media screen and (max-width: 850px) {
@@ -1379,8 +1400,14 @@ form.search-site button {
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.13);
   font-size: 15px;
   font-weight: 600;
+  cursor: pointer;
   width: 100% !important;
   font-size: x-large;
+}
+
+.cart-total-container div button:hover {
+  background-color: #F9D342;
+  color: #292826;
 }
 
 @media screen and (max-width: 850px) {

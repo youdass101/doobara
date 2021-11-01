@@ -27,15 +27,11 @@ a:link {
 
     // Add to Cart button 
     button {
-        color: #fff;
-        background-color: #292826;
-        font-family: "Archivo Narrow",Sans-serif;
-        font-size: 14px;
-        border-style: groove;
-        border-width: 0;
-        border-radius: 6px;
-        padding: 7px 20px 7px 20px;
-        cursor: pointer;
+        @include var.button-secondary;
+    }
+
+    button:hover {
+        @include var.hover-secondary;
     }
     
     // Product info text under p element

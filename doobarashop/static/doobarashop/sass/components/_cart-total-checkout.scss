@@ -41,6 +41,9 @@
             width: 100% !important;
             font-size: x-large;  
         }   
+        button:hover {
+            @include var.hover-secondary;
+        }
     }
 }
 

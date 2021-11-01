@@ -10,10 +10,7 @@
         
         .product-card:hover {
             .card-info {
-                background-color: var.$back-color;
-                p {
-                    color: var.$identity-color;
-                }
+                @include var.hover-forth;
             }      
         }
 

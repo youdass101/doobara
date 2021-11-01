@@ -28,7 +28,7 @@
             }
 
             a:hover {
-                color: var.$identity-color;
+                @include var.hover-primary;
             }
 
             i {

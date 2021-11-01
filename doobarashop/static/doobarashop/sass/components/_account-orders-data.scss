@@ -25,6 +25,10 @@
         button {
             padding: 7px;
             border-color: transparent;
+            cursor: pointer;
+        }
+        button:hover {
+            @include var.hover-secondary;
         }
     } 
 }

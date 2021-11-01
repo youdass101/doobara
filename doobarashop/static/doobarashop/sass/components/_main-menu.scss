@@ -27,7 +27,7 @@
 
     // Navigatopn Menu Links icons On hover
     a:hover{
-        color: var.$identity-color;
+        @include var.hover-primary;
     }
     // desktop navigation menu link icons element  
     a:link {

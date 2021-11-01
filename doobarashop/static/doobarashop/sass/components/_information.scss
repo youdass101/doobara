@@ -35,15 +35,14 @@
 
     // phone number on hover start transition effect 
     .phone-number:hover {
-        background-color: var.$identity-color;
-        font-weight: 500;
-        border-radius: 5px;
-        border-color: transparent;
+        a {
+        @include var.hover-primary;
+        }
     }
 
     // phone icon when phone class on hover to change icont color 
     .phone-number:hover .fa-phone-alt{
-        color: white;
+        @include var.hover-third;
     }
 
 
