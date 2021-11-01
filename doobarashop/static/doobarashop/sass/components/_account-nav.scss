@@ -4,6 +4,9 @@
     margin: 0 !important;
     display: inline-block;
     ul {
+        li:hover {
+            a{color: var.$identity-color !important;}
+        }
         li {
             @include var.nav-title;
             cursor: pointer;
@@ -13,6 +16,8 @@
             border-color: gray;
             padding: 6% 0 5% 0;
            
+            
+
             a {
                 color: var.$back-color;
             }

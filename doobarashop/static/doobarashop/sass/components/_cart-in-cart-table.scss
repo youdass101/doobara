@@ -162,7 +162,6 @@
             td {
                 position:  relative;
                 padding-left: 45% !important;
-                font-size: medium;
                 padding-top: 0px !important;
             }
 
@@ -231,7 +230,7 @@
                 width: 45%;
                 padding-right: 10px;
                 white-space: nowrap;
-                font-weight: 600;
+                @include var.header-title;
             }
             // Name each before td header 
             td:nth-of-type(1):before { content: "";}

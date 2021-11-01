@@ -15,9 +15,9 @@
         width: 35%;
         padding-left: 10px;
         align-self: flex-start;
-        h1 {font-size: xx-large; margin: 0;}
-        h2 {font-size: x-large; margin: 0;}
-        p {font-size: 14px;}
+        h1 {@include var.mid-title; margin: 0;}
+        h2 {@include var.sub-title; margin: 0;}
+        p {@include var.par-body-2;}
     }
     // Form input div class contaciner 
     .contact-inputs {
@@ -28,6 +28,7 @@
         #contact-submit-form {
             // input of contact sumbition form  
             input {
+                @include var.par-body;
                 padding: 10px;   //size
                 width: 100%;
                 margin: 5px 0 5px 5px ;   //space between cells 
@@ -45,6 +46,7 @@
         }
 
         textarea {
+            @include var.par-body;
             width: 100%;
             border: none;
             height: 100px;   
@@ -57,12 +59,10 @@
             margin: 0;
             //Submition button element styling 
             button {
+                @include var.input-button-style;
                 padding: 10px 30px;
-                background-color: var.$back-color;
-                color: white;
-                font-weight: 600;
-                font-size: 15px;
                 letter-spacing: 2px; 
+                
             }
         }
     }

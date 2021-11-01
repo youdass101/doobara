@@ -35,9 +35,10 @@
     // navigation menu icons for Mobile 
     #navigation-mobile {
         grid-area: nmm;
+        @include var.par-body-2;
         background-color: var.$back-color;  
         padding-right: 30px 0 0 0;
-        @include var.par-body-2;
+        
         
         ul {
             list-style: none;

@@ -8,8 +8,8 @@
     flex-direction: column;
     align-items: center;
     h1 {
+        @include var.top-title;
         color: white;
-        font-size: 4vw;
         letter-spacing: 2px;
     }
   
@@ -32,15 +32,10 @@
 
 @media screen and (max-width: 750px) {
     // CONTACT US PAGE RESPONSVITY
-   .whatsapp {
-       font-size: 10vw;
-   }
-
-   .phone-icon {
-       font-size: 8vw;
-   }
-
-   h1 {
-       font-size: 6vw !important;
-   }
+    .contact-info {
+        h1 {
+            @include var.mid-title;
+            color: white !important;
+        }
+    }
 }

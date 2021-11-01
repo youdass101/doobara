@@ -1,4 +1,5 @@
 // VIDEO PAGE CAROUSEL 
+@use '../abstracts/all' as var;
 #video-carousel-container {
     display: grid;
     grid-template-columns:  1fr 1fr;

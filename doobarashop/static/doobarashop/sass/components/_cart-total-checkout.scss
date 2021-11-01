@@ -13,8 +13,7 @@
         
         // Title over checkout tabel (cart totals)
         .cart-total-title {
-            font-size: x-large;
-            font-weight: 300;
+            @include var.sub-title;
         }
         
         // Check out table element 
@@ -24,13 +23,13 @@
             th {
                 padding: 15px 0px 15px 0px;
                 background-color: whitesmoke;
-                font-size: medium ;
                 vertical-align: top;
+                @include var.header-title;
             }
 
             td {
                 padding: 17px 40px 0px 17px;
-                font-size: medium;
+                @include var.par-body;
                 vertical-align: top;
                 background-color: rgb(252, 248, 248);
             }
@@ -38,12 +37,9 @@
 
         // the proceed check out button under tabel 
         button {
+            @include var.input-button-style;
             width: 100% !important;
-            padding: 19px 0px 19px 0px;
-            background-color: var.$back-color;
-            color: white;
-            font-size: x-large;
-            font-weight: 600;   
+            font-size: x-large;  
         }   
     }
 }

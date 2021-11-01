@@ -7,9 +7,10 @@
     grid-area: menu;
     @include var.flex-default;
     @include var.backround-bordertop-color;
+    @include var.nav-title;
     color: var.$identity-color;
     align-items: center;
-    @include var.nav-title;
+    
 
     // navigation links 
     a {

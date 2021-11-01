@@ -20,6 +20,8 @@
     }
     // Video title 
     H2 {
+        @include var.par-title;
+        color: gainsboro;
         padding: 0 0 0 18px;
     }
 }

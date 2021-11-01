@@ -11,7 +11,7 @@ a:link {
 
 // Post card paragraph styling
 p {
-    @include var.par-body;
+    @include var.par-body-2;
     color: white;
     height: 100px;
     padding-left: 15px;
@@ -19,6 +19,7 @@ p {
 }
 
 h2 {
+    @include var.sub-title;
     color: var.$identity-color;
     padding-left: 16px;
 

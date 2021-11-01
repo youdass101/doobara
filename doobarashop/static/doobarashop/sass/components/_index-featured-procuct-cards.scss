@@ -9,9 +9,11 @@
         flex-wrap: wrap;
         
         .product-card:hover {
-            color: var.$identity-color;
             .card-info {
                 background-color: var.$back-color;
+                p {
+                    color: var.$identity-color;
+                }
             }      
         }
 
@@ -27,14 +29,18 @@
             background-color: var.$identity-color;
             color: var.$back-color;
             box-shadow: 1px 1px 4px 5px rgba(0, 0, 0, 0.5 );
+            text-decoration: none;
+
+       
             
             // p element child of product-card
             p { 
-                padding: 0 1% 0 1%;
+                margin: 0px 0px 15px 0px;
+                padding: 5% 1% 0 1%;
                 text-align: center;
-                font-size:1vw;
-                font-weight: 600;  
                 line-height: 130%; 
+                @include var.nav-title;
+
             } 
          
             // Product-card information 
