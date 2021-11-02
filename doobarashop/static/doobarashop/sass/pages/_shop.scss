@@ -10,5 +10,5 @@
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     background-color: var.$identity-color;
     
-    @import '../components/shop-product-item-block';
+    @import '../components/shop/shop-product-item-block';
 }

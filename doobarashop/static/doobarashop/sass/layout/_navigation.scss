@@ -2,19 +2,19 @@
 @use '../abstracts/all' as var;
 
 // SEARCH ITEMS COMPONENET 
-@use '../components/search-widget';
+@use '../components/layout/search-widget';
 
 // PRIMARY NAVIGATION MENU
-@use '../components/main-menu';
+@use '../components/layout/main-menu';
 
 // CART COMPONENET AFTER MENU
-@use '../components/cart-widget';
+@use '../components/layout/cart-widget';
 
 // SECONDARY MENU FOR MOBILE
-@use '../components/secondary-menu';
+@use '../components/layout/secondary-menu';
 
 // // MOBILE FOOTER MENU
-@use '../components/footer_mobile_menu';
+@use '../components/layout/footer_mobile_menu';
 
 
 // LOGO AFTER HEADER AND FIRST IN NAVIGATION (moved here for the @use later)

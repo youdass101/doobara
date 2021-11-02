@@ -2,8 +2,8 @@
 
 
 @use '../abstracts/all.scss' as var;
-@use '../components/cart-in-cart-table';
-@use '../components/cart-total-checkout';
+@use '../components/cart/cart-in-cart-table';
+@use '../components/cart/cart-total-checkout';
 
 
 // Cart page container
