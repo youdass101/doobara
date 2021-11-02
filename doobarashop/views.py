@@ -24,3 +24,6 @@ def myaccount(request):
 def cart(request):
     return render(request, "doobarashop/cart.html")
 
+def single_product(request):
+    return render(request, "doobarashop/single_product.html")
+
