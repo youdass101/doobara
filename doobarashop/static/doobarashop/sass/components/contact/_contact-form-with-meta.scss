@@ -59,7 +59,7 @@
             margin: 0;
             //Submition button element styling 
             button {
-                @include var.input-button-style;
+                @include var.button-style-wide;
                 padding: 10px 30px;
                 letter-spacing: 2px; 
                 

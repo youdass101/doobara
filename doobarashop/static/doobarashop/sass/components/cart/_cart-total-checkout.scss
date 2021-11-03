@@ -22,7 +22,7 @@
             border-collapse: collapse;
             th {
                 padding: 15px 0px 15px 0px;
-                background-color: whitesmoke;
+                background-color: var.$table-header-background-color-v1;
                 vertical-align: top;
                 @include var.header-title;
             }
@@ -31,13 +31,13 @@
                 padding: 17px 40px 0px 17px;
                 @include var.par-body;
                 vertical-align: top;
-                background-color: rgb(252, 248, 248);
+                background-color: var.$table-body-background-color-v1;
             }
         }
 
         // the proceed check out button under tabel 
         button {
-            @include var.input-button-style;
+            @include var.button-style-wide;
             width: 100% !important;
             font-size: x-large;  
         }   

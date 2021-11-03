@@ -16,7 +16,7 @@
 
         // Table header
         thead {
-            background-color: rgba(233, 233, 233, 0.582);
+            background-color: var.$table-header-background-color-v1;
             th {
                 @include var.par-title;
                 text-align: left;
@@ -26,7 +26,7 @@
 
         // Table body where the arbitrary data goes 
         tbody {
-            background-color: rgba(245, 245, 245, 0.336);
+            background-color: var.$table-body-background-color-v1;
             tr {
                 @include var.par-body;
 
@@ -36,16 +36,7 @@
                 
                 // input Element to see or change product qtty
                 .in-cart-qtty {
-                    width: 100%;
-                    padding: 10px;
-                    background-color: #f2f2f2;
-                    color: #43454b;
-                    border: 0;
-                    -webkit-appearance: none;
-                    box-sizing: border-box;
-                    box-shadow: inset 0 1px 1px rgb(0 0 0 / 13%);
-                    text-align: center;
-                    max-width: 60px;
+                    @include var.single-input-number-v1;
                 }
                 
                 // Remove Icon Is a td class for remove Icon
@@ -88,7 +79,7 @@
                         flex: 0;
                         padding-top: 20px;
                         input {
-                            @include var.input-button-style;
+                            @include var.button-style-wide;
                         }
                     }
 
@@ -99,7 +90,7 @@
                         padding-left: 10px;
                         
                         button {
-                            @include var.input-button-style;
+                            @include var.button-style-wide;
                             font-weight: 600;
                         }
                         button:hover {
@@ -111,7 +102,7 @@
                     .in-cart-update-cart-button {
                         padding-top: 20px;
                         button {
-                            @include var.input-button-style;
+                            @include var.button-style-wide;
                         }
                         button:hover {
                             @include var.hover-secondary;
@@ -144,7 +135,7 @@
 
             // Rows in tabel 
             tr {
-                background-color: rgb(250, 248, 248);
+                background-color: var.$table-body-background-color-v1;
                 border: 8px solid white;
             }
 

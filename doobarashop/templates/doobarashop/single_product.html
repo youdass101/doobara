@@ -5,5 +5,98 @@
 Product Name
 {% endblock %}
 {% block body %}
+<!-- SINGLE PRODUCT PAGE ELEMENT CONTAINER -->
+<div class="single-product-page-container">
+    <!-- PRODUCT NAME TITLE -->
+    <h1 class="single-product-title">Smart WiFi Universal Remote Control</h1>
 
-(% endblock %)
+    <!-- PRODUCT IMAGE SLIDER -->
+    <img class="single-product-image" src="{% static 'doobarashop/upload/images/hub.jpg' %}">
+
+    <div class="single-product-image-thumb">
+        <!-- PRODUCT IMAGE IN THUMBNAIL SIZE TO USE IN IMAGE -->
+        <img class="sp-thumb-image" src="{% static 'doobarashop/upload/images/hub.jpg' %}">
+        <img class="sp-thumb-image" src="{% static 'doobarashop/upload/images/hub.jpg' %}">
+        <img class="sp-thumb-image" src="{% static 'doobarashop/upload/images/hub.jpg' %}">
+        <img class="sp-thumb-image" src="{% static 'doobarashop/upload/images/hub.jpg' %}">
+    </div>
+
+    <div class="product-highlight">
+        <!-- PRODUCT PRICE -->
+        <p class="single-product-price"> $ 49.00 </p>
+
+        <!-- PRODUCT QUANTITY TO ADD TO CART (DEFAULT !) -->
+        <input class="single-product-quantity" type="number" placeholder="1">
+
+        <!-- ADD TO CART BUTTON -->
+        <button class="single-product-addtocart">Add to cart</button>
+
+        <!-- PRODUCT SHORT SPESIFICATION (MAINLY LIST) -->
+        <div class="single-product-specs">
+            <h1>Specification</h1>
+            <ul class="specs-list">
+                <li>WiFi connection</li>
+                <li>Outdoor waterproof</li>     
+                <li>Two-way voice</li> 
+                <li>Motion detection</li> 
+                <li>Max 64gb SD card storage</li>
+                <li>Real-time view</li>
+                <li>Standalone</li>
+                <li>History logs</li>
+                <li>Automation trigger setup</li>
+                <li>Share access control with family memebers</li>
+                <li>Application smart life</li>
+                <li>Cloud storage (optional monthly paid subscribtion)</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- PRODUCT VIDEO (DISPLAY NONE IF THERE IS NO VIDEO) -->
+    <div class="single-product-video">
+        <iframe 
+            src="https://www.youtube.com/embed/Rsq0DIjpWdk" 
+            title="YouTube video player" frameborder="0" 
+            allowfullscreen>
+        </iframe>
+    </div>
+
+    <!-- LONG IMAGE TO DESCRIBE THE PRODUCT VISUALLY -->
+    <img class="single-product-image-long" src="{% static 'doobarashop/upload/images/hub.jpg' %}">
+
+    <!-- LONG DESCRITPION ABOUT THE PRODUCT DETAILS -->
+    <div class="single-product-long-desc">
+        <h1>Somthing</h1>
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Accusamus nobis 
+            iusto quaerat laborum. Iure odit saepe accusamus similique delectus, 
+            ratione vero possimus dolorum quidem, ducimus numquam aperiam rerum?
+            Adipisci, eveniet!</p>
+    </div>
+
+    <!-- PODUCT DIMENTION AND WHAT IN PACKGE TABLE  -->
+    <div class="single-product-dimention">
+        <table>
+            <tr>
+                <th>Weight </th>
+                <td>33 g</td>
+            </tr>
+            <tr>
+                <th>Dimension</th>
+                <td>8.3x8.3x1.5</td>
+            </tr>
+            <tr>
+                <th>In Package</th>
+                <td>
+                    <ul>
+                        <li>Camera</li>
+                        <li>Reset pin</li>
+                        <li>Adapte 5v</li>
+                        <li>USB Cable</li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+
+{% endblock %}
