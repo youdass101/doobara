@@ -534,10 +534,10 @@ form.search-site button {
 #product-category .icon-title-container p {
   text-align: center;
   margin: 0;
-  font-size: 14px;
+  font-size: 13px;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   color: #292826;
-  font-weight: 550;
+  font-weight: 600;
 }
 
 .product-card-container {
@@ -546,6 +546,12 @@ form.search-site button {
   display: flex;
   display: -webkit-flex;
   flex-wrap: wrap;
+}
+.product-card-container .product-card:hover {
+  background-color: #292826;
+}
+.product-card-container .product-card:hover * {
+  color: #F9D342;
 }
 .product-card-container .product-card:hover .card-info {
   background-color: #292826;
@@ -881,6 +887,11 @@ form.search-site button {
   cursor: pointer;
   padding: 10px 30px;
   letter-spacing: 2px;
+}
+
+#contact-form-container .contact-inputs .contact-send-button button:hover {
+  background-color: #F9D342;
+  color: #292826;
 }
 
 @media screen and (max-width: 960px) {
@@ -1516,11 +1527,7 @@ form.search-site button {
 .single-product-page-container .single-product-video {
   grid-area: v;
   padding-top: 50px;
-  width: 60%;
-}
-.single-product-page-container .single-product-video iframe {
   width: 100%;
-  height: 900px;
 }
 .single-product-page-container .single-product-image-long {
   grid-area: il;

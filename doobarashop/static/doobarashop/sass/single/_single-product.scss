@@ -73,12 +73,11 @@
     .single-product-video {
         grid-area: v;
         padding-top: 50px;
-        width: 60%;
-        iframe {
-   
-            width: 100%;
-            height: 900px;
-        }
+        width: 100%;
+        // iframe {   
+        //     width: 100% !important;
+        //     height: 100% !important;
+        // }
     }
 
     .single-product-image-long {

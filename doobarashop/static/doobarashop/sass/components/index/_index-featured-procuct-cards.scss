@@ -9,6 +9,7 @@
         flex-wrap: wrap;
         
         .product-card:hover {
+            @include var.hover-forth;
             .card-info {
                 @include var.hover-forth;
             }      

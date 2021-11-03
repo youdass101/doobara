@@ -64,6 +64,10 @@
                 letter-spacing: 2px; 
                 
             }
+
+            button:hover {
+                @include var.hover-secondary;
+            }
         }
     }
 }
