@@ -1526,8 +1526,21 @@ form.search-site button {
 }
 .single-product-page-container .single-product-video {
   grid-area: v;
-  padding-top: 50px;
+  display: flex;
+  justify-items: space-around;
+  margin-top: 50px !important;
   width: 100%;
+  position: relative;
+  padding-bottom: 56.25%;
+  /* 16:9 */
+  height: 0;
+}
+.single-product-page-container .single-product-video iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 50%;
 }
 .single-product-page-container .single-product-image-long {
   grid-area: il;
