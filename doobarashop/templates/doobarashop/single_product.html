@@ -11,7 +11,9 @@ Product Name
     <h1 class="single-product-title">Smart WiFi Universal Remote Control</h1>
 
     <!-- PRODUCT IMAGE SLIDER -->
-    <img class="single-product-image" src="{% static 'doobarashop/upload/images/hub.jpg' %}">
+    <div class="single-product-image">
+        <img width="416" height="416" src="{% static 'doobarashop/upload/images/hub.jpg' %}">
+    
 
     <div class="single-product-image-thumb">
         <!-- PRODUCT IMAGE IN THUMBNAIL SIZE TO USE IN IMAGE -->
@@ -19,6 +21,7 @@ Product Name
         <img class="sp-thumb-image" src="{% static 'doobarashop/upload/images/hub.jpg' %}">
         <img class="sp-thumb-image" src="{% static 'doobarashop/upload/images/hub.jpg' %}">
         <img class="sp-thumb-image" src="{% static 'doobarashop/upload/images/hub.jpg' %}">
+    </div>
     </div>
 
     <div class="product-highlight">
@@ -53,11 +56,13 @@ Product Name
 
     <!-- PRODUCT VIDEO (DISPLAY NONE IF THERE IS NO VIDEO) -->
     <div class="single-product-video">
-        <iframe 
-            src="https://www.youtube.com/embed/Rsq0DIjpWdk" 
-            title="YouTube video player" frameborder="0" 
-            allowfullscreen>
-        </iframe>
+        <div class="single-video">
+            <iframe 
+                src="https://www.youtube.com/embed/Rsq0DIjpWdk" 
+                title="YouTube video player" frameborder="0" 
+                allowfullscreen>
+            </iframe>
+        </div>
     </div>
 
     <!-- LONG IMAGE TO DESCRIBE THE PRODUCT VISUALLY -->

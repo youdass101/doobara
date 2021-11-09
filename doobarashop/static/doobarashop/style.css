@@ -1447,7 +1447,7 @@ form.search-site button {
   padding: 20px;
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  grid-template-areas: "nt nt nt nt nt nt nt nt nt nt nt nt" "i i i i i i h h h h h h" "i i i i i i h h h h h h" "i i i i i i h h h h h h" "it it it it it it h h h h h h" "v v v v v v v v v v v v" "il il il il il il il il il il il il" "ld ld ld ld ld ld ld ld ld ld ld ld" "d d d d d d d d d d d d";
+  grid-template-areas: "nt nt nt nt nt nt nt nt nt nt nt nt" "i i i i i i h h h h h h" "i i i i i i h h h h h h" "i i i i i i h h h h h h" "v v v v v v v v v v v v" "il il il il il il il il il il il il" "ld ld ld ld ld ld ld ld ld ld ld ld" "d d d d d d d d d d d d";
 }
 .single-product-page-container .single-product-title {
   grid-area: nt;
@@ -1458,16 +1458,21 @@ form.search-site button {
 }
 .single-product-page-container .single-product-image {
   grid-area: i;
-}
-.single-product-page-container .single-product-image-thumb {
-  grid-area: it;
-  display: flex;
-  display: -webkit-flex;
-  justify-content: space-around;
+  display: block;
   width: 100%;
 }
+.single-product-page-container .single-product-image img {
+  max-width: 100%;
+  height: auto;
+}
+.single-product-page-container .single-product-image-thumb {
+  display: flex;
+  display: -webkit-flex;
+  justify-content: flex-start;
+}
 .single-product-page-container .single-product-image-thumb img {
-  width: 10%;
+  max-width: 10%;
+  margin-right: 20px;
 }
 .single-product-page-container .product-highlight {
   grid-area: h;
@@ -1527,20 +1532,29 @@ form.search-site button {
 .single-product-page-container .single-product-video {
   grid-area: v;
   display: flex;
-  justify-items: space-around;
-  margin-top: 50px !important;
+  justify-items: center;
+  justify-content: center;
   width: 100%;
-  position: relative;
-  padding-bottom: 56.25%;
-  /* 16:9 */
-  height: 0;
 }
-.single-product-page-container .single-product-video iframe {
+.single-product-page-container .single-product-video .single-video {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  padding-top: 56.25%;
+  /* 16:9 Aspect Ratio */
+  padding-right: 0px !important;
+  padding-left: 0px !important;
+  margin: 0 0 0 0 !important;
+}
+.single-product-page-container .single-product-video .single-video iframe {
   position: absolute;
   top: 0;
   left: 0;
-  width: 50%;
-  height: 50%;
+  bottom: 0;
+  right: 0;
+  width: 80%;
+  height: 80%;
+  border: none;
 }
 .single-product-page-container .single-product-image-long {
   grid-area: il;

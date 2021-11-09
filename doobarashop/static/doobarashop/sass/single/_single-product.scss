@@ -10,7 +10,6 @@
     'i i i i i i h h h h h h'
     'i i i i i i h h h h h h'
     'i i i i i i h h h h h h'
-    'it it it it it it h h h h h h'
     'v v v v v v v v v v v v'
     'il il il il il il il il il il il il'
     'ld ld ld ld ld ld ld ld ld ld ld ld'
@@ -23,16 +22,20 @@
 
     .single-product-image {
         grid-area: i;
+        display: block;
+        width: 100%;
+        img {
+            max-width: 100%;
+            height: auto;
+        }
     }
 
     .single-product-image-thumb {
-        grid-area: it;
         @include var.flex-default;
-        justify-content: space-around;
-        width: 100%;
-        img {
-            
-            width: 10%;
+        justify-content: flex-start;    
+        img {     
+            max-width: 10%;
+            margin-right: 20px;
         }
     }
 
@@ -40,12 +43,10 @@
         grid-area: h;
         .single-product-price {
             @include var.sub-title;
-
         }
 
         .single-product-quantity {
-            @include var.single-input-number-v1;
-            
+            @include var.single-input-number-v1;  
         }
 
         .single-product-addtocart {
@@ -73,20 +74,29 @@
     .single-product-video {
         grid-area: v;
         display: flex;
-        justify-items: space-around;
-        margin-top: 50px !important;
+        justify-items: center;
+        justify-content: center;
         width: 100%;
-        position: relative;
-        padding-bottom: 56.25%; /* 16:9 */
-        // padding-top: 25px;
-        height: 0;
 
-        iframe {   
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 50%;
-            height: 50%
+        .single-video { 
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            padding-top: 56.25%; /* 16:9 Aspect Ratio */
+            padding-right: 0px !important;
+            padding-left: 0px !important;
+            margin: 0 0 0 0 !important ;
+
+            iframe {   
+                position: absolute;
+                top: 0;
+                left: 0;
+                bottom: 0;
+                right: 0;
+                width: 80%;
+                height: 80%;
+                border: none;
+            }
         }
     }
 
