@@ -1531,29 +1531,12 @@ form.search-site button {
 }
 .single-product-page-container .single-product-video {
   grid-area: v;
-  display: block;
-  padding-right: 10%;
-  padding-left: 10%;
+  display: flex;
+  justify-content: center;
 }
-.single-product-page-container .single-product-video .spv {
-  display: block;
-}
-.single-product-page-container .single-product-video .spv .single-video {
-  position: relative;
-  width: 100%;
-  overflow: hidden;
-  padding-top: 56.25%;
-  /* 16:9 Aspect Ratio */
-}
-.single-product-page-container .single-product-video .spv .single-video iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  width: 100%;
-  height: 100%;
-  border: none;
+.single-product-page-container .single-product-video .single-video embed {
+  width: 800px;
+  height: 450px;
 }
 .single-product-page-container .single-product-image-long {
   grid-area: il;
