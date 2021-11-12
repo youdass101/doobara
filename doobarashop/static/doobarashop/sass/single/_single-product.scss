@@ -15,11 +15,13 @@
     'ld ld ld ld ld ld ld ld ld ld ld ld'
     'd d d d d d d d d d d d';
 
+    // PRODUCT TITLE FIRST ROW
     .single-product-title {
         grid-area: nt;
         @include var.sub-title;
     }
 
+    // PRODUCT MAIN IMAGE 
     .single-product-image {
         grid-area: i;
         display: block;
@@ -30,6 +32,7 @@
         }
     }
 
+    // PRODUCT THUMB IMAGE GALLERY TO CHOSE FROM
     .single-product-image-thumb {
         @include var.flex-default;
         justify-content: flex-start;    
@@ -39,21 +42,27 @@
         }
     }
 
+    // PRODUCT MAIN INFORMATION Unit price, Quantity to add, add to cart button and short description
     .product-highlight {
         grid-area: h;
+
+        //p Product Price
         .single-product-price {
             @include var.sub-title;
         }
 
+        // Product qtt yo add to cart 
         .single-product-quantity {
             @include var.single-input-number-v1;  
         }
 
+        // add to cart button 
         .single-product-addtocart {
             @include var.button-secondary;
             margin-left: 30px;
         }
 
+        // short description 
         .single-product-specs {
             padding-top: 15px;
             
@@ -71,51 +80,82 @@
         }
     }
 
+    // Product video block wrapper 
     .single-product-video {
-        grid-area: v;
-        display: flex;
-        justify-content: center;
-        // display: block;
-        // padding-right: 10%;
-        // padding-left: 10%;
-      
-     
-        // .spv {
-        //     // display: block;
+        grid-area: v;    
+        padding-top: 35px; 
+        width: 100%;
+        max-width: 800px;
+        margin: 0 auto;
             
-            .single-video { 
-                embed {
-                    width: 800px;
-                    height: 450px;
-                }
-                // position: relative; 
-                // width: 100%;
-                // overflow: hidden;
-                // padding-top: 56.25%; /* 16:9 Aspect Ratio */
-                
-                // iframe {   
-                //     position: absolute;
-                //     top: 0;
-                //     left: 0;
-                //     bottom: 0;
-                //     right: 0;
-                //     width: 100%;
-                //     height: 100%;
-                //     border: none;
-                // }
+        // Iframe wraper 
+        .single-video { 
+            position: relative; 
+            width: 100%;
+            overflow: hidden;
+            padding-top: 56.25%; /* 16:9 Aspect Ratio */
+            
+            iframe {   
+                position: absolute;
+                top: 0;
+                left: 0;
+                bottom: 0;
+                right: 0;
+                width: 100%;
+                height: 100%;
+                border: none;
             }
-        // }
+        }
     }
 
+    // long image showcase and info 
     .single-product-image-long {
         grid-area: il;
+        padding-top: 20px;
+        width: 100%;
+        max-width: 800px;
+        margin: 0 auto;
+
+        img {
+            width: 100%;
+        }
     }
 
+    // Long product description 
     .single-product-long-desc {
         grid-area: ld;
+        width: 100%;
+        max-width: 800px;
+        margin: 0 auto;
+        h1 {
+            @include var.sub-title;
+        }
+        p{
+            @include var.par-body;
+        }
     }
 
+    // product dimension and packeging table
     .single-product-dimention {
         grid-area: d;
+        padding-top: 25px;
+        width: 100%;
+        max-width: 800px;
+        margin: 0 auto;
+
+        table {
+            border-collapse: separate;
+            border: 1px solid black;
+
+            tr {
+                th {
+                    @include var.header-title;
+                }
+
+                td {
+                    @include var.par-body;
+                }
+            }
+        }
     }
 }

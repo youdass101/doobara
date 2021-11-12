@@ -1531,21 +1531,78 @@ form.search-site button {
 }
 .single-product-page-container .single-product-video {
   grid-area: v;
-  display: flex;
-  justify-content: center;
+  padding-top: 35px;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
 }
-.single-product-page-container .single-product-video .single-video embed {
-  width: 800px;
-  height: 450px;
+.single-product-page-container .single-product-video .single-video {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  padding-top: 56.25%;
+  /* 16:9 Aspect Ratio */
+}
+.single-product-page-container .single-product-video .single-video iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
 }
 .single-product-page-container .single-product-image-long {
   grid-area: il;
+  padding-top: 20px;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.single-product-page-container .single-product-image-long img {
+  width: 100%;
 }
 .single-product-page-container .single-product-long-desc {
   grid-area: ld;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.single-product-page-container .single-product-long-desc h1 {
+  font-size: x-large;
+  font-family: Arial, sans-serif;
+  color: #292826;
+  font-weight: 600;
+}
+.single-product-page-container .single-product-long-desc p {
+  font-size: 14px;
+  font-family: Arial, sans-serif;
+  color: #292826;
+  font-weight: 400;
 }
 .single-product-page-container .single-product-dimention {
   grid-area: d;
+  padding-top: 25px;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.single-product-page-container .single-product-dimention table {
+  border-collapse: separate;
+  border: 1px solid black;
+}
+.single-product-page-container .single-product-dimention table tr th {
+  font-size: 15px;
+  font-family: Arial, sans-serif;
+  color: #292826;
+  font-weight: 600;
+}
+.single-product-page-container .single-product-dimention table tr td {
+  font-size: 14px;
+  font-family: Arial, sans-serif;
+  color: #292826;
+  font-weight: 400;
 }
 
 /*# sourceMappingURL=style.css.map */
