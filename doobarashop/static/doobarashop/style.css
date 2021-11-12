@@ -1588,21 +1588,37 @@ form.search-site button {
   max-width: 800px;
   margin: 0 auto;
 }
+.single-product-page-container .single-product-dimention h1 {
+  font-size: x-large;
+  font-family: Arial, sans-serif;
+  color: #292826;
+  font-weight: 600;
+}
 .single-product-page-container .single-product-dimention table {
-  border-collapse: separate;
-  border: 1px solid black;
+  border-collapse: collapse;
+  width: 100%;
 }
 .single-product-page-container .single-product-dimention table tr th {
   font-size: 15px;
   font-family: Arial, sans-serif;
   color: #292826;
   font-weight: 600;
+  background-color: rgba(233, 233, 233, 0.582);
+  text-align: left;
+  padding: 10px 0px 10px 15px;
 }
 .single-product-page-container .single-product-dimention table tr td {
   font-size: 14px;
   font-family: Arial, sans-serif;
   color: #292826;
   font-weight: 400;
+  padding: 10px 0px 10px 15px;
+}
+
+@media screen and (max-width: 740px) {
+  .single-product-page-container {
+    grid-template-areas: "nt nt nt nt nt nt nt nt nt nt nt nt" "i i i i i i i i i i i i" "h h h h h h h h h h h h" "v v v v v v v v v v v v" "il il il il il il il il il il il il" "ld ld ld ld ld ld ld ld ld ld ld ld" "d d d d d d d d d d d d";
+  }
 }
 
 /*# sourceMappingURL=style.css.map */
