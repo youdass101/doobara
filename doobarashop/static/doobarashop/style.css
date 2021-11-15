@@ -1164,7 +1164,22 @@ form.search-site button {
   background-color: rgba(245, 245, 245, 0.336);
 }
 #my-account-container #account-wish-list {
-  display: block;
+  display: none;
+}
+#my-account-container #account-detail form .account-first-name {
+  padding-right: 20px;
+}
+#my-account-container #account-detail form .account-first-name, #my-account-container #account-detail form .account-last-name {
+  width: 50% !important;
+}
+#my-account-container #account-detail form input[type=text] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
 }
 
 @media screen and (max-width: 850px) {
