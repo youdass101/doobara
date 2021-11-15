@@ -1,0 +1,32 @@
+
+#view-order {
+    display: none;
+    h1 {
+        @include var.sub-title;
+    }
+    p {
+        @include var.par-body-2;
+        padding: 0;
+        margin: 0;
+    }
+       //Dashboard and orders URL table 
+    table {
+    width: 100%;
+    text-align: left;
+    border-collapse: collapse;
+
+        th {
+            @include var.header-title;
+            background-color:var.$table-header-background-color-v1;
+            padding: 15px 0 15px 20px;
+        }
+
+        td {
+            @include var.par-body;
+            padding: 15px 0 15px 20px;
+            background-color: var.$table-body-background-color-v1;
+
+        }
+    }
+    
+}

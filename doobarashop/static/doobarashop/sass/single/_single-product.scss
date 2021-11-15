@@ -3,9 +3,10 @@
 
 // SINGLE PRODUCT PAGE container styling
 .single-product-page-container {
-    padding: 20px;
+    padding: 0px 0px 5px 40px;
     display: grid;
     grid-template-columns: repeat(12, 1fr);
+    // grid structure on desktop browser 
     grid-template-areas: 'nt nt nt nt nt nt nt nt nt nt nt nt'
     'i i i i i i h h h h h h'
     'i i i i i i h h h h h h'
@@ -24,8 +25,8 @@
     // PRODUCT MAIN IMAGE 
     .single-product-image {
         grid-area: i;
-        display: block;
-        width: 100%;
+        // display: block;
+        // width: 100%;
         img {
             max-width: 100%;
             height: auto;
@@ -84,9 +85,9 @@
     .single-product-video {
         grid-area: v;    
         padding-top: 35px; 
-        width: 100%;
-        max-width: 800px;
-        margin: 0 auto;
+        // the video box size
+        // @include var.sub-body-800width-center;
+        @extend .body-800width;
             
         // Iframe wraper 
         .single-video { 
@@ -112,9 +113,8 @@
     .single-product-image-long {
         grid-area: il;
         padding-top: 20px;
-        width: 100%;
-        max-width: 800px;
-        margin: 0 auto;
+        // @include var.sub-body-800width-center;
+        @extend .body-800width;
 
         img {
             width: 100%;
@@ -124,13 +124,12 @@
     // Long product description 
     .single-product-long-desc {
         grid-area: ld;
-        width: 100%;
-        max-width: 800px;
-        margin: 0 auto;
+        // @include var.sub-body-800width-center;
+        @extend .body-800width;
         h1 {
             @include var.sub-title;
         }
-        p{
+        p {
             @include var.par-body;
         }
     }
@@ -139,17 +138,15 @@
     .single-product-dimention {
         grid-area: d;
         padding-top: 25px;
-        width: 100%;
-        max-width: 800px;
-        margin: 0 auto;
+        // @include var.sub-body-800width-center;
+        @extend .body-800width;
         h1 {
             @include var.sub-title;
         }
 
         table {
             border-collapse: collapse;
-            width: 100%;
-            
+            width: 100%;          
 
             tr {
                 th {
@@ -157,7 +154,6 @@
                     background-color: var.$table-header-background-color-v1;
                     text-align: left;
                     padding: 10px 0px 10px 15px;
-
                 }
 
                 td {
@@ -169,8 +165,10 @@
     }
 }
 
+// TABLET and MOBILE RESPONSIVNESS STYLE 
 @media screen and (max-width: 740px) {
     .single-product-page-container {
+        padding: 10px !important;
         grid-template-areas: 'nt nt nt nt nt nt nt nt nt nt nt nt'
         'i i i i i i i i i i i i'
         'h h h h h h h h h h h h'
@@ -179,5 +177,4 @@
         'ld ld ld ld ld ld ld ld ld ld ld ld'
         'd d d d d d d d d d d d';
     }
-
 }

@@ -27,3 +27,6 @@ def cart(request):
 def single_product(request):
     return render(request, "doobarashop/single_product.html")
 
+def single_blog_post(request):
+    return render(request, "doobarashop/single_blog_post.html")
+

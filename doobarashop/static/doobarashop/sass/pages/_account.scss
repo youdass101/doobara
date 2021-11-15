@@ -7,10 +7,19 @@
         padding: 0 0 4% 4% ;
         @include var.par-body;
     }
+
+    #my-account-data {
+        width: 75%;
+        padding: 15px 0 0 60px;
+        display: inline-block;
+        vertical-align: top;
+    }
     
     // ACCOUNT NAV
     @import '../components/account/account-nav';
     @import '../components/account/account-orders-data';
+    @import '../components/account/account-order-view';
+    @import '../components/account/account-wishlist.scss';
     
     
 }
