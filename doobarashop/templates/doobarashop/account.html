@@ -130,16 +130,57 @@ My Account
         <!-- ACCOUNT DETAILS VIEW  -->
         <div id="account-detail">
             <form class="edit-account">
-                <div class="account-first-name">
-                    <label >First Name</label>
+                <!-- first and last name  -->
+                <div class="account-1st-row">
+                    <!-- first name -->
+                    <div class="account-first-name">
+                        <label >First name</label>
+                        <input type="text" value="Hamze">
+                    </div>
+                    <!-- Last name -->
+                    <div class="account-last-name">
+                        <label > Last name</label>
+                        <input type="text" value="Chalhoub">
+                    </div>
+                </div>
+                <div class="account-display-name">
+                    <!-- Display name or nickname -->
+                    <label>Display name</label>
                     <input type="text" value="Hamze">
+                    <p class="account-display-name-note">This will be how your name will be displayed in the account section and in reviews</p>
                 </div>
-                <div class="account-last-name">
-                    <label > Last name</label>
-                    <input type="text" value="Chalhoub">
+
+                <div class="account-email-address">
+                    <!-- Email Address -->
+                    <label>Email address</label>
+                    <input type="email" value="hamzechalhoub@gmail.com">
                 </div>
-                <label>Nickname</label>
-                <input type="text" value="Hamze">
+
+            <!-- PASSWORD CHANGE -->
+            <h2>Password Change</h2>
+            <div class="account-password-change">
+                    <!-- Last name -->
+                    <div class="account-current-password">
+                        <label > Current password (leave blank to leave unchanged)</label>
+                        <input type="password">
+                    </div>
+                </div>
+                <div class="account-new-password">
+                    <!-- Display name or nickname -->
+                    <label>New password (leave blank to leave unchanged)</label>
+                    <input type="password">
+                </div>
+
+                <div class="account-comfirm-new-password">
+                    <!-- Email Address -->
+                    <label>Confirm new password</label>
+                    <input type="password">
+                </div>
+
+                <div class="account-change-submit">
+                    <input type="submit" value="Save changes">
+                </div>
+                    
             </form>
             
         </div>

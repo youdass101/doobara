@@ -1166,13 +1166,40 @@ form.search-site button {
 #my-account-container #account-wish-list {
   display: none;
 }
-#my-account-container #account-detail form .account-first-name {
+#my-account-container #account-detail form {
+  padding: 20px;
+}
+#my-account-container #account-detail form .account-display-name-note {
+  padding: 0px 0px 10px 0px;
+  margin: 0;
+  font-size: small;
+  font-family: fantasy;
+  color: #292826;
+  font-weight: 400;
+  font-style: italic;
+}
+#my-account-container #account-detail form div {
+  padding-bottom: 10px;
+}
+#my-account-container #account-detail form label {
+  font-size: 16px;
+  font-family: Arial, sans-serif;
+  color: #292826;
+  font-weight: 400;
+  color: #292826;
+}
+#my-account-container #account-detail form .account-1st-row {
+  display: flex;
+  width: 100%;
+}
+#my-account-container #account-detail form .account-1st-row .account-first-name {
   padding-right: 20px;
 }
-#my-account-container #account-detail form .account-first-name, #my-account-container #account-detail form .account-last-name {
-  width: 50% !important;
+#my-account-container #account-detail form .account-1st-row .account-first-name, #my-account-container #account-detail form .account-1st-row .account-last-name {
+  display: block;
+  width: 50%;
 }
-#my-account-container #account-detail form input[type=text] {
+#my-account-container #account-detail form input {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -1180,6 +1207,35 @@ form.search-site button {
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
+  font-size: 14px;
+  font-family: Arial, sans-serif;
+  color: #292826;
+  font-weight: 400;
+  background-color: #f2f2f2;
+}
+#my-account-container #account-detail form input[type=submit] {
+  width: 100%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+#my-account-container #account-detail form input[type=submit]:hover {
+  background-color: #45a049;
+}
+@media screen and (max-width: 750px) {
+  #my-account-container .account-1st-row {
+    display: block !important;
+  }
+  #my-account-container .account-1st-row .account-first-name {
+    padding-right: 0px !important;
+  }
+  #my-account-container .account-1st-row .account-first-name, #my-account-container .account-1st-row .account-last-name {
+    width: 100% !important;
+  }
 }
 
 @media screen and (max-width: 850px) {
