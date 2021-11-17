@@ -33,5 +33,8 @@ def single_product(request):
 def single_blog_post(request):
     return render(request, "doobarashop/single_blog_post.html")
 
+def register_login(request):
+    return render(request, "doobarashop/register_login.html")
+
 
 

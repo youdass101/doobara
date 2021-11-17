@@ -1,0 +1,61 @@
+// Import varable and mixins
+@use '../abstracts/all.scss' as var;
+
+.login-register-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 5px auto;
+    padding: 10px ;
+
+    .register-container {
+        padding-top: 20px ;
+    }
+
+    .breaker {
+        width: 100%;
+        display: inline-block;
+        hr.rounded {
+            border-top: 8px solid #bbb;
+            border-radius: 5px;
+        }
+    }
+
+    .login-container {
+
+
+        // !!! COPIED FORM CHEKOUT FORM 
+        form {
+
+            label {
+                @include var.par-body-2;
+                color: var.$back-color;
+            }
+
+            input, textarea {
+                width: 100%;
+                padding: 12px 20px;
+                margin: 8px 0;
+                display: inline-block;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                box-sizing: border-box;
+                @include var.par-body;
+                background-color: var.$input-background-color-v1;
+            }
+
+            // !!! COPIED FROM ACCOUNT EDIT 
+            input[type=submit] {
+                float: right;
+                width: 30%;
+                background-color: var.$back-color;
+                color: var.$identity-color;
+                padding: 14px 20px;
+                margin: 8px 0;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+            }
+        }
+
+    }
+}

@@ -1,0 +1,41 @@
+{% extends "doobarashop/layout.html" %}
+{% load static %}
+
+{% block pagetitle %}
+Login or Sign Up
+{% endblock %}
+{% block body %}
+<div class="login-register-container">
+    <div class="login-container">
+        <div class="login-form-container">
+            <h1>LOGIN</h1>
+            <form class="login-form">
+                <label>Username or email address </label>
+                <input type="email" placeholder="your@email.address">
+                <label>Password</label>
+                <input type="password" placeholder="Your password">
+                <input type="submit" value="Login">
+            </form>
+        </div>
+        <div class="breaker"><hr class="dashed"></div>
+  
+        <div class="register-container">
+            <div class="register-form-container">
+                <h1>Register New Account</h1>
+                <form class="resiter-form">
+                    <label>User Email</label>
+                    <input type="text" placeholder="email address">
+
+                    <label>User Password</label>
+                    <input type="password" placeholder="Enter password">
+
+                    <label>Confirm Password</label>
+                    <input type="password" placeholder="Retype password">
+
+                    <input type="submit" value="REGISTER">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
