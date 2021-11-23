@@ -1,10 +1,48 @@
+.body-800width, .single-product-page-container .single-product-video, .single-product-page-container .single-product-image-long, .single-product-page-container .single-product-long-desc, .single-product-page-container .single-product-dimention {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.input-label {
+  font-size: 16px;
+  font-weight: 400;
+  color: #292826;
+}
+
+.input-style-prim, #contact-form-container .contact-inputs #contact-submit-form input, #my-account-container #account-detail form input, .checkout-page-container .checkout-shipping-details-container form input, .checkout-page-container .checkout-shipping-details-container form textarea, .login-register-container .login-container form input, .login-register-container .login-container form textarea {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 14px;
+  font-weight: 400;
+  background-color: #f2f2f2;
+}
+
+.input-submit-button-prim, #my-account-container #account-detail form input[type=submit], .login-register-container .login-container form input[type=submit] {
+  width: 100%;
+  background-color: #292826;
+  color: #F9D342;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 15px;
+}
+
 html {
   height: 100%;
   width: 100%;
   font-weight: 400;
   line-height: 1.618;
-  font-family: "Helvetica Neue", Arial, Helvetica, "Liberation Sans", sans-serif;
+  font-family: Arial, sans-serif;
   font-size: 13px;
+  color: #292826;
 }
 
 html, body {
@@ -44,47 +82,6 @@ html, body {
     grid-template-areas: "info info info info info info info info info info info info" "logo logo logo logo logo logo logo logo mmb mmb mmb mmb" "nmm nmm nmm nmm nmm nmm nmm nmm nmm nmm nmm nmm" "pc pc pc pc pc pc pc pc pc pc pc pc" "ft ft ft ft ft ft ft ft ft ft ft ft" "fm fm fm fm fm fm fm fm fm fm fm fm";
   }
 }
-.body-800width, .single-product-page-container .single-product-video, .single-product-page-container .single-product-image-long, .single-product-page-container .single-product-long-desc, .single-product-page-container .single-product-dimention {
-  width: 100%;
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.input-label {
-  font-size: 16px;
-  font-family: Arial, sans-serif;
-  color: #292826;
-  font-weight: 400;
-  color: #292826;
-}
-
-.input-style {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-  font-size: 14px;
-  font-family: Arial, sans-serif;
-  color: #292826;
-  font-weight: 400;
-  background-color: #f2f2f2;
-}
-
-.input-submit-button {
-  width: 100%;
-  background-color: #292826;
-  color: #F9D342;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 15px;
-}
-
 .header-top-bar-left {
   grid-area: info;
   background-color: #292826;
@@ -101,8 +98,6 @@ html, body {
 }
 .header-top-bar-left a:link {
   font-size: 14px;
-  font-family: Arial, sans-serif;
-  color: #292826;
   font-weight: 400;
   color: white;
   text-decoration: none;
@@ -164,8 +159,6 @@ form.search-site input[type=text] {
   border-bottom-left-radius: 4px;
   padding: 12px 20px;
   font-size: 14px;
-  font-family: Arial, sans-serif;
-  color: #292826;
   font-weight: 400;
   border: 1px solid #F9D342;
   float: left;
@@ -204,8 +197,6 @@ form.search-site button {
   background-color: #292826;
   border-top: 5px solid #F9D342;
   font-size: 15px;
-  font-family: Arial, sans-serif;
-  color: #292826;
   font-weight: 550;
   color: #F9D342;
   align-items: center;
@@ -252,15 +243,11 @@ form.search-site button {
 }
 #cart-nav .homeTotal {
   font-size: 16px;
-  font-family: Arial, sans-serif;
-  color: #292826;
   font-weight: 400;
   color: white;
 }
 #cart-nav .homeTotal .cartUrl {
   font-size: 14px;
-  font-family: Arial, sans-serif;
-  color: #292826;
   font-weight: 400;
 }
 
@@ -288,14 +275,12 @@ form.search-site button {
     display: -webkit-flex;
     align-items: center;
     justify-content: space-around;
+    font-size: 16px;
+    font-weight: 400;
     background-color: #F9D342;
     border: none;
     width: 85px;
     height: 40px;
-    font-size: 16px;
-    font-family: Arial, sans-serif;
-    color: #292826;
-    font-weight: 400;
   }
   #mobile-menu-btn span {
     pointer-events: none;
@@ -304,8 +289,6 @@ form.search-site button {
   #navigation-mobile {
     grid-area: nmm;
     font-size: 16px;
-    font-family: Arial, sans-serif;
-    color: #292826;
     font-weight: 400;
     background-color: #292826;
     padding-right: 30px 0 0 0;
@@ -402,13 +385,11 @@ form.search-site button {
 
 .input-label {
   font-size: 16px;
-  font-family: Arial, sans-serif;
-  color: #292826;
   font-weight: 400;
   color: #292826;
 }
 
-.input-style {
+.input-style-prim, .login-register-container .login-container form input, .login-register-container .login-container form textarea, .checkout-page-container .checkout-shipping-details-container form input, .checkout-page-container .checkout-shipping-details-container form textarea, #my-account-container #account-detail form input {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -417,13 +398,11 @@ form.search-site button {
   border-radius: 4px;
   box-sizing: border-box;
   font-size: 14px;
-  font-family: Arial, sans-serif;
-  color: #292826;
   font-weight: 400;
   background-color: #f2f2f2;
 }
 
-.input-submit-button {
+.input-submit-button-prim, .login-register-container .login-container form input[type=submit], #my-account-container #account-detail form input[type=submit] {
   width: 100%;
   background-color: #292826;
   color: #F9D342;
@@ -504,8 +483,6 @@ form.search-site button {
 /* SLider Caption text */
 .slider-caption {
   font-size: 14px;
-  font-family: Arial, sans-serif;
-  color: #292826;
   font-weight: 400;
   color: #f2f2f2;
   position: absolute;
@@ -618,7 +595,6 @@ form.search-site button {
   margin: 0;
   font-size: 13px;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  color: #292826;
   font-weight: 600;
 }
 
@@ -661,8 +637,6 @@ form.search-site button {
   text-align: center;
   line-height: 130%;
   font-size: 15px;
-  font-family: Arial, sans-serif;
-  color: #292826;
   font-weight: 550;
 }
 .product-card-container .product-card .card-info {
@@ -709,13 +683,11 @@ form.search-site button {
 
 .input-label {
   font-size: 16px;
-  font-family: Arial, sans-serif;
-  color: #292826;
   font-weight: 400;
   color: #292826;
 }
 
-.input-style {
+.input-style-prim, .login-register-container .login-container form input, .login-register-container .login-container form textarea, .checkout-page-container .checkout-shipping-details-container form input, .checkout-page-container .checkout-shipping-details-container form textarea, #my-account-container #account-detail form input {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -724,13 +696,11 @@ form.search-site button {
   border-radius: 4px;
   box-sizing: border-box;
   font-size: 14px;
-  font-family: Arial, sans-serif;
-  color: #292826;
   font-weight: 400;
   background-color: #f2f2f2;
 }
 
-.input-submit-button {
+.input-submit-button-prim, .login-register-container .login-container form input[type=submit], #my-account-container #account-detail form input[type=submit] {
   width: 100%;
   background-color: #292826;
   color: #F9D342;
@@ -787,8 +757,6 @@ form.search-site button {
 #container-shop .shop-product p {
   text-align: center;
   font-size: 15px;
-  font-family: Arial, sans-serif;
-  color: #292826;
   font-weight: 550;
   margin: 0;
 }
@@ -804,13 +772,11 @@ form.search-site button {
 
 .input-label {
   font-size: 16px;
-  font-family: Arial, sans-serif;
-  color: #292826;
   font-weight: 400;
   color: #292826;
 }
 
-.input-style {
+.input-style-prim, .login-register-container .login-container form input, .login-register-container .login-container form textarea, .checkout-page-container .checkout-shipping-details-container form input, .checkout-page-container .checkout-shipping-details-container form textarea, #my-account-container #account-detail form input {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -819,13 +785,11 @@ form.search-site button {
   border-radius: 4px;
   box-sizing: border-box;
   font-size: 14px;
-  font-family: Arial, sans-serif;
-  color: #292826;
   font-weight: 400;
   background-color: #f2f2f2;
 }
 
-.input-submit-button {
+.input-submit-button-prim, .login-register-container .login-container form input[type=submit], #my-account-container #account-detail form input[type=submit] {
   width: 100%;
   background-color: #292826;
   color: #F9D342;
@@ -853,8 +817,6 @@ form.search-site button {
 }
 #blog-carousel p {
   font-size: 16px;
-  font-family: Arial, sans-serif;
-  color: #292826;
   font-weight: 400;
   color: white;
   height: 100px;
@@ -863,8 +825,6 @@ form.search-site button {
 }
 #blog-carousel h2 {
   font-size: x-large;
-  font-family: Arial, sans-serif;
-  color: #292826;
   font-weight: 600;
   color: #F9D342;
   padding-left: 16px;
@@ -886,13 +846,11 @@ form.search-site button {
 
 .input-label {
   font-size: 16px;
-  font-family: Arial, sans-serif;
-  color: #292826;
   font-weight: 400;
   color: #292826;
 }
 
-.input-style {
+.input-style-prim, .login-register-container .login-container form input, .login-register-container .login-container form textarea, .checkout-page-container .checkout-shipping-details-container form input, .checkout-page-container .checkout-shipping-details-container form textarea, #my-account-container #account-detail form input {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -901,13 +859,11 @@ form.search-site button {
   border-radius: 4px;
   box-sizing: border-box;
   font-size: 14px;
-  font-family: Arial, sans-serif;
-  color: #292826;
   font-weight: 400;
   background-color: #f2f2f2;
 }
 
-.input-submit-button {
+.input-submit-button-prim, .login-register-container .login-container form input[type=submit], #my-account-container #account-detail form input[type=submit] {
   width: 100%;
   background-color: #292826;
   color: #F9D342;
@@ -946,7 +902,6 @@ form.search-site button {
 #video-carousel-container .video-card H2 {
   font-size: 16px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  color: #292826;
   font-weight: 600;
   color: gainsboro;
   padding: 0 0 0 18px;
@@ -965,13 +920,11 @@ form.search-site button {
 
 .input-label {
   font-size: 16px;
-  font-family: Arial, sans-serif;
-  color: #292826;
   font-weight: 400;
   color: #292826;
 }
 
-.input-style {
+.input-style-prim, .login-register-container .login-container form input, .login-register-container .login-container form textarea, .checkout-page-container .checkout-shipping-details-container form input, .checkout-page-container .checkout-shipping-details-container form textarea, #my-account-container #account-detail form input, #contact-form-container .contact-inputs #contact-submit-form input {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -980,13 +933,11 @@ form.search-site button {
   border-radius: 4px;
   box-sizing: border-box;
   font-size: 14px;
-  font-family: Arial, sans-serif;
-  color: #292826;
   font-weight: 400;
   background-color: #f2f2f2;
 }
 
-.input-submit-button {
+.input-submit-button-prim, .login-register-container .login-container form input[type=submit], #my-account-container #account-detail form input[type=submit] {
   width: 100%;
   background-color: #292826;
   color: #F9D342;
@@ -1008,8 +959,6 @@ form.search-site button {
 
 .contact-info h1 {
   font-size: 60px;
-  font-family: Arial, sans-serif;
-  color: #292826;
   font-weight: 600;
   color: white;
   letter-spacing: 2px;
@@ -1033,8 +982,6 @@ form.search-site button {
 @media screen and (max-width: 750px) {
   .contact-info h1 {
     font-size: xx-large;
-    font-family: Arial, sans-serif;
-    color: #292826;
     font-weight: 600;
     color: white !important;
   }
@@ -1057,24 +1004,18 @@ form.search-site button {
 
 #contact-form-container .form-desc h1 {
   font-size: xx-large;
-  font-family: Arial, sans-serif;
-  color: #292826;
   font-weight: 600;
   margin: 0;
 }
 
 #contact-form-container .form-desc h2 {
   font-size: x-large;
-  font-family: Arial, sans-serif;
-  color: #292826;
   font-weight: 600;
   margin: 0;
 }
 
 #contact-form-container .form-desc p {
   font-size: 16px;
-  font-family: Arial, sans-serif;
-  color: #292826;
   font-weight: 400;
 }
 
@@ -1084,14 +1025,8 @@ form.search-site button {
 
 #contact-form-container .contact-inputs #contact-submit-form input {
   font-size: 14px;
-  font-family: Arial, sans-serif;
-  color: #292826;
   font-weight: 400;
-  padding: 10px;
-  width: 100%;
-  margin: 5px 0 5px 5px;
-  border: none;
-  background-color: white;
+  background-color: white !important;
 }
 
 #contact-form-container .contact-inputs #contact-submit-form .contact-name, #contact-form-container .contact-inputs #contact-submit-form .contact-email {
@@ -1106,8 +1041,6 @@ form.search-site button {
 
 #contact-form-container .contact-inputs textarea {
   font-size: 14px;
-  font-family: Arial, sans-serif;
-  color: #292826;
   font-weight: 400;
   width: 100%;
   border: none;
@@ -1165,8 +1098,6 @@ form.search-site button {
 }
 .inquiry-email-contact h1 {
   font-size: x-large;
-  font-family: Arial, sans-serif;
-  color: #292826;
   font-weight: 600;
   color: #F9D342;
   margin: 0;
@@ -1183,13 +1114,11 @@ form.search-site button {
 
 .input-label {
   font-size: 16px;
-  font-family: Arial, sans-serif;
-  color: #292826;
   font-weight: 400;
   color: #292826;
 }
 
-.input-style {
+.input-style-prim, .login-register-container .login-container form input, .login-register-container .login-container form textarea, .checkout-page-container .checkout-shipping-details-container form input, .checkout-page-container .checkout-shipping-details-container form textarea, #my-account-container #account-detail form input, #contact-form-container .contact-inputs #contact-submit-form input {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -1198,13 +1127,11 @@ form.search-site button {
   border-radius: 4px;
   box-sizing: border-box;
   font-size: 14px;
-  font-family: Arial, sans-serif;
-  color: #292826;
   font-weight: 400;
   background-color: #f2f2f2;
 }
 
-.input-submit-button {
+.input-submit-button-prim, .login-register-container .login-container form input[type=submit], #my-account-container #account-detail form input[type=submit] {
   width: 100%;
   background-color: #292826;
   color: #F9D342;
@@ -1222,8 +1149,6 @@ form.search-site button {
 #my-account-container p {
   padding: 0 0 4% 4%;
   font-size: 14px;
-  font-family: Arial, sans-serif;
-  color: #292826;
   font-weight: 400;
 }
 #my-account-container #my-account-data {
@@ -1242,8 +1167,6 @@ form.search-site button {
 }
 #my-account-container .my-account-navigation ul li {
   font-size: 15px;
-  font-family: Arial, sans-serif;
-  color: #292826;
   font-weight: 550;
   cursor: pointer;
   list-style: none;
@@ -1289,16 +1212,12 @@ form.search-site button {
 }
 #my-account-container #my-account-dashboard th {
   font-size: 15px;
-  font-family: Arial, sans-serif;
-  color: #292826;
   font-weight: 600;
   background-color: rgba(233, 233, 233, 0.582);
   padding: 10px 0 10px 0;
 }
 #my-account-container #my-account-dashboard td {
   font-size: 14px;
-  font-family: Arial, sans-serif;
-  color: #292826;
   font-weight: 400;
   padding: 10px 0 10px 0;
   background-color: rgba(245, 245, 245, 0.336);
@@ -1350,8 +1269,6 @@ form.search-site button {
     padding-right: 10px;
     white-space: nowrap;
     font-size: 15px;
-    font-family: Arial, sans-serif;
-    color: #292826;
     font-weight: 550;
   }
   #my-account-container #my-account-data #my-account-dashboard td:nth-of-type(1):before {
@@ -1375,14 +1292,10 @@ form.search-site button {
 }
 #my-account-container #view-order h1, #my-account-container #account-wish-list h1 {
   font-size: x-large;
-  font-family: Arial, sans-serif;
-  color: #292826;
   font-weight: 600;
 }
 #my-account-container #view-order p, #my-account-container #account-wish-list p {
   font-size: 16px;
-  font-family: Arial, sans-serif;
-  color: #292826;
   font-weight: 400;
   padding: 0;
   margin: 0;
@@ -1394,21 +1307,20 @@ form.search-site button {
 }
 #my-account-container #view-order table th, #my-account-container #account-wish-list table th {
   font-size: 15px;
-  font-family: Arial, sans-serif;
-  color: #292826;
   font-weight: 600;
   background-color: rgba(233, 233, 233, 0.582);
   padding: 15px 0 15px 20px;
 }
 #my-account-container #view-order table td, #my-account-container #account-wish-list table td {
   font-size: 14px;
-  font-family: Arial, sans-serif;
-  color: #292826;
   font-weight: 400;
   padding: 15px 0 15px 20px;
   background-color: rgba(245, 245, 245, 0.336);
 }
 #my-account-container #account-wish-list {
+  display: block;
+}
+#my-account-container #account-detail {
   display: none;
 }
 #my-account-container #account-detail form {
@@ -1419,7 +1331,6 @@ form.search-site button {
   margin: 0;
   font-size: small;
   font-family: fantasy;
-  color: #292826;
   font-weight: 400;
   font-style: italic;
 }
@@ -1428,13 +1339,11 @@ form.search-site button {
 }
 #my-account-container #account-detail form label {
   font-size: 16px;
-  font-family: Arial, sans-serif;
-  color: #292826;
   font-weight: 400;
-  color: #292826;
 }
 #my-account-container #account-detail form .account-1st-row {
   display: flex;
+  display: -webkit-flex;
   width: 100%;
 }
 #my-account-container #account-detail form .account-1st-row .account-first-name {
@@ -1443,31 +1352,6 @@ form.search-site button {
 #my-account-container #account-detail form .account-1st-row .account-first-name, #my-account-container #account-detail form .account-1st-row .account-last-name {
   display: block;
   width: 50%;
-}
-#my-account-container #account-detail form input {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-  font-size: 14px;
-  font-family: Arial, sans-serif;
-  color: #292826;
-  font-weight: 400;
-  background-color: #f2f2f2;
-}
-#my-account-container #account-detail form input[type=submit] {
-  width: 100%;
-  background-color: #292826;
-  color: #F9D342;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 15px;
 }
 #my-account-container #account-detail form input[type=submit]:hover {
   background-color: #F9D342;
@@ -1499,13 +1383,11 @@ form.search-site button {
 
 .input-label {
   font-size: 16px;
-  font-family: Arial, sans-serif;
-  color: #292826;
   font-weight: 400;
   color: #292826;
 }
 
-.input-style {
+.input-style-prim, .login-register-container .login-container form input, .login-register-container .login-container form textarea, .checkout-page-container .checkout-shipping-details-container form input, .checkout-page-container .checkout-shipping-details-container form textarea, #my-account-container #account-detail form input, #contact-form-container .contact-inputs #contact-submit-form input {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -1514,13 +1396,11 @@ form.search-site button {
   border-radius: 4px;
   box-sizing: border-box;
   font-size: 14px;
-  font-family: Arial, sans-serif;
-  color: #292826;
   font-weight: 400;
   background-color: #f2f2f2;
 }
 
-.input-submit-button {
+.input-submit-button-prim, .login-register-container .login-container form input[type=submit], #my-account-container #account-detail form input[type=submit] {
   width: 100%;
   background-color: #292826;
   color: #F9D342;
@@ -1552,7 +1432,6 @@ form.search-site button {
 .cart-table-container .products-in-cart thead th {
   font-size: 16px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  color: #292826;
   font-weight: 600;
   text-align: left;
   padding: 30px 10px 30px 0px;
@@ -1564,8 +1443,6 @@ form.search-site button {
 
 .cart-table-container .products-in-cart tbody tr {
   font-size: 14px;
-  font-family: Arial, sans-serif;
-  color: #292826;
   font-weight: 400;
 }
 
@@ -1585,8 +1462,6 @@ form.search-site button {
   text-align: center;
   max-width: 60px;
   font-size: 14px;
-  font-family: Arial, sans-serif;
-  color: #292826;
   font-weight: 400;
 }
 
@@ -1635,6 +1510,9 @@ form.search-site button {
   font-size: 15px;
   font-weight: 600;
   cursor: pointer;
+  background-color: white !important;
+  cursor: text !important;
+  color: black;
 }
 
 .cart-table-container .products-in-cart tfoot tr .in-cart-footer-container .in-cart-apply-coupon-button {
@@ -1780,8 +1658,6 @@ form.search-site button {
     padding-right: 10px;
     white-space: nowrap;
     font-size: 15px;
-    font-family: Arial, sans-serif;
-    color: #292826;
     font-weight: 600;
   }
 
@@ -1823,8 +1699,6 @@ form.search-site button {
 
 .cart-total-container div .cart-total-title {
   font-size: x-large;
-  font-family: Arial, sans-serif;
-  color: #292826;
   font-weight: 600;
 }
 
@@ -1838,16 +1712,12 @@ form.search-site button {
   background-color: rgba(233, 233, 233, 0.582);
   vertical-align: top;
   font-size: 15px;
-  font-family: Arial, sans-serif;
-  color: #292826;
   font-weight: 600;
 }
 
 .cart-total-container div table td {
   padding: 17px 40px 0px 17px;
   font-size: 14px;
-  font-family: Arial, sans-serif;
-  color: #292826;
   font-weight: 400;
   vertical-align: top;
   background-color: rgba(245, 245, 245, 0.336);
@@ -1898,13 +1768,11 @@ form.search-site button {
 
 .input-label {
   font-size: 16px;
-  font-family: Arial, sans-serif;
-  color: #292826;
   font-weight: 400;
   color: #292826;
 }
 
-.input-style {
+.input-style-prim, .login-register-container .login-container form input, .login-register-container .login-container form textarea, .checkout-page-container .checkout-shipping-details-container form input, .checkout-page-container .checkout-shipping-details-container form textarea, #my-account-container #account-detail form input, #contact-form-container .contact-inputs #contact-submit-form input {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -1913,13 +1781,11 @@ form.search-site button {
   border-radius: 4px;
   box-sizing: border-box;
   font-size: 14px;
-  font-family: Arial, sans-serif;
-  color: #292826;
   font-weight: 400;
   background-color: #f2f2f2;
 }
 
-.input-submit-button {
+.input-submit-button-prim, .login-register-container .login-container form input[type=submit], #my-account-container #account-detail form input[type=submit] {
   width: 100%;
   background-color: #292826;
   color: #F9D342;
@@ -1940,8 +1806,6 @@ form.search-site button {
 .single-product-page-container .single-product-title {
   grid-area: nt;
   font-size: x-large;
-  font-family: Arial, sans-serif;
-  color: #292826;
   font-weight: 600;
 }
 .single-product-page-container .single-product-image {
@@ -1965,8 +1829,6 @@ form.search-site button {
 }
 .single-product-page-container .product-highlight .single-product-price {
   font-size: x-large;
-  font-family: Arial, sans-serif;
-  color: #292826;
   font-weight: 600;
 }
 .single-product-page-container .product-highlight .single-product-quantity {
@@ -1981,8 +1843,6 @@ form.search-site button {
   text-align: center;
   max-width: 60px;
   font-size: 14px;
-  font-family: Arial, sans-serif;
-  color: #292826;
   font-weight: 400;
 }
 .single-product-page-container .product-highlight .single-product-addtocart {
@@ -2002,14 +1862,10 @@ form.search-site button {
 }
 .single-product-page-container .product-highlight .single-product-specs h1 {
   font-size: x-large;
-  font-family: Arial, sans-serif;
-  color: #292826;
   font-weight: 600;
 }
 .single-product-page-container .product-highlight .single-product-specs ul.specs-list {
   font-size: 14px;
-  font-family: Arial, sans-serif;
-  color: #292826;
   font-weight: 400;
 }
 .single-product-page-container .product-highlight .single-product-specs ul.specs-list li {
@@ -2048,14 +1904,10 @@ form.search-site button {
 }
 .single-product-page-container .single-product-long-desc h1 {
   font-size: x-large;
-  font-family: Arial, sans-serif;
-  color: #292826;
   font-weight: 600;
 }
 .single-product-page-container .single-product-long-desc p {
   font-size: 14px;
-  font-family: Arial, sans-serif;
-  color: #292826;
   font-weight: 400;
 }
 .single-product-page-container .single-product-dimention {
@@ -2064,8 +1916,6 @@ form.search-site button {
 }
 .single-product-page-container .single-product-dimention h1 {
   font-size: x-large;
-  font-family: Arial, sans-serif;
-  color: #292826;
   font-weight: 600;
 }
 .single-product-page-container .single-product-dimention table {
@@ -2074,8 +1924,6 @@ form.search-site button {
 }
 .single-product-page-container .single-product-dimention table tr th {
   font-size: 15px;
-  font-family: Arial, sans-serif;
-  color: #292826;
   font-weight: 600;
   background-color: rgba(233, 233, 233, 0.582);
   text-align: left;
@@ -2083,8 +1931,6 @@ form.search-site button {
 }
 .single-product-page-container .single-product-dimention table tr td {
   font-size: 14px;
-  font-family: Arial, sans-serif;
-  color: #292826;
   font-weight: 400;
   padding: 10px 0px 10px 15px;
 }
@@ -2103,13 +1949,11 @@ form.search-site button {
 
 .input-label {
   font-size: 16px;
-  font-family: Arial, sans-serif;
-  color: #292826;
   font-weight: 400;
   color: #292826;
 }
 
-.input-style {
+.input-style-prim, .login-register-container .login-container form input, .login-register-container .login-container form textarea, .checkout-page-container .checkout-shipping-details-container form input, .checkout-page-container .checkout-shipping-details-container form textarea, #my-account-container #account-detail form input, #contact-form-container .contact-inputs #contact-submit-form input {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -2118,13 +1962,11 @@ form.search-site button {
   border-radius: 4px;
   box-sizing: border-box;
   font-size: 14px;
-  font-family: Arial, sans-serif;
-  color: #292826;
   font-weight: 400;
   background-color: #f2f2f2;
 }
 
-.input-submit-button {
+.input-submit-button-prim, .login-register-container .login-container form input[type=submit], #my-account-container #account-detail form input[type=submit] {
   width: 100%;
   background-color: #292826;
   color: #F9D342;
@@ -2150,13 +1992,11 @@ form.search-site button {
 
 .input-label {
   font-size: 16px;
-  font-family: Arial, sans-serif;
-  color: #292826;
   font-weight: 400;
   color: #292826;
 }
 
-.input-style {
+.input-style-prim, .login-register-container .login-container form input, .login-register-container .login-container form textarea, #my-account-container #account-detail form input, .checkout-page-container .checkout-shipping-details-container form input, .checkout-page-container .checkout-shipping-details-container form textarea, #contact-form-container .contact-inputs #contact-submit-form input {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -2165,13 +2005,11 @@ form.search-site button {
   border-radius: 4px;
   box-sizing: border-box;
   font-size: 14px;
-  font-family: Arial, sans-serif;
-  color: #292826;
   font-weight: 400;
   background-color: #f2f2f2;
 }
 
-.input-submit-button {
+.input-submit-button-prim, .login-register-container .login-container form input[type=submit], #my-account-container #account-detail form input[type=submit] {
   width: 100%;
   background-color: #292826;
   color: #F9D342;
@@ -2185,6 +2023,7 @@ form.search-site button {
 
 .checkout-page-container {
   display: flex;
+  display: -webkit-flex;
   width: 100%;
   max-width: 1100px;
   margin: 5px auto;
@@ -2200,13 +2039,11 @@ form.search-site button {
 }
 .checkout-page-container .checkout-shipping-details-container form label {
   font-size: 16px;
-  font-family: Arial, sans-serif;
-  color: #292826;
   font-weight: 400;
-  color: #292826;
 }
 .checkout-page-container .checkout-shipping-details-container form .shipping-1st-row {
   display: flex;
+  display: -webkit-flex;
   width: 100%;
 }
 .checkout-page-container .checkout-shipping-details-container form .shipping-1st-row .shipping-first-name {
@@ -2215,20 +2052,6 @@ form.search-site button {
 .checkout-page-container .checkout-shipping-details-container form .shipping-1st-row .shipping-first-name, .checkout-page-container .checkout-shipping-details-container form .shipping-1st-row .shipping-last-name {
   display: block;
   width: 50%;
-}
-.checkout-page-container .checkout-shipping-details-container form input, .checkout-page-container .checkout-shipping-details-container form textarea {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-  font-size: 14px;
-  font-family: Arial, sans-serif;
-  color: #292826;
-  font-weight: 400;
-  background-color: #f2f2f2;
 }
 .checkout-page-container .checkout-order-invoice {
   width: 45%;
@@ -2243,15 +2066,11 @@ form.search-site button {
   background-color: rgba(233, 233, 233, 0.582);
   vertical-align: top;
   font-size: 15px;
-  font-family: Arial, sans-serif;
-  color: #292826;
   font-weight: 600;
 }
 .checkout-page-container .checkout-order-invoice table td {
   padding: 17px 40px 0px 17px;
   font-size: 14px;
-  font-family: Arial, sans-serif;
-  color: #292826;
   font-weight: 400;
   vertical-align: top;
   background-color: rgba(245, 245, 245, 0.336);
@@ -2262,8 +2081,6 @@ form.search-site button {
 }
 .checkout-page-container .checkout-order-invoice .checkout-policy p {
   font-size: 14px;
-  font-family: Arial, sans-serif;
-  color: #292826;
   font-weight: 400;
 }
 .checkout-page-container .checkout-order-invoice .checkout-policy .policy-checkbox {
@@ -2319,13 +2136,11 @@ form.search-site button {
 
 .input-label {
   font-size: 16px;
-  font-family: Arial, sans-serif;
-  color: #292826;
   font-weight: 400;
   color: #292826;
 }
 
-.input-style {
+.input-style-prim, #my-account-container #account-detail form input, .checkout-page-container .checkout-shipping-details-container form input, .checkout-page-container .checkout-shipping-details-container form textarea, .login-register-container .login-container form input, .login-register-container .login-container form textarea, #contact-form-container .contact-inputs #contact-submit-form input {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -2334,13 +2149,11 @@ form.search-site button {
   border-radius: 4px;
   box-sizing: border-box;
   font-size: 14px;
-  font-family: Arial, sans-serif;
-  color: #292826;
   font-weight: 400;
   background-color: #f2f2f2;
 }
 
-.input-submit-button {
+.input-submit-button-prim, #my-account-container #account-detail form input[type=submit], .login-register-container .login-container form input[type=submit] {
   width: 100%;
   background-color: #292826;
   color: #F9D342;
@@ -2371,35 +2184,7 @@ form.search-site button {
 }
 .login-register-container .login-container form label {
   font-size: 16px;
-  font-family: Arial, sans-serif;
-  color: #292826;
   font-weight: 400;
-  color: #292826;
-}
-.login-register-container .login-container form input, .login-register-container .login-container form textarea {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-  font-size: 14px;
-  font-family: Arial, sans-serif;
-  color: #292826;
-  font-weight: 400;
-  background-color: #f2f2f2;
-}
-.login-register-container .login-container form input[type=submit] {
-  float: right;
-  width: 30%;
-  background-color: #292826;
-  color: #F9D342;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
 }
 
 /*# sourceMappingURL=style.css.map */

@@ -13,12 +13,14 @@
     border-style: solid;
     border-width: 0 0 5px 0;
     border-color: var.$identity-color ;
+
     // Email address text removing margin 
     h1 {
         @include var.sub-title;
         color: var.$identity-color;
         margin: 0;
     }
+    
     // Email address text color 
     .inquiry-email-address {
         color: var.$identity-color;

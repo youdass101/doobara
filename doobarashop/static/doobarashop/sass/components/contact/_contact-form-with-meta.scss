@@ -7,7 +7,6 @@
     align-content: space-around;
     align-items: center;
     padding: 50px 0 50px 0;
-    // width: auto;
     background-color: rgb(205, 225, 233);
     
     // Submition contact form infor text 
@@ -21,7 +20,6 @@
     }
     // Form input div class contaciner 
     .contact-inputs {
-        // width: 60%;
         padding-right: 10px;
 
         //COntact form
@@ -29,11 +27,8 @@
             // input of contact sumbition form  
             input {
                 @include var.par-body;
-                padding: 10px;   //size
-                width: 100%;
-                margin: 5px 0 5px 5px ;   //space between cells 
-                border: none;
-                background-color: white;
+                @extend .input-style-prim;
+                background-color: white !important;
             }
             // Set inline on desk
             .contact-name, .contact-email {
@@ -61,8 +56,7 @@
             button {
                 @include var.button-style-wide;
                 padding: 10px 30px;
-                letter-spacing: 2px; 
-                
+                letter-spacing: 2px;    
             }
 
             button:hover {

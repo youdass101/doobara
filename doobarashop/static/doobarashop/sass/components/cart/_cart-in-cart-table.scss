@@ -72,14 +72,16 @@
                     width: 100%;
                     @include var.flex-default;
                     align-items: center;
-                    
-                    
+                      
                     // COUPON TEXT INPUT DIV
                     .in-cart-coupon-input {
                         flex: 0;
                         padding-top: 20px;
                         input {
                             @include var.button-style-wide;
+                            background-color: white !important;
+                            cursor: text !important;
+                            color: black;
                         }
                     }
 
@@ -191,7 +193,6 @@
                     .in-cart-footer-container { 
                         align-items: flex-start !important;
                         flex-direction: column;
-
 
                         div {
                             padding-bottom: 10px;

@@ -3,7 +3,6 @@
     // Featured product elemet
     .product-card-container {
         grid-area: fp;
-        // align-self: center;
         padding-left: 1%;
         @include var.flex-default;
         flex-wrap: wrap;
@@ -29,8 +28,6 @@
             box-shadow: 1px 1px 4px 5px rgba(0, 0, 0, 0.5 );
             text-decoration: none;
 
-       
-            
             // p element child of product-card
             p { 
                 margin: 0px 0px 15px 0px;
@@ -38,7 +35,6 @@
                 text-align: center;
                 line-height: 130%; 
                 @include var.nav-title;
-
             } 
          
             // Product-card information 
