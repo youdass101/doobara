@@ -16,7 +16,6 @@
 
         // Table header
         thead {
-            background-color: var.$table-header-background-color-v1;
             th {
                 @include var.par-title;
                 text-align: left;
@@ -26,10 +25,7 @@
 
         // Table body where the arbitrary data goes 
         tbody {
-            background-color: var.$table-body-background-color-v1;
             tr {
-                @include var.par-body;
-
                 td {
                     padding: 20px 10px 20px 0px ;
                 }

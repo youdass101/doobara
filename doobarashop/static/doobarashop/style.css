@@ -71,6 +71,18 @@ html, body {
   display: block !important;
 }
 
+th {
+  font-size: 15px;
+  font-weight: 600;
+  background-color: rgba(233, 233, 233, 0.582);
+}
+
+td {
+  font-size: 14px;
+  font-weight: 400;
+  background-color: rgba(245, 245, 245, 0.336);
+}
+
 .layout-grid-container {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
@@ -1203,7 +1215,7 @@ form.search-site button {
   }
 }
 #my-account-container #my-account-dashboard {
-  display: none;
+  display: block;
 }
 #my-account-container #my-account-dashboard table {
   width: 100%;
@@ -1211,16 +1223,10 @@ form.search-site button {
   border-collapse: collapse;
 }
 #my-account-container #my-account-dashboard th {
-  font-size: 15px;
-  font-weight: 600;
-  background-color: rgba(233, 233, 233, 0.582);
   padding: 10px 0 10px 0;
 }
 #my-account-container #my-account-dashboard td {
-  font-size: 14px;
-  font-weight: 400;
   padding: 10px 0 10px 0;
-  background-color: rgba(245, 245, 245, 0.336);
 }
 #my-account-container #my-account-dashboard td button {
   padding: 7px;
@@ -1288,7 +1294,7 @@ form.search-site button {
   }
 }
 #my-account-container #view-order, #my-account-container #account-wish-list {
-  display: none;
+  display: block;
 }
 #my-account-container #view-order h1, #my-account-container #account-wish-list h1 {
   font-size: x-large;
@@ -1306,16 +1312,10 @@ form.search-site button {
   border-collapse: collapse;
 }
 #my-account-container #view-order table th, #my-account-container #account-wish-list table th {
-  font-size: 15px;
-  font-weight: 600;
-  background-color: rgba(233, 233, 233, 0.582);
   padding: 15px 0 15px 20px;
 }
 #my-account-container #view-order table td, #my-account-container #account-wish-list table td {
-  font-size: 14px;
-  font-weight: 400;
   padding: 15px 0 15px 20px;
-  background-color: rgba(245, 245, 245, 0.336);
 }
 #my-account-container #account-wish-list {
   display: block;
@@ -1425,25 +1425,12 @@ form.search-site button {
   width: 100%;
 }
 
-.cart-table-container .products-in-cart thead {
-  background-color: rgba(233, 233, 233, 0.582);
-}
-
 .cart-table-container .products-in-cart thead th {
   font-size: 16px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-weight: 600;
   text-align: left;
   padding: 30px 10px 30px 0px;
-}
-
-.cart-table-container .products-in-cart tbody {
-  background-color: rgba(245, 245, 245, 0.336);
-}
-
-.cart-table-container .products-in-cart tbody tr {
-  font-size: 14px;
-  font-weight: 400;
 }
 
 .cart-table-container .products-in-cart tbody tr td {
@@ -1709,18 +1696,12 @@ form.search-site button {
 
 .cart-total-container div table th {
   padding: 15px 0px 15px 0px;
-  background-color: rgba(233, 233, 233, 0.582);
   vertical-align: top;
-  font-size: 15px;
-  font-weight: 600;
 }
 
 .cart-total-container div table td {
   padding: 17px 40px 0px 17px;
-  font-size: 14px;
-  font-weight: 400;
   vertical-align: top;
-  background-color: rgba(245, 245, 245, 0.336);
 }
 
 .cart-total-container div button {
@@ -2063,17 +2044,11 @@ form.search-site button {
 }
 .checkout-page-container .checkout-order-invoice table th {
   padding: 15px 0px 15px 0px;
-  background-color: rgba(233, 233, 233, 0.582);
   vertical-align: top;
-  font-size: 15px;
-  font-weight: 600;
 }
 .checkout-page-container .checkout-order-invoice table td {
   padding: 17px 40px 0px 17px;
-  font-size: 14px;
-  font-weight: 400;
   vertical-align: top;
-  background-color: rgba(245, 245, 245, 0.336);
 }
 .checkout-page-container .checkout-order-invoice .checkout-policy {
   background-color: #f2f2f2;

@@ -22,16 +22,12 @@
             border-collapse: collapse;
             th {
                 padding: 15px 0px 15px 0px;
-                background-color: var.$table-header-background-color-v1;
                 vertical-align: top;
-                @include var.header-title;
             }
             
             td {
                 padding: 17px 40px 0px 17px;
-                @include var.par-body;
                 vertical-align: top;
-                background-color: var.$table-body-background-color-v1;
             }
         }
 
