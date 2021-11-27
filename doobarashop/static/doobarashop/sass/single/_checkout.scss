@@ -58,9 +58,7 @@
         .checkout-policy {
             background-color: var.$input-background-color-v1;
             padding: 10px;
-            p {
-                @include var.par-body;
-            }
+
             .policy-checkbox {
                 display: flex;
                 align-items: center;

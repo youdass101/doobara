@@ -8,7 +8,6 @@
     flex-direction: column;
     align-items: center;
     h1 {
-        @include var.top-title;
         color: white;
         letter-spacing: 2px;
     }
@@ -33,8 +32,9 @@
 @media screen and (max-width: 750px) {
     // CONTACT US PAGE RESPONSVITY
     .contact-info {
-        h1 {
-            @include var.mid-title;
+        h2 {
+            font-size: xx-large;
+            font-weight: 600;
             color: white !important;
         }
     }

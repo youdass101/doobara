@@ -10,12 +10,7 @@
     div {  
         width: 47%;
         padding: 0 0 30px 0;
-        
-        // Title over checkout tabel (cart totals)
-        .cart-total-title {
-            @include var.sub-title;
-        }
-        
+           
         // Check out table element 
         table {
             width: 100%;

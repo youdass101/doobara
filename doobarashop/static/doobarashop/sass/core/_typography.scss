@@ -3,10 +3,8 @@
 html {
     height: 100%;
     width: 100%; 
-    font-weight: 400;
     line-height: 1.618; 
     font-family: var.$primary-font;
-    font-size:13px; 
     color: var.$back-color;
 }
 
@@ -27,7 +25,9 @@ html, body {
 
 // All pages element border boxing 
 * {
-    box-sizing: border-box
+    box-sizing: border-box;
+    font-size: 14px;
+    font-weight: 400;
 }
 
 /* Any Page content to be used for sevarel elements */
@@ -46,7 +46,33 @@ th {
 }
 
 td {
-    @include var.par-body;
     background-color: var.$table-body-background-color-v1;
 }
+
+h1 {
+    font-size: 60px;
+    font-weight: 600;
+}
+
+h2 {
+    font-size: xx-large;
+    font-weight: 600;
+}
+
+h3 {
+    font-size: x-large;
+    font-weight: 600;
+}
+
+h4 {
+    font-size: 16px;
+    font-family: var.$third-font;
+    font-weight: 600 ;
+}
+
+h5{
+    font-size: 16px;
+    font-weight: 400;
+}
+
 

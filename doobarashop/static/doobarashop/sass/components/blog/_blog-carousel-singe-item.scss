@@ -18,11 +18,9 @@ p {
     padding-right: 10px;
 }
 
-h2 {
-    @include var.sub-title;
+h3 {
     color: var.$identity-color;
     padding-left: 16px;
-
 }
 
 //Post card image styling 

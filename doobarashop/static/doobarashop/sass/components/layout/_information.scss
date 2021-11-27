@@ -20,7 +20,6 @@
     // phone and number disable url style and add padding
     a:link {
         // should be created in mixin
-        @include var.par-body ;
         color:white;
         text-decoration: none;
         padding-right: 20px;

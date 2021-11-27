@@ -15,8 +15,7 @@
     border-color: var.$identity-color ;
 
     // Email address text removing margin 
-    h1 {
-        @include var.sub-title;
+    h4 {
         color: var.$identity-color;
         margin: 0;
     }

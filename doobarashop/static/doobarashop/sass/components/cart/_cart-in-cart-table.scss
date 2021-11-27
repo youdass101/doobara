@@ -17,7 +17,9 @@
         // Table header
         thead {
             th {
-                @include var.par-title;
+                font-size: 16px;
+                font-family: var.$third-font;
+                font-weight: 600 ;
                 text-align: left;
                 padding: 30px 10px 30px 0px;
             }

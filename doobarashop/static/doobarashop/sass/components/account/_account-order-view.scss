@@ -1,11 +1,7 @@
-
+// account view single order data 
 #view-order {
     display: block;
-    h1 {
-        @include var.sub-title;
-    }
     p {
-        @include var.par-body-2;
         padding: 0;
         margin: 0;
     }
@@ -23,5 +19,4 @@
             padding: 15px 0 15px 20px;
         }
     }
-    
 }

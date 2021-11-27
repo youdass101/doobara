@@ -18,8 +18,6 @@
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
-  font-size: 14px;
-  font-weight: 400;
   background-color: #f2f2f2;
 }
 
@@ -38,10 +36,8 @@
 html {
   height: 100%;
   width: 100%;
-  font-weight: 400;
   line-height: 1.618;
   font-family: Arial, sans-serif;
-  font-size: 13px;
   color: #292826;
 }
 
@@ -60,6 +56,8 @@ html, body {
 
 * {
   box-sizing: border-box;
+  font-size: 14px;
+  font-weight: 400;
 }
 
 /* Any Page content to be used for sevarel elements */
@@ -78,9 +76,33 @@ th {
 }
 
 td {
-  font-size: 14px;
-  font-weight: 400;
   background-color: rgba(245, 245, 245, 0.336);
+}
+
+h1 {
+  font-size: 60px;
+  font-weight: 600;
+}
+
+h2 {
+  font-size: xx-large;
+  font-weight: 600;
+}
+
+h3 {
+  font-size: x-large;
+  font-weight: 600;
+}
+
+h4 {
+  font-size: 16px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: 600;
+}
+
+h5 {
+  font-size: 16px;
+  font-weight: 400;
 }
 
 .layout-grid-container {
@@ -109,8 +131,6 @@ td {
   align-self: center !important;
 }
 .header-top-bar-left a:link {
-  font-size: 14px;
-  font-weight: 400;
   color: white;
   text-decoration: none;
   padding-right: 20px;
@@ -170,8 +190,6 @@ td {
 form.search-site input[type=text] {
   border-bottom-left-radius: 4px;
   padding: 12px 20px;
-  font-size: 14px;
-  font-weight: 400;
   border: 1px solid #F9D342;
   float: left;
   width: 220px;
@@ -210,7 +228,6 @@ form.search-site button {
   border-top: 5px solid #F9D342;
   font-size: 15px;
   font-weight: 550;
-  color: #F9D342;
   align-items: center;
 }
 #navigation-menu a {
@@ -257,10 +274,6 @@ form.search-site button {
   font-size: 16px;
   font-weight: 400;
   color: white;
-}
-#cart-nav .homeTotal .cartUrl {
-  font-size: 14px;
-  font-weight: 400;
 }
 
 @media screen and (max-width: 530px) {
@@ -409,8 +422,6 @@ form.search-site button {
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
-  font-size: 14px;
-  font-weight: 400;
   background-color: #f2f2f2;
 }
 
@@ -494,8 +505,6 @@ form.search-site button {
 
 /* SLider Caption text */
 .slider-caption {
-  font-size: 14px;
-  font-weight: 400;
   color: #f2f2f2;
   position: absolute;
   width: 100%;
@@ -707,8 +716,6 @@ form.search-site button {
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
-  font-size: 14px;
-  font-weight: 400;
   background-color: #f2f2f2;
 }
 
@@ -771,6 +778,7 @@ form.search-site button {
   font-size: 15px;
   font-weight: 550;
   margin: 0;
+  color: #292826;
 }
 #container-shop .shop-product .product-price {
   padding-top: 15px;
@@ -796,8 +804,6 @@ form.search-site button {
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
-  font-size: 14px;
-  font-weight: 400;
   background-color: #f2f2f2;
 }
 
@@ -835,9 +841,7 @@ form.search-site button {
   padding-left: 15px;
   padding-right: 10px;
 }
-#blog-carousel h2 {
-  font-size: x-large;
-  font-weight: 600;
+#blog-carousel h3 {
   color: #F9D342;
   padding-left: 16px;
 }
@@ -870,8 +874,6 @@ form.search-site button {
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
-  font-size: 14px;
-  font-weight: 400;
   background-color: #f2f2f2;
 }
 
@@ -911,10 +913,7 @@ form.search-site button {
   width: 100%;
   height: 100%;
 }
-#video-carousel-container .video-card H2 {
-  font-size: 16px;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-weight: 600;
+#video-carousel-container .video-card h4 {
   color: gainsboro;
   padding: 0 0 0 18px;
 }
@@ -944,8 +943,6 @@ form.search-site button {
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
-  font-size: 14px;
-  font-weight: 400;
   background-color: #f2f2f2;
 }
 
@@ -970,8 +967,6 @@ form.search-site button {
 }
 
 .contact-info h1 {
-  font-size: 60px;
-  font-weight: 600;
   color: white;
   letter-spacing: 2px;
 }
@@ -992,7 +987,7 @@ form.search-site button {
 }
 
 @media screen and (max-width: 750px) {
-  .contact-info h1 {
+  .contact-info h2 {
     font-size: xx-large;
     font-weight: 600;
     color: white !important;
@@ -1014,15 +1009,7 @@ form.search-site button {
   align-self: flex-start;
 }
 
-#contact-form-container .form-desc h1 {
-  font-size: xx-large;
-  font-weight: 600;
-  margin: 0;
-}
-
-#contact-form-container .form-desc h2 {
-  font-size: x-large;
-  font-weight: 600;
+#contact-form-container .form-desc h1, #contact-form-container .form-desc h2 {
   margin: 0;
 }
 
@@ -1036,8 +1023,6 @@ form.search-site button {
 }
 
 #contact-form-container .contact-inputs #contact-submit-form input {
-  font-size: 14px;
-  font-weight: 400;
   background-color: white !important;
 }
 
@@ -1052,8 +1037,6 @@ form.search-site button {
 }
 
 #contact-form-container .contact-inputs textarea {
-  font-size: 14px;
-  font-weight: 400;
   width: 100%;
   border: none;
   height: 100px;
@@ -1108,9 +1091,7 @@ form.search-site button {
   border-width: 0 0 5px 0;
   border-color: #F9D342;
 }
-.inquiry-email-contact h1 {
-  font-size: x-large;
-  font-weight: 600;
+.inquiry-email-contact h4 {
   color: #F9D342;
   margin: 0;
 }
@@ -1138,8 +1119,6 @@ form.search-site button {
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
-  font-size: 14px;
-  font-weight: 400;
   background-color: #f2f2f2;
 }
 
@@ -1160,8 +1139,6 @@ form.search-site button {
 }
 #my-account-container p {
   padding: 0 0 4% 4%;
-  font-size: 14px;
-  font-weight: 400;
 }
 #my-account-container #my-account-data {
   width: 75%;
@@ -1296,13 +1273,7 @@ form.search-site button {
 #my-account-container #view-order, #my-account-container #account-wish-list {
   display: block;
 }
-#my-account-container #view-order h1, #my-account-container #account-wish-list h1 {
-  font-size: x-large;
-  font-weight: 600;
-}
 #my-account-container #view-order p, #my-account-container #account-wish-list p {
-  font-size: 16px;
-  font-weight: 400;
   padding: 0;
   margin: 0;
 }
@@ -1395,8 +1366,6 @@ form.search-site button {
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
-  font-size: 14px;
-  font-weight: 400;
   background-color: #f2f2f2;
 }
 
@@ -1448,8 +1417,6 @@ form.search-site button {
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.13);
   text-align: center;
   max-width: 60px;
-  font-size: 14px;
-  font-weight: 400;
 }
 
 .cart-table-container .products-in-cart tbody tr .in-cart-remove-icon {
@@ -1684,11 +1651,6 @@ form.search-site button {
   padding: 0 0 30px 0;
 }
 
-.cart-total-container div .cart-total-title {
-  font-size: x-large;
-  font-weight: 600;
-}
-
 .cart-total-container div table {
   width: 100%;
   border-collapse: collapse;
@@ -1761,8 +1723,6 @@ form.search-site button {
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
-  font-size: 14px;
-  font-weight: 400;
   background-color: #f2f2f2;
 }
 
@@ -1786,8 +1746,6 @@ form.search-site button {
 }
 .single-product-page-container .single-product-title {
   grid-area: nt;
-  font-size: x-large;
-  font-weight: 600;
 }
 .single-product-page-container .single-product-image {
   grid-area: i;
@@ -1808,10 +1766,6 @@ form.search-site button {
 .single-product-page-container .product-highlight {
   grid-area: h;
 }
-.single-product-page-container .product-highlight .single-product-price {
-  font-size: x-large;
-  font-weight: 600;
-}
 .single-product-page-container .product-highlight .single-product-quantity {
   width: 100%;
   padding: 7px;
@@ -1823,8 +1777,6 @@ form.search-site button {
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.13);
   text-align: center;
   max-width: 60px;
-  font-size: 14px;
-  font-weight: 400;
 }
 .single-product-page-container .product-highlight .single-product-addtocart {
   color: #fff;
@@ -1840,14 +1792,6 @@ form.search-site button {
 }
 .single-product-page-container .product-highlight .single-product-specs {
   padding-top: 15px;
-}
-.single-product-page-container .product-highlight .single-product-specs h1 {
-  font-size: x-large;
-  font-weight: 600;
-}
-.single-product-page-container .product-highlight .single-product-specs ul.specs-list {
-  font-size: 14px;
-  font-weight: 400;
 }
 .single-product-page-container .product-highlight .single-product-specs ul.specs-list li {
   padding-bottom: 5px;
@@ -1883,21 +1827,9 @@ form.search-site button {
 .single-product-page-container .single-product-long-desc {
   grid-area: ld;
 }
-.single-product-page-container .single-product-long-desc h1 {
-  font-size: x-large;
-  font-weight: 600;
-}
-.single-product-page-container .single-product-long-desc p {
-  font-size: 14px;
-  font-weight: 400;
-}
 .single-product-page-container .single-product-dimention {
   grid-area: d;
   padding-top: 25px;
-}
-.single-product-page-container .single-product-dimention h1 {
-  font-size: x-large;
-  font-weight: 600;
 }
 .single-product-page-container .single-product-dimention table {
   border-collapse: collapse;
@@ -1911,8 +1843,6 @@ form.search-site button {
   padding: 10px 0px 10px 15px;
 }
 .single-product-page-container .single-product-dimention table tr td {
-  font-size: 14px;
-  font-weight: 400;
   padding: 10px 0px 10px 15px;
 }
 
@@ -1942,8 +1872,6 @@ form.search-site button {
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
-  font-size: 14px;
-  font-weight: 400;
   background-color: #f2f2f2;
 }
 
@@ -1985,8 +1913,6 @@ form.search-site button {
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
-  font-size: 14px;
-  font-weight: 400;
   background-color: #f2f2f2;
 }
 
@@ -2054,10 +1980,6 @@ form.search-site button {
   background-color: #f2f2f2;
   padding: 10px;
 }
-.checkout-page-container .checkout-order-invoice .checkout-policy p {
-  font-size: 14px;
-  font-weight: 400;
-}
 .checkout-page-container .checkout-order-invoice .checkout-policy .policy-checkbox {
   display: flex;
   align-items: center;
@@ -2123,8 +2045,6 @@ form.search-site button {
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
-  font-size: 14px;
-  font-weight: 400;
   background-color: #f2f2f2;
 }
 

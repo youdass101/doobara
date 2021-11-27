@@ -14,8 +14,8 @@
         width: 35%;
         padding-left: 10px;
         align-self: flex-start;
-        h1 {@include var.mid-title; margin: 0;}
-        h2 {@include var.sub-title; margin: 0;}
+        h1 ,h2 {margin: 0;}
+
         p {@include var.par-body-2;}
     }
     // Form input div class contaciner 
@@ -26,7 +26,6 @@
         #contact-submit-form {
             // input of contact sumbition form  
             input {
-                @include var.par-body;
                 @extend .input-style-prim;
                 background-color: white !important;
             }
@@ -41,7 +40,6 @@
         }
 
         textarea {
-            @include var.par-body;
             width: 100%;
             border: none;
             height: 100px;   

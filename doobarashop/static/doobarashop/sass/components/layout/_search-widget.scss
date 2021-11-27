@@ -17,7 +17,6 @@
 form.search-site input[type=text] {
     border-bottom-left-radius: 4px ;
     padding: 12px 20px;
-    @include var.par-body;
     border: 1px solid var.$identity-color;
     float: left;
     width: 220px;

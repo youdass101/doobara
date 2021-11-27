@@ -38,6 +38,7 @@ a:link {
         text-align: center;
         @include var.nav-title;
         margin: 0;  
+        color: var.$back-color;
     }
 
     .product-price {
