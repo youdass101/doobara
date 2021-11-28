@@ -20,8 +20,22 @@ document.addEventListener('DOMContentLoaded', function(){
     var search_nav = document.getElementById('search-box-nav');
     var menu_nav = document.getElementById('navigation-menu');
     var cart_nav = document.getElementById('cart-nav');
-    var mobile_menu_btn_nav = document.getElementById('mobile-menu-btn')
-    var mobile_nav = document.getElementById('navigation-mobile')
+    var mobile_menu_btn_nav = document.getElementById('mobile-menu-btn');
+    var mobile_nav = document.getElementById('navigation-mobile');
+
+    // Display account to none
+    function account_default() {
+        document.getElementById('account-whishlist').classList.toggle('show', false)
+        document.getElementById('my-account-dashboard').style.display = 'none'
+        document.getElementById('account-details').classList.toggle('show', false)
+        document.getElementById('view-order').classList.toggle("show",false)
+    }
+    //Navigation menu whishlistbutton
+    document.getElementById('account-whishlist').onclick = () => {
+        account_default()
+        document.getElementById('account-wish-list').classList.toggle('show')
+    
+    }
 
     // Sticky is Number
     // Get the offset position of the navbar Assign to var

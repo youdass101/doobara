@@ -1271,7 +1271,7 @@ form.search-site button {
   }
 }
 #my-account-container #view-order, #my-account-container #account-wish-list {
-  display: block;
+  display: none;
 }
 #my-account-container #view-order p, #my-account-container #account-wish-list p {
   padding: 0;
@@ -1289,7 +1289,7 @@ form.search-site button {
   padding: 15px 0 15px 20px;
 }
 #my-account-container #account-wish-list {
-  display: block;
+  display: none;
 }
 #my-account-container #account-detail {
   display: none;
