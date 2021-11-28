@@ -27,12 +27,12 @@
         }
 
         // the proceed check out button under tabel 
-        button {
+        .cart-proceed-checkout-button {
             @include var.button-style-wide;
             width: 100% !important;
             font-size: x-large;  
         }   
-        button:hover {
+        .cart-proceed-checkout-button:hover {
             @include var.hover-secondary;
         }
     }

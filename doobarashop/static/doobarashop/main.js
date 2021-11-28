@@ -25,17 +25,47 @@ document.addEventListener('DOMContentLoaded', function(){
 
     // Display account to none
     function account_default() {
-        document.getElementById('account-whishlist').classList.toggle('show', false)
-        document.getElementById('my-account-dashboard').style.display = 'none'
-        document.getElementById('account-details').classList.toggle('show', false)
+        document.getElementById('account-wish-list').classList.toggle('show', false)
+        document.getElementById('my-account-dashboard').style.display = 'none';
+        document.getElementById('account-detail').classList.toggle('show', false)
         document.getElementById('view-order').classList.toggle("show",false)
     }
+
+    //Account current orders
+    document.getElementById('account-dash').onclick = () => {
+        account_default()
+        document.getElementById('my-account-dashboard').style.display = 'block'
+    }
+
+    //account order history
+    document.getElementById('account-orders').onclick = () => {
+    account_default()
+    document.getElementById('my-account-dashboard').style.display = 'block'
+    }
+
     //Navigation menu whishlistbutton
     document.getElementById('account-whishlist').onclick = () => {
         account_default()
         document.getElementById('account-wish-list').classList.toggle('show')
-    
     }
+
+       //Account edit
+       document.getElementById('account-edit').onclick = () => {
+        account_default()
+        document.getElementById('account-detail').classList.toggle('show')
+    }
+     
+    // ACCOUNT ORDER VIEW 
+    if (document.querySelectorAll('.view-order-button')) {
+        document.querySelectorAll('.view-order-button').forEach (button => {
+            button.onclick = () => {
+            account_default()
+            document.getElementById('view-order').classList.toggle('show')
+            }
+        })
+    }
+
+    // MENU STICKY 
 
     // Sticky is Number
     // Get the offset position of the navbar Assign to var
@@ -46,7 +76,6 @@ document.addEventListener('DOMContentLoaded', function(){
     //          display hidden menu links div
     menubtn.onclick = function() {
         mobilemenu.classList.toggle('show');
-
     }
     
     // Event -> mobilemenu
@@ -82,9 +111,10 @@ document.addEventListener('DOMContentLoaded', function(){
         }
     }
 
+
+    // SLIDER 
     if (document.querySelector(".mySlides"))
     {
-        // alert(document.querySelector("mySlides"))
         // SLIDER is number 
         // slidIndex is image count
         var slideIndex = 1;

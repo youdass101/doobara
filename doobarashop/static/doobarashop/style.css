@@ -1191,9 +1191,6 @@ form.search-site button {
     padding-left: 7px;
   }
 }
-#my-account-container #my-account-dashboard {
-  display: block;
-}
 #my-account-container #my-account-dashboard table {
   width: 100%;
   text-align: center;
@@ -1666,7 +1663,7 @@ form.search-site button {
   vertical-align: top;
 }
 
-.cart-total-container div button {
+.cart-total-container div .cart-proceed-checkout-button {
   padding: 15px;
   background-color: #292826;
   color: #F9D342;
@@ -1681,7 +1678,7 @@ form.search-site button {
   font-size: x-large;
 }
 
-.cart-total-container div button:hover {
+.cart-total-container div .cart-proceed-checkout-button:hover {
   background-color: #F9D342;
   color: #292826;
 }
