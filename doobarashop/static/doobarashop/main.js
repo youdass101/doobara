@@ -4,22 +4,28 @@ function snumber(n) {
 }
 
 // DOM START HERE 
+// When any page on the site load
 document.addEventListener('DOMContentLoaded', function(){
 
-    // Menubtn is Html Element    
-    // interp. menubtn is mobile menu button element under id btmn
+    // mobile nav menu button element    
     var menubtn = document.getElementById('btnm');
 
-    // Mobilemenu is Html ELement
-    // interp. mobilemenu is mobile menu links element under id navigation-mobile
+    // secondary navigaton menu container for mobile media
     var mobilemenu = document.getElementById('navigation-mobile');
 
-    // Navbar is Html Element 
-    // interp. navbar is mobile menu links element under id navbar
-    var logo_nav = document.getElementById('logo-nav');
+    // site logo container in the header-nav area
+    var logo_nav = document.getElementById('logo-nav');   
+
+    // search componenet container in the header-nav area 
     var search_nav = document.getElementById('search-box-nav');
+
+    // Primary meny componenet in the header-nav area 
     var menu_nav = document.getElementById('navigation-menu');
+
+    // cart information component in header-nav area  
     var cart_nav = document.getElementById('cart-nav');
+
+    
     var mobile_menu_btn_nav = document.getElementById('mobile-menu-btn');
     var mobile_nav = document.getElementById('navigation-mobile');
 
@@ -31,39 +37,42 @@ document.addEventListener('DOMContentLoaded', function(){
         document.getElementById('view-order').classList.toggle("show",false)
     }
 
-    //Account current orders
-    document.getElementById('account-dash').onclick = () => {
-        account_default()
-        document.getElementById('my-account-dashboard').style.display = 'block'
-    }
+    // When account page loaded 
+    if (document.getElementById('account-dash')) {
 
-    //account order history
-    document.getElementById('account-orders').onclick = () => {
-    account_default()
-    document.getElementById('my-account-dashboard').style.display = 'block'
-    }
+        //Account current orders
+        document.getElementById('account-dash').onclick = () => {
+            account_default()
+            document.getElementById('my-account-dashboard').style.display = 'block'
+        }
 
-    //Navigation menu whishlistbutton
-    document.getElementById('account-whishlist').onclick = () => {
-        account_default()
-        document.getElementById('account-wish-list').classList.toggle('show')
-    }
+        //account order history
+        document.getElementById('account-orders').onclick = () => {
+            account_default()
+            document.getElementById('my-account-dashboard').style.display = 'block'
+        }
 
-       //Account edit
-       document.getElementById('account-edit').onclick = () => {
-        account_default()
-        document.getElementById('account-detail').classList.toggle('show')
-    }
-     
-    // ACCOUNT ORDER VIEW 
-    if (document.querySelectorAll('.view-order-button')) {
+        //Navigation menu whishlistbutton
+        document.getElementById('account-whishlist').onclick = () => {
+            account_default()
+            document.getElementById('account-wish-list').classList.toggle('show')
+        }
+
+        //Account edit
+        document.getElementById('account-edit').onclick = () => {
+            account_default()
+            document.getElementById('account-detail').classList.toggle('show')
+        }
+        
+        // ACCOUNT single ORDER VIEW 
         document.querySelectorAll('.view-order-button').forEach (button => {
             button.onclick = () => {
             account_default()
             document.getElementById('view-order').classList.toggle('show')
             }
-        })
+        }) 
     }
+
 
     // MENU STICKY 
 
