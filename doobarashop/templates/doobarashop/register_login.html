@@ -1,10 +1,18 @@
 {% extends "doobarashop/layout.html" %}
 {% load static %}
+{% load socialaccount %}
 
 {% block pagetitle %}
 Login or Sign Up
 {% endblock %}
 {% block body %}
+<h1>My Google OAuth Project </h1>
+{% if user.is_authenticated %}
+  <p>Welcome, You are logged in as {{ user.username }}</p>
+{% else %}
+  <a href="{% provider_login_url 'google' %}">Login With Google</a>
+{% endif %}
+
 <div class="login-register-container">
     <div class="login-container">
         <div class="login-form-container">
