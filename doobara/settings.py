@@ -69,8 +69,7 @@ ROOT_URLCONF = 'doobara.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        # currently stock here on DIR not working 
-        'DIRS': [BASE_DIR / 'templates', 'doobarashop'],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -158,6 +157,6 @@ SOCIALACCOUNT_PROVIDERS = {
 
 # all auth id 
 
-SITE_ID = 2
+# SITE_ID = 1
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
