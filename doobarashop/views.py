@@ -19,7 +19,10 @@ def contactus(request):
     return render(request, "doobarashop/contactus.html")
 
 def myaccount(request):
+    # if request.user.is_authenticated:
     return render(request, "doobarashop/account.html")
+    # return render(request, "account/login.html")
+
 
 def cart(request):
     return render(request, "doobarashop/cart.html")

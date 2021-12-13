@@ -1,0 +1,12 @@
+@use '../abstracts/all' as var;
+
+@use '../components/authentication/login';
+@use '../components/authentication/logout';
+@use '../components/authentication/signup';
+
+.auth-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 5px auto;
+    padding: 10px ;
+}

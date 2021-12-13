@@ -1,0 +1,22 @@
+@use '../../abstracts/all.scss' as var;
+
+.signup-container {
+    form {
+        label {
+            @include var.par-body-2;
+        }
+
+        input, textarea {
+            @extend .input-style-prim;
+        }
+
+        // !!! COPIED FROM ACCOUNT EDIT 
+        button {
+            @extend .input-submit-button-prim;
+        }
+
+        #id_remember {
+            width: 2% !important;
+        }
+    }
+}

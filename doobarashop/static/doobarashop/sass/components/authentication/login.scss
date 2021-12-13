@@ -1,0 +1,33 @@
+@use '../../abstracts/all.scss' as var;
+
+.singup-secondary-button {
+    @include var.button-secondary;
+    background-color: var.$identity-color;
+    color: var.$back-color;
+    font-weight: 700;
+}
+
+.singup-secondary-button:hover {
+    font-weight: 800;
+}
+
+.login-container {
+    form {
+        label {
+            @include var.par-body-2;
+        }
+
+        input, textarea {
+            @extend .input-style-prim;
+        }
+
+        // !!! COPIED FROM ACCOUNT EDIT 
+        button {
+            @extend .input-submit-button-prim;
+        }
+
+        #id_remember {
+            width: 2% !important;
+        }
+    }
+}

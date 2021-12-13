@@ -16,22 +16,12 @@
             border-color: gray;
             padding: 6% 0 5% 0;
 
-            a {
-                color: var.$back-color;
-            }
-            
-            a:link {
-                text-decoration: none;
-                color: black;
-            }
-
-            a:hover {
-                @include var.hover-primary;
-            }
-
             i {
                 float: right;
             }
+        }
+        li:hover {
+            @include var.hover-primary;
         }
     }
 }

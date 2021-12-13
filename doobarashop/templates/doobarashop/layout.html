@@ -63,11 +63,15 @@
         
             <!-- MENU LINK ICON BAR 3d left buttom section of navigatio bar contain navigation menu links -->
             <div id="navigation-menu">
-                <a href="shop"><i class="icons fas fa-store"></i>Shop</a>
-                <a href="blog"><i class="icons fab fa-blogger-b"></i>Blog</a>
-                <a href="video"><i class="icons fab fa-youtube"></i>Video</a>
-                <a href="contactus"><i class="icons fas fa-inbox"></i>Contact Us</a>
-                <a href="myaccount"><i class="icons fas fa-user"></i>My Account</a>
+                <a href="/shop"><i class="icons fas fa-store"></i>Shop</a>
+                <a href="/blog"><i class="icons fab fa-blogger-b"></i>Blog</a>
+                <a href="/video"><i class="icons fab fa-youtube"></i>Video</a>
+                <a href="/contactus"><i class="icons fas fa-inbox"></i>Contact Us</a>
+                {% if user.is_authenticated %}
+                <a href="/myaccount"><i class="icons fas fa-user"></i>My Account</a>
+                {%else%}
+                <a href="/accounts/login"><i class="icons fas fa-user"></i>Create Account</a>
+                {% endif%}
             </div>
             
             <!-- CART final right buttom section of navigation bar contain cart and totla url -->

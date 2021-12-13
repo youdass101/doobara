@@ -10,7 +10,7 @@
   color: #292826;
 }
 
-.input-style-prim, #contact-form-container .contact-inputs #contact-submit-form input, #my-account-container #account-detail form input, .checkout-page-container .checkout-shipping-details-container form input, .checkout-page-container .checkout-shipping-details-container form textarea, .login-register-container .login-container form input, .login-register-container .login-container form textarea {
+.input-style-prim, #contact-form-container .contact-inputs #contact-submit-form input, .signup-container form input, .signup-container form textarea, .login-container form input, .login-container form textarea, #my-account-container #account-detail form input, .checkout-page-container .checkout-shipping-details-container form input, .checkout-page-container .checkout-shipping-details-container form textarea, .login-register-container .login-container form input, .login-register-container .login-container form textarea {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -21,7 +21,7 @@
   background-color: #f2f2f2;
 }
 
-.input-submit-button-prim, #my-account-container #account-detail form input[type=submit], .login-register-container .login-container form input[type=submit] {
+.input-submit-button-prim, .signup-container form button, .login-container form button, #my-account-container #account-detail form input[type=submit], .login-register-container .login-container form input[type=submit] {
   width: 100%;
   background-color: #292826;
   color: #F9D342;
@@ -1164,18 +1164,11 @@ form.search-site button {
   border-color: gray;
   padding: 6% 0 5% 0;
 }
-#my-account-container .my-account-navigation ul li a {
-  color: #292826;
-}
-#my-account-container .my-account-navigation ul li a:link {
-  text-decoration: none;
-  color: black;
-}
-#my-account-container .my-account-navigation ul li a:hover {
-  color: #F9D342;
-}
 #my-account-container .my-account-navigation ul li i {
   float: right;
+}
+#my-account-container .my-account-navigation ul li:hover {
+  color: #F9D342;
 }
 @media screen and (max-width: 850px) {
   #my-account-container .my-account-navigation {
@@ -1366,7 +1359,106 @@ form.search-site button {
   background-color: #f2f2f2;
 }
 
-.input-submit-button-prim, .login-register-container .login-container form input[type=submit], #my-account-container #account-detail form input[type=submit] {
+.input-submit-button-prim, .login-register-container .login-container form input[type=submit], #my-account-container #account-detail form input[type=submit], .signup-container form button, .login-container form button {
+  width: 100%;
+  background-color: #292826;
+  color: #F9D342;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.singup-secondary-button {
+  color: #fff;
+  background-color: #292826;
+  font-family: "Archivo Narrow", Sans-serif;
+  font-size: 14px;
+  border-style: groove;
+  border-width: 0;
+  border-radius: 6px;
+  padding: 7px 20px 7px 20px;
+  cursor: pointer;
+  background-color: #F9D342;
+  color: #292826;
+  font-weight: 700;
+}
+
+.singup-secondary-button:hover {
+  font-weight: 800;
+}
+
+.login-container form label {
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.login-container form #id_remember {
+  width: 2% !important;
+}
+
+.logout-container {
+  padding-bottom: 20%;
+}
+
+.logout-container button {
+  color: #fff;
+  background-color: #292826;
+  font-family: "Archivo Narrow", Sans-serif;
+  font-size: 14px;
+  border-style: groove;
+  border-width: 0;
+  border-radius: 6px;
+  padding: 7px 20px 7px 20px;
+  cursor: pointer;
+}
+
+.logout-container button:hover {
+  color: #F9D342;
+}
+
+.signup-container form label {
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.signup-container form #id_remember {
+  width: 2% !important;
+}
+
+.auth-container {
+  width: 100%;
+  max-width: 800px;
+  margin: 5px auto;
+  padding: 10px;
+}
+
+.body-800width, .single-product-page-container .single-product-dimention, .single-product-page-container .single-product-long-desc, .single-product-page-container .single-product-image-long, .single-product-page-container .single-product-video {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.input-label {
+  font-size: 16px;
+  font-weight: 400;
+  color: #292826;
+}
+
+.input-style-prim, .login-register-container .login-container form input, .login-register-container .login-container form textarea, .checkout-page-container .checkout-shipping-details-container form input, .checkout-page-container .checkout-shipping-details-container form textarea, #my-account-container #account-detail form input, #contact-form-container .contact-inputs #contact-submit-form input, .signup-container form input, .signup-container form textarea, .login-container form input, .login-container form textarea {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  background-color: #f2f2f2;
+}
+
+.input-submit-button-prim, .login-register-container .login-container form input[type=submit], #my-account-container #account-detail form input[type=submit], .signup-container form button, .login-container form button {
   width: 100%;
   background-color: #292826;
   color: #F9D342;
@@ -1712,7 +1804,7 @@ form.search-site button {
   color: #292826;
 }
 
-.input-style-prim, .login-register-container .login-container form input, .login-register-container .login-container form textarea, .checkout-page-container .checkout-shipping-details-container form input, .checkout-page-container .checkout-shipping-details-container form textarea, #my-account-container #account-detail form input, #contact-form-container .contact-inputs #contact-submit-form input {
+.input-style-prim, .login-register-container .login-container form input, .login-register-container .login-container form textarea, .checkout-page-container .checkout-shipping-details-container form input, .checkout-page-container .checkout-shipping-details-container form textarea, #my-account-container #account-detail form input, #contact-form-container .contact-inputs #contact-submit-form input, .signup-container form input, .signup-container form textarea, .login-container form input, .login-container form textarea {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -1723,7 +1815,7 @@ form.search-site button {
   background-color: #f2f2f2;
 }
 
-.input-submit-button-prim, .login-register-container .login-container form input[type=submit], #my-account-container #account-detail form input[type=submit] {
+.input-submit-button-prim, .login-register-container .login-container form input[type=submit], #my-account-container #account-detail form input[type=submit], .signup-container form button, .login-container form button {
   width: 100%;
   background-color: #292826;
   color: #F9D342;
@@ -1861,7 +1953,7 @@ form.search-site button {
   color: #292826;
 }
 
-.input-style-prim, .login-register-container .login-container form input, .login-register-container .login-container form textarea, .checkout-page-container .checkout-shipping-details-container form input, .checkout-page-container .checkout-shipping-details-container form textarea, #my-account-container #account-detail form input, #contact-form-container .contact-inputs #contact-submit-form input {
+.input-style-prim, .login-register-container .login-container form input, .login-register-container .login-container form textarea, .checkout-page-container .checkout-shipping-details-container form input, .checkout-page-container .checkout-shipping-details-container form textarea, #my-account-container #account-detail form input, #contact-form-container .contact-inputs #contact-submit-form input, .signup-container form input, .signup-container form textarea, .login-container form input, .login-container form textarea {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -1872,7 +1964,7 @@ form.search-site button {
   background-color: #f2f2f2;
 }
 
-.input-submit-button-prim, .login-register-container .login-container form input[type=submit], #my-account-container #account-detail form input[type=submit] {
+.input-submit-button-prim, .login-register-container .login-container form input[type=submit], #my-account-container #account-detail form input[type=submit], .signup-container form button, .login-container form button {
   width: 100%;
   background-color: #292826;
   color: #F9D342;
@@ -1902,7 +1994,7 @@ form.search-site button {
   color: #292826;
 }
 
-.input-style-prim, .login-register-container .login-container form input, .login-register-container .login-container form textarea, #my-account-container #account-detail form input, .checkout-page-container .checkout-shipping-details-container form input, .checkout-page-container .checkout-shipping-details-container form textarea, #contact-form-container .contact-inputs #contact-submit-form input {
+.input-style-prim, .login-register-container .login-container form input, .login-register-container .login-container form textarea, #my-account-container #account-detail form input, .checkout-page-container .checkout-shipping-details-container form input, .checkout-page-container .checkout-shipping-details-container form textarea, #contact-form-container .contact-inputs #contact-submit-form input, .signup-container form input, .signup-container form textarea, .login-container form input, .login-container form textarea {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -1913,7 +2005,7 @@ form.search-site button {
   background-color: #f2f2f2;
 }
 
-.input-submit-button-prim, .login-register-container .login-container form input[type=submit], #my-account-container #account-detail form input[type=submit] {
+.input-submit-button-prim, .login-register-container .login-container form input[type=submit], #my-account-container #account-detail form input[type=submit], .signup-container form button, .login-container form button {
   width: 100%;
   background-color: #292826;
   color: #F9D342;
@@ -2034,7 +2126,7 @@ form.search-site button {
   color: #292826;
 }
 
-.input-style-prim, #my-account-container #account-detail form input, .checkout-page-container .checkout-shipping-details-container form input, .checkout-page-container .checkout-shipping-details-container form textarea, .login-register-container .login-container form input, .login-register-container .login-container form textarea, #contact-form-container .contact-inputs #contact-submit-form input {
+.input-style-prim, #my-account-container #account-detail form input, .checkout-page-container .checkout-shipping-details-container form input, .checkout-page-container .checkout-shipping-details-container form textarea, .login-register-container .login-container form input, .login-register-container .login-container form textarea, #contact-form-container .contact-inputs #contact-submit-form input, .signup-container form input, .signup-container form textarea, .login-container form input, .login-container form textarea {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -2045,7 +2137,7 @@ form.search-site button {
   background-color: #f2f2f2;
 }
 
-.input-submit-button-prim, #my-account-container #account-detail form input[type=submit], .login-register-container .login-container form input[type=submit] {
+.input-submit-button-prim, #my-account-container #account-detail form input[type=submit], .login-register-container .login-container form input[type=submit], .signup-container form button, .login-container form button {
   width: 100%;
   background-color: #292826;
   color: #F9D342;

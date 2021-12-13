@@ -1,0 +1,14 @@
+@use '../../abstracts/all.scss' as var;
+
+.logout-container {
+        // !!! COPIED FROM ACCOUNT EDIT 
+        button {
+            @include var.button-secondary;
+        }
+
+        button:hover {
+            @include var.hover-primary;
+        }
+
+    padding-bottom: 20%;
+}
