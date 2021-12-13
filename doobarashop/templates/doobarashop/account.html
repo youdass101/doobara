@@ -1,14 +1,16 @@
 {% extends "doobarashop/layout.html" %}
 {% load static %}
-
+{% load i18n %}
+{% load account %}
 {% block pagetitle %}
 My Account
 {% endblock %}
 {% block body %}
 <!-- All element wrapper  -->
 <div id="my-account-container">
-    <!-- Logged in User name -->
-    <div><p>You are currently logged in as Hamze Chalhoub</p></div>
+    <!-- logged  in user name snippet-->
+{% include 'account/snippets/already_logged_in.html' %}
+
     <!-- User account board menu navigator -->
     <div class="my-account-navigation">
         <ul>
