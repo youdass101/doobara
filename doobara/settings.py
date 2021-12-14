@@ -160,3 +160,11 @@ SOCIALACCOUNT_PROVIDERS = {
 # SITE_ID = 1
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+SIGNUP_REDIRECT_URL = '/'
+
+ACCOUNT_FORMS = {
+'signup': 'doobarashop.forms.CustomSignupForm',
+}
+
+# Fix (go around untill smtp setup done) 1061 error after pressing signup
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

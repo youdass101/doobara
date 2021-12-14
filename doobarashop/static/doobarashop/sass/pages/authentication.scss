@@ -1,12 +1,67 @@
 @use '../abstracts/all' as var;
 
-@use '../components/authentication/login';
-@use '../components/authentication/logout';
-@use '../components/authentication/signup';
-
 .auth-container {
     width: 100%;
     max-width: 800px;
     margin: 5px auto;
     padding: 10px ;
+}
+
+#user-change-password-container, #email-change-container, #login-container, #signup-container, #logout-container, #user-set-password {
+    @extend .form-default-style;
+}
+
+// when social user change a password (set new one) button style 
+#user-set-password {
+        form {
+        input[type='submit'] {
+            @extend .input-submit-button-prim;
+        }
+        input[type='submit']:hover {
+            @include var.hover-secondary;
+        }
+    }
+}
+
+// Logout page button space 
+.logout-container {
+    padding-bottom: 20%;
+}
+
+// email change radio element position related with
+#email-change-container {
+    .ctrlHolder {
+        input[type=radio] {
+            width: 5%;
+        }
+    } 
+}
+
+// top page button to signup or login depend on which page 
+.singup-secondary-button {
+    @include var.button-secondary;
+    background-color: var.$identity-color;
+    color: var.$back-color;
+    font-weight: 700;
+}
+.singup-secondary-button:hover {
+    font-weight: 800;
+}
+
+// login and signup extending the button wide type
+.login-container, .signup-container {
+        #id_remember {
+            width: 2%;
+        }
+        // forget my password
+        .secondaryAction {
+            display: block;
+        }
+    
+}
+
+@media screen and (max-width: 750px) {
+    #id_remember {
+        width: 10% !important;
+    }
 }

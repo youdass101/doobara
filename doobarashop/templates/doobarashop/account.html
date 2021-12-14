@@ -131,6 +131,18 @@ My Account
 
         <!-- ACCOUNT DETAILS VIEW  -->
         <div id="account-detail">
+            <div class="user-profile-data">
+                <div class="user-username-display">
+                    <h3>Welcome {{ user }}</h3>
+                </div>
+                <div class="user-email-profile">
+                    <h4>Email: <span>{{user.email}}</h4></span> <pre>  </pre><a href="/accounts/email">Change email</a>
+                </div> 
+                <div><a href="/accounts/password/change">Change Your Password</a></div> 
+
+                <div><h4>Shipping address</h4></div>
+            </div>
+        
             <form class="edit-account">
                 <!-- first and last name  -->
                 <div class="account-1st-row">

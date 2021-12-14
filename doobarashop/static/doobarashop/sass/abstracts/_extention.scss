@@ -34,3 +34,22 @@
     cursor: pointer;
     font-size: 15px;
 }
+
+.form-default-style {
+    form {       
+        label {
+            @include var.par-body-2;
+        }
+        input, textarea {
+            @extend .input-style-prim;
+        }
+        button {
+            @include var.button-secondary;
+            margin-top: 10px;
+            margin-right: 10px;
+        }
+        button:hover {
+            @include var.hover-primary;
+        }
+    }
+}

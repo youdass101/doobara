@@ -1,5 +1,23 @@
+
 #account-detail {
     display: none;
+
+    .user-profile-data {
+        
+        .user-username-display {
+            h3 {
+                margin: 0;
+            }
+            
+        }
+        .user-email-profile {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+        }
+    }
+
+    .edit-account {display: none;}
     form {
         padding: 20px ;
         .account-display-name-note {

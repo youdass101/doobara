@@ -8,7 +8,7 @@
 {% block content %}
 <button class="singup-secondary-button" onclick="location.href='{% url 'account_signup' %}'">Create New Account</button>
 
-<div class="login-container">
+<div id="login-container">
 
   <h1>{% trans "Sign In" %}</h1>
   {% get_providers as socialaccount_providers %}
