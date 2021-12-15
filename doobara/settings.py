@@ -167,4 +167,22 @@ ACCOUNT_FORMS = {
 }
 
 # Fix (go around untill smtp setup done) 1061 error after pressing signup
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# allauth email and username authentication
+ACCOUNT_AUTHENTICATION_METHOD = "username_email"
+
+# allauth signup email required
+ACCOUNT_EMAIL_REQUIRED=True
+# allauth email verification required
+ACCOUNT_EMAIL_VERIFICATION = "mandatory"
+
+
+# test email sending 
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'localhost'
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
+EMAIL_PORT = '1025'
+EMAIL_USE_TLS = False  
+EMAIL_USE_SSL = False

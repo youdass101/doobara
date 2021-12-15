@@ -7,12 +7,12 @@
     padding: 10px ;
 }
 
-#user-change-password-container, #email-change-container, #login-container, #signup-container, #logout-container, #user-set-password {
+#user-change-password-container, #email-change-container, #login-container, #signup-container, #logout-container, #user-set-password, #password-reset-container, #email-comfirmation-container, #reset-password-container {
     @extend .form-default-style;
 }
 
 // when social user change a password (set new one) button style 
-#user-set-password {
+#user-set-password, #password-reset-container, #reset-password-container {
         form {
         input[type='submit'] {
             @extend .input-submit-button-prim;
@@ -24,7 +24,7 @@
 }
 
 // Logout page button space 
-.logout-container {
+#logout-container {
     padding-bottom: 20%;
 }
 
@@ -38,18 +38,18 @@
 }
 
 // top page button to signup or login depend on which page 
-.singup-secondary-button {
+#singup-secondary-button {
     @include var.button-secondary;
     background-color: var.$identity-color;
     color: var.$back-color;
     font-weight: 700;
 }
-.singup-secondary-button:hover {
+#singup-secondary-button:hover {
     font-weight: 800;
 }
 
 // login and signup extending the button wide type
-.login-container, .signup-container {
+#login-container, #signup-container {
         #id_remember {
             width: 2%;
         }
