@@ -1,4 +1,8 @@
 {% extends "account/base.html" %}
+{% load socialaccount %}
+{% providers_media_js %}
+{% load socialaccount %}
+{% load static %}
 
 {% load i18n %}
 {% load account socialaccount %}
@@ -6,6 +10,13 @@
 {% block pagetitle %}{% trans "Sign In" %}{% endblock %}
 
 {% block content %}
+<div id="fb-root"></div>
+<!-- facebook login button script definition -->
+<script async defer crossorigin="anonymous" 
+  src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v12.0&appId=696608170537675&autoLogAppEvents=1" 
+  nonce="6lctZvNK">
+</script>
+
 <button id="singup-secondary-button" onclick="location.href='{% url 'account_signup' %}'">Create New Account</button>
 
 <div id="login-container">
@@ -19,9 +30,20 @@
     for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
 
     <div class="socialaccount_ballot">
-      <!-- google login -->
       <div class="socialaccount_providers">
-        {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+        <!-- {% include "socialaccount/snippets/provider_list.html" with process="login" %} -->
+        <!-- google login ICON -->
+        <div>
+          <a href="/accounts/google/login"><img src="{% static 'doobarashop/upload/images/googleloginfocused.png'%}"></a>  
+        </div>
+
+        <!-- I AM STRUGLLING HERE -->
+        <!-- facebook login icon -->
+        <!-- <div><a href="{% provider_login_url 'facebook' method='js_sdk' %}"> -->
+          <div class="fb-login-button" data-width="" data-size="large" data-button-type="login_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="false">
+
+          </div>
+          <!-- </a></div> -->
       </div>
       <div class="login-or">{% trans 'or' %}</div>
     </div>
@@ -31,6 +53,12 @@
     <p>{% blocktrans %}If you have not created an account yet, then please
     <a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
   {% endif %}
+
+  
+  <!-- <a href="{% provider_login_url "facebook" method="js_sdk" %}">Facebook Connect</a> -->
+  <!-- GOOGLE LOGIN -->
+
+
 
   <!-- login form  -->
   <form class="login" method="POST" action="{% url 'account_login' %}">

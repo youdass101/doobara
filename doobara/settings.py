@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
-    # 'allauth.socialaccount.providers.facebook',
+    'allauth.socialaccount.providers.facebook',
 ]
 
 
@@ -155,6 +155,31 @@ SOCIALACCOUNT_PROVIDERS = {
     }
 }
 
+
+
+# SOCIALACCOUNT_PROVIDERS = {
+#     'facebook': {
+#         'METHOD': 'oauth2',
+#         'SDK_URL': '//connect.facebook.net/{locale}/sdk.js',
+#         'SCOPE': ['email', 'public_profile'],
+#         'AUTH_PARAMS': {'auth_type': 'reauthenticate'},
+#         'INIT_PARAMS': {'cookie': True},
+#         'FIELDS': [
+#             'id',
+#             'first_name',
+#             'last_name',
+#             'middle_name',
+#             'name',
+#             'name_format',
+#             'picture',
+#             'short_name'
+#         ],
+#         'EXCHANGE_TOKEN': True,
+#         'LOCALE_FUNC': 'path.to.callable',
+#         'VERIFIED_EMAIL': False,
+#         'VERSION': 'v7.0',
+#     }
+# }
 # all auth id 
 
 # SITE_ID = 1
@@ -167,7 +192,7 @@ ACCOUNT_FORMS = {
 }
 
 # Fix (go around untill smtp setup done) 1061 error after pressing signup
-# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # allauth email and username authentication
 ACCOUNT_AUTHENTICATION_METHOD = "username_email"
@@ -180,9 +205,9 @@ ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 
 # test email sending 
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'localhost'
-EMAIL_HOST_USER = ''
-EMAIL_HOST_PASSWORD = ''
-EMAIL_PORT = '1025'
-EMAIL_USE_TLS = False  
-EMAIL_USE_SSL = False
+# EMAIL_HOST = 'localhost'
+# EMAIL_HOST_USER = ''
+# EMAIL_HOST_PASSWORD = ''
+# EMAIL_PORT = '1025'
+# EMAIL_USE_TLS = False  
+# EMAIL_USE_SSL = False

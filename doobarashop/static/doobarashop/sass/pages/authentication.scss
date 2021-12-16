@@ -7,6 +7,17 @@
     padding: 10px ;
 }
 
+.socialaccount_providers {
+    display: flex;
+    width: 100%;
+    justify-content: flex-start;
+    align-items: stretch;
+    
+    * {
+        margin-right: 10px;
+    }
+}
+
 #user-change-password-container, #email-change-container, #login-container, #signup-container, #logout-container, #user-set-password, #password-reset-container, #email-comfirmation-container, #reset-password-container {
     @extend .form-default-style;
 }

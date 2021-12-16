@@ -1571,6 +1571,16 @@ form.search-site button {
   padding: 10px;
 }
 
+.socialaccount_providers {
+  display: flex;
+  width: 100%;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+.socialaccount_providers * {
+  margin-right: 10px;
+}
+
 #user-set-password form input[type=submit]:hover, #password-reset-container form input[type=submit]:hover, #reset-password-container form input[type=submit]:hover {
   background-color: #F9D342;
   color: #292826;
