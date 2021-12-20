@@ -1571,6 +1571,10 @@ form.search-site button {
   padding: 10px;
 }
 
+.login-facbook-img {
+  width: 52%;
+}
+
 .socialaccount_providers {
   display: flex;
   width: 100%;

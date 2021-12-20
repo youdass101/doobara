@@ -13,18 +13,22 @@
 <div id="fb-root"></div>
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v12.0&appId=429532295495332&autoLogAppEvents=1" nonce="DIUZ1knz"></script>
 
+<!-- SIGNUP AND LOGIN TOP BUTTON SWITCH  -->
 <button id="singup-secondary-button" onclick="location.href='{% url 'account_signup' %}'">Create New Account</button>
 
+<!-- LOGIN OPTIONS CONTAINER -->
 <div id="login-container">
 
   <h1>{% trans "Sign In" %}</h1>
   {% get_providers as socialaccount_providers %}
 
+  <!-- instruction for login options  -->
   {% if socialaccount_providers %}
     <p>{% blocktrans with site.name as site_name %}Please sign in with one
     of your existing third party accounts. Or, <a href="{{ signup_url }}">sign up</a>
     for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
 
+    <!-- GOOGLE LOGIN  -->
     <div class="socialaccount_ballot">
       <div class="socialaccount_providers">
         <!-- {% include "socialaccount/snippets/provider_list.html" with process="login" %} -->
@@ -36,8 +40,10 @@
         <!-- I AM STRUGLLING HERE -->
         <!-- facebook login icon -->
         <div><a href="{% provider_login_url 'facebook' method='js_sdk' %}">
-          <div class="fb-login-button" data-width="" data-size="large" data-button-type="login_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="false"></div>
+          <!-- <div class="fb-login-button" data-width="" data-size="large" data-button-type="login_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="false"></div> -->
+            <img class="login-facbook-img" src="{% static 'doobarashop/upload/images/lfb.png'%}">
           </a></div>
+          
       </div>
     <div class="login-or">{% trans 'or' %}</div>
     </div>
