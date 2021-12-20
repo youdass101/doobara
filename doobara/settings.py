@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os
 
+import environ
+env = environ.Env()
+environ.Env.read_env()
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -191,9 +194,6 @@ ACCOUNT_FORMS = {
 'signup': 'doobarashop.forms.CustomSignupForm',
 }
 
-# Fix (go around untill smtp setup done) 1061 error after pressing signup
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
 # allauth email and username authentication
 ACCOUNT_AUTHENTICATION_METHOD = "username_email"
 
@@ -202,12 +202,15 @@ ACCOUNT_EMAIL_REQUIRED=True
 # allauth email verification required
 ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 
+# Fix (go around untill smtp setup done) 1061 error after pressing signup shell email not real
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-# test email sending 
+# REAL email sending (activate it on production and ceratin tests)
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_HOST = 'localhost'
-# EMAIL_HOST_USER = ''
-# EMAIL_HOST_PASSWORD = ''
-# EMAIL_PORT = '1025'
-# EMAIL_USE_TLS = False  
+# DEFAULT_FROM_EMAIL = 'info@doobara.com'
+# EMAIL_HOST = env('EMAIL_HOST')
+# EMAIL_HOST_USER = env('EMAIL_HOST_USER')
+# EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
 # EMAIL_USE_SSL = False
