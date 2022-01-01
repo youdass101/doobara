@@ -19,12 +19,12 @@
     }
 }
 
-#user-change-password-container, #email-change-container, #login-container, #signup-container, #logout-container, #user-set-password, #password-reset-container, #email-comfirmation-container, #reset-password-container {
+#user-change-password-container, #email-change-container, #login-container, #signup-container, #logout-container, #user-set-password, #password-reset-container, #email-comfirmation-container, #reset-password-container, .auth-account-default {
     @extend .form-default-style;
 }
 
 // when social user change a password (set new one) button style 
-#user-set-password, #password-reset-container, #reset-password-container {
+#user-set-password, #password-reset-container, #reset-password-container, .auth-account-default {
         form {
         input[type='submit'] {
             @extend .input-submit-button-prim;

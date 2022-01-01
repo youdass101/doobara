@@ -203,7 +203,7 @@ ACCOUNT_EMAIL_REQUIRED=True
 ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 
 # Fix (go around untill smtp setup done) 1061 error after pressing signup shell email not real
-# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # REAL email sending (activate it on production and ceratin tests)
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
