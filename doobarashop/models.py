@@ -13,10 +13,10 @@ class Categories(models.Model):
     name = models.CharField(max_length=255)
     # category description filed more than 1000 characters
     description = models.TextField()
-    # self regerence for child category
-    child_node = models.ForeignKey("self",null=True, blank=True, default=None, on_delete=models.SET_NULL, related_name='parent')
-    # self reference for next category under same parent
-    right_node = models.ForeignKey("self",null=True, blank=True, default=None, on_delete=models.SET_NULL, related_name='left')
+    # self regerence for child category (CANCELED)
+    # child_node = models.ForeignKey("self",null=True, blank=True, default=None, on_delete=models.SET_NULL, related_name='parent')
+    # self reference for next category under same parent (CANCELED)
+    # right_node = models.ForeignKey("self",null=True, blank=True, default=None, on_delete=models.SET_NULL, related_name='left')
     
     def __str__(self):
         return f"{self.name} "
@@ -39,18 +39,18 @@ class Product(models.Model):
     # product video URL string 
     video = models.URLField()
     # boolean true if product in stock, false if out of stock 
-    stock = models.BooleanField()
+    stock = models.BooleanField(default=False)
     # boolean ture if the product is featured, else false
-    featured = models.BooleanField()
+    featured = models.BooleanField(default=False)
     # if product have variant options true, else false
-    variant = models.BooleanField()
+    variant = models.BooleanField(default=False)
     # true if product active, else false
-    active = models.BooleanField()
+    active = models.BooleanField(default=False)
     # true if product on discount, else if not false
-    discount = models.BooleanField()
-    # product category model reference
-    category = models.ForeignKey(Categories, null=True, blank=True, default=None, on_delete=models.SET_NULL)
-
+    discount = models.BooleanField(default=False)
+    # product category model reference many to many (the product can belong to several catergories)
+    category = models.ManyToManyField(Categories, null=True, blank=True, default=None, related_name="products")
+    
     def __str__(self):
         return f"{self.name} "
 
