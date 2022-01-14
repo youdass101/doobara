@@ -2,20 +2,16 @@ import re
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.core.mail import send_mail
+from .models import *
 
 def index(request):
     return render(request, "doobarashop/index.html")
 
 
 def shop(request):
-    # send_mail(
-    #     'Subject here',
-    #     'Here is the message.',
-    #     'info@doobara.com',
-    #     ['hamzechalhoub@gmail.com'],
-    #     fail_silently=False,
-    # )
-    return render(request, "doobarashop/shop.html")
+    lop = Product.objects.all()
+    slop = [row.serialize() for row in lop]
+    return render(request, "doobarashop/shop.html", {"lop":slop})
 
 def blog(request):
     return render(request, "doobarashop/blog.html")

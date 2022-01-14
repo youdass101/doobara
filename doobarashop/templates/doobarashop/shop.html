@@ -7,21 +7,23 @@ SHOP
 {% block body %}
 <!-- Shop carousel container -->
 <div id="container-shop">
+    {% for row in lop %}
     <div class="shop-product">
         <a href="single_product">
             <!-- Product Thumb, title price -->
             <!-- Product image -->
             <img src="{% static 'doobarashop/upload/images/4m.jpg' %}">
             <!-- Product Name -->
-            <p class="product-name">Smart WiFi Camera</p>
+            <p class="product-name">{{row.pname}}</p>
             <!-- product price -->
-            <p class="product-price">$42.00</p>
+            <p class="product-price">$ {{row.pprice}}</p>
             <!-- <div class="vertical-center"> -->
         </a>
         <button>Add to Cart</button>    
     </div>
 
-    <!-- Single product from data arbitrary list  -->
+    {% endfor %}
+    <!-- Single product from data arbitrary list 
     <div class="shop-product">
         <a href="single_product">  
             <img src="{% static 'doobarashop/upload/images/doorcam.jpg' %}">
@@ -101,7 +103,7 @@ SHOP
             <p class="product-price">$42.00</p>
         </a>
         <button>Add to Cart</button>
-    </div>
+    </div> -->
     
 </div>
 
