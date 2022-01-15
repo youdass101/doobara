@@ -7,7 +7,45 @@ from django.db.models.fields.related import ForeignKey
 # from .modeling.images import *
 # from django.contrib.auth.models import AbstractBaseUser
 
+class ImageAlbum(models.Model):
+    name = models.CharField(max_length=255)
+    def default(self):
+        return self.images.filter(default=True).first()
+    
+    def thumbnails(self):
+        return self.images.filter(width=100, length=100)
 
+    def __str__(self):
+        return f"{self.name} " 
+
+class Image(models.Model):
+    # name is string
+    # image title
+    name = models.CharField(max_length=255)
+    # alt is string
+    # image short interpretation 
+    alt = models.CharField(max_length=255, blank=True)
+    # desctiption is string
+    # image description 
+    description = models.TextField(blank=True)
+    # image is image 
+    # the image path
+    image = models.ImageField(upload_to= 'doobarashop/static/doobarashop/upload/images')
+    # default is boolean 
+    # if true the image is the main image for the product 
+    default = models.BooleanField(default=False)
+    # long is boolean 
+    # if true it is for the product singal page long image 
+    long = models.BooleanField(default=False)
+    # album is model-object 
+    # pointer to a specific album object id 
+    album = models.ForeignKey(ImageAlbum, related_name='images', on_delete=models.CASCADE)
+
+    width = models.FloatField(default=100)
+    length = models.FloatField(default=100)
+
+    def __str__(self):
+        return f"{self.name}, {self.album} " 
 
 # Categories is (int(primary id) * string * string * int * int) model
 # interp. Product categories database SQL table 
@@ -53,7 +91,7 @@ class Product(models.Model):
 
     # album is model-object
     # one to one filed with album images tabel object 
-    # album = models.OneToOneField(ImageAlbum, related_name='model', on_delete=models.CASCADE, null=True, blank=True)
+    album = models.OneToOneField(ImageAlbum, related_name='model', on_delete=models.CASCADE, null=True, blank=True)
     
     # stock is boolean
     # boolean true if product in stock, false if out of stock 
@@ -79,8 +117,15 @@ class Product(models.Model):
     # product category model reference many to many (the product can belong to several catergories)
     category = models.ManyToManyField(Categories, null=True, blank=True, default=None, related_name="products")
     
+    # Admin page tabel view of dojects column (key value)
     def __str__(self):
-        return f"{self.name} "
+        return f"{self.name}, {self.album} "
+
+    # string(url) -> string(url)
+    # take a url string removes the first prefix folder name
+    def img_path_customize(self, ipath):
+        return "/".join(ipath.strip("/").split('/')[1:])
+
 
 
     # SQL query set -> Dictionary(json)
@@ -93,7 +138,10 @@ class Product(models.Model):
             "plongdescription": self.long_description,
             "pvideo": self.video,
             "pcreationdate": self.created_time,
-            "pcategory": self.category
+            "pcategory": self.category,
+            # pmainimage is string(url)
+            # the product main image url
+            "pmainimage": self.img_path_customize((self.album.default().image.url)),
         }
 
 
