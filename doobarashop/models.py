@@ -131,6 +131,15 @@ class Product(models.Model):
     # SQL query set -> Dictionary(json)
     # Takes SQL(model) query set data and convert it to JSON dictionary records
     def serialize(self):
+        # image is string(url)
+        # the product main image url
+        try:
+            # if product have an album
+            image = self.img_path_customize((self.album.default().image.url))
+        except:
+            # else return None
+            image = None
+
         return {
             "pname": self.name,
             "pprice": self.price,
@@ -139,9 +148,8 @@ class Product(models.Model):
             "pvideo": self.video,
             "pcreationdate": self.created_time,
             "pcategory": self.category,
-            # pmainimage is string(url)
-            # the product main image url
-            "pmainimage": self.img_path_customize((self.album.default().image.url)),
+        
+            "pmainimage": image,
         }
 
 
