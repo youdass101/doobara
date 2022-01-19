@@ -1,3 +1,5 @@
+from ctypes import util
+from itertools import product
 import re
 from django.shortcuts import render
 from django.http import HttpResponse
@@ -34,8 +36,10 @@ def cart(request):
 def checkout(request):
     return render(request, "doobarashop/checkout.html")
 
-def single_product(request):
-    return render(request, "doobarashop/single_product.html")
+def single_product(request, locat):
+    product = Product.objects.get(name=locat)
+    product = product.serialize()
+    return render(request, "doobarashop/single_product.html", {"product": product})
 
 def single_blog_post(request):
     return render(request, "doobarashop/single_blog_post.html")

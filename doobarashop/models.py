@@ -124,7 +124,7 @@ class Product(models.Model):
     # string(url) -> string(url)
     # take a url string removes the first prefix folder name
     def img_path_customize(self, ipath):
-        return "/".join(ipath.strip("/").split('/')[1:])
+        return "/".join(ipath.strip("/").split('/')[2:])
 
 
 
@@ -140,6 +140,14 @@ class Product(models.Model):
             # else return None
             image = None
 
+        def allimages():
+            try:
+                all = self.album.thumbnails()
+                loi = [self.img_path_customize(i.image.url) for i in all]
+            except:
+                loi = None
+            return loi
+
         return {
             "pname": self.name,
             "pprice": self.price,
@@ -147,8 +155,9 @@ class Product(models.Model):
             "plongdescription": self.long_description,
             "pvideo": self.video,
             "pcreationdate": self.created_time,
-            "pcategory": self.category,
+            "pcategory": self.category.all(),
             "pmainimage": image,
+            "pallimages": allimages()
         }
 
 
