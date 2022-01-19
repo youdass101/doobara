@@ -148,7 +148,6 @@ class Product(models.Model):
             "pvideo": self.video,
             "pcreationdate": self.created_time,
             "pcategory": self.category,
-        
             "pmainimage": image,
         }
 
