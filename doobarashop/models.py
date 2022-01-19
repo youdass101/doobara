@@ -47,6 +47,19 @@ class Image(models.Model):
     def __str__(self):
         return f"{self.name}, {self.album} " 
 
+    def img_path_customize(self, ipath):
+        return "/".join(ipath.strip("/").split('/')[2:])
+
+    def serialize(self):
+        return{
+            "iname": self.name,
+            "ialt": self.alt,
+            "idescription": self.description,
+            "idefault": self.default,
+            "ilong": self.long,
+            "iurl": self.img_path_customize(self.image.url)
+        }
+
 # Categories is (int(primary id) * string * string * int * int) model
 # interp. Product categories database SQL table 
 class Categories(models.Model):
@@ -135,7 +148,7 @@ class Product(models.Model):
         # the product main image url
         try:
             # if product have an album
-            image = self.img_path_customize((self.album.default().image.url))
+            image = self.album.default()
         except:
             # else return None
             image = None
@@ -156,7 +169,7 @@ class Product(models.Model):
             "pvideo": self.video,
             "pcreationdate": self.created_time,
             "pcategory": self.category.all(),
-            "pmainimage": image,
+            "pmainimage": image.serialize(),
             "pallimages": allimages()
         }
 

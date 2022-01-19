@@ -13,7 +13,7 @@ SHOP
             <!-- Product Thumb, title price -->
             <!-- Product image -->
             <!-- <img src={{row.pmainimage}}> -->
-            <img src="{% static row.pmainimage %}">
+            <img src="{% static row.pmainimage.iurl %}" alt="{{row.pmainimage.ialt}}">
             
             <!-- Product Name -->
             <p class="product-name">{{row.pname}}</p>
