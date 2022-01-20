@@ -7,13 +7,15 @@ Product Name
 {% block body %}
 <!-- SINGLE PRODUCT PAGE ELEMENT CONTAINER -->
 <div class="single-product-page-container">
+
     <!-- PRODUCT NAME TITLE -->
     <h3 class="single-product-title">{{product.pname}}</h3>
+
     <!-- PRODUCT IMAGE SLIDER -->
     <div class="single-product-image">
         <img width="416" height="416" src="{% static product.pmainimage.iurl %}">
     
-
+        <!-- Images thumbnails -->
         <div class="single-product-image-thumb">
             {% for image in product.pallimages %}
                 {% if  image.ilong == False %}
@@ -42,15 +44,17 @@ Product Name
     </div>
 
     <!-- PRODUCT VIDEO (DISPLAY NONE IF THERE IS NO VIDEO) -->
-    <div class="single-product-video">
-            <div class="single-video">
-                    <iframe 
-                    src={{product.pvideo}} 
-                    title="YouTube video player" frameborder="0" 
-                    allowfullscreen>
-                </iframe>
-            </div>
-    </div>
+    {% if product.pvideo %}
+        <div class="single-product-video">
+                <div class="single-video">
+                        <iframe 
+                        src={{product.pvideo}} 
+                        title="YouTube video player" frameborder="0" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+        </div>
+    {% endif %}
 
     <!-- LONG IMAGE TO DESCRIBE THE PRODUCT VISUALLY -->
     {% for image in product.pallimages %}

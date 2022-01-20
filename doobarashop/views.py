@@ -6,14 +6,24 @@ from django.http import HttpResponse
 from django.core.mail import send_mail
 from .models import *
 
+
+
 def index(request):
-    return render(request, "doobarashop/index.html")
+    lop = Product.objects.filter(featured=True)
+    slop = [row.serialize() for row in lop]
+    return render(request, "doobarashop/index.html", {"lop":slop})
 
 
 def shop(request):
-    lop = Product.objects.all()
+    lop = Product.objects.filter(active=True)
     slop = [row.serialize() for row in lop]
     return render(request, "doobarashop/shop.html", {"lop":slop})
+
+def filtering(request, locat):
+    lop = Categories.objects.get(name=locat).products.all()
+    slop = [row.serialize() for row in lop]
+    return render(request, "doobarashop/shop.html", {"lop":slop})
+
 
 def blog(request):
     return render(request, "doobarashop/blog.html")

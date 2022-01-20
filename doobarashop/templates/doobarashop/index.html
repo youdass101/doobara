@@ -43,70 +43,70 @@ Home Automation
 
       <div class="icon-title-container">
         <div>
-          <a href="#"><object data="{% static 'doobarashop/upload/images/icon/smartlifebigger.svg' %}"></object></a>
+          <a href="shop/Smart%20Life"><object data="{% static 'doobarashop/upload/images/icon/smartlifebigger.svg' %}"></object></a>
         </div>
         <p>Smart Life</p>
       </div>
 
       <div class="icon-title-container">
         <div>
-          <a href="#"><object data="{% static 'doobarashop/upload/images/icon/iot.svg' %}"></object></a>
+          <a href="shop"><object data="{% static 'doobarashop/upload/images/icon/iot.svg' %}"></object></a>
         </div>
         <p>All</p>
       </div>
 
       <div class="icon-title-container">
         <div></object>
-          <a href="#"><object data="{% static 'doobarashop/upload/images/icon/ir.svg' %}"></object></a>
+          <a href="shop/Infrared"><object data="{% static 'doobarashop/upload/images/icon/ir.svg' %}"></object></a>
         </div>
         <p>Infrared</p>
       </div>
 
       <div class="icon-title-container">
         <div>
-          <a href="#"><object data="{% static 'doobarashop/upload/images/icon/security.svg' %}"></object></a>
+          <a href="shop/Security"><object data="{% static 'doobarashop/upload/images/icon/security.svg' %}"></object></a>
         </div>
         <p>Security</p>
       </div>
 
       <div class="icon-title-container">
         <div>
-          <a href="#"><object data="{% static 'doobarashop/upload/images/icon/cctv.svg' %}"></object></a>
+          <a href="shop/Cameras"><object data="{% static 'doobarashop/upload/images/icon/cctv.svg' %}"></object></a>
         </div>
         <p>Cameras</p>
       </div>
 
       <div class="icon-title-container">
         <div>
-          <a href="#"><object data="{% static 'doobarashop/upload/images/icon/ihcbigger.svg' %}"></object></a>
+          <a href="shop/Broadlink"><object data="{% static 'doobarashop/upload/images/icon/ihcbigger.svg' %}"></object></a>
         </div>
-        <p>IHC</p>
+        <p>Broadlink</p>
       </div>
 
       <div class="icon-title-container">
         <div>
-          <a href="#"><object data="{% static 'doobarashop/upload/images/icon/sensor2.svg' %}"></object></a>
+          <a href="shop/Sensors"><object data="{% static 'doobarashop/upload/images/icon/sensor2.svg' %}"></object></a>
         </div>
         <p>Sensors</p>
       </div>
 
       <div class="icon-title-container">
         <div>
-          <a href="#"><object data="{% static 'doobarashop/upload/images/icon/light.svg' %}"></object></a>
+          <a href="shop/Light"><object data="{% static 'doobarashop/upload/images/icon/light.svg' %}"></object></a>
         </div>
         <p>Light</p>
       </div>
 
       <div class="icon-title-container">
         <div>
-          <a href="#"><object data="{% static 'doobarashop/upload/images/icon/plug.svg' %}"></object></a>
+          <a href="shop/Plug"><object data="{% static 'doobarashop/upload/images/icon/plug.svg' %}"></object></a>
         </div>
         <p>Plugs</p>
       </div>
 
       <div class="icon-title-container">
         <div>
-          <a href="#"><object data="{% static 'doobarashop/upload/images/icon/ir.svg' %}"></object></a>
+          <a href="shop/Bundle"><object data="{% static 'doobarashop/upload/images/icon/ir.svg' %}"></object></a>
         </div>
         <p>Bundle</p>
       </div>
@@ -116,41 +116,13 @@ Home Automation
     <!-- featured-products PRODUCTS CARD -->
 
     <div class="product-card-container">
-      <a href="single_product" class="product-card">
-        <img class="card-img" src="{% static 'doobarashop/upload/images/4m.jpg' %}">
-        <div class="card-info"><p >Smart PTZ Camera</p></div>
-        <!-- <div class="card-price"><p>$ 42.00</p></div> -->
-      </a>
-                    
-      <a href="single_product" class="product-card">
-        <img class="card-img" src="{% static 'doobarashop/upload/images/hub.jpg' %}">
-        <div class="card-info"><p>Gateway Zigbee Hub</p></div>
-        <!-- <div class="car-price"><p>$ 42.00</p></div> -->
-      </a>
-
-      <a href="single_product" class="product-card">
-        <img class="card-img" src="{% static 'doobarashop/upload/images/IR.jpg' %}">
-        <div class="card-info"><p>smart wifi for me IR universal remote control </p></div>
-        <!-- <div class="card-price"> <p>$ 42.00</p></div> -->
-      </a>
-
-      <a href="single_product" class="product-card">
-        <img class="card-img" src="{% static 'doobarashop/upload/images/doorcam.jpg' %}">
-        <div class="card-info"><p>Door bell Camera</p></div>
-        <!-- <div class="card-price"><p>$ 42.00</p></div> -->
-      </a>
-
-      <a href="single_product" class="product-card">
-        <img class="card-img" src="{% static 'doobarashop/upload/images/siren.jpg' %}">
-        <div class="card-info"><p>Security Siren</p></div>
-        <!-- <div class="card-price"><p>$ 42.00</p></div> -->
-      </a>
-
-      <a href="single_product" class="product-card">
-        <img class="card-img" src="{% static 'doobarashop/upload/images/4m.jpg' %}">
-        <div class="card-info"><p>Smart Camera</p></div>
-        <!-- <div class="card-price"><p>$ 42.00</p></div> -->
-      </a>
+      {% for i in lop %}
+        <a href="single_product/{{i.pname}}" class="product-card">
+          <img class="card-img" src="{% static i.pmainimage.iurl %}">
+          <div class="card-info"><p >{{i.pname}}</p></div>
+          <!-- <div class="card-price"><p>$ 42.00</p></div> -->
+        </a>
+      {% endfor %}
     </div>
 
     <!-- featured-products products ads  -->

@@ -18,6 +18,7 @@ urlpatterns=[
     path("single_blog_post", views.single_blog_post, name="single_blog_post"),
     path("checkout", views.checkout, name="checkout"),
     path("register_login", views.register_login, name="register_login"),
+    path("shop/<str:locat>/", views.filtering, name="filtering"),
     # all auth
     path('accounts/', include('allauth.urls')),
     path('logout', LogoutView.as_view()),
