@@ -7,17 +7,29 @@ from django.db.models.fields.related import ForeignKey
 # from .modeling.images import *
 # from django.contrib.auth.models import AbstractBaseUser
 
+# ImageAlbum is sql django model
+# interp. imagealbum link one product id
+#  from one side to many images on the other side
 class ImageAlbum(models.Model):
+    # album name 
     name = models.CharField(max_length=255)
+
+    # list of images -> image
+    # return image object that have the default key value true
     def default(self):
         return self.images.filter(default=True).first()
     
+    # list of images -> list of images
+    # returns the image that fit the width and lenght 
     def thumbnails(self):
         return self.images.filter(width=100, length=100)
 
+    # data to show on admin page 
     def __str__(self):
         return f"{self.name} " 
 
+# image is Sql django model
+# interp each object contain image informations and url
 class Image(models.Model):
     # name is string
     # image title
@@ -44,12 +56,17 @@ class Image(models.Model):
     width = models.FloatField(default=100)
     length = models.FloatField(default=100)
 
+    # data to show on admin page 
     def __str__(self):
         return f"{self.name}, {self.album} " 
 
+    # string(url) -> string(url)
+    # interp custumize usrl contant 
     def img_path_customize(self, ipath):
         return "/".join(ipath.strip("/").split('/')[2:])
 
+    # image object -> dictionary 
+    # take django sql image object and convert data to dictionary 
     def serialize(self):
         return{
             "iname": self.name,
@@ -144,8 +161,8 @@ class Product(models.Model):
     # SQL query set -> Dictionary(json)
     # Takes SQL(model) query set data and convert it to JSON dictionary records
     def serialize(self):
-        # image is string(url)
-        # the product main image url
+        # image is image object
+        # if the object album is empty return none
         try:
             # if product have an album
             image = self.album.default()
@@ -153,14 +170,18 @@ class Product(models.Model):
             # else return None
             image = None
 
+        # -> list of dictionary
+        # convert a list of object to a list of dictionary usng helpers
+        # if no obejcts exist return none to avoid erorrs
         def allimages():
             try:
                 all = self.album.thumbnails()
-                loi = [self.img_path_customize(i.image.url) for i in all]
+                loi = [i.serialize() for i in all]
             except:
                 loi = None
             return loi
 
+        # is a Dictionary 
         return {
             "pname": self.name,
             "pprice": self.price,
@@ -172,17 +193,3 @@ class Product(models.Model):
             "pmainimage": image.serialize(),
             "pallimages": allimages()
         }
-
-
-
-   
-
-
-
-
-
-
-
- 
-
-    

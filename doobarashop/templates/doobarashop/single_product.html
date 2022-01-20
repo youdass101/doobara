@@ -11,13 +11,15 @@ Product Name
     <h3 class="single-product-title">{{product.pname}}</h3>
     <!-- PRODUCT IMAGE SLIDER -->
     <div class="single-product-image">
-        <img width="416" height="416" src="{% static product.pmainimage %}">
+        <img width="416" height="416" src="{% static product.pmainimage.iurl %}">
     
 
         <div class="single-product-image-thumb">
             {% for image in product.pallimages %}
-                <!-- PRODUCT IMAGE IN THUMBNAIL SIZE TO USE IN IMAGE -->
-                <img class="sp-thumb-image" src="{% static image %}">
+                {% if  image.ilong == False %}
+                    <!-- PRODUCT IMAGE IN THUMBNAIL SIZE TO USE IN IMAGE -->
+                    <img class="sp-thumb-image" src="{% static image.iurl %}">
+                {% endif %}
             {% endfor %}
         </div>
     </div>
@@ -51,7 +53,11 @@ Product Name
     </div>
 
     <!-- LONG IMAGE TO DESCRIBE THE PRODUCT VISUALLY -->
-    <img class="single-product-image-long" src="{% static 'doobarashop/upload/images/long.png' %}">
+    {% for image in product.pallimages %}
+        {% if image.ilong %}
+            <img class="single-product-image-long" src="{% static image.iurl %}">
+        {% endif %}
+    {% endfor %}
 
     <!-- LONG DESCRITPION ABOUT THE PRODUCT DETAILS -->
     <div class="single-product-long-desc">
