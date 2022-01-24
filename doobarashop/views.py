@@ -1,21 +1,29 @@
+from ctypes import util
+from itertools import product
 import re
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.core.mail import send_mail
+from .models import *
+
+
 
 def index(request):
-    return render(request, "doobarashop/index.html")
+    lop = Product.objects.filter(featured=True)
+    slop = [row.serialize() for row in lop]
+    return render(request, "doobarashop/index.html", {"lop":slop})
 
 
 def shop(request):
-    # send_mail(
-    #     'Subject here',
-    #     'Here is the message.',
-    #     'info@doobara.com',
-    #     ['hamzechalhoub@gmail.com'],
-    #     fail_silently=False,
-    # )
-    return render(request, "doobarashop/shop.html")
+    lop = Product.objects.filter(active=True)
+    slop = [row.serialize() for row in lop]
+    return render(request, "doobarashop/shop.html", {"lop":slop})
+
+def filtering(request, locat):
+    lop = Categories.objects.get(name=locat).products.all()
+    slop = [row.serialize() for row in lop]
+    return render(request, "doobarashop/shop.html", {"lop":slop})
+
 
 def blog(request):
     return render(request, "doobarashop/blog.html")
@@ -38,8 +46,10 @@ def cart(request):
 def checkout(request):
     return render(request, "doobarashop/checkout.html")
 
-def single_product(request):
-    return render(request, "doobarashop/single_product.html")
+def single_product(request, locat):
+    product = Product.objects.get(name=locat)
+    product = product.serialize()
+    return render(request, "doobarashop/single_product.html", {"product": product})
 
 def single_blog_post(request):
     return render(request, "doobarashop/single_blog_post.html")

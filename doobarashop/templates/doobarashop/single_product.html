@@ -7,26 +7,28 @@ Product Name
 {% block body %}
 <!-- SINGLE PRODUCT PAGE ELEMENT CONTAINER -->
 <div class="single-product-page-container">
+
     <!-- PRODUCT NAME TITLE -->
-    <h3 class="single-product-title">Smart WiFi Universal Remote Control</h3>
+    <h3 class="single-product-title">{{product.pname}}</h3>
 
     <!-- PRODUCT IMAGE SLIDER -->
     <div class="single-product-image">
-        <img width="416" height="416" src="{% static 'doobarashop/upload/images/hub.jpg' %}">
+        <img width="416" height="416" src="{% static product.pmainimage.iurl %}">
     
-
-    <div class="single-product-image-thumb">
-        <!-- PRODUCT IMAGE IN THUMBNAIL SIZE TO USE IN IMAGE -->
-        <img class="sp-thumb-image" src="{% static 'doobarashop/upload/images/hub.jpg' %}">
-        <img class="sp-thumb-image" src="{% static 'doobarashop/upload/images/hub.jpg' %}">
-        <img class="sp-thumb-image" src="{% static 'doobarashop/upload/images/hub.jpg' %}">
-        <img class="sp-thumb-image" src="{% static 'doobarashop/upload/images/hub.jpg' %}">
-    </div>
+        <!-- Images thumbnails -->
+        <div class="single-product-image-thumb">
+            {% for image in product.pallimages %}
+                {% if  image.ilong == False %}
+                    <!-- PRODUCT IMAGE IN THUMBNAIL SIZE TO USE IN IMAGE -->
+                    <img class="sp-thumb-image" src="{% static image.iurl %}">
+                {% endif %}
+            {% endfor %}
+        </div>
     </div>
 
     <div class="product-highlight">
         <!-- PRODUCT PRICE -->
-        <h3 class="single-product-price"> $ 49.00 </h3>
+        <h3 class="single-product-price">$ {{product.pprice}} </h3>
 
         <!-- PRODUCT QUANTITY TO ADD TO CART (DEFAULT !) -->
         <input class="single-product-quantity" type="number" placeholder="1">
@@ -37,44 +39,35 @@ Product Name
         <!-- PRODUCT SHORT SPESIFICATION (MAINLY LIST) -->
         <div class="single-product-specs">
             <h3>Specification</h3>
-            <ul class="specs-list">
-                <li>WiFi connection</li>
-                <li>Outdoor waterproof</li>     
-                <li>Two-way voice</li> 
-                <li>Motion detection</li> 
-                <li>Max 64gb SD card storage</li>
-                <li>Real-time view</li>
-                <li>Standalone</li>
-                <li>History logs</li>
-                <li>Automation trigger setup</li>
-                <li>Share access control with family memebers</li>
-                <li>Application smart life</li>
-                <li>Cloud storage (optional monthly paid subscribtion)</li>
-            </ul>
+            {{product.pshortdescription|safe}}
         </div>
     </div>
 
     <!-- PRODUCT VIDEO (DISPLAY NONE IF THERE IS NO VIDEO) -->
-    <div class="single-product-video">
-            <div class="single-video">
-                    <iframe 
-                    src="https://www.youtube.com/embed/Rsq0DIjpWdk" 
-                    title="YouTube video player" frameborder="0" 
-                    allowfullscreen>
-                </iframe>
-            </div>
-    </div>
+    {% if product.pvideo %}
+        <div class="single-product-video">
+                <div class="single-video">
+                        <iframe 
+                        src={{product.pvideo}} 
+                        title="YouTube video player" frameborder="0" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+        </div>
+    {% endif %}
 
     <!-- LONG IMAGE TO DESCRIBE THE PRODUCT VISUALLY -->
-    <img class="single-product-image-long" src="{% static 'doobarashop/upload/images/long.png' %}">
+    {% for image in product.pallimages %}
+        {% if image.ilong %}
+            <img class="single-product-image-long" src="{% static image.iurl %}">
+        {% endif %}
+    {% endfor %}
 
     <!-- LONG DESCRITPION ABOUT THE PRODUCT DETAILS -->
     <div class="single-product-long-desc">
-        <h3>Something</h3>
-        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Accusamus nobis 
-            iusto quaerat laborum. Iure odit saepe accusamus similique delectus, 
-            ratione vero possimus dolorum quidem, ducimus numquam aperiam rerum?
-            Adipisci, eveniet!</p>
+        <h3>Description</h3>
+        {{product.plongdescription|safe}}
+       
     </div>
 
     <!-- PODUCT DIMENTION AND WHAT IN PACKGE TABLE  -->
