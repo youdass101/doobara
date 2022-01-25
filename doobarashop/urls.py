@@ -21,14 +21,10 @@ urlpatterns=[
     path("contactus", views.contactus, name="contactus"),
     # My Account page
     path("myaccount", views.myaccount, name="myaccount"),
-    # Cart page 
-    path("cart", views.cart, name="cart"),
     # Single product page
     path('single_product/<str:locat>/', views.single_product, name="single_product"),
     # Single Blog Post page
     path("single_blog_post", views.single_blog_post, name="single_blog_post"),
-    # Chekout cart page 
-    path("checkout", views.checkout, name="checkout"),
     # Login and registration page 
     path("register_login", views.register_login, name="register_login"),
     # all auth views

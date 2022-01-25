@@ -40,11 +40,6 @@ def myaccount(request):
     # return render(request, "account/login.html")
 
 
-def cart(request):
-    return render(request, "doobarashop/cart.html")
-
-def checkout(request):
-    return render(request, "doobarashop/checkout.html")
 
 def single_product(request, locat):
     product = Product.objects.get(name=locat)

@@ -1,0 +1,132 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="eng">
+    <head>
+        <!-- MOBILE RESPONSIVILITY -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link href="{% static 'doobarashop/style.css' %}" rel="stylesheet">
+        <script src="{% static 'doobarashop/main.js'%}"></script>
+
+        <!-- Font awesome -->
+        <link href="{% static 'doobarashop/all.css' %}" rel="stylesheet">
+        <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
+
+        <!-- Page TITLE -->
+        <title>{% block pagetitle %}{%endblock%}</title>
+    </head>
+    <body>
+        <div class="layout-grid-container">
+            
+            <!-- PHONE AND PAYMENT ON DELIVERY left section of top bar -->
+            <div class="header-top-bar-left">
+                <ul>
+                    <li class="phone-number"><a href="tel:96170856471"><i class="icons fas fa-phone-alt"></i> 70-856 471</a></li>
+                    <li><i class="icons fas fa-dollar-sign"></i> Cash on delivery</li>
+                </ul>
+            </div>
+            <!-- SOCIAL MEDIA ICONS right top bar section contain link -->
+            <div class="header-top-bar-right">
+                <a href="https://www.facebook.com/doobarashop" target="_blank"><i class="social-media-nav fab fa-facebook-f fa-2x"></i></a>
+                <a href="https://www.instagram.com/doobarashop/" target="_blank"><i class="social-media-nav fab fa-instagram fa-2x"></i></a>
+                <a href="https://www.youtube.com/gadgetsfreak" target="_blank"><i class="social-media-nav fab fa-youtube fa-2x"></i></a>
+            </div>
+    
+            <!-- LOGO first top left section in navigation contain logo with home link -->
+            <div id="logo-nav">
+                <a href="/"> 
+                    <img src="{% static 'doobarashop/upload/images/home-automaion-doobara-logo.png' %}" alt="home automation doobara">
+                </a>
+            </div>
+
+            <!-- MOBILE MENU HUMBERGER --> 
+            <div id ="mobile-menu-btn" >
+                <button class="humberger" id="btnm">
+                    <span>
+                        <i class="menu-btn fas fa-bars"></i>
+                    </span>
+                    <span>
+                        <p>Menu</p>
+                    </span>  
+                </button>
+            </div>
+
+            <!-- SEARCH BOX second right top section of navigation bar contain search box  -->
+            <div id="search-box-nav" >   
+                <form class="search-site">
+                    <!-- text input for search  -->
+                    <input class="search-input" type="text" placeholder="Search Products">
+                    <!-- button icon for search submit -->
+                    <button type="submit"><i class="fa fa-search"></i></button>
+                </form>       
+            </div>
+        
+            <!-- MENU LINK ICON BAR 3d left buttom section of navigatio bar contain navigation menu links -->
+            <div id="navigation-menu">
+                <a href="/shop"><i class="icons fas fa-store"></i>Shop</a>
+                <a href="/blog"><i class="icons fab fa-blogger-b"></i>Blog</a>
+                <a href="/video"><i class="icons fab fa-youtube"></i>Video</a>
+                <a href="/contactus"><i class="icons fas fa-inbox"></i>Contact Us</a>
+                {% if user.is_authenticated %}
+                <a href="/myaccount"><i class="icons fas fa-user"></i>My Account</a>
+                {%else%}
+                <a href="/accounts/login"><i class="icons fas fa-user"></i>Create Account</a>
+                {% endif%}
+            </div>
+            
+            <!-- CART final right buttom section of navigation bar contain cart and totla url -->
+            <div id="cart-nav">
+                <p class="homeTotal">$0.00  </p>
+                <a href="cart" class="cartUrl"> 0 Items
+                    <i class="icons fas fa-shopping-cart fa-2x"></i></a>
+            </div>
+
+            <!-- MOBILE MENU LINKS ICON (Normaly hidden) -->
+            <div id="navigation-mobile"> 
+                <ul>
+                    <li><a href="/shop"><i class="icons fas fa-store"></i><span class="navigationMenuName"> Shop</span></a></li>
+                    <li><a href="/blog"><i class="icons fab fa-blogger-b"></i><span class="navigationMenuName"> Blog</span></a></li>
+                    <li><a href="/video"><i class="icons fab fa-youtube"></i><span class="navigationMenuName"> Video</span></a></li>
+                    <li><a href="/contactus"><i class="icons fas fa-inbox"></i><span class="navigationMenuName"> Contact Us</span></a></li>
+                    {% if user.is_authenticated %}
+                    <li><a href="/myaccount"><i class="icons fas fa-user"></i><span class="navigationMenuName"> My Account</span></a></li>
+                    {%else%}
+                    <li><a href="/accounts/login"><i class="icons fas fa-user"></i><span class="navigationMenuName"> Create Account</span></a></li>
+                    {% endif%}
+                </ul>
+            </div>
+
+    
+            <!-- PAGE BODY CONTENT SECTION  -->
+            <div class="page-content">
+                {% block body %} {%endblock%}   
+            </div>
+
+            <!-- MOBILE FOOTER MENU -->
+            <div id="mobile-footer-menu">
+                <div class="footer-navigation">
+                <a href="/"><i class="icons fas fa-home fa-3x"></i></a>
+                <a href="/shop"><i class="icons fas fa-store fa-3x"></i></a>
+                {% if user.is_authenticated %}
+                <a href="/myaccount"><i class="icons fas fa-user fa-3x"></i></a>
+                {%else%}
+                <a href="/accounts/login"><i class="icons fas fa-user fa-3x"></i></a>
+                {% endif%}
+                <a href="#"><i class="icons fas fa-search fa-3x"></i></a>
+                <a href="cart"><i class="icons fas fa-shopping-cart fa-3x"></i></a>
+                </div>
+            </div>
+
+            <!-- ALL PAGES FOOTER -->
+            <div class="footter-wrapper">
+                <div class="push">
+                </div>               
+            </div>
+            
+            <div class="footer">
+            
+            </div>  
+        </div>    
+    </body>
+
+</html>
