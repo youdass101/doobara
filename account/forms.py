@@ -1,5 +1,5 @@
 from django import forms
-from .models import *
+from account.models import *
 from datetime import datetime
 from allauth.account.forms import SignupForm
 

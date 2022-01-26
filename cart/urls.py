@@ -1,6 +1,5 @@
-from django.urls import path
-from . import views
 
+from . import views
 # allauth 
 from django.urls import path, include, re_path
 from django.views.generic import TemplateView

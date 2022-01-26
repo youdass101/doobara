@@ -42,7 +42,7 @@ class Image(models.Model):
     description = models.TextField(blank=True)
     # image is image 
     # the image path
-    image = models.ImageField(upload_to= 'doobarashop/static/doobarashop/upload/images')
+    image = models.ImageField(upload_to= 'static/doobarashop/upload/images')
     # default is boolean 
     # if true the image is the main image for the product 
     default = models.BooleanField(default=False)
