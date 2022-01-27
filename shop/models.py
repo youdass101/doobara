@@ -20,6 +20,9 @@ class Categories(models.Model):
     def __str__(self):
         return f"{self.name} "
 
+# class Variants(models.Model):
+#     name = models.CharField(max_length=255)
+#     price = models.DecimalField(max_digits=5, decimal_places=2)
 
 # PRODUCT is model-table (int (primary ID) * string * int * string * string * date * URL
 #                         * boolean * boolean * boolean * boolean * boolean *  model reference) model
@@ -65,13 +68,14 @@ class Product(models.Model):
     # product category model reference many to many (the product can belong to several catergories)
     category = models.ManyToManyField(Categories, null=True, blank=True, default=None, related_name="products") 
     
+
     # Admin page tabel view of dojects column (key value)
     def __str__(self):
         return f"{self.name}, {self.album} "
 
     # SQL query set -> Dictionary(json)
     # Takes SQL(model) query set data and convert it to JSON dictionary records
-    def serialize(self):
+    def serialize(self, tag):
         # image is image object
         # if the object album is empty return none
         try:
@@ -93,14 +97,22 @@ class Product(models.Model):
             return loi
 
         # is a Dictionary 
-        return {
+        if tag == 'main':
+            return {
             "pname": self.name,
             "pprice": self.price,
-            "pshortdescription": self.short_description,
-            "plongdescription": self.long_description,
-            "pvideo": self.video,
-            "pcreationdate": self.created_time,
             "pcategory": self.category.all(),
             "pmainimage": image.serialize(),
-            "pallimages": allimages()
         }
+        else:
+            return {
+                "pname": self.name,
+                "pprice": self.price,
+                "pshortdescription": self.short_description,
+                "plongdescription": self.long_description,
+                "pvideo": self.video,
+                "pcreationdate": self.created_time,
+                "pcategory": self.category.all(),
+                "pmainimage": image.serialize(),
+                "pallimages": allimages()
+            }
