@@ -10,7 +10,7 @@
   color: #292826;
 }
 
-.input-style-prim, #contact-form-container .contact-inputs #contact-submit-form input, #my-account-container #account-detail form input, .checkout-page-container .checkout-shipping-details-container form input, .checkout-page-container .checkout-shipping-details-container form textarea, .login-register-container .login-container form input, .login-register-container .login-container form textarea, .form-default-style form input, #user-change-password-container form input, #email-change-container form input, #login-container form input, #signup-container form input, #logout-container form input, #user-set-password form input, #password-reset-container form input, #email-comfirmation-container form input, #reset-password-container form input, .auth-account-default form input, .form-default-style form textarea, #user-change-password-container form textarea, #email-change-container form textarea, #login-container form textarea, #signup-container form textarea, #logout-container form textarea, #user-set-password form textarea, #password-reset-container form textarea, #email-comfirmation-container form textarea, #reset-password-container form textarea, .auth-account-default form textarea {
+.input-style-prim, #contact-form-container .contact-inputs #contact-submit-form input, .checkout-page-container .checkout-shipping-details-container form input, .checkout-page-container .checkout-shipping-details-container form textarea, #my-account-container #account-detail form input, .login-register-container .login-container form input, .login-register-container .login-container form textarea, .form-default-style form input, #user-change-password-container form input, #email-change-container form input, #login-container form input, #signup-container form input, #logout-container form input, #user-set-password form input, #password-reset-container form input, #email-comfirmation-container form input, #reset-password-container form input, .auth-account-default form input, .form-default-style form textarea, #user-change-password-container form textarea, #email-change-container form textarea, #login-container form textarea, #signup-container form textarea, #logout-container form textarea, #user-set-password form textarea, #password-reset-container form textarea, #email-comfirmation-container form textarea, #reset-password-container form textarea, .auth-account-default form textarea {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -21,7 +21,7 @@
   background-color: #f2f2f2;
 }
 
-.input-submit-button-prim, #my-account-container #account-detail form input[type=submit], #user-set-password form input[type=submit], #password-reset-container form input[type=submit], #reset-password-container form input[type=submit], .auth-account-default form input[type=submit], .login-register-container .login-container form input[type=submit] {
+.input-submit-button-prim, #my-account-container #account-detail form input[type=submit], .login-register-container .login-container form input[type=submit], #user-set-password form input[type=submit], #password-reset-container form input[type=submit], #reset-password-container form input[type=submit], .auth-account-default form input[type=submit] {
   width: 100%;
   background-color: #292826;
   color: #F9D342;
@@ -435,7 +435,7 @@ form.search-site button {
   color: #292826;
 }
 
-.input-style-prim, .login-register-container .login-container form input, .login-register-container .login-container form textarea, .checkout-page-container .checkout-shipping-details-container form input, .checkout-page-container .checkout-shipping-details-container form textarea, #my-account-container #account-detail form input, .form-default-style form input, #user-change-password-container form input, #email-change-container form input, #login-container form input, #signup-container form input, #logout-container form input, #user-set-password form input, #password-reset-container form input, #email-comfirmation-container form input, #reset-password-container form input, .auth-account-default form input, .form-default-style form textarea, #user-change-password-container form textarea, #email-change-container form textarea, #login-container form textarea, #signup-container form textarea, #logout-container form textarea, #user-set-password form textarea, #password-reset-container form textarea, #email-comfirmation-container form textarea, #reset-password-container form textarea, .auth-account-default form textarea {
+.input-style-prim, .login-register-container .login-container form input, .login-register-container .login-container form textarea, #my-account-container #account-detail form input, .checkout-page-container .checkout-shipping-details-container form input, .checkout-page-container .checkout-shipping-details-container form textarea, .form-default-style form input, #user-change-password-container form input, #email-change-container form input, #login-container form input, #signup-container form input, #logout-container form input, #user-set-password form input, #password-reset-container form input, #email-comfirmation-container form input, #reset-password-container form input, .auth-account-default form input, .form-default-style form textarea, #user-change-password-container form textarea, #email-change-container form textarea, #login-container form textarea, #signup-container form textarea, #logout-container form textarea, #user-set-password form textarea, #password-reset-container form textarea, #email-comfirmation-container form textarea, #reset-password-container form textarea, .auth-account-default form textarea {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -446,435 +446,7 @@ form.search-site button {
   background-color: #f2f2f2;
 }
 
-.input-submit-button-prim, .login-register-container .login-container form input[type=submit], #user-set-password form input[type=submit], #password-reset-container form input[type=submit], #reset-password-container form input[type=submit], .auth-account-default form input[type=submit], #my-account-container #account-detail form input[type=submit] {
-  width: 100%;
-  background-color: #292826;
-  color: #F9D342;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 15px;
-}
-
-.form-default-style form label, #user-change-password-container form label, #email-change-container form label, #login-container form label, #signup-container form label, #logout-container form label, #user-set-password form label, #password-reset-container form label, #email-comfirmation-container form label, #reset-password-container form label, .auth-account-default form label {
-  font-size: 16px;
-  font-weight: 400;
-}
-
-.form-default-style form button, #user-change-password-container form button, #email-change-container form button, #login-container form button, #signup-container form button, #logout-container form button, #user-set-password form button, #password-reset-container form button, #email-comfirmation-container form button, #reset-password-container form button, .auth-account-default form button {
-  color: #fff;
-  background-color: #292826;
-  font-family: "Archivo Narrow", Sans-serif;
-  font-size: 14px;
-  border-style: groove;
-  border-width: 0;
-  border-radius: 6px;
-  padding: 7px 20px 7px 20px;
-  cursor: pointer;
-  margin-top: 10px;
-  margin-right: 10px;
-}
-
-.form-default-style form button:hover, #user-change-password-container form button:hover, #email-change-container form button:hover, #login-container form button:hover, #signup-container form button:hover, #logout-container form button:hover, #user-set-password form button:hover, #password-reset-container form button:hover, #email-comfirmation-container form button:hover, #reset-password-container form button:hover, .auth-account-default form button:hover {
-  color: #F9D342;
-}
-
-#index-grid-container {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  grid-template-areas: "slider slider slider slider slider slider slider slider slider slider slider slider" "pcat pcat pcat fp fp fp fp fp fp fp fp fp" "ac ac ac ac ac ac ac ac ac ac ac ac";
-}
-
-@media screen and (max-width: 1206px) {
-  #index-grid-container {
-    grid-template-areas: "slider slider slider slider slider slider slider slider slider slider slider slider " "pcat pcat pcat pcat pcat pcat pcat pcat pcat pcat pcat pcat" "fp fp fp fp fp fp fp fp fp fp fp fp" "ac ac ac ac ac ac ac ac ac ac ac ac";
-  }
-}
-@media screen and (max-width: 530px) {
-  #index-grid-container {
-    grid-template-areas: "slider slider slider slider slider slider slider slider slider slider slider slider " "pcat pcat pcat pcat pcat pcat pcat pcat pcat pcat pcat pcat" "ac ac ac ac ac ac ac ac ac ac ac ac";
-  }
-}
-.slider-img-desktop {
-  display: block;
-}
-
-.slider-img-mobile {
-  display: none;
-}
-
-/* Slideshow container */
-.slideshow-container {
-  grid-area: slider;
-}
-
-/* SLider Hide the images by default */
-.mySlides {
-  display: none;
-  transition: transform 35s;
-}
-
-/* Next & previous pointer icons buttons on slider */
-.prev, .next {
-  cursor: pointer;
-  position: relative;
-  width: auto;
-  margin-top: -62px;
-  padding: 16px;
-  color: white;
-  font-weight: bold;
-  font-size: 18px;
-  transition: 0.6s ease;
-  border-radius: 0 3px 3px 0;
-  user-select: none;
-}
-
-.prev {
-  float: left;
-}
-
-/* Position the "next button" pointer on slider to the right */
-.next {
-  float: right;
-  right: 0;
-  border-radius: 3px 0 0 3px;
-}
-
-/* On hover, add a black background color with a little bit see-through on slider arrows pointers */
-.prev:hover, .next:hover {
-  background-color: rgba(0, 0, 0, 0.8);
-}
-
-/* SLider Caption text */
-.slider-caption {
-  color: #f2f2f2;
-  position: absolute;
-  width: 100%;
-  margin-top: -35px;
-  text-align: center;
-}
-
-/* Slider image Number text (1/3 etc) */
-.numbertext {
-  color: #f2f2f2;
-  font-size: 12px;
-  padding: 8px 12px;
-  position: absolute;
-}
-
-/* Slider Fading animation effect */
-.slide-fade {
-  -webkit-animation-name: fade;
-  -webkit-animation-duration: 1.5s;
-  animation-name: fade;
-  animation-duration: 1.5s;
-}
-
-@-webkit-keyframes fade {
-  from {
-    opacity: 0.4;
-  }
-  to {
-    opacity: 1;
-  }
-}
-@keyframes fade {
-  from {
-    opacity: 0.4;
-  }
-  to {
-    opacity: 1;
-  }
-}
-@media screen and (max-width: 480px) {
-  .slider-img-mobile {
-    display: block;
-  }
-
-  .slider-img-desktop {
-    display: none;
-  }
-
-  .prev, .next {
-    width: auto;
-    position: relative;
-    margin-top: -100px;
-  }
-
-  .prev {
-    float: left;
-  }
-
-  .next {
-    float: right;
-  }
-}
-#product-category {
-  grid-area: pcat;
-  display: flex;
-  display: -webkit-flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  align-content: center;
-  padding: 4px;
-}
-#product-category .icon-title-container {
-  min-width: 20%;
-  padding-bottom: 10px;
-  display: flex;
-  display: -webkit-flex;
-  flex-wrap: wrap;
-  flex-direction: column;
-  align-content: center;
-}
-#product-category .icon-title-container div:hover {
-  background-color: #F9D342;
-  color: #292826;
-}
-#product-category .icon-title-container div:hover a object {
-  filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(331deg) brightness(104%) contrast(103%);
-}
-#product-category .icon-title-container div {
-  width: 60px;
-  border: 1px solid black;
-  border-radius: 30px;
-  background-color: #292826;
-}
-#product-category .icon-title-container div a {
-  display: flex;
-  display: -webkit-flex;
-  justify-items: center;
-  align-items: center;
-  align-content: center;
-}
-#product-category .icon-title-container div a object {
-  width: 100%;
-  filter: invert(94%) sepia(27%) saturate(3740%) hue-rotate(323deg) brightness(103%) contrast(95%);
-  padding: 10px;
-  pointer-events: none;
-}
-#product-category .icon-title-container p {
-  text-align: center;
-  margin: 0;
-  font-size: 13px;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  font-weight: 600;
-}
-
-.product-card-container {
-  grid-area: fp;
-  padding-left: 1%;
-  display: flex;
-  display: -webkit-flex;
-  flex-wrap: wrap;
-}
-.product-card-container .product-card:hover {
-  background-color: #292826;
-}
-.product-card-container .product-card:hover * {
-  color: #F9D342;
-}
-.product-card-container .product-card:hover .card-info {
-  background-color: #292826;
-}
-.product-card-container .product-card:hover .card-info * {
-  color: #F9D342;
-}
-.product-card-container .product-card {
-  flex: 15% !important;
-  -webkit-flex: 15%;
-  width: 15%;
-  display: flex;
-  display: -webkit-flex;
-  justify-content: space-around;
-  align-content: space-between;
-  flex-direction: column;
-  background-color: #F9D342;
-  color: #292826;
-  box-shadow: 1px 1px 4px 5px rgba(0, 0, 0, 0.5);
-  text-decoration: none;
-}
-.product-card-container .product-card p {
-  margin: 0px 0px 15px 0px;
-  padding: 5% 1% 0 1%;
-  text-align: center;
-  line-height: 130%;
-  font-size: 15px;
-  font-weight: 550;
-}
-.product-card-container .product-card .card-info {
-  background-color: #F9D342;
-  margin: 0;
-  height: 25%;
-}
-
-@media screen and (max-width: 1206px) {
-  .product-card-container {
-    padding-left: 0;
-  }
-}
-@media screen and (max-width: 760px) {
-  .product-card-container {
-    display: none;
-  }
-}
-.ad-container {
-  grid-area: ac;
-  display: flex;
-  flex-wrap: wrap;
-  padding-top: 15px;
-}
-.ad-container .single-add-home {
-  flex: 50%;
-  border: 2px solid #292826;
-}
-.ad-container .single-add-home img {
-  width: 100%;
-  vertical-align: top;
-}
-
-@media screen and (max-width: 720px) {
-  .single-add-home {
-    flex: 100% !important;
-  }
-}
-.body-800width, .single-product-page-container .single-product-dimention, .single-product-page-container .single-product-long-desc, .single-product-page-container .single-product-image-long, .single-product-page-container .single-product-video {
-  width: 100%;
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.input-label {
-  font-size: 16px;
-  font-weight: 400;
-  color: #292826;
-}
-
-.input-style-prim, .login-register-container .login-container form input, .login-register-container .login-container form textarea, .checkout-page-container .checkout-shipping-details-container form input, .checkout-page-container .checkout-shipping-details-container form textarea, #my-account-container #account-detail form input, .form-default-style form input, #user-change-password-container form input, #email-change-container form input, #login-container form input, #signup-container form input, #logout-container form input, #user-set-password form input, #password-reset-container form input, #email-comfirmation-container form input, #reset-password-container form input, .auth-account-default form input, .form-default-style form textarea, #user-change-password-container form textarea, #email-change-container form textarea, #login-container form textarea, #signup-container form textarea, #logout-container form textarea, #user-set-password form textarea, #password-reset-container form textarea, #email-comfirmation-container form textarea, #reset-password-container form textarea, .auth-account-default form textarea {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-  background-color: #f2f2f2;
-}
-
-.input-submit-button-prim, .login-register-container .login-container form input[type=submit], #user-set-password form input[type=submit], #password-reset-container form input[type=submit], #reset-password-container form input[type=submit], .auth-account-default form input[type=submit], #my-account-container #account-detail form input[type=submit] {
-  width: 100%;
-  background-color: #292826;
-  color: #F9D342;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 15px;
-}
-
-.form-default-style form label, #user-change-password-container form label, #email-change-container form label, #login-container form label, #signup-container form label, #logout-container form label, #user-set-password form label, #password-reset-container form label, #email-comfirmation-container form label, #reset-password-container form label, .auth-account-default form label {
-  font-size: 16px;
-  font-weight: 400;
-}
-
-.form-default-style form button, #user-change-password-container form button, #email-change-container form button, #login-container form button, #signup-container form button, #logout-container form button, #user-set-password form button, #password-reset-container form button, #email-comfirmation-container form button, #reset-password-container form button, .auth-account-default form button {
-  color: #fff;
-  background-color: #292826;
-  font-family: "Archivo Narrow", Sans-serif;
-  font-size: 14px;
-  border-style: groove;
-  border-width: 0;
-  border-radius: 6px;
-  padding: 7px 20px 7px 20px;
-  cursor: pointer;
-  margin-top: 10px;
-  margin-right: 10px;
-}
-
-.form-default-style form button:hover, #user-change-password-container form button:hover, #email-change-container form button:hover, #login-container form button:hover, #signup-container form button:hover, #logout-container form button:hover, #user-set-password form button:hover, #password-reset-container form button:hover, #email-comfirmation-container form button:hover, #reset-password-container form button:hover, .auth-account-default form button:hover {
-  color: #F9D342;
-}
-
-#container-shop {
-  clear: both;
-  padding: 7px 0 7px 0;
-  grid-gap: 5px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  background-color: #F9D342;
-}
-#container-shop a:link {
-  text-decoration: none;
-}
-#container-shop .shop-product {
-  padding: 10px 10px 15px 10px;
-  border-radius: 7px;
-  background-color: white;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  box-shadow: 1px 1px 4px 5px rgba(0, 0, 0, 0.5);
-}
-#container-shop .shop-product img {
-  width: 100%;
-  margin: 0;
-}
-#container-shop .shop-product .product-name {
-  height: 45px;
-}
-#container-shop .shop-product button {
-  color: #fff;
-  background-color: #292826;
-  font-family: "Archivo Narrow", Sans-serif;
-  font-size: 14px;
-  border-style: groove;
-  border-width: 0;
-  border-radius: 6px;
-  padding: 7px 20px 7px 20px;
-  cursor: pointer;
-}
-#container-shop .shop-product button:hover {
-  background-color: #F9D342;
-  color: #292826;
-}
-#container-shop .shop-product p {
-  text-align: center;
-  font-size: 15px;
-  font-weight: 550;
-  margin: 0;
-  color: #292826;
-}
-#container-shop .shop-product .product-price {
-  padding-top: 15px;
-}
-
-.body-800width, .single-product-page-container .single-product-dimention, .single-product-page-container .single-product-long-desc, .single-product-page-container .single-product-image-long, .single-product-page-container .single-product-video {
-  width: 100%;
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.input-label {
-  font-size: 16px;
-  font-weight: 400;
-  color: #292826;
-}
-
-.input-style-prim, .login-register-container .login-container form input, .login-register-container .login-container form textarea, .checkout-page-container .checkout-shipping-details-container form input, .checkout-page-container .checkout-shipping-details-container form textarea, #my-account-container #account-detail form input, .form-default-style form input, #user-change-password-container form input, #email-change-container form input, #login-container form input, #signup-container form input, #logout-container form input, #user-set-password form input, #password-reset-container form input, #email-comfirmation-container form input, #reset-password-container form input, .auth-account-default form input, .form-default-style form textarea, #user-change-password-container form textarea, #email-change-container form textarea, #login-container form textarea, #signup-container form textarea, #logout-container form textarea, #user-set-password form textarea, #password-reset-container form textarea, #email-comfirmation-container form textarea, #reset-password-container form textarea, .auth-account-default form textarea {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-  background-color: #f2f2f2;
-}
-
-.input-submit-button-prim, .login-register-container .login-container form input[type=submit], #user-set-password form input[type=submit], #password-reset-container form input[type=submit], #reset-password-container form input[type=submit], .auth-account-default form input[type=submit], #my-account-container #account-detail form input[type=submit] {
+.input-submit-button-prim, #user-set-password form input[type=submit], #password-reset-container form input[type=submit], #reset-password-container form input[type=submit], .auth-account-default form input[type=submit], .login-register-container .login-container form input[type=submit], #my-account-container #account-detail form input[type=submit] {
   width: 100%;
   background-color: #292826;
   color: #F9D342;
@@ -956,7 +528,7 @@ form.search-site button {
   color: #292826;
 }
 
-.input-style-prim, .login-register-container .login-container form input, .login-register-container .login-container form textarea, .checkout-page-container .checkout-shipping-details-container form input, .checkout-page-container .checkout-shipping-details-container form textarea, #my-account-container #account-detail form input, .form-default-style form input, #user-change-password-container form input, #email-change-container form input, #login-container form input, #signup-container form input, #logout-container form input, #user-set-password form input, #password-reset-container form input, #email-comfirmation-container form input, #reset-password-container form input, .auth-account-default form input, .form-default-style form textarea, #user-change-password-container form textarea, #email-change-container form textarea, #login-container form textarea, #signup-container form textarea, #logout-container form textarea, #user-set-password form textarea, #password-reset-container form textarea, #email-comfirmation-container form textarea, #reset-password-container form textarea, .auth-account-default form textarea {
+.input-style-prim, .login-register-container .login-container form input, .login-register-container .login-container form textarea, #my-account-container #account-detail form input, .checkout-page-container .checkout-shipping-details-container form input, .checkout-page-container .checkout-shipping-details-container form textarea, .form-default-style form input, #user-change-password-container form input, #email-change-container form input, #login-container form input, #signup-container form input, #logout-container form input, #user-set-password form input, #password-reset-container form input, #email-comfirmation-container form input, #reset-password-container form input, .auth-account-default form input, .form-default-style form textarea, #user-change-password-container form textarea, #email-change-container form textarea, #login-container form textarea, #signup-container form textarea, #logout-container form textarea, #user-set-password form textarea, #password-reset-container form textarea, #email-comfirmation-container form textarea, #reset-password-container form textarea, .auth-account-default form textarea {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -967,7 +539,71 @@ form.search-site button {
   background-color: #f2f2f2;
 }
 
-.input-submit-button-prim, .login-register-container .login-container form input[type=submit], #user-set-password form input[type=submit], #password-reset-container form input[type=submit], #reset-password-container form input[type=submit], .auth-account-default form input[type=submit], #my-account-container #account-detail form input[type=submit] {
+.input-submit-button-prim, #user-set-password form input[type=submit], #password-reset-container form input[type=submit], #reset-password-container form input[type=submit], .auth-account-default form input[type=submit], .login-register-container .login-container form input[type=submit], #my-account-container #account-detail form input[type=submit] {
+  width: 100%;
+  background-color: #292826;
+  color: #F9D342;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.form-default-style form label, #user-change-password-container form label, #email-change-container form label, #login-container form label, #signup-container form label, #logout-container form label, #user-set-password form label, #password-reset-container form label, #email-comfirmation-container form label, #reset-password-container form label, .auth-account-default form label {
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.form-default-style form button, #user-change-password-container form button, #email-change-container form button, #login-container form button, #signup-container form button, #logout-container form button, #user-set-password form button, #password-reset-container form button, #email-comfirmation-container form button, #reset-password-container form button, .auth-account-default form button {
+  color: #fff;
+  background-color: #292826;
+  font-family: "Archivo Narrow", Sans-serif;
+  font-size: 14px;
+  border-style: groove;
+  border-width: 0;
+  border-radius: 6px;
+  padding: 7px 20px 7px 20px;
+  cursor: pointer;
+  margin-top: 10px;
+  margin-right: 10px;
+}
+
+.form-default-style form button:hover, #user-change-password-container form button:hover, #email-change-container form button:hover, #login-container form button:hover, #signup-container form button:hover, #logout-container form button:hover, #user-set-password form button:hover, #password-reset-container form button:hover, #email-comfirmation-container form button:hover, #reset-password-container form button:hover, .auth-account-default form button:hover {
+  color: #F9D342;
+}
+
+.blog-post-container {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.body-800width, .single-product-page-container .single-product-dimention, .single-product-page-container .single-product-long-desc, .single-product-page-container .single-product-image-long, .single-product-page-container .single-product-video {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.input-label {
+  font-size: 16px;
+  font-weight: 400;
+  color: #292826;
+}
+
+.input-style-prim, .login-register-container .login-container form input, .login-register-container .login-container form textarea, #my-account-container #account-detail form input, .checkout-page-container .checkout-shipping-details-container form input, .checkout-page-container .checkout-shipping-details-container form textarea, .form-default-style form input, #user-change-password-container form input, #email-change-container form input, #login-container form input, #signup-container form input, #logout-container form input, #user-set-password form input, #password-reset-container form input, #email-comfirmation-container form input, #reset-password-container form input, .auth-account-default form input, .form-default-style form textarea, #user-change-password-container form textarea, #email-change-container form textarea, #login-container form textarea, #signup-container form textarea, #logout-container form textarea, #user-set-password form textarea, #password-reset-container form textarea, #email-comfirmation-container form textarea, #reset-password-container form textarea, .auth-account-default form textarea {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  background-color: #f2f2f2;
+}
+
+.input-submit-button-prim, #user-set-password form input[type=submit], #password-reset-container form input[type=submit], #reset-password-container form input[type=submit], .auth-account-default form input[type=submit], .login-register-container .login-container form input[type=submit], #my-account-container #account-detail form input[type=submit] {
   width: 100%;
   background-color: #292826;
   color: #F9D342;
@@ -1048,7 +684,7 @@ form.search-site button {
   color: #292826;
 }
 
-.input-style-prim, .login-register-container .login-container form input, .login-register-container .login-container form textarea, .checkout-page-container .checkout-shipping-details-container form input, .checkout-page-container .checkout-shipping-details-container form textarea, #my-account-container #account-detail form input, .form-default-style form input, #user-change-password-container form input, #email-change-container form input, #login-container form input, #signup-container form input, #logout-container form input, #user-set-password form input, #password-reset-container form input, #email-comfirmation-container form input, #reset-password-container form input, .auth-account-default form input, .form-default-style form textarea, #user-change-password-container form textarea, #email-change-container form textarea, #login-container form textarea, #signup-container form textarea, #logout-container form textarea, #user-set-password form textarea, #password-reset-container form textarea, #email-comfirmation-container form textarea, #reset-password-container form textarea, .auth-account-default form textarea {
+.input-style-prim, .login-register-container .login-container form input, .login-register-container .login-container form textarea, #my-account-container #account-detail form input, .checkout-page-container .checkout-shipping-details-container form input, .checkout-page-container .checkout-shipping-details-container form textarea, .form-default-style form input, #user-change-password-container form input, #email-change-container form input, #login-container form input, #signup-container form input, #logout-container form input, #user-set-password form input, #password-reset-container form input, #email-comfirmation-container form input, #reset-password-container form input, .auth-account-default form input, .form-default-style form textarea, #user-change-password-container form textarea, #email-change-container form textarea, #login-container form textarea, #signup-container form textarea, #logout-container form textarea, #user-set-password form textarea, #password-reset-container form textarea, #email-comfirmation-container form textarea, #reset-password-container form textarea, .auth-account-default form textarea {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -1059,596 +695,7 @@ form.search-site button {
   background-color: #f2f2f2;
 }
 
-.input-submit-button-prim, .login-register-container .login-container form input[type=submit], #user-set-password form input[type=submit], #password-reset-container form input[type=submit], #reset-password-container form input[type=submit], .auth-account-default form input[type=submit], #my-account-container #account-detail form input[type=submit] {
-  width: 100%;
-  background-color: #292826;
-  color: #F9D342;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 15px;
-}
-
-.form-default-style form label, #user-change-password-container form label, #email-change-container form label, #login-container form label, #signup-container form label, #logout-container form label, #user-set-password form label, #password-reset-container form label, #email-comfirmation-container form label, #reset-password-container form label, .auth-account-default form label {
-  font-size: 16px;
-  font-weight: 400;
-}
-
-.form-default-style form button, #user-change-password-container form button, #email-change-container form button, #login-container form button, #signup-container form button, #logout-container form button, #user-set-password form button, #password-reset-container form button, #email-comfirmation-container form button, #reset-password-container form button, .auth-account-default form button {
-  color: #fff;
-  background-color: #292826;
-  font-family: "Archivo Narrow", Sans-serif;
-  font-size: 14px;
-  border-style: groove;
-  border-width: 0;
-  border-radius: 6px;
-  padding: 7px 20px 7px 20px;
-  cursor: pointer;
-  margin-top: 10px;
-  margin-right: 10px;
-}
-
-.form-default-style form button:hover, #user-change-password-container form button:hover, #email-change-container form button:hover, #login-container form button:hover, #signup-container form button:hover, #logout-container form button:hover, #user-set-password form button:hover, #password-reset-container form button:hover, #email-comfirmation-container form button:hover, #reset-password-container form button:hover, .auth-account-default form button:hover {
-  color: #F9D342;
-}
-
-.contact-info {
-  background-color: #292826;
-  opacity: 0.7;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.contact-info h1 {
-  color: white;
-  letter-spacing: 2px;
-}
-
-.contact-info i {
-  color: white;
-  padding-right: 15px;
-}
-
-.contact-info .whatsapp {
-  color: green;
-}
-
-.contact-info .contact-phone {
-  border-style: solid;
-  border-width: 5px 0;
-  border-color: #f84d43;
-}
-
-@media screen and (max-width: 750px) {
-  .contact-info h1 {
-    font-size: xx-large;
-    font-weight: 600;
-    color: white !important;
-  }
-}
-#contact-form-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  align-content: space-around;
-  align-items: center;
-  padding: 50px 0 50px 0;
-  background-color: #cde1e9;
-}
-
-#contact-form-container .form-desc {
-  width: 35%;
-  padding-left: 10px;
-  align-self: flex-start;
-}
-
-#contact-form-container .form-desc h1, #contact-form-container .form-desc h2 {
-  margin: 0;
-}
-
-#contact-form-container .form-desc p {
-  font-size: 16px;
-  font-weight: 400;
-}
-
-#contact-form-container .contact-inputs {
-  padding-right: 10px;
-}
-
-#contact-form-container .contact-inputs #contact-submit-form input {
-  background-color: white !important;
-}
-
-#contact-form-container .contact-inputs #contact-submit-form .contact-name, #contact-form-container .contact-inputs #contact-submit-form .contact-email {
-  width: 49%;
-  display: inline-block;
-  margin: 0;
-}
-
-#contact-form-container .contact-inputs #contact-submit-form .contact-email {
-  float: right;
-}
-
-#contact-form-container .contact-inputs textarea {
-  width: 100%;
-  border: none;
-  height: 100px;
-  margin: 5px 0 0 5px;
-}
-
-#contact-form-container .contact-inputs .contact-send-button {
-  float: right;
-  margin: 0;
-}
-
-#contact-form-container .contact-inputs .contact-send-button button {
-  padding: 15px;
-  background-color: #292826;
-  color: #F9D342;
-  border: 0;
-  -webkit-appearance: none;
-  box-sizing: border-box;
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.13);
-  font-size: 15px;
-  font-weight: 600;
-  cursor: pointer;
-  padding: 10px 30px;
-  letter-spacing: 2px;
-}
-
-#contact-form-container .contact-inputs .contact-send-button button:hover {
-  background-color: #F9D342;
-  color: #292826;
-}
-
-@media screen and (max-width: 960px) {
-  #contact-form-container {
-    padding: 15px !important;
-  }
-
-  #contact-form-container .form-desc, #contact-form-container .contact-inputs {
-    width: 100% !important;
-    text-align: center;
-  }
-
-  #contact-form-container .contact-name, #contact-form-container .contact-email {
-    width: 100% !important;
-  }
-}
-.inquiry-email-contact {
-  margin-top: 0px;
-  text-align: center;
-  background-color: #292826;
-  color: white;
-  border-style: solid;
-  border-width: 0 0 5px 0;
-  border-color: #F9D342;
-}
-.inquiry-email-contact h4 {
-  color: #F9D342;
-  margin: 0;
-}
-.inquiry-email-contact .inquiry-email-address {
-  color: #F9D342;
-}
-
-.body-800width, .single-product-page-container .single-product-dimention, .single-product-page-container .single-product-long-desc, .single-product-page-container .single-product-image-long, .single-product-page-container .single-product-video {
-  width: 100%;
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.input-label {
-  font-size: 16px;
-  font-weight: 400;
-  color: #292826;
-}
-
-.input-style-prim, .login-register-container .login-container form input, .login-register-container .login-container form textarea, .checkout-page-container .checkout-shipping-details-container form input, .checkout-page-container .checkout-shipping-details-container form textarea, #my-account-container #account-detail form input, .form-default-style form input, #user-change-password-container form input, #email-change-container form input, #login-container form input, #signup-container form input, #logout-container form input, #user-set-password form input, #password-reset-container form input, #email-comfirmation-container form input, #reset-password-container form input, .auth-account-default form input, .form-default-style form textarea, #user-change-password-container form textarea, #email-change-container form textarea, #login-container form textarea, #signup-container form textarea, #logout-container form textarea, #user-set-password form textarea, #password-reset-container form textarea, #email-comfirmation-container form textarea, #reset-password-container form textarea, .auth-account-default form textarea {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-  background-color: #f2f2f2;
-}
-
-.input-submit-button-prim, .login-register-container .login-container form input[type=submit], #user-set-password form input[type=submit], #password-reset-container form input[type=submit], #reset-password-container form input[type=submit], .auth-account-default form input[type=submit], #my-account-container #account-detail form input[type=submit] {
-  width: 100%;
-  background-color: #292826;
-  color: #F9D342;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 15px;
-}
-
-.form-default-style form label, #user-change-password-container form label, #email-change-container form label, #login-container form label, #signup-container form label, #logout-container form label, #user-set-password form label, #password-reset-container form label, #email-comfirmation-container form label, #reset-password-container form label, .auth-account-default form label {
-  font-size: 16px;
-  font-weight: 400;
-}
-
-.form-default-style form button, #user-change-password-container form button, #email-change-container form button, #login-container form button, #signup-container form button, #logout-container form button, #user-set-password form button, #password-reset-container form button, #email-comfirmation-container form button, #reset-password-container form button, .auth-account-default form button {
-  color: #fff;
-  background-color: #292826;
-  font-family: "Archivo Narrow", Sans-serif;
-  font-size: 14px;
-  border-style: groove;
-  border-width: 0;
-  border-radius: 6px;
-  padding: 7px 20px 7px 20px;
-  cursor: pointer;
-  margin-top: 10px;
-  margin-right: 10px;
-}
-
-.form-default-style form button:hover, #user-change-password-container form button:hover, #email-change-container form button:hover, #login-container form button:hover, #signup-container form button:hover, #logout-container form button:hover, #user-set-password form button:hover, #password-reset-container form button:hover, #email-comfirmation-container form button:hover, #reset-password-container form button:hover, .auth-account-default form button:hover {
-  color: #F9D342;
-}
-
-#my-account-container {
-  padding: 4%;
-}
-#my-account-container p {
-  padding: 0 0 4% 4%;
-}
-#my-account-container #my-account-data {
-  width: 75%;
-  padding: 15px 0 0 60px;
-  display: inline-block;
-  vertical-align: top;
-}
-#my-account-container .my-account-navigation {
-  width: 20%;
-  margin: 0 !important;
-  display: inline-block;
-}
-#my-account-container .my-account-navigation ul li:hover a {
-  color: #F9D342 !important;
-}
-#my-account-container .my-account-navigation ul li {
-  font-size: 15px;
-  font-weight: 550;
-  cursor: pointer;
-  list-style: none;
-  border-style: solid;
-  border-width: 0.5px 0px;
-  border-color: gray;
-  padding: 6% 0 5% 0;
-}
-#my-account-container .my-account-navigation ul li i {
-  float: right;
-}
-#my-account-container .my-account-navigation ul li:hover {
-  color: #F9D342;
-}
-@media screen and (max-width: 850px) {
-  #my-account-container .my-account-navigation {
-    width: 100% !important;
-  }
-  #my-account-container .my-account-navigation ul {
-    padding: 0;
-  }
-  #my-account-container .my-account-navigation ul li {
-    padding: 10px 0 10px 0;
-  }
-  #my-account-container .my-account-navigation ul li a {
-    padding-left: 7px;
-  }
-}
-#my-account-container #my-account-dashboard table {
-  width: 100%;
-  text-align: center;
-  border-collapse: collapse;
-}
-#my-account-container #my-account-dashboard th {
-  padding: 10px 0 10px 0;
-}
-#my-account-container #my-account-dashboard td {
-  padding: 10px 0 10px 0;
-}
-#my-account-container #my-account-dashboard td button {
-  padding: 7px;
-  border-color: transparent;
-  cursor: pointer;
-}
-#my-account-container #my-account-dashboard td button:hover {
-  background-color: #F9D342;
-  color: #292826;
-}
-@media screen and (max-width: 850px) {
-  #my-account-container #my-account-data {
-    width: 100%;
-    padding: 0;
-  }
-  #my-account-container #my-account-data #my-account-dashboard {
-    /* Force table to not be like tables anymore */
-    /* Hide table headers (but not display: none;, for accessibility) */
-    /*
-    DATA LABEL HEADER FOR EACH DATA LINE ON MOBILE
-    */
-  }
-  #my-account-container #my-account-data #my-account-dashboard table, #my-account-container #my-account-data #my-account-dashboard thead, #my-account-container #my-account-data #my-account-dashboard tbody, #my-account-container #my-account-data #my-account-dashboard th, #my-account-container #my-account-data #my-account-dashboard td, #my-account-container #my-account-data #my-account-dashboard tr {
-    display: block;
-  }
-  #my-account-container #my-account-data #my-account-dashboard thead {
-    display: none;
-  }
-  #my-account-container #my-account-data #my-account-dashboard tr {
-    border: 1px solid #ccc;
-  }
-  #my-account-container #my-account-data #my-account-dashboard td {
-    /* Behave  like a "row" */
-    border: none;
-    position: relative;
-    padding-left: 50%;
-    padding-bottom: 22px;
-  }
-  #my-account-container #my-account-data #my-account-dashboard td:before {
-    /* Now like a table header */
-    position: absolute;
-    /* Top/left values mimic padding */
-    top: 6px;
-    left: 6px;
-    width: 45%;
-    padding-right: 10px;
-    white-space: nowrap;
-    font-size: 15px;
-    font-weight: 550;
-  }
-  #my-account-container #my-account-data #my-account-dashboard td:nth-of-type(1):before {
-    content: "Order";
-  }
-  #my-account-container #my-account-data #my-account-dashboard td:nth-of-type(2):before {
-    content: "Date:";
-  }
-  #my-account-container #my-account-data #my-account-dashboard td:nth-of-type(3):before {
-    content: "Status:";
-  }
-  #my-account-container #my-account-data #my-account-dashboard td:nth-of-type(4):before {
-    content: "Total:";
-  }
-  #my-account-container #my-account-data #my-account-dashboard td:nth-of-type(5):before {
-    content: "Action:";
-  }
-}
-#my-account-container #view-order, #my-account-container #account-wish-list {
-  display: none;
-}
-#my-account-container #view-order p, #my-account-container #account-wish-list p {
-  padding: 0;
-  margin: 0;
-}
-#my-account-container #view-order table, #my-account-container #account-wish-list table {
-  width: 100%;
-  text-align: left;
-  border-collapse: collapse;
-}
-#my-account-container #view-order table th, #my-account-container #account-wish-list table th {
-  padding: 15px 0 15px 20px;
-}
-#my-account-container #view-order table td, #my-account-container #account-wish-list table td {
-  padding: 15px 0 15px 20px;
-}
-#my-account-container #account-wish-list {
-  display: none;
-}
-#my-account-container #account-detail {
-  display: none;
-}
-#my-account-container #account-detail .user-profile-data .user-username-display h3 {
-  margin: 0;
-}
-#my-account-container #account-detail .user-profile-data .user-email-profile {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-}
-#my-account-container #account-detail .edit-account {
-  display: none;
-}
-#my-account-container #account-detail form {
-  padding: 20px;
-}
-#my-account-container #account-detail form .account-display-name-note {
-  padding: 0px 0px 10px 0px;
-  margin: 0;
-  font-size: small;
-  font-family: fantasy;
-  font-weight: 400;
-  font-style: italic;
-}
-#my-account-container #account-detail form div {
-  padding-bottom: 10px;
-}
-#my-account-container #account-detail form label {
-  font-size: 16px;
-  font-weight: 400;
-}
-#my-account-container #account-detail form .account-1st-row {
-  display: flex;
-  display: -webkit-flex;
-  width: 100%;
-}
-#my-account-container #account-detail form .account-1st-row .account-first-name {
-  padding-right: 20px;
-}
-#my-account-container #account-detail form .account-1st-row .account-first-name, #my-account-container #account-detail form .account-1st-row .account-last-name {
-  display: block;
-  width: 50%;
-}
-#my-account-container #account-detail form input[type=submit]:hover {
-  background-color: #F9D342;
-  color: #292826;
-}
-@media screen and (max-width: 750px) {
-  #my-account-container .account-1st-row {
-    display: block !important;
-  }
-  #my-account-container .account-1st-row .account-first-name {
-    padding-right: 0px !important;
-  }
-  #my-account-container .account-1st-row .account-first-name, #my-account-container .account-1st-row .account-last-name {
-    width: 100% !important;
-  }
-}
-
-@media screen and (max-width: 850px) {
-  #my-account-container {
-    padding: 10px;
-    margin: 0;
-  }
-}
-.body-800width, .single-product-page-container .single-product-dimention, .single-product-page-container .single-product-long-desc, .single-product-page-container .single-product-image-long, .single-product-page-container .single-product-video {
-  width: 100%;
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.input-label {
-  font-size: 16px;
-  font-weight: 400;
-  color: #292826;
-}
-
-.input-style-prim, .login-register-container .login-container form input, .login-register-container .login-container form textarea, .checkout-page-container .checkout-shipping-details-container form input, .checkout-page-container .checkout-shipping-details-container form textarea, #my-account-container #account-detail form input, .form-default-style form input, #user-change-password-container form input, #email-change-container form input, #login-container form input, #signup-container form input, #logout-container form input, #user-set-password form input, #password-reset-container form input, #email-comfirmation-container form input, #reset-password-container form input, .auth-account-default form input, .form-default-style form textarea, #user-change-password-container form textarea, #email-change-container form textarea, #login-container form textarea, #signup-container form textarea, #logout-container form textarea, #user-set-password form textarea, #password-reset-container form textarea, #email-comfirmation-container form textarea, #reset-password-container form textarea, .auth-account-default form textarea {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-  background-color: #f2f2f2;
-}
-
-.input-submit-button-prim, .login-register-container .login-container form input[type=submit], #my-account-container #account-detail form input[type=submit], #user-set-password form input[type=submit], #password-reset-container form input[type=submit], #reset-password-container form input[type=submit], .auth-account-default form input[type=submit] {
-  width: 100%;
-  background-color: #292826;
-  color: #F9D342;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 15px;
-}
-
-.form-default-style form label, #user-change-password-container form label, #email-change-container form label, #login-container form label, #signup-container form label, #logout-container form label, #user-set-password form label, #password-reset-container form label, #email-comfirmation-container form label, #reset-password-container form label, .auth-account-default form label {
-  font-size: 16px;
-  font-weight: 400;
-}
-
-.form-default-style form button, #user-change-password-container form button, #email-change-container form button, #login-container form button, #signup-container form button, #logout-container form button, #user-set-password form button, #password-reset-container form button, #email-comfirmation-container form button, #reset-password-container form button, .auth-account-default form button {
-  color: #fff;
-  background-color: #292826;
-  font-family: "Archivo Narrow", Sans-serif;
-  font-size: 14px;
-  border-style: groove;
-  border-width: 0;
-  border-radius: 6px;
-  padding: 7px 20px 7px 20px;
-  cursor: pointer;
-  margin-top: 10px;
-  margin-right: 10px;
-}
-
-.form-default-style form button:hover, #user-change-password-container form button:hover, #email-change-container form button:hover, #login-container form button:hover, #signup-container form button:hover, #logout-container form button:hover, #user-set-password form button:hover, #password-reset-container form button:hover, #email-comfirmation-container form button:hover, #reset-password-container form button:hover, .auth-account-default form button:hover {
-  color: #F9D342;
-}
-
-.auth-container {
-  width: 100%;
-  max-width: 800px;
-  margin: 5px auto;
-  padding: 10px;
-}
-
-.socialaccount_providers {
-  display: flex;
-  width: 100%;
-  justify-content: flex-start;
-  align-items: stretch;
-}
-.socialaccount_providers * {
-  margin-right: 10px;
-}
-
-#user-set-password form input[type=submit]:hover, #password-reset-container form input[type=submit]:hover, #reset-password-container form input[type=submit]:hover, .auth-account-default form input[type=submit]:hover {
-  background-color: #F9D342;
-  color: #292826;
-}
-
-#logout-container {
-  padding-bottom: 20%;
-}
-
-#email-change-container .ctrlHolder input[type=radio] {
-  width: 5%;
-}
-
-#singup-secondary-button {
-  color: #fff;
-  background-color: #292826;
-  font-family: "Archivo Narrow", Sans-serif;
-  font-size: 14px;
-  border-style: groove;
-  border-width: 0;
-  border-radius: 6px;
-  padding: 7px 20px 7px 20px;
-  cursor: pointer;
-  background-color: #F9D342;
-  color: #292826;
-  font-weight: 700;
-}
-
-#singup-secondary-button:hover {
-  font-weight: 800;
-}
-
-#login-container #id_remember, #signup-container #id_remember {
-  width: 2%;
-}
-#login-container .secondaryAction, #signup-container .secondaryAction {
-  display: block;
-}
-
-@media screen and (max-width: 750px) {
-  #id_remember {
-    width: 10% !important;
-  }
-}
-.body-800width, .single-product-page-container .single-product-dimention, .single-product-page-container .single-product-long-desc, .single-product-page-container .single-product-image-long, .single-product-page-container .single-product-video {
-  width: 100%;
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.input-label {
-  font-size: 16px;
-  font-weight: 400;
-  color: #292826;
-}
-
-.input-style-prim, .login-register-container .login-container form input, .login-register-container .login-container form textarea, .checkout-page-container .checkout-shipping-details-container form input, .checkout-page-container .checkout-shipping-details-container form textarea, #my-account-container #account-detail form input, .form-default-style form input, #user-change-password-container form input, #email-change-container form input, #login-container form input, #signup-container form input, #logout-container form input, #user-set-password form input, #password-reset-container form input, #email-comfirmation-container form input, #reset-password-container form input, .auth-account-default form input, .form-default-style form textarea, #user-change-password-container form textarea, #email-change-container form textarea, #login-container form textarea, #signup-container form textarea, #logout-container form textarea, #user-set-password form textarea, #password-reset-container form textarea, #email-comfirmation-container form textarea, #reset-password-container form textarea, .auth-account-default form textarea {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-  background-color: #f2f2f2;
-}
-
-.input-submit-button-prim, .login-register-container .login-container form input[type=submit], #my-account-container #account-detail form input[type=submit], #user-set-password form input[type=submit], #password-reset-container form input[type=submit], #reset-password-container form input[type=submit], .auth-account-default form input[type=submit] {
+.input-submit-button-prim, #user-set-password form input[type=submit], #password-reset-container form input[type=submit], #reset-password-container form input[type=submit], .auth-account-default form input[type=submit], .login-register-container .login-container form input[type=submit], #my-account-container #account-detail form input[type=submit] {
   width: 100%;
   background-color: #292826;
   color: #F9D342;
@@ -2005,6 +1052,589 @@ form.search-site button {
   width: 100%;
 }
 
+.body-800width, .single-product-page-container .single-product-dimention, .single-product-page-container .single-product-long-desc, .single-product-page-container .single-product-image-long, .single-product-page-container .single-product-video {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.input-label {
+  font-size: 16px;
+  font-weight: 400;
+  color: #292826;
+}
+
+.input-style-prim, .login-register-container .login-container form input, .login-register-container .login-container form textarea, #my-account-container #account-detail form input, .checkout-page-container .checkout-shipping-details-container form input, .checkout-page-container .checkout-shipping-details-container form textarea, .form-default-style form input, #user-change-password-container form input, #email-change-container form input, #login-container form input, #signup-container form input, #logout-container form input, #user-set-password form input, #password-reset-container form input, #email-comfirmation-container form input, #reset-password-container form input, .auth-account-default form input, .form-default-style form textarea, #user-change-password-container form textarea, #email-change-container form textarea, #login-container form textarea, #signup-container form textarea, #logout-container form textarea, #user-set-password form textarea, #password-reset-container form textarea, #email-comfirmation-container form textarea, #reset-password-container form textarea, .auth-account-default form textarea {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  background-color: #f2f2f2;
+}
+
+.input-submit-button-prim, #user-set-password form input[type=submit], #password-reset-container form input[type=submit], #reset-password-container form input[type=submit], .auth-account-default form input[type=submit], .login-register-container .login-container form input[type=submit], #my-account-container #account-detail form input[type=submit] {
+  width: 100%;
+  background-color: #292826;
+  color: #F9D342;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.form-default-style form label, #user-change-password-container form label, #email-change-container form label, #login-container form label, #signup-container form label, #logout-container form label, #user-set-password form label, #password-reset-container form label, #email-comfirmation-container form label, #reset-password-container form label, .auth-account-default form label {
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.form-default-style form button, #user-change-password-container form button, #email-change-container form button, #login-container form button, #signup-container form button, #logout-container form button, #user-set-password form button, #password-reset-container form button, #email-comfirmation-container form button, #reset-password-container form button, .auth-account-default form button {
+  color: #fff;
+  background-color: #292826;
+  font-family: "Archivo Narrow", Sans-serif;
+  font-size: 14px;
+  border-style: groove;
+  border-width: 0;
+  border-radius: 6px;
+  padding: 7px 20px 7px 20px;
+  cursor: pointer;
+  margin-top: 10px;
+  margin-right: 10px;
+}
+
+.form-default-style form button:hover, #user-change-password-container form button:hover, #email-change-container form button:hover, #login-container form button:hover, #signup-container form button:hover, #logout-container form button:hover, #user-set-password form button:hover, #password-reset-container form button:hover, #email-comfirmation-container form button:hover, #reset-password-container form button:hover, .auth-account-default form button:hover {
+  color: #F9D342;
+}
+
+.checkout-page-container {
+  display: flex;
+  display: -webkit-flex;
+  width: 100%;
+  max-width: 1100px;
+  margin: 5px auto;
+}
+.checkout-page-container .checkout-shipping-details-container {
+  width: 55%;
+}
+.checkout-page-container .checkout-shipping-details-container form {
+  padding: 20px;
+}
+.checkout-page-container .checkout-shipping-details-container form div {
+  padding-bottom: 10px;
+}
+.checkout-page-container .checkout-shipping-details-container form label {
+  font-size: 16px;
+  font-weight: 400;
+}
+.checkout-page-container .checkout-shipping-details-container form .shipping-1st-row {
+  display: flex;
+  display: -webkit-flex;
+  width: 100%;
+}
+.checkout-page-container .checkout-shipping-details-container form .shipping-1st-row .shipping-first-name {
+  padding-right: 20px;
+}
+.checkout-page-container .checkout-shipping-details-container form .shipping-1st-row .shipping-first-name, .checkout-page-container .checkout-shipping-details-container form .shipping-1st-row .shipping-last-name {
+  display: block;
+  width: 50%;
+}
+.checkout-page-container .checkout-order-invoice {
+  width: 45%;
+  padding-left: 30px;
+}
+.checkout-page-container .checkout-order-invoice table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.checkout-page-container .checkout-order-invoice table th {
+  padding: 15px 0px 15px 0px;
+  vertical-align: top;
+}
+.checkout-page-container .checkout-order-invoice table td {
+  padding: 17px 40px 0px 17px;
+  vertical-align: top;
+}
+.checkout-page-container .checkout-order-invoice .checkout-policy {
+  background-color: #f2f2f2;
+  padding: 10px;
+}
+.checkout-page-container .checkout-order-invoice .checkout-policy .policy-checkbox {
+  display: flex;
+  align-items: center;
+}
+.checkout-page-container .checkout-order-invoice .checkout-policy .policy-checkbox p {
+  padding-left: 5px;
+}
+.checkout-page-container .checkout-order-invoice .checkout-policy button {
+  width: 100%;
+  padding: 15px;
+  background-color: #292826;
+  color: #F9D342;
+  border: 0;
+  -webkit-appearance: none;
+  box-sizing: border-box;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.13);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 750px) {
+  h1 {
+    padding-left: 10px;
+  }
+
+  .checkout-page-container {
+    display: block;
+    width: 100%;
+  }
+  .checkout-page-container .checkout-shipping-details-container, .checkout-page-container .checkout-order-invoice {
+    width: 100% !important;
+  }
+  .checkout-page-container .checkout-order-invoice {
+    padding-left: 0px;
+  }
+  .checkout-page-container .shipping-1st-row {
+    display: block !important;
+  }
+  .checkout-page-container .shipping-1st-row .shipping-first-name, .checkout-page-container .shipping-1st-row .shipping-last-name {
+    display: block;
+    width: 100% !important;
+    padding: 0px !important;
+  }
+}
+.body-800width, .single-product-page-container .single-product-dimention, .single-product-page-container .single-product-long-desc, .single-product-page-container .single-product-image-long, .single-product-page-container .single-product-video {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.input-label {
+  font-size: 16px;
+  font-weight: 400;
+  color: #292826;
+}
+
+.input-style-prim, .login-register-container .login-container form input, .login-register-container .login-container form textarea, #my-account-container #account-detail form input, .checkout-page-container .checkout-shipping-details-container form input, .checkout-page-container .checkout-shipping-details-container form textarea, .form-default-style form input, #user-change-password-container form input, #email-change-container form input, #login-container form input, #signup-container form input, #logout-container form input, #user-set-password form input, #password-reset-container form input, #email-comfirmation-container form input, #reset-password-container form input, .auth-account-default form input, .form-default-style form textarea, #user-change-password-container form textarea, #email-change-container form textarea, #login-container form textarea, #signup-container form textarea, #logout-container form textarea, #user-set-password form textarea, #password-reset-container form textarea, #email-comfirmation-container form textarea, #reset-password-container form textarea, .auth-account-default form textarea {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  background-color: #f2f2f2;
+}
+
+.input-submit-button-prim, #user-set-password form input[type=submit], #password-reset-container form input[type=submit], #reset-password-container form input[type=submit], .auth-account-default form input[type=submit], .login-register-container .login-container form input[type=submit], #my-account-container #account-detail form input[type=submit] {
+  width: 100%;
+  background-color: #292826;
+  color: #F9D342;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.form-default-style form label, #user-change-password-container form label, #email-change-container form label, #login-container form label, #signup-container form label, #logout-container form label, #user-set-password form label, #password-reset-container form label, #email-comfirmation-container form label, #reset-password-container form label, .auth-account-default form label {
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.form-default-style form button, #user-change-password-container form button, #email-change-container form button, #login-container form button, #signup-container form button, #logout-container form button, #user-set-password form button, #password-reset-container form button, #email-comfirmation-container form button, #reset-password-container form button, .auth-account-default form button {
+  color: #fff;
+  background-color: #292826;
+  font-family: "Archivo Narrow", Sans-serif;
+  font-size: 14px;
+  border-style: groove;
+  border-width: 0;
+  border-radius: 6px;
+  padding: 7px 20px 7px 20px;
+  cursor: pointer;
+  margin-top: 10px;
+  margin-right: 10px;
+}
+
+.form-default-style form button:hover, #user-change-password-container form button:hover, #email-change-container form button:hover, #login-container form button:hover, #signup-container form button:hover, #logout-container form button:hover, #user-set-password form button:hover, #password-reset-container form button:hover, #email-comfirmation-container form button:hover, #reset-password-container form button:hover, .auth-account-default form button:hover {
+  color: #F9D342;
+}
+
+#index-grid-container {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-areas: "slider slider slider slider slider slider slider slider slider slider slider slider" "pcat pcat pcat fp fp fp fp fp fp fp fp fp" "ac ac ac ac ac ac ac ac ac ac ac ac";
+}
+
+@media screen and (max-width: 1206px) {
+  #index-grid-container {
+    grid-template-areas: "slider slider slider slider slider slider slider slider slider slider slider slider " "pcat pcat pcat pcat pcat pcat pcat pcat pcat pcat pcat pcat" "fp fp fp fp fp fp fp fp fp fp fp fp" "ac ac ac ac ac ac ac ac ac ac ac ac";
+  }
+}
+@media screen and (max-width: 530px) {
+  #index-grid-container {
+    grid-template-areas: "slider slider slider slider slider slider slider slider slider slider slider slider " "pcat pcat pcat pcat pcat pcat pcat pcat pcat pcat pcat pcat" "ac ac ac ac ac ac ac ac ac ac ac ac";
+  }
+}
+.slider-img-desktop {
+  display: block;
+}
+
+.slider-img-mobile {
+  display: none;
+}
+
+/* Slideshow container */
+.slideshow-container {
+  grid-area: slider;
+}
+
+/* SLider Hide the images by default */
+.mySlides {
+  display: none;
+  transition: transform 35s;
+}
+
+/* Next & previous pointer icons buttons on slider */
+.prev, .next {
+  cursor: pointer;
+  position: relative;
+  width: auto;
+  margin-top: -62px;
+  padding: 16px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+
+.prev {
+  float: left;
+}
+
+/* Position the "next button" pointer on slider to the right */
+.next {
+  float: right;
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through on slider arrows pointers */
+.prev:hover, .next:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* SLider Caption text */
+.slider-caption {
+  color: #f2f2f2;
+  position: absolute;
+  width: 100%;
+  margin-top: -35px;
+  text-align: center;
+}
+
+/* Slider image Number text (1/3 etc) */
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+}
+
+/* Slider Fading animation effect */
+.slide-fade {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 1.5s;
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade {
+  from {
+    opacity: 0.4;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fade {
+  from {
+    opacity: 0.4;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@media screen and (max-width: 480px) {
+  .slider-img-mobile {
+    display: block;
+  }
+
+  .slider-img-desktop {
+    display: none;
+  }
+
+  .prev, .next {
+    width: auto;
+    position: relative;
+    margin-top: -100px;
+  }
+
+  .prev {
+    float: left;
+  }
+
+  .next {
+    float: right;
+  }
+}
+#product-category {
+  grid-area: pcat;
+  display: flex;
+  display: -webkit-flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-content: center;
+  padding: 4px;
+}
+#product-category .icon-title-container {
+  min-width: 20%;
+  padding-bottom: 10px;
+  display: flex;
+  display: -webkit-flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-content: center;
+}
+#product-category .icon-title-container div:hover {
+  background-color: #F9D342;
+  color: #292826;
+}
+#product-category .icon-title-container div:hover a object {
+  filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(331deg) brightness(104%) contrast(103%);
+}
+#product-category .icon-title-container div {
+  width: 60px;
+  border: 1px solid black;
+  border-radius: 30px;
+  background-color: #292826;
+}
+#product-category .icon-title-container div a {
+  display: flex;
+  display: -webkit-flex;
+  justify-items: center;
+  align-items: center;
+  align-content: center;
+}
+#product-category .icon-title-container div a object {
+  width: 100%;
+  filter: invert(94%) sepia(27%) saturate(3740%) hue-rotate(323deg) brightness(103%) contrast(95%);
+  padding: 10px;
+  pointer-events: none;
+}
+#product-category .icon-title-container p {
+  text-align: center;
+  margin: 0;
+  font-size: 13px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 600;
+}
+
+.product-card-container {
+  grid-area: fp;
+  padding-left: 1%;
+  display: flex;
+  display: -webkit-flex;
+  flex-wrap: wrap;
+}
+.product-card-container .product-card:hover {
+  background-color: #292826;
+}
+.product-card-container .product-card:hover * {
+  color: #F9D342;
+}
+.product-card-container .product-card:hover .card-info {
+  background-color: #292826;
+}
+.product-card-container .product-card:hover .card-info * {
+  color: #F9D342;
+}
+.product-card-container .product-card {
+  flex: 15% !important;
+  -webkit-flex: 15%;
+  width: 15%;
+  display: flex;
+  display: -webkit-flex;
+  justify-content: space-around;
+  align-content: space-between;
+  flex-direction: column;
+  background-color: #F9D342;
+  color: #292826;
+  box-shadow: 1px 1px 4px 5px rgba(0, 0, 0, 0.5);
+  text-decoration: none;
+}
+.product-card-container .product-card p {
+  margin: 0px 0px 15px 0px;
+  padding: 5% 1% 0 1%;
+  text-align: center;
+  line-height: 130%;
+  font-size: 15px;
+  font-weight: 550;
+}
+.product-card-container .product-card .card-info {
+  background-color: #F9D342;
+  margin: 0;
+  height: 25%;
+}
+
+@media screen and (max-width: 1206px) {
+  .product-card-container {
+    padding-left: 0;
+  }
+}
+@media screen and (max-width: 760px) {
+  .product-card-container {
+    display: none;
+  }
+}
+.ad-container {
+  grid-area: ac;
+  display: flex;
+  flex-wrap: wrap;
+  padding-top: 15px;
+}
+.ad-container .single-add-home {
+  flex: 50%;
+  border: 2px solid #292826;
+}
+.ad-container .single-add-home img {
+  width: 100%;
+  vertical-align: top;
+}
+
+@media screen and (max-width: 720px) {
+  .single-add-home {
+    flex: 100% !important;
+  }
+}
+.body-800width, .single-product-page-container .single-product-dimention, .single-product-page-container .single-product-long-desc, .single-product-page-container .single-product-image-long, .single-product-page-container .single-product-video {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.input-label {
+  font-size: 16px;
+  font-weight: 400;
+  color: #292826;
+}
+
+.input-style-prim, .login-register-container .login-container form input, .login-register-container .login-container form textarea, #my-account-container #account-detail form input, .checkout-page-container .checkout-shipping-details-container form input, .checkout-page-container .checkout-shipping-details-container form textarea, .form-default-style form input, #user-change-password-container form input, #email-change-container form input, #login-container form input, #signup-container form input, #logout-container form input, #user-set-password form input, #password-reset-container form input, #email-comfirmation-container form input, #reset-password-container form input, .auth-account-default form input, .form-default-style form textarea, #user-change-password-container form textarea, #email-change-container form textarea, #login-container form textarea, #signup-container form textarea, #logout-container form textarea, #user-set-password form textarea, #password-reset-container form textarea, #email-comfirmation-container form textarea, #reset-password-container form textarea, .auth-account-default form textarea {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  background-color: #f2f2f2;
+}
+
+.input-submit-button-prim, #user-set-password form input[type=submit], #password-reset-container form input[type=submit], #reset-password-container form input[type=submit], .auth-account-default form input[type=submit], .login-register-container .login-container form input[type=submit], #my-account-container #account-detail form input[type=submit] {
+  width: 100%;
+  background-color: #292826;
+  color: #F9D342;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.form-default-style form label, #user-change-password-container form label, #email-change-container form label, #login-container form label, #signup-container form label, #logout-container form label, #user-set-password form label, #password-reset-container form label, #email-comfirmation-container form label, #reset-password-container form label, .auth-account-default form label {
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.form-default-style form button, #user-change-password-container form button, #email-change-container form button, #login-container form button, #signup-container form button, #logout-container form button, #user-set-password form button, #password-reset-container form button, #email-comfirmation-container form button, #reset-password-container form button, .auth-account-default form button {
+  color: #fff;
+  background-color: #292826;
+  font-family: "Archivo Narrow", Sans-serif;
+  font-size: 14px;
+  border-style: groove;
+  border-width: 0;
+  border-radius: 6px;
+  padding: 7px 20px 7px 20px;
+  cursor: pointer;
+  margin-top: 10px;
+  margin-right: 10px;
+}
+
+.form-default-style form button:hover, #user-change-password-container form button:hover, #email-change-container form button:hover, #login-container form button:hover, #signup-container form button:hover, #logout-container form button:hover, #user-set-password form button:hover, #password-reset-container form button:hover, #email-comfirmation-container form button:hover, #reset-password-container form button:hover, .auth-account-default form button:hover {
+  color: #F9D342;
+}
+
+#container-shop {
+  clear: both;
+  padding: 7px 0 7px 0;
+  grid-gap: 5px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  background-color: #F9D342;
+}
+#container-shop a:link {
+  text-decoration: none;
+}
+#container-shop .shop-product {
+  padding: 10px 10px 15px 10px;
+  border-radius: 7px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 1px 1px 4px 5px rgba(0, 0, 0, 0.5);
+}
+#container-shop .shop-product img {
+  width: 100%;
+  margin: 0;
+}
+#container-shop .shop-product .product-name {
+  height: 45px;
+}
+#container-shop .shop-product button {
+  color: #fff;
+  background-color: #292826;
+  font-family: "Archivo Narrow", Sans-serif;
+  font-size: 14px;
+  border-style: groove;
+  border-width: 0;
+  border-radius: 6px;
+  padding: 7px 20px 7px 20px;
+  cursor: pointer;
+}
+#container-shop .shop-product button:hover {
+  background-color: #F9D342;
+  color: #292826;
+}
+#container-shop .shop-product p {
+  text-align: center;
+  font-size: 15px;
+  font-weight: 550;
+  margin: 0;
+  color: #292826;
+}
+#container-shop .shop-product .product-price {
+  padding-top: 15px;
+}
+
 .body-800width, .single-product-page-container .single-product-video, .single-product-page-container .single-product-image-long, .single-product-page-container .single-product-long-desc, .single-product-page-container .single-product-dimention {
   width: 100%;
   max-width: 800px;
@@ -2017,7 +1647,7 @@ form.search-site button {
   color: #292826;
 }
 
-.input-style-prim, .login-register-container .login-container form input, .login-register-container .login-container form textarea, .checkout-page-container .checkout-shipping-details-container form input, .checkout-page-container .checkout-shipping-details-container form textarea, #my-account-container #account-detail form input, .form-default-style form input, #user-change-password-container form input, #email-change-container form input, #login-container form input, #signup-container form input, #logout-container form input, #user-set-password form input, #password-reset-container form input, #email-comfirmation-container form input, #reset-password-container form input, .auth-account-default form input, .form-default-style form textarea, #user-change-password-container form textarea, #email-change-container form textarea, #login-container form textarea, #signup-container form textarea, #logout-container form textarea, #user-set-password form textarea, #password-reset-container form textarea, #email-comfirmation-container form textarea, #reset-password-container form textarea, .auth-account-default form textarea {
+.input-style-prim, .login-register-container .login-container form input, .login-register-container .login-container form textarea, #my-account-container #account-detail form input, .checkout-page-container .checkout-shipping-details-container form input, .checkout-page-container .checkout-shipping-details-container form textarea, .form-default-style form input, #user-change-password-container form input, #email-change-container form input, #login-container form input, #signup-container form input, #logout-container form input, #user-set-password form input, #password-reset-container form input, #email-comfirmation-container form input, #reset-password-container form input, .auth-account-default form input, .form-default-style form textarea, #user-change-password-container form textarea, #email-change-container form textarea, #login-container form textarea, #signup-container form textarea, #logout-container form textarea, #user-set-password form textarea, #password-reset-container form textarea, #email-comfirmation-container form textarea, #reset-password-container form textarea, .auth-account-default form textarea {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -2028,7 +1658,7 @@ form.search-site button {
   background-color: #f2f2f2;
 }
 
-.input-submit-button-prim, .login-register-container .login-container form input[type=submit], #my-account-container #account-detail form input[type=submit], #user-set-password form input[type=submit], #password-reset-container form input[type=submit], #reset-password-container form input[type=submit], .auth-account-default form input[type=submit] {
+.input-submit-button-prim, #user-set-password form input[type=submit], #password-reset-container form input[type=submit], #reset-password-container form input[type=submit], .auth-account-default form input[type=submit], .login-register-container .login-container form input[type=submit], #my-account-container #account-detail form input[type=submit] {
   width: 100%;
   background-color: #292826;
   color: #F9D342;
@@ -2200,7 +1830,7 @@ form.search-site button {
   background-color: #f2f2f2;
 }
 
-.input-submit-button-prim, .login-register-container .login-container form input[type=submit], #my-account-container #account-detail form input[type=submit], #user-set-password form input[type=submit], #password-reset-container form input[type=submit], #reset-password-container form input[type=submit], .auth-account-default form input[type=submit] {
+.input-submit-button-prim, #user-set-password form input[type=submit], #password-reset-container form input[type=submit], #reset-password-container form input[type=submit], .auth-account-default form input[type=submit], .login-register-container .login-container form input[type=submit], #my-account-container #account-detail form input[type=submit] {
   width: 100%;
   background-color: #292826;
   color: #F9D342;
@@ -2235,165 +1865,217 @@ form.search-site button {
   color: #F9D342;
 }
 
-.blog-post-container {
-  width: 100%;
-  max-width: 800px;
-  margin: 0 auto;
+#my-account-container {
+  padding: 4%;
 }
-
-.body-800width, .single-product-page-container .single-product-video, .single-product-page-container .single-product-image-long, .single-product-page-container .single-product-long-desc, .single-product-page-container .single-product-dimention {
-  width: 100%;
-  max-width: 800px;
-  margin: 0 auto;
+#my-account-container p {
+  padding: 0 0 4% 4%;
 }
-
-.input-label {
-  font-size: 16px;
-  font-weight: 400;
+#my-account-container #my-account-data {
+  width: 75%;
+  padding: 15px 0 0 60px;
+  display: inline-block;
+  vertical-align: top;
+}
+#my-account-container .my-account-navigation {
+  width: 20%;
+  margin: 0 !important;
+  display: inline-block;
+}
+#my-account-container .my-account-navigation ul li:hover a {
+  color: #F9D342 !important;
+}
+#my-account-container .my-account-navigation ul li {
+  font-size: 15px;
+  font-weight: 550;
+  cursor: pointer;
+  list-style: none;
+  border-style: solid;
+  border-width: 0.5px 0px;
+  border-color: gray;
+  padding: 6% 0 5% 0;
+}
+#my-account-container .my-account-navigation ul li i {
+  float: right;
+}
+#my-account-container .my-account-navigation ul li:hover {
+  color: #F9D342;
+}
+@media screen and (max-width: 850px) {
+  #my-account-container .my-account-navigation {
+    width: 100% !important;
+  }
+  #my-account-container .my-account-navigation ul {
+    padding: 0;
+  }
+  #my-account-container .my-account-navigation ul li {
+    padding: 10px 0 10px 0;
+  }
+  #my-account-container .my-account-navigation ul li a {
+    padding-left: 7px;
+  }
+}
+#my-account-container #my-account-dashboard table {
+  width: 100%;
+  text-align: center;
+  border-collapse: collapse;
+}
+#my-account-container #my-account-dashboard th {
+  padding: 10px 0 10px 0;
+}
+#my-account-container #my-account-dashboard td {
+  padding: 10px 0 10px 0;
+}
+#my-account-container #my-account-dashboard td button {
+  padding: 7px;
+  border-color: transparent;
+  cursor: pointer;
+}
+#my-account-container #my-account-dashboard td button:hover {
+  background-color: #F9D342;
   color: #292826;
 }
-
-.input-style-prim, .login-register-container .login-container form input, .login-register-container .login-container form textarea, #my-account-container #account-detail form input, .checkout-page-container .checkout-shipping-details-container form input, .checkout-page-container .checkout-shipping-details-container form textarea, .form-default-style form input, #user-change-password-container form input, #email-change-container form input, #login-container form input, #signup-container form input, #logout-container form input, #user-set-password form input, #password-reset-container form input, #email-comfirmation-container form input, #reset-password-container form input, .auth-account-default form input, .form-default-style form textarea, #user-change-password-container form textarea, #email-change-container form textarea, #login-container form textarea, #signup-container form textarea, #logout-container form textarea, #user-set-password form textarea, #password-reset-container form textarea, #email-comfirmation-container form textarea, #reset-password-container form textarea, .auth-account-default form textarea {
+@media screen and (max-width: 850px) {
+  #my-account-container #my-account-data {
+    width: 100%;
+    padding: 0;
+  }
+  #my-account-container #my-account-data #my-account-dashboard {
+    /* Force table to not be like tables anymore */
+    /* Hide table headers (but not display: none;, for accessibility) */
+    /*
+    DATA LABEL HEADER FOR EACH DATA LINE ON MOBILE
+    */
+  }
+  #my-account-container #my-account-data #my-account-dashboard table, #my-account-container #my-account-data #my-account-dashboard thead, #my-account-container #my-account-data #my-account-dashboard tbody, #my-account-container #my-account-data #my-account-dashboard th, #my-account-container #my-account-data #my-account-dashboard td, #my-account-container #my-account-data #my-account-dashboard tr {
+    display: block;
+  }
+  #my-account-container #my-account-data #my-account-dashboard thead {
+    display: none;
+  }
+  #my-account-container #my-account-data #my-account-dashboard tr {
+    border: 1px solid #ccc;
+  }
+  #my-account-container #my-account-data #my-account-dashboard td {
+    /* Behave  like a "row" */
+    border: none;
+    position: relative;
+    padding-left: 50%;
+    padding-bottom: 22px;
+  }
+  #my-account-container #my-account-data #my-account-dashboard td:before {
+    /* Now like a table header */
+    position: absolute;
+    /* Top/left values mimic padding */
+    top: 6px;
+    left: 6px;
+    width: 45%;
+    padding-right: 10px;
+    white-space: nowrap;
+    font-size: 15px;
+    font-weight: 550;
+  }
+  #my-account-container #my-account-data #my-account-dashboard td:nth-of-type(1):before {
+    content: "Order";
+  }
+  #my-account-container #my-account-data #my-account-dashboard td:nth-of-type(2):before {
+    content: "Date:";
+  }
+  #my-account-container #my-account-data #my-account-dashboard td:nth-of-type(3):before {
+    content: "Status:";
+  }
+  #my-account-container #my-account-data #my-account-dashboard td:nth-of-type(4):before {
+    content: "Total:";
+  }
+  #my-account-container #my-account-data #my-account-dashboard td:nth-of-type(5):before {
+    content: "Action:";
+  }
+}
+#my-account-container #view-order, #my-account-container #account-wish-list {
+  display: none;
+}
+#my-account-container #view-order p, #my-account-container #account-wish-list p {
+  padding: 0;
+  margin: 0;
+}
+#my-account-container #view-order table, #my-account-container #account-wish-list table {
   width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-  background-color: #f2f2f2;
+  text-align: left;
+  border-collapse: collapse;
 }
-
-.input-submit-button-prim, .login-register-container .login-container form input[type=submit], #my-account-container #account-detail form input[type=submit], #user-set-password form input[type=submit], #password-reset-container form input[type=submit], #reset-password-container form input[type=submit], .auth-account-default form input[type=submit] {
-  width: 100%;
-  background-color: #292826;
-  color: #F9D342;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 15px;
+#my-account-container #view-order table th, #my-account-container #account-wish-list table th {
+  padding: 15px 0 15px 20px;
 }
-
-.form-default-style form label, #user-change-password-container form label, #email-change-container form label, #login-container form label, #signup-container form label, #logout-container form label, #user-set-password form label, #password-reset-container form label, #email-comfirmation-container form label, #reset-password-container form label, .auth-account-default form label {
-  font-size: 16px;
-  font-weight: 400;
+#my-account-container #view-order table td, #my-account-container #account-wish-list table td {
+  padding: 15px 0 15px 20px;
 }
-
-.form-default-style form button, #user-change-password-container form button, #email-change-container form button, #login-container form button, #signup-container form button, #logout-container form button, #user-set-password form button, #password-reset-container form button, #email-comfirmation-container form button, #reset-password-container form button, .auth-account-default form button {
-  color: #fff;
-  background-color: #292826;
-  font-family: "Archivo Narrow", Sans-serif;
-  font-size: 14px;
-  border-style: groove;
-  border-width: 0;
-  border-radius: 6px;
-  padding: 7px 20px 7px 20px;
-  cursor: pointer;
-  margin-top: 10px;
-  margin-right: 10px;
+#my-account-container #account-wish-list {
+  display: none;
 }
-
-.form-default-style form button:hover, #user-change-password-container form button:hover, #email-change-container form button:hover, #login-container form button:hover, #signup-container form button:hover, #logout-container form button:hover, #user-set-password form button:hover, #password-reset-container form button:hover, #email-comfirmation-container form button:hover, #reset-password-container form button:hover, .auth-account-default form button:hover {
-  color: #F9D342;
+#my-account-container #account-detail {
+  display: none;
 }
-
-.checkout-page-container {
+#my-account-container #account-detail .user-profile-data .user-username-display h3 {
+  margin: 0;
+}
+#my-account-container #account-detail .user-profile-data .user-email-profile {
   display: flex;
-  display: -webkit-flex;
-  width: 100%;
-  max-width: 1100px;
-  margin: 5px auto;
+  justify-content: flex-start;
+  align-items: center;
 }
-.checkout-page-container .checkout-shipping-details-container {
-  width: 55%;
+#my-account-container #account-detail .edit-account {
+  display: none;
 }
-.checkout-page-container .checkout-shipping-details-container form {
+#my-account-container #account-detail form {
   padding: 20px;
 }
-.checkout-page-container .checkout-shipping-details-container form div {
+#my-account-container #account-detail form .account-display-name-note {
+  padding: 0px 0px 10px 0px;
+  margin: 0;
+  font-size: small;
+  font-family: fantasy;
+  font-weight: 400;
+  font-style: italic;
+}
+#my-account-container #account-detail form div {
   padding-bottom: 10px;
 }
-.checkout-page-container .checkout-shipping-details-container form label {
+#my-account-container #account-detail form label {
   font-size: 16px;
   font-weight: 400;
 }
-.checkout-page-container .checkout-shipping-details-container form .shipping-1st-row {
+#my-account-container #account-detail form .account-1st-row {
   display: flex;
   display: -webkit-flex;
   width: 100%;
 }
-.checkout-page-container .checkout-shipping-details-container form .shipping-1st-row .shipping-first-name {
+#my-account-container #account-detail form .account-1st-row .account-first-name {
   padding-right: 20px;
 }
-.checkout-page-container .checkout-shipping-details-container form .shipping-1st-row .shipping-first-name, .checkout-page-container .checkout-shipping-details-container form .shipping-1st-row .shipping-last-name {
+#my-account-container #account-detail form .account-1st-row .account-first-name, #my-account-container #account-detail form .account-1st-row .account-last-name {
   display: block;
   width: 50%;
 }
-.checkout-page-container .checkout-order-invoice {
-  width: 45%;
-  padding-left: 30px;
+#my-account-container #account-detail form input[type=submit]:hover {
+  background-color: #F9D342;
+  color: #292826;
 }
-.checkout-page-container .checkout-order-invoice table {
-  width: 100%;
-  border-collapse: collapse;
-}
-.checkout-page-container .checkout-order-invoice table th {
-  padding: 15px 0px 15px 0px;
-  vertical-align: top;
-}
-.checkout-page-container .checkout-order-invoice table td {
-  padding: 17px 40px 0px 17px;
-  vertical-align: top;
-}
-.checkout-page-container .checkout-order-invoice .checkout-policy {
-  background-color: #f2f2f2;
-  padding: 10px;
-}
-.checkout-page-container .checkout-order-invoice .checkout-policy .policy-checkbox {
-  display: flex;
-  align-items: center;
-}
-.checkout-page-container .checkout-order-invoice .checkout-policy .policy-checkbox p {
-  padding-left: 5px;
-}
-.checkout-page-container .checkout-order-invoice .checkout-policy button {
-  width: 100%;
-  padding: 15px;
-  background-color: #292826;
-  color: #F9D342;
-  border: 0;
-  -webkit-appearance: none;
-  box-sizing: border-box;
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.13);
-  font-size: 15px;
-  font-weight: 600;
-  cursor: pointer;
-}
-
 @media screen and (max-width: 750px) {
-  h1 {
-    padding-left: 10px;
-  }
-
-  .checkout-page-container {
-    display: block;
-    width: 100%;
-  }
-  .checkout-page-container .checkout-shipping-details-container, .checkout-page-container .checkout-order-invoice {
-    width: 100% !important;
-  }
-  .checkout-page-container .checkout-order-invoice {
-    padding-left: 0px;
-  }
-  .checkout-page-container .shipping-1st-row {
+  #my-account-container .account-1st-row {
     display: block !important;
   }
-  .checkout-page-container .shipping-1st-row .shipping-first-name, .checkout-page-container .shipping-1st-row .shipping-last-name {
-    display: block;
+  #my-account-container .account-1st-row .account-first-name {
+    padding-right: 0px !important;
+  }
+  #my-account-container .account-1st-row .account-first-name, #my-account-container .account-1st-row .account-last-name {
     width: 100% !important;
-    padding: 0px !important;
+  }
+}
+
+@media screen and (max-width: 850px) {
+  #my-account-container {
+    padding: 10px;
+    margin: 0;
   }
 }
 .body-800width, .single-product-page-container .single-product-video, .single-product-page-container .single-product-image-long, .single-product-page-container .single-product-long-desc, .single-product-page-container .single-product-dimention {
@@ -2408,7 +2090,7 @@ form.search-site button {
   color: #292826;
 }
 
-.input-style-prim, #my-account-container #account-detail form input, .checkout-page-container .checkout-shipping-details-container form input, .checkout-page-container .checkout-shipping-details-container form textarea, .login-register-container .login-container form input, .login-register-container .login-container form textarea, .form-default-style form input, #user-change-password-container form input, #email-change-container form input, #login-container form input, #signup-container form input, #logout-container form input, #user-set-password form input, #password-reset-container form input, #email-comfirmation-container form input, #reset-password-container form input, .auth-account-default form input, .form-default-style form textarea, #user-change-password-container form textarea, #email-change-container form textarea, #login-container form textarea, #signup-container form textarea, #logout-container form textarea, #user-set-password form textarea, #password-reset-container form textarea, #email-comfirmation-container form textarea, #reset-password-container form textarea, .auth-account-default form textarea {
+.input-style-prim, .checkout-page-container .checkout-shipping-details-container form input, .checkout-page-container .checkout-shipping-details-container form textarea, #my-account-container #account-detail form input, .login-register-container .login-container form input, .login-register-container .login-container form textarea, .form-default-style form input, #user-change-password-container form input, #email-change-container form input, #login-container form input, #signup-container form input, #logout-container form input, #user-set-password form input, #password-reset-container form input, #email-comfirmation-container form input, #reset-password-container form input, .auth-account-default form input, .form-default-style form textarea, #user-change-password-container form textarea, #email-change-container form textarea, #login-container form textarea, #signup-container form textarea, #logout-container form textarea, #user-set-password form textarea, #password-reset-container form textarea, #email-comfirmation-container form textarea, #reset-password-container form textarea, .auth-account-default form textarea {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -2419,7 +2101,7 @@ form.search-site button {
   background-color: #f2f2f2;
 }
 
-.input-submit-button-prim, #my-account-container #account-detail form input[type=submit], #user-set-password form input[type=submit], #password-reset-container form input[type=submit], #reset-password-container form input[type=submit], .auth-account-default form input[type=submit], .login-register-container .login-container form input[type=submit] {
+.input-submit-button-prim, #user-set-password form input[type=submit], #password-reset-container form input[type=submit], #reset-password-container form input[type=submit], .auth-account-default form input[type=submit], #my-account-container #account-detail form input[type=submit], .login-register-container .login-container form input[type=submit] {
   width: 100%;
   background-color: #292826;
   color: #F9D342;
@@ -2474,6 +2156,323 @@ form.search-site button {
 .login-register-container .login-container form label {
   font-size: 16px;
   font-weight: 400;
+}
+.body-800width, .single-product-page-container .single-product-video, .single-product-page-container .single-product-image-long, .single-product-page-container .single-product-long-desc, .single-product-page-container .single-product-dimention {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.input-label {
+  font-size: 16px;
+  font-weight: 400;
+  color: #292826;
+}
+
+.input-style-prim, .checkout-page-container .checkout-shipping-details-container form input, .checkout-page-container .checkout-shipping-details-container form textarea, #my-account-container #account-detail form input, .login-register-container .login-container form input, .login-register-container .login-container form textarea, .form-default-style form input, #user-change-password-container form input, #email-change-container form input, #login-container form input, #signup-container form input, #logout-container form input, #user-set-password form input, #password-reset-container form input, #email-comfirmation-container form input, #reset-password-container form input, .auth-account-default form input, .form-default-style form textarea, #user-change-password-container form textarea, #email-change-container form textarea, #login-container form textarea, #signup-container form textarea, #logout-container form textarea, #user-set-password form textarea, #password-reset-container form textarea, #email-comfirmation-container form textarea, #reset-password-container form textarea, .auth-account-default form textarea {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  background-color: #f2f2f2;
+}
+
+.input-submit-button-prim, #my-account-container #account-detail form input[type=submit], .login-register-container .login-container form input[type=submit], #user-set-password form input[type=submit], #password-reset-container form input[type=submit], #reset-password-container form input[type=submit], .auth-account-default form input[type=submit] {
+  width: 100%;
+  background-color: #292826;
+  color: #F9D342;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.form-default-style form label, #user-change-password-container form label, #email-change-container form label, #login-container form label, #signup-container form label, #logout-container form label, #user-set-password form label, #password-reset-container form label, #email-comfirmation-container form label, #reset-password-container form label, .auth-account-default form label {
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.form-default-style form button, #user-change-password-container form button, #email-change-container form button, #login-container form button, #signup-container form button, #logout-container form button, #user-set-password form button, #password-reset-container form button, #email-comfirmation-container form button, #reset-password-container form button, .auth-account-default form button {
+  color: #fff;
+  background-color: #292826;
+  font-family: "Archivo Narrow", Sans-serif;
+  font-size: 14px;
+  border-style: groove;
+  border-width: 0;
+  border-radius: 6px;
+  padding: 7px 20px 7px 20px;
+  cursor: pointer;
+  margin-top: 10px;
+  margin-right: 10px;
+}
+
+.form-default-style form button:hover, #user-change-password-container form button:hover, #email-change-container form button:hover, #login-container form button:hover, #signup-container form button:hover, #logout-container form button:hover, #user-set-password form button:hover, #password-reset-container form button:hover, #email-comfirmation-container form button:hover, #reset-password-container form button:hover, .auth-account-default form button:hover {
+  color: #F9D342;
+}
+
+.auth-container {
+  width: 100%;
+  max-width: 800px;
+  margin: 5px auto;
+  padding: 10px;
+}
+
+.socialaccount_providers {
+  display: flex;
+  width: 100%;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+.socialaccount_providers * {
+  margin-right: 10px;
+}
+
+#user-set-password form input[type=submit]:hover, #password-reset-container form input[type=submit]:hover, #reset-password-container form input[type=submit]:hover, .auth-account-default form input[type=submit]:hover {
+  background-color: #F9D342;
+  color: #292826;
+}
+
+#logout-container {
+  padding-bottom: 20%;
+}
+
+#email-change-container .ctrlHolder input[type=radio] {
+  width: 5%;
+}
+
+#singup-secondary-button {
+  color: #fff;
+  background-color: #292826;
+  font-family: "Archivo Narrow", Sans-serif;
+  font-size: 14px;
+  border-style: groove;
+  border-width: 0;
+  border-radius: 6px;
+  padding: 7px 20px 7px 20px;
+  cursor: pointer;
+  background-color: #F9D342;
+  color: #292826;
+  font-weight: 700;
+}
+
+#singup-secondary-button:hover {
+  font-weight: 800;
+}
+
+#login-container #id_remember, #signup-container #id_remember {
+  width: 2%;
+}
+#login-container .secondaryAction, #signup-container .secondaryAction {
+  display: block;
+}
+
+@media screen and (max-width: 750px) {
+  #id_remember {
+    width: 10% !important;
+  }
+}
+.body-800width, .single-product-page-container .single-product-video, .single-product-page-container .single-product-image-long, .single-product-page-container .single-product-long-desc, .single-product-page-container .single-product-dimention {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.input-label {
+  font-size: 16px;
+  font-weight: 400;
+  color: #292826;
+}
+
+.input-style-prim, .checkout-page-container .checkout-shipping-details-container form input, .checkout-page-container .checkout-shipping-details-container form textarea, #my-account-container #account-detail form input, .login-register-container .login-container form input, .login-register-container .login-container form textarea, .form-default-style form input, #user-change-password-container form input, #email-change-container form input, #login-container form input, #signup-container form input, #logout-container form input, #user-set-password form input, #password-reset-container form input, #email-comfirmation-container form input, #reset-password-container form input, .auth-account-default form input, .form-default-style form textarea, #user-change-password-container form textarea, #email-change-container form textarea, #login-container form textarea, #signup-container form textarea, #logout-container form textarea, #user-set-password form textarea, #password-reset-container form textarea, #email-comfirmation-container form textarea, #reset-password-container form textarea, .auth-account-default form textarea {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  background-color: #f2f2f2;
+}
+
+.input-submit-button-prim, #my-account-container #account-detail form input[type=submit], .login-register-container .login-container form input[type=submit], #user-set-password form input[type=submit], #password-reset-container form input[type=submit], #reset-password-container form input[type=submit], .auth-account-default form input[type=submit] {
+  width: 100%;
+  background-color: #292826;
+  color: #F9D342;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.form-default-style form label, #user-change-password-container form label, #email-change-container form label, #login-container form label, #signup-container form label, #logout-container form label, #user-set-password form label, #password-reset-container form label, #email-comfirmation-container form label, #reset-password-container form label, .auth-account-default form label {
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.form-default-style form button, #user-change-password-container form button, #email-change-container form button, #login-container form button, #signup-container form button, #logout-container form button, #user-set-password form button, #password-reset-container form button, #email-comfirmation-container form button, #reset-password-container form button, .auth-account-default form button {
+  color: #fff;
+  background-color: #292826;
+  font-family: "Archivo Narrow", Sans-serif;
+  font-size: 14px;
+  border-style: groove;
+  border-width: 0;
+  border-radius: 6px;
+  padding: 7px 20px 7px 20px;
+  cursor: pointer;
+  margin-top: 10px;
+  margin-right: 10px;
+}
+
+.form-default-style form button:hover, #user-change-password-container form button:hover, #email-change-container form button:hover, #login-container form button:hover, #signup-container form button:hover, #logout-container form button:hover, #user-set-password form button:hover, #password-reset-container form button:hover, #email-comfirmation-container form button:hover, #reset-password-container form button:hover, .auth-account-default form button:hover {
+  color: #F9D342;
+}
+
+.contact-info {
+  background-color: #292826;
+  opacity: 0.7;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.contact-info h1 {
+  color: white;
+  letter-spacing: 2px;
+}
+
+.contact-info i {
+  color: white;
+  padding-right: 15px;
+}
+
+.contact-info .whatsapp {
+  color: green;
+}
+
+.contact-info .contact-phone {
+  border-style: solid;
+  border-width: 5px 0;
+  border-color: #f84d43;
+}
+
+@media screen and (max-width: 750px) {
+  .contact-info h1 {
+    font-size: xx-large;
+    font-weight: 600;
+    color: white !important;
+  }
+}
+#contact-form-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-content: space-around;
+  align-items: center;
+  padding: 50px 0 50px 0;
+  background-color: #cde1e9;
+}
+
+#contact-form-container .form-desc {
+  width: 35%;
+  padding-left: 10px;
+  align-self: flex-start;
+}
+
+#contact-form-container .form-desc h1, #contact-form-container .form-desc h2 {
+  margin: 0;
+}
+
+#contact-form-container .form-desc p {
+  font-size: 16px;
+  font-weight: 400;
+}
+
+#contact-form-container .contact-inputs {
+  padding-right: 10px;
+}
+
+#contact-form-container .contact-inputs #contact-submit-form input {
+  background-color: white !important;
+}
+
+#contact-form-container .contact-inputs #contact-submit-form .contact-name, #contact-form-container .contact-inputs #contact-submit-form .contact-email {
+  width: 49%;
+  display: inline-block;
+  margin: 0;
+}
+
+#contact-form-container .contact-inputs #contact-submit-form .contact-email {
+  float: right;
+}
+
+#contact-form-container .contact-inputs textarea {
+  width: 100%;
+  border: none;
+  height: 100px;
+  margin: 5px 0 0 5px;
+}
+
+#contact-form-container .contact-inputs .contact-send-button {
+  float: right;
+  margin: 0;
+}
+
+#contact-form-container .contact-inputs .contact-send-button button {
+  padding: 15px;
+  background-color: #292826;
+  color: #F9D342;
+  border: 0;
+  -webkit-appearance: none;
+  box-sizing: border-box;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.13);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 10px 30px;
+  letter-spacing: 2px;
+}
+
+#contact-form-container .contact-inputs .contact-send-button button:hover {
+  background-color: #F9D342;
+  color: #292826;
+}
+
+@media screen and (max-width: 960px) {
+  #contact-form-container {
+    padding: 15px !important;
+  }
+
+  #contact-form-container .form-desc, #contact-form-container .contact-inputs {
+    width: 100% !important;
+    text-align: center;
+  }
+
+  #contact-form-container .contact-name, #contact-form-container .contact-email {
+    width: 100% !important;
+  }
+}
+.inquiry-email-contact {
+  margin-top: 0px;
+  text-align: center;
+  background-color: #292826;
+  color: white;
+  border-style: solid;
+  border-width: 0 0 5px 0;
+  border-color: #F9D342;
+}
+.inquiry-email-contact h4 {
+  color: #F9D342;
+  margin: 0;
+}
+.inquiry-email-contact .inquiry-email-address {
+  color: #F9D342;
 }
 
 /*# sourceMappingURL=style.css.map */

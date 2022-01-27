@@ -3,8 +3,13 @@
 //LAYOUT 
 @use 'sass/core/all' as core;
 @use 'sass/layout/all' as layout;
+
+// Blog app
+@import '../../blog/sass/all' ;
+@import '../../cart/sass/all' ;
+@import '../../shop/sass/all';
+@import '../../users/sass/all';
 @import 'sass/pages/all' ;
-@import 'sass/single/all' ;
 
 
 

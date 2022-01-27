@@ -6,7 +6,7 @@ from django.http import HttpResponse
 
 
 def cart(request):
-    return render(request, "doobarashop/cart.html")
+    return render(request, "cart/cart.html")
 
 def checkout(request):
-    return render(request, "doobarashop/checkout.html")
+    return render(request, "cart/checkout.html")

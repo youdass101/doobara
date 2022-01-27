@@ -1,0 +1,14 @@
+// SHOP PAGE
+@use '../../../static/doobarashop/sass/abstracts/all' as var; 
+
+// product countainer grid 
+#container-shop {
+    clear: both;
+    padding: 7px 0 7px 0;
+    grid-gap: 5px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    background-color: var.$identity-color;
+    
+    @import '../components/shop-product-item-block';
+}

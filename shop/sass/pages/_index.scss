@@ -1,0 +1,46 @@
+// INDEX PAGE SYLE ------------
+@use '../../../static/doobarashop/sass/abstracts/all' as var;
+
+// Index page grid
+#index-grid-container {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+
+    grid-template-areas: 
+    'slider slider slider slider slider slider slider slider slider slider slider slider'
+    'pcat pcat pcat fp fp fp fp fp fp fp fp fp'
+    'ac ac ac ac ac ac ac ac ac ac ac ac'  
+ }
+
+ @media screen and (max-width: 1206px) {
+    #index-grid-container {
+        grid-template-areas:  
+        'slider slider slider slider slider slider slider slider slider slider slider slider '
+        'pcat pcat pcat pcat pcat pcat pcat pcat pcat pcat pcat pcat'
+        'fp fp fp fp fp fp fp fp fp fp fp fp' 
+        'ac ac ac ac ac ac ac ac ac ac ac ac'  
+    }
+ }
+
+
+
+@media screen and (max-width: 530px) {
+    #index-grid-container {
+        grid-template-areas:  
+        'slider slider slider slider slider slider slider slider slider slider slider slider '
+        'pcat pcat pcat pcat pcat pcat pcat pcat pcat pcat pcat pcat'
+        'ac ac ac ac ac ac ac ac ac ac ac ac' 
+         
+    }
+
+}
+// SLIDER 
+@import '../components/slider';
+
+// Category product menu icons 
+@import '../components/product-category-menu';
+@import '../components/index-featured-procuct-cards';
+
+// Product featured add and bundles 
+@import '../section/home_hero';
+

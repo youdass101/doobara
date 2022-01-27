@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'shop',
     'cart',
     'blog',
+    'users',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -201,7 +202,7 @@ LOGOUT_REDIRECT_URL = '/'
 SIGNUP_REDIRECT_URL = '/'
 
 ACCOUNT_FORMS = {
-'signup': 'account.forms.CustomSignupForm',
+'signup': 'users.forms.CustomSignupForm',
 }
 
 # allauth email and username authentication
