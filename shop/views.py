@@ -7,11 +7,10 @@ from django.core.mail import send_mail
 from .models import *
 
 
-
 def index(request):
     lop = Product.objects.filter(featured=True)
     slop = [row.serialize() for row in lop]
-    return render(request, "shop/index.html", {"lop":slop})
+    return render(request, "shop/index.html", {"lop":slop[:5]})
 
 
 def shop(request):
