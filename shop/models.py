@@ -20,9 +20,26 @@ class Categories(models.Model):
     def __str__(self):
         return f"{self.name} "
 
-# class Variants(models.Model):
-#     name = models.CharField(max_length=255)
-#     price = models.DecimalField(max_digits=5, decimal_places=2)
+    def serialize(self):
+        return {
+            "name" : self.name,
+            "description" : self.description
+        }
+
+class Variants(models.Model):
+    name = models.CharField(max_length=255)
+    title = models.CharField(max_length=255)
+    price = models.DecimalField(max_digits=5, decimal_places=2)
+
+    def __str__(self):
+        return f"{self.name, self.title} "
+
+    def serialize(self):
+        return {
+            "name" : self.name,
+            "title" : self.title,
+            "price" : self.price 
+        }
 
 # PRODUCT is model-table (int (primary ID) * string * int * string * string * date * URL
 #                         * boolean * boolean * boolean * boolean * boolean *  model reference) model
@@ -68,6 +85,9 @@ class Product(models.Model):
     # product category model reference many to many (the product can belong to several catergories)
     category = models.ManyToManyField(Categories, null=True, blank=True, default=None, related_name="products") 
     
+    # variantes are a list of objects
+    # if product have a variant they will be listed
+    variant_list = models.ManyToManyField(Variants, null=True, blank=True, default=None, related_name="lov")
 
     # Admin page tabel view of dojects column (key value)
     def __str__(self):
@@ -112,7 +132,8 @@ class Product(models.Model):
                 "plongdescription": self.long_description,
                 "pvideo": self.video,
                 "pcreationdate": self.created_time,
-                "pcategory": self.category.all(),
+                "pcategory": [cat.serialize() for cat in self.category.all()],
                 "pmainimage": image.serialize(),
-                "pallimages": allimages()
+                "pallimages": allimages(),
+                "pvariant" : [var.serialize() for var in self.variant_list.all()]
             }
