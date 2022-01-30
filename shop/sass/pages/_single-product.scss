@@ -44,6 +44,18 @@
     .product-highlight {
         grid-area: h;
 
+        .single-product-variant {
+            padding-bottom: 20px;
+            select {
+                padding: 5px 10px 5px 10px;
+                font-size: small;
+                .svoption {
+                    font-size: 20px ;
+                }
+            }
+        }
+        
+
         // Product qtt yo add to cart 
         .single-product-quantity {
             @include var.single-input-number-v1;  

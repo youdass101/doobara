@@ -1,0 +1,18 @@
+@use 'static/doobarashop/sass/abstracts/variables' as var;
+
+//LAYOUT 
+@use 'static/doobarashop/sass/core/all' as core;
+@use 'static/doobarashop/sass/layout/all' as layout;
+
+// Blog ap
+@use 'blog/sass/all' as a;
+@use 'cart/sass/all' as b;
+@use 'shop/sass/all' as c;
+@use 'users/sass/all'as d;
+@use 'static/doobarashop/sass/pages/all' as e;
+
+
+
+
+    
+  

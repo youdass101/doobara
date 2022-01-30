@@ -1,0 +1,18 @@
+@use 'sass/abstracts/variables' as var;
+
+//LAYOUT 
+@use 'sass/core/all' as core;
+@use 'sass/layout/all' as layout;
+
+// Blog ap
+@use '../../blog/sass/all' as a;
+@use '../../cart/sass/all' as b;
+@use '../../shop/sass/all' as c;
+@use '../../users/sass/all'as d;
+@use 'sass/pages/all' as e;
+
+
+
+
+    
+  

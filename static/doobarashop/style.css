@@ -1,4 +1,4 @@
-.body-800width, .single-product-page-container .single-product-video, .single-product-page-container .single-product-image-long, .single-product-page-container .single-product-long-desc, .single-product-page-container .single-product-dimention {
+.body-800width {
   width: 100%;
   max-width: 800px;
   margin: 0 auto;
@@ -10,7 +10,7 @@
   color: #292826;
 }
 
-.input-style-prim, #contact-form-container .contact-inputs #contact-submit-form input, .checkout-page-container .checkout-shipping-details-container form input, .checkout-page-container .checkout-shipping-details-container form textarea, #my-account-container #account-detail form input, .login-register-container .login-container form input, .login-register-container .login-container form textarea, .form-default-style form input, #user-change-password-container form input, #email-change-container form input, #login-container form input, #signup-container form input, #logout-container form input, #user-set-password form input, #password-reset-container form input, #email-comfirmation-container form input, #reset-password-container form input, .auth-account-default form input, .form-default-style form textarea, #user-change-password-container form textarea, #email-change-container form textarea, #login-container form textarea, #signup-container form textarea, #logout-container form textarea, #user-set-password form textarea, #password-reset-container form textarea, #email-comfirmation-container form textarea, #reset-password-container form textarea, .auth-account-default form textarea {
+.input-style-prim, #contact-form-container .contact-inputs #contact-submit-form input, .form-default-style form input, .form-default-style form textarea {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -21,7 +21,7 @@
   background-color: #f2f2f2;
 }
 
-.input-submit-button-prim, #my-account-container #account-detail form input[type=submit], .login-register-container .login-container form input[type=submit], #user-set-password form input[type=submit], #password-reset-container form input[type=submit], #reset-password-container form input[type=submit], .auth-account-default form input[type=submit] {
+.input-submit-button-prim {
   width: 100%;
   background-color: #292826;
   color: #F9D342;
@@ -33,11 +33,11 @@
   font-size: 15px;
 }
 
-.form-default-style form label, #user-change-password-container form label, #email-change-container form label, #login-container form label, #signup-container form label, #logout-container form label, #user-set-password form label, #password-reset-container form label, #email-comfirmation-container form label, #reset-password-container form label, .auth-account-default form label {
+.form-default-style form label {
   font-size: 16px;
   font-weight: 400;
 }
-.form-default-style form button, #user-change-password-container form button, #email-change-container form button, #login-container form button, #signup-container form button, #logout-container form button, #user-set-password form button, #password-reset-container form button, #email-comfirmation-container form button, #reset-password-container form button, .auth-account-default form button {
+.form-default-style form button {
   color: #fff;
   background-color: #292826;
   font-family: "Archivo Narrow", Sans-serif;
@@ -50,7 +50,7 @@
   margin-top: 10px;
   margin-right: 10px;
 }
-.form-default-style form button:hover, #user-change-password-container form button:hover, #email-change-container form button:hover, #login-container form button:hover, #signup-container form button:hover, #logout-container form button:hover, #user-set-password form button:hover, #password-reset-container form button:hover, #email-comfirmation-container form button:hover, #reset-password-container form button:hover, .auth-account-default form button:hover {
+.form-default-style form button:hover {
   color: #F9D342;
 }
 
@@ -423,7 +423,7 @@ form.search-site button {
   background-color: #292826;
 }
 
-.body-800width, .single-product-page-container .single-product-dimention, .single-product-page-container .single-product-long-desc, .single-product-page-container .single-product-image-long, .single-product-page-container .single-product-video {
+.body-800width {
   width: 100%;
   max-width: 800px;
   margin: 0 auto;
@@ -435,7 +435,7 @@ form.search-site button {
   color: #292826;
 }
 
-.input-style-prim, .login-register-container .login-container form input, .login-register-container .login-container form textarea, #my-account-container #account-detail form input, .checkout-page-container .checkout-shipping-details-container form input, .checkout-page-container .checkout-shipping-details-container form textarea, .form-default-style form input, #user-change-password-container form input, #email-change-container form input, #login-container form input, #signup-container form input, #logout-container form input, #user-set-password form input, #password-reset-container form input, #email-comfirmation-container form input, #reset-password-container form input, .auth-account-default form input, .form-default-style form textarea, #user-change-password-container form textarea, #email-change-container form textarea, #login-container form textarea, #signup-container form textarea, #logout-container form textarea, #user-set-password form textarea, #password-reset-container form textarea, #email-comfirmation-container form textarea, #reset-password-container form textarea, .auth-account-default form textarea {
+.input-style-prim, .form-default-style form input, .form-default-style form textarea {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -446,7 +446,7 @@ form.search-site button {
   background-color: #f2f2f2;
 }
 
-.input-submit-button-prim, #user-set-password form input[type=submit], #password-reset-container form input[type=submit], #reset-password-container form input[type=submit], .auth-account-default form input[type=submit], .login-register-container .login-container form input[type=submit], #my-account-container #account-detail form input[type=submit] {
+.input-submit-button-prim {
   width: 100%;
   background-color: #292826;
   color: #F9D342;
@@ -458,12 +458,12 @@ form.search-site button {
   font-size: 15px;
 }
 
-.form-default-style form label, #user-change-password-container form label, #email-change-container form label, #login-container form label, #signup-container form label, #logout-container form label, #user-set-password form label, #password-reset-container form label, #email-comfirmation-container form label, #reset-password-container form label, .auth-account-default form label {
+.form-default-style form label {
   font-size: 16px;
   font-weight: 400;
 }
 
-.form-default-style form button, #user-change-password-container form button, #email-change-container form button, #login-container form button, #signup-container form button, #logout-container form button, #user-set-password form button, #password-reset-container form button, #email-comfirmation-container form button, #reset-password-container form button, .auth-account-default form button {
+.form-default-style form button {
   color: #fff;
   background-color: #292826;
   font-family: "Archivo Narrow", Sans-serif;
@@ -477,7 +477,7 @@ form.search-site button {
   margin-right: 10px;
 }
 
-.form-default-style form button:hover, #user-change-password-container form button:hover, #email-change-container form button:hover, #login-container form button:hover, #signup-container form button:hover, #logout-container form button:hover, #user-set-password form button:hover, #password-reset-container form button:hover, #email-comfirmation-container form button:hover, #reset-password-container form button:hover, .auth-account-default form button:hover {
+.form-default-style form button:hover {
   color: #F9D342;
 }
 
@@ -516,7 +516,7 @@ form.search-site button {
     grid-template-columns: auto;
   }
 }
-.body-800width, .single-product-page-container .single-product-dimention, .single-product-page-container .single-product-long-desc, .single-product-page-container .single-product-image-long, .single-product-page-container .single-product-video {
+.body-800width {
   width: 100%;
   max-width: 800px;
   margin: 0 auto;
@@ -528,7 +528,7 @@ form.search-site button {
   color: #292826;
 }
 
-.input-style-prim, .login-register-container .login-container form input, .login-register-container .login-container form textarea, #my-account-container #account-detail form input, .checkout-page-container .checkout-shipping-details-container form input, .checkout-page-container .checkout-shipping-details-container form textarea, .form-default-style form input, #user-change-password-container form input, #email-change-container form input, #login-container form input, #signup-container form input, #logout-container form input, #user-set-password form input, #password-reset-container form input, #email-comfirmation-container form input, #reset-password-container form input, .auth-account-default form input, .form-default-style form textarea, #user-change-password-container form textarea, #email-change-container form textarea, #login-container form textarea, #signup-container form textarea, #logout-container form textarea, #user-set-password form textarea, #password-reset-container form textarea, #email-comfirmation-container form textarea, #reset-password-container form textarea, .auth-account-default form textarea {
+.input-style-prim, .form-default-style form input, .form-default-style form textarea {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -539,7 +539,7 @@ form.search-site button {
   background-color: #f2f2f2;
 }
 
-.input-submit-button-prim, #user-set-password form input[type=submit], #password-reset-container form input[type=submit], #reset-password-container form input[type=submit], .auth-account-default form input[type=submit], .login-register-container .login-container form input[type=submit], #my-account-container #account-detail form input[type=submit] {
+.input-submit-button-prim {
   width: 100%;
   background-color: #292826;
   color: #F9D342;
@@ -551,12 +551,12 @@ form.search-site button {
   font-size: 15px;
 }
 
-.form-default-style form label, #user-change-password-container form label, #email-change-container form label, #login-container form label, #signup-container form label, #logout-container form label, #user-set-password form label, #password-reset-container form label, #email-comfirmation-container form label, #reset-password-container form label, .auth-account-default form label {
+.form-default-style form label {
   font-size: 16px;
   font-weight: 400;
 }
 
-.form-default-style form button, #user-change-password-container form button, #email-change-container form button, #login-container form button, #signup-container form button, #logout-container form button, #user-set-password form button, #password-reset-container form button, #email-comfirmation-container form button, #reset-password-container form button, .auth-account-default form button {
+.form-default-style form button {
   color: #fff;
   background-color: #292826;
   font-family: "Archivo Narrow", Sans-serif;
@@ -570,7 +570,7 @@ form.search-site button {
   margin-right: 10px;
 }
 
-.form-default-style form button:hover, #user-change-password-container form button:hover, #email-change-container form button:hover, #login-container form button:hover, #signup-container form button:hover, #logout-container form button:hover, #user-set-password form button:hover, #password-reset-container form button:hover, #email-comfirmation-container form button:hover, #reset-password-container form button:hover, .auth-account-default form button:hover {
+.form-default-style form button:hover {
   color: #F9D342;
 }
 
@@ -580,7 +580,7 @@ form.search-site button {
   margin: 0 auto;
 }
 
-.body-800width, .single-product-page-container .single-product-dimention, .single-product-page-container .single-product-long-desc, .single-product-page-container .single-product-image-long, .single-product-page-container .single-product-video {
+.body-800width {
   width: 100%;
   max-width: 800px;
   margin: 0 auto;
@@ -592,7 +592,7 @@ form.search-site button {
   color: #292826;
 }
 
-.input-style-prim, .login-register-container .login-container form input, .login-register-container .login-container form textarea, #my-account-container #account-detail form input, .checkout-page-container .checkout-shipping-details-container form input, .checkout-page-container .checkout-shipping-details-container form textarea, .form-default-style form input, #user-change-password-container form input, #email-change-container form input, #login-container form input, #signup-container form input, #logout-container form input, #user-set-password form input, #password-reset-container form input, #email-comfirmation-container form input, #reset-password-container form input, .auth-account-default form input, .form-default-style form textarea, #user-change-password-container form textarea, #email-change-container form textarea, #login-container form textarea, #signup-container form textarea, #logout-container form textarea, #user-set-password form textarea, #password-reset-container form textarea, #email-comfirmation-container form textarea, #reset-password-container form textarea, .auth-account-default form textarea {
+.input-style-prim, .form-default-style form input, .form-default-style form textarea {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -603,7 +603,7 @@ form.search-site button {
   background-color: #f2f2f2;
 }
 
-.input-submit-button-prim, #user-set-password form input[type=submit], #password-reset-container form input[type=submit], #reset-password-container form input[type=submit], .auth-account-default form input[type=submit], .login-register-container .login-container form input[type=submit], #my-account-container #account-detail form input[type=submit] {
+.input-submit-button-prim {
   width: 100%;
   background-color: #292826;
   color: #F9D342;
@@ -615,12 +615,12 @@ form.search-site button {
   font-size: 15px;
 }
 
-.form-default-style form label, #user-change-password-container form label, #email-change-container form label, #login-container form label, #signup-container form label, #logout-container form label, #user-set-password form label, #password-reset-container form label, #email-comfirmation-container form label, #reset-password-container form label, .auth-account-default form label {
+.form-default-style form label {
   font-size: 16px;
   font-weight: 400;
 }
 
-.form-default-style form button, #user-change-password-container form button, #email-change-container form button, #login-container form button, #signup-container form button, #logout-container form button, #user-set-password form button, #password-reset-container form button, #email-comfirmation-container form button, #reset-password-container form button, .auth-account-default form button {
+.form-default-style form button {
   color: #fff;
   background-color: #292826;
   font-family: "Archivo Narrow", Sans-serif;
@@ -634,7 +634,7 @@ form.search-site button {
   margin-right: 10px;
 }
 
-.form-default-style form button:hover, #user-change-password-container form button:hover, #email-change-container form button:hover, #login-container form button:hover, #signup-container form button:hover, #logout-container form button:hover, #user-set-password form button:hover, #password-reset-container form button:hover, #email-comfirmation-container form button:hover, #reset-password-container form button:hover, .auth-account-default form button:hover {
+.form-default-style form button:hover {
   color: #F9D342;
 }
 
@@ -672,7 +672,7 @@ form.search-site button {
     grid-template-columns: auto;
   }
 }
-.body-800width, .single-product-page-container .single-product-dimention, .single-product-page-container .single-product-long-desc, .single-product-page-container .single-product-image-long, .single-product-page-container .single-product-video {
+.body-800width {
   width: 100%;
   max-width: 800px;
   margin: 0 auto;
@@ -684,7 +684,7 @@ form.search-site button {
   color: #292826;
 }
 
-.input-style-prim, .login-register-container .login-container form input, .login-register-container .login-container form textarea, #my-account-container #account-detail form input, .checkout-page-container .checkout-shipping-details-container form input, .checkout-page-container .checkout-shipping-details-container form textarea, .form-default-style form input, #user-change-password-container form input, #email-change-container form input, #login-container form input, #signup-container form input, #logout-container form input, #user-set-password form input, #password-reset-container form input, #email-comfirmation-container form input, #reset-password-container form input, .auth-account-default form input, .form-default-style form textarea, #user-change-password-container form textarea, #email-change-container form textarea, #login-container form textarea, #signup-container form textarea, #logout-container form textarea, #user-set-password form textarea, #password-reset-container form textarea, #email-comfirmation-container form textarea, #reset-password-container form textarea, .auth-account-default form textarea {
+.input-style-prim, .checkout-page-container .checkout-shipping-details-container form input, .checkout-page-container .checkout-shipping-details-container form textarea, .form-default-style form input, .form-default-style form textarea {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -695,7 +695,7 @@ form.search-site button {
   background-color: #f2f2f2;
 }
 
-.input-submit-button-prim, #user-set-password form input[type=submit], #password-reset-container form input[type=submit], #reset-password-container form input[type=submit], .auth-account-default form input[type=submit], .login-register-container .login-container form input[type=submit], #my-account-container #account-detail form input[type=submit] {
+.input-submit-button-prim {
   width: 100%;
   background-color: #292826;
   color: #F9D342;
@@ -707,12 +707,12 @@ form.search-site button {
   font-size: 15px;
 }
 
-.form-default-style form label, #user-change-password-container form label, #email-change-container form label, #login-container form label, #signup-container form label, #logout-container form label, #user-set-password form label, #password-reset-container form label, #email-comfirmation-container form label, #reset-password-container form label, .auth-account-default form label {
+.form-default-style form label {
   font-size: 16px;
   font-weight: 400;
 }
 
-.form-default-style form button, #user-change-password-container form button, #email-change-container form button, #login-container form button, #signup-container form button, #logout-container form button, #user-set-password form button, #password-reset-container form button, #email-comfirmation-container form button, #reset-password-container form button, .auth-account-default form button {
+.form-default-style form button {
   color: #fff;
   background-color: #292826;
   font-family: "Archivo Narrow", Sans-serif;
@@ -726,7 +726,7 @@ form.search-site button {
   margin-right: 10px;
 }
 
-.form-default-style form button:hover, #user-change-password-container form button:hover, #email-change-container form button:hover, #login-container form button:hover, #signup-container form button:hover, #logout-container form button:hover, #user-set-password form button:hover, #password-reset-container form button:hover, #email-comfirmation-container form button:hover, #reset-password-container form button:hover, .auth-account-default form button:hover {
+.form-default-style form button:hover {
   color: #F9D342;
 }
 
@@ -1052,7 +1052,7 @@ form.search-site button {
   width: 100%;
 }
 
-.body-800width, .single-product-page-container .single-product-dimention, .single-product-page-container .single-product-long-desc, .single-product-page-container .single-product-image-long, .single-product-page-container .single-product-video {
+.body-800width {
   width: 100%;
   max-width: 800px;
   margin: 0 auto;
@@ -1064,7 +1064,7 @@ form.search-site button {
   color: #292826;
 }
 
-.input-style-prim, .login-register-container .login-container form input, .login-register-container .login-container form textarea, #my-account-container #account-detail form input, .checkout-page-container .checkout-shipping-details-container form input, .checkout-page-container .checkout-shipping-details-container form textarea, .form-default-style form input, #user-change-password-container form input, #email-change-container form input, #login-container form input, #signup-container form input, #logout-container form input, #user-set-password form input, #password-reset-container form input, #email-comfirmation-container form input, #reset-password-container form input, .auth-account-default form input, .form-default-style form textarea, #user-change-password-container form textarea, #email-change-container form textarea, #login-container form textarea, #signup-container form textarea, #logout-container form textarea, #user-set-password form textarea, #password-reset-container form textarea, #email-comfirmation-container form textarea, #reset-password-container form textarea, .auth-account-default form textarea {
+.input-style-prim, .checkout-page-container .checkout-shipping-details-container form input, .checkout-page-container .checkout-shipping-details-container form textarea, .form-default-style form input, .form-default-style form textarea {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -1075,7 +1075,7 @@ form.search-site button {
   background-color: #f2f2f2;
 }
 
-.input-submit-button-prim, #user-set-password form input[type=submit], #password-reset-container form input[type=submit], #reset-password-container form input[type=submit], .auth-account-default form input[type=submit], .login-register-container .login-container form input[type=submit], #my-account-container #account-detail form input[type=submit] {
+.input-submit-button-prim {
   width: 100%;
   background-color: #292826;
   color: #F9D342;
@@ -1087,12 +1087,12 @@ form.search-site button {
   font-size: 15px;
 }
 
-.form-default-style form label, #user-change-password-container form label, #email-change-container form label, #login-container form label, #signup-container form label, #logout-container form label, #user-set-password form label, #password-reset-container form label, #email-comfirmation-container form label, #reset-password-container form label, .auth-account-default form label {
+.form-default-style form label {
   font-size: 16px;
   font-weight: 400;
 }
 
-.form-default-style form button, #user-change-password-container form button, #email-change-container form button, #login-container form button, #signup-container form button, #logout-container form button, #user-set-password form button, #password-reset-container form button, #email-comfirmation-container form button, #reset-password-container form button, .auth-account-default form button {
+.form-default-style form button {
   color: #fff;
   background-color: #292826;
   font-family: "Archivo Narrow", Sans-serif;
@@ -1106,7 +1106,7 @@ form.search-site button {
   margin-right: 10px;
 }
 
-.form-default-style form button:hover, #user-change-password-container form button:hover, #email-change-container form button:hover, #login-container form button:hover, #signup-container form button:hover, #logout-container form button:hover, #user-set-password form button:hover, #password-reset-container form button:hover, #email-comfirmation-container form button:hover, #reset-password-container form button:hover, .auth-account-default form button:hover {
+.form-default-style form button:hover {
   color: #F9D342;
 }
 
@@ -1219,7 +1219,7 @@ form.search-site button {
   color: #292826;
 }
 
-.input-style-prim, .login-register-container .login-container form input, .login-register-container .login-container form textarea, #my-account-container #account-detail form input, .checkout-page-container .checkout-shipping-details-container form input, .checkout-page-container .checkout-shipping-details-container form textarea, .form-default-style form input, #user-change-password-container form input, #email-change-container form input, #login-container form input, #signup-container form input, #logout-container form input, #user-set-password form input, #password-reset-container form input, #email-comfirmation-container form input, #reset-password-container form input, .auth-account-default form input, .form-default-style form textarea, #user-change-password-container form textarea, #email-change-container form textarea, #login-container form textarea, #signup-container form textarea, #logout-container form textarea, #user-set-password form textarea, #password-reset-container form textarea, #email-comfirmation-container form textarea, #reset-password-container form textarea, .auth-account-default form textarea {
+.input-style-prim, .form-default-style form input, .form-default-style form textarea {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -1230,7 +1230,7 @@ form.search-site button {
   background-color: #f2f2f2;
 }
 
-.input-submit-button-prim, #user-set-password form input[type=submit], #password-reset-container form input[type=submit], #reset-password-container form input[type=submit], .auth-account-default form input[type=submit], .login-register-container .login-container form input[type=submit], #my-account-container #account-detail form input[type=submit] {
+.input-submit-button-prim {
   width: 100%;
   background-color: #292826;
   color: #F9D342;
@@ -1242,12 +1242,12 @@ form.search-site button {
   font-size: 15px;
 }
 
-.form-default-style form label, #user-change-password-container form label, #email-change-container form label, #login-container form label, #signup-container form label, #logout-container form label, #user-set-password form label, #password-reset-container form label, #email-comfirmation-container form label, #reset-password-container form label, .auth-account-default form label {
+.form-default-style form label {
   font-size: 16px;
   font-weight: 400;
 }
 
-.form-default-style form button, #user-change-password-container form button, #email-change-container form button, #login-container form button, #signup-container form button, #logout-container form button, #user-set-password form button, #password-reset-container form button, #email-comfirmation-container form button, #reset-password-container form button, .auth-account-default form button {
+.form-default-style form button {
   color: #fff;
   background-color: #292826;
   font-family: "Archivo Narrow", Sans-serif;
@@ -1261,7 +1261,7 @@ form.search-site button {
   margin-right: 10px;
 }
 
-.form-default-style form button:hover, #user-change-password-container form button:hover, #email-change-container form button:hover, #login-container form button:hover, #signup-container form button:hover, #logout-container form button:hover, #user-set-password form button:hover, #password-reset-container form button:hover, #email-comfirmation-container form button:hover, #reset-password-container form button:hover, .auth-account-default form button:hover {
+.form-default-style form button:hover {
   color: #F9D342;
 }
 
@@ -1536,7 +1536,7 @@ form.search-site button {
   color: #292826;
 }
 
-.input-style-prim, .login-register-container .login-container form input, .login-register-container .login-container form textarea, #my-account-container #account-detail form input, .checkout-page-container .checkout-shipping-details-container form input, .checkout-page-container .checkout-shipping-details-container form textarea, .form-default-style form input, #user-change-password-container form input, #email-change-container form input, #login-container form input, #signup-container form input, #logout-container form input, #user-set-password form input, #password-reset-container form input, #email-comfirmation-container form input, #reset-password-container form input, .auth-account-default form input, .form-default-style form textarea, #user-change-password-container form textarea, #email-change-container form textarea, #login-container form textarea, #signup-container form textarea, #logout-container form textarea, #user-set-password form textarea, #password-reset-container form textarea, #email-comfirmation-container form textarea, #reset-password-container form textarea, .auth-account-default form textarea {
+.input-style-prim, .form-default-style form input, .form-default-style form textarea {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -1547,7 +1547,7 @@ form.search-site button {
   background-color: #f2f2f2;
 }
 
-.input-submit-button-prim, #user-set-password form input[type=submit], #password-reset-container form input[type=submit], #reset-password-container form input[type=submit], .auth-account-default form input[type=submit], .login-register-container .login-container form input[type=submit], #my-account-container #account-detail form input[type=submit] {
+.input-submit-button-prim {
   width: 100%;
   background-color: #292826;
   color: #F9D342;
@@ -1559,12 +1559,12 @@ form.search-site button {
   font-size: 15px;
 }
 
-.form-default-style form label, #user-change-password-container form label, #email-change-container form label, #login-container form label, #signup-container form label, #logout-container form label, #user-set-password form label, #password-reset-container form label, #email-comfirmation-container form label, #reset-password-container form label, .auth-account-default form label {
+.form-default-style form label {
   font-size: 16px;
   font-weight: 400;
 }
 
-.form-default-style form button, #user-change-password-container form button, #email-change-container form button, #login-container form button, #signup-container form button, #logout-container form button, #user-set-password form button, #password-reset-container form button, #email-comfirmation-container form button, #reset-password-container form button, .auth-account-default form button {
+.form-default-style form button {
   color: #fff;
   background-color: #292826;
   font-family: "Archivo Narrow", Sans-serif;
@@ -1578,7 +1578,7 @@ form.search-site button {
   margin-right: 10px;
 }
 
-.form-default-style form button:hover, #user-change-password-container form button:hover, #email-change-container form button:hover, #login-container form button:hover, #signup-container form button:hover, #logout-container form button:hover, #user-set-password form button:hover, #password-reset-container form button:hover, #email-comfirmation-container form button:hover, #reset-password-container form button:hover, .auth-account-default form button:hover {
+.form-default-style form button:hover {
   color: #F9D342;
 }
 
@@ -1647,7 +1647,7 @@ form.search-site button {
   color: #292826;
 }
 
-.input-style-prim, .login-register-container .login-container form input, .login-register-container .login-container form textarea, #my-account-container #account-detail form input, .checkout-page-container .checkout-shipping-details-container form input, .checkout-page-container .checkout-shipping-details-container form textarea, .form-default-style form input, #user-change-password-container form input, #email-change-container form input, #login-container form input, #signup-container form input, #logout-container form input, #user-set-password form input, #password-reset-container form input, #email-comfirmation-container form input, #reset-password-container form input, .auth-account-default form input, .form-default-style form textarea, #user-change-password-container form textarea, #email-change-container form textarea, #login-container form textarea, #signup-container form textarea, #logout-container form textarea, #user-set-password form textarea, #password-reset-container form textarea, #email-comfirmation-container form textarea, #reset-password-container form textarea, .auth-account-default form textarea {
+.input-style-prim, .form-default-style form input, .form-default-style form textarea {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -1658,7 +1658,7 @@ form.search-site button {
   background-color: #f2f2f2;
 }
 
-.input-submit-button-prim, #user-set-password form input[type=submit], #password-reset-container form input[type=submit], #reset-password-container form input[type=submit], .auth-account-default form input[type=submit], .login-register-container .login-container form input[type=submit], #my-account-container #account-detail form input[type=submit] {
+.input-submit-button-prim {
   width: 100%;
   background-color: #292826;
   color: #F9D342;
@@ -1670,12 +1670,12 @@ form.search-site button {
   font-size: 15px;
 }
 
-.form-default-style form label, #user-change-password-container form label, #email-change-container form label, #login-container form label, #signup-container form label, #logout-container form label, #user-set-password form label, #password-reset-container form label, #email-comfirmation-container form label, #reset-password-container form label, .auth-account-default form label {
+.form-default-style form label {
   font-size: 16px;
   font-weight: 400;
 }
 
-.form-default-style form button, #user-change-password-container form button, #email-change-container form button, #login-container form button, #signup-container form button, #logout-container form button, #user-set-password form button, #password-reset-container form button, #email-comfirmation-container form button, #reset-password-container form button, .auth-account-default form button {
+.form-default-style form button {
   color: #fff;
   background-color: #292826;
   font-family: "Archivo Narrow", Sans-serif;
@@ -1689,7 +1689,7 @@ form.search-site button {
   margin-right: 10px;
 }
 
-.form-default-style form button:hover, #user-change-password-container form button:hover, #email-change-container form button:hover, #login-container form button:hover, #signup-container form button:hover, #logout-container form button:hover, #user-set-password form button:hover, #password-reset-container form button:hover, #email-comfirmation-container form button:hover, #reset-password-container form button:hover, .auth-account-default form button:hover {
+.form-default-style form button:hover {
   color: #F9D342;
 }
 
@@ -1720,6 +1720,16 @@ form.search-site button {
 }
 .single-product-page-container .product-highlight {
   grid-area: h;
+}
+.single-product-page-container .product-highlight .single-product-variant {
+  padding-bottom: 20px;
+}
+.single-product-page-container .product-highlight .single-product-variant select {
+  padding: 5px 10px 5px 10px;
+  font-size: small;
+}
+.single-product-page-container .product-highlight .single-product-variant select .svoption {
+  font-size: 20px;
 }
 .single-product-page-container .product-highlight .single-product-quantity {
   width: 100%;
@@ -1807,7 +1817,7 @@ form.search-site button {
     grid-template-areas: "nt nt nt nt nt nt nt nt nt nt nt nt" "i i i i i i i i i i i i" "h h h h h h h h h h h h" "v v v v v v v v v v v v" "il il il il il il il il il il il il" "ld ld ld ld ld ld ld ld ld ld ld ld" "d d d d d d d d d d d d";
   }
 }
-.body-800width, .single-product-page-container .single-product-video, .single-product-page-container .single-product-image-long, .single-product-page-container .single-product-long-desc, .single-product-page-container .single-product-dimention {
+.body-800width {
   width: 100%;
   max-width: 800px;
   margin: 0 auto;
@@ -1819,7 +1829,7 @@ form.search-site button {
   color: #292826;
 }
 
-.input-style-prim, .login-register-container .login-container form input, .login-register-container .login-container form textarea, .checkout-page-container .checkout-shipping-details-container form input, .checkout-page-container .checkout-shipping-details-container form textarea, #my-account-container #account-detail form input, .form-default-style form input, #user-change-password-container form input, #email-change-container form input, #login-container form input, #signup-container form input, #logout-container form input, #user-set-password form input, #password-reset-container form input, #email-comfirmation-container form input, #reset-password-container form input, .auth-account-default form input, .form-default-style form textarea, #user-change-password-container form textarea, #email-change-container form textarea, #login-container form textarea, #signup-container form textarea, #logout-container form textarea, #user-set-password form textarea, #password-reset-container form textarea, #email-comfirmation-container form textarea, #reset-password-container form textarea, .auth-account-default form textarea {
+.input-style-prim, .login-register-container .login-container form input, .login-register-container .login-container form textarea, #my-account-container #account-detail form input, .form-default-style form input, #user-change-password-container form input, #email-change-container form input, #login-container form input, #signup-container form input, #logout-container form input, #user-set-password form input, #password-reset-container form input, #email-comfirmation-container form input, #reset-password-container form input, .auth-account-default form input, .form-default-style form textarea, #user-change-password-container form textarea, #email-change-container form textarea, #login-container form textarea, #signup-container form textarea, #logout-container form textarea, #user-set-password form textarea, #password-reset-container form textarea, #email-comfirmation-container form textarea, #reset-password-container form textarea, .auth-account-default form textarea {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -2078,7 +2088,7 @@ form.search-site button {
     margin: 0;
   }
 }
-.body-800width, .single-product-page-container .single-product-video, .single-product-page-container .single-product-image-long, .single-product-page-container .single-product-long-desc, .single-product-page-container .single-product-dimention {
+.body-800width {
   width: 100%;
   max-width: 800px;
   margin: 0 auto;
@@ -2090,7 +2100,7 @@ form.search-site button {
   color: #292826;
 }
 
-.input-style-prim, .checkout-page-container .checkout-shipping-details-container form input, .checkout-page-container .checkout-shipping-details-container form textarea, #my-account-container #account-detail form input, .login-register-container .login-container form input, .login-register-container .login-container form textarea, .form-default-style form input, #user-change-password-container form input, #email-change-container form input, #login-container form input, #signup-container form input, #logout-container form input, #user-set-password form input, #password-reset-container form input, #email-comfirmation-container form input, #reset-password-container form input, .auth-account-default form input, .form-default-style form textarea, #user-change-password-container form textarea, #email-change-container form textarea, #login-container form textarea, #signup-container form textarea, #logout-container form textarea, #user-set-password form textarea, #password-reset-container form textarea, #email-comfirmation-container form textarea, #reset-password-container form textarea, .auth-account-default form textarea {
+.input-style-prim, #my-account-container #account-detail form input, .login-register-container .login-container form input, .login-register-container .login-container form textarea, .form-default-style form input, #user-change-password-container form input, #email-change-container form input, #login-container form input, #signup-container form input, #logout-container form input, #user-set-password form input, #password-reset-container form input, #email-comfirmation-container form input, #reset-password-container form input, .auth-account-default form input, .form-default-style form textarea, #user-change-password-container form textarea, #email-change-container form textarea, #login-container form textarea, #signup-container form textarea, #logout-container form textarea, #user-set-password form textarea, #password-reset-container form textarea, #email-comfirmation-container form textarea, #reset-password-container form textarea, .auth-account-default form textarea {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -2157,7 +2167,7 @@ form.search-site button {
   font-size: 16px;
   font-weight: 400;
 }
-.body-800width, .single-product-page-container .single-product-video, .single-product-page-container .single-product-image-long, .single-product-page-container .single-product-long-desc, .single-product-page-container .single-product-dimention {
+.body-800width {
   width: 100%;
   max-width: 800px;
   margin: 0 auto;
@@ -2169,7 +2179,7 @@ form.search-site button {
   color: #292826;
 }
 
-.input-style-prim, .checkout-page-container .checkout-shipping-details-container form input, .checkout-page-container .checkout-shipping-details-container form textarea, #my-account-container #account-detail form input, .login-register-container .login-container form input, .login-register-container .login-container form textarea, .form-default-style form input, #user-change-password-container form input, #email-change-container form input, #login-container form input, #signup-container form input, #logout-container form input, #user-set-password form input, #password-reset-container form input, #email-comfirmation-container form input, #reset-password-container form input, .auth-account-default form input, .form-default-style form textarea, #user-change-password-container form textarea, #email-change-container form textarea, #login-container form textarea, #signup-container form textarea, #logout-container form textarea, #user-set-password form textarea, #password-reset-container form textarea, #email-comfirmation-container form textarea, #reset-password-container form textarea, .auth-account-default form textarea {
+.input-style-prim, #my-account-container #account-detail form input, .login-register-container .login-container form input, .login-register-container .login-container form textarea, .form-default-style form input, #user-change-password-container form input, #email-change-container form input, #login-container form input, #signup-container form input, #logout-container form input, #user-set-password form input, #password-reset-container form input, #email-comfirmation-container form input, #reset-password-container form input, .auth-account-default form input, .form-default-style form textarea, #user-change-password-container form textarea, #email-change-container form textarea, #login-container form textarea, #signup-container form textarea, #logout-container form textarea, #user-set-password form textarea, #password-reset-container form textarea, #email-comfirmation-container form textarea, #reset-password-container form textarea, .auth-account-default form textarea {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -2276,7 +2286,7 @@ form.search-site button {
     width: 10% !important;
   }
 }
-.body-800width, .single-product-page-container .single-product-video, .single-product-page-container .single-product-image-long, .single-product-page-container .single-product-long-desc, .single-product-page-container .single-product-dimention {
+.body-800width {
   width: 100%;
   max-width: 800px;
   margin: 0 auto;
@@ -2288,7 +2298,7 @@ form.search-site button {
   color: #292826;
 }
 
-.input-style-prim, .checkout-page-container .checkout-shipping-details-container form input, .checkout-page-container .checkout-shipping-details-container form textarea, #my-account-container #account-detail form input, .login-register-container .login-container form input, .login-register-container .login-container form textarea, .form-default-style form input, #user-change-password-container form input, #email-change-container form input, #login-container form input, #signup-container form input, #logout-container form input, #user-set-password form input, #password-reset-container form input, #email-comfirmation-container form input, #reset-password-container form input, .auth-account-default form input, .form-default-style form textarea, #user-change-password-container form textarea, #email-change-container form textarea, #login-container form textarea, #signup-container form textarea, #logout-container form textarea, #user-set-password form textarea, #password-reset-container form textarea, #email-comfirmation-container form textarea, #reset-password-container form textarea, .auth-account-default form textarea {
+.input-style-prim, .form-default-style form input, .form-default-style form textarea {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -2299,7 +2309,7 @@ form.search-site button {
   background-color: #f2f2f2;
 }
 
-.input-submit-button-prim, #my-account-container #account-detail form input[type=submit], .login-register-container .login-container form input[type=submit], #user-set-password form input[type=submit], #password-reset-container form input[type=submit], #reset-password-container form input[type=submit], .auth-account-default form input[type=submit] {
+.input-submit-button-prim {
   width: 100%;
   background-color: #292826;
   color: #F9D342;
@@ -2311,12 +2321,12 @@ form.search-site button {
   font-size: 15px;
 }
 
-.form-default-style form label, #user-change-password-container form label, #email-change-container form label, #login-container form label, #signup-container form label, #logout-container form label, #user-set-password form label, #password-reset-container form label, #email-comfirmation-container form label, #reset-password-container form label, .auth-account-default form label {
+.form-default-style form label {
   font-size: 16px;
   font-weight: 400;
 }
 
-.form-default-style form button, #user-change-password-container form button, #email-change-container form button, #login-container form button, #signup-container form button, #logout-container form button, #user-set-password form button, #password-reset-container form button, #email-comfirmation-container form button, #reset-password-container form button, .auth-account-default form button {
+.form-default-style form button {
   color: #fff;
   background-color: #292826;
   font-family: "Archivo Narrow", Sans-serif;
@@ -2330,7 +2340,7 @@ form.search-site button {
   margin-right: 10px;
 }
 
-.form-default-style form button:hover, #user-change-password-container form button:hover, #email-change-container form button:hover, #login-container form button:hover, #signup-container form button:hover, #logout-container form button:hover, #user-set-password form button:hover, #password-reset-container form button:hover, #email-comfirmation-container form button:hover, #reset-password-container form button:hover, .auth-account-default form button:hover {
+.form-default-style form button:hover {
   color: #F9D342;
 }
 
