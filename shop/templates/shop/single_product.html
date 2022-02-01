@@ -29,13 +29,14 @@ Product Name
     <div class="product-highlight">
         <!-- PRODUCT PRICE -->
         <h3 class="single-product-price">$ {{product.pprice}} </h3>
+    
         <div class="single-product-variant">
-            {% if product.pvariant %}
+            {% if product.pvariant %}           
                 <select name="variant" id="variants">
                     {% for var in product.pvariant %}
-                        <option class="svoption">{{var.title}}</option>
+                        <option class="svoption" value="{{var.price}}">{{var.title}}</option>
                     {% endfor %}
-                </select>
+                </select>        
             {% endif %}
         </div>
 

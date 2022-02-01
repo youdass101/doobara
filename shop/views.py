@@ -26,8 +26,7 @@ def filtering(request, locat):
 
 
 def single_product(request, locat):
-    product = Product.objects.get(name=locat)
-    product = product.serialize("all")
+    product = Product.objects.get(name=locat).serialize("all")
     return render(request, "shop/single_product.html", {"product": product})
 
 

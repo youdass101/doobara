@@ -1729,7 +1729,7 @@ form.search-site button {
   font-size: small;
 }
 .single-product-page-container .product-highlight .single-product-variant select .svoption {
-  font-size: 20px;
+  font-size: small;
 }
 .single-product-page-container .product-highlight .single-product-quantity {
   width: 100%;
