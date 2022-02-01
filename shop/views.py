@@ -20,7 +20,7 @@ def shop(request):
 
 
 def filtering(request, locat):
-    lop = Categories.objects.get(name=locat).products.all()
+    lop = Categorie.objects.get(name=locat).products.all()
     slop = [row.serialize("main") for row in lop]
     return render(request, "shop/shop.html", {"lop":slop})
 

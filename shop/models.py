@@ -9,7 +9,7 @@ from .modeling.images import *
 
 # Categories is (int(primary id) * string * string * int * int) model
 # interp. Product categories database SQL table 
-class Categories(models.Model):
+class Categorie(models.Model):
     # name is string
     # category name string max 255 characters
     name = models.CharField(max_length=255)
@@ -83,7 +83,7 @@ class Product(models.Model):
     discount = models.BooleanField(default=False)
     # category is List of model-objects
     # product category model reference many to many (the product can belong to several catergories)
-    category = models.ManyToManyField(Categories, null=True, blank=True, default=None, related_name="products") 
+    category = models.ManyToManyField(Categorie, null=True, blank=True, default=None, related_name="products") 
     
     # variantes are a list of objects
     # if product have a variant they will be listed
