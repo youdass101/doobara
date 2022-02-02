@@ -177,6 +177,27 @@ document.addEventListener('DOMContentLoaded', function(){
             slides[slideIndex-1].style.display = "block";
         }
     }
+
+    // PRODUCT SINGLE PAGE SELECT ELEMENT TO CHANGE PRODUCT VARIANT DATA (SO FAR PRICE ONLY CHANGE)
+    if (document.getElementById("variants")) {
+        obj = document.getElementById("variants")
+        obj.onchange = function() {
+            val = obj.options[obj.selectedIndex].value
+            document.getElementById("spp").innerHTML = val
+        }
+    }
+
+    // SINGLE PRODUCT IMAGE THUMB CHANGE MAIN IMAGE BY CLICK ON THUMB
+    if (document.getElementsByClassName("sp-thumb-image")) {
+        document.querySelectorAll('.sp-thumb-image').forEach (image => {
+            image.onclick = () => {
+                document.getElementById("spi").src = image.src
+         
+
+            }
+        }) 
+
+    }
 })
 
 

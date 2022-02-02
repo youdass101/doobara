@@ -13,14 +13,14 @@ Product Name
 
     <!-- PRODUCT IMAGE SLIDER -->
     <div class="single-product-image">
-        <img width="416" height="416" src="{% static product.pmainimage.iurl %}">
+        <img id="spi" width="416" height="416" src="{% static product.pmainimage.iurl %}">
     
         <!-- Images thumbnails -->
         <div class="single-product-image-thumb">
             {% for image in product.pallimages %}
                 {% if  image.ilong == False %}
                     <!-- PRODUCT IMAGE IN THUMBNAIL SIZE TO USE IN IMAGE -->
-                    <img class="sp-thumb-image" src="{% static image.iurl %}">
+                    <img width="70" height="70" class="sp-thumb-image" src="{% static image.iurl %}">
                 {% endif %}
             {% endfor %}
         </div>
@@ -28,13 +28,19 @@ Product Name
 
     <div class="product-highlight">
         <!-- PRODUCT PRICE -->
-        <h3 class="single-product-price">$ {{product.pprice}} </h3>
-    
+        <h3 id="spp" class="single-product-price">$ {{product.pprice}} </h3>
+        
+        <!-- PRODUCT VARIANTS IF EXIST loop over and add the variants to select element -->
         <div class="single-product-variant">
             {% if product.pvariant %}           
                 <select name="variant" id="variants">
                     {% for var in product.pvariant %}
-                        <option class="svoption" value="{{var.price}}">{{var.title}}</option>
+                        {% if var.default %}
+                            <option selected="selected" class="svoption" value="$ {{var.price}}">{{var.title}}</option>
+                        {% else %}
+                            <option class="svoption" value="$ {{var.price}}">{{var.title}}</option>
+                        {% endif %}
+                        
                     {% endfor %}
                 </select>        
             {% endif %}
