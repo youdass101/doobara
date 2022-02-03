@@ -62,7 +62,7 @@ class Product(models.Model):
     long_description = models.TextField(blank=True)
     # created_time is date
     # product object creation date 
-    created_time = models.DateTimeField()
+    created_time = models.DateTimeField(null=True, blank=True, auto_now_add=True)
     # video is string(url arg)
     # product video URL string 
     video = models.URLField(blank=True)
@@ -103,7 +103,7 @@ class Product(models.Model):
         # if the object album is empty return none
         try:
             # if product have an album
-            image = self.album.default()
+            image = self.album.default().serialize()
         except:
             # else return None
             image = None
@@ -124,8 +124,8 @@ class Product(models.Model):
             return {
             "pname": self.name,
             "pprice": self.price,
-            "pcategory": self.category.all(),
-            "pmainimage": image.serialize(),
+            "pcategory": [cat.serialize() for cat in self.category.all()],
+            "pmainimage": image,
         }
         else:
             return {
@@ -136,7 +136,7 @@ class Product(models.Model):
                 "pvideo": self.video,
                 "pcreationdate": self.created_time,
                 "pcategory": [cat.serialize() for cat in self.category.all()],
-                "pmainimage": image.serialize(),
+                "pmainimage": image,
                 "pallimages": allimages(),
                 "pvariant" : [var.serialize() for var in self.variant_list.all()]
             }
