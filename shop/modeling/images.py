@@ -56,7 +56,7 @@ class Image(models.Model):
     # string(url) -> string(url)
     # interp custumize usrl contant 
     def img_path_customize(self, ipath):
-        return "/".join(ipath.strip("/").split('/')[2:])
+        return "/".join(ipath.strip("/").split('/')[1:])
 
     # image object -> dictionary 
     # take django sql image object and convert data to dictionary 

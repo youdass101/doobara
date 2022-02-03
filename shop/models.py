@@ -147,6 +147,7 @@ class Product(models.Model):
         # is a Dictionary 
         if tag == 'main':
             return {
+            "pid": self.id,
             "pname": self.name,
             "pprice": self.price,
             "pcategory": [cat.serialize() for cat in self.category.all()],
@@ -154,6 +155,7 @@ class Product(models.Model):
         }
         else:
             return {
+                "pid": self.id,
                 "pname": self.name,
                 "pprice": self.price,
                 "pshortdescription": self.short_description,
