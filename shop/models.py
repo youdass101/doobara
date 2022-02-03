@@ -6,6 +6,7 @@ from django.db.models.base import Model
 from django.db.models.deletion import SET_NULL
 from django.db.models.fields.related import ForeignKey
 from .modeling.images import *
+from django.dispatch import receiver
 # from django.contrib.auth.models import AbstractBaseUser
 
 # Categories is (int(primary id) * string * string * int * int) model
@@ -27,11 +28,18 @@ class Categorie(models.Model):
             "description" : self.description
         }
 
+class VariantHolder(models.Model):
+    name = models.CharField(max_length=255)
+
+    def __str__(self):
+        return f"{self.name} "
+
 class Variant(models.Model):
     name = models.CharField(max_length=255)
     title = models.CharField(max_length=255)
     price = models.DecimalField(max_digits=5, decimal_places=2)
     default = models.BooleanField(default=False)
+    variantholder = models.ForeignKey(VariantHolder, blank=True, null=True, default=None, on_delete=models.CASCADE, related_name="variants")
 
     def __str__(self):
         return f"{self.name, self.title} "
@@ -68,7 +76,7 @@ class Product(models.Model):
     video = models.URLField(blank=True)
     # album is model-object
     # one to one filed with album images tabel object 
-    album = models.OneToOneField(ImageAlbum, related_name='model', on_delete=models.CASCADE, null=True, blank=True) 
+    album = models.OneToOneField(ImageAlbum, related_name='model', on_delete=models.SET_NULL, null=True, blank=True) 
     # stock is boolean
     # boolean true if product in stock, false if out of stock 
     stock = models.BooleanField(default=False)
@@ -88,9 +96,20 @@ class Product(models.Model):
     # product category model reference many to many (the product can belong to several catergories)
     category = models.ManyToManyField(Categorie, null=True, blank=True, default=None, related_name="products") 
     
+    # !!!!!!!!!!! FIX DELETING TREE !!!!!!!!!!!!!!!!!!!!
     # variantes are a list of objects
     # if product have a variant they will be listed
-    variant_list = models.ManyToManyField(Variant, null=True, blank=True, default=None, related_name="lov")
+    variant_list = models.ForeignKey(VariantHolder, null=True, blank=True, default=None, related_name="products", on_delete=models.SET_NULL)
+
+
+    # Delete -> boolean
+    # when an instance is deleted the foreing obejects deleted
+    # def delete(self):
+    #     if self.variant_list:
+    #         self.variant_list.delete()
+    #     if self.album:
+    #         self.album.delete()
+    #     super(Product, self).delete()
 
     # Admin page tabel view of dojects column (key value)
     def __str__(self):
@@ -119,6 +138,12 @@ class Product(models.Model):
                 loi = None
             return loi
 
+        if self.variant_list:
+            lov = [var.serialize() for var in self.variant_list.variants.all()]
+        else:
+            lov = None
+
+
         # is a Dictionary 
         if tag == 'main':
             return {
@@ -138,5 +163,13 @@ class Product(models.Model):
                 "pcategory": [cat.serialize() for cat in self.category.all()],
                 "pmainimage": image,
                 "pallimages": allimages(),
-                "pvariant" : [var.serialize() for var in self.variant_list.all()]
+                "pvariant" : lov
             }
+
+# Delete product foreing connected objects
+@receiver(models.signals.post_delete, sender=Product)
+def handle_deleted_product(sender, instance, **kwargs):
+    if instance.variant_list:
+        instance.variant_list.delete()
+    if instance.album:
+        instance.album.delete()
