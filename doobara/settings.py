@@ -35,7 +35,10 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'doobarashop',
+    'shop',
+    'cart',
+    'blog',
+    'users',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -50,6 +53,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.facebook',
+    'import_export',
 ]
 
 
@@ -136,6 +140,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+# Add these new lines
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
+
+# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # new allauth
 # allauth backend authentication 
@@ -191,7 +202,7 @@ LOGOUT_REDIRECT_URL = '/'
 SIGNUP_REDIRECT_URL = '/'
 
 ACCOUNT_FORMS = {
-'signup': 'doobarashop.forms.CustomSignupForm',
+'signup': 'users.forms.CustomSignupForm',
 }
 
 # allauth email and username authentication

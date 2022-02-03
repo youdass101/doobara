@@ -1,0 +1,32 @@
+@use '../../../static/doobarashop/sass/abstracts/all' as var;
+// MY ACCOUNT PAGE STYLING 
+#my-account-container {
+    padding: 4%;
+    // First line of logged in user in my account page
+    p {
+        padding: 0 0 4% 4% ;
+    }
+
+    #my-account-data {
+        width: 75%;
+        padding: 15px 0 0 60px;
+        display: inline-block;
+        vertical-align: top;
+    }
+    
+    // ACCOUNT NAV
+    @import '../components/account-nav';
+    @import '../components/account-orders-data';
+    @import '../components/account-order-view';
+    @import '../components/account-wishlist';
+    @import '../components/account-edit';
+}
+
+
+@media screen and (max-width: 850px) {
+    // My account page mobile styling
+    #my-account-container {
+        padding: 10px;
+        margin: 0;
+    }
+}

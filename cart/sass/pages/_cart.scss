@@ -1,0 +1,13 @@
+// CART SINGLE PAGE 
+@use '../../../static/doobarashop/sass/abstracts/all' as var;
+@use '../components/cart-in-cart-table';
+@use '../components/cart-total-checkout';
+
+
+// Cart page container
+.cart-page-container {
+    @include var.flex-default;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
