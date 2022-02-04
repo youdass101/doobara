@@ -37,4 +37,5 @@ def shopaddtocart(request):
         return JsonResponse({"result":"login"}, status=201)
 
 
-        
+def cartcontext(request):
+    return {'item': 4}
