@@ -198,6 +198,52 @@ document.addEventListener('DOMContentLoaded', function(){
         }) 
 
     }
+
+    // ADD TO CART BUTTON AT SHOP PAGE 
+    // event * component -> 
+    if(document.querySelectorAll('.shop-add-to-cart')){
+        document.querySelectorAll(".shop-add-to-cart").forEach (button => {
+            button.onclick = () => {
+                
+                fetch('/shopaddtocart', {
+                    method: 'PUT',
+                    body: JSON.stringify({
+                        pid : button.value,
+                    }),
+                    headers:{
+                        'X-CSRFToken': getCookie('csrftoken')
+                    }
+                })
+                
+                .then (response => response.json())
+                .then (result => {
+                    console.log(result)
+                    if (result.result=="login"){
+                        alert("please login")
+                    }
+                    else {
+                        alert("done")
+                    }
+                })
+            }
+        })
+    }
+
+
+    // CSRF token function  
+    function getCookie(name) {
+        if (!document.cookie) {
+            return null;
+        }
+        const token = document.cookie.split(';')
+            .map(c => c.trim())
+            .filter(c => c.startsWith(name + '='));
+
+        if (token.length === 0) {
+            return null;
+        }
+        return decodeURIComponent(token[0].split('=')[1]);
+    }
 })
 
 

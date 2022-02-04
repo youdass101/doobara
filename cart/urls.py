@@ -10,4 +10,5 @@ urlpatterns=[
     path("cart", views.cart, name="cart"),
      # Chekout cart page 
     path("checkout", views.checkout, name="checkout"),
+    path("shopaddtocart", views.shopaddtocart, name="shopaddtocart")
 ]
