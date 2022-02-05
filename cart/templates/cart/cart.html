@@ -22,25 +22,27 @@ My Cart
                 </tr>
                 <!-- Tabel body container (here goes the list of data) -->
                 <tbody>
-                    <tr>
-                        <!-- Remove product from cart Icon -->
-                        <td class="in-cart-remove-icon">
-                            <div> &#x26D2; </div>
-                        </td>
-                        <!-- Product image  -->
-                        <td class="in-cart-img">
-                            <img src="{% static 'doobarashop/upload/images/cartthumb.jpg'%}"> 
-                        </td>
-                        <!-- product name -->
-                        <td class="in-cart-product-name"><p>Smart Plug Wifi 16 amps</p></td>
-                        <!-- product unit price -->
-                        <td class="in-cart-unit-price"><p>$ 15.00</p></td>
-                        <!-- product quantity in cart -->
-                        <td class="in-cart-product-qtt"><input class="in-cart-qtty" type="number" value="1"></td>
-                        <!-- Product subtotal (unit price * quantity) -->
-                        <td class="in-cart-units-subtotal"><p>$ 15.00</p></td>
-                    </tr>
-                    <tr>
+                    {% for item in cart %}
+                        <tr>
+                            <!-- Remove product from cart Icon -->
+                            <td class="in-cart-remove-icon">
+                                <div> &#x26D2; </div>
+                            </td>
+                            <!-- Product image  -->
+                            <td class="in-cart-img">
+                                <img src="{% static item.0.productimage.iurl %}"> 
+                            </td>
+                            <!-- product name -->
+                            <td class="in-cart-product-name"><p>{{item.0.productname}}</p></td>
+                            <!-- product unit price -->
+                            <td class="in-cart-unit-price"><p>$ {{item.0.productunitprice}}</p></td>
+                            <!-- product quantity in cart -->
+                            <td class="in-cart-product-qtt"><input class="in-cart-qtty" type="number" value={{item.0.productquantity}}></td>
+                            <!-- Product subtotal (unit price * quantity) -->
+                            <td class="in-cart-units-subtotal"><p>$ {{item.1}}</p></td>
+                        </tr>
+                    {% endfor %}
+                    <!-- <tr>
                         <td class="in-cart-remove-icon">
                             &#x26D2;
                         </td>
@@ -51,7 +53,7 @@ My Cart
                         <td class="in-cart-unit-price"><p>$ 15.00</p></td>
                         <td class="in-cart-product-qtt"><input class="in-cart-qtty" type="number" value="1"></td>
                         <td class="in-cart-units-subtotal"><p>$0</p></td>
-                    </tr>
+                    </tr> -->
                 </tbody>
                 <!-- Cart action button for coupon and cart update -->
                 <tfoot>
@@ -82,7 +84,7 @@ My Cart
                 <table>
                     <tr>
                         <th>Subtotal</th>
-                        <td> $ 54.50 </td>
+                        <td> $ {{total}} </td>
                     </tr>
                     <tr>
                         <th>Shipping </th>
@@ -90,7 +92,7 @@ My Cart
                     </tr>
                     <tr>
                         <th>Total</th>
-                        <td>$ 55.50 </td>
+                        <td>$ {{total}} </td>
                     </tr>
                 </table>
                 <!-- proceed checkout button -->

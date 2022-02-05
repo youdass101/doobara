@@ -22,3 +22,12 @@ class Cart_Item (models.Model):
     def __str__(self):
         return f"{self.product.name, self.quantity, self.cart} "
 
+    def serialize(self):
+        return{
+            "productname" : self.product.name,
+            "productunitprice" : self.product.price,
+            "productquantity": self.quantity,
+            "productimage": self.product.album.default().serialize()
+        }
+
+

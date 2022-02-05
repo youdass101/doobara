@@ -204,11 +204,18 @@ document.addEventListener('DOMContentLoaded', function(){
     if(document.querySelectorAll('.shop-add-to-cart')){
         document.querySelectorAll(".shop-add-to-cart").forEach (button => {
             button.onclick = () => {
+                if (document.getElementById('spq')) {
+                    qtt = document.getElementById('spq').value
+                }
+                else {
+                    qtt = 1
+                }
                 
                 fetch('/shopaddtocart', {
                     method: 'PUT',
                     body: JSON.stringify({
                         pid : button.value,
+                        quantity : qtt
                     }),
                     headers:{
                         'X-CSRFToken': getCookie('csrftoken')
@@ -222,7 +229,8 @@ document.addEventListener('DOMContentLoaded', function(){
                         alert("please login")
                     }
                     else {
-                        alert("done")
+                        document.getElementById('carttotal').innerHTML = result.cart.total
+                        document.getElementById('cartitemsqtt').innerHTML = result.cart.item
                     }
                 })
             }
