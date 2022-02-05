@@ -28,14 +28,12 @@ def shopaddtocart(request):
                     citem.quantity += int(pid['quantity'])
                     citem.save()
                 except:
-                    print("do not exist")
                     Cart_Item.objects.create(product=product, quantity=pid['quantity'], cart=user.mycart)
             except:
                 cart = Cart.objects.create(user=user)
                 Cart_Item.objects.create(product=product, quantity=pid['quantity'], cart=user.mycart)
             
             cart = cartcontext(request)
-            print(cart)
             return JsonResponse({"result":"done", "cart":cart}, status=201)
     else:
         return JsonResponse({"result":"login"}, status=201)
