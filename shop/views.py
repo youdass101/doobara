@@ -1,13 +1,10 @@
-from ctypes import util
-from itertools import product
-import re
 from django.shortcuts import render
 from django.http import HttpResponse
-from django.core.mail import send_mail
 from .models import *
 
 
 def index(request):
+    print (request.session._session_key)
     lop = Product.objects.filter(featured=True)
     slop = [row.serialize("main") for row in lop]
     return render(request, "shop/index.html", {"lop":slop[:5]})
