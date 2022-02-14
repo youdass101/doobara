@@ -29,19 +29,21 @@ def user_add_to_cart (request, item, product):
 # save or adjust cart data in session dict with given item
 def session_add_to_cart (request, item, product):
     # if session deosn't exist create new
-    if not request.session:
-        request.session.save()
-
+   
+    # if not request.session:
+    #     session['cart'] = {}
+    #     request.session.save()
+        
     price = product.price
     session = request.session
     try:
-        session['cart'][item['pid']]['quantity'] = str(item['quantity'])
+        qtt = session['cart'][item['pid']]['quantity']
+        session['cart'][item['pid']]['quantity'] = str(int(qtt) + (int(item['quantity'])))
     except:
         try:
             session['cart'][item['pid']] = {'quantity' : str(item["quantity"]), 'price' : str(price)}
         except:
-            session['cart'] = {}
+            
             session['cart'][item['pid']] = {'quantity' : str(item["quantity"]), 'price' : str(price)}
-
-    print(session['cart'])
+    request.session.save()
 

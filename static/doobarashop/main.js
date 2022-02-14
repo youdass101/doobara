@@ -226,7 +226,7 @@ document.addEventListener('DOMContentLoaded', function(){
                 .then (result => {
                     console.log(result)
                     if (result.result=="login"){
-                        alert("please login")
+                        true
                     }
                     else {
                         document.getElementById('carttotal').innerHTML = result.cart.total

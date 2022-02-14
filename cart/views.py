@@ -9,8 +9,20 @@ from .modules.helper import *
 
 
 def cart(request):
-    cart = request.user.mycart.items.all()
-    scart = [(item.serialize(),(item.quantity * item.product.price)) for item in cart]
+    if request.user.is_authenticated:
+        cart = request.user.mycart.items.all()
+        scart = [(item.serialize(),(item.quantity * item.product.price)) for item in cart]
+    else:
+        scart = []
+        cart = request.session['cart']
+        for i in cart:
+            product = Product.objects.get(id=i)
+            scart.append(({"productname" : product.name,
+                    "productunitprice" : cart[i]['price'],
+                    "productquantity": cart[i]['quantity'],
+                    "productimage": product.album.default().serialize()}, 
+                    (int(cart[i]['quantity']) * float(cart[i]['price']))))
+        print(scart)
     return render(request, "cart/cart.html", {"cart": scart})
 
 def checkout(request):
@@ -23,13 +35,13 @@ def shopaddtocart(request):
         cpid = json.loads(request.body)
         product = Product.objects.get(id=int(cpid['pid']))
         if request.user.is_authenticated:
-                user_add_to_cart(request, cpid, product)
-                cart = cartcontext(request) 
-                return JsonResponse({"result":"done", "cart":cart}, status=201)
+            user_add_to_cart(request, cpid, product)
+            cart = cartcontext(request) 
+            return JsonResponse({"result":"done", "cart":cart}, status=201)
         else:
             session_add_to_cart(request, cpid, product)
             cart = cartcontext(request) 
-            return JsonResponse({"result":"login"}, status=201)
+            return JsonResponse({"result":"done", "cart": cart}, status=201)
 
 # request -> dict
 # DATA UPDATES COLLECTER return the user attached cart items qtty and total price 
@@ -40,8 +52,14 @@ def cartcontext(request):
         for i in cart:
             items += i.quantity
             total += (i.quantity * i.product.price)
+    else:      
+        try:
+            cart = request.session['cart']
+            for i in cart:
+                items += int(cart[i]['quantity'])
+                total += (float(cart[i]['quantity']) * float(cart[i]['price']))
+        except:
+            request.session['cart'] = {}
+            request.session.save()
 
-        return {'item': items, 'total': total}
-    else:
-
-        return {'item': 0, 'total': 0}
+    return {'item': items, 'total': "{:.2f}".format(total)}
