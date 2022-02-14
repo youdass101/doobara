@@ -2286,9 +2286,14 @@ form.search-site button {
   display: block;
 }
 
-@media screen and (max-width: 750px) {
+@media screen and (max-width: 850px) {
   #id_remember {
     width: 10% !important;
+  }
+
+  .socialaccount_providers {
+    display: flex;
+    flex-direction: column;
   }
 }
 .body-800width {
