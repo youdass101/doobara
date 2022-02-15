@@ -37,23 +37,12 @@ My Cart
                             <!-- product unit price -->
                             <td class="in-cart-unit-price"><p>$ {{item.0.productunitprice}}</p></td>
                             <!-- product quantity in cart -->
-                            <td class="in-cart-product-qtt"><input class="in-cart-qtty" type="number" value={{item.0.productquantity}}></td>
+                            <td class="in-cart-product-qtt"><input id="quantity-item-name" type="hidden" value="{{item.0.productname}}" ><input class="in-cart-qtty" type="number" value={{item.0.productquantity}} min="0"></td>
                             <!-- Product subtotal (unit price * quantity) -->
                             <td class="in-cart-units-subtotal"><p>$ {{item.1}}</p></td>
                         </tr>
                     {% endfor %}
-                    <!-- <tr>
-                        <td class="in-cart-remove-icon">
-                            &#x26D2;
-                        </td>
-                        <td class="in-cart-img">
-                            <img src="{% static 'doobarashop/upload/images/cartthumb.jpg'%}"> 
-                        </td>
-                        <td class="in-cart-product-name"><p>Smart Plug Wifi </p></td>
-                        <td class="in-cart-unit-price"><p>$ 15.00</p></td>
-                        <td class="in-cart-product-qtt"><input class="in-cart-qtty" type="number" value="1"></td>
-                        <td class="in-cart-units-subtotal"><p>$0</p></td>
-                    </tr> -->
+
                 </tbody>
                 <!-- Cart action button for coupon and cart update -->
                 <tfoot>
@@ -67,7 +56,7 @@ My Cart
                                 <!-- Apply coupon button -->
                                 <div class="in-cart-apply-coupon-button"><button>Apply coupon</button></div>
                                 <!-- apply cart changes from table button -->
-                                <div class="in-cart-update-cart-button"><button>Update Cart</button></div>
+                                <div class="in-cart-update-cart-button" id="update-cart-button"><button>Update Cart</button></div>
                             </div>
                         </td>
                     </tr>

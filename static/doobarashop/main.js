@@ -237,6 +237,25 @@ document.addEventListener('DOMContentLoaded', function(){
         })
     }
 
+    // UPDATE CART
+    // if (document.getElementById('update-cart-button')){
+    //     updates = []
+    //     document.getElementById('update-cart-button').onclick = () => {
+    //         document.querySelectorAll(".in-cart-qtty").forEach (element => {
+    //             pname = element.parentElement
+    //             updates.push({"pquantity" : element.value, "pname":pname.querySelector("#quantity-item-name").value})
+    //         })
+    //         fetch('/updatecart', {
+    //             method: 'PUT',
+    //             body: JSON.stringify({
+    //                 cart : updates
+    //             }),
+    //             headers:{
+    //                 'X-CSRFToken': getCookie('csrftoken')
+    //             }
+    //         })
+    //     }
+    // }
 
     // CSRF token function  
     function getCookie(name) {
@@ -252,6 +271,7 @@ document.addEventListener('DOMContentLoaded', function(){
         }
         return decodeURIComponent(token[0].split('=')[1]);
     }
+
 })
 
 

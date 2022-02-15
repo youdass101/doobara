@@ -43,6 +43,11 @@ def shopaddtocart(request):
             cart = cartcontext(request) 
             return JsonResponse({"result":"done", "cart": cart}, status=201)
 
+# def updatecart(request):
+#     cartupdate = json.loads(request.body)
+#     if request.user.is_authenticated:
+
+
 # request -> dict
 # DATA UPDATES COLLECTER return the user attached cart items qtty and total price 
 def cartcontext(request):
