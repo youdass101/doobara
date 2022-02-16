@@ -43,9 +43,11 @@ def shopaddtocart(request):
             cart = cartcontext(request) 
             return JsonResponse({"result":"done", "cart": cart}, status=201)
 
-# def updatecart(request):
-#     cartupdate = json.loads(request.body)
-#     if request.user.is_authenticated:
+def updatecart(request):
+    cartupdate = json.loads(request.body)
+    if request.user.is_authenticated:
+        user_cart = request.user.mycart
+    return JsonResponse({"result":"done"}, status=201)
 
 
 # request -> dict

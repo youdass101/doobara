@@ -12,5 +12,5 @@ urlpatterns=[
      # Chekout cart page 
     path("checkout", views.checkout, name="checkout"),
     path("shopaddtocart", views.shopaddtocart, name="shopaddtocart"),
-    # path("updatecart", views.updatecart, name="updatecart")
+    path("updatecart", views.updatecart, name="updatecart")
 ]
