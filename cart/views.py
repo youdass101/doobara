@@ -1,6 +1,5 @@
-from audioop import reverse
 from operator import ipow
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from .models import *
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from django.urls import reverse
@@ -54,7 +53,7 @@ def updatecart(request):
         for product in cartupdate['cart']:  
             cart[product['pid']]['quantity'] = product['quantity']
         request.session.save()
-    return HttpResponseRedirect(reverse("cart"))
+        return HttpResponseRedirect(reverse('cart'))
 
 
 # request -> dict

@@ -246,7 +246,7 @@ document.addEventListener('DOMContentLoaded', function(){
                 updates.push({"quantity" : element.value, "pid":pname.querySelector("#quantity-item-name").value})
             })
             fetch('/updatecart', {
-                method: 'PUT',
+                method: 'POST',
                 body: JSON.stringify({
                     cart : updates
                 }),
@@ -254,7 +254,7 @@ document.addEventListener('DOMContentLoaded', function(){
                     'X-CSRFToken': getCookie('csrftoken')
                 }
             })
-            .then (updates = [])
+            
         }
     }
 
