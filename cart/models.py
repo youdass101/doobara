@@ -19,11 +19,13 @@ class Cart_Item (models.Model):
     quantity = models.IntegerField()
     cart = models.ForeignKey(Cart, related_name="items", blank=True, null=True, default=None, on_delete=models.CASCADE)
 
+
     def __str__(self):
         return f"{self.product.name, self.quantity, self.cart} "
 
     def serialize(self):
         return{
+            "productid" : self.product.id,
             "productname" : self.product.name,
             "productunitprice" : self.product.price,
             "productquantity": self.quantity,

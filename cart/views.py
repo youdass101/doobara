@@ -1,7 +1,9 @@
+from audioop import reverse
 from operator import ipow
 from django.shortcuts import render
 from .models import *
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
+from django.urls import reverse
 import json
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
@@ -18,11 +20,11 @@ def cart(request):
         for i in cart:
             product = Product.objects.get(id=i)
             scart.append(({"productname" : product.name,
+                    "productid" : product.id,
                     "productunitprice" : cart[i]['price'],
                     "productquantity": cart[i]['quantity'],
                     "productimage": product.album.default().serialize()}, 
                     (int(cart[i]['quantity']) * float(cart[i]['price']))))
-        print(scart)
     return render(request, "cart/cart.html", {"cart": scart})
 
 def checkout(request):
@@ -47,7 +49,12 @@ def updatecart(request):
     cartupdate = json.loads(request.body)
     if request.user.is_authenticated:
         user_cart = request.user.mycart
-    return JsonResponse({"result":"done"}, status=201)
+    else:
+        cart = request.session['cart']
+        for product in cartupdate['cart']:  
+            cart[product['pid']]['quantity'] = product['quantity']
+        request.session.save()
+    return HttpResponseRedirect(reverse("cart"))
 
 
 # request -> dict

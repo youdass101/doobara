@@ -43,7 +43,6 @@ def session_add_to_cart (request, item, product):
         try:
             session['cart'][item['pid']] = {'quantity' : str(item["quantity"]), 'price' : str(price)}
         except:
-            
             session['cart'][item['pid']] = {'quantity' : str(item["quantity"]), 'price' : str(price)}
     request.session.save()
 

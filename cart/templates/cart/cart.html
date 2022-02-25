@@ -37,7 +37,7 @@ My Cart
                             <!-- product unit price -->
                             <td class="in-cart-unit-price"><p>$ {{item.0.productunitprice}}</p></td>
                             <!-- product quantity in cart -->
-                            <td class="in-cart-product-qtt"><input id="quantity-item-name" type="hidden" value="{{item.0.productname}}" ><input class="in-cart-qtty" type="number" value={{item.0.productquantity}} min="0"></td>
+                            <td class="in-cart-product-qtt"><input id="quantity-item-name" type="hidden" value={{item.0.productid}}><input class="in-cart-qtty" type="number" value={{item.0.productquantity}} min="0"></td>
                             <!-- Product subtotal (unit price * quantity) -->
                             <td class="in-cart-units-subtotal"><p>$ {{item.1}}</p></td>
                         </tr>

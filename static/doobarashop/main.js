@@ -243,7 +243,7 @@ document.addEventListener('DOMContentLoaded', function(){
         document.getElementById('update-cart-button').onclick = () => {
             document.querySelectorAll(".in-cart-qtty").forEach (element => {
                 pname = element.parentElement
-                updates.push({"pquantity" : element.value, "pname":pname.querySelector("#quantity-item-name").value})
+                updates.push({"quantity" : element.value, "pid":pname.querySelector("#quantity-item-name").value})
             })
             fetch('/updatecart', {
                 method: 'PUT',
@@ -254,6 +254,7 @@ document.addEventListener('DOMContentLoaded', function(){
                     'X-CSRFToken': getCookie('csrftoken')
                 }
             })
+            .then (updates = [])
         }
     }
 
