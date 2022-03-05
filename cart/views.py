@@ -23,7 +23,8 @@ def cart(request):
                     "productunitprice" : cart[i]['price'],
                     "productquantity": cart[i]['quantity'],
                     "productimage": product.album.default().serialize()}, 
-                    (int(cart[i]['quantity']) * float(cart[i]['price']))))
+                    (int(cart[i]['quantity']) * float(cart[i]['price']))
+                    ))
     return render(request, "cart/cart.html", {"cart": scart})
 
 def checkout(request):
@@ -50,10 +51,14 @@ def updatecart(request):
         user_cart = request.user.mycart
     else:
         cart = request.session['cart']
+        request.session.set_expiry(10000)
+        print("ALERT", request.session.get_expiry_date())
         for product in cartupdate['cart']:  
             cart[product['pid']]['quantity'] = product['quantity']
         request.session.save()
-        return HttpResponseRedirect(reverse('cart'))
+    
+    return JsonResponse({"result":"done"}, status=201)
+
 
 
 # request -> dict

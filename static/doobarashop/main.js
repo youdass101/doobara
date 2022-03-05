@@ -254,7 +254,15 @@ document.addEventListener('DOMContentLoaded', function(){
                     'X-CSRFToken': getCookie('csrftoken')
                 }
             })
-            
+            .then(() => {
+                window.location.reload()})
+            .then (response => {
+                console.log(response)
+                return response.json()
+            })
+            .then (result => console.log(result))
+            .catch(err => console.log("rejected", err))
+           
         }
     }
 
