@@ -51,14 +51,20 @@ def updatecart(request):
         user_cart = request.user.mycart
     else:
         cart = request.session['cart']
-        request.session.set_expiry(10000)
-        print("ALERT", request.session.get_expiry_date())
-        for product in cartupdate['cart']:  
-            cart[product['pid']]['quantity'] = product['quantity']
+        try:
+            del cart[cartupdate['cart']['pid']]  
+        except:
+            # request.session.set_expiry(10000)
+            # print("ALERT", request.session.get_expiry_date())
+
+            for product in cartupdate['cart']:  
+                if (int(product['quantity']) == 0 ):
+                    del cart[product['pid']]
+                else:
+                    cart[product['pid']]['quantity'] = product['quantity']
         request.session.save()
     
     return JsonResponse({"result":"done"}, status=201)
-
 
 
 # request -> dict

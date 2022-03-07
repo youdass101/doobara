@@ -8,89 +8,99 @@ My Cart
 <!-- Cart page content container  -->
 <div class="cart-page-container">
     <!-- In cart product Table -->
-    <div class="cart-table-container">
-        <table class="products-in-cart">
-            <!-- In Cart product table header  -->
-            <thead>
-                <tr>
-                    <th class="in-cart-header-empty"></th>
-                    <th class= "in-cart-header-empty"></th>
-                    <th class="in-cart-header-product">Product</th>
-                    <th class="in-cart-header-price">Price</th>
-                    <th class="in-cart-header-quantity">Quantity</th>
-                    <th class="in-cart-header-subtotal">Subtotal</th>
-                </tr>
-                <!-- Tabel body container (here goes the list of data) -->
-                <tbody>
-                    {% for item in cart %}
+
+    {% if cart %}
+        <div class="cart-table-container">
+            <table class="products-in-cart">
+                <!-- In Cart product table header  -->
+                <thead>
+                    <tr>
+                        <th class="in-cart-header-empty"></th>
+                        <th class= "in-cart-header-empty"></th>
+                        <th class="in-cart-header-product">Product</th>
+                        <th class="in-cart-header-price">Price</th>
+                        <th class="in-cart-header-quantity">Quantity</th>
+                        <th class="in-cart-header-subtotal">Subtotal</th>
+                    </tr>
+                    <!-- Tabel body container (here goes the list of data) -->
+                    <tbody>
+                        {% for item in cart %}
+                            <tr>
+                                <!-- Remove product from cart Icon -->
+                                <td class="in-cart-remove-icon">
+                                    <button id="close-button" aria-label="dismiss alert" type="button" value={{item.0.productid}}>
+                                        <span class="close-icon" aria-hidden="true">&times;</span>
+                                    </button>
+                                </td>
+                                <!-- Product image  -->
+                                <td class="in-cart-img">
+                                    <img src="{% static item.0.productimage.iurl %}"> 
+                                </td>
+                                <!-- product name -->
+                                <td class="in-cart-product-name"><p>{{item.0.productname}}</p></td>
+                                <!-- product unit price -->
+                                <td class="in-cart-unit-price"><p>$ {{item.0.productunitprice}}</p></td>
+                                <!-- product quantity in cart -->
+                                <td class="in-cart-product-qtt"><input id="quantity-item-name" type="hidden" value={{item.0.productid}}><input class="in-cart-qtty" type="number" value={{item.0.productquantity}} min="0"></td>
+                                <!-- Product subtotal (unit price * quantity) -->
+                                <td class="in-cart-units-subtotal"><p>$ {{item.1}}</p></td>
+                            </tr>
+                        {% endfor %}
+
+                    </tbody>
+                    <!-- Cart action button for coupon and cart update -->
+                    <tfoot>
                         <tr>
-                            <!-- Remove product from cart Icon -->
-                            <td class="in-cart-remove-icon">
-                                <div> &#x26D2; </div>
+                            <!-- merging all 6 cells into one in the footer  -->
+                            <td colspan="6">
+                                <!-- Buttons and input divs container -->
+                                <div class="in-cart-footer-container">
+                                    <!-- Input text for coupon -->
+                                    <div class="in-cart-coupon-input"><input type="text" placeholder="Coupon code"></div> 
+                                    <!-- Apply coupon button -->
+                                    <div class="in-cart-apply-coupon-button"><button>Apply coupon</button></div>
+                                    <!-- apply cart changes from table button -->
+                                    <div class="in-cart-update-cart-button" id="update-cart-button"><button>Update Cart</button></div>
+                                </div>
                             </td>
-                            <!-- Product image  -->
-                            <td class="in-cart-img">
-                                <img src="{% static item.0.productimage.iurl %}"> 
-                            </td>
-                            <!-- product name -->
-                            <td class="in-cart-product-name"><p>{{item.0.productname}}</p></td>
-                            <!-- product unit price -->
-                            <td class="in-cart-unit-price"><p>$ {{item.0.productunitprice}}</p></td>
-                            <!-- product quantity in cart -->
-                            <td class="in-cart-product-qtt"><input id="quantity-item-name" type="hidden" value={{item.0.productid}}><input class="in-cart-qtty" type="number" value={{item.0.productquantity}} min="0"></td>
-                            <!-- Product subtotal (unit price * quantity) -->
-                            <td class="in-cart-units-subtotal"><p>$ {{item.1}}</p></td>
                         </tr>
-                    {% endfor %}
-
-                </tbody>
-                <!-- Cart action button for coupon and cart update -->
-                <tfoot>
-                    <tr>
-                        <!-- merging all 6 cells into one in the footer  -->
-                        <td colspan="6">
-                            <!-- Buttons and input divs container -->
-                            <div class="in-cart-footer-container">
-                                <!-- Input text for coupon -->
-                                <div class="in-cart-coupon-input"><input type="text" placeholder="Coupon code"></div> 
-                                <!-- Apply coupon button -->
-                                <div class="in-cart-apply-coupon-button"><button>Apply coupon</button></div>
-                                <!-- apply cart changes from table button -->
-                                <div class="in-cart-update-cart-button" id="update-cart-button"><button>Update Cart</button></div>
-                            </div>
-                        </td>
-                    </tr>
-                </tfoot>
-            </thead>  
-        </table>
-    </div>
-
-    <!-- Check cart section container -->
-    <div class="cart-total-container">
-        <div>
-            <!-- check out table title -->
-            <h3 class="cart-total-title"> Cart totals</h3>
-                <table>
-                    <tr>
-                        <th>Subtotal</th>
-                        <td> $ {{total}} </td>
-                    </tr>
-                    <tr>
-                        <th>Shipping </th>
-                        <td> $ 2.00 <p> some kind of message </p></td>
-                    </tr>
-                    <tr>
-                        <th>Total</th>
-                        <td>$ {{total}} </td>
-                    </tr>
-                </table>
-                <!-- proceed checkout button -->
-                <input type="submit" onclick="location.href='/checkout'" class="cart-proceed-checkout-button" value = "Proceed to checkout &#8594">
-             
-                <!-- <button class="cart-proceed-checkout-button">
-                    Proceed to checkout &#8594;
-                </button>   -->
+                    </tfoot>
+                </thead>  
+            </table>
         </div>
-    </div>
+
+        <!-- Check cart section container -->
+        <div class="cart-total-container">
+            <div>
+                <!-- check out table title -->
+                <h3 class="cart-total-title"> Cart totals</h3>
+                    <table>
+                        <tr>
+                            <th>Subtotal</th>
+                            <td> $ {{total}} </td>
+                        </tr>
+                        <tr>
+                            <th>Shipping </th>
+                            <td> $ 2.00 <p> some kind of message </p></td>
+                        </tr>
+                        <tr>
+                            <th>Total</th>
+                            <td>$ {{total}} </td>
+                        </tr>
+                    </table>
+                    <!-- proceed checkout button -->
+                    <input type="submit" onclick="location.href='/checkout'" class="cart-proceed-checkout-button" value = "Proceed to checkout &#8594">
+                
+                    <!-- <button class="cart-proceed-checkout-button">
+                        Proceed to checkout &#8594;
+                    </button>   -->
+            </div>
+        </div>
+    {% else %}
+        <div class="empty-cart">
+            <h1>Your Cart is empty</h1>
+            <p>Please visit the shop page to add items to your cart</p>
+        </div>
+    {% endif %}
 </div>
 {% endblock %}

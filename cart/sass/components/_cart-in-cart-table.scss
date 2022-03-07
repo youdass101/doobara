@@ -44,8 +44,19 @@
                     padding-right: 80px;
                     padding-left: 20px;
 
-                    div {
-                    max-width: 18px !important;       
+                    #close-button {
+                        background-color: transparent;
+                        border: 0;
+                        cursor: pointer;
+                    }
+
+                    .close-icon {
+                    font-size: x-large;   
+                    color: grey;  
+                    }
+
+                    .close-icon:hover {
+                        color: var.$back-color;
                     }
                 }
 
@@ -170,8 +181,13 @@
 
             // TD class of remove icon in tabel body 
             .in-cart-remove-icon {
-                float: right;
-                padding-right: 20px !important;
+                max-width: 100% !important;
+                padding-right: 0px !important;
+                padding-left: 0px !important;
+
+                #close-button {
+                    float: right;
+                }
             }
 
             // Table footer where the action button exist

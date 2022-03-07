@@ -192,8 +192,6 @@ document.addEventListener('DOMContentLoaded', function(){
         document.querySelectorAll('.sp-thumb-image').forEach (image => {
             image.onclick = () => {
                 document.getElementById("spi").src = image.src
-         
-
             }
         }) 
 
@@ -237,7 +235,7 @@ document.addEventListener('DOMContentLoaded', function(){
         })
     }
 
-    // UPDATE CART
+    // UPDATE CART 
     if (document.getElementById('update-cart-button')){
         updates = []
         document.getElementById('update-cart-button').onclick = () => {
@@ -245,25 +243,30 @@ document.addEventListener('DOMContentLoaded', function(){
                 pname = element.parentElement
                 updates.push({"quantity" : element.value, "pid":pname.querySelector("#quantity-item-name").value})
             })
-            fetch('/updatecart', {
-                method: 'POST',
-                body: JSON.stringify({
-                    cart : updates
-                }),
-                headers:{
-                    'X-CSRFToken': getCookie('csrftoken')
-                }
-            })
-            .then(() => {
-                window.location.reload()})
-            .then (response => {
-                console.log(response)
-                return response.json()
-            })
-            .then (result => console.log(result))
-            .catch(err => console.log("rejected", err))
-           
+            cartupdate(updates)
         }
+    }
+
+    if (document.getElementById('close-button')){
+        butt = document.getElementById('close-button') 
+        butt.onclick = () => {
+            update = {"pid": butt.value, "del": true}
+            cartupdate(update)
+        }
+    }
+
+    function cartupdate (data) {
+        fetch('/updatecart', {
+            method: 'POST',
+            body: JSON.stringify({
+                cart : data
+            }),
+            headers:{
+                'X-CSRFToken': getCookie('csrftoken')
+            }
+        })
+        .then(() => {
+            window.location.reload()}) 
     }
 
     // CSRF token function  
