@@ -246,7 +246,7 @@ document.addEventListener('DOMContentLoaded', function(){
             cartupdate(updates)
         }
     }
-
+    // DELET A PRODUCT FROM CART
     if (document.getElementById('close-button')){
         butt = document.getElementById('close-button') 
         butt.onclick = () => {

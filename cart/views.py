@@ -49,6 +49,20 @@ def updatecart(request):
     cartupdate = json.loads(request.body)
     if request.user.is_authenticated:
         user_cart = request.user.mycart
+        try: 
+            cartupdate['cart']['del']
+            product= Product.objects.get(id=cartupdate['cart']['pid'])
+            Cart_Item.objects.get(product= product, cart=user_cart).delete()
+        except:
+            for product in cartupdate['cart']:
+                po = Product.objects.get(id = int(product['pid']))
+                cit = Cart_Item.objects.get(product= po, cart=user_cart)
+                if (int(product['quantity']) == 0):
+                    cit.delete()
+                else:
+                    cit.quantity = int(product['quantity'])
+                    cit.save()
+
     else:
         cart = request.session['cart']
         try:

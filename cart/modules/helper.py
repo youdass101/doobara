@@ -21,7 +21,7 @@ def user_add_to_cart (request, item, product):
             Cart_Item.objects.create(product=product, quantity=item['quantity'], cart=user.mycart)
     except:
         # If user cart object doesn't exist create new one
-        cart = Cart.objects.create(user=user)
+        Cart.objects.create(user=user)
         Cart_Item.objects.create(product=product, quantity=item['quantity'], cart=user.mycart)
 
 # dict * dict -> dict
