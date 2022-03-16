@@ -1,4 +1,6 @@
+from email.policy import default
 from pyexpat import model
+import defusedxml
 from django.db import models
 from datetime import datetime, timedelta
 from django.conf import settings
@@ -100,6 +102,14 @@ class Product(models.Model):
     # variantes are a list of objects
     # if product have a variant they will be listed
     variant_list = models.ForeignKey(VariantHolder, null=True, blank=True, default=None, related_name="products", on_delete=models.SET_NULL)
+    
+    # Variant_name is the string 
+    # if variant true, name is the variant keyword of the product
+    variant_name = models.CharField(max_length=255, blank=True, null=True, default=None)
+
+    # Variant_default is a boolean 
+    # if product is variant and is the default variant in list result is true 
+    variant_default = models.BooleanField(default=False)
 
 
     # Delete -> boolean
