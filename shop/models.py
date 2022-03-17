@@ -78,7 +78,7 @@ class Product(models.Model):
     video = models.URLField(blank=True)
     # album is model-object
     # one to one filed with album images tabel object 
-    album = models.OneToOneField(ImageAlbum, related_name='model', on_delete=models.SET_NULL, null=True, blank=True) 
+    album = models.ForeignKey(ImageAlbum, related_name='model', on_delete=models.SET_NULL, null=True, blank=True) 
     # stock is boolean
     # boolean true if product in stock, false if out of stock 
     stock = models.BooleanField(default=False)
@@ -149,7 +149,7 @@ class Product(models.Model):
             return loi
 
         if self.variant_list:
-            lov = [var.serialize() for var in self.variant_list.variants.all()]
+            lov = [var.serialize("single") for var in self.variant_list.products.all()]
         else:
             lov = None
 
@@ -175,7 +175,8 @@ class Product(models.Model):
                 "pcategory": [cat.serialize() for cat in self.category.all()],
                 "pmainimage": image,
                 "pallimages": allimages(),
-                "pvariant" : lov
+                "pvariant" : lov,
+                "pvname" : self.variant_name
             }
 
 # Delete product foreing connected objects
