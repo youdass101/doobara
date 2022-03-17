@@ -149,7 +149,8 @@ class Product(models.Model):
             return loi
 
         if self.variant_list:
-            lov = [var.serialize("single") for var in self.variant_list.products.all()]
+            lov = [{"title" : var.variant_name, "price":int(var.price), "id": var.id} for var in self.variant_list.products.all()]
+           
         else:
             lov = None
 

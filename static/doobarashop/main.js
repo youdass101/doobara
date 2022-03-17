@@ -182,8 +182,19 @@ document.addEventListener('DOMContentLoaded', function(){
     if (document.getElementById("variants")) {
         obj = document.getElementById("variants")
         obj.onchange = function() {
-            val = obj.options[obj.selectedIndex].value
-            document.getElementById("spp").innerHTML = val
+            // is a string
+            // product data dict as string replaing the ' with " to parse it
+            val1 = obj.options[obj.selectedIndex].value.replaceAll('\'', '"');
+            // is a dict
+            // conver the string type to dict data type  
+            val = JSON.parse(val1);
+            // is int
+            // set the product id to add to cart button hidden value
+            document.getElementById("spatc").value = val.id
+            //is decimale
+            // change the product price element data
+            document.getElementById("spp").innerHTML = val.price.toFixed(2);
+            
         }
     }
 

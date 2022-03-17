@@ -38,9 +38,14 @@ Product Name
                 <select name="variant" id="variants">
                     {% for var in product.pvariant %}
                         {% if var.default %}
-                            <option selected="selected" class="svoption" value="$ {{var.price}}">{{var.title}}</option>
+                            <option selected="selected" class="svoption" value="{{var}}">{{var.title}}
+                            </option>
+                            
                         {% else %}
-                            <option class="svoption" value="$ {{var.price}}">{{var.title}}</option>
+                            <option class="svoption" value="{{var}}">{{var.title}}
+                            </option>
+                            
+
                         {% endif %}
                         
                     {% endfor %}
@@ -53,7 +58,7 @@ Product Name
         <input id="spq" class="single-product-quantity" type="number" value="1" min="0">
 
         <!-- ADD TO CART BUTTON -->
-        <button class="single-product-addtocart shop-add-to-cart" value="{{product.pid}}">Add to cart</button>
+        <button id="spatc" class="single-product-addtocart shop-add-to-cart" value="{{product.pid}}">Add to cart</button>
 
         <!-- PRODUCT SHORT SPESIFICATION (MAINLY LIST) -->
         <div class="single-product-specs">
