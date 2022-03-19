@@ -15,14 +15,22 @@ class Cart (models.Model):
 # Cart_items is "SQL" django model
 # is an object linked to product object, with qtt int
 class Cart_Item (models.Model):
+    # is object
+    # objects list of connected Products
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    # is int
+    # product quatity
     quantity = models.IntegerField()
+    # is object
+    # cart connected to the cart item
     cart = models.ForeignKey(Cart, related_name="items", blank=True, null=True, default=None, on_delete=models.CASCADE)
 
 
     def __str__(self):
         return f"{self.product.name, self.quantity, self.cart} "
 
+    # object -> dict
+    # convert object specified keys to a dict key/value
     def serialize(self):
         return{
             "productid" : self.product.id,

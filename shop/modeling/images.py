@@ -1,3 +1,4 @@
+from email.policy import default
 from django.db import models
 
 # ImageAlbum is sql django model
@@ -15,7 +16,7 @@ class ImageAlbum(models.Model):
     # list of images -> list of images
     # returns the image that fit the width and lenght 
     def thumbnails(self):
-        return self.images.filter(width=100, length=100)
+        return self.images.filter()
 
     # data to show on admin page 
     def __str__(self):
@@ -40,12 +41,13 @@ class Image(models.Model):
     # if true the image is the main image for the product 
     default = models.BooleanField(default=False)
     # long is boolean 
-    # if true it is for the product singal page long image 
+    # if true it is for the product singal page long image which is a dimension type 
     long = models.BooleanField(default=False)
     # album is model-object 
     # pointer to a specific album object id 
     album = models.ForeignKey(ImageAlbum, related_name='images', on_delete=models.CASCADE)
 
+    # WILL BE REMOVED Not sure If Will be used yet
     width = models.FloatField(default=100)
     length = models.FloatField(default=100)
 
@@ -55,8 +57,8 @@ class Image(models.Model):
 
     # string(url) -> string(url)
     # interp custumize usrl contant 
-    def img_path_customize(self, ipath):
-        return "/".join(ipath.strip("/").split('/')[1:])
+    def img_path_customize(self):
+        return "/".join(self.image.url.strip("/").split('/')[1:])
 
     # image object -> dictionary 
     # take django sql image object and convert data to dictionary 
@@ -67,5 +69,5 @@ class Image(models.Model):
             "idescription": self.description,
             "idefault": self.default,
             "ilong": self.long,
-            "iurl": self.img_path_customize(self.image.url)
+            "iurl": self.img_path_customize()
         }
