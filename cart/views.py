@@ -33,17 +33,21 @@ def checkout(request):
 
 def shopaddtocart(request):
     if request.method == "PUT":
-        # load product model object
+        # load html input of product id
         cpid = json.loads(request.body)
+        # load product object
         product = Product.objects.get(id=int(cpid['pid']))
+        # if user is logged in
         if request.user.is_authenticated:
+            # add product quantity to cart
             user_add_to_cart(request, cpid, product)
-            cart = cartcontext(request) 
-            return JsonResponse({"result":"done", "cart":cart}, status=201)
+        # if user isn't logged in use session data 
         else:
+            # add to session cart product qtt
             session_add_to_cart(request, cpid, product)
-            cart = cartcontext(request) 
-            return JsonResponse({"result":"done", "cart": cart}, status=201)
+        # updated cart context after adding new data 
+        cart = cartcontext(request) 
+        return JsonResponse({"result":"done", "cart": cart}, status=201)
 
 def updatecart(request):
     cartupdate = json.loads(request.body)
@@ -68,9 +72,6 @@ def updatecart(request):
         try:
             del cart[cartupdate['cart']['pid']]  
         except:
-            # request.session.set_expiry(10000)
-            # print("ALERT", request.session.get_expiry_date())
-
             for product in cartupdate['cart']:  
                 if (int(product['quantity']) == 0 ):
                     del cart[product['pid']]
