@@ -28,21 +28,20 @@ def user_add_to_cart (request, item, product):
 # if session doesn't exist create new one 
 # save or adjust cart data in session dict with given item
 def session_add_to_cart (request, item, product):
-    # if session deosn't exist create new
-   
-    # if not request.session:
-    #     session['cart'] = {}
-    #     request.session.save()
-        
+
+    # is int
+    # extract int price from given object product  
     price = product.price
+    # is hex
+    # extract int session dict from request class 
     session = request.session
+
+    # add and edit data in session dict
     try:
         qtt = session['cart'][item['pid']]['quantity']
         session['cart'][item['pid']]['quantity'] = str(int(qtt) + (int(item['quantity'])))
-    except:
-        try:
-            session['cart'][item['pid']] = {'quantity' : str(item["quantity"]), 'price' : str(price)}
-        except:
-            session['cart'][item['pid']] = {'quantity' : str(item["quantity"]), 'price' : str(price)}
+    except: 
+        session['cart'][item['pid']] = {'quantity' : str(item["quantity"]), 'price' : str(price)}
+    
     request.session.save()
 
