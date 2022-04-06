@@ -6,23 +6,42 @@ from ..models import *
 # if item exist in cart adjust value else create item object  
 def user_add_to_cart (request, item, product):
     
+    # is object
     # load current loggedin user object model 
     user = request.user
+
+    # is int
+    # quantity keyvalue in given item dict
+    iqtt = int(item['quantity'])
+
+    # object * string * object -> boolean
+    # create object using the fgiven data
+    def create_ci (product, qtt, cart):
+        Cart_Item.objects.create(product=product, quantity=qtt, cart=cart)
+
     try:
         # if use have object cart
-        user.mycart
+        mycart = user.mycart
+        # manupilating object data to update to the new given data
+        # If product item object already exist adjust
         try:
-            # If product item object already exist adjust
-            citem = Cart_Item.objects.get(product=product, cart=user.mycart)
-            citem.quantity += int(item['quantity'])
+            # is object 
+            # single object from cart item model 
+            citem = Cart_Item.objects.get(product=product, cart=mycart)
+            # is int 
+            # updating incrementing sub value by given int item 
+            citem.quantity += iqtt
             citem.save()
+        # if previous failed excute this supose element does'nt exist
         except:
             # if product item doesn't exist create new
-            Cart_Item.objects.create(product=product, quantity=item['quantity'], cart=user.mycart)
+            create_ci(product, iqtt, mycart)
     except:
         # If user cart object doesn't exist create new one
         Cart.objects.create(user=user)
-        Cart_Item.objects.create(product=product, quantity=item['quantity'], cart=user.mycart)
+        create_ci(product, iqtt, user.mycart)
+
+    return True
 
 # dict * dict -> dict
 # if session doesn't exist create new one 
@@ -35,13 +54,16 @@ def session_add_to_cart (request, item, product):
     # is hex
     # extract int session dict from request class 
     session = request.session
+    # is int
+    # quantity keyvalue in given item dict
+    iqtt = int(item['quantity'])
 
     # add and edit data in session dict
     try:
-        qtt = session['cart'][item['pid']]['quantity']
-        session['cart'][item['pid']]['quantity'] = str(int(qtt) + (int(item['quantity'])))
-    except: 
-        session['cart'][item['pid']] = {'quantity' : str(item["quantity"]), 'price' : str(price)}
+        qtt = int(session['cart'][item['pid']]['quantity'])
+        session['cart'][item['pid']]['quantity'] = str(qtt + iqtt)
+    except:
+        session['cart'][item['pid']] = {'quantity' : str(iqtt), 'price' : str(price)}
     
     request.session.save()
 
