@@ -11,20 +11,18 @@ from .modules.helper import *
 
 def cart(request):
     if request.user.is_authenticated:
+        # is dict
+        # Get my cart model taht is connected to current use model 
         cart = request.user.mycart.items.all()
+        # is list
+        # json serialize list of dict objects
         scart = [(item.serialize(),(item.quantity * item.product.price)) for item in cart]
-    else:
-        scart = []
+    else: 
+        # is dict
+        # session cart dict  
         cart = request.session['cart']
-        for i in cart:
-            product = Product.objects.get(id=i)
-            scart.append(({"productname" : product.name,
-                    "productid" : product.id,
-                    "productunitprice" : cart[i]['price'],
-                    "productquantity": cart[i]['quantity'],
-                    "productimage": product.album.default().serialize()}, 
-                    (int(cart[i]['quantity']) * float(cart[i]['price']))
-                    ))
+        # is list of dict for each product in session cart dict
+        scart = session_cart(cart)
     return render(request, "cart/cart.html", {"cart": scart})
 
 def checkout(request):
@@ -35,7 +33,7 @@ def shopaddtocart(request):
     if request.method == "PUT":
         # load html input of product id
         cpid = json.loads(request.body)
-        # load product object
+        # load product object from Product model
         product = Product.objects.get(id=int(cpid['pid']))
         # if user is logged in
         if request.user.is_authenticated:

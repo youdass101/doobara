@@ -1,3 +1,4 @@
+from os import scandir
 from ..models import *
 
 # dict * dict -> boolean (event)
@@ -67,3 +68,19 @@ def session_add_to_cart (request, item, product):
     
     request.session.save()
 
+# dict -> list of dict
+# take the session cart dict and return a list of dict for prodduct 
+def session_cart(cart):
+    # is list 
+    # empty session cart to be filled 
+    scart = []
+    for i in cart:
+            product = Product.objects.get(id=i)
+            scart.append(({"productname" : product.name,
+                    "productid" : product.id,
+                    "productunitprice" : cart[i]['price'],
+                    "productquantity": cart[i]['quantity'],
+                    "productimage": product.album.default().serialize()}, 
+                    (int(cart[i]['quantity']) * float(cart[i]['price']))
+                    ))
+    return scart
