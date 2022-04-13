@@ -47,33 +47,56 @@ def shopaddtocart(request):
         cart = cartcontext(request) 
         return JsonResponse({"result":"done", "cart": cart}, status=201)
 
+# dict (request) -> json dict
 def updatecart(request):
+    # is dict
+    # json dict collect from js
     cartupdate = json.loads(request.body)
+    # check is user is authenticated 
     if request.user.is_authenticated:
+        # is dict of objects
         user_cart = request.user.mycart
+        # if delete value is true when x button is pressed in cart
         try: 
+            # check value if true
             cartupdate['cart']['del']
+            # is model object instance (class)
             product= Product.objects.get(id=cartupdate['cart']['pid'])
+            # delete object
             Cart_Item.objects.get(product= product, cart=user_cart).delete()
         except:
+            # loop over products in cart html
             for product in cartupdate['cart']:
+                # is model instance 
+                # single product object 
                 po = Product.objects.get(id = int(product['pid']))
+                # is model instance
+                # Cart item in cart items related to use user 
                 cit = Cart_Item.objects.get(product= po, cart=user_cart)
+                # if new giver quatity is 0 delete product from cart item
                 if (int(product['quantity']) == 0):
                     cit.delete()
                 else:
+                    # if new given qunatity is more than 0, adjust it
                     cit.quantity = int(product['quantity'])
                     cit.save()
 
     else:
+        # is dict
+        # the current session cart in request class 
         cart = request.session['cart']
         try:
+            # delete the prouct from cart id the update given is for single product not list
             del cart[cartupdate['cart']['pid']]  
         except:
+            # loop over list of product dict in cart html session
             for product in cartupdate['cart']:  
+                # if new product quantity is 0 delete product from session cart
                 if (int(product['quantity']) == 0 ):
                     del cart[product['pid']]
                 else:
+                    # if new given quantity is more than 0 change the current session 
+                    # quantity to the given quantity
                     cart[product['pid']]['quantity'] = product['quantity']
         request.session.save()
     
