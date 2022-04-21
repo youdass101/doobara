@@ -1,4 +1,5 @@
 from os import scandir
+from pickle import TRUE
 from ..models import *
 
 # dict * dict -> boolean (event)
@@ -84,3 +85,14 @@ def session_cart(cart):
                     (int(cart[i]['quantity']) * float(cart[i]['price']))
                     ))
     return scart
+
+
+# dict -> boolean
+# delete object using product given id 
+# Helper function to delete object in a pattern 
+def del_object(item, ucart):
+    # is model object instance exist
+    product= Product.objects.get(id=item)
+    # delete object
+    Cart_Item.objects.get(product= product, cart=ucart).delete()
+

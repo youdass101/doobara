@@ -8,8 +8,10 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
 from .modules.helper import *
 
-
+# Request(model) -> render
+# return the user or session cart data list 
 def cart(request):
+    # if user is logged in
     if request.user.is_authenticated:
         # is dict
         # Get my cart model taht is connected to current use model 
@@ -17,6 +19,7 @@ def cart(request):
         # is list
         # json serialize list of dict objects
         scart = [(item.serialize(),(item.quantity * item.product.price)) for item in cart]
+    # if user is not login use the session dict data 
     else: 
         # is dict
         # session cart dict  
@@ -58,12 +61,8 @@ def updatecart(request):
         user_cart = request.user.mycart
         # if delete value is true when x button is pressed in cart
         try: 
-            # check value if true
-            cartupdate['cart']['del']
-            # is model object instance (class)
-            product= Product.objects.get(id=cartupdate['cart']['pid'])
-            # delete object
-            Cart_Item.objects.get(product= product, cart=user_cart).delete()
+            del_object(cartupdate['cart']['pid'], user_cart)
+           
         except:
             # loop over products in cart html
             for product in cartupdate['cart']:
@@ -107,8 +106,12 @@ def updatecart(request):
 # DATA UPDATES COLLECTER return the user attached cart items qtty and total price 
 def cartcontext(request):
     items, total = 0, 0
+    user = request.user
     if request.user.is_authenticated:
-        cart = request.user.mycart.items.all()
+        try:
+            cart = user.mycart.items.all()
+        except:
+            cart = [Cart.objects.create(user=user)]
         for i in cart:
             items += i.quantity
             total += (i.quantity * i.product.price)
