@@ -1,5 +1,5 @@
-from os import scandir
-from pickle import TRUE
+# from os import scandir
+# from pickle import TRUE
 from ..models import *
 
 # dict * dict -> boolean (event)
@@ -96,3 +96,109 @@ def del_object(item, ucart):
     # delete object
     Cart_Item.objects.get(product= product, cart=ucart).delete()
 
+
+def update_cart(request, cartupdate):
+    if request.user.is_authenticated:
+        # is dict of objects
+        user_cart = request.user.mycart
+        # if delete value is true when x button is pressed in cart
+        try: 
+            del_object(cartupdate['cart']['pid'], user_cart)
+           
+        except:
+            # loop over products in cart html
+            for product in cartupdate['cart']:
+                # is model instance 
+                # single product object 
+                po = Product.objects.get(id = int(product['pid']))
+                # is model instance
+                # Cart item in cart items related to use user 
+                cit = Cart_Item.objects.get(product= po, cart=user_cart)
+                # if new giver quatity is 0 delete product from cart item
+                if (int(product['quantity']) == 0):
+                    cit.delete()
+                else:
+                    # if new given qunatity is more than 0, adjust it
+                    cit.quantity = int(product['quantity'])
+                    cit.save()
+
+    else:
+        # is dict
+        # the current session cart in request class 
+        cart = request.session['cart']
+        try:
+            # delete the prouct from cart id the update given is for single product not list
+            del cart[cartupdate['cart']['pid']]  
+        except:
+            # loop over list of product dict in cart html session
+            for product in cartupdate['cart']:  
+                # if new product quantity is 0 delete product from session cart
+                if (int(product['quantity']) == 0 ):
+                    del cart[product['pid']]
+                else:
+                    # if new given quantity is more than 0 change the current session 
+                    # quantity to the given quantity
+                    cart[product['pid']]['quantity'] = product['quantity']
+        request.session.save()
+
+def cart_context_process(request):
+    # is int 
+    # the all page cart update data for top and other use
+    items, total = 0, 0
+    # int * int -> true
+    # calculate the cart qtt and total price
+    def calc_cart (qtt, price):
+        nonlocal items, total
+        items += qtt
+        total += (float(qtt)*float(price))
+    # if user is logged in
+    if request.user.is_authenticated:
+        user = request.user
+        try:
+            # is listofproduct
+            cart = user.mycart.items.all()
+            for i in cart:
+                # update items qtt and total price of user cart
+                calc_cart(i.quantity, i.product.price)   
+        except:
+            # is dict
+            cart = [Cart.objects.create(user=user)]  
+    # if user is not logged in
+    else:      
+        try:
+            cart = request.session['cart']
+            for i in cart:
+                # update items qtt and total pruce of session cart
+                calc_cart(int(cart[i]['quantity']), cart[i]['price'])
+        except:
+            # is dict
+            # create a new cart session 
+            request.session['cart'] = {}
+            request.session.save()
+    return items, total
+
+# def ccs(request):
+#     try:
+#         dcart = request.session['cartclass']
+#     except:
+#         request.session['cartclass'] = CartManager(request)
+#         dcart = request.session['cartclass']
+#     return dcart
+
+class CartManager:
+    def __init__(self, request):
+        self.request = request
+        try:
+            self.user = self.request.user
+            try:
+                self.cart = self.user.mycart.items.all()
+            except:
+                self.cart = [Cart.objects.create(user=self.user)]
+        except:
+            self.user = self.request.session
+            try:
+                self.cart = self.user['cart']
+            except:
+                self.user['cart'] = {}
+                self.user.save()
+                self.cart = self.user['cart']

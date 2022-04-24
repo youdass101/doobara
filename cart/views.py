@@ -1,16 +1,22 @@
-from operator import ipow
+# from operator import ipow
+# import re
 from django.shortcuts import redirect, render
+from requests import request
 from .models import *
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
-from django.urls import reverse
+# from django.urls import reverse
 import json
-from django.views.decorators.csrf import csrf_exempt
-from django.contrib.auth.models import User
+# from django.views.decorators.csrf import csrf_exempt
+# from django.contrib.auth.models import User
 from .modules.helper import *
+
+dcart = CartManager(request)
 
 # Request(model) -> render
 # return the user or session cart data list 
 def cart(request):
+    # print("this is",dcart)
+    # print(dcart.cart)
     # if user is logged in
     if request.user.is_authenticated:
         # is dict
@@ -27,9 +33,6 @@ def cart(request):
         # is list of dict for each product in session cart dict
         scart = session_cart(cart)
     return render(request, "cart/cart.html", {"cart": scart})
-
-def checkout(request):
-    return render(request, "cart/checkout.html")
 
 
 def shopaddtocart(request):
@@ -56,73 +59,17 @@ def updatecart(request):
     # json dict collect from js
     cartupdate = json.loads(request.body)
     # check is user is authenticated 
-    if request.user.is_authenticated:
-        # is dict of objects
-        user_cart = request.user.mycart
-        # if delete value is true when x button is pressed in cart
-        try: 
-            del_object(cartupdate['cart']['pid'], user_cart)
-           
-        except:
-            # loop over products in cart html
-            for product in cartupdate['cart']:
-                # is model instance 
-                # single product object 
-                po = Product.objects.get(id = int(product['pid']))
-                # is model instance
-                # Cart item in cart items related to use user 
-                cit = Cart_Item.objects.get(product= po, cart=user_cart)
-                # if new giver quatity is 0 delete product from cart item
-                if (int(product['quantity']) == 0):
-                    cit.delete()
-                else:
-                    # if new given qunatity is more than 0, adjust it
-                    cit.quantity = int(product['quantity'])
-                    cit.save()
-
-    else:
-        # is dict
-        # the current session cart in request class 
-        cart = request.session['cart']
-        try:
-            # delete the prouct from cart id the update given is for single product not list
-            del cart[cartupdate['cart']['pid']]  
-        except:
-            # loop over list of product dict in cart html session
-            for product in cartupdate['cart']:  
-                # if new product quantity is 0 delete product from session cart
-                if (int(product['quantity']) == 0 ):
-                    del cart[product['pid']]
-                else:
-                    # if new given quantity is more than 0 change the current session 
-                    # quantity to the given quantity
-                    cart[product['pid']]['quantity'] = product['quantity']
-        request.session.save()
+    update_cart(request, cartupdate)
     
     return JsonResponse({"result":"done"}, status=201)
 
+def checkout(request):
+    return render(request, "cart/checkout.html")
 
 # request -> dict
 # DATA UPDATES COLLECTER return the user attached cart items qtty and total price 
 def cartcontext(request):
-    items, total = 0, 0
-    user = request.user
-    if request.user.is_authenticated:
-        try:
-            cart = user.mycart.items.all()
-        except:
-            cart = [Cart.objects.create(user=user)]
-        for i in cart:
-            items += i.quantity
-            total += (i.quantity * i.product.price)
-    else:      
-        try:
-            cart = request.session['cart']
-            for i in cart:
-                items += int(cart[i]['quantity'])
-                total += (float(cart[i]['quantity']) * float(cart[i]['price']))
-        except:
-            request.session['cart'] = {}
-            request.session.save()
-
+    # dict -> int * int
+    # cart data process to get total items quatity and total price
+    items, total = cart_context_process(request)
     return {'item': items, 'total': "{:.2f}".format(total)}
