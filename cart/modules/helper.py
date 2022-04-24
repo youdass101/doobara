@@ -185,20 +185,60 @@ def cart_context_process(request):
 #         dcart = request.session['cartclass']
 #     return dcart
 
+# Object 
+# Manage all cart request add, update, view and delete
 class CartManager:
+    # object * dict -> *
+    # object initial and default variables
     def __init__(self, request):
+        # is dict
+        # django request dict
         self.request = request
+        # if user logged in
         try:
+            # is model object (class local)
+            # logged in user object
             self.user = self.request.user
+            # check if user have my cart linked
             try:
+                # is model object (class local)
+                # logged in user in cart items
                 self.cart = self.user.mycart.items.all()
+            # create new cart and linke it 
             except:
+                # is model object (class local)
+                # empty cart linked created 
                 self.cart = [Cart.objects.create(user=self.user)]
+        # use the session insted of user
         except:
+            # is dict (class local)
+            # user session dict
             self.user = self.request.session
+            # if cart key exist
             try:
+                # is dict
                 self.cart = self.user['cart']
+            # create a new cart key
             except:
+                # empty cart 
                 self.user['cart'] = {}
+                # sace to session
                 self.user.save()
+                # is dict
                 self.cart = self.user['cart']
+    
+    def cart_page(self):
+        try:
+            ccart = [(item.serialize(),(item.quantity * item.product.price)) for item in self.cart]
+        except:
+            ccart = []
+            for i in self.cart:
+                    product = Product.objects.get(id=i)
+                    ccart.append(({"productname" : product.name,
+                            "productid" : product.id,
+                            "productunitprice" : self.cart[i]['price'],
+                            "productquantity": self.cart[i]['quantity'],
+                            "productimage": product.album.default().serialize()}, 
+                            (int(self.cart[i]['quantity']) * float(self.cart[i]['price']))
+                            ))
+        return ccart
