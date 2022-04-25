@@ -71,20 +71,20 @@ def session_add_to_cart (request, item, product):
 
 # dict -> list of dict
 # take the session cart dict and return a list of dict for prodduct 
-def session_cart(cart):
-    # is list 
-    # empty session cart to be filled 
-    scart = []
-    for i in cart:
-            product = Product.objects.get(id=i)
-            scart.append(({"productname" : product.name,
-                    "productid" : product.id,
-                    "productunitprice" : cart[i]['price'],
-                    "productquantity": cart[i]['quantity'],
-                    "productimage": product.album.default().serialize()}, 
-                    (int(cart[i]['quantity']) * float(cart[i]['price']))
-                    ))
-    return scart
+# def session_cart(cart):
+#     # is list 
+#     # empty session cart to be filled 
+#     scart = []
+#     for i in cart:
+#             product = Product.objects.get(id=i)
+#             scart.append(({"productname" : product.name,
+#                     "productid" : product.id,
+#                     "productunitprice" : cart[i]['price'],
+#                     "productquantity": cart[i]['quantity'],
+#                     "productimage": product.album.default().serialize()}, 
+#                     (int(cart[i]['quantity']) * float(cart[i]['price']))
+#                     ))
+#     return scart
 
 
 # dict -> boolean
@@ -185,6 +185,45 @@ def cart_context_process(request):
 #         dcart = request.session['cartclass']
 #     return dcart
 
+# dict -> object * object
+# helper that take request and return user or session data (user object or session dict
+# and user cart or session cart) depend if user logged in
+def userorsession(request):
+    # if user logged in
+    if request.user.is_authenticated:
+        # is model object (class local)
+        # logged in user object
+        user = request.user
+        # check if user have my cart linked
+        try:
+            # is model object (class local)
+            # logged in user in cart items
+            cart = user.mycart.items.all()
+        # create new cart and linke it 
+        except:
+            # is model object (class local)
+            # empty cart linked created 
+            cart = [Cart.objects.create(user=user)]
+    # use the session insted of user
+    else:
+        # is dict (class local)
+        # user session dict
+        user = request.session
+        # if cart key exist
+        try:
+            # is dict
+            cart = user['cart']
+        # create a new cart key
+        except:
+            # empty cart 
+            user['cart'] = {}
+            # sace to session
+            user.save()
+            # is dict
+            cart = user['cart']
+    
+    return user, cart
+
 # Object 
 # Manage all cart request add, update, view and delete
 class CartManager:
@@ -194,46 +233,34 @@ class CartManager:
         # is dict
         # django request dict
         self.request = request
-        # if user logged in
-        try:
-            # is model object (class local)
-            # logged in user object
-            self.user = self.request.user
-            # check if user have my cart linked
-            try:
-                # is model object (class local)
-                # logged in user in cart items
-                self.cart = self.user.mycart.items.all()
-            # create new cart and linke it 
-            except:
-                # is model object (class local)
-                # empty cart linked created 
-                self.cart = [Cart.objects.create(user=self.user)]
-        # use the session insted of user
-        except:
-            # is dict (class local)
-            # user session dict
-            self.user = self.request.session
-            # if cart key exist
-            try:
-                # is dict
-                self.cart = self.user['cart']
-            # create a new cart key
-            except:
-                # empty cart 
-                self.user['cart'] = {}
-                # sace to session
-                self.user.save()
-                # is dict
-                self.cart = self.user['cart']
+        # is obejct or dict
+        # user object or session dict and user cart object or session cart dict 
+        self.user, self.cart = userorsession(request)
+        # is boolean
+        # true is user is logged in, else false
+        self.uli = request.user.is_authenticated
     
+    # object -> listofdict 
+    # if user is auth it will serialize self.cart using model serializer
+    # if no user is logged it will create a listofdict from session cart dict data 
+    # same listofdict template for both options
     def cart_page(self):
-        try:
+        # if self cart is a model object
+        if self.uli:
+            # is listofdict 
+            # serialized cart objects in self.cart
             ccart = [(item.serialize(),(item.quantity * item.product.price)) for item in self.cart]
-        except:
+        # if self cart is session dict
+        else:
+            # is list
+            # empty list pre assinged to be used in loop
             ccart = []
+            # for key in list of dict cart
             for i in self.cart:
+                    # is object model 
+                    # product object with given id 
                     product = Product.objects.get(id=i)
+                    # convert product data to dict with required keys and append dict to list
                     ccart.append(({"productname" : product.name,
                             "productid" : product.id,
                             "productunitprice" : self.cart[i]['price'],
