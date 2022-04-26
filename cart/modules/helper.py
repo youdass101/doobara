@@ -5,69 +5,69 @@ from ..models import *
 # dict * dict -> boolean (event)
 # add item in "item" to loggedin user "in request" cart "in models"
 # if user cart object exist add item else create table object
-# if item exist in cart adjust value else create item object  
-def user_add_to_cart (request, item, product):
+# # if item exist in cart adjust value else create item object  
+# def user_add_to_cart (request, item, product):
     
-    # is object
-    # load current loggedin user object model 
-    user = request.user
+#     # is object
+#     # load current loggedin user object model 
+#     user = request.user
 
-    # is int
-    # quantity keyvalue in given item dict
-    iqtt = int(item['quantity'])
+#     # is int
+#     # quantity keyvalue in given item dict
+#     iqtt = int(item['quantity'])
 
     # object * string * object -> boolean
-    # create object using the fgiven data
-    def create_ci (product, qtt, cart):
-        Cart_Item.objects.create(product=product, quantity=qtt, cart=cart)
+    # create new object in user cart item model using the from given data
+    # def create_ci (product, qtt, cart):
+    #     Cart_Item.objects.create(product=product, quantity=qtt, cart=cart)
 
-    try:
-        # if use have object cart
-        mycart = user.mycart
-        # manupilating object data to update to the new given data
-        # If product item object already exist adjust
-        try:
-            # is object 
-            # single object from cart item model 
-            citem = Cart_Item.objects.get(product=product, cart=mycart)
-            # is int 
-            # updating incrementing sub value by given int item 
-            citem.quantity += iqtt
-            citem.save()
-        # if previous failed excute this supose element does'nt exist
-        except:
-            # if product item doesn't exist create new
-            create_ci(product, iqtt, mycart)
-    except:
-        # If user cart object doesn't exist create new one
-        Cart.objects.create(user=user)
-        create_ci(product, iqtt, user.mycart)
+    # try:
+    #     # if use have object cart
+    #     mycart = user.mycart
+    #     # manupilating object data to update to the new given data
+    #     # If product item object already exist adjust
+    #     try:
+    #         # is object 
+    #         # single object from cart item model 
+    #         citem = Cart_Item.objects.get(product=product, cart=mycart)
+    #         # is int 
+    #         # updating incrementing sub value by given int item 
+    #         citem.quantity += iqtt
+    #         citem.save()
+    #     # if previous failed excute this supose element does'nt exist
+    #     except:
+    #         # if product item doesn't exist create new
+    #         create_ci(product, iqtt, mycart)
+    # except:
+    #     # If user cart object doesn't exist create new one
+    #     Cart.objects.create(user=user)
+    #     create_ci(product, iqtt, user.mycart)
 
-    return True
+    # return True
 
 # dict * dict -> dict
 # if session doesn't exist create new one 
 # save or adjust cart data in session dict with given item
-def session_add_to_cart (request, item, product):
+# def session_add_to_cart (request, item, product):
 
-    # is int
-    # extract int price from given object product  
-    price = product.price
-    # is hex
-    # extract int session dict from request class 
-    session = request.session
-    # is int
-    # quantity keyvalue in given item dict
-    iqtt = int(item['quantity'])
+#     # is int
+#     # extract int price from given object product  
+#     price = product.price
+#     # is hex
+#     # extract int session dict from request class 
+#     session = request.session
+#     # is int
+#     # quantity keyvalue in given item dict
+#     iqtt = int(item['quantity'])
 
-    # add and edit data in session dict
-    try:
-        qtt = int(session['cart'][item['pid']]['quantity'])
-        session['cart'][item['pid']]['quantity'] = str(qtt + iqtt)
-    except:
-        session['cart'][item['pid']] = {'quantity' : str(iqtt), 'price' : str(price)}
+#     # add and edit data in session dict
+#     try:
+#         qtt = int(session['cart'][item['pid']]['quantity'])
+#         session['cart'][item['pid']]['quantity'] = str(qtt + iqtt)
+#     except:
+#         session['cart'][item['pid']] = {'quantity' : str(iqtt), 'price' : str(price)}
     
-    request.session.save()
+#     request.session.save()
 
 # dict -> list of dict
 # take the session cart dict and return a list of dict for prodduct 
@@ -246,6 +246,7 @@ class CartManager:
     # same listofdict template for both options
     def cart_page(self):
         # if self cart is a model object
+        print(self.uli)
         if self.uli:
             # is listofdict 
             # serialized cart objects in self.cart
@@ -261,6 +262,7 @@ class CartManager:
                     # product object with given id 
                     product = Product.objects.get(id=i)
                     # convert product data to dict with required keys and append dict to list
+                    #  serialization
                     ccart.append(({"productname" : product.name,
                             "productid" : product.id,
                             "productunitprice" : self.cart[i]['price'],
@@ -269,3 +271,42 @@ class CartManager:
                             (int(self.cart[i]['quantity']) * float(self.cart[i]['price']))
                             ))
         return ccart
+
+
+    # CREATE CART ITEM OBJECT METHOD 
+    # object * string * object -> boolean
+    # create new object in user cart item model using the from given data
+    def create_ci (self, product, qtt):
+        Cart_Item.objects.create(product=product, quantity=qtt, cart=self.user.mycart)
+        return True
+
+
+
+    def add_to_cart (self, item):
+        # is object (Product)
+        # load product object from Product model
+        product = Product.objects.get(id=int(item['pid']))
+        pqtt = int(item['quantity'])
+        if self.uli:
+            try:
+                # is object 
+                # single object from cart item model 
+                citem = Cart_Item.objects.get(product=product, cart=self.user.mycart)
+                # is int 
+                # updating incrementing sub value by given int item 
+                citem.quantity += pqtt
+                citem.save()
+            # if previous failed excute this supose element does'nt exist
+            except:
+                # if product item doesn't exist create new
+                self.create_ci(product, pqtt)
+        else:
+            try:
+                qtt = int(self.user['cart'][item['pid']]['quantity'])
+                self.user['cart'][item['pid']]['quantity'] = str(qtt + pqtt)
+            except:
+                self.user['cart'][item['pid']] = {'quantity' : str(pqtt), 'price' : str(product.price)}
+            
+            self.user.save()
+
+        return True

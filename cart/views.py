@@ -44,17 +44,20 @@ def shopaddtocart(request):
     if request.method == "PUT":
         # load html input of product id
         cpid = json.loads(request.body)
-        # load product object from Product model
-        product = Product.objects.get(id=int(cpid['pid']))
-        # if user is logged in
-        if request.user.is_authenticated:
-            # add product quantity to cart
-            user_add_to_cart(request, cpid, product)
-        # if user isn't logged in use session data 
-        else:
-            # add to session cart product qtt
-            session_add_to_cart(request, cpid, product)
-        # updated cart context after adding new data 
+        # # load product object from Product model
+        # product = Product.objects.get(id=int(cpid['pid']))
+        # # if user is logged in
+        # if request.user.is_authenticated:
+        #     # add product quantity to cart
+        #     user_add_to_cart(request, cpid, product)
+        # # if user isn't logged in use session data 
+        # else:
+        #     # add to session cart product qtt
+        #     session_add_to_cart(request, cpid, product)
+        # # updated cart context after adding new data 
+        # print("alooha", request.user.is_authenticated)
+        cart = CartManager(request)
+        cart.add_to_cart(cpid)
         cart = cartcontext(request) 
         objgraph.show_growth()
         return JsonResponse({"result":"done", "cart": cart}, status=201)
