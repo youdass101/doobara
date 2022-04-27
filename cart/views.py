@@ -67,9 +67,11 @@ def updatecart(request):
     # is dict
     # json dict collect from js
     cartupdate = json.loads(request.body)
-    # check is user is authenticated 
-    update_cart(request, cartupdate)
-    objgraph.show_growth()
+    dcart = CartManager(request)
+    dcart.update_cart(cartupdate)
+    # # check is user is authenticated 
+    # update_cart(request, cartupdate)
+    # objgraph.show_growth()
     
     return JsonResponse({"result":"done"}, status=201)
     

@@ -203,7 +203,7 @@ def userorsession(request):
         except:
             # is model object (class local)
             # empty cart linked created 
-            cart = [Cart.objects.create(user=user)]
+            cart = [Cart.objects.create(user=user)].items.all()
     # use the session insted of user
     else:
         # is dict (class local)
@@ -310,3 +310,10 @@ class CartManager:
             self.user.save()
 
         return True
+
+    def update_cart(self, cupdate):
+        for product, item in zip(cupdate['cart'], self.cart):
+            given = int(product['quantity'])
+            current =  item.quantity
+            result = {'pid': product['pid'],'quantity':(given - current)}
+            self.add_to_cart(result)
