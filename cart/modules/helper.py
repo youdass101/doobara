@@ -199,6 +199,7 @@ def userorsession(request):
             # is model object (class local)
             # logged in user in cart items
             cart = user.mycart.items.all()
+            
         # create new cart and linke it 
         except:
             # is model object (class local)
@@ -295,6 +296,8 @@ class CartManager:
                 # is int 
                 # updating incrementing sub value by given int item 
                 citem.quantity += pqtt
+                if citem.quantity == 0:
+                    citem.delete()
                 citem.save()
             # if previous failed excute this supose element does'nt exist
             except:
@@ -304,6 +307,8 @@ class CartManager:
             try:
                 qtt = int(self.user['cart'][item['pid']]['quantity'])
                 self.user['cart'][item['pid']]['quantity'] = str(qtt + pqtt)
+                if (qtt + pqtt) == 0:
+                    del self.user['cart'][item['pid']]
             except:
                 self.user['cart'][item['pid']] = {'quantity' : str(pqtt), 'price' : str(product.price)}
             
