@@ -774,7 +774,7 @@ form.search-site button {
   padding-left: 20px;
 }
 
-.cart-table-container .products-in-cart tbody tr .in-cart-remove-icon #close-button {
+.cart-table-container .products-in-cart tbody tr .in-cart-remove-icon .close-button {
   background-color: transparent;
   border: 0;
   cursor: pointer;

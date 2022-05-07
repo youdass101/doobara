@@ -67,6 +67,7 @@ def updatecart(request):
     # is dict
     # json dict collect from js
     cartupdate = json.loads(request.body)
+    print("json body data", cartupdate)
     dcart = CartManager(request)
     dcart.update_cart(cartupdate)
     # # check is user is authenticated 

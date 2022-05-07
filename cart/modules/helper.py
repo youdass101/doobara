@@ -1,5 +1,6 @@
 # from os import scandir
 # from pickle import TRUE
+from unittest import result
 from ..models import *
 
 # dict * dict -> boolean (event)
@@ -37,7 +38,7 @@ from ..models import *
     #     # if previous failed excute this supose element does'nt exist
     #     except:
     #         # if product item doesn't exist create new
-    #         create_ci(product, iqtt, mycart)
+    #        0 create_ci(product, iqtt, mycart)
     # except:
     #     # If user cart object doesn't exist create new one
     #     Cart.objects.create(user=user)
@@ -199,7 +200,7 @@ def userorsession(request):
             # is model object (class local)
             # logged in user in cart items
             cart = user.mycart.items.all()
-            
+    
         # create new cart and linke it 
         except:
             # is model object (class local)
@@ -221,7 +222,7 @@ def userorsession(request):
             # sace to session
             user.save()
             # is dict
-            cart = user['cart']
+            cart = user.get('cart')
     
     return user, cart
 
@@ -281,6 +282,13 @@ class CartManager:
         Cart_Item.objects.create(product=product, quantity=qtt, cart=self.user.mycart)
         return True
 
+    # dict -> boolean
+    # delete object using product given id 
+    # Helper function to delete object in a pattern 
+    def delete_objct(item, ucart):
+        product= Product.objects.get(id=item)
+        # delete object
+        Cart_Item.objects.get(product= product, cart=ucart).delete()
 
 
     def add_to_cart (self, item):
@@ -296,9 +304,12 @@ class CartManager:
                 # is int 
                 # updating incrementing sub value by given int item 
                 citem.quantity += pqtt
-                if citem.quantity == 0:
-                    citem.delete()
                 citem.save()
+                if citem.quantity == 0:
+                    print("it is true")
+                    citem.delete()
+                    print("deleting is",citem)
+                
             # if previous failed excute this supose element does'nt exist
             except:
                 # if product item doesn't exist create new
@@ -316,9 +327,31 @@ class CartManager:
 
         return True
 
+    # dict * dict -> dict
+    # takes self variable and json cart update in dict 
+    # calculate the difference of quantity btw current car 
+    # and update cart, and returne a dict with product id and result
     def update_cart(self, cupdate):
-        for product, item in zip(cupdate['cart'], self.cart):
+        if self.uli: 
+            cart = self.cart 
+        else: 
+            cart = self.cart.copy()
+        # loop over given update cart and current cart
+        for product, item in zip(cupdate['cart'], cart):
+            # is int
+            # the update cart product quantity
             given = int(product['quantity'])
-            current =  item.quantity
+            # if user login
+            if self.uli:
+                # is int
+                # current user cart product quantity
+                current =  item.quantity
+            # if user is not logged in
+            else:
+                # is int
+                # current cart product quantity
+                current = int(cart[item]['quantity'])
+            # is dict 
+            # product id and quantity difference 
             result = {'pid': product['pid'],'quantity':(given - current)}
             self.add_to_cart(result)

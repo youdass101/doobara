@@ -258,12 +258,16 @@ document.addEventListener('DOMContentLoaded', function(){
         }
     }
     // DELET A PRODUCT FROM CART
-    if (document.getElementById('close-button')){
-        butt = document.getElementById('close-button') 
-        butt.onclick = () => {
-            update = {"pid": butt.value, "del": true}
-            cartupdate(update)
-        }
+    if (document.getElementsByClassName('close-button')){
+        document.querySelectorAll(".close-button").forEach (butt => {
+            butt.onclick = () => {
+                // update = {"pid": butt.value, "del": true}
+                update = [{'quantity': 0 ,"pid": butt.value}]
+                cartupdate(update)
+            }   
+        })
+
+     
     }
 
     function cartupdate (data) {
