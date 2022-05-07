@@ -261,8 +261,9 @@ document.addEventListener('DOMContentLoaded', function(){
     if (document.getElementsByClassName('close-button')){
         document.querySelectorAll(".close-button").forEach (butt => {
             butt.onclick = () => {
-                // update = {"pid": butt.value, "del": true}
-                update = [{'quantity': 0 ,"pid": butt.value}]
+                pname = butt.parentElement.parentElement
+                oq = pname.querySelector('.in-cart-qtty').value
+                update = {"pid": butt.value, 'quantity': 0 - oq}
                 cartupdate(update)
             }   
         })

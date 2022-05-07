@@ -85,6 +85,8 @@ def checkout(request):
 def cartcontext(request):
     # dict -> int * int
     # cart data process to get total items quatity and total price
-    items, total = cart_context_process(request)
+    ccart = CartManager(request)
+    items, total = ccart.cart_context_process()
+    # items, total = cart_context_process(request)
     objgraph.show_growth()
     return {'item': items, 'total': "{:.2f}".format(total)}
