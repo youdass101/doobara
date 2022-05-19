@@ -182,8 +182,19 @@ document.addEventListener('DOMContentLoaded', function(){
     if (document.getElementById("variants")) {
         obj = document.getElementById("variants")
         obj.onchange = function() {
-            val = obj.options[obj.selectedIndex].value
-            document.getElementById("spp").innerHTML = val
+            // is a string
+            // product data dict as string replaing the ' with " to parse it
+            val1 = obj.options[obj.selectedIndex].value.replaceAll('\'', '"');
+            // is a dict
+            // conver the string type to dict data type  
+            val = JSON.parse(val1);
+            // is int
+            // set the product id to add to cart button hidden value
+            document.getElementById("spatc").value = val.id
+            //is decimale
+            // change the product price element data
+            document.getElementById("spp").innerHTML = val.price.toFixed(2);
+            
         }
     }
 
@@ -192,12 +203,103 @@ document.addEventListener('DOMContentLoaded', function(){
         document.querySelectorAll('.sp-thumb-image').forEach (image => {
             image.onclick = () => {
                 document.getElementById("spi").src = image.src
-         
-
             }
         }) 
 
     }
+
+    // ADD TO CART BUTTON AT SHOP PAGE 
+    // event * component -> 
+    if(document.querySelectorAll('.shop-add-to-cart')){
+        document.querySelectorAll(".shop-add-to-cart").forEach (button => {
+            button.onclick = () => {
+                if (document.getElementById('spq')) {
+                    qtt = document.getElementById('spq').value
+                }
+                else {
+                    qtt = 1
+                }
+                
+                fetch('/shopaddtocart', {
+                    method: 'PUT',
+                    body: JSON.stringify({
+                        pid : button.value,
+                        quantity : qtt
+                    }),
+                    headers:{
+                        'X-CSRFToken': getCookie('csrftoken')
+                    }
+                })
+                
+                .then (response => response.json())
+                .then (result => {
+                    console.log(result)
+                    if (result.result=="login"){
+                        true
+                    }
+                    else {
+                        document.getElementById('carttotal').innerHTML = result.cart.total
+                        document.getElementById('cartitemsqtt').innerHTML = result.cart.item
+                    }
+                })
+            }
+        })
+    }
+
+    // UPDATE CART 
+    if (document.getElementById('update-cart-button')){
+        updates = []
+        document.getElementById('update-cart-button').onclick = () => {
+            document.querySelectorAll(".in-cart-qtty").forEach (element => {
+                pname = element.parentElement
+                updates.push({"quantity" : element.value, "pid":pname.querySelector("#quantity-item-name").value})
+            })
+            cartupdate(updates)
+        }
+    }
+    // DELET A PRODUCT FROM CART
+    if (document.getElementsByClassName('close-button')){
+        document.querySelectorAll(".close-button").forEach (butt => {
+            butt.onclick = () => {
+                pname = butt.parentElement.parentElement
+                oq = pname.querySelector('.in-cart-qtty').value
+                update = {"pid": butt.value, 'quantity': 0 - oq}
+                cartupdate(update)
+            }   
+        })
+
+     
+    }
+
+    function cartupdate (data) {
+        fetch('/updatecart', {
+            method: 'POST',
+            body: JSON.stringify({
+                cart : data
+            }),
+            headers:{
+                'X-CSRFToken': getCookie('csrftoken')
+            }
+        })
+        .then(() => {
+            window.location.reload()}) 
+    }
+
+    // CSRF token function  
+    function getCookie(name) {
+        if (!document.cookie) {
+            return null;
+        }
+        const token = document.cookie.split(';')
+            .map(c => c.trim())
+            .filter(c => c.startsWith(name + '='));
+
+        if (token.length === 0) {
+            return null;
+        }
+        return decodeURIComponent(token[0].split('=')[1]);
+    }
+
 })
 
 

@@ -8,7 +8,6 @@
 {% block pagetitle %}{% trans "Sign In" %}{% endblock %}
 
 {% block content %}
-
 <!-- facebook login button script definition -->
 <div id="fb-root"></div>
 <!-- <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v12.0&appId=429532295495332&autoLogAppEvents=1" nonce="DIUZ1knz"></script> -->
@@ -43,7 +42,8 @@
         <div><a href="{% provider_login_url 'facebook' method='js_sdk' %}">
           <!-- <div class="fb-login-button" data-width="" data-size="large" data-button-type="login_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="false"></div> -->
             <img class="login-facbook-img" src="{% static 'doobarashop/upload/images/lfb2.png'%}">
-          </a></div>
+          </a>
+        </div>
           
       </div>
     <div class="login-or">{% trans 'or' %}</div>

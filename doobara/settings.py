@@ -29,7 +29,7 @@ SECRET_KEY = '&&#g)kp!ad^4*gyx6x-d&(tku-xk5!d9@8v%vvnl1wrqh+s$#='
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -68,7 +68,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'livereload.middleware.LiveReloadScript',
-
 ]
 
 ROOT_URLCONF = 'doobara.urls'
@@ -84,6 +83,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'cart.views.cartcontext'
             ],
         },
     },
