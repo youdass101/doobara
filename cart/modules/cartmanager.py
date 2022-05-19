@@ -1,5 +1,3 @@
-# from os import scandir
-# from pickle import TRUE
 from ..models import *
 from allauth.account.signals import user_logged_in
 from django.dispatch import receiver
@@ -35,7 +33,6 @@ def user_cart_empty(cart):
         return True
     else:
         return False
-
 
 
 # dict -> object * object
@@ -169,6 +166,8 @@ class CartManager:
                 self.create_ci(product, pqtt)
         else:
             try:
+                # is Int
+                # quantity of a spesific product id in session cart 
                 qtt = int(self.user['cart'][item['pid']]['quantity'])
                 self.user['cart'][item['pid']]['quantity'] = str(qtt + pqtt)
                 if (qtt + pqtt) == 0:
