@@ -1,8 +1,6 @@
 from django.db import models
 from shop.models import *
 from django.contrib.auth.models import User
-# from django.dispatch import receiver
-
 
 # Cart_holder is "SQL" django model 
 # is an object that hold the cart id, and point to cart items
@@ -39,5 +37,3 @@ class Cart_Item (models.Model):
             "productquantity": self.quantity,
             "productimage": self.product.album.default().serialize()
         }
-
-

@@ -1,7 +1,41 @@
 # from os import scandir
 # from pickle import TRUE
-from unittest import result
 from ..models import *
+from allauth.account.signals import user_logged_in
+from django.dispatch import receiver
+
+# When user login 
+@receiver(user_logged_in)
+def cart_after_login(request, **kwargs):
+    cart_migration(request)
+
+# dict -> boolean 
+# move session cart item to use cart data if user cart is empty
+def cart_migration(request):
+    user_cart = request.user.mycart.items.all()
+    session_cart = request.session['cart']
+    if user_cart_empty(user_cart) and session_cart_not_empty(session_cart):
+        for item in session_cart:
+            itemdetail = {'pid': item, 'quantity': session_cart[item]['quantity']}
+            cart = CartManager(request)
+            cart.add_to_cart(itemdetail)
+
+# dict -> boolean
+# check if given dict is empty
+def session_cart_not_empty(cart):
+    if len(cart)== 0:
+        return False
+    else:
+        return True
+
+# instance -> boolean
+# check if given dict is empty 
+def user_cart_empty(cart):
+    if len(cart)== 0:
+        return True
+    else:
+        return False
+
 
 
 # dict -> object * object
@@ -18,6 +52,7 @@ def userorsession(request):
             # is model object (class local)
             # logged in user in cart items
             cart = user.mycart.items.all()
+    
     
         # create new cart and linke it 
         except:
@@ -44,6 +79,7 @@ def userorsession(request):
     
     return user, cart
 
+
 # Object 
 # Manage all cart request add, update, view and delete
 class CartManager:
@@ -66,7 +102,6 @@ class CartManager:
     # same listofdict template for both options
     def cart_page(self):
         # if self cart is a model object
-        print(self.uli)
         if self.uli:
             # is listofdict 
             # serialized cart objects in self.cart
@@ -109,6 +144,8 @@ class CartManager:
         Cart_Item.objects.get(product= product, cart=ucart).delete()
 
 
+    # instance * dict -> boolean
+    # create a new or edit existing object in cart_item model  
     def add_to_cart (self, item):
         # is object (Product)
         # load product object from Product model
@@ -193,4 +230,3 @@ class CartManager:
                 calc_cart(int(self.cart[i]['quantity']), self.cart[i]['price'])
         
         return items, total
-
