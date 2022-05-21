@@ -1,6 +1,8 @@
 @use '../../../static/doobarashop/sass/abstracts/all' as var;
 
 //Chekout page container 
+
+
 .checkout-page-container {
     @include var.flex-default;
     width: 100%;
@@ -19,18 +21,18 @@
             label {
                 @include var.par-body-2;
             }
-
-            .shipping-1st-row {
-                @include var.flex-default;
-                width: 100%;
-                .shipping-first-name {
-                    padding-right: 20px;
-                }
-                .shipping-first-name, .shipping-last-name {
-                    display: block;
-                    width: 50%;
-                }             
-            }
+            // Temperarly removed to use the form structure !!!!!!
+            // .shipping-1st-row {
+            //     @include var.flex-default;
+            //     width: 100%;
+            //     .shipping-first-name {
+            //         padding-right: 20px;
+            //     }
+            //     .shipping-first-name, .shipping-last-name {
+            //         display: block;
+            //         width: 50%;
+            //     }             
+            // }
             input, textarea {
                 @extend .input-style-prim;
             }

@@ -1150,18 +1150,6 @@ form.search-site button {
   font-size: 16px;
   font-weight: 400;
 }
-.checkout-page-container .checkout-shipping-details-container form .shipping-1st-row {
-  display: flex;
-  display: -webkit-flex;
-  width: 100%;
-}
-.checkout-page-container .checkout-shipping-details-container form .shipping-1st-row .shipping-first-name {
-  padding-right: 20px;
-}
-.checkout-page-container .checkout-shipping-details-container form .shipping-1st-row .shipping-first-name, .checkout-page-container .checkout-shipping-details-container form .shipping-1st-row .shipping-last-name {
-  display: block;
-  width: 50%;
-}
 .checkout-page-container .checkout-order-invoice {
   width: 45%;
   padding-left: 30px;

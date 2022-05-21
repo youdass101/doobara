@@ -1,9 +1,10 @@
-from django.shortcuts import redirect, render
-from requests import request
+from django.shortcuts import render
 from .models import *
-from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
+from django.http import  JsonResponse, HttpResponse, HttpResponseRedirect
+from django.urls import reverse
 import json
 from .modules.cartmanager import *
+from users.forms import *
 
 
 # Request(model) -> render
@@ -35,7 +36,11 @@ def updatecart(request):
     return JsonResponse({"result":"done"}, status=201)
     
 def checkout(request):
-    return render(request, "cart/checkout.html")
+    if request.user.is_authenticated:
+        # do something 
+        return render(request, "cart/checkout.html", {"form": Delivery_Information()} )
+    else:
+        return HttpResponseRedirect(reverse('register_login'))
 
 # request -> dict
 # DATA UPDATES COLLECTER return the user attached cart items qtty and total price 

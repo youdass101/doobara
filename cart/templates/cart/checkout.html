@@ -5,35 +5,86 @@
 My Cart
 {% endblock %}
 {% block body %}
+
 <div class="checkout-page-container">
     <div class="checkout-shipping-details-container">
         <h1>Shipping details</h1>
         <form id="shipping-details-id" class="shipping-details">
+            {{form}}
             <!-- FIRST AND LAST NAME CONTAINER -->
-            <div class="shipping-1st-row">
+            <!-- <div class="shipping-1st-row"> -->
                 <!-- First name  -->
-                <div class="shipping-first-name">
+                <!-- <div class="shipping-first-name">
+                    <label>First name</label>
+                    {{form.first_name}}
+                </div>   -->
+                <!-- Last name  -->
+                <!-- <div class="shipping-last-name">
+                    <label>Last name</label>
+                    {{form.last_name}}
+                </div> 
+            </div>  -->
+            <!-- City and town  -->
+            <!-- <div class="shipping-city-town">
+                <label>City/Town</label>
+                {{form.city_town}}
+            </div>   -->
+            <!-- Street name -->
+            <!-- <div class="shipping-street">
+                <label>Street name</label>
+                {{form.street}}
+            </div>   -->
+            <!-- apartment blding, details -->
+            <!-- <div class="shipping-street">
+                <label>Building, appartement details</label>
+                {{form.building_appartement}}
+            </div>  
+            <div class="shipping-phone">
+                <label>Phone number</label>
+                {{form.phone}}
+            </div>  
+            <div class="shipping-note">
+                <label>Order notes (optional)</label>
+                {{form.note}}
+            </div>
+            <div>
+                <label>Additional Information</label>
+                {{form.additional_information}}
+            </div> -->
+            
+        </form>
+
+<!-- CURRENT DESIGN OF THE FORM -->
+
+<!-- <div class="checkout-page-container">
+    <div class="checkout-shipping-details-container">
+        <h1>Shipping details</h1>
+        <form id="shipping-details-id" class="shipping-details"> -->
+            <!-- FIRST AND LAST NAME CONTAINER -->
+            <!-- <div class="shipping-1st-row"> -->
+                <!-- First name  -->
+                <!-- <div class="shipping-first-name">
                     <label>First name</label>
                     <input type="text" value="Hamze">
-                </div>  
+                </div>   -->
                 <!-- Last name  -->
-                <div class="shipping-last-name">
+                <!-- <div class="shipping-last-name">
                     <label>Last name</label>
                     <input type="text" value="Chalhoub">
                 </div> 
-            </div> 
+            </div>  -->
             <!-- City and town  -->
-            <div class="shipping-city-town">
+            <!-- <div class="shipping-city-town">
                 <label>City/Town</label>
                 <input type="text" value="Jounieh/Adonis">
-            </div>  
+            </div>   -->
             <!-- Street name -->
-            <div class="shipping-street">
+            <!-- <div class="shipping-street">
                 <label>Street name</label>
                 <input type="text" value="Green area">
-            </div>  
+            </div>   -->
             <!-- apartment blding, details -->
-            <div class="shipping-street">
+            <!-- <div class="shipping-street">
                 <label>Building, appartment details</label>
                 <input type="text" value="Elie Azar, 3d floor">
             </div>  
@@ -46,7 +97,7 @@ My Cart
                 <textarea class="shipping-note-text" name="delivery notes" form="shipping-details-id" placeholder="Notes about your order"></textarea>
 
              </div>
-        </form>
+        </form> -->
 
     </div>
     <div class="checkout-order-invoice">
