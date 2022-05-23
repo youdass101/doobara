@@ -40,7 +40,7 @@ def checkout(request):
         # do something 
         return render(request, "cart/checkout.html", {"form": Delivery_Information()} )
     else:
-        return HttpResponseRedirect(reverse('register_login'))
+        return HttpResponseRedirect(reverse('myaccount'))
 
 # request -> dict
 # DATA UPDATES COLLECTER return the user attached cart items qtty and total price 
