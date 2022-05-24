@@ -14,4 +14,6 @@ urlpatterns=[
     # My Account page
     path("myaccount", views.myaccount, name="myaccount"),
     path('logout', LogoutView.as_view()),
+    path('placeorder', views.placeorder, name="placeorder")
+
 ]

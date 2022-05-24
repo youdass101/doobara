@@ -9,7 +9,8 @@ My Cart
 <div class="checkout-page-container">
     <div class="checkout-shipping-details-container">
         <h1>Shipping details</h1>
-        <form id="shipping-details-id" class="shipping-details">
+        <form id="shipping-details-id" class="shipping-details" action="{% url 'placeorder'%}" method="POST">
+            {% csrf_token %}
             {{form}}
             <!-- FIRST AND LAST NAME CONTAINER -->
             <!-- <div class="shipping-1st-row"> -->
@@ -137,7 +138,7 @@ My Cart
                     <input type="checkbox">
                     <p>I have read and agree to the website terms and conditions *</p>
                 </div>
-                <button> Place order </button>
+                <button type="submit" form="shipping-details-id"> Place order </button>
             </div>
         </div>
     </div>
