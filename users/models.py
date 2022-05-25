@@ -58,6 +58,9 @@ class Orders (models.Model):
     # is Decimal number 
     # order total cost
     total = models.DecimalField(max_digits=5, decimal_places=2)
+    # is strin 
+    # order notes 
+    note = models.CharField(max_length=355)
 
     def __str__(self):
         return f"{self.status} "
