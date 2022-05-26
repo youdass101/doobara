@@ -34,6 +34,6 @@ class Delivery_Information(forms.Form):
     city_town = forms.CharField(max_length=200)
     street = forms.CharField(max_length=200)
     building_appartement = forms.CharField(max_length=200)
-    additional_information = forms.CharField(max_length=255)
-    note = forms.CharField(max_length=200)
+    additional_information = forms.CharField(max_length=255, required=False)
+    note = forms.CharField(max_length=200, required=False)
     

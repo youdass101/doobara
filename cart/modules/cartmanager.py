@@ -132,13 +132,13 @@ class CartManager:
         Cart_Item.objects.create(product=product, quantity=qtt, cart=self.user.mycart)
         return True
 
-    # dict -> boolean
+    # instance * instance -> boolean
     # delete object using product given id 
     # Helper function to delete object in a pattern 
-    def delete_objct(item, ucart):
-        product= Product.objects.get(id=item)
+    def delete_objct(self, item, ucart):
+        # product= Product.objects.get(id=item)
         # delete object
-        Cart_Item.objects.get(product= product, cart=ucart).delete()
+        Cart_Item.objects.get(product= item, cart=ucart).delete()
 
 
     # instance * dict -> boolean
