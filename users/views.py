@@ -16,7 +16,11 @@ def myaccount(request):
 
 @login_required
 def placeorder(request):
+    # is dict 
+    # deliver information form from html request
     form = Delivery_Information(request.POST)
+    # create order
     createorder(request,form) 
+    success = "Thank you for Your order"
 
-    return render(request, "users/orderplace.html")
+    return render(request, "users/orderplace.html", {'ordermessage':success})
