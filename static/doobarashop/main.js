@@ -300,6 +300,17 @@ document.addEventListener('DOMContentLoaded', function(){
         return decodeURIComponent(token[0].split('=')[1]);
     }
 
+    if (document.getElementById("dtotal")) {
+        stotal = parseInt(document.getElementById("dsubtotal").innerHTML.replace('$', "").trim());
+        if (stotal > 60) {
+            document.getElementById("ddelivery").innerHTML = "Free";
+        }
+        else {
+            total = (stotal + 2).toFixed(2)
+            document.getElementById("dtotal").innerHTML =  "$" +" "+ total
+
+        }
+    }
 })
 
 

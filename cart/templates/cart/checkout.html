@@ -55,79 +55,35 @@ My Cart
             
         </form>
 
-<!-- CURRENT DESIGN OF THE FORM -->
-
-<!-- <div class="checkout-page-container">
-    <div class="checkout-shipping-details-container">
-        <h1>Shipping details</h1>
-        <form id="shipping-details-id" class="shipping-details"> -->
-            <!-- FIRST AND LAST NAME CONTAINER -->
-            <!-- <div class="shipping-1st-row"> -->
-                <!-- First name  -->
-                <!-- <div class="shipping-first-name">
-                    <label>First name</label>
-                    <input type="text" value="Hamze">
-                </div>   -->
-                <!-- Last name  -->
-                <!-- <div class="shipping-last-name">
-                    <label>Last name</label>
-                    <input type="text" value="Chalhoub">
-                </div> 
-            </div>  -->
-            <!-- City and town  -->
-            <!-- <div class="shipping-city-town">
-                <label>City/Town</label>
-                <input type="text" value="Jounieh/Adonis">
-            </div>   -->
-            <!-- Street name -->
-            <!-- <div class="shipping-street">
-                <label>Street name</label>
-                <input type="text" value="Green area">
-            </div>   -->
-            <!-- apartment blding, details -->
-            <!-- <div class="shipping-street">
-                <label>Building, appartment details</label>
-                <input type="text" value="Elie Azar, 3d floor">
-            </div>  
-            <div class="shipping-phone">
-                <label>Phone number</label>
-                <input type="number" value="70148082">
-            </div>  
-             <div class="shipping-note">
-                <label>Order notes (optional)</label>
-                <textarea class="shipping-note-text" name="delivery notes" form="shipping-details-id" placeholder="Notes about your order"></textarea>
-
-             </div>
-        </form> -->
-
     </div>
     <div class="checkout-order-invoice">
         <h1>Your order</h1>
         <div class="checkout-invoice-table">
             <table class="invoice-table">
-                <tr>
-                    <th>Product</th>
-                    <th>Subtotal</th>
-                </tr>
-                <tr>
-                    <th> Smart wifi outdoot camera x1 </th>
-                    <td>$ 38.00</td>
-                </tr>
-                <tr>
-                    <th> Smart infrared remote x1 </th>
-                    <td>$ 19.50</td>
-                </tr>
+                {% for item in cart %} 
+                    <tr>
+                        <!-- product name -->
+                        <th>{{item.0.productname}}</th>
+                        <!-- product unit price -->
+                        <td>$ {{item.0.productunitprice}}</td>
+                        <!-- product quantity in cart -->
+                        <td>{{item.0.productquantity}}</td>
+                        <!-- Product subtotal (unit price * quantity) -->
+                        <td>$ {{item.1}}</td>
+                    </tr>
+                {% endfor %}
+            
                 <tr>
                     <th> Subtotal </th>
-                    <td>$ 57.50</td>
-                </tr>
+                    <td id="dsubtotal"> $ {{total}}</td> 
+                    </tr>
                 <tr>
-                    <th> Shipping </th>
-                    <td>Flat rate $ 2.00</td>
+                    <th> Delivery </th>
+                    <td id="ddelivery">$ 2.00</td>
                 </tr>
                 <tr>
                     <th> Total </th>
-                    <td>$ 59.50</td>
+                    <td id="dtotal">$ {{total}} </td>
                 </tr>
             </table>
             <div class="checkout-policy">
