@@ -38,8 +38,13 @@ def updatecart(request):
 def checkout(request):
     if request.user.is_authenticated:
         cart = CartManager(request)
+        loa = request.user.myaddress.all()
+        if loa:
+            have_address = True
+        else:
+            have_address = False
         # do something 
-        return render(request, "cart/checkout.html", {"form": Delivery_Information(), "cart":cart.cart_page()})
+        return render(request, "cart/checkout.html", {"form": Delivery_Information(), "cart":cart.cart_page(), "have_address":have_address, "loa":loa})
     else:
         return HttpResponseRedirect(reverse('myaccount'))
 

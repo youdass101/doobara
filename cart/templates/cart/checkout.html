@@ -11,7 +11,16 @@ My Cart
         <h1>Shipping details</h1>
         <form id="shipping-details-id" class="shipping-details" action="{% url 'placeorder'%}" method="POST">
             {% csrf_token %}
-            {{form}}
+            {% if have_address %}
+                <select>
+                    {% for address in loa %}
+                        <option>{{address}}</option>
+                    {% endfor %}
+                </select>
+
+            {% else %}
+                {{form}}
+            {% endif %}
             <!-- FIRST AND LAST NAME CONTAINER -->
             <!-- <div class="shipping-1st-row"> -->
                 <!-- First name  -->

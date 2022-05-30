@@ -30,6 +30,9 @@ class Delivery_Address_Details (models.Model):
     # is object instance
     # user account 
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="myaddress")
+    # is boolean 
+    # address default
+    # default = models.BooleanField(default=False)
 
     def __str__(self):
         return f"{self.name}, {self.city_town} "
