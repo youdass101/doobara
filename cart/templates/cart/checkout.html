@@ -12,11 +12,23 @@ My Cart
         <form id="shipping-details-id" class="shipping-details" action="{% url 'placeorder'%}" method="POST">
             {% csrf_token %}
             {% if have_address %}
-                <select>
-                    {% for address in loa %}
-                        <option>{{address}}</option>
-                    {% endfor %}
-                </select>
+                {% for item in loa %}
+                    {% if item.default %}
+                        <h2>Delivery Address</h2>
+                        <div class="delivery_container">
+                            <div class="delivery_address">
+                                <p>{{item.name}} {{item.last_name}}</p>
+                                <p>{{item.city_town}} {{item.street_name}}
+                                    {{item.building_appartment}}</p>
+                                    <input type="hidden" value={{item.id}}>
+                                <p>{{item.phone_number}}</p>
+                                <p>{{item.delivery_details}}</p>
+                            </div>    
+                            <div><button>Change</button></div>
+                        </div>
+                    
+                    {% endif %}
+                {% endfor %}
 
             {% else %}
                 {{form}}

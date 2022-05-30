@@ -26,16 +26,16 @@ class Delivery_Address_Details (models.Model):
     phone_number = models.CharField(max_length=8)
     # is string 
     # delivery additional details
-    delivery_details = models.CharField(max_length=400)
+    delivery_details = models.CharField(max_length=400, blank=True)
     # is object instance
     # user account 
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="myaddress")
     # is boolean 
     # address default
-    # default = models.BooleanField(default=False)
+    default = models.BooleanField(default=False)
 
     def __str__(self):
-        return f"{self.name}, {self.city_town} "
+        return f"{self.name}, {self.city_town}, {self.id} "
 
 # is object model 
 # user orders 
