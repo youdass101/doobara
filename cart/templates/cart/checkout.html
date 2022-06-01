@@ -9,6 +9,22 @@ My Cart
 <div class="checkout-page-container">
     <div class="checkout-shipping-details-container">
         <h1>Shipping details</h1>
+
+        <div class="change_address">
+            <div>
+                <h2>Select Other delivery address</h2>
+            </div>
+            <div>
+                <ul>
+                    {% for address in loa %}
+                    <li>
+                        <div></div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
         <form id="shipping-details-id" class="shipping-details" action="{% url 'placeorder'%}" method="POST">
             {% csrf_token %}
             {% if have_address %}
@@ -17,19 +33,20 @@ My Cart
                         <h2>Delivery Address</h2>
                         <div class="delivery_container">
                             <div class="delivery_address">
-                                <p>{{item.name}} {{item.last_name}}</p>
+                                <p class="deliver_name_phone">{{item.name}} {{item.last_name}}, {{item.phone_number}}</p>
                                 <p>{{item.city_town}} {{item.street_name}}
                                     {{item.building_appartment}}</p>
                                     <input type="hidden" value={{item.id}}>
-                                <p>{{item.phone_number}}</p>
                                 <p>{{item.delivery_details}}</p>
                             </div>    
-                            <div><button>Change</button></div>
+                            <div>
+                                <div><button>Other address</button></div>
+                                <div><button>+ New Address</button></div>
+                            </div>
+                            
                         </div>
-                    
                     {% endif %}
                 {% endfor %}
-
             {% else %}
                 {{form}}
             {% endif %}
