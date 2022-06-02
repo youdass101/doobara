@@ -5,48 +5,69 @@
 My Cart
 {% endblock %}
 {% block body %}
+<!-- POP UP CHANGE ADDRESS OUT OF CONTAINER -->
+<div class="change_address_popup">
+    <div>
+        <h3>Delivery Address</h3>
+    </div>
+    <div class="address_list">
+        <ul>
+            {% for item in loa %}
+            <li>
+                <div class="delivery_container">
+                    <div class="delivery_address">
+                        <p class="deliver_name_phone"><span class="checkout_address_detail_name">{{item.name}} {{item.last_name}}</span> {{item.phone_number}}</p>
+                        <p>{{item.city_town}} {{item.street_name}}
+                            {{item.building_appartment}}</p>
+                            <input type="hidden" value={{item.id}}>
+                        <p>{{item.delivery_details}}</p>
+                    </div>    
+                    <div>
+                        <div><button class="change_address" id="id_change_address">Change address</button></div>
+                        <div><button class="checkout_new_address" id="id_checkout_new_address">+ New Address</button></div>
+                    </div>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
 
 <div class="checkout-page-container">
     <div class="checkout-shipping-details-container">
         <h1>Shipping details</h1>
+        
+        <!-- POP WHEN USER WANT TO CHOOSE DIFFERENT CHECKOUT DELIVER ADDRESSS -->
+        
 
-        <div class="change_address">
-            <div>
-                <h2>Select Other delivery address</h2>
-            </div>
-            <div>
-                <ul>
-                    {% for address in loa %}
-                    <li>
-                        <div></div>
-                    </li>
-                    {% endfor %}
-                </ul>
-            </div>
-        </div>
-
+        <!-- SELECTED DELIVERY ADDRESS  -->
         <form id="shipping-details-id" class="shipping-details" action="{% url 'placeorder'%}" method="POST">
             {% csrf_token %}
+
+            <!-- IF USER ALREADY HAVE A 1 or More delivery addresses saved  -->
             {% if have_address %}
                 {% for item in loa %}
+
+                    <!-- WHEN LOADED SHOW THE SET TO DEFAULT DELIVERY ADDRESS -->
                     {% if item.default %}
-                        <h2>Delivery Address</h2>
+                        <h3>Delivery Address</h3>
                         <div class="delivery_container">
                             <div class="delivery_address">
-                                <p class="deliver_name_phone">{{item.name}} {{item.last_name}}, {{item.phone_number}}</p>
+                                <p class="deliver_name_phone"><span class="checkout_address_detail_name">{{item.name}} {{item.last_name}}</span> {{item.phone_number}}</p>
                                 <p>{{item.city_town}} {{item.street_name}}
                                     {{item.building_appartment}}</p>
                                     <input type="hidden" value={{item.id}}>
                                 <p>{{item.delivery_details}}</p>
                             </div>    
                             <div>
-                                <div><button>Other address</button></div>
-                                <div><button>+ New Address</button></div>
+                                <div><button class="change_address" id="id_change_address">Change address</button></div>
+                                <div><button class="checkout_new_address" id="id_checkout_new_address">+ New Address</button></div>
                             </div>
                             
                         </div>
                     {% endif %}
                 {% endfor %}
+            <!-- IF THERE IS NO SAVED ADDRESS CREATE A NEW ONE -->
             {% else %}
                 {{form}}
             {% endif %}

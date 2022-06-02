@@ -1130,21 +1130,63 @@ form.search-site button {
   color: #F9D342;
 }
 
+.change_address_popup {
+  display: none;
+  width: 50%;
+  padding: 20px;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: column;
+  position: absolute;
+  border-radius: 20px;
+  background-color: yellow;
+  left: 50%;
+  transform: translate(-50%, 50%);
+}
+.change_address_popup ul {
+  list-style-type: none;
+  padding: 0px;
+}
+.change_address_popup li {
+  padding: 6px;
+  border: 1px solid black;
+  border-radius: 15px;
+}
+.change_address_popup .address_list {
+  width: 100%;
+}
+
+.delivery_container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.delivery_container button {
+  color: #fff;
+  background-color: #292826;
+  font-family: "Archivo Narrow", Sans-serif;
+  font-size: 14px;
+  border-style: groove;
+  border-width: 0;
+  border-radius: 6px;
+  padding: 7px 20px 7px 20px;
+  cursor: pointer;
+}
+.delivery_container .checkout_address_detail_name {
+  font-weight: 750;
+  padding-right: 15px;
+}
+
 .checkout-page-container {
   display: flex;
   display: -webkit-flex;
   width: 100%;
-  max-width: 1100px;
+  justify-content: space-around;
   margin: 5px auto;
-}
-.checkout-page-container .delivery_container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-right: 20px;
 }
 .checkout-page-container .checkout-shipping-details-container {
   width: 55%;
+  max-width: 600px;
 }
 .checkout-page-container .checkout-shipping-details-container form {
   padding: 0px 20px 20px 20px;
@@ -1159,6 +1201,7 @@ form.search-site button {
 .checkout-page-container .checkout-order-invoice {
   width: 50%;
   padding-left: 30px;
+  max-width: 600px;
 }
 .checkout-page-container .checkout-order-invoice table {
   width: 100%;
@@ -1207,8 +1250,14 @@ form.search-site button {
     display: block;
     width: 100%;
   }
+  .checkout-page-container .delivery_container {
+    flex-direction: column;
+  }
   .checkout-page-container .checkout-shipping-details-container, .checkout-page-container .checkout-order-invoice {
     width: 100% !important;
+  }
+  .checkout-page-container .checkout-shipping-details-container h1, .checkout-page-container .checkout-shipping-details-container h2, .checkout-page-container .checkout-order-invoice h1, .checkout-page-container .checkout-order-invoice h2 {
+    text-align: center;
   }
   .checkout-page-container .checkout-order-invoice {
     padding-left: 0px;
