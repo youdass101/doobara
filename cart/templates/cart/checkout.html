@@ -6,7 +6,7 @@ My Cart
 {% endblock %}
 {% block body %}
 <!-- POP UP CHANGE ADDRESS OUT OF CONTAINER -->
-<div class="change_address_popup">
+<div class="change_address_popup" id="id_change_address_popup">
     <div>
         <h3>Delivery Address</h3>
     </div>
@@ -24,7 +24,6 @@ My Cart
                     </div>    
                     <div>
                         <div><button class="change_address" id="id_change_address">Change address</button></div>
-                        <div><button class="checkout_new_address" id="id_checkout_new_address">+ New Address</button></div>
                     </div>
                 </div>
             </li>
@@ -60,8 +59,8 @@ My Cart
                                 <p>{{item.delivery_details}}</p>
                             </div>    
                             <div>
-                                <div><button class="change_address" id="id_change_address">Change address</button></div>
-                                <div><button class="checkout_new_address" id="id_checkout_new_address">+ New Address</button></div>
+                                <button type="button" class="change_address" id="id_change_address">Change address</button>
+                                <button class="checkout_new_address" id="id_checkout_new_address">+ New Address</button>
                             </div>
                             
                         </div>

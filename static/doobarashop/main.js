@@ -311,6 +311,12 @@ document.addEventListener('DOMContentLoaded', function(){
 
         }
     }
+
+    // change address element
+    document.getElementById("id_change_address").onclick = () => {
+        alert("Asdasd")
+        document.getElementById("id_change_address_popup").style.display = "flex";
+    }
 })
 
 
