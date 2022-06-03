@@ -312,10 +312,37 @@ document.addEventListener('DOMContentLoaded', function(){
         }
     }
 
+
     // change address element
-    document.getElementById("id_change_address").onclick = () => {
-        alert("Asdasd")
-        document.getElementById("id_change_address_popup").style.display = "flex";
+    if (document.getElementById("id_change_address_checkout")) {
+        loa =  document.getElementById('id_change_address_checkout');
+        popm = document.getElementById("id_change_address_popup");
+       loa.onclick = () => {
+            popm.style.display = "flex";
+        }
+    }
+
+    window.onclick = function(event) {
+        if (event.target !== loa && event.target !== popm ) {
+            popm.style.display = "none";
+        }   
+    }
+
+    // change address element
+    if (document.getElementById("id_change_address_checkout")) {
+        nbtn = document.getElementById('id_checkout_new_address')
+        nbtn.onclick = () => {
+            fetch('/checkout', {
+                method: 'POST',
+                body: JSON.stringify({
+                    data : nbtn.value
+                }),
+                headers:{
+                    'X-CSRFToken': getCookie('csrftoken')
+                }
+            })
+       
+        }
     }
 })
 

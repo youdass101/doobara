@@ -1176,6 +1176,14 @@ form.search-site button {
   font-weight: 750;
   padding-right: 15px;
 }
+.delivery_container .change_address {
+  cursor: pointer;
+  background-color: #292826;
+  padding: 4px;
+  text-align: center;
+  border-radius: 5px;
+  color: white;
+}
 
 .checkout-page-container {
   display: flex;

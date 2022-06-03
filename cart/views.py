@@ -39,14 +39,22 @@ def checkout(request):
     if request.user.is_authenticated:
         cart = CartManager(request)
         loa = request.user.myaddress.all()
-        if loa:
-            have_address = True
+        if request.method == "GET":
+            print("NOT ME")
+            if loa:
+                have_address = True
+            else:
+                have_address = False
+            # do something 
+            return render(request, "cart/checkout.html", {"form": Delivery_Information(), "cart":cart.cart_page(), "have_address":have_address, "loa":loa})
         else:
             have_address = False
-        # do something 
-        return render(request, "cart/checkout.html", {"form": Delivery_Information(), "cart":cart.cart_page(), "have_address":have_address, "loa":loa})
+            print("WHAT??>????")
+            return render(request, "cart/checkout.html", {"form": Delivery_Information(), "cart":cart.cart_page(), "have_address":have_address, "loa":[]})
+
     else:
         return HttpResponseRedirect(reverse('myaccount'))
+
 
 # request -> dict
 # DATA UPDATES COLLECTER return the user attached cart items qtty and total price 
