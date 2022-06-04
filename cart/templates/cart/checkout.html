@@ -19,11 +19,11 @@ My Cart
                         <p class="deliver_name_phone"><span class="checkout_address_detail_name">{{item.name}} {{item.last_name}}</span> {{item.phone_number}}</p>
                         <p>{{item.city_town}} {{item.street_name}}
                             {{item.building_appartment}}</p>
-                            <input type="hidden" value={{item.id}}>
+                            <!-- <input type="hidden" value={{item.id}}> -->
                         <p>{{item.delivery_details}}</p>
                     </div>    
                     <div>
-                        <div><button class="change_address" id="id_change_address">Change address</button></div>
+                        <div><button value={{item.id}} class="change_address" id="id_change_address">Use address</button></div>
                     </div>
                 </div>
             </li>
@@ -60,7 +60,8 @@ My Cart
                             </div>    
                             <div>
                                 <div><button type="button" class="change_address" id="id_change_address_checkout">Change address</button></div>
-                                <div><a href="/checkout" class="change_address" id="id_checkout_new_address">+ New Address</a></div>
+                                <div><button type="submit"  formaction="/checkout" class="change_address" id="id_checkout_new_address">+ New Address</button></div>
+                                <!-- <div><a href="/checkout" class="change_address" id="id_checkout_new_address">+ New Address</a></div> -->
                             </div>
                             
                         </div>

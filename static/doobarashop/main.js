@@ -320,30 +320,31 @@ document.addEventListener('DOMContentLoaded', function(){
        loa.onclick = () => {
             popm.style.display = "flex";
         }
-    }
+    
 
-    window.onclick = function(event) {
-        if (event.target !== loa && event.target !== popm ) {
-            popm.style.display = "none";
-        }   
+        window.onclick = function(event) {
+            if (event.target !== loa && event.target !== popm ) {
+                popm.style.display = "none";
+            }   
+        }
     }
 
     // change address element
-    if (document.getElementById("id_change_address_checkout")) {
-        nbtn = document.getElementById('id_checkout_new_address')
-        nbtn.onclick = () => {
-            fetch('/checkout', {
-                method: 'POST',
-                body: JSON.stringify({
-                    data : nbtn.value
-                }),
-                headers:{
-                    'X-CSRFToken': getCookie('csrftoken')
-                }
-            })
+    // if (document.getElementById("id_change_address_checkout")) {
+    //     nbtn = document.getElementById('id_checkout_new_address')
+    //     nbtn.onclick = () => {
+    //         fetch('/checkout', {
+    //             method: 'POST',
+    //             body: JSON.stringify({
+    //                 data : []
+    //             }),
+    //             headers:{
+    //                 'X-CSRFToken': getCookie('csrftoken')
+    //             }
+    //         })
        
-        }
-    }
+    //     }
+    // }
 })
 
 

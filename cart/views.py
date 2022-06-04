@@ -50,7 +50,7 @@ def checkout(request):
         else:
             have_address = False
             print("WHAT??>????")
-            return render(request, "cart/checkout.html", {"form": Delivery_Information(), "cart":cart.cart_page(), "have_address":have_address, "loa":[]})
+            return render(request, "cart/checkout.html", {"form": Delivery_Information(), "cart":cart.cart_page(), "have_address":have_address, "loa":[""]})
 
     else:
         return HttpResponseRedirect(reverse('myaccount'))
