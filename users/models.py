@@ -45,7 +45,7 @@ class Orders (models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="myorders")
     # is instance
     # delivery address of user who placed the order 
-    address = models.OneToOneField(Delivery_Address_Details, on_delete=models.SET_NULL, null=True)
+    address = models.ForeignKey(Delivery_Address_Details, on_delete=models.SET_NULL, null=True)
     # is string
     # status names 
     processing = "prcs"

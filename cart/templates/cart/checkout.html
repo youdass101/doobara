@@ -19,11 +19,14 @@ My Cart
                         <p class="deliver_name_phone"><span class="checkout_address_detail_name">{{item.name}} {{item.last_name}}</span> {{item.phone_number}}</p>
                         <p>{{item.city_town}} {{item.street_name}}
                             {{item.building_appartment}}</p>
-                            <!-- <input type="hidden" value={{item.id}}> -->
                         <p>{{item.delivery_details}}</p>
                     </div>    
                     <div>
-                        <div><button value={{item.id}} class="change_address" id="id_change_address">Use address</button></div>
+                        <form action="{% url 'checkout' %}" method="POST">
+                            {% csrf_token %}
+                            <input name="id" value={{item.id}} type="hidden">
+                            <div><button type="submit" formaction="/checkout" class="change_address" id="id_change_address">Use address</button></div>
+                        </form> 
                     </div>
                 </div>
             </li>
@@ -44,76 +47,48 @@ My Cart
             {% csrf_token %}
 
             <!-- IF USER ALREADY HAVE A 1 or More delivery addresses saved  -->
-            {% if have_address %}
+            {% if address_id > 0 %}
                 {% for item in loa %}
-
                     <!-- WHEN LOADED SHOW THE SET TO DEFAULT DELIVERY ADDRESS -->
-                    {% if item.default %}
+                    {% if item.id == address_id %}
+                        <input type="hidden" name="current_address_id" value={{item.id}}>
                         <h3>Delivery Address</h3>
                         <div class="delivery_container">
                             <div class="delivery_address">
                                 <p class="deliver_name_phone"><span class="checkout_address_detail_name">{{item.name}} {{item.last_name}}</span> {{item.phone_number}}</p>
                                 <p>{{item.city_town}} {{item.street_name}}
                                     {{item.building_appartment}}</p>
-                                    <input type="hidden" value={{item.id}}>
                                 <p>{{item.delivery_details}}</p>
                             </div>    
                             <div>
-                                <div><button type="button" class="change_address" id="id_change_address_checkout">Change address</button></div>
-                                <div><button type="submit"  formaction="/checkout" class="change_address" id="id_checkout_new_address">+ New Address</button></div>
-                                <!-- <div><a href="/checkout" class="change_address" id="id_checkout_new_address">+ New Address</a></div> -->
+                                <div>
+                                    <button type="button" class="change_address" id="id_change_address_checkout">
+                                        Change address
+                                    </button>
+                                </div>
+                                <div>
+                                    <form action="{% url 'checkout' %}" method="POST">
+                                        {% csrf_token %}
+                                        <input name=id type="hidden" value=0>
+                                        <button type="submit" formaction="/checkout" class="change_address" id="id_checkout_new_address">
+                                            + New Address
+                                        </button>
+                                    </form>
+                                </div>
                             </div>
-                            
                         </div>
                     {% endif %}
                 {% endfor %}
+                <div id="id_order_note">
+                    <p><label for="ordernote">Notes</label></p>
+                    <textarea form="shipping-details-id" type="textarea" name="ordernote" rows="4" cols="50"> </textarea>
+                </div>
             <!-- IF THERE IS NO SAVED ADDRESS CREATE A NEW ONE -->
             {% else %}
                 {{form}}
             {% endif %}
-            <!-- FIRST AND LAST NAME CONTAINER -->
-            <!-- <div class="shipping-1st-row"> -->
-                <!-- First name  -->
-                <!-- <div class="shipping-first-name">
-                    <label>First name</label>
-                    {{form.first_name}}
-                </div>   -->
-                <!-- Last name  -->
-                <!-- <div class="shipping-last-name">
-                    <label>Last name</label>
-                    {{form.last_name}}
-                </div> 
-            </div>  -->
-            <!-- City and town  -->
-            <!-- <div class="shipping-city-town">
-                <label>City/Town</label>
-                {{form.city_town}}
-            </div>   -->
-            <!-- Street name -->
-            <!-- <div class="shipping-street">
-                <label>Street name</label>
-                {{form.street}}
-            </div>   -->
-            <!-- apartment blding, details -->
-            <!-- <div class="shipping-street">
-                <label>Building, appartement details</label>
-                {{form.building_appartement}}
-            </div>  
-            <div class="shipping-phone">
-                <label>Phone number</label>
-                {{form.phone}}
-            </div>  
-            <div class="shipping-note">
-                <label>Order notes (optional)</label>
-                {{form.note}}
-            </div>
-            <div>
-                <label>Additional Information</label>
-                {{form.additional_information}}
-            </div> -->
-            
         </form>
-
+    
     </div>
     <div class="checkout-order-invoice">
         <h1>Your order</h1>

@@ -684,7 +684,7 @@ form.search-site button {
   color: #292826;
 }
 
-.input-style-prim, .checkout-page-container .checkout-shipping-details-container form input, .checkout-page-container .checkout-shipping-details-container form textarea, .form-default-style form input, .form-default-style form textarea {
+.input-style-prim, .checkout-page-container .checkout-shipping-details-container form input, .checkout-page-container .checkout-shipping-details-container form textarea, .checkout-page-container .checkout-shipping-details-container input, .checkout-page-container .checkout-shipping-details-container textarea, .form-default-style form input, .form-default-style form textarea {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -1084,7 +1084,7 @@ form.search-site button {
   color: #292826;
 }
 
-.input-style-prim, .checkout-page-container .checkout-shipping-details-container form input, .checkout-page-container .checkout-shipping-details-container form textarea, .form-default-style form input, .form-default-style form textarea {
+.input-style-prim, .checkout-page-container .checkout-shipping-details-container input, .checkout-page-container .checkout-shipping-details-container textarea, .checkout-page-container .checkout-shipping-details-container form input, .checkout-page-container .checkout-shipping-details-container form textarea, .form-default-style form input, .form-default-style form textarea {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -1197,6 +1197,13 @@ form.search-site button {
 .checkout-page-container .checkout-shipping-details-container {
   width: 55%;
   max-width: 600px;
+}
+.checkout-page-container .checkout-shipping-details-container #id_order_note {
+  padding: 15px;
+}
+.checkout-page-container .checkout-shipping-details-container label {
+  font-size: 16px;
+  font-weight: 400;
 }
 .checkout-page-container .checkout-shipping-details-container form {
   padding: 0px 20px 20px 20px;

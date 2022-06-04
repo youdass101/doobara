@@ -40,8 +40,6 @@
 
     button {
         @include var.button-secondary;
-        // margin-bottom: 10px;
-
     }
 
     .checkout_address_detail_name {
@@ -57,29 +55,28 @@
         border-radius: 5px;
         color: white;
     }
-
 }
-
-
 
 .checkout-page-container {
     @include var.flex-default;
     width: 100%;
     justify-content: space-around;
-
     margin: 5px auto;
 
 
     .checkout-shipping-details-container {
         width: 55%;
         max-width: 600px;
-
-
-      
-
-    
-
-    
+        #id_order_note {
+            padding: 15px;
+        }
+        label {
+            @include var.par-body-2;
+        }
+ 
+        input, textarea {
+            @extend .input-style-prim;
+        }
 
         form {
             padding: 0px 20px 20px 20px ;
@@ -90,21 +87,11 @@
             label {
                 @include var.par-body-2;
             }
-            // Temperarly removed to use the form structure !!!!!!
-            // .shipping-1st-row {
-            //     @include var.flex-default;
-            //     width: 100%;
-            //     .shipping-first-name {
-            //         padding-right: 20px;
-            //     }
-            //     .shipping-first-name, .shipping-last-name {
-            //         display: block;
-            //         width: 50%;
-            //     }             
-            // }
+     
             input, textarea {
                 @extend .input-style-prim;
             }
+           
         }
     }
 

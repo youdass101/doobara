@@ -28,29 +28,25 @@ def updatecart(request):
     # is dict
     # json dict collect from js
     cartupdate = json.loads(request.body)
-    print("json body data", cartupdate)
     dcart = CartManager(request)
     dcart.update_cart(cartupdate)
  
-    
     return JsonResponse({"result":"done"}, status=201)
     
+
 def checkout(request):
     if request.user.is_authenticated:
         cart = CartManager(request)
         loa = request.user.myaddress.all()
+        id = 0
         if request.method == "GET":
-            print("NOT ME")
-            if loa:
-                have_address = True
-            else:
-                have_address = False
-            # do something 
-            return render(request, "cart/checkout.html", {"form": Delivery_Information(), "cart":cart.cart_page(), "have_address":have_address, "loa":loa})
-        else:
-            have_address = False
-            print("WHAT??>????")
-            return render(request, "cart/checkout.html", {"form": Delivery_Information(), "cart":cart.cart_page(), "have_address":have_address, "loa":[""]})
+            for i in loa:
+                if i.default:
+                    id= i.id
+        
+        if request.method == "POST":
+            id = int(request.POST['id'])
+        return render(request, "cart/checkout.html", {"form": Delivery_Information(), "cart":cart.cart_page(), "address_id":id, "loa":loa})
 
     else:
         return HttpResponseRedirect(reverse('myaccount'))

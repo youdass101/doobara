@@ -16,11 +16,19 @@ def myaccount(request):
 
 @login_required
 def placeorder(request):
-    # is dict 
-    # deliver information form from html request
-    form = Delivery_Information(request.POST)
-    # create order
-    createorder(request,form) 
-    success = "Thank you for Your order"
+    if request.method == "POST":
+        # is dict 
+        # deliver information form from html request
+        try: 
+            # form = int(request.POST['current_address_id'])
+            form =request.POST
+            createorder(request, form, False) 
 
-    return render(request, "users/orderplace.html", {'ordermessage':success})
+        except:
+            form = Delivery_Information(request.POST)
+            # create order
+
+            createorder(request,form, True) 
+        success = "Thank you for Your order"
+
+        return render(request, "users/orderplace.html", {'ordermessage':success})
