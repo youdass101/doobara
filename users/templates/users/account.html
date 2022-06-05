@@ -26,7 +26,7 @@ My Account
     <div id="my-account-data">
 
         <!-- DASHBOARD MAIN VIEW ACTIVE ORDERS -->
-        <div id="my-account-dashboard">
+        <div id="my-account-dashboard" class="show">
             <table>
                 <thead>
                     <tr>
@@ -38,20 +38,47 @@ My Account
                     </tr>
                 </thead>
                 <tbody>
+                    {% for order in orders %}
+                        {% if order.status == "processing" %}
+                            <tr>
+                                <td>#{{order.orderid}}</td>
+                                <td>{{order.date}}</td>
+                                <td>{{order.status}}</td>
+                                <td>${{order.total}}</td>
+                                <td><button class="view-order-button"><i class="fas fa-eye"></i> View </button></td>
+                            </tr>                            
+                        {% endif %}
+                    {%endfor%}
+                     
+                </tbody>
+            </table>
+        </div>
+
+        <!-- DASHBOARD MAIN VIEW ACTIVE ORDERS -->
+        <div id="my-account-orders">
+            <table>
+                <thead>
                     <tr>
-                        <td>#12345</td>
-                        <td>August 22, 2021</td>
-                        <td>Processing</td>
-                        <td>$40 for 1 item</td>
-                        <td><button class="view-order-button"><i class="fas fa-eye"></i> View </button></td>
+                        <th>Order</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                        <th>Total</th>
+                        <th>Action</th>
                     </tr>
-                    <tr>
-                        <td>#4577</td>
-                        <td>August 12, 2021</td>
-                        <td>Processing</td>
-                        <td>$60 for 3 item</td>
-                        <td><button class="view-order-button"><i class="view-order-button fas fa-eye"></i> View </button></td>
-                    </tr>
+                </thead>
+                <tbody>
+                    {% for order in orders %}
+                        {% if order.status != "processing" %}
+                            <tr>
+                                <td>#{{order.orderid}}</td>
+                                <td>{{order.date}}</td>
+                                <td>{{order.status}}</td>
+                                <td>${{order.total}}</td>
+                                <td><button class="view-order-button"><i class="fas fa-eye"></i> View </button></td>
+                            </tr>                            
+                        {% endif %}
+                    {%endfor%}
+                     
                 </tbody>
             </table>
         </div>

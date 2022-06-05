@@ -3,6 +3,7 @@ from allauth.account.signals import user_logged_in
 from django.dispatch import receiver
 
 # When user login 
+# Migrate session cart to user cart
 @receiver(user_logged_in)
 def cart_after_login(request, **kwargs):
     cart_migration(request)

@@ -6,7 +6,7 @@ def createorder(request, form, new):
     user = request.user
     if new:
         if form.is_valid():
-            # clean form data 
+            # clean form data of delivery address form 
             name = form.cleaned_data['first_name']
             lastname = form.cleaned_data['last_name']
             phone = form.cleaned_data['phone']
@@ -19,11 +19,12 @@ def createorder(request, form, new):
             # is intance 
             # create a new delivery address model object 
             state = False
+            # is list
+            # list of user saved delivery addresses
             allad = user.myaddress.all()
            
             if len(allad) == 0:
                 state=True
-                print("it is true")
             delivery = Delivery_Address_Details.objects.create(name=name, last_name=lastname, city_town=city, street_name=street, building_appartment=building, phone_number=phone, delivery_details=information, user=user, default=state)
         else:
             return False
@@ -57,7 +58,7 @@ def createorder(request, form, new):
         # delete current product from current user cart
         managecart.delete_objct(product, cart)
     
-    return True
+    return order
  
 
 

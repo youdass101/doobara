@@ -1,7 +1,7 @@
-from tkinter import CASCADE
 from django.db import models
 from django.contrib.auth.models import User
 from shop.models import *
+from datetime import timedelta, datetime
 
 # is model object
 # user shippin address and information
@@ -37,6 +37,20 @@ class Delivery_Address_Details (models.Model):
     def __str__(self):
         return f"{self.name}, {self.city_town}, {self.id} "
 
+
+    def serialize(self):
+        return{
+            "id": self.id,
+            "name": self.name,
+            "last_name": self.last_name,
+            "city_town": self.city_town,
+            "street_name": self.street_name,
+            "building_appartment": self.building_appartment,
+            "phone_number": self.phone_number,
+            "delivery_details": self.delivery_details,
+            "default": self.default
+        }
+
 # is object model 
 # user orders 
 class Orders (models.Model):
@@ -48,16 +62,17 @@ class Orders (models.Model):
     address = models.ForeignKey(Delivery_Address_Details, on_delete=models.SET_NULL, null=True)
     # is string
     # status names 
-    processing = "prcs"
-    complete = "cmplt"
-    canceled = "cncld"
-    pending = "pndng"
+    date = models.DateTimeField(auto_now_add=True)
+    prcs = "processing"
+    cmplt = "complete"
+    cncld = "canceled"
+    pndng = "pending"
     # is list 
     # list of status
-    STATUS_CHOICES = [(processing, "processing"), (complete, "complete"), (canceled, "canceled"), (pending, "pending") ]
+    STATUS_CHOICES = [(prcs, "processing"), (cmplt, "complete"), (cncld, "canceled"), (pndng, "pending") ]
     # is string
     # order staus to pick from list of choices 
-    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default=processing)
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default=prcs)
     # is Decimal number 
     # order total cost
     total = models.DecimalField(max_digits=5, decimal_places=2)
@@ -67,6 +82,16 @@ class Orders (models.Model):
 
     def __str__(self):
         return f"{self.id} "
+
+    def serialize(self):
+        return{
+            "orderid": self.id,
+            "status": self.status,
+            "total": self.total,
+            "note": self.note,
+            "date": self.date
+        }
+
 
 
 

@@ -1,6 +1,6 @@
 // Data for each Nav menu url 
-#my-account-dashboard {
-
+#my-account-dashboard, #my-account-orders {
+    display: none;
     //Dashboard and orders URL table 
     table {
         width: 100%;
@@ -25,6 +25,12 @@
         }
     } 
 }
+
+
+#my-account-orders {
+    display: none;
+}   
+
 
 @media screen and (max-width: 850px) {
     // My account page mobile styling

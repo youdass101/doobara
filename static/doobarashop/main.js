@@ -38,7 +38,8 @@ document.addEventListener('DOMContentLoaded', function(){
     // Set all account page data element display to none
     function account_default() {
         document.getElementById('account-wish-list').classList.toggle('show', false)
-        document.getElementById('my-account-dashboard').style.display = 'none';
+        document.getElementById('my-account-dashboard').classList.toggle('show', false)
+        document.getElementById('my-account-orders').classList.toggle('show', false)
         document.getElementById('account-detail').classList.toggle('show', false)
         document.getElementById('view-order').classList.toggle("show",false)
     }
@@ -50,14 +51,14 @@ document.addEventListener('DOMContentLoaded', function(){
         // Show Account current active orders container
         document.getElementById('account-dash').onclick = () => {
             account_default()
-            document.getElementById('my-account-dashboard').style.display = 'block'
+            document.getElementById('my-account-dashboard').classList.toggle('show')
         }
 
         // When Orders button clicked in account page 
         // Show account order history container
         document.getElementById('account-orders').onclick = () => {
             account_default()
-            document.getElementById('my-account-dashboard').style.display = 'block'
+            document.getElementById('my-account-orders').classList.toggle('show')
         }
 
         // When whishlist button clicked in account page 
@@ -329,22 +330,6 @@ document.addEventListener('DOMContentLoaded', function(){
         }
     }
 
-    // change address element
-    // if (document.getElementById("id_change_address_checkout")) {
-    //     nbtn = document.getElementById('id_checkout_new_address')
-    //     nbtn.onclick = () => {
-    //         fetch('/checkout', {
-    //             method: 'POST',
-    //             body: JSON.stringify({
-    //                 data : []
-    //             }),
-    //             headers:{
-    //                 'X-CSRFToken': getCookie('csrftoken')
-    //             }
-    //         })
-       
-    //     }
-    // }
 })
 
 

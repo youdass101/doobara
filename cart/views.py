@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import *
-from django.http import  JsonResponse, HttpResponse, HttpResponseRedirect
+from django.http import  JsonResponse, HttpResponseRedirect
 from django.urls import reverse
 import json
 from .modules.cartmanager import *
@@ -14,6 +14,8 @@ def cart(request):
     return render(request, "cart/cart.html", {"cart": cart.cart_page()})
 
 
+# WHen user press the add to cart button
+# this view will add the given
 def shopaddtocart(request):
     if request.method == "PUT":
         # load html input of product id
@@ -38,16 +40,15 @@ def checkout(request):
     if request.user.is_authenticated:
         cart = CartManager(request)
         loa = request.user.myaddress.all()
+        lod = [item.serialize() for item in loa]
         id = 0
         if request.method == "GET":
-            for i in loa:
-                if i.default:
-                    id= i.id
-        
+            for i in lod:
+                if i['default']:
+                    id= int(i['id'])
         if request.method == "POST":
             id = int(request.POST['id'])
-        return render(request, "cart/checkout.html", {"form": Delivery_Information(), "cart":cart.cart_page(), "address_id":id, "loa":loa})
-
+        return render(request, "cart/checkout.html", {"form": Delivery_Information(), "cart":cart.cart_page(), "address_id":id, "loa":lod})
     else:
         return HttpResponseRedirect(reverse('myaccount'))
 
