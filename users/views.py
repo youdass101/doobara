@@ -18,21 +18,13 @@ def myaccount(request):
 @login_required
 def placeorder(request):
     if request.method == "POST":
-        try: 
-            # is disct
-            # conatin current select address id and order note
-            form =request.POST
-            # is a helper function at modules, ordermanager 
-            # Create order and bind with delivery address
-            order =createorder(request, form, False) 
-
-        except:
-            # is instance form
-            # new delivery address for login user
-            form = Delivery_Information(request.POST)
-            # create order
-            order = createorder(request,form, True) 
-
+        form, state = address_post(request)
+        order = createorder(request,form, state) 
         success = "Thank you for Your order"
 
         return render(request, "users/orderplace.html", {'ordermessage':success, "order": order.serialize()})
+
+
+@login_required
+def order_log(request):
+    return render(request, "users/orderlog.html")

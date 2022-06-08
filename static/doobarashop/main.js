@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function(){
         document.getElementById('my-account-dashboard').classList.toggle('show', false)
         document.getElementById('my-account-orders').classList.toggle('show', false)
         document.getElementById('account-detail').classList.toggle('show', false)
-        document.getElementById('view-order').classList.toggle("show",false)
+        // document.getElementById('view-order').classList.toggle("show",false)
     }
 
     // When account page compnents loaded 
@@ -77,12 +77,12 @@ document.addEventListener('DOMContentLoaded', function(){
         
         // When view button is clicked in orders and dash container in account page 
         // Show ACCOUNT single ORDER VIEW 
-        document.querySelectorAll('.view-order-button').forEach (button => {
-            button.onclick = () => {
-            account_default()
-            document.getElementById('view-order').classList.toggle('show')
-            }
-        }) 
+        // document.querySelectorAll('.view-order-button').forEach (button => {
+        //     button.onclick = () => {
+        //     account_default()
+        //     document.getElementById('view-order').classList.toggle('show')
+        //     }
+        // }) 
     }
 
 

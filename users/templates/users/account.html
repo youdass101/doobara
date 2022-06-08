@@ -74,7 +74,10 @@ My Account
                                 <td>{{order.date}}</td>
                                 <td>{{order.status}}</td>
                                 <td>${{order.total}}</td>
-                                <td><button class="view-order-button"><i class="fas fa-eye"></i> View </button></td>
+                                <form action="{% url 'order_log' %}">
+                                    <input type="hidden" value={{order.orderid}} name="orderid">
+                                    <td><button type="submit" class="view-order-button"><i class="fas fa-eye"></i> View </button></td>
+                                </form>
                             </tr>                            
                         {% endif %}
                     {%endfor%}
@@ -85,7 +88,6 @@ My Account
 
         <!-- ORDERS HISTORY VIEW  -->
         <!-- it was here -->
-        {% include "users/orderhistory.html"%}
 
         <!-- WHICH LIST TABLE VIEW  -->
         <div id="account-wish-list">
@@ -154,9 +156,9 @@ My Account
                     <input type="email" value="hamzechalhoub@gmail.com">
                 </div>
 
-            <!-- PASSWORD CHANGE -->
-            <h2>Password Change</h2>
-            <div class="account-password-change">
+                <!-- PASSWORD CHANGE -->
+                <h2>Password Change</h2>
+                <div class="account-password-change">
                     <!-- Last name -->
                     <div class="account-current-password">
                         <label > Current password (leave blank to leave unchanged)</label>

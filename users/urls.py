@@ -14,6 +14,6 @@ urlpatterns=[
     # My Account page
     path("myaccount", views.myaccount, name="myaccount"),
     path('logout', LogoutView.as_view()),
-    path('placeorder', views.placeorder, name="placeorder")
-
+    path('placeorder', views.placeorder, name="placeorder"),
+    path('order_log', view=views.order_log, name="order_log")
 ]

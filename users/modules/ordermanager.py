@@ -59,7 +59,25 @@ def createorder(request, form, new):
         managecart.delete_objct(product, cart)
     
     return order
- 
 
+# dict -> dict * boolean
+# takes request dict return: form data
+# and boolean true if user have address saved or false if not
+def address_post(request):
+    try: 
+        # is disct
+        # conatin current select address id and order note
+        form =request.POST
+        # is a helper function at modules, ordermanager 
+        # user have saved address
+        state = False 
 
+    except:
+        # is instance form
+        # new delivery address for login user
+        form = Delivery_Information(request.POST)
+        # new address 
+        state = True
+    
+    return form, state
             
