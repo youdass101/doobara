@@ -27,4 +27,10 @@ def placeorder(request):
 
 @login_required
 def order_log(request):
-    return render(request, "users/orderlog.html")
+    if request.method == "POST":
+        form = request.POST['orderid']
+        order = Orders.objects.filter(id=form)[0]
+        items = order.items.all()
+        sorder = order.serialize()
+        sitems = [item.serialize() for item in items]
+    return render(request, "users/orderlog.html", {"order": sorder, "items": sitems})

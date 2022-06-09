@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function(){
     
     // Set all account page data element display to none
     function account_default() {
-        document.getElementById('account-wish-list').classList.toggle('show', false)
+        // document.getElementById('account-wish-list').classList.toggle('show', false)
         document.getElementById('my-account-dashboard').classList.toggle('show', false)
         document.getElementById('my-account-orders').classList.toggle('show', false)
         document.getElementById('account-detail').classList.toggle('show', false)
@@ -63,10 +63,10 @@ document.addEventListener('DOMContentLoaded', function(){
 
         // When whishlist button clicked in account page 
         // Show account whishlistbutton container
-        document.getElementById('account-whishlist').onclick = () => {
-            account_default()
-            document.getElementById('account-wish-list').classList.toggle('show')
-        }
+        // document.getElementById('account-whishlist').onclick = () => {
+        //     account_default()
+        //     document.getElementById('account-wish-list').classList.toggle('show')
+        // }
 
         // When account details button is clicked in account page 
         //show Account edit form contianer 

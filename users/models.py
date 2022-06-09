@@ -117,4 +117,12 @@ class Item_Order (models.Model):
     def __str__(self):
         return f"{self.product_name} "
 
+    def serialize(self):
+        return {
+            "product_name":self.product_name,
+            "price":self.price,
+            "quantity": self.quantity,
+            "subtotal": (self.price * self.quantity)
+        }
+
 

@@ -2085,24 +2085,6 @@ form.search-site button {
     content: "Action:";
   }
 }
-#my-account-container #view-order, #my-account-container #account-wish-list {
-  display: none;
-}
-#my-account-container #view-order p, #my-account-container #account-wish-list p {
-  padding: 0;
-  margin: 0;
-}
-#my-account-container #view-order table, #my-account-container #account-wish-list table {
-  width: 100%;
-  text-align: left;
-  border-collapse: collapse;
-}
-#my-account-container #view-order table th, #my-account-container #account-wish-list table th {
-  padding: 15px 0 15px 20px;
-}
-#my-account-container #view-order table td, #my-account-container #account-wish-list table td {
-  padding: 15px 0 15px 20px;
-}
 #my-account-container #account-wish-list {
   display: none;
 }
@@ -2435,6 +2417,28 @@ form.search-site button {
 
 .order_sucess_container {
   padding: 100px;
+}
+
+#view-order, #my-account-container #account-wish-list {
+  padding: 5% 10% 10% 10%;
+}
+#view-order .highlight, #my-account-container #account-wish-list .highlight {
+  font-weight: 800;
+}
+#view-order p, #my-account-container #account-wish-list p {
+  padding: 1px;
+  margin: 0;
+}
+#view-order table, #my-account-container #account-wish-list table {
+  width: 100%;
+  text-align: left;
+  border-collapse: collapse;
+}
+#view-order table th, #my-account-container #account-wish-list table th {
+  padding: 15px 0 15px 20px;
+}
+#view-order table td, #my-account-container #account-wish-list table td {
+  padding: 15px 0 15px 20px;
 }
 
 .body-800width {

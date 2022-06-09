@@ -16,7 +16,7 @@ My Account
         <ul>
             <li id="account-dash">Dashboard <i class="fas fa-tachometer-alt"></i></li>
             <li id="account-orders">Orders <i class="fas fa-shopping-cart"></i></li>
-            <li id="account-whishlist">Wishlist <i class="fas fa-list-alt"></i></li>
+            <!-- <li id="account-whishlist">Wishlist <i class="fas fa-list-alt"></i></li> -->
             <li id="account-edit">Account details <i class="fas fa-address-card"></i></li>
             <li onclick="location.href='/accounts/logout'">Logout <i class="fas fa-sign-out-alt"></i></li>
         </ul>
@@ -45,7 +45,11 @@ My Account
                                 <td>{{order.date}}</td>
                                 <td>{{order.status}}</td>
                                 <td>${{order.total}}</td>
-                                <td><button class="view-order-button"><i class="fas fa-eye"></i> View </button></td>
+                                <form method="POST" action="{% url 'order_log' %}">
+                                    {% csrf_token %}
+                                    <input type="hidden" value={{order.orderid}} name="orderid">
+                                    <td><button formaction="order_log" type="submit" class="view-order-button"><i class="fas fa-eye"></i> View </button></td>
+                                </form> 
                             </tr>                            
                         {% endif %}
                     {%endfor%}
@@ -74,10 +78,11 @@ My Account
                                 <td>{{order.date}}</td>
                                 <td>{{order.status}}</td>
                                 <td>${{order.total}}</td>
-                                <form action="{% url 'order_log' %}">
+                                <form method="POST" action="{% url 'order_log' %}">
+                                    {% csrf_token %}
                                     <input type="hidden" value={{order.orderid}} name="orderid">
-                                    <td><button type="submit" class="view-order-button"><i class="fas fa-eye"></i> View </button></td>
-                                </form>
+                                    <td><button formaction="order_log" type="submit" class="view-order-button"><i class="fas fa-eye"></i> View </button></td>
+                                </form> 
                             </tr>                            
                         {% endif %}
                     {%endfor%}
