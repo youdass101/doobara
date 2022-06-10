@@ -105,6 +105,15 @@
 
             <!-- MOBILE FOOTER MENU -->
             <div id="mobile-footer-menu">
+                <div class="searchproductmobile">
+                    <form action="{% url 'search' %}" method="POST" class="search-site">
+                        <!-- text input for search  -->
+                        {% csrf_token %}
+                        <input name="keyword" class="search-input" type="text" placeholder="Search Products">
+                        <!-- button icon for search submit -->
+                        <button type="submit"><i class="fa fa-search"></i></button>
+                    </form>
+                </div>      
                 <div class="footer-navigation">
                 <a href="/"><i class="icons fas fa-home fa-3x"></i></a>
                 <a href="/shop"><i class="icons fas fa-store fa-3x"></i></a>
