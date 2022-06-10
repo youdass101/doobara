@@ -1,6 +1,8 @@
 // SHOP PAGE
 @use '../../../static/doobarashop/sass/abstracts/all' as var; 
 
+@import '../components/filterbar';
+
 // product countainer grid 
 #container-shop {
     clear: both;
@@ -11,4 +13,5 @@
     background-color: var.$identity-color;
     
     @import '../components/shop-product-item-block';
+
 }

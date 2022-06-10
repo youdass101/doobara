@@ -14,6 +14,9 @@ urlpatterns=[
     path("contactus", views.contactus, name="contactus"),
     # Single product page
     path('single_product/<str:locat>/', views.single_product, name="single_product"),
+    # search keyword 
+    path('search', views.search, name="search"),
+    path("orderby", views.orderby, name="orderby")
 
  
 

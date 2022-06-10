@@ -53,9 +53,10 @@
 
             <!-- SEARCH BOX second right top section of navigation bar contain search box  -->
             <div id="search-box-nav" >   
-                <form class="search-site">
+                <form action="{% url 'search' %}" method="POST" class="search-site">
                     <!-- text input for search  -->
-                    <input class="search-input" type="text" placeholder="Search Products">
+                    {% csrf_token %}
+                    <input name="keyword" class="search-input" type="text" placeholder="Search Products">
                     <!-- button icon for search submit -->
                     <button type="submit"><i class="fa fa-search"></i></button>
                 </form>       

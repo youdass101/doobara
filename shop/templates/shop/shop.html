@@ -6,6 +6,27 @@ SHOP
 {% endblock %}
 {% block body %}
 <!-- Shop carousel container -->
+<div class="filterproduct">
+    <form action="{% url 'orderby' %}" method="POST">
+        {% csrf_token %}
+        <select name="category">
+            <option value="all">Categories</option>
+            {% for cat in cats %}
+            <option value="{{cat.name}}">{{cat.name}}</option>
+            {% endfor %}
+        </select>
+
+        <select name="byorder">
+            <option value="default">By order</option>
+            <option value="AZ">A-Z</option>
+            <option value="ZA">Z-A</option>
+            <option value="lhp">Low Price</option>
+            <option value="hlp">High Price</option>
+        </select>
+        <input class="filtersubmit" type="submit" value="Filter">
+    </form>
+
+</div>
 <div id="container-shop">
     {% for row in lop %}
     <div class="shop-product">

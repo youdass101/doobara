@@ -1655,6 +1655,27 @@ form.search-site button {
   color: #F9D342;
 }
 
+.filterproduct {
+  position: relative;
+  font-family: Arial;
+  padding: 10px 10px 10px 20px;
+}
+.filterproduct select {
+  padding: 5px;
+  background-color: #F9D342;
+}
+.filterproduct .filtersubmit {
+  color: #fff;
+  background-color: #292826;
+  font-family: "Archivo Narrow", Sans-serif;
+  font-size: 14px;
+  border-style: groove;
+  border-width: 0;
+  border-radius: 6px;
+  padding: 7px 20px 7px 20px;
+  cursor: pointer;
+}
+
 #container-shop {
   clear: both;
   padding: 7px 0 7px 0;
