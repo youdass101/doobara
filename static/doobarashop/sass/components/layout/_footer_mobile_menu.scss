@@ -23,6 +23,18 @@
         .footer-navigation { 
             @include var.flex-default;   
             justify-content: space-around; // !!!
+
+            .search_icon_footer_menu {
+                cursor: pointer;
+            }
+        }
+
+        #popsearch {
+            display: none;
+            position: fixed;
+            bottom: 8%;
+            width: 99%;
+            margin: 0px auto 0px 50px ;
         }
     }
 }

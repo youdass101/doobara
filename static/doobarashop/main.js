@@ -330,6 +330,17 @@ document.addEventListener('DOMContentLoaded', function(){
         }
     }
 
+    // show search form 
+    // when user press the search icon in the fotter mobile menu
+    // the search element form is set to displat
+    if (document.getElementById('search_icon')) {
+        sbut = document.getElementById("search_icon")
+        sbar =document.getElementById("popsearch")
+        sbut.onclick = function() {
+            sbar.classList.toggle('show');
+        }
+    }
+
 })
 
 

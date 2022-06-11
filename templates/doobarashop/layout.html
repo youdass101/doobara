@@ -65,7 +65,7 @@
             <!-- MENU LINK ICON BAR 3d left buttom section of navigatio bar contain navigation menu links -->
             <div id="navigation-menu">
                 <a href="/shop"><i class="icons fas fa-store"></i>Shop</a>
-                <a href="/blog"><i class="icons fab fa-blogger-b"></i>Blog</a>
+                <!-- <a href="/blog"><i class="icons fab fa-blogger-b"></i>Blog</a> -->
                 <a href="/video"><i class="icons fab fa-youtube"></i>Video</a>
                 <a href="/contactus"><i class="icons fas fa-inbox"></i>Contact Us</a>
                 {% if user.is_authenticated %}
@@ -86,7 +86,7 @@
             <div id="navigation-mobile"> 
                 <ul>
                     <li><a href="/shop"><i class="icons fas fa-store"></i><span class="navigationMenuName"> Shop</span></a></li>
-                    <li><a href="/blog"><i class="icons fab fa-blogger-b"></i><span class="navigationMenuName"> Blog</span></a></li>
+                    <!-- <li><a href="/blog"><i class="icons fab fa-blogger-b"></i><span class="navigationMenuName"> Blog</span></a></li> -->
                     <li><a href="/video"><i class="icons fab fa-youtube"></i><span class="navigationMenuName"> Video</span></a></li>
                     <li><a href="/contactus"><i class="icons fas fa-inbox"></i><span class="navigationMenuName"> Contact Us</span></a></li>
                     {% if user.is_authenticated %}
@@ -103,9 +103,10 @@
                 {% block body %} {%endblock%}   
             </div>
 
+         
             <!-- MOBILE FOOTER MENU -->
             <div id="mobile-footer-menu">
-                <div class="searchproductmobile">
+                <div class="searchproductmobile" id="popsearch">
                     <form action="{% url 'search' %}" method="POST" class="search-site">
                         <!-- text input for search  -->
                         {% csrf_token %}
@@ -113,7 +114,7 @@
                         <!-- button icon for search submit -->
                         <button type="submit"><i class="fa fa-search"></i></button>
                     </form>
-                </div>      
+                </div>  
                 <div class="footer-navigation">
                 <a href="/"><i class="icons fas fa-home fa-3x"></i></a>
                 <a href="/shop"><i class="icons fas fa-store fa-3x"></i></a>
@@ -122,7 +123,7 @@
                 {%else%}
                 <a href="/accounts/login"><i class="icons fas fa-user fa-3x"></i></a>
                 {% endif%}
-                <a href="#"><i class="icons fas fa-search fa-3x"></i></a>
+                <div class="search_icon_footer_menu" id="search_icon"><i class="icons fas fa-search fa-3x"></i></div>
                 <a href="/cart"><i class="icons fas fa-shopping-cart fa-3x"></i></a>
                 </div>
             </div>

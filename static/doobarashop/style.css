@@ -240,10 +240,6 @@ form.search-site button {
   #search-box-nav {
     display: none !important;
   }
-
-  .searchproductmobile {
-    display: none;
-  }
 }
 #navigation-menu {
   grid-area: menu;
@@ -374,6 +370,16 @@ form.search-site button {
     display: flex;
     display: -webkit-flex;
     justify-content: space-around;
+  }
+  #mobile-footer-menu .footer-navigation .search_icon_footer_menu {
+    cursor: pointer;
+  }
+  #mobile-footer-menu #popsearch {
+    display: none;
+    position: fixed;
+    bottom: 8%;
+    width: 99%;
+    margin: 0px auto 0px 50px;
   }
 }
 #logo-nav {
