@@ -37,10 +37,11 @@ document.addEventListener('DOMContentLoaded', function(){
     
     // Set all account page data element display to none
     function account_default() {
-        document.getElementById('account-wish-list').classList.toggle('show', false)
-        document.getElementById('my-account-dashboard').style.display = 'none';
+        // document.getElementById('account-wish-list').classList.toggle('show', false)
+        document.getElementById('my-account-dashboard').classList.toggle('show', false)
+        document.getElementById('my-account-orders').classList.toggle('show', false)
         document.getElementById('account-detail').classList.toggle('show', false)
-        document.getElementById('view-order').classList.toggle("show",false)
+        // document.getElementById('view-order').classList.toggle("show",false)
     }
 
     // When account page compnents loaded 
@@ -50,22 +51,22 @@ document.addEventListener('DOMContentLoaded', function(){
         // Show Account current active orders container
         document.getElementById('account-dash').onclick = () => {
             account_default()
-            document.getElementById('my-account-dashboard').style.display = 'block'
+            document.getElementById('my-account-dashboard').classList.toggle('show')
         }
 
         // When Orders button clicked in account page 
         // Show account order history container
         document.getElementById('account-orders').onclick = () => {
             account_default()
-            document.getElementById('my-account-dashboard').style.display = 'block'
+            document.getElementById('my-account-orders').classList.toggle('show')
         }
 
         // When whishlist button clicked in account page 
         // Show account whishlistbutton container
-        document.getElementById('account-whishlist').onclick = () => {
-            account_default()
-            document.getElementById('account-wish-list').classList.toggle('show')
-        }
+        // document.getElementById('account-whishlist').onclick = () => {
+        //     account_default()
+        //     document.getElementById('account-wish-list').classList.toggle('show')
+        // }
 
         // When account details button is clicked in account page 
         //show Account edit form contianer 
@@ -76,12 +77,12 @@ document.addEventListener('DOMContentLoaded', function(){
         
         // When view button is clicked in orders and dash container in account page 
         // Show ACCOUNT single ORDER VIEW 
-        document.querySelectorAll('.view-order-button').forEach (button => {
-            button.onclick = () => {
-            account_default()
-            document.getElementById('view-order').classList.toggle('show')
-            }
-        }) 
+        // document.querySelectorAll('.view-order-button').forEach (button => {
+        //     button.onclick = () => {
+        //     account_default()
+        //     document.getElementById('view-order').classList.toggle('show')
+        //     }
+        // }) 
     }
 
 
@@ -240,6 +241,7 @@ document.addEventListener('DOMContentLoaded', function(){
                     else {
                         document.getElementById('carttotal').innerHTML = result.cart.total
                         document.getElementById('cartitemsqtt').innerHTML = result.cart.item
+                        document.getElementById('footeritemqtt').innerHTML = result.cart.item
                     }
                 })
             }
@@ -298,6 +300,46 @@ document.addEventListener('DOMContentLoaded', function(){
             return null;
         }
         return decodeURIComponent(token[0].split('=')[1]);
+    }
+
+    if (document.getElementById("dtotal")) {
+        stotal = parseInt(document.getElementById("dsubtotal").innerHTML.replace('$', "").trim());
+        if (stotal > 60) {
+            document.getElementById("ddelivery").innerHTML = "Free";
+        }
+        else {
+            total = (stotal + 2).toFixed(2)
+            document.getElementById("dtotal").innerHTML =  "$" +" "+ total
+
+        }
+    }
+
+
+    // change address element
+    if (document.getElementById("id_change_address_checkout")) {
+        loa =  document.getElementById('id_change_address_checkout');
+        popm = document.getElementById("id_change_address_popup");
+       loa.onclick = () => {
+            popm.style.display = "flex";
+        }
+    
+
+        window.onclick = function(event) {
+            if (event.target !== loa && event.target !== popm ) {
+                popm.style.display = "none";
+            }   
+        }
+    }
+
+    // show search form 
+    // when user press the search icon in the fotter mobile menu
+    // the search element form is set to displat
+    if (document.getElementById('search_icon')) {
+        sbut = document.getElementById("search_icon")
+        sbar =document.getElementById("popsearch")
+        sbut.onclick = function() {
+            sbar.classList.toggle('show');
+        }
     }
 
 })

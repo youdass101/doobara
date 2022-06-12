@@ -1,0 +1,41 @@
+{% extends "doobarashop/layout.html"%}
+{% load static %}
+{% block pagetitle %}
+    Order
+{% endblock %}
+
+{% block body %}
+    <div id="view-order" class="">
+        <h3>Order details</h3>
+        <p>Order Number #<span class="highlight">{{order.orderid}}</span></p>
+        <p>Order date:  <span class="highlight">{{order.date}}</span></p>
+        <p>Order status: <span class="highlight">{{order.status}}</span></p> 
+        <table>
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Unit price</th>
+                    <th>Subtotal</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in items %}
+                    <tr>
+                        <td><a href="single_product/{{item.product_name}}"><b>{{item.product_name}}</b></td>
+                        <td>{{item.quantity}}</td>
+                        <td>{{item.price}}</td>
+                        <td>{{item.subtotal}}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th>Total</th>
+                    <td></td><td></td>
+                    <td class="highlight">${{order.total}}</td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+{% endblock %}

@@ -53,9 +53,10 @@
 
             <!-- SEARCH BOX second right top section of navigation bar contain search box  -->
             <div id="search-box-nav" >   
-                <form class="search-site">
+                <form action="{% url 'search' %}" method="POST" class="search-site">
                     <!-- text input for search  -->
-                    <input class="search-input" type="text" placeholder="Search Products">
+                    {% csrf_token %}
+                    <input name="keyword" class="search-input" type="text" placeholder="Search Products">
                     <!-- button icon for search submit -->
                     <button type="submit"><i class="fa fa-search"></i></button>
                 </form>       
@@ -64,7 +65,7 @@
             <!-- MENU LINK ICON BAR 3d left buttom section of navigatio bar contain navigation menu links -->
             <div id="navigation-menu">
                 <a href="/shop"><i class="icons fas fa-store"></i>Shop</a>
-                <a href="/blog"><i class="icons fab fa-blogger-b"></i>Blog</a>
+                <!-- <a href="/blog"><i class="icons fab fa-blogger-b"></i>Blog</a> -->
                 <a href="/video"><i class="icons fab fa-youtube"></i>Video</a>
                 <a href="/contactus"><i class="icons fas fa-inbox"></i>Contact Us</a>
                 {% if user.is_authenticated %}
@@ -85,7 +86,7 @@
             <div id="navigation-mobile"> 
                 <ul>
                     <li><a href="/shop"><i class="icons fas fa-store"></i><span class="navigationMenuName"> Shop</span></a></li>
-                    <li><a href="/blog"><i class="icons fab fa-blogger-b"></i><span class="navigationMenuName"> Blog</span></a></li>
+                    <!-- <li><a href="/blog"><i class="icons fab fa-blogger-b"></i><span class="navigationMenuName"> Blog</span></a></li> -->
                     <li><a href="/video"><i class="icons fab fa-youtube"></i><span class="navigationMenuName"> Video</span></a></li>
                     <li><a href="/contactus"><i class="icons fas fa-inbox"></i><span class="navigationMenuName"> Contact Us</span></a></li>
                     {% if user.is_authenticated %}
@@ -102,18 +103,28 @@
                 {% block body %} {%endblock%}   
             </div>
 
+         
             <!-- MOBILE FOOTER MENU -->
             <div id="mobile-footer-menu">
+                <div class="searchproductmobile" id="popsearch">
+                    <form action="{% url 'search' %}" method="POST" class="search-site">
+                        <!-- text input for search  -->
+                        {% csrf_token %}
+                        <input name="keyword" class="search-input" type="text" placeholder="Search Products">
+                        <!-- button icon for search submit -->
+                        <button type="submit"><i class="fa fa-search"></i></button>
+                    </form>
+                </div>  
                 <div class="footer-navigation">
-                <a href="/"><i class="icons fas fa-home fa-3x"></i></a>
-                <a href="/shop"><i class="icons fas fa-store fa-3x"></i></a>
-                {% if user.is_authenticated %}
-                <a href="/myaccount"><i class="icons fas fa-user fa-3x"></i></a>
-                {%else%}
-                <a href="/accounts/login"><i class="icons fas fa-user fa-3x"></i></a>
-                {% endif%}
-                <a href="#"><i class="icons fas fa-search fa-3x"></i></a>
-                <a href="/cart"><i class="icons fas fa-shopping-cart fa-3x"></i></a>
+                    <a href="/"><i class="icons fas fa-home fa-3x"></i></a>
+                    <a href="/shop"><i class="icons fas fa-store fa-3x"></i></a>
+                    {% if user.is_authenticated %}
+                    <a href="/myaccount"><i class="icons fas fa-user fa-3x"></i></a>
+                    {%else%}
+                    <a href="/accounts/login"><i class="icons fas fa-user fa-3x"></i></a>
+                    {% endif%}
+                    <div class="search_icon_footer_menu" id="search_icon"><i class="icons fas fa-search fa-3x"></i></div>
+                    <a href="/cart"><i class="icons fas fa-shopping-cart fa-3x"></i><p id="footeritemqtt">{{item}}</p></a>
                 </div>
             </div>
 

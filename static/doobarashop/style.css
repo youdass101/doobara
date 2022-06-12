@@ -371,6 +371,26 @@ form.search-site button {
     display: -webkit-flex;
     justify-content: space-around;
   }
+  #mobile-footer-menu .footer-navigation .search_icon_footer_menu {
+    cursor: pointer;
+  }
+  #mobile-footer-menu .footer-navigation .mcart {
+    position: relative;
+  }
+  #mobile-footer-menu .footer-navigation #footeritemqtt {
+    display: block;
+    position: absolute;
+    color: black;
+    bottom: 15%;
+    right: 8%;
+  }
+  #mobile-footer-menu #popsearch {
+    display: none;
+    position: fixed;
+    bottom: 8%;
+    width: 99%;
+    margin: 0px auto 0px 50px;
+  }
 }
 #logo-nav {
   grid-area: logo;
@@ -684,7 +704,7 @@ form.search-site button {
   color: #292826;
 }
 
-.input-style-prim, .checkout-page-container .checkout-shipping-details-container form input, .checkout-page-container .checkout-shipping-details-container form textarea, .form-default-style form input, .form-default-style form textarea {
+.input-style-prim, .checkout-page-container .checkout-shipping-details-container form input, .checkout-page-container .checkout-shipping-details-container form textarea, .checkout-page-container .checkout-shipping-details-container input, .checkout-page-container .checkout-shipping-details-container textarea, .form-default-style form input, .form-default-style form textarea {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -1084,7 +1104,7 @@ form.search-site button {
   color: #292826;
 }
 
-.input-style-prim, .checkout-page-container .checkout-shipping-details-container form input, .checkout-page-container .checkout-shipping-details-container form textarea, .form-default-style form input, .form-default-style form textarea {
+.input-style-prim, .checkout-page-container .checkout-shipping-details-container input, .checkout-page-container .checkout-shipping-details-container textarea, .checkout-page-container .checkout-shipping-details-container form input, .checkout-page-container .checkout-shipping-details-container form textarea, .form-default-style form input, .form-default-style form textarea {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -1130,18 +1150,83 @@ form.search-site button {
   color: #F9D342;
 }
 
+.change_address_popup {
+  display: none;
+  width: 60%;
+  padding: 20px;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: column;
+  position: absolute;
+  border-radius: 20px;
+  border: 1px solid black;
+  background-color: white;
+  left: 50%;
+  transform: translate(-50%, 10%);
+}
+.change_address_popup ul {
+  list-style-type: none;
+  padding: 0px;
+}
+.change_address_popup li {
+  padding: 6px;
+  border: 1px solid black;
+  border-radius: 15px;
+  margin: 0 0 8px 0;
+}
+.change_address_popup .address_list {
+  width: 100%;
+}
+
+.delivery_container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.delivery_container button {
+  color: #fff;
+  background-color: #292826;
+  font-family: "Archivo Narrow", Sans-serif;
+  font-size: 14px;
+  border-style: groove;
+  border-width: 0;
+  border-radius: 6px;
+  padding: 7px 20px 7px 20px;
+  cursor: pointer;
+}
+.delivery_container .checkout_address_detail_name {
+  font-weight: 750;
+  padding-right: 15px;
+}
+.delivery_container .change_address {
+  cursor: pointer;
+  background-color: #292826;
+  padding: 4px;
+  text-align: center;
+  border-radius: 5px;
+  color: white;
+}
+
 .checkout-page-container {
   display: flex;
   display: -webkit-flex;
   width: 100%;
-  max-width: 1100px;
+  justify-content: space-around;
   margin: 5px auto;
 }
 .checkout-page-container .checkout-shipping-details-container {
   width: 55%;
+  max-width: 600px;
+}
+.checkout-page-container .checkout-shipping-details-container #id_order_note {
+  padding: 15px;
+}
+.checkout-page-container .checkout-shipping-details-container label {
+  font-size: 16px;
+  font-weight: 400;
 }
 .checkout-page-container .checkout-shipping-details-container form {
-  padding: 20px;
+  padding: 0px 20px 20px 20px;
 }
 .checkout-page-container .checkout-shipping-details-container form div {
   padding-bottom: 10px;
@@ -1150,32 +1235,22 @@ form.search-site button {
   font-size: 16px;
   font-weight: 400;
 }
-.checkout-page-container .checkout-shipping-details-container form .shipping-1st-row {
-  display: flex;
-  display: -webkit-flex;
-  width: 100%;
-}
-.checkout-page-container .checkout-shipping-details-container form .shipping-1st-row .shipping-first-name {
-  padding-right: 20px;
-}
-.checkout-page-container .checkout-shipping-details-container form .shipping-1st-row .shipping-first-name, .checkout-page-container .checkout-shipping-details-container form .shipping-1st-row .shipping-last-name {
-  display: block;
-  width: 50%;
-}
 .checkout-page-container .checkout-order-invoice {
-  width: 45%;
+  width: 50%;
   padding-left: 30px;
+  max-width: 600px;
 }
 .checkout-page-container .checkout-order-invoice table {
   width: 100%;
   border-collapse: collapse;
 }
 .checkout-page-container .checkout-order-invoice table th {
+  width: 30%;
   padding: 15px 0px 15px 0px;
   vertical-align: top;
 }
 .checkout-page-container .checkout-order-invoice table td {
-  padding: 17px 40px 0px 17px;
+  padding: 17px 20px 0px 20px;
   vertical-align: top;
 }
 .checkout-page-container .checkout-order-invoice .checkout-policy {
@@ -1212,19 +1287,17 @@ form.search-site button {
     display: block;
     width: 100%;
   }
+  .checkout-page-container .delivery_container {
+    flex-direction: column;
+  }
   .checkout-page-container .checkout-shipping-details-container, .checkout-page-container .checkout-order-invoice {
     width: 100% !important;
   }
+  .checkout-page-container .checkout-shipping-details-container h1, .checkout-page-container .checkout-shipping-details-container h2, .checkout-page-container .checkout-order-invoice h1, .checkout-page-container .checkout-order-invoice h2 {
+    text-align: center;
+  }
   .checkout-page-container .checkout-order-invoice {
     padding-left: 0px;
-  }
-  .checkout-page-container .shipping-1st-row {
-    display: block !important;
-  }
-  .checkout-page-container .shipping-1st-row .shipping-first-name, .checkout-page-container .shipping-1st-row .shipping-last-name {
-    display: block;
-    width: 100% !important;
-    padding: 0px !important;
   }
 }
 .body-800width, .single-product-page-container .single-product-dimention, .single-product-page-container .single-product-long-desc, .single-product-page-container .single-product-image-long, .single-product-page-container .single-product-video {
@@ -1602,6 +1675,27 @@ form.search-site button {
   color: #F9D342;
 }
 
+.filterproduct {
+  position: relative;
+  font-family: Arial;
+  padding: 10px 10px 10px 20px;
+}
+.filterproduct select {
+  padding: 5px;
+  background-color: #F9D342;
+}
+.filterproduct .filtersubmit {
+  color: #fff;
+  background-color: #292826;
+  font-family: "Archivo Narrow", Sans-serif;
+  font-size: 14px;
+  border-style: groove;
+  border-width: 0;
+  border-radius: 6px;
+  padding: 7px 20px 7px 20px;
+  cursor: pointer;
+}
+
 #container-shop {
   clear: both;
   padding: 7px 0 7px 0;
@@ -1950,55 +2044,61 @@ form.search-site button {
     padding-left: 7px;
   }
 }
-#my-account-container #my-account-dashboard table {
+#my-account-container #my-account-dashboard, #my-account-container #my-account-orders {
+  display: none;
+}
+#my-account-container #my-account-dashboard table, #my-account-container #my-account-orders table {
   width: 100%;
   text-align: center;
   border-collapse: collapse;
 }
-#my-account-container #my-account-dashboard th {
+#my-account-container #my-account-dashboard th, #my-account-container #my-account-orders th {
   padding: 10px 0 10px 0;
 }
-#my-account-container #my-account-dashboard td {
+#my-account-container #my-account-dashboard td, #my-account-container #my-account-orders td {
   padding: 10px 0 10px 0;
 }
-#my-account-container #my-account-dashboard td button {
+#my-account-container #my-account-dashboard td button, #my-account-container #my-account-orders td button {
   padding: 7px;
   border-color: transparent;
   cursor: pointer;
 }
-#my-account-container #my-account-dashboard td button:hover {
+#my-account-container #my-account-dashboard td button:hover, #my-account-container #my-account-orders td button:hover {
   background-color: #F9D342;
   color: #292826;
+}
+#my-account-container #my-account-orders {
+  display: none;
 }
 @media screen and (max-width: 850px) {
   #my-account-container #my-account-data {
     width: 100%;
     padding: 0;
   }
-  #my-account-container #my-account-data #my-account-dashboard {
+  #my-account-container #my-account-data #my-account-dashboard, #my-account-container #my-account-data #my-account-orders {
     /* Force table to not be like tables anymore */
     /* Hide table headers (but not display: none;, for accessibility) */
     /*
     DATA LABEL HEADER FOR EACH DATA LINE ON MOBILE
     */
   }
-  #my-account-container #my-account-data #my-account-dashboard table, #my-account-container #my-account-data #my-account-dashboard thead, #my-account-container #my-account-data #my-account-dashboard tbody, #my-account-container #my-account-data #my-account-dashboard th, #my-account-container #my-account-data #my-account-dashboard td, #my-account-container #my-account-data #my-account-dashboard tr {
+  #my-account-container #my-account-data #my-account-dashboard table, #my-account-container #my-account-data #my-account-dashboard thead, #my-account-container #my-account-data #my-account-dashboard tbody, #my-account-container #my-account-data #my-account-dashboard th, #my-account-container #my-account-data #my-account-dashboard td, #my-account-container #my-account-data #my-account-dashboard tr, #my-account-container #my-account-data #my-account-orders table, #my-account-container #my-account-data #my-account-orders thead, #my-account-container #my-account-data #my-account-orders tbody, #my-account-container #my-account-data #my-account-orders th, #my-account-container #my-account-data #my-account-orders td, #my-account-container #my-account-data #my-account-orders tr {
     display: block;
   }
-  #my-account-container #my-account-data #my-account-dashboard thead {
+  #my-account-container #my-account-data #my-account-dashboard thead, #my-account-container #my-account-data #my-account-orders thead {
     display: none;
   }
-  #my-account-container #my-account-data #my-account-dashboard tr {
+  #my-account-container #my-account-data #my-account-dashboard tr, #my-account-container #my-account-data #my-account-orders tr {
     border: 1px solid #ccc;
   }
-  #my-account-container #my-account-data #my-account-dashboard td {
+  #my-account-container #my-account-data #my-account-dashboard td, #my-account-container #my-account-data #my-account-orders td {
     /* Behave  like a "row" */
     border: none;
     position: relative;
     padding-left: 50%;
     padding-bottom: 22px;
   }
-  #my-account-container #my-account-data #my-account-dashboard td:before {
+  #my-account-container #my-account-data #my-account-dashboard td:before, #my-account-container #my-account-data #my-account-orders td:before {
     /* Now like a table header */
     position: absolute;
     /* Top/left values mimic padding */
@@ -2010,39 +2110,21 @@ form.search-site button {
     font-size: 15px;
     font-weight: 550;
   }
-  #my-account-container #my-account-data #my-account-dashboard td:nth-of-type(1):before {
+  #my-account-container #my-account-data #my-account-dashboard td:nth-of-type(1):before, #my-account-container #my-account-data #my-account-orders td:nth-of-type(1):before {
     content: "Order";
   }
-  #my-account-container #my-account-data #my-account-dashboard td:nth-of-type(2):before {
+  #my-account-container #my-account-data #my-account-dashboard td:nth-of-type(2):before, #my-account-container #my-account-data #my-account-orders td:nth-of-type(2):before {
     content: "Date:";
   }
-  #my-account-container #my-account-data #my-account-dashboard td:nth-of-type(3):before {
+  #my-account-container #my-account-data #my-account-dashboard td:nth-of-type(3):before, #my-account-container #my-account-data #my-account-orders td:nth-of-type(3):before {
     content: "Status:";
   }
-  #my-account-container #my-account-data #my-account-dashboard td:nth-of-type(4):before {
+  #my-account-container #my-account-data #my-account-dashboard td:nth-of-type(4):before, #my-account-container #my-account-data #my-account-orders td:nth-of-type(4):before {
     content: "Total:";
   }
-  #my-account-container #my-account-data #my-account-dashboard td:nth-of-type(5):before {
+  #my-account-container #my-account-data #my-account-dashboard td:nth-of-type(5):before, #my-account-container #my-account-data #my-account-orders td:nth-of-type(5):before {
     content: "Action:";
   }
-}
-#my-account-container #view-order, #my-account-container #account-wish-list {
-  display: none;
-}
-#my-account-container #view-order p, #my-account-container #account-wish-list p {
-  padding: 0;
-  margin: 0;
-}
-#my-account-container #view-order table, #my-account-container #account-wish-list table {
-  width: 100%;
-  text-align: left;
-  border-collapse: collapse;
-}
-#my-account-container #view-order table th, #my-account-container #account-wish-list table th {
-  padding: 15px 0 15px 20px;
-}
-#my-account-container #view-order table td, #my-account-container #account-wish-list table td {
-  padding: 15px 0 15px 20px;
 }
 #my-account-container #account-wish-list {
   display: none;
@@ -2316,6 +2398,90 @@ form.search-site button {
     flex-direction: column;
   }
 }
+.body-800width {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.input-label {
+  font-size: 16px;
+  font-weight: 400;
+  color: #292826;
+}
+
+.input-style-prim, #my-account-container #account-detail form input, .login-register-container .login-container form input, .login-register-container .login-container form textarea, .form-default-style form input, #user-change-password-container form input, #email-change-container form input, #login-container form input, #signup-container form input, #logout-container form input, #user-set-password form input, #password-reset-container form input, #email-comfirmation-container form input, #reset-password-container form input, .auth-account-default form input, .form-default-style form textarea, #user-change-password-container form textarea, #email-change-container form textarea, #login-container form textarea, #signup-container form textarea, #logout-container form textarea, #user-set-password form textarea, #password-reset-container form textarea, #email-comfirmation-container form textarea, #reset-password-container form textarea, .auth-account-default form textarea {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  background-color: #f2f2f2;
+}
+
+.input-submit-button-prim, #my-account-container #account-detail form input[type=submit], .login-register-container .login-container form input[type=submit], #user-set-password form input[type=submit], #password-reset-container form input[type=submit], #reset-password-container form input[type=submit], .auth-account-default form input[type=submit] {
+  width: 100%;
+  background-color: #292826;
+  color: #F9D342;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.form-default-style form label, #user-change-password-container form label, #email-change-container form label, #login-container form label, #signup-container form label, #logout-container form label, #user-set-password form label, #password-reset-container form label, #email-comfirmation-container form label, #reset-password-container form label, .auth-account-default form label {
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.form-default-style form button, #user-change-password-container form button, #email-change-container form button, #login-container form button, #signup-container form button, #logout-container form button, #user-set-password form button, #password-reset-container form button, #email-comfirmation-container form button, #reset-password-container form button, .auth-account-default form button {
+  color: #fff;
+  background-color: #292826;
+  font-family: "Archivo Narrow", Sans-serif;
+  font-size: 14px;
+  border-style: groove;
+  border-width: 0;
+  border-radius: 6px;
+  padding: 7px 20px 7px 20px;
+  cursor: pointer;
+  margin-top: 10px;
+  margin-right: 10px;
+}
+
+.form-default-style form button:hover, #user-change-password-container form button:hover, #email-change-container form button:hover, #login-container form button:hover, #signup-container form button:hover, #logout-container form button:hover, #user-set-password form button:hover, #password-reset-container form button:hover, #email-comfirmation-container form button:hover, #reset-password-container form button:hover, .auth-account-default form button:hover {
+  color: #F9D342;
+}
+
+.order_sucess_container {
+  padding: 100px;
+}
+
+#view-order, #my-account-container #account-wish-list {
+  padding: 5% 10% 10% 10%;
+}
+#view-order .highlight, #my-account-container #account-wish-list .highlight {
+  font-weight: 800;
+}
+#view-order p, #my-account-container #account-wish-list p {
+  padding: 1px;
+  margin: 0;
+}
+#view-order table, #my-account-container #account-wish-list table {
+  width: 100%;
+  text-align: left;
+  border-collapse: collapse;
+}
+#view-order table th, #my-account-container #account-wish-list table th {
+  padding: 15px 0 15px 20px;
+}
+#view-order table td, #my-account-container #account-wish-list table td {
+  padding: 15px 0 15px 20px;
+}
+
 .body-800width {
   width: 100%;
   max-width: 800px;

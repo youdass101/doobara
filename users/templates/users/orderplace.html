@@ -1,0 +1,17 @@
+{% extends "doobarashop/layout.html" %}
+{% load static %}
+{% load socialaccount %}
+
+{% block pagetitle %}
+Order Placed
+{% endblock %}
+{% block body %}
+<div class="order_sucess_container">
+    <h1>{{ordermessage}}</h1>
+    <h5>Your order ID number is {{order.orderid}}</h5> 
+    <h5>Order total of {{order.total}}</h5>
+    <h5>Order status {{order.status}}
+    <h5>Order Note: {{order.note}}</h5>
+    <p>You will receive your order within 2 to 4 business days</p>
+</div>
+{% endblock %}

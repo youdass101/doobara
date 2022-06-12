@@ -1,11 +1,15 @@
 // VARIABLE POINTERS TO BE USED LIKE COLORS AND OTHERS/0
 @use '../../abstracts/all' as var;
 
+
+
 // SEARCH WIDGET COMPONENT 
 // search box section style default 
 #search-box-nav {
     grid-area: sn;
     @include var.backround-bordertop-color;
+
+   
     
     .search-site {
         float: right;

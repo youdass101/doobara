@@ -8,10 +8,12 @@ from django.contrib.auth.views import LogoutView
 
 urlpatterns=[
     # Login and registration page 
-    path("register_login", views.register_login, name="register_login"),
+    # path("register_login", views.register_login, name="register_login"),
     # all auth views
-    path('accounts/', include('allauth.urls')),
+    path('accounts/', include('allauth.urls'), name="allauthlogin"),
     # My Account page
     path("myaccount", views.myaccount, name="myaccount"),
     path('logout', LogoutView.as_view()),
+    path('placeorder', views.placeorder, name="placeorder"),
+    path('order_log', view=views.order_log, name="order_log")
 ]

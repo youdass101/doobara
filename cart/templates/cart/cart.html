@@ -77,23 +77,19 @@ My Cart
                     <table>
                         <tr>
                             <th>Subtotal</th>
-                            <td> $ {{total}} </td>
+                            <td id="dsubtotal"> $ {{total}} </td>
                         </tr>
                         <tr>
-                            <th>Shipping </th>
-                            <td> $ 2.00 <p> some kind of message </p></td>
+                            <th>Delivery </th>
+                            <td id="ddelivery"> $ 2.00</td>
                         </tr>
                         <tr>
                             <th>Total</th>
-                            <td>$ {{total}} </td>
+                            <td id="dtotal">$ {{total}} </td>
                         </tr>
                     </table>
                     <!-- proceed checkout button -->
-                    <input type="submit" onclick="location.href='/checkout'" class="cart-proceed-checkout-button" value = "Proceed to checkout &#8594">
-                
-                    <!-- <button class="cart-proceed-checkout-button">
-                        Proceed to checkout &#8594;
-                    </button>   -->
+                    <button type="button" class="cart-proceed-checkout-button" onclick=location.href='/checkout'>Proceed to checkout &#8594</button>
             </div>
         </div>
     {% else %}

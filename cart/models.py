@@ -21,7 +21,7 @@ class Cart_Item (models.Model):
     quantity = models.IntegerField()
     # is object
     # cart connected to the cart item
-    cart = models.ForeignKey(Cart, related_name="items", blank=True, null=True, default=None, on_delete=models.CASCADE)
+    cart = models.ForeignKey(Cart, related_name="items", on_delete=models.CASCADE)
 
 
     def __str__(self):

@@ -23,6 +23,28 @@
         .footer-navigation { 
             @include var.flex-default;   
             justify-content: space-around; // !!!
+
+            .search_icon_footer_menu {
+                cursor: pointer;
+            }
+
+            .mcart {position: relative;}
+            #footeritemqtt {
+                display: block;
+                position: absolute;
+                color: black; 
+                bottom: 15%;
+                right: 8%;
+            }
+            
+        }
+
+        #popsearch {
+            display: none;
+            position: fixed;
+            bottom: 8%;
+            width: 99%;
+            margin: 0px auto 0px 50px ;
         }
     }
 }

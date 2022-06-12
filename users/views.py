@@ -1,16 +1,36 @@
 from django.shortcuts import render
-import objgraph
+from django.contrib.auth.decorators import login_required
+from .forms import *
+from .models import *
+from .modules.ordermanager import *
+
 
 # Create your views here.
-def register_login(request):
-    objgraph.show_growth()
-
-    return render(request, "users/register_login.html")
-
-
+# def register_login(request):
+#     return render(request, "users/register_login.html")
+ # if request.user.is_authenticated:
+@login_required
 def myaccount(request):
-    objgraph.show_growth()
+    loo = Orders.objects.filter(user=request.user)
+    orders = [order.serialize() for order in loo]
+    return render(request, "users/account.html", {"orders": orders})
 
-    # if request.user.is_authenticated:
-    return render(request, "users/account.html")
-    # return render(request, "account/login.html")
+@login_required
+def placeorder(request):
+    if request.method == "POST":
+        form, state = address_post(request)
+        order = createorder(request,form, state) 
+        success = "Thank you for Your order"
+
+        return render(request, "users/orderplace.html", {'ordermessage':success, "order": order.serialize()})
+
+
+@login_required
+def order_log(request):
+    if request.method == "POST":
+        form = request.POST['orderid']
+        order = Orders.objects.filter(id=form)[0]
+        items = order.items.all()
+        sorder = order.serialize()
+        sitems = [item.serialize() for item in items]
+    return render(request, "users/orderlog.html", {"order": sorder, "items": sitems})

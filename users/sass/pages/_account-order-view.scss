@@ -1,8 +1,14 @@
 // account view single order data 
 #view-order {
-    display: none;
+
+    padding: 5% 10% 10% 10%;
+
+    .highlight {
+        font-weight: 800;
+    }
+    
     p {
-        padding: 0;
+        padding: 1px;
         margin: 0;
     }
        //Dashboard and orders URL table 

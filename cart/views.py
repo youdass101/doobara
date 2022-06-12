@@ -1,9 +1,10 @@
-from django.shortcuts import redirect, render
-from requests import request
+from django.shortcuts import render
 from .models import *
-from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
+from django.http import  JsonResponse, HttpResponseRedirect
+from django.urls import reverse
 import json
 from .modules.cartmanager import *
+from users.forms import *
 
 
 # Request(model) -> render
@@ -13,6 +14,8 @@ def cart(request):
     return render(request, "cart/cart.html", {"cart": cart.cart_page()})
 
 
+# WHen user press the add to cart button
+# this view will add the given
 def shopaddtocart(request):
     if request.method == "PUT":
         # load html input of product id
@@ -27,15 +30,28 @@ def updatecart(request):
     # is dict
     # json dict collect from js
     cartupdate = json.loads(request.body)
-    print("json body data", cartupdate)
     dcart = CartManager(request)
     dcart.update_cart(cartupdate)
  
-    
     return JsonResponse({"result":"done"}, status=201)
     
+
 def checkout(request):
-    return render(request, "cart/checkout.html")
+    if request.user.is_authenticated:
+        cart = CartManager(request)
+        loa = request.user.myaddress.all()
+        lod = [item.serialize() for item in loa]
+        id = 0
+        if request.method == "GET":
+            for i in lod:
+                if i['default']:
+                    id= int(i['id'])
+        if request.method == "POST":
+            id = int(request.POST['id'])
+        return render(request, "cart/checkout.html", {"form": Delivery_Information(), "cart":cart.cart_page(), "address_id":id, "loa":lod})
+    else:
+        return HttpResponseRedirect(reverse('myaccount'))
+
 
 # request -> dict
 # DATA UPDATES COLLECTER return the user attached cart items qtty and total price 
