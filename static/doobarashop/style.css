@@ -374,6 +374,16 @@ form.search-site button {
   #mobile-footer-menu .footer-navigation .search_icon_footer_menu {
     cursor: pointer;
   }
+  #mobile-footer-menu .footer-navigation .mcart {
+    position: relative;
+  }
+  #mobile-footer-menu .footer-navigation #footeritemqtt {
+    display: block;
+    position: absolute;
+    color: black;
+    bottom: 15%;
+    right: 8%;
+  }
   #mobile-footer-menu #popsearch {
     display: none;
     position: fixed;
@@ -2065,30 +2075,30 @@ form.search-site button {
     width: 100%;
     padding: 0;
   }
-  #my-account-container #my-account-data #my-account-dashboard {
+  #my-account-container #my-account-data #my-account-dashboard, #my-account-container #my-account-data #my-account-orders {
     /* Force table to not be like tables anymore */
     /* Hide table headers (but not display: none;, for accessibility) */
     /*
     DATA LABEL HEADER FOR EACH DATA LINE ON MOBILE
     */
   }
-  #my-account-container #my-account-data #my-account-dashboard table, #my-account-container #my-account-data #my-account-dashboard thead, #my-account-container #my-account-data #my-account-dashboard tbody, #my-account-container #my-account-data #my-account-dashboard th, #my-account-container #my-account-data #my-account-dashboard td, #my-account-container #my-account-data #my-account-dashboard tr {
+  #my-account-container #my-account-data #my-account-dashboard table, #my-account-container #my-account-data #my-account-dashboard thead, #my-account-container #my-account-data #my-account-dashboard tbody, #my-account-container #my-account-data #my-account-dashboard th, #my-account-container #my-account-data #my-account-dashboard td, #my-account-container #my-account-data #my-account-dashboard tr, #my-account-container #my-account-data #my-account-orders table, #my-account-container #my-account-data #my-account-orders thead, #my-account-container #my-account-data #my-account-orders tbody, #my-account-container #my-account-data #my-account-orders th, #my-account-container #my-account-data #my-account-orders td, #my-account-container #my-account-data #my-account-orders tr {
     display: block;
   }
-  #my-account-container #my-account-data #my-account-dashboard thead {
+  #my-account-container #my-account-data #my-account-dashboard thead, #my-account-container #my-account-data #my-account-orders thead {
     display: none;
   }
-  #my-account-container #my-account-data #my-account-dashboard tr {
+  #my-account-container #my-account-data #my-account-dashboard tr, #my-account-container #my-account-data #my-account-orders tr {
     border: 1px solid #ccc;
   }
-  #my-account-container #my-account-data #my-account-dashboard td {
+  #my-account-container #my-account-data #my-account-dashboard td, #my-account-container #my-account-data #my-account-orders td {
     /* Behave  like a "row" */
     border: none;
     position: relative;
     padding-left: 50%;
     padding-bottom: 22px;
   }
-  #my-account-container #my-account-data #my-account-dashboard td:before {
+  #my-account-container #my-account-data #my-account-dashboard td:before, #my-account-container #my-account-data #my-account-orders td:before {
     /* Now like a table header */
     position: absolute;
     /* Top/left values mimic padding */
@@ -2100,19 +2110,19 @@ form.search-site button {
     font-size: 15px;
     font-weight: 550;
   }
-  #my-account-container #my-account-data #my-account-dashboard td:nth-of-type(1):before {
+  #my-account-container #my-account-data #my-account-dashboard td:nth-of-type(1):before, #my-account-container #my-account-data #my-account-orders td:nth-of-type(1):before {
     content: "Order";
   }
-  #my-account-container #my-account-data #my-account-dashboard td:nth-of-type(2):before {
+  #my-account-container #my-account-data #my-account-dashboard td:nth-of-type(2):before, #my-account-container #my-account-data #my-account-orders td:nth-of-type(2):before {
     content: "Date:";
   }
-  #my-account-container #my-account-data #my-account-dashboard td:nth-of-type(3):before {
+  #my-account-container #my-account-data #my-account-dashboard td:nth-of-type(3):before, #my-account-container #my-account-data #my-account-orders td:nth-of-type(3):before {
     content: "Status:";
   }
-  #my-account-container #my-account-data #my-account-dashboard td:nth-of-type(4):before {
+  #my-account-container #my-account-data #my-account-dashboard td:nth-of-type(4):before, #my-account-container #my-account-data #my-account-orders td:nth-of-type(4):before {
     content: "Total:";
   }
-  #my-account-container #my-account-data #my-account-dashboard td:nth-of-type(5):before {
+  #my-account-container #my-account-data #my-account-dashboard td:nth-of-type(5):before, #my-account-container #my-account-data #my-account-orders td:nth-of-type(5):before {
     content: "Action:";
   }
 }

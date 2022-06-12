@@ -27,6 +27,16 @@
             .search_icon_footer_menu {
                 cursor: pointer;
             }
+
+            .mcart {position: relative;}
+            #footeritemqtt {
+                display: block;
+                position: absolute;
+                color: black; 
+                bottom: 15%;
+                right: 8%;
+            }
+            
         }
 
         #popsearch {
