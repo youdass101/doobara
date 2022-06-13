@@ -6,6 +6,7 @@ from django.dispatch import receiver
 # Migrate session cart to user cart
 @receiver(user_logged_in)
 def cart_after_login(request, **kwargs):
+    userorsession(request)
     cart_migration(request)
 
 # dict -> boolean 
@@ -56,7 +57,7 @@ def userorsession(request):
         except:
             # is model object (class local)
             # empty cart linked created 
-            cart = [Cart.objects.create(user=user)].items.all()
+            cart = [Cart.objects.create(user=user)]
     # use the session insted of user
     else:
         # is dict (class local)
