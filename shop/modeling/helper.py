@@ -1,4 +1,4 @@
-from ..models import *
+
 
 # listofobjects * string -> dict
 # serialize given list of products, method can be either main and everything else has the same result
@@ -66,3 +66,4 @@ def product_serialize(object, tag):
             "pvariant" : variants(),
             "pvname" : object.variant_name
         }
+
