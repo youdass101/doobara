@@ -2,8 +2,8 @@
 
 # listofobjects * string -> dict
 # serialize given list of products, method can be either main and everything else has the same result
-def serialize(loo, method):
-    return [object.serialize(method) for object in loo]
+def serialize(lop, method):
+    return [object.serialize(method) for object in lop]
 
 # model_object * string - > dictionary 
 # reutrning a dictionary of specified keys in a given object model (the engine of product serialize method)

@@ -1,16 +1,7 @@
-from email.policy import default
-from pyexpat import model
-import defusedxml
 from django.db import models
-from datetime import datetime, timedelta
-from django.conf import settings
-from django.db.models.base import Model
-from django.db.models.deletion import SET_NULL
-from django.db.models.fields.related import ForeignKey
 from .modeling.images import *
 from .modeling.helper import *
 from django.dispatch import receiver
-# from django.contrib.auth.models import AbstractBaseUser
 
 # Categories is (int(primary id) * string * string * int * int) model
 # interp. Product categories database SQL table 
