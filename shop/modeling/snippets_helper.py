@@ -11,7 +11,7 @@ def serialized_categories():
 
 # dict -> tuple(dict)
 # take a filter form input dict request and return the selection string name 
-def filter_data(form):
+def filter_data(form): 
     # is string (both)
     # name of selectd category and orderby filter name
     category = form['category']

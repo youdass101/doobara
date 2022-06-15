@@ -46,10 +46,6 @@ class Image(models.Model):
     # pointer to a specific album object id 
     album = models.ForeignKey(ImageAlbum, related_name='images', on_delete=models.CASCADE)
 
-    # WILL BE REMOVED Not sure If Will be used yet
-    width = models.FloatField(default=100)
-    length = models.FloatField(default=100)
-
     # data to show on admin page 
     def __str__(self):
         return f"{self.name}, {self.album} " 

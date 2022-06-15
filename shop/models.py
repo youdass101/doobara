@@ -27,7 +27,7 @@ class VariantHolder(models.Model):
     name = models.CharField(max_length=255)
 
     def __str__(self):
-        return f"{self.name} "
+        return f"{self.name}"
 
 
 # PRODUCT is model-table (int (primary ID) * string * int * string * string * date * URL
