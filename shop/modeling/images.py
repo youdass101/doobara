@@ -4,7 +4,7 @@ from django.db import models
 # interp. imagealbum link one product id
 #  from one side to many images on the other side
 class ImageAlbum(models.Model):
-    # album name 
+    # album name string
     name = models.CharField(max_length=255)
 
     # list of images -> image

@@ -13,9 +13,13 @@ class Categorie(models.Model):
     # category description filed more than 1000 characters
     description = models.TextField()
     
+    # instance -> string
+    # what fileds to show on admin page
     def __str__(self):
         return f"{self.name} "
 
+    # instance -> dict 
+    # copy instance filterd data to a string dictionary
     def serialize(self):
         return {
             "name" : self.name,
@@ -72,9 +76,10 @@ class Product(models.Model):
     discount = models.BooleanField(default=False)
     # category is List of model-objects
     # product category model reference many to many (the product can belong to several catergories)
-    category = models.ManyToManyField(Categorie, null=True, blank=True, default=None, related_name="products") 
+    category = models.ManyToManyField(Categorie, blank=True, default=None, related_name="products") 
     
-    # !!!!!!!!!!! FIX DELETING TREE !!!!!!!!!!!!!!!!!!!!
+    # IF any issue show will customize based on it so far when connected variant holder is deleted 
+    #                       to connected product 
     # variantes are a list of objects
     # if product have a variant they will be listed
     variant_list = models.ForeignKey(VariantHolder, null=True, blank=True, default=None, related_name="products", on_delete=models.SET_NULL)
