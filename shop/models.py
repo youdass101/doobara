@@ -104,7 +104,7 @@ class Product(models.Model):
 # Delete product foreing connected objects
 @receiver(models.signals.post_delete, sender=Product)
 def handle_deleted_product(sender, instance, **kwargs):
-    if instance.variant_list:
-        instance.variant_list.delete()
+    # if instance.variant_list:
+    #     instance.variant_list.delete()
     if instance.album:
         instance.album.delete()
