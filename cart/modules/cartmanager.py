@@ -1,6 +1,7 @@
 from ..models import *
 from allauth.account.signals import user_logged_in
 from django.dispatch import receiver
+from .snippethelper import *
 
 # When user login 
 # Migrate session cart to user cart
@@ -20,21 +21,6 @@ def cart_migration(request):
             cart = CartManager(request)
             cart.add_to_cart(itemdetail)
 
-# dict -> boolean
-# check if given dict is empty
-def session_cart_not_empty(cart):
-    if len(cart)== 0:
-        return False
-    else:
-        return True
-
-# instance -> boolean
-# check if given dict is empty 
-def user_cart_empty(cart):
-    if len(cart)== 0:
-        return True
-    else:
-        return False
 
 
 # dict -> object * object
