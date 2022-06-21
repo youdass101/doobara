@@ -15,7 +15,7 @@ def cart_after_login(request, **kwargs):
 def cart_migration(request):
     user_cart = request.user.mycart.items.all()
     session_cart = request.session['cart']
-    if user_cart_empty(user_cart) and session_cart_not_empty(session_cart):
+    if cart_empty(user_cart) and (not cart_empty(session_cart)):
         for item in session_cart:
             itemdetail = {'pid': item, 'quantity': session_cart[item]['quantity']}
             cart = CartManager(request)
@@ -37,13 +37,14 @@ def userorsession(request):
             # is model object (class local)
             # logged in user in cart items
             cart = user.mycart.items.all()
-    
-    
+
         # create new cart and linke it 
         except:
             # is model object (class local)
             # empty cart linked created 
             cart = [Cart.objects.create(user=user)]
+
+    # User not loged in   
     # use the session insted of user
     else:
         # is dict (class local)
@@ -95,21 +96,23 @@ class CartManager:
         else:
             # is list
             # empty list pre assinged to be used in loop
-            ccart = []
+            # using helper from snippetherlper to setup the data structer template
+            ccart = scart_data_setup(self.cart, [])
+            # ccart = []
             # for key in list of dict cart
-            for i in self.cart:
-                    # is object model 
-                    # product object with given id 
-                    product = Product.objects.get(id=i)
-                    # convert product data to dict with required keys and append dict to list
-                    #  serialization
-                    ccart.append(({"productname" : product.name,
-                            "productid" : product.id,
-                            "productunitprice" : self.cart[i]['price'],
-                            "productquantity": self.cart[i]['quantity'],
-                            "productimage": product.album.default().serialize()}, 
-                            (int(self.cart[i]['quantity']) * float(self.cart[i]['price']))
-                            ))
+            # for i in self.cart:
+            #         # is object model 
+            #         # product object with given id 
+            #         product = Product.objects.get(id=i)
+            #         # convert product data to dict with required keys and append dict to list
+            #         #  serialization
+            #         ccart.append(({"productname" : product.name,
+            #                 "productid" : product.id,
+            #                 "productunitprice" : self.cart[i]['price'],
+            #                 "productquantity": self.cart[i]['quantity'],
+            #                 "productimage": product.album.default().serialize()}, 
+            #                 (int(self.cart[i]['quantity']) * float(self.cart[i]['price']))
+            #                 ))
         return ccart
 
 
