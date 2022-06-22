@@ -11,15 +11,28 @@ from .modules.ordermanager import *
  # if request.user.is_authenticated:
 @login_required
 def myaccount(request):
+    # is list of instances
+    # currnet user list of related records in orders model
     loo = Orders.objects.filter(user=request.user)
+    # is list of dict 
+    # copy list of serialized orders in loo list 
     orders = [order.serialize() for order in loo]
+
     return render(request, "users/account.html", {"orders": orders})
 
 @login_required
 def placeorder(request):
     if request.method == "POST":
+        # is mixed component
+        # form is int or dict, state is boolean 
+        # if state is true it means the address is new then form have the new data
+        # if state is false then the form contain an id of current address 
         form, state = address_post(request)
+        # is instance
+        # new order instance
         order = createorder(request,form, state) 
+        # is string 
+        # text to be shown on html page
         success = "Thank you for Your order"
 
         return render(request, "users/orderplace.html", {'ordermessage':success, "order": order.serialize()})
@@ -43,5 +56,5 @@ def order_log(request):
         # is list of dict 
         # list of serialized copy of order item record objects list
         sitems = [item.serialize() for item in items]
-        
+
     return render(request, "users/orderlog.html", {"order": sorder, "items": sitems})
