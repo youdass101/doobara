@@ -28,9 +28,20 @@ def placeorder(request):
 @login_required
 def order_log(request):
     if request.method == "POST":
-        form = request.POST['orderid']
-        order = Orders.objects.filter(id=form)[0]
+        # is int
+        # given order record id 
+        orderid = request.POST['orderid']
+        # is object 
+        # order instance the first in list 
+        order = Orders.objects.filter(id=orderid)[0]
+        # is list of instance 
+        # all order connected product item records 
         items = order.items.all()
+        # is dict 
+        # serilized copy of order record fields
         sorder = order.serialize()
+        # is list of dict 
+        # list of serialized copy of order item record objects list
         sitems = [item.serialize() for item in items]
+        
     return render(request, "users/orderlog.html", {"order": sorder, "items": sitems})

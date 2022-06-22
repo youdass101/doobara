@@ -37,7 +37,8 @@ class Delivery_Address_Details (models.Model):
     def __str__(self):
         return f"{self.name}, {self.city_town}, {self.id} "
 
-
+    # instance -> dict
+    # serialized copy of instance record fields
     def serialize(self):
         return{
             "id": self.id,
@@ -83,6 +84,8 @@ class Orders (models.Model):
     def __str__(self):
         return f"{self.id} "
 
+    # instace -> dict 
+    # serialize self instance record fields
     def serialize(self):
         return{
             "orderid": self.id,

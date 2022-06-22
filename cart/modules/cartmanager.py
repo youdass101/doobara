@@ -83,6 +83,7 @@ class CartManager:
         self.uli = request.user.is_authenticated
     
     # object -> listofdict 
+    # CART DATA RENDER METHOD
     # if user is auth it will serialize self.cart using model serializer
     # if no user is logged it will create a listofdict from session cart dict data 
     # same listofdict template for both options
@@ -98,26 +99,12 @@ class CartManager:
             # empty list pre assinged to be used in loop
             # using helper from snippetherlper to setup the data structer template
             ccart = scart_data_setup(self.cart, [])
-            # ccart = []
-            # for key in list of dict cart
-            # for i in self.cart:
-            #         # is object model 
-            #         # product object with given id 
-            #         product = Product.objects.get(id=i)
-            #         # convert product data to dict with required keys and append dict to list
-            #         #  serialization
-            #         ccart.append(({"productname" : product.name,
-            #                 "productid" : product.id,
-            #                 "productunitprice" : self.cart[i]['price'],
-            #                 "productquantity": self.cart[i]['quantity'],
-            #                 "productimage": product.album.default().serialize()}, 
-            #                 (int(self.cart[i]['quantity']) * float(self.cart[i]['price']))
-            #                 ))
         return ccart
 
 
     # CREATE CART ITEM OBJECT METHOD 
     # object * string * object -> boolean
+    # CREATE NEW CART ITEM METHOD
     # create new object in user cart item model using the from given data
     def create_ci (self, product, qtt):
         Cart_Item.objects.create(product=product, quantity=qtt, cart=self.user.mycart)
@@ -125,6 +112,7 @@ class CartManager:
 
     # instance * instance -> boolean
     # delete object using product given id 
+    # DELETE INSTANCE METHOD !!NOT USED YET!
     # Helper function to delete object in a pattern 
     def delete_objct(self, item, ucart):
         # product= Product.objects.get(id=item)
@@ -133,12 +121,17 @@ class CartManager:
 
 
     # instance * dict -> boolean
+    # ADD TO CART METHOD 
     # create a new or edit existing object in cart_item model  
     def add_to_cart (self, item):
         # is object (Product)
         # load product object from Product model
         product = Product.objects.get(id=int(item['pid']))
+        # is int 
+        # given quantity of items to be added to cart
         pqtt = int(item['quantity'])
+
+        # IF USER LOGGED IN 
         if self.uli:
             try:
                 # is object 
@@ -148,21 +141,27 @@ class CartManager:
                 # updating incrementing sub value by given int item 
                 citem.quantity += pqtt
                 citem.save()
+                # if item in cart qtt is 0 delete it
                 if citem.quantity == 0:
                     citem.delete()
                 
             # if previous failed excute this supose element does'nt exist
             except:
-                # if product item doesn't exist create new
+                # if product item doesn't exist create new record
                 self.create_ci(product, pqtt)
+        # SESSION USER CART
         else:
             try:
                 # is Int
                 # quantity of a spesific product id in session cart 
                 qtt = int(self.user['cart'][item['pid']]['quantity'])
+                # is string 
+                # user session cart dict
                 self.user['cart'][item['pid']]['quantity'] = str(qtt + pqtt)
+                # if item in cart qtt is 0 delete it
                 if (qtt + pqtt) == 0:
                     del self.user['cart'][item['pid']]
+            # key item doesn't exist so create a new one 
             except:
                 self.user['cart'][item['pid']] = {'quantity' : str(pqtt), 'price' : str(product.price)}
             
@@ -171,17 +170,24 @@ class CartManager:
         return True
 
     # dict * dict -> dict
+    # UPDATE CART DATA METHOD 
     # takes self variable and json cart update in dict 
     # calculate the difference of quantity btw current car 
     # and update cart, and returne a dict with product id and result
     def update_cart(self, cupdate):
         try:
+            # if delete button is used on page
             self.add_to_cart(cupdate['cart'])
+        # if change in qtt is made
         except:
+            # if user is logged in point to the instance cart
             if self.uli: 
                 cart = self.cart 
-            else: 
+            # user not logged in so take a copy of session dict
+            else:
+                # get a copy of dict session  
                 cart = self.cart.copy()
+
             # loop over given update cart and current cart
             for product, item in zip(cupdate['cart'], cart):
                 # is int
@@ -200,6 +206,7 @@ class CartManager:
                 # is dict 
                 # product id and quantity difference 
                 result = {'pid': product['pid'],'quantity':(given - current)}
+                # edit cart item using add to cart method
                 self.add_to_cart(result)
 
     def cart_context_process(self):
@@ -213,9 +220,12 @@ class CartManager:
             items += qtt
             total += (float(qtt)*float(price))
 
+        # loop over user cart item and can calculate totalt and item in cart qtt 
         for i in self.cart:
+            # if user is logged in
             if self.uli:
                 calc_cart(i.quantity, i.product.price)
+            # if user is not logged in 
             else:
                 calc_cart(int(self.cart[i]['quantity']), self.cart[i]['price'])
         

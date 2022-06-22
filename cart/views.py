@@ -9,8 +9,6 @@ from .modules.snippethelper import *
 from django.contrib.auth.decorators import login_required
 
 
-
-
 # Request(model) -> render
 # return the user or session cart data list 
 def cart(request):
