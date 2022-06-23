@@ -25,6 +25,7 @@ def createorder(request, form, new):
            
             if len(allad) == 0:
                 state=True
+                
             delivery = Delivery_Address_Details.objects.create(name=name, last_name=lastname, city_town=city, street_name=street, building_appartment=building, phone_number=phone, delivery_details=information, user=user, default=state)
         else:
             return False
@@ -64,20 +65,17 @@ def createorder(request, form, new):
 # takes request dict return: form data
 # and boolean true if user have address saved or false if not
 def address_post(request):
-
     # is instance form
     # new delivery address for login user
     form = Delivery_Information(request.POST)
     if form.is_valid():
         # new address 
         state = True
-        print("and I am still here",form.is_valid())
 
     else:
         # is disct
         # conatin current select address id and order note
         form =request.POST
-        print("still on post")
         # is a helper function at modules, ordermanager 
         # user have saved address
         state = False 
