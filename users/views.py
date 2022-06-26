@@ -31,12 +31,17 @@ def placeorder(request):
         # is instance
         # new order instance
         order = createorder(request,form, state) 
-        # is string 
-        # text to be shown on html page
-        success = "Thank you for Your order"
 
-        return render(request, "users/orderplace.html", {'ordermessage':success, "order": order.serialize()})
+        # If form has a valid data 
+        if order[0]:
+            # is string 
+            # text to be shown on html page
+            success = "Thank you for Your order"
 
+            return render(request, "users/orderplace.html", {'ordermessage':success, "order": order[1].serialize()})
+        # If new form have invalid data return same form and chekout page to retry
+        else:
+            return render(request, "cart/checkout.html", {"form": order[1], "cart": CartManager(request).cart_page()})
 
 @login_required
 def order_log(request):
