@@ -3,192 +3,116 @@
 {% load i18n %}
 {% load account %}
 {% block pagetitle %}
-My Account
+    My Account
 {% endblock %}
 {% block body %}
-<!-- All element wrapper  -->
-<div id="my-account-container">
-    <!-- logged  in user name snippet-->
-{% include 'account/snippets/already_logged_in.html' %}
+    <!-- All element wrapper  -->
+    <div id="my-account-container">
+        <!-- logged  in user name snippet-->
+    {% include 'account/snippets/already_logged_in.html' %}
 
-    <!-- User account board menu navigator -->
-    <div class="my-account-navigation">
-        <ul>
-            <li id="account-dash">Dashboard <i class="fas fa-tachometer-alt"></i></li>
-            <li id="account-orders">Orders <i class="fas fa-shopping-cart"></i></li>
-            <!-- <li id="account-whishlist">Wishlist <i class="fas fa-list-alt"></i></li> -->
-            <li id="account-edit">Account details <i class="fas fa-address-card"></i></li>
-            <li onclick="location.href='/accounts/logout'">Logout <i class="fas fa-sign-out-alt"></i></li>
-        </ul>
-    </div>
-
-    <!-- Data that shows when switching between Nav menu URL -->
-    <div id="my-account-data">
-
-        <!-- DASHBOARD MAIN VIEW ACTIVE ORDERS -->
-        <div id="my-account-dashboard" class="show">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Order</th>
-                        <th>Date</th>
-                        <th>Status</th>
-                        <th>Total</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for order in orders %}
-                        {% if order.status == "processing" %}
-                            <tr>
-                                <td>#{{order.orderid}}</td>
-                                <td>{{order.date}}</td>
-                                <td>{{order.status}}</td>
-                                <td>${{order.total}}</td>
-                                <form method="POST" action="{% url 'order_log' %}">
-                                    {% csrf_token %}
-                                    <input type="hidden" value={{order.orderid}} name="orderid">
-                                    <td><button formaction="order_log" type="submit" class="view-order-button"><i class="fas fa-eye"></i> View </button></td>
-                                </form> 
-                            </tr>                            
-                        {% endif %}
-                    {%endfor%}
-                     
-                </tbody>
-            </table>
+        <!-- User account board menu navigator -->
+        <div class="my-account-navigation">
+            <ul>
+                <li id="account-dash">Dashboard <i class="fas fa-tachometer-alt"></i></li>
+                <li id="account-orders">Orders <i class="fas fa-shopping-cart"></i></li>
+                <!-- <li id="account-whishlist">Wishlist <i class="fas fa-list-alt"></i></li> -->
+                <li id="account-edit">Account details <i class="fas fa-address-card"></i></li>
+                <li onclick="location.href='/accounts/logout'">Logout <i class="fas fa-sign-out-alt"></i></li>
+            </ul>
         </div>
 
-        <!-- DASHBOARD MAIN VIEW ACTIVE ORDERS -->
-        <div id="my-account-orders">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Order</th>
-                        <th>Date</th>
-                        <th>Status</th>
-                        <th>Total</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for order in orders %}
-                        {% if order.status != "processing" %}
-                            <tr>
-                                <td>#{{order.orderid}}</td>
-                                <td>{{order.date}}</td>
-                                <td>{{order.status}}</td>
-                                <td>${{order.total}}</td>
-                                <form method="POST" action="{% url 'order_log' %}">
-                                    {% csrf_token %}
-                                    <input type="hidden" value={{order.orderid}} name="orderid">
-                                    <td><button formaction="order_log" type="submit" class="view-order-button"><i class="fas fa-eye"></i> View </button></td>
-                                </form> 
-                            </tr>                            
-                        {% endif %}
-                    {%endfor%}
-                     
-                </tbody>
-            </table>
-        </div>
+        <!-- Data that shows when switching between Nav menu URL -->
+        <div id="my-account-data">
 
-        <!-- ORDERS HISTORY VIEW  -->
-        <!-- it was here -->
-
-        <!-- WHICH LIST TABLE VIEW  -->
-        <div id="account-wish-list">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Product</th>
-                        <th>Price</th>
-                        <th>Remove</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Smart relay switch ms-101 <b>x1</b></td>
-                        <td>$ 9.50</td>
-                        <td>X</td>
-                    </tr>
-                    <tr>
-                        <td>USB power adapter 5 volt <b>x1</b></td>
-                        <td>$ 3.00</td>
-                        <td>X</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-
-        <!-- ACCOUNT DETAILS VIEW  -->
-        <div id="account-detail">
-            <div class="user-profile-data">
-                <div class="user-username-display">
-                    <h3>Welcome {{ user }}</h3>
-                </div>
-                <div class="user-email-profile">
-                    <h4>Email: <span>{{user.email}}</h4></span> <pre>  </pre><a href="/accounts/email">Change email</a>
-                </div> 
-                <div><a href="/accounts/password/change">Change Your Password</a></div> 
-
-                <div><h4>Shipping address</h4></div>
+            <!-- DASHBOARD MAIN VIEW ACTIVE ORDERS -->
+            <div id="my-account-dashboard" class="show">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Order</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                            <th>Total</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for order in orders %}
+                            {% if order.status == "processing" %}
+                                <tr>
+                                    <td>#{{order.orderid}}</td>
+                                    <td>{{order.date}}</td>
+                                    <td>{{order.status}}</td>
+                                    <td>${{order.total}}</td>
+                                    <form method="POST" action="{% url 'order_log' %}">
+                                        {% csrf_token %}
+                                        <input type="hidden" value={{order.orderid}} name="orderid">
+                                        <td><button formaction="order_log" type="submit" class="view-order-button"><i class="fas fa-eye"></i> View </button></td>
+                                    </form> 
+                                </tr>                            
+                            {% endif %}
+                        {%endfor%}
+                        
+                    </tbody>
+                </table>
             </div>
-        
-            <form class="edit-account">
-                <!-- first and last name  -->
-                <div class="account-1st-row">
-                    <!-- first name -->
-                    <div class="account-first-name">
-                        <label >First name</label>
-                        <input type="text" value="Hamze">
+
+            <!-- DASHBOARD MAIN VIEW ACTIVE ORDERS -->
+            <div id="my-account-orders">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Order</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                            <th>Total</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for order in orders %}
+                            {% if order.status != "processing" %}
+                                <tr>
+                                    <td>#{{order.orderid}}</td>
+                                    <td>{{order.date}}</td>
+                                    <td>{{order.status}}</td>
+                                    <td>${{order.total}}</td>
+                                    <form method="POST" action="{% url 'order_log' %}">
+                                        {% csrf_token %}
+                                        <input type="hidden" value={{order.orderid}} name="orderid">
+                                        <td><button formaction="order_log" type="submit" class="view-order-button"><i class="fas fa-eye"></i> View </button></td>
+                                    </form> 
+                                </tr>                            
+                            {% endif %}
+                        {%endfor%}
+                    </tbody>
+                </table>
+            </div>
+
+
+            <!-- ACCOUNT DETAILS VIEW  -->
+            <div id="account-detail">
+                <div class="user-profile-data">
+                    <div class="user-username-display">
+                        <h3>Welcome {{ user }}</h3>
                     </div>
-                    <!-- Last name -->
-                    <div class="account-last-name">
-                        <label > Last name</label>
-                        <input type="text" value="Chalhoub">
+                    <div class="user-email-profile">
+                        <h4>Email: <span>{{user.email}}</h4></span> <pre>  </pre><a href="/accounts/email">Change email</a>
+                    </div> 
+                    <div><a href="/accounts/password/change">Change Your Password</a></div> 
+
+                    <div class="default-user-shipping">
+                        <h4>Default Shipping Address</h4>
+                        <p>{{address.name}} {{address.last_name}} ({{address.phone_number}})    
+                            <p>{{address.city_town}} {{address.street_name}}
+                            {{address.building_appartment}}
+                            {{address.delivery_details}}</p>
+                        </p>
+                        <button onclick="window.location.href='address_list'">Change Address</button>
                     </div>
-                </div>
-                <div class="account-display-name">
-                    <!-- Display name or nickname -->
-                    <label>Display name</label>
-                    <input type="text" value="Hamze">
-                    <p class="account-display-name-note">This will be how your name will be displayed in the account section and in reviews</p>
-                </div>
-
-                <div class="account-email-address">
-                    <!-- Email Address -->
-                    <label>Email address</label>
-                    <input type="email" value="hamzechalhoub@gmail.com">
-                </div>
-
-                <!-- PASSWORD CHANGE -->
-                <h2>Password Change</h2>
-                <div class="account-password-change">
-                    <!-- Last name -->
-                    <div class="account-current-password">
-                        <label > Current password (leave blank to leave unchanged)</label>
-                        <input type="password">
-                    </div>
-                </div>
-                <div class="account-new-password">
-                    <!-- Display name or nickname -->
-                    <label>New password (leave blank to leave unchanged)</label>
-                    <input type="password">
-                </div>
-
-                <div class="account-comfirm-new-password">
-                    <!-- Email Address -->
-                    <label>Confirm new password</label>
-                    <input type="password">
-                </div>
-
-                <div class="account-change-submit">
-                    <input type="submit" value="Save changes">
-                </div>
-                    
-            </form>
-            
+                </div>   
+            </div>
         </div>
     </div>
-</div>
 {% endblock%}

@@ -1,0 +1,37 @@
+{% extends "doobarashop/layout.html" %}
+{% load static %}
+{% load i18n %}
+{% load account %}
+{% block pagetitle %}
+    User Addresses
+{% endblock %}
+{% block body %}
+<div>
+    <div>
+        <h3>Delivery Address</h3>
+    </div>
+    <div class="address_list">
+        <ul>
+            {% for item in loa %}
+            <li>
+                <div class="delivery_container">
+                    <div class="delivery_address">
+                        <p class="deliver_name_phone"><span class="checkout_address_detail_name">{{item.name}} {{item.last_name}}</span> {{item.phone_number}}</p>
+                        <p>{{item.city_town}} {{item.street_name}}
+                            {{item.building_appartment}}</p>
+                        <p>{{item.delivery_details}}</p>
+                    </div>    
+                    <div>
+                        <form action="{% url 'checkout' %}" method="POST">
+                            {% csrf_token %}
+                            <input name="id" value={{item.id}} type="hidden">
+                            <div><button type="submit" formaction="/checkout" class="change_address" id="id_change_address">Use address</button></div>
+                        </form> 
+                    </div>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock%}

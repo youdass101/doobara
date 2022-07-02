@@ -15,47 +15,20 @@
             justify-content: flex-start;
             align-items: center;
         }
-    }
 
-    .edit-account {display: none;}
-    form {
-        padding: 20px ;
-        .account-display-name-note {
-            padding: 0px 0px 10px 0px; 
-            margin: 0;
-            @include var.note;
-        }
-        div {
-            padding-bottom: 10px;
-        }
-
-        label {
-            @include var.par-body-2;
-        }
-
-        .account-1st-row {
-            @include var.flex-default;
-            width: 100%;
-            .account-first-name {
-                padding-right: 20px;
+        .default-user-shipping {
+            p{
+                padding: 0px !important;
+                margin: 0px;
             }
-            .account-first-name, .account-last-name {
-                display: block;
-                width: 50%;
+            button {
+                margin-top: 15px;
+                @include var.button-secondary
             }
         }
-        input {
-            @extend .input-style-prim;
-        }
-        
-        input[type=submit] {
-          @extend .input-submit-button-prim;
-        }
-        
-        input[type=submit]:hover {
-            @include var.hover-secondary;
-        }
     }
+
+    
 }
 
 @media screen and (max-width: 750px) {

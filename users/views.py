@@ -17,8 +17,10 @@ def myaccount(request):
     # is list of dict 
     # copy list of serialized orders in loo list 
     orders = [order.serialize() for order in loo]
+    address = Delivery_Address_Details.objects.get(user=request.user, default=True)
+    saddress = address.serialize()
 
-    return render(request, "users/account.html", {"orders": orders})
+    return render(request, "users/account.html", {"orders": orders, "address":saddress})
 
 @login_required
 def placeorder(request):
@@ -63,3 +65,10 @@ def order_log(request):
         sitems = [item.serialize() for item in items]
 
     return render(request, "users/orderlog.html", {"order": sorder, "items": sitems})
+
+def address_list(request):
+    user = request.user
+    loa = Delivery_Address_Details.objects.filter(user=user)
+    sloa = [address.serialize() for address in loa]
+    print(sloa)
+    return render(request, "users/address_list.html",{"loa":sloa})

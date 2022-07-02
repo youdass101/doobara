@@ -39,6 +39,7 @@ def createorder(request, form, new):
         id = int(form['current_address_id'])
         note = form['ordernote']
         delivery = Delivery_Address_Details.objects.get(id=id)
+        
     # is instance 
     # cart manager class instance to add remove and update cart 
     managecart = CartManager(request)
@@ -82,7 +83,7 @@ def address_post(request):
         state = False
 
     except:
-        # is disct
+        # is disct                                                  
         # conatin current select address id and order note
         form = Delivery_Information(request.POST)
         # is a helper function at modules, ordermanager 

@@ -15,5 +15,7 @@ urlpatterns=[
     path("myaccount", views.myaccount, name="myaccount"),
     path('logout', LogoutView.as_view()),
     path('placeorder', views.placeorder, name="placeorder"),
-    path('order_log', view=views.order_log, name="order_log")
+    path('order_log', view=views.order_log, name="order_log"),
+    path('address_list', view=views.address_list, name="address_list")
+
 ]
