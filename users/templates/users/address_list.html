@@ -25,13 +25,16 @@
                         <form action="{% url 'checkout' %}" method="POST">
                             {% csrf_token %}
                             <input name="id" value={{item.id}} type="hidden">
-                            <div><button type="submit" formaction="/checkout" class="change_address" id="id_change_address">Use address</button></div>
+                            <div><button type="submit" formaction="/?" class="change_address" id="id_change_address">Edit</button></div>
+                            <div><button type="submit" formaction="/?" class="make-default_address" id="id_make_default_address">Set as Default</button></div>
                         </form> 
                     </div>
                 </div>
             </li>
             {% endfor %}
         </ul>
+        <div><button type="submit" formaction="/?" class="add_new_address" id="id_add_new_address">New address</button></div>
+
     </div>
 </div>
 {% endblock%}

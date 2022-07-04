@@ -70,5 +70,4 @@ def address_list(request):
     user = request.user
     loa = Delivery_Address_Details.objects.filter(user=user)
     sloa = [address.serialize() for address in loa]
-    print(sloa)
     return render(request, "users/address_list.html",{"loa":sloa})
