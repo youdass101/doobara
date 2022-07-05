@@ -1164,18 +1164,19 @@ form.search-site button {
   left: 50%;
   transform: translate(-50%, 10%);
 }
-.change_address_popup ul {
+
+.address_list {
+  width: 100%;
+}
+.address_list ul {
   list-style-type: none;
   padding: 0px;
 }
-.change_address_popup li {
+.address_list li {
   padding: 6px;
   border: 1px solid black;
   border-radius: 15px;
   margin: 0 0 8px 0;
-}
-.change_address_popup .address_list {
-  width: 100%;
 }
 
 .delivery_container {
@@ -2520,7 +2521,11 @@ form.search-site button {
 }
 
 .address-list-user {
-  padding: 10%;
+  width: 60%;
+  padding: 20px;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: column;
 }
 
 .body-800width {

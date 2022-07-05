@@ -17,9 +17,11 @@ def myaccount(request):
     # is list of dict 
     # copy list of serialized orders in loo list 
     orders = [order.serialize() for order in loo]
-    address = Delivery_Address_Details.objects.get(user=request.user, default=True)
-    saddress = address.serialize()
-
+    try:
+        address = Delivery_Address_Details.objects.get(user=request.user, default=True)
+        saddress = address.serialize()
+    except:
+        saddress = False
     return render(request, "users/account.html", {"orders": orders, "address":saddress})
 
 @login_required

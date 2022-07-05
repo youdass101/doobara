@@ -14,7 +14,10 @@
         background-color: white;
         left: 50%;
         transform: translate(-50%, 10%);
-
+    }
+  
+    .address_list {
+        width: 100%;
         ul {
             list-style-type: none;
             padding: 0px;
@@ -26,11 +29,6 @@
             border-radius: 15px;
             margin: 0 0 8px 0;
         }
-
-        .address_list {
-            width: 100%;
-        }
-    
     }
 
 .delivery_container {

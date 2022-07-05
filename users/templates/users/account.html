@@ -101,16 +101,23 @@
                         <h4>Email: <span>{{user.email}}</h4></span> <pre>  </pre><a href="/accounts/email">Change email</a>
                     </div> 
                     <div><a href="/accounts/password/change">Change Your Password</a></div> 
-
-                    <div class="default-user-shipping">
-                        <h4>Default Shipping Address</h4>
-                        <p>{{address.name}} {{address.last_name}} ({{address.phone_number}})    
-                            <p>{{address.city_town}} {{address.street_name}}
-                            {{address.building_appartment}}
-                            {{address.delivery_details}}</p>
-                        </p>
-                        <button onclick="window.location.href='address_list'">Change Address</button>
-                    </div>
+                    {% if address %}
+                        <div class="default-user-shipping">
+                            <h4>Default Shipping Address</h4>
+                            <p>{{address.name}} {{address.last_name}} ({{address.phone_number}})    
+                                <p>{{address.city_town}} {{address.street_name}}
+                                {{address.building_appartment}}
+                                {{address.delivery_details}}</p>
+                            </p>
+                            <button onclick="window.location.href='address_list'">Change Address</button>
+                        </div>
+                    {% else %}
+                        <div class="default-user-shipping">
+                            <h4>Default Shipping Address</h4>
+                            <p>No Address saved</p>
+                            <button onclick="window.location.href='address_list'">New Address</button>
+                        </div>
+                    {% endif %}
                 </div>   
             </div>
         </div>
