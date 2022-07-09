@@ -16,42 +16,46 @@
         transform: translate(-50%, 10%);
     }
   
-    .address_list {
-        width: 100%;
-        ul {
-            list-style-type: none;
-            padding: 0px;
+.address_list {
+    width: 100%;
+    ul {
+        list-style-type: none;
+        padding: 0px;
+    }
+
+    li {
+        padding: 6px;
+        border: 1px solid black;
+        border-radius: 15px;
+        margin: 0 0 8px 0;
+    }
+
+    .delivery_container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .delivery_address {
+            width: 74%;
+
+        }
+        button {
+            @include var.button-secondary;
         }
 
-        li {
-            padding: 6px;
-            border: 1px solid black;
-            border-radius: 15px;
-            margin: 0 0 8px 0;
+        .checkout_address_detail_name {
+            font-weight: 750;
+            padding-right: 15px;
         }
-    }
 
-.delivery_container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    button {
-        @include var.button-secondary;
-    }
-
-    .checkout_address_detail_name {
-        font-weight: 750;
-        padding-right: 15px;
-    }
-
-    .change_address {
-        cursor: pointer;
-        background-color: var.$back-color;
-        padding: 4px;
-        text-align: center;
-        border-radius: 5px;
-        color: white;
+        .change_address {
+            cursor: pointer;
+            background-color: var.$back-color;
+            padding: 4px;
+            text-align: center;
+            border-radius: 5px;
+            color: white;
+        }
     }
 }
 

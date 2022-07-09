@@ -342,6 +342,28 @@ document.addEventListener('DOMContentLoaded', function(){
         }
     }
 
+    if (document.getElementsByClassName('make-default-address')) {
+        document.querySelectorAll(".make-default-address").forEach (button => {
+            button.onclick = () => {
+                addressid = button.value;
+
+                fetch('/address_list', {
+                    method: 'POST',
+                    body:JSON.stringify({
+                        id : addressid
+                    }),
+                    headers:{
+                        'x-CSRFToken': getCookie('csrftoken')
+                    }
+                })
+                .then(()=> {
+                    window.location.reload()
+                })
+            }
+        })
+
+    }
+
 })
 
 

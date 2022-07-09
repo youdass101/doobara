@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from .forms import *
 from .models import *
 from .modules.ordermanager import *
+import json
 
 
 # Create your views here.
@@ -69,7 +70,17 @@ def order_log(request):
     return render(request, "users/orderlog.html", {"order": sorder, "items": sitems})
 
 def address_list(request):
+    # if request.method == "GET":
     user = request.user
     loa = Delivery_Address_Details.objects.filter(user=user)
     sloa = [address.serialize() for address in loa]
+    if request.method == "POST":
+        result = json.loads(request.body)['id']
+        old = Delivery_Address_Details.objects.get(user=user, default=True)
+        old.default = False
+        old.save()
+        caddress = Delivery_Address_Details.objects.get(id=result)
+        caddress.default = True
+        caddress.save()
+
     return render(request, "users/address_list.html",{"loa":sloa})

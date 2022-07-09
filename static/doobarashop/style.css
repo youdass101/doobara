@@ -1178,13 +1178,15 @@ form.search-site button {
   border-radius: 15px;
   margin: 0 0 8px 0;
 }
-
-.delivery_container {
+.address_list .delivery_container {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-.delivery_container button {
+.address_list .delivery_container .delivery_address {
+  width: 74%;
+}
+.address_list .delivery_container button {
   color: #fff;
   background-color: #292826;
   font-family: "Archivo Narrow", Sans-serif;
@@ -1195,11 +1197,11 @@ form.search-site button {
   padding: 7px 20px 7px 20px;
   cursor: pointer;
 }
-.delivery_container .checkout_address_detail_name {
+.address_list .delivery_container .checkout_address_detail_name {
   font-weight: 750;
   padding-right: 15px;
 }
-.delivery_container .change_address {
+.address_list .delivery_container .change_address {
   cursor: pointer;
   background-color: #292826;
   padding: 4px;
@@ -2520,14 +2522,49 @@ form.search-site button {
   color: #F9D342;
 }
 
-.address-list-user {
-  width: 60%;
-  padding: 20px;
-  align-items: center;
-  justify-content: space-around;
-  flex-direction: column;
+.delviery-address-title {
+  text-align: center;
 }
 
+.address-list-user {
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+}
+.address-list-user .address_list {
+  width: 60%;
+}
+.address-list-user button {
+  margin-bottom: 10px;
+  padding: 7px !important;
+}
+.address-list-user .add-new-address {
+  color: #fff;
+  background-color: #292826;
+  font-family: "Archivo Narrow", Sans-serif;
+  font-size: 14px;
+  border-style: groove;
+  border-width: 0;
+  border-radius: 6px;
+  padding: 7px 20px 7px 20px;
+  cursor: pointer;
+  float: right;
+}
+.address-list-user .default-address {
+  color: green;
+}
+
+@media screen and (max-width: 750px) {
+  .address-list-user {
+    width: 100%;
+    padding: 20px;
+  }
+
+  .address_list {
+    width: 100% !important;
+  }
+}
 .body-800width {
   width: 100%;
   max-width: 800px;

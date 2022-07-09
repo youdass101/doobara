@@ -6,10 +6,8 @@
     User Addresses
 {% endblock %}
 {% block body %}
+<h3 class="delviery-address-title">Delivery Address</h3>
 <div class="address-list-user">
-
-    <h3>Delivery Address</h3>
-
     <div class="address_list">
         <ul>
             {% for item in loa %}
@@ -22,18 +20,21 @@
                         <p>{{item.delivery_details}}</p>
                     </div>    
                     <div>
-                        <form action="{% url 'checkout' %}" method="POST">
-                            {% csrf_token %}
-                            <input name="id" value={{item.id}} type="hidden">
-                            <div><button type="submit" formaction="/?" class="change_address" id="id_change_address">Edit</button></div>
-                            <div><button type="submit" formaction="/?" class="make-default_address" id="id_make_default_address">Set as Default</button></div>
-                        </form> 
+                        {% if item.default %}
+                            <div><button type="submit" formaction="/?" class="edit-address-button">Edit</button></div>
+                        {% else %}                         
+                            <div><button type="submit" formaction="/?" class="edit-address-button">Edit</button></div>
+                            <div><button value={{item.id}} class="make-default-address">Set Default</button></div>
+                        {% endif %}
                     </div>
                 </div>
+                {% if item.default %}
+                <p class="default-address">default</p>
+                {% endif %}
             </li>
             {% endfor %}
         </ul>
-        <div><button type="submit" formaction="/?" class="add_new_address" id="id_add_new_address">New address</button></div>
+        <div><button type="submit" formaction="/?" class="add-new-address" id="id_add_new_address">New address</button></div>
 
     </div>
 </div>
