@@ -16,8 +16,7 @@ def default_address(lod):
     for i in lod:
         if i['default']:
             return int(i['id'])
-        else:
-            return 0
+    return 0
 
 
 # list_of_instace -> list_of_dict

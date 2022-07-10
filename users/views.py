@@ -4,6 +4,7 @@ from .forms import *
 from .models import *
 from .modules.ordermanager import *
 import json
+from .forms import *
 
 
 # Create your views here.
@@ -84,3 +85,6 @@ def address_list(request):
         caddress.save()
 
     return render(request, "users/address_list.html",{"loa":sloa})
+
+def new_edit_address(request):
+    return render(request, "users/new_edit_address.html", {"form": Delivery_Information()})

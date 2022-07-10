@@ -21,9 +21,15 @@
                     </div>    
                     <div>
                         {% if item.default %}
-                            <div><button type="submit" formaction="/?" class="edit-address-button">Edit</button></div>
-                        {% else %}                         
-                            <div><button type="submit" formaction="/?" class="edit-address-button">Edit</button></div>
+                            <form action="{% url 'new_edit_address' %}" method="POST">      
+                                {% csrf_token %}                  
+                                <div><button type="submit" formaction="/new_edit_address" class="edit-address-button">Edit</button></div>
+                            </form>                        
+                        {% else %} 
+                            <form action="{% url 'new_edit_address' %}" method="POST">      
+                                {% csrf_token %}                  
+                                <div><button type="submit" formaction="/new_edit_address" class="edit-address-button">Edit</button></div>
+                            </form>
                             <div><button value={{item.id}} class="make-default-address">Set Default</button></div>
                         {% endif %}
                     </div>
