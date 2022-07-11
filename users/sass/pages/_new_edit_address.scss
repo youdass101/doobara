@@ -1,0 +1,33 @@
+@use '../../../static/doobarashop/sass/abstracts/all' as var;
+
+.new-edit-address-form-container {
+    .new-address-form-container {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        padding: 5% 0 5% 0;
+        flex-direction: column;
+        .new-address-container-title {
+            text-align: center;
+        }
+        form {
+            width: 60%;
+            padding: 0px 20px 20px 20px ;
+        
+            label {
+                @include var.par-body-2;
+            }
+
+            input, textarea {
+                @extend .input-style-prim;
+            }
+        }
+        button {
+            @include var.button-style-wide;
+        }
+
+        .submit-new-address-button {
+            @extend .input-submit-button-prim;
+        }
+    }  
+} 

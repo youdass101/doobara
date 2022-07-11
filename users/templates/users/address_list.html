@@ -40,8 +40,10 @@
             </li>
             {% endfor %}
         </ul>
-        <div><button type="submit" formaction="/?" class="add-new-address" id="id_add_new_address">New address</button></div>
-
+        <form action="{% url 'new_edit_address' %}" method="POST">      
+            {% csrf_token %}                  
+            <div><button type="submit" formaction="/new_edit_address" class="add-new-address">New address</button></div>
+        </form>
     </div>
 </div>
 {% endblock%}
