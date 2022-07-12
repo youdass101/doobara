@@ -22,12 +22,16 @@
                     <div>
                         {% if item.default %}
                             <form action="{% url 'new_edit_address' %}" method="POST">      
-                                {% csrf_token %}                  
+                                {% csrf_token %}  
+                                <input name="submit-type" type="hidden" value="edit">
+                                <input name="edit-address" type="hidden" value={{item.id}}>               
                                 <div><button type="submit" formaction="/new_edit_address" class="edit-address-button">Edit</button></div>
                             </form>                        
                         {% else %} 
                             <form action="{% url 'new_edit_address' %}" method="POST">      
-                                {% csrf_token %}                  
+                                {% csrf_token %}   
+                                <input name="submit-type" type="hidden" value="edit">
+                                <input name="edit-address" type="hidden" value={{item.id}}>                
                                 <div><button type="submit" formaction="/new_edit_address" class="edit-address-button">Edit</button></div>
                             </form>
                             <div><button value={{item.id}} class="make-default-address">Set Default</button></div>
@@ -40,8 +44,9 @@
             </li>
             {% endfor %}
         </ul>
-        <form action="{% url 'new_edit_address' %}" method="POST">      
-            {% csrf_token %}                  
+        <form action="{% url 'new_edit_address' %}" method="GET">      
+            {% csrf_token %}   
+            <input name="submit-type" type="hidden" value="new-address">
             <div><button type="submit" formaction="/new_edit_address" class="add-new-address">New address</button></div>
         </form>
     </div>

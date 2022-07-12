@@ -83,7 +83,7 @@ def address_post(request):
         state = False
 
     except:
-        # is disct                                                  
+        # is dict                                                  
         # conatin current select address id and order note
         form = Delivery_Information(request.POST)
         # is a helper function at modules, ordermanager 

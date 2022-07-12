@@ -87,4 +87,14 @@ def address_list(request):
     return render(request, "users/address_list.html",{"loa":sloa})
 
 def new_edit_address(request):
-    return render(request, "users/new_edit_address.html", {"form": Delivery_Information()})
+    if request.method == "POST":
+        info = request.POST
+        address = Delivery_Address_Details.objects.get(user=request.user, id=info['edit-address'])
+        saddress =address.serialize()
+        print(info, saddress)
+        type = False
+    else:
+
+        type=  True
+
+    return render(request, "users/new_edit_address.html", {"form": Delivery_Information(), "new":type})
