@@ -90,11 +90,11 @@ def new_edit_address(request):
     if request.method == "POST":
         info = request.POST
         address = Delivery_Address_Details.objects.get(user=request.user, id=info['edit-address'])
-        saddress =address.serialize()
-        print(info, saddress)
+        form = Delivery_Information(instance=address)
+
         type = False
     else:
-
+        form = Delivery_Information()
         type=  True
 
-    return render(request, "users/new_edit_address.html", {"form": Delivery_Information(), "new":type})
+    return render(request, "users/new_edit_address.html", {"form": form, "new":type})
