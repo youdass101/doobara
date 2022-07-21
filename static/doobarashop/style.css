@@ -1222,7 +1222,7 @@ form.search-site button {
   max-width: 600px;
 }
 .checkout-page-container .checkout-shipping-details-container #id_order_note {
-  padding: 15px;
+  padding: 15px 15px 0px 0px;
 }
 .checkout-page-container .checkout-shipping-details-container label {
   font-size: 16px;

@@ -1,3 +1,4 @@
+from signal import default_int_handler
 from ..models import *
 from ..forms import *
 from cart.modules.cartmanager import *
@@ -6,15 +7,15 @@ def createorder(request, form, new):
     user = request.user
     if new:
         if form.is_valid():
-            # clean form data of delivery address form 
-            name = form.cleaned_data['first_name']
-            lastname = form.cleaned_data['last_name']
-            phone = form.cleaned_data['phone']
-            city = form.cleaned_data['city_town']
-            street = form.cleaned_data['street']
-            building = form.cleaned_data['building_appartement']
-            information = form.cleaned_data['additional_information']
-            note = form.cleaned_data['note']
+            # # clean form data of delivery address form 
+            # name = form.cleaned_data['first_name']
+            # lastname = form.cleaned_data['last_name']
+            # phone = form.cleaned_data['phone']
+            # city = form.cleaned_data['city_town']
+            # street = form.cleaned_data['street']
+            # building = form.cleaned_data['building_appartement']
+            # information = form.cleaned_data['additional_information']
+            # note = form.cleaned_data['note']
 
             # is intance 
             # create a new delivery address model object 
@@ -28,7 +29,11 @@ def createorder(request, form, new):
             
             # record instance
             # create a new instance deliver address data
-            delivery = Delivery_Address_Details.objects.create(name=name, last_name=lastname, city_town=city, street_name=street, building_appartment=building, phone_number=phone, delivery_details=information, user=user, default=state)
+            note = form.cleaned_data.get('notes')
+            form.instance.user = user
+            form.instance.default = state
+            delivery =form.save()        
+            # delivery = Delivery_Address_Details.objects.create(name=name, last_name=lastname, city_town=city, street_name=street, building_appartment=building, phone_number=phone, delivery_details=information, user=user, default=state)
 
         else:
             # return form as it is to reload it 
@@ -74,20 +79,22 @@ def createorder(request, form, new):
 # takes request dict return: form data
 # and boolean true if user have address saved or false if not
 def address_post(request):
-    # is instance form
-    # new delivery address for login user
-    form =request.POST
+    # is dictionarry form
+    form =request.POST  
+    
+    # aleardy existing address (icluding any order note in form)
     try:
         form['current_address_id']
-        # new address 
+        # user have saved address
         state = False
-
+        
+    # new delivery address for logged in user (should include order note)
     except:
         # is dict                                                  
-        # conatin current select address id and order note
         form = Delivery_Information(request.POST)
+        
         # is a helper function at modules, ordermanager 
-        # user have saved address
+        # new address 
         state = True 
 
     return form, state

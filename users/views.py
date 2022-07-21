@@ -33,6 +33,7 @@ def placeorder(request):
         # form is int or dict, state is boolean 
         # if state is true it means the address is new then form have the new data
         # if state is false then the form contain an id of current address 
+        print("calling address post ")
         form, state = address_post(request)
         # is instance
         # new order instance

@@ -8,10 +8,10 @@ from datetime import timedelta, datetime
 class Delivery_Address_Details (models.Model):
     # is string
     # oreder Receiver name 
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=30)
     # is string 
     # order receiver last name
-    last_name = models.CharField(max_length=255)
+    last_name = models.CharField(max_length=40)
     # is string
     # delivery city and town
     city_town = models.CharField(max_length=255)

@@ -70,7 +70,7 @@
         width: 55%;
         max-width: 600px;
         #id_order_note {
-            padding: 15px;
+            padding: 15px 15px 0px 0px;
         }
         label {
             @include var.par-body-2;

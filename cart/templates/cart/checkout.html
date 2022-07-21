@@ -35,6 +35,7 @@ My Cart
     </div>
 </div>
 
+<!-- shipping managment section -->
 <div class="checkout-page-container">
     <div class="checkout-shipping-details-container">
         <h1>Shipping details</h1>
@@ -73,20 +74,22 @@ My Cart
                                         <button type="submit" formaction="/checkout" class="change_address" id="id_checkout_new_address">
                                             + New Address
                                         </button>
+                                        <div id="id_order_note">
+                                            <p><label for="ordernote">Notes</label></p>
+                                            <textarea form="shipping-details-id" type="textarea" name="ordernote" rows="4" cols="50"> </textarea>
+                                        </div>
                                     </form>
                                 </div>
                             </div>
                         </div>
                     {% endif %}
                 {% endfor %}
-                <div id="id_order_note">
-                    <p><label for="ordernote">Notes</label></p>
-                    <textarea form="shipping-details-id" type="textarea" name="ordernote" rows="4" cols="50"> </textarea>
-                </div>
+              
             <!-- IF THERE IS NO SAVED ADDRESS CREATE A NEW ONE -->
             {% else %}
                 {{form}}
             {% endif %}
+                
         </form>
     
     </div>

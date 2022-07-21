@@ -40,8 +40,11 @@ class CustomSignupForm(SignupForm):
 #     note = forms.CharField(max_length=200, required=False)
     
 class Delivery_Information(ModelForm):
+    
+    notes = forms.CharField(max_length=200, required=False)
+
+
     class Meta:
         model = Delivery_Address_Details
         fields = ['name', 'last_name', 'phone_number', 'city_town', 
                     'street_name', 'building_appartment', 'delivery_details']
-        localized_fields = ('birth_date',)
