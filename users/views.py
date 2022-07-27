@@ -33,7 +33,7 @@ def placeorder(request):
         # form is int or dict, state is boolean 
         # if state is true it means the address is new then form have the new data
         # if state is false then the form contain an id of current address 
-        print("calling address post ")
+        print("calling address post")
         form, state = address_post(request)
         # is instance
         # new order instance
@@ -89,13 +89,20 @@ def address_list(request):
 
 def new_edit_address(request):
     if request.method == "POST":
-        info = request.POST
-        address = Delivery_Address_Details.objects.get(user=request.user, id=info['edit-address'])
+        data = request.POST
+        address = Delivery_Address_Details.objects.get(user=request.user, id=data['edit-address'])
         form = Delivery_Information(instance=address)
+        info = data['edit-address']
 
         type = False
     else:
         form = Delivery_Information()
+        info = "new"
         type=  True
 
-    return render(request, "users/new_edit_address.html", {"form": form, "new":type})
+    return render(request, "users/new_edit_address.html", {"form": form, "new":type, "info": info})
+
+def update_address(request):
+    if request.method == "POST":
+        a = request.POST
+        print("this is", a)

@@ -17,6 +17,7 @@ urlpatterns=[
     path('placeorder', views.placeorder, name="placeorder"),
     path('order_log', view=views.order_log, name="order_log"),
     path('address_list', view=views.address_list, name="address_list"),
-    path('new_edit_address', view=views.new_edit_address, name="new_edit_address")
+    path('new_edit_address', view=views.new_edit_address, name="new_edit_address"),
+    path('update_address', view=views.update_address, name="update_address")
 
 ]

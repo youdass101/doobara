@@ -8,28 +8,27 @@
 {% block body %}
 
 <div class="new-edit-address-form-container">
-    {% if new %}
         <div class="new-address-form-container">
             <div class="new-address-container-title">
-                <h3>New Address</h3>
+                <h3>
+                    {% if new %}
+                        New 
+                    {% else %}
+                        Edit
+                    {% endif %} 
+                    Address
+                </h3>
             </div> 
-            <form>
-                {{form}}
-                <!-- <button type="submit">Create New Address</button> -->
-                <input type="submit" value="Create New Address" class="submit-new-address-button">
-            </form> 
-        </div>
-    {% else %}
-        <div class="new-address-form-container">
-            <div class="new-address-container-title">
-                <h3>Edit Address</h3>
-            </div> 
-            <form>
-                {{form}}
-                <!-- <button type="submit">Create New Address</button> -->
+            <form action="{% url 'update_address' %}" method="POST">   
+                {% csrf_token %}      
+                {% for field in form %}
+                    {% if field.name != "notes"%}
+                        {{field.label}} {{field}}
+                    {% endif %}
+                {% endfor %}
+                <input type="hidden" class="info" value={{info}} name="info">
                 <input type="submit" value="Save" class="submit-new-address-button">
             </form> 
         </div>
-    {% endif %}
 </div>
 {% endblock %}
