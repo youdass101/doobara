@@ -29,6 +29,14 @@
                 <input type="hidden" class="info" value={{info}} name="info">
                 <input type="submit" value="Save" class="submit-new-address-button">
             </form> 
+            {% if info != "new" %}
+                <form action="{% url 'update_address' %}" method="POST">   
+                    {% csrf_token %}   
+                    <input type="hidden" value="del" name="info">
+                    <input type="hidden" value={{info}} name="aid">
+                    <input type="submit" value="Delete" class="submit-new-address-button">
+                </form>
+            {% endif %}
         </div>
 </div>
 {% endblock %}

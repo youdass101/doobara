@@ -1,4 +1,6 @@
-from django.shortcuts import render
+from hashlib import new
+from nntplib import ArticleInfo
+from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 from .forms import *
 from .models import *
@@ -93,7 +95,6 @@ def new_edit_address(request):
         address = Delivery_Address_Details.objects.get(user=request.user, id=data['edit-address'])
         form = Delivery_Information(instance=address)
         info = data['edit-address']
-
         type = False
     else:
         form = Delivery_Information()
@@ -104,5 +105,24 @@ def new_edit_address(request):
 
 def update_address(request):
     if request.method == "POST":
-        a = request.POST
-        print("this is", a)
+        address_id = request.POST['info']
+        if address_id == "new":
+            new_address = Delivery_Information(request.POST)
+            if new_address.is_valid:
+                new_address.instance.user = request.user
+                new_address.instance.default = False
+                new_address.save()
+            
+        elif address_id == "del":
+            id = request.POST['aid']
+            address = Delivery_Address_Details.objects.get(user=request.user, id = int(id))
+            address.delete()
+
+        else:
+            address = Delivery_Address_Details.objects.get(user=request.user, id = int(address_id))
+            edit_address = Delivery_Information(request.POST, instance=address)
+            edit_address.save()
+            
+        
+        return redirect("/address_list")
+
