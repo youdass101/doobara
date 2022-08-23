@@ -1,5 +1,3 @@
-from hashlib import new
-from nntplib import ArticleInfo
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 from .forms import *
@@ -8,11 +6,8 @@ from .modules.ordermanager import *
 import json
 from .forms import *
 
-
-# Create your views here.
-# def register_login(request):
-#     return render(request, "users/register_login.html")
- # if request.user.is_authenticated:
+# User account page render
+# User has to be login
 @login_required
 def myaccount(request):
     # is list of instances
@@ -22,12 +17,17 @@ def myaccount(request):
     # copy list of serialized orders in loo list 
     orders = [order.serialize() for order in loo]
     try:
+        # is instance
+        # address instance with default set to true
         address = Delivery_Address_Details.objects.get(user=request.user, default=True)
+        # is dict
+        # default address serialized 
         saddress = address.serialize()
     except:
         saddress = False
     return render(request, "users/account.html", {"orders": orders, "address":saddress})
 
+# Create a new order instance
 @login_required
 def placeorder(request):
     if request.method == "POST":
@@ -35,7 +35,6 @@ def placeorder(request):
         # form is int or dict, state is boolean 
         # if state is true it means the address is new then form have the new data
         # if state is false then the form contain an id of current address 
-        print("calling address post")
         form, state = address_post(request)
         # is instance
         # new order instance
@@ -52,6 +51,7 @@ def placeorder(request):
         else:
             return render(request, "cart/checkout.html", {"form": order[1], "cart": CartManager(request).cart_page()})
 
+# render specific order instance and connected items
 @login_required
 def order_log(request):
     if request.method == "POST":
@@ -73,56 +73,95 @@ def order_log(request):
 
     return render(request, "users/orderlog.html", {"order": sorder, "items": sitems})
 
+# render address list and change dedault address instance
 def address_list(request):
     # if request.method == "GET":
     user = request.user
     loa = Delivery_Address_Details.objects.filter(user=user)
     sloa = [address.serialize() for address in loa]
+
+    # Change user default  address 
     if request.method == "POST":
         result = json.loads(request.body)['id']
+        # get current default addres and set it to default to false and and save model instance
         old = Delivery_Address_Details.objects.get(user=user, default=True)
         old.default = False
         old.save()
+        # set new address to default 
+        # get new address and set default to true and save instance
         caddress = Delivery_Address_Details.objects.get(id=result)
         caddress.default = True
         caddress.save()
 
     return render(request, "users/address_list.html",{"loa":sloa})
 
+# render empty form for new address request or current address to edit in filled in form 
+# Method get for new address and POST to existing address instance 
 def new_edit_address(request):
     if request.method == "POST":
+        # is dict 
+        # html data post 
         data = request.POST
+        # is instance
+        # get deliver address using given ID
         address = Delivery_Address_Details.objects.get(user=request.user, id=data['edit-address'])
+        # is form 
+        # form filled with given address
         form = Delivery_Information(instance=address)
+        # is int
+        # delivery address id 
         info = data['edit-address']
+        # is boolean 
+        # false if address already exist and true if address is new
         type = False
     else:
         form = Delivery_Information()
+        # is string
+        # form address type one of 3 "new" "del" ""
         info = "new"
+        # is boolean 
+        # false if address already exist and true if address is new 
         type=  True
 
     return render(request, "users/new_edit_address.html", {"form": form, "new":type, "info": info})
 
+# update existing address instance
 def update_address(request):
     if request.method == "POST":
+        # is string
+        # one of 3 "new" * "del" * ""
         address_id = request.POST['info']
+        # create new instance 
         if address_id == "new":
+            # is form
+            # fill form with given information
             new_address = Delivery_Information(request.POST)
             if new_address.is_valid:
+                # add missing fields to form and save form to instance 
                 new_address.instance.user = request.user
                 new_address.instance.default = False
                 new_address.save()
             
+        # delete existing instance 
         elif address_id == "del":
+            # is int
+            # D.A.D id
             id = request.POST['aid']
+            # is instance
+            # d.a.d instance using given ID 
             address = Delivery_Address_Details.objects.get(user=request.user, id = int(id))
+            # delete selected instace 
             address.delete()
 
+        # edit existing instance 
         else:
+            # is instance 
+            # get address instance using given id 
             address = Delivery_Address_Details.objects.get(user=request.user, id = int(address_id))
+            # is form
+            # fill for with with existing address and edit fields using posted data form
             edit_address = Delivery_Information(request.POST, instance=address)
+            # save instance updates
             edit_address.save()
             
-        
         return redirect("/address_list")
-

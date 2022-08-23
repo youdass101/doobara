@@ -127,5 +127,3 @@ class Item_Order (models.Model):
             "quantity": self.quantity,
             "subtotal": (self.price * self.quantity)
         }
-
-
