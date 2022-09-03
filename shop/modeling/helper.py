@@ -48,6 +48,7 @@ def product_serialize(object, tag):
         "pprice": object.price,
         "pcategory": category_list,
         "pmainimage": image,
+        "pactive" : object.active,
     }
     # if loading in single product with full details data loaded
     else:

@@ -29,21 +29,23 @@ SHOP
 </div>
 <div id="container-shop">
     {% for row in lop %}
-    <div class="shop-product">
-        <a href="/single_product/{{row.pname}}">
-            <!-- Product Thumb, title price -->
-            <!-- Product image -->
-            <!-- <img src={{row.pmainimage}}> -->
-            <img src="{% static row.pmainimage.iurl %}" alt="{{row.pmainimage.ialt}}">
-            
-            <!-- Product Name -->
-            <p class="product-name">{{row.pname}}</p>
-            <!-- product price -->
-            <p class="product-price">$ {{row.pprice}}</p>
-            <!-- <div class="vertical-center"> -->
-        </a>
-        <button class="shop-add-to-cart" value="{{row.pid}}">Add to Cart</button>    
-    </div>
+        {% if row.pactive %}
+            <div class="shop-product">
+                <a href="/single_product/{{row.pname}}">
+                    <!-- Product Thumb, title price -->
+                    <!-- Product image -->
+                    <!-- <img src={{row.pmainimage}}> -->
+                    <img src="{% static row.pmainimage.iurl %}" alt="{{row.pmainimage.ialt}}">
+                    
+                    <!-- Product Name -->
+                    <p class="product-name">{{row.pname}}</p>
+                    <!-- product price -->
+                    <p class="product-price">$ {{row.pprice}}</p>
+                    <!-- <div class="vertical-center"> -->
+                </a>
+                <button class="shop-add-to-cart" value="{{row.pid}}">Add to Cart</button>    
+            </div>
+        {% endif %}
 
     {% endfor %}
     
