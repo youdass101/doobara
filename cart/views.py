@@ -12,8 +12,11 @@ from django.contrib.auth.decorators import login_required
 # Request(model) -> render
 # return the user or session cart data list 
 def cart(request):
-    cart = CartManager(request)
-    return render(request, "cart/cart.html", {"cart": cart.cart_page()})
+    # is list of dict
+    # call CartManager class in modules-cartmanager 
+    # get user cart module list of dict for cart items related
+    cart = CartManager(request).cart_page() # helper class in cartmanager
+    return render(request, "cart/cart.html", {"cart": cart})
 
 
 # WHen user press the add to cart button
