@@ -1,6 +1,7 @@
 from ..models import *
 from allauth.account.signals import user_logged_in
 from django.dispatch import receiver
+# project files
 from .snippethelper import *
 
 # When user login 
@@ -10,14 +11,25 @@ def cart_after_login(request, **kwargs):
     userorsession(request)
     cart_migration(request)
 
+# !!! MOVE TO snippethelper file !!! ?
 # dict -> boolean 
 # move session cart item to use cart data if user cart is empty
 def cart_migration(request):
+    # is list of dict
+    # get given reg-user sub instance cart (connected instance) - sub instance items in cart instance
     user_cart = request.user.mycart.items.all()
+    # is list of dick 
+    # list of dictionary with product cart item data for none login user
     session_cart = request.session['cart']
+    # in case the reg-user cart is empty and the session cart have data
+    # than we should migrate the session data to login user connected cart model sub data 
     if cart_empty(user_cart) and (not cart_empty(session_cart)):
         for item in session_cart:
+            # is dict
+            # cart item data with patttern that fit the cm method
             itemdetail = {'pid': item, 'quantity': session_cart[item]['quantity']}
+            # is instance 
+            # cartmanager class 
             cart = CartManager(request)
             cart.add_to_cart(itemdetail)
 

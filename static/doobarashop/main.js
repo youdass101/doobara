@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', function(){
         // }
 
         // When account details button is clicked in account page 
-        //show Account edit form contianer 
+        //show Account edit form container 
         document.getElementById('account-edit').onclick = () => {
             account_default()
             document.getElementById('account-detail').classList.toggle('show')
@@ -286,6 +286,8 @@ document.addEventListener('DOMContentLoaded', function(){
         .then(() => {
             window.location.reload()}) 
     }
+
+    
 
     // CSRF token function  
     function getCookie(name) {

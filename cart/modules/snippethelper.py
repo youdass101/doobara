@@ -2,6 +2,12 @@ from shop.models import *
 # This a helper mini functions for cart application 
 
 
+
+# NOTES FOR OPTIMIZATION 
+# scart_data_setup function can be replace with the session cart itself 
+# but the session cart pattern should be custumized to match the cds function output pattern
+
+
 # instance -> boolean
 # check if given dict is empty 
 def cart_empty(cart):
@@ -20,7 +26,8 @@ def default_address(lod):
 
 
 # list_of_instace -> list_of_dict
-# create a default dict temlate of user cart data for session
+# create a default dict template of user cart data for session
+# mimicing model serialization pattern
 def scart_data_setup(cart, lst=[]):
     for i in cart:
         # is object model 

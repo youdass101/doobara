@@ -1,12 +1,16 @@
 from django.shortcuts import render
-from .models import *
-from django.http import  JsonResponse, HttpResponseRedirect
-from django.urls import reverse
+from django.http import  JsonResponse
+from django.contrib.auth.decorators import login_required
 import json
+from .models import *
 from .modules.cartmanager import *
 from users.forms import *
 from .modules.snippethelper import *
-from django.contrib.auth.decorators import login_required
+
+
+
+# NOTES FOR OPTIMIZATION 
+# Request the CartManager instance for the samse session is highly repetetive
 
 
 # Request(model) -> render
@@ -14,68 +18,70 @@ from django.contrib.auth.decorators import login_required
 def cart(request):
     # is list of dict
     # call CartManager class in modules-cartmanager 
-    # get user cart module list of dict for cart items related
-    cart = CartManager(request).cart_page() # helper class in cartmanager
-    return render(request, "cart/cart.html", {"cart": cart})
+    # get user cart manager module list of dict for cart items related
+    cm = CartManager(request).cart_page() # helper class in cartmanager
+    return render(request, "cart/cart.html", {"cart": cm})
 
 
 # WHen user press the add to cart button
 # this view will add the given
 def shopaddtocart(request):
     if request.method == "PUT":
-        # load html input of product id
+        # load html input of product id (cart product id)
         cpid = json.loads(request.body)
         # is instance object
-        # create new cart instance 
-        cart = CartManager(request)
-        # add time to cart using instance method
-        cart.add_to_cart(cpid)
+        # create new cart manager instance 
+        cm = CartManager(request)
+        # add time to cart manager using instance method
+        cm.add_to_cart(cpid)
         # is dict
-        # current cart data in dict
+        # current cart data in dict 
         ccart = cartcontext(request) 
         return JsonResponse({"result":"done", "cart": ccart}, status=201)
 
 # dict (request) -> json dict
 def updatecart(request):
     # is dict
-    # json dict collect from js
+    # json dict collect from js page request contains product adjustment
     cartupdate = json.loads(request.body)
     # is instance 
-    # create new cart instance
-    dcart = CartManager(request)
-    # use cart method to update cart data 
-    dcart.update_cart(cartupdate)
+    # create new cart manager instance
+    cm = CartManager(request) 
+    # use cart method to update cart data items
+    cm.update_cart(cartupdate)
  
     return JsonResponse({"result":"done"}, status=201)
     
 @login_required
 def checkout(request):
     # is instance object
-    # create new cart instance 
-    cart = CartManager(request)
+    # create new cart manager instance 
+    cm = CartManager(request)
     # is list 
-    # all user address instances
+    # all user address instances (list of address )
     loa = request.user.myaddress.all()
     # is list of dict
     # create list of dict from objects
-    lod = [item.serialize() for item in loa]
+    sloa = [item.serialize() for item in loa]
     # if method is GET
+    # assign defualt address id to id variable
     if request.method == "GET":
         # is int 
         # get the address that has default as true
-        id = default_address(lod)
+        aid = default_address(sloa)
     # is method is POST
     if request.method == "POST":
         # is int
         # given Id 
-        id = int(request.POST['id'])
+        aid = int(request.POST['id'])
 
     # is dict 
-    # create a list of data 
+    # create a list of data wrapping all data in a dict 
     output = {"form": Delivery_Information(),
-            "cart":cart.cart_page(),
-            "address_id":id, 
-            "loa":lod}
+            "cart":cm.cart_page(),
+            "address_id":aid, 
+            "loa":sloa}
+
     return render(request, "cart/checkout.html", output)
     # else:
     #     return HttpResponseRedirect(reverse('myaccount'))
