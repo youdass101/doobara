@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import  JsonResponse
 from django.contrib.auth.decorators import login_required
 import json
+# project files
 from .models import *
 from .modules.cartmanager import *
 from users.forms import *
@@ -11,6 +12,8 @@ from .modules.snippethelper import *
 
 # NOTES FOR OPTIMIZATION 
 # Request the CartManager instance for the samse session is highly repetetive
+# Other thant the CM repetation I cannot find any major optimazation that can be done 
+# there is 38 line of codes and the rest commenting
 
 
 # Request(model) -> render
@@ -83,16 +86,11 @@ def checkout(request):
             "loa":sloa}
 
     return render(request, "cart/checkout.html", output)
-    # else:
-    #     return HttpResponseRedirect(reverse('myaccount'))
 
 
-# request -> dict
+# request -> dict (
 # DATA UPDATES COLLECTER return the user attached cart items qtty and total price 
 def cartcontext(request):
-    # is instance object
-    # create new cart instance object 
-    ccart = CartManager(request)
-    # is dict * int
-    items, total = ccart.cart_context_process()
+    # is dict * int (requested function from snippethelper file)
+    items, total = cart_context_process(request)
     return {'item': items, 'total': "{:.2f}".format(total)}

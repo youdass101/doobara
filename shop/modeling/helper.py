@@ -42,14 +42,17 @@ def product_serialize(object, tag):
     # is a Dictionary
     # if loading in carousel no details data loaded  
     if tag == 'main':
-        return {
-        "pid": object.id,
-        "pname": object.name,
-        "pprice": object.price,
-        "pcategory": category_list,
-        "pmainimage": image,
-        "pactive" : object.active,
-    }
+        # do not load inactive products 
+        if object.active:
+            return {
+            "pid": object.id,
+            "pname": object.name,
+            "pprice": object.price,
+            "pcategory": category_list,
+            "pmainimage": image,
+            # !!! HAVE TO BE REMOVED FROM HTML CODE IN ANY IF CONFITION
+            "pactive" : object.active,
+        }
     # if loading in single product with full details data loaded
     else:
         return {

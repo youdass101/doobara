@@ -15,6 +15,7 @@ class ImageAlbum(models.Model):
     # list of images -> list of images
     # returns the image that fit the width and lenght 
     def thumbnails(self):
+        # it can be for now all instead filter
         return self.images.filter()
 
     # data to show on admin page 

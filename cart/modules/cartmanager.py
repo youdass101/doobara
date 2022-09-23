@@ -35,47 +35,6 @@ def cart_migration(request):
 
 
 
-# dict -> object * object
-# helper that take request and return user or session data (user object or session dict
-# and user cart or session cart) depend if user logged in
-def userorsession(request):
-    # if user logged in
-    if request.user.is_authenticated:
-        # is model object (class local)
-        # logged in user object
-        user = request.user
-        # check if user have my cart linked
-        try:
-            # is model object (class local)
-            # logged in user in cart items
-            cart = user.mycart.items.all()
-
-        # create new cart and linke it 
-        except:
-            # is model object (class local)
-            # empty cart linked created 
-            cart = [Cart.objects.create(user=user)]
-
-    # User not loged in   
-    # use the session insted of user
-    else:
-        # is dict (class local)
-        # user session dict
-        user = request.session
-        # if cart key exist
-        try:
-            # is dict
-            cart = user['cart']
-        # create a new cart key
-        except:
-            # empty cart 
-            user['cart'] = {}
-            # sace to session
-            user.save()
-            # is dict
-            cart = user.get('cart')
-    
-    return user, cart
 
 
 # Object 
@@ -114,24 +73,6 @@ class CartManager:
         return ccart
 
 
-    # CREATE CART ITEM OBJECT METHOD 
-    # object * string * object -> boolean
-    # CREATE NEW CART ITEM METHOD
-    # create new object in user cart item model using the from given data
-    def create_ci (self, product, qtt):
-        Cart_Item.objects.create(product=product, quantity=qtt, cart=self.user.mycart)
-        return True
-
-    # instance * instance -> boolean
-    # delete object using product given id 
-    # DELETE INSTANCE METHOD !!NOT USED YET!
-    # Helper function to delete object in a pattern 
-    def delete_objct(self, item, ucart):
-        # product= Product.objects.get(id=item)
-        # delete object
-        Cart_Item.objects.get(product= item, cart=ucart).delete()
-
-
     # instance * dict -> boolean
     # ADD TO CART METHOD 
     # create a new or edit existing object in cart_item model  
@@ -160,7 +101,8 @@ class CartManager:
             # if previous failed excute this supose element does'nt exist
             except:
                 # if product item doesn't exist create new record
-                self.create_ci(product, pqtt)
+                Cart_Item.objects.create(product=product, quantity=pqtt, cart=self.user.mycart)
+
         # SESSION USER CART
         else:
             try:
@@ -175,7 +117,7 @@ class CartManager:
                     del self.user['cart'][item['pid']]
             # key item doesn't exist so create a new one 
             except:
-                self.user['cart'][item['pid']] = {'quantity' : str(pqtt), 'price' : str(product.price)}
+                self.user['cart'][item['pid']] = {'quantity' : str(pqtt)}
             
             self.user.save()
 
@@ -220,25 +162,3 @@ class CartManager:
                 result = {'pid': product['pid'],'quantity':(given - current)}
                 # edit cart item using add to cart method
                 self.add_to_cart(result)
-
-    def cart_context_process(self):
-        # is int 
-        # the all page cart update data for top and other use
-        items, total = 0, 0
-        # int * int -> true
-        # calculate the cart qtt and total price
-        def calc_cart (qtt, price):
-            nonlocal items, total
-            items += qtt
-            total += (float(qtt)*float(price))
-
-        # loop over user cart item and can calculate totalt and item in cart qtt 
-        for i in self.cart:
-            # if user is logged in
-            if self.uli:
-                calc_cart(i.quantity, i.product.price)
-            # if user is not logged in 
-            else:
-                calc_cart(int(self.cart[i]['quantity']), self.cart[i]['price'])
-        
-        return items, total
