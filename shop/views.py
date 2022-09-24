@@ -17,7 +17,7 @@ def index(request):
     slop = serialize(Product.objects.filter(featured=True), "main")
     return render(request, "shop/index.html", {"lop":slop[:items_in_featrued]})
 
-# request -> render (url * dict)
+# request -> render (url  * dict)
 # caller: navigation shop
 # render the shop html template and shop page data
 def shop(request):
@@ -44,7 +44,7 @@ def filtering(request, locat):
 
     return render(request, "shop/shop.html", {"lop":slop, "cats":scats})
 
-# request * string -> render (url * dict)   (single_product.html + data)
+# request * string -> render (url * dict)  
 # caller: product icon anywhere
 # render single product html template with and given product data dict
 def single_product(request, locat):
@@ -55,7 +55,7 @@ def single_product(request, locat):
     return render(request, "shop/single_product.html", {"product": product})
 
 
-# request -> render(shop.html with result data)
+# request -> render(url * dict)
 # filter products that contain same pattern or chars in name 
 # caller: search widget in navigation and mobile footer
 def search(request):
@@ -72,7 +72,7 @@ def search(request):
 
     return render(request, "shop/shop.html", {"lop": slop, "cats":scats})
 
-# request -> render(shop.html with result data)
+# request -> render (url * dict)
 # caller: shp catergory tab (form)
 # filter, sort product list
 def orderby(request):

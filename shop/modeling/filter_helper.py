@@ -4,7 +4,7 @@ from ..models import *
 # take a filter form input dict request and return the selection string name 
 # this function is for the product shop filter menu, 
 def filter_data(form): 
-    # is string (both)
+    # is string (both) (from html submited request)
     # name of selectd category and orderby filter name
     category = form['category']
     orderby = form['byorder']
@@ -29,16 +29,17 @@ def filter_data(form):
             filter_name = ""
         return filter_name
 
-    # is string
+    # is string | Local fuunction called
     # order filter value
     filter_option = check_orderby(orderby)
-    
+    # (loc: shop.models)
     # if catergory string value is (all) default filter only apply   
     if category == "all":
         lop = Product.objects.filter(active=True)
     else:
         lop = Categorie.objects.get(name=category).products.all()
     
+   # loc: shop.modeling.serialize_helper 
    # if orderby string value is (default) no filter is applied 
     if orderby == "default":
         slop = serialize(lop, "main")
