@@ -1,6 +1,6 @@
 from django.db import models
 from .modeling.images import *
-from .modeling.helper import *
+from .modeling.serialize_helper import *
 from django.dispatch import receiver
 
 # Categories is (int(primary id) * string * string * int * int) model
@@ -98,6 +98,7 @@ class Product(models.Model):
     # Takes SQL(model) query set data and convert it to JSON dictionary records
     #  Using helper file to breack down the model serializiation
     def serialize(self, tag):
+        # function at helper file 
         return product_serialize(self, tag)
 
 # !!! TEST IT IF ITS STILL WORKING AFTER THE VARIANT CUSTOMIZATION !!!

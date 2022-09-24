@@ -1,14 +1,5 @@
 from ..models import *
 
-#  -> dict 
-# serialized dict for category objects list
-def serialized_categories():
-    # is list of dict
-    # filter all product in the given category, and serizled them in listof dicts
-    cats =  Categorie.objects.all()
-    scats = [cat.serialize() for cat in cats]
-    return scats
-
 # dict -> tuple(dict)
 # take a filter form input dict request and return the selection string name 
 # this function is for the product shop filter menu, 
