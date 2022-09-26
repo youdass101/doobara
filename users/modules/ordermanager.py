@@ -1,4 +1,3 @@
-from signal import default_int_handler
 from ..models import *
 from ..forms import *
 from cart.modules.cartmanager import *
@@ -7,16 +6,6 @@ def createorder(request, form, new):
     user = request.user
     if new:
         if form.is_valid():
-            # # clean form data of delivery address form 
-            # name = form.cleaned_data['first_name']
-            # lastname = form.cleaned_data['last_name']
-            # phone = form.cleaned_data['phone']
-            # city = form.cleaned_data['city_town']
-            # street = form.cleaned_data['street']
-            # building = form.cleaned_data['building_appartement']
-            # information = form.cleaned_data['additional_information']
-            # note = form.cleaned_data['note']
-
             # is intance 
             # create a new delivery address model object 
             state = False
@@ -33,7 +22,6 @@ def createorder(request, form, new):
             form.instance.user = user
             form.instance.default = state
             delivery =form.save()        
-            # delivery = Delivery_Address_Details.objects.create(name=name, last_name=lastname, city_town=city, street_name=street, building_appartment=building, phone_number=phone, delivery_details=information, user=user, default=state)
 
         else:
             # return form as it is to reload it 
@@ -99,3 +87,14 @@ def address_post(request):
 
     return form, state
             
+def change_default_address(user, aid):
+    # get current default addres and set it to default to false and and save model instance
+    # loc: models
+    old = Delivery_Address_Details.objects.get(user=user, default=True)
+    old.default = False
+    old.save()
+    # set new address to default 
+    # get new address and set default to true and save instance
+    caddress = Delivery_Address_Details.objects.get(id=aid)
+    caddress.default = True
+    caddress.save()

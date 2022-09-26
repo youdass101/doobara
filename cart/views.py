@@ -19,48 +19,50 @@ from .modules.snippethelper import *
 # Request(model) -> render
 # return the user or session cart data list 
 def cart(request):
-    # is list of dict
-    # call CartManager class in modules-cartmanager 
+    # is list of dict | (loc: modules.cartmanager)
     # get user cart manager module list of dict for cart items related
     cm = CartManager(request).cart_page() # helper class in cartmanager
     return render(request, "cart/cart.html", {"cart": cm})
 
-
+# caller: shop , index
 # WHen user press the add to cart button
 # this view will add the given
 def shopaddtocart(request):
     if request.method == "PUT":
+        # HTML submited data 
         # load html input of product id (cart product id)
         cpid = json.loads(request.body)
-        # is instance object
+        # is instance object | (loc: modules.cartmanager)
         # create new cart manager instance 
         cm = CartManager(request)
         # add time to cart manager using instance method
         cm.add_to_cart(cpid)
-        # is dict
+        # is dict | (loc: modules.cartmanager)
         # current cart data in dict 
         ccart = cartcontext(request) 
         return JsonResponse({"result":"done", "cart": ccart}, status=201)
 
+# caller: cart
 # dict (request) -> json dict
 def updatecart(request):
-    # is dict
+    # is dict | Javascript submited data 
     # json dict collect from js page request contains product adjustment
     cartupdate = json.loads(request.body)
-    # is instance 
+    # is instance | (loc: modules.cartmanager)
     # create new cart manager instance
     cm = CartManager(request) 
-    # use cart method to update cart data items
+    # use cart method to update cart data items | (loc: modules.cartmanager)
     cm.update_cart(cartupdate)
  
     return JsonResponse({"result":"done"}, status=201)
-    
+
+# caller: cart     
 @login_required
 def checkout(request):
-    # is instance object
+    # is instance object | (loc: modules.cartmanager)
     # create new cart manager instance 
     cm = CartManager(request)
-    # is list 
+    # is list | (loc: models)
     # all user address instances (list of address )
     loa = request.user.myaddress.all()
     # is list of dict
@@ -88,9 +90,10 @@ def checkout(request):
     return render(request, "cart/checkout.html", output)
 
 
-# request -> dict (
+# request -> dict 
 # DATA UPDATES COLLECTER return the user attached cart items qtty and total price 
 def cartcontext(request):
+    # | (loc: modules.cartmanager)
     # is dict * int (requested function from snippethelper file)
     items, total = cart_context_process(request)
     return {'item': items, 'total': "{:.2f}".format(total)}

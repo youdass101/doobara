@@ -6,18 +6,19 @@ from .modules.ordermanager import *
 import json
 from .forms import *
 
+# caller: main navigation
 # User account page render
 # User has to be login
 @login_required
 def myaccount(request):
-    # is list of instances
+    # is list of instances | (loc: models)
     # currnet user list of related records in orders model
     loo = Orders.objects.filter(user=request.user)
     # is list of dict 
     # copy list of serialized orders in loo list 
     orders = [order.serialize() for order in loo]
     try:
-        # is instance
+        # is instance | (loc: models)
         # address instance with default set to true
         address = Delivery_Address_Details.objects.get(user=request.user, default=True)
         # is dict
@@ -27,16 +28,17 @@ def myaccount(request):
         saddress = False
     return render(request, "users/account.html", {"orders": orders, "address":saddress})
 
+# caller: checkout
 # Create a new order instance
 @login_required
 def placeorder(request):
     if request.method == "POST":
-        # is mixed component
+        # is mixed component | (loc: modules.ordermanager)
         # form is int or dict, state is boolean 
         # if state is true it means the address is new then form have the new data
         # if state is false then the form contain an id of current address 
         form, state = address_post(request)
-        # is instance
+        # is instance | (loc: modules.ordermanager)
         # new order instance
         order = createorder(request,form, state) 
 
@@ -51,16 +53,17 @@ def placeorder(request):
         else:
             return render(request, "cart/checkout.html", {"form": order[1], "cart": CartManager(request).cart_page()})
 
+# caller: account
 # render specific order instance and connected items
 @login_required
 def order_log(request):
     if request.method == "POST":
-        # is int
+        # is int | HTML submited data 
         # given order record id 
         orderid = request.POST['orderid']
-        # is object 
+        # is object  | (loc: models)
         # order instance the first in list 
-        order = Orders.objects.filter(id=orderid)[0]
+        order = Orders.objects.get(id=orderid)
         # is list of instance 
         # all order connected product item records 
         items = order.items.all()
@@ -73,28 +76,29 @@ def order_log(request):
 
     return render(request, "users/orderlog.html", {"order": sorder, "items": sitems})
 
+
+# caller: account 
 # render address list and change dedault address instance
 def address_list(request):
     # if request.method == "GET":
-    user = request.user
+    user = request.user 
+    # is list of dict  | (loc: modules)
     loa = Delivery_Address_Details.objects.filter(user=user)
     sloa = [address.serialize() for address in loa]
 
     # Change user default  address 
     if request.method == "POST":
-        result = json.loads(request.body)['id']
+        # is string(number)
+        # javascript submited data 
+        aid = json.loads(request.body)['id']
         # get current default addres and set it to default to false and and save model instance
-        old = Delivery_Address_Details.objects.get(user=user, default=True)
-        old.default = False
-        old.save()
-        # set new address to default 
-        # get new address and set default to true and save instance
-        caddress = Delivery_Address_Details.objects.get(id=result)
-        caddress.default = True
-        caddress.save()
+        # loc: models
+        change_default_address(user, aid)
 
     return render(request, "users/address_list.html",{"loa":sloa})
 
+
+# caller: account
 # render empty form for new address request or current address to edit in filled in form 
 # Method get for new address and POST to existing address instance 
 def new_edit_address(request):
@@ -125,6 +129,8 @@ def new_edit_address(request):
 
     return render(request, "users/new_edit_address.html", {"form": form, "new":type, "info": info})
 
+
+# caller: account 
 # update existing address instance
 def update_address(request):
     if request.method == "POST":

@@ -46,10 +46,10 @@ class CartManager:
         # is dict
         # django request dict
         self.request = request
-        # is obejct or dict
+        # is obejct or dict | (loc: modules.snippethelper)
         # user object or session dict and user cart object or session cart dict 
         self.user, self.cart = userorsession(request)
-        # is boolean
+        # is boolean | (loc: models)
         # true is user is logged in, else false
         self.uli = request.user.is_authenticated
     
@@ -61,7 +61,7 @@ class CartManager:
     def cart_page(self):
         # if self cart is a model object
         if self.uli:
-            # is listofdict 
+            # is listofdict | (loc: models)
             # serialized cart objects in self.cart
             ccart = [(item.serialize(),(item.quantity * item.product.price)) for item in self.cart]
         # if self cart is session dict
@@ -77,7 +77,7 @@ class CartManager:
     # ADD TO CART METHOD 
     # create a new or edit existing object in cart_item model  
     def add_to_cart (self, item):
-        # is object (Product)
+        # is object (Product) | (loc: models)
         # load product object from Product model
         product = Product.objects.get(id=int(item['pid']))
         # is int 
@@ -87,7 +87,7 @@ class CartManager:
         # IF USER LOGGED IN 
         if self.uli:
             try:
-                # is object 
+                # is object | (loc: models)
                 # single object from cart item model 
                 citem = Cart_Item.objects.get(product=product, cart=self.user.mycart)
                 # is int 
@@ -100,7 +100,7 @@ class CartManager:
                 
             # if previous failed excute this supose element does'nt exist
             except:
-                # if product item doesn't exist create new record
+                # if product item doesn't exist create new record | (loc: models)
                 Cart_Item.objects.create(product=product, quantity=pqtt, cart=self.user.mycart)
 
         # SESSION USER CART
