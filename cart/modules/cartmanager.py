@@ -131,6 +131,7 @@ class CartManager:
     def update_cart(self, cupdate):
         try:
             # if delete button is used on page
+            print(cupdate['cart'])
             self.add_to_cart(cupdate['cart'])
         # if change in qtt is made
         except:
@@ -162,3 +163,11 @@ class CartManager:
                 result = {'pid': product['pid'],'quantity':(given - current)}
                 # edit cart item using add to cart method
                 self.add_to_cart(result)
+
+    # instance * instance -> boolean
+    # delete object using product given id 
+    # Helper function to delete object in a pattern 
+    def delete_objct(self, item, ucart):
+        # product= Product.objects.get(id=item)
+        # delete object
+        Cart_Item.objects.get(product= item, cart=ucart).delete()

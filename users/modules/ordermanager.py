@@ -1,11 +1,15 @@
 from ..models import *
 from ..forms import *
 from cart.modules.cartmanager import *
+from cart.modules.snippethelper import *
+
 
 def createorder(request, form, new):
     user = request.user
+    # result = create_new_address(request, form)
     if new:
         if form.is_valid():
+        # if result:
             # is intance 
             # create a new delivery address model object 
             state = False
@@ -33,14 +37,16 @@ def createorder(request, form, new):
         note = form['ordernote']
         delivery = Delivery_Address_Details.objects.get(id=id)
         
-    # is instance 
+    # is instance | (loc: cart.modules.cartmanager)
     # cart manager class instance to add remove and update cart 
     managecart = CartManager(request)
     # is float 
     # current cart total Note the cart context process returns a list 
     # of two values at index 0 the item in cart total quantity and at index 1 the 
     # cart total amount in usd
-    total = "{:.2f}".format(managecart.cart_context_process()[1])
+    # total = "{:.2f}".format(managecart.cart_context_process()[1])
+    total = "{:.2f}".format(cart_context_process(request)[1])
+
     # is instance 
     # create an new order object model
     order = Orders.objects.create(user=user, address=delivery, total=total, note=note)
@@ -66,10 +72,7 @@ def createorder(request, form, new):
 # dict -> dict * boolean
 # takes request dict return: form data
 # and boolean true if user have address saved or false if not
-def address_post(request):
-    # is dictionarry form
-    form =request.POST  
-    
+def address_post(form):
     # aleardy existing address (icluding any order note in form)
     try:
         form['current_address_id']
@@ -78,9 +81,8 @@ def address_post(request):
         
     # new delivery address for logged in user (should include order note)
     except:
-        # is dict                                                  
-        form = Delivery_Information(request.POST)
-        
+        # is dict                                              
+        form = Delivery_Information(form)
         # is a helper function at modules, ordermanager 
         # new address 
         state = True 
@@ -98,3 +100,15 @@ def change_default_address(user, aid):
     caddress = Delivery_Address_Details.objects.get(id=aid)
     caddress.default = True
     caddress.save()
+
+
+def create_new_address(request, form):
+    if form.is_valid:
+        # add missing fields to form and save form to instance 
+        form.instance.user = request.user
+        form.instance.default = False
+        form.save()
+        return True
+    else:
+        return form
+

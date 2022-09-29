@@ -33,11 +33,13 @@ def myaccount(request):
 @login_required
 def placeorder(request):
     if request.method == "POST":
+        # is dictionarry form
+        form =request.POST 
         # is mixed component | (loc: modules.ordermanager)
         # form is int or dict, state is boolean 
         # if state is true it means the address is new then form have the new data
         # if state is false then the form contain an id of current address 
-        form, state = address_post(request)
+        form, state = address_post(form)
         # is instance | (loc: modules.ordermanager)
         # new order instance
         order = createorder(request,form, state) 
@@ -92,7 +94,7 @@ def address_list(request):
         # javascript submited data 
         aid = json.loads(request.body)['id']
         # get current default addres and set it to default to false and and save model instance
-        # loc: models
+        # loc: modules.ordermanager
         change_default_address(user, aid)
 
     return render(request, "users/address_list.html",{"loa":sloa})
@@ -103,22 +105,25 @@ def address_list(request):
 # Method get for new address and POST to existing address instance 
 def new_edit_address(request):
     if request.method == "POST":
-        # is dict 
+        # is dict | HTML submited data 
         # html data post 
         data = request.POST
-        # is instance
+        # is instance | (loc: models)
         # get deliver address using given ID
         address = Delivery_Address_Details.objects.get(user=request.user, id=data['edit-address'])
         # is form 
         # form filled with given address
         form = Delivery_Information(instance=address)
-        # is int
+        # is int | (loc: models)
         # delivery address id 
         info = data['edit-address']
         # is boolean 
         # false if address already exist and true if address is new
         type = False
+
+    # Create new address
     else:
+        # | (loc: forms)
         form = Delivery_Information()
         # is string
         # form address type one of 3 "new" "del" ""
@@ -134,22 +139,23 @@ def new_edit_address(request):
 # update existing address instance
 def update_address(request):
     if request.method == "POST":
-        # is string
+        # is string | HTML submited data
         # one of 3 "new" * "del" * ""
-        address_id = request.POST['info']
+        address_state = request.POST['info']
         # create new instance 
-        if address_id == "new":
-            # is form
+        if address_state == "new":
+            # is form | (loc: models)
             # fill form with given information
             new_address = Delivery_Information(request.POST)
-            if new_address.is_valid:
-                # add missing fields to form and save form to instance 
-                new_address.instance.user = request.user
-                new_address.instance.default = False
-                new_address.save()
+            create_new_address(request, new_address)
+            # if new_address.is_valid:
+            #     # add missing fields to form and save form to instance 
+            #     new_address.instance.user = request.user
+            #     new_address.instance.default = False
+            #     new_address.save()
             
         # delete existing instance 
-        elif address_id == "del":
+        elif address_state == "del":
             # is int
             # D.A.D id
             id = request.POST['aid']
@@ -163,7 +169,7 @@ def update_address(request):
         else:
             # is instance 
             # get address instance using given id 
-            address = Delivery_Address_Details.objects.get(user=request.user, id = int(address_id))
+            address = Delivery_Address_Details.objects.get(user=request.user, id = int(address_state))
             # is form
             # fill for with with existing address and edit fields using posted data form
             edit_address = Delivery_Information(request.POST, instance=address)
