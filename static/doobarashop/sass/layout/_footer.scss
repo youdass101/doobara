@@ -15,6 +15,11 @@
 .footer {
     grid-area: ft;
     background-color: var.$back-color;
+    padding: 10px;
+
+    .copy-right-text {
+        color: white;
+    }
 }
 
 

@@ -436,6 +436,10 @@ form.search-site button {
 .footer {
   grid-area: ft;
   background-color: #292826;
+  padding: 10px;
+}
+.footer .copy-right-text {
+  color: white;
 }
 
 .body-800width {
