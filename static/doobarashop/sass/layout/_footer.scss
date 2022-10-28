@@ -17,9 +17,33 @@
     background-color: var.$back-color;
     padding: 10px;
 
-    .copy-right-text {
-        color: white;
+    .footer-container {
+        display: flex;
+        .footer-row2 {
+            display: flex;
+            width: 100%;
+            .footer-r2-col{
+                width: 33%;
+                .logo {
+                    padding: 5px;
+                }
+
+                .copy-right-text {
+                    color: white;
+                }
+
+                .footer-index {
+                    display: inline-flex;
+                    flex-direction: column;
+                    justify-content: center;
+                }
+            }
+
+        }
+
     }
+
+    
 }
 
 
