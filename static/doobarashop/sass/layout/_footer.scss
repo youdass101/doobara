@@ -1,4 +1,4 @@
-@use '../abstracts/variables' as var;
+@use '../abstracts/all' as var;
 // for the footter push to the bottom always 
 .footter-wrapper {
     height: auto !important;
@@ -23,19 +23,64 @@
             display: flex;
             width: 100%;
             .footer-r2-col{
-                width: 33%;
-                .logo {
-                    padding: 5px;
-                }
+                display: flex;
+                justify-content: space-between;
+                width: 25%;
 
-                .copy-right-text {
+                a {
+                    text-decoration: none;
                     color: white;
+                }
+                .logo-copyright {
+                    display: inline-flexbox;
+                    align-items: flex-end;
+
+
+                    .logo {
+                        padding: 5px;
+                    }
+
+                    .copy-right-text {
+                        color: white;
+                    }
                 }
 
                 .footer-index {
-                    display: inline-flex;
+                    width: 100%;
+                    display: flex;
                     flex-direction: column;
                     justify-content: center;
+                    align-items: center;
+                    div {
+
+                        display: inline-flex;
+                        flex-direction: column;
+                    } 
+                }
+
+                .contact-info-footer {
+                    h4{
+                        color: white;
+                        text-decoration: underline;
+                        text-decoration-color: var.$identity-color;
+                        text-decoration-thickness: 4px;
+                        font-family: sans-serif;
+                    }
+                    .email-text-icon {
+                        padding-left: 5%;
+                        font-size: 14px;
+                    }
+                }
+
+                .footer-social-media {
+                    width: 60%;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: flex-end;
+                    
+                    a:hover {
+                        @include var.hover-primary;
+                    }
                 }
             }
 
@@ -46,4 +91,19 @@
     
 }
 
+
+@media screen and (max-width: 530px){
+    .footer-container {
+        display: block;
+        .footer-r2-col {
+
+
+            .footer-index {
+                display: none !important;
+            }
+
+        }
+        
+    }
+}
 
