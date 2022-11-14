@@ -49,7 +49,7 @@
                     width: 100%;
                     display: flex;
                     flex-direction: column;
-                    justify-content: center;
+                    justify-content: space-between;
                     align-items: center;
                     div {
 
@@ -59,8 +59,15 @@
                 }
 
                 .contact-info-footer {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: stretch;
+                    align-content: center;
+                    justify-content: space-between;
+                    padding-bottom: 10px;
                     h4{
                         color: white;
+                        margin-top: 0px;
                         text-decoration: underline;
                         text-decoration-color: var.$identity-color;
                         text-decoration-thickness: 4px;
@@ -70,16 +77,54 @@
                         padding-left: 5%;
                         font-size: 14px;
                     }
+                    li {
+                        margin-left: 0px;
+                        list-style-type: none;
+
+                    }
                 }
 
-                .footer-social-media {
-                    width: 60%;
+                .footer-social-media-news {
+                    width: 100%;
                     display: flex;
+                    flex-direction: column;
                     justify-content: space-between;
-                    align-items: flex-end;
+
+                    .news-email-container {
+                        width: 100%;
+                        .new-subscribe-form{
+                            display:flex;
+                            width: 100%;
+                            .news-email-input{
+                                max-width: 50%;
+                                input {
+                                    @include var.input-style-wide;
+                                    background-color: white;
+                                }
+                            }
+                            .new-email-button {
+                                max-width: 50%;
+                                button {
+                                    @include var.second-button-style-wide;
+                                }
+                                button:hover {
+                                    background-color: var.$back-color;
+                                    color: white;
+                                }
+                            }
+                        }
+
+                    }
+
+                    .social-icons {
+                        width: 100%;
+                        display: flex;
+                        justify-content: space-around;
+                        align-items: flex-end;
                     
-                    a:hover {
-                        @include var.hover-primary;
+                        a:hover {
+                            @include var.hover-primary;
+                        }
                     }
                 }
             }

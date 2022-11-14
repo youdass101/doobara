@@ -30,6 +30,31 @@
     max-width: 60px; 
 }
 
+@mixin input-style-wide {
+    padding: 15px;
+    background-color: white;
+    color: var.$identity-color;
+    border: 0;
+    -webkit-appearance: none;
+    box-sizing: border-box;
+    box-shadow: inset 0 1px 1px rgb(0 0 0 / 13%);
+    font-size: 15px;
+    font-weight: 600;
+}
+
+@mixin second-button-style-wide {
+    padding: 15px;
+    background-color: var.$identity-color;
+    color: var.$back-color;
+    border: 0;
+    -webkit-appearance: none;
+    box-sizing: border-box;
+    box-shadow: inset 0 1px 1px rgb(0 0 0 / 13%);
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
 @mixin button-style-wide {
     padding: 15px;
     background-color: var.$back-color;
