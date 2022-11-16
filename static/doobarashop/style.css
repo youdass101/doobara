@@ -512,13 +512,15 @@ form.search-site button {
 }
 .footer .footer-container .footer-row2 .footer-r2-col .footer-social-media-news .news-email-container {
   width: 100%;
+  margin-right: 50px;
+}
+.footer .footer-container .footer-row2 .footer-r2-col .footer-social-media-news .news-email-container .email-news-form-label {
+  color: white;
+  margin: 0px;
 }
 .footer .footer-container .footer-row2 .footer-r2-col .footer-social-media-news .news-email-container .new-subscribe-form {
   display: flex;
   width: 100%;
-}
-.footer .footer-container .footer-row2 .footer-r2-col .footer-social-media-news .news-email-container .new-subscribe-form .news-email-input {
-  max-width: 50%;
 }
 .footer .footer-container .footer-row2 .footer-r2-col .footer-social-media-news .news-email-container .new-subscribe-form .news-email-input input {
   padding: 15px;
@@ -531,9 +533,6 @@ form.search-site button {
   font-size: 15px;
   font-weight: 600;
   background-color: white;
-}
-.footer .footer-container .footer-row2 .footer-r2-col .footer-social-media-news .news-email-container .new-subscribe-form .new-email-button {
-  max-width: 50%;
 }
 .footer .footer-container .footer-row2 .footer-r2-col .footer-social-media-news .news-email-container .new-subscribe-form .new-email-button button {
   padding: 15px;
@@ -563,9 +562,26 @@ form.search-site button {
 
 @media screen and (max-width: 530px) {
   .footer-container {
+    padding-bottom: 10%;
+  }
+  .footer-container .footer-row2 {
+    flex-direction: row;
+    justify-content: space-between;
     display: block;
   }
-  .footer-container .footer-r2-col .footer-index {
+  .footer-container .footer-row2 .fr2c4 {
+    display: flex;
+    align-items: center;
+    min-width: 40%;
+  }
+  .footer-container .footer-row2 .fr2c4 .social-icons {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .footer-container .footer-row2 .fr2c2, .footer-container .footer-row2 .fr2c3 {
+    display: none !important;
+  }
+  .footer-container .footer-row2 .footer-r2-col .contact-info-footer, .footer-container .footer-row2 .footer-r2-col .news-email-container {
     display: none !important;
   }
 }

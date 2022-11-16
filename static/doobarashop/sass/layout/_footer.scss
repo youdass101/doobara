@@ -92,18 +92,25 @@
 
                     .news-email-container {
                         width: 100%;
+                        margin-right: 50px;
+
+                        .email-news-form-label {
+                            color: white;
+                            margin: 0px;
+                        }
+
                         .new-subscribe-form{
                             display:flex;
                             width: 100%;
                             .news-email-input{
-                                max-width: 50%;
+                                // max-width: 50%;
                                 input {
                                     @include var.input-style-wide;
                                     background-color: white;
                                 }
                             }
                             .new-email-button {
-                                max-width: 50%;
+                                // max-width: 50%;
                                 button {
                                     @include var.second-button-style-wide;
                                 }
@@ -139,14 +146,32 @@
 
 @media screen and (max-width: 530px){
     .footer-container {
-        display: block;
-        .footer-r2-col {
+        padding-bottom: 10%;
 
-
-            .footer-index {
+        .footer-row2 {
+            flex-direction: row;
+            justify-content: space-between;
+            .fr2c4 {
+            display: flex;
+            align-items: center;
+            min-width: 40%;
+            
+                .social-icons {
+                    width: 100%;
+                    justify-content: space-between;
+                }
+            }
+            .fr2c2, .fr2c3 {
                 display: none !important;
             }
+            display: block;
+            .footer-r2-col {
 
+                .contact-info-footer, .news-email-container {
+                    display: none !important;
+                }
+
+            }
         }
         
     }
