@@ -122,15 +122,21 @@
                         }
 
                     }
-
-                    .social-icons {
+                    .social-icons-container {
                         width: 100%;
                         display: flex;
-                        justify-content: space-around;
-                        align-items: flex-end;
+                  
+               
                     
-                        a:hover {
-                            @include var.hover-primary;
+                        .social-icons {
+                            width: 100%;
+                            display: flex;
+                            justify-content: space-around;
+                            align-items: flex-end;
+                        
+                            a:hover {
+                                @include var.hover-primary;
+                            }
                         }
                     }
                 }
@@ -166,6 +172,10 @@
             }
             display: block;
             .footer-r2-col {
+                .social-icons-container {
+                    height: 100%;
+                  
+                }
 
                 .contact-info-footer, .news-email-container {
                     display: none !important;

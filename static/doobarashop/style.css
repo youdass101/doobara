@@ -550,13 +550,17 @@ form.search-site button {
   background-color: #292826;
   color: white;
 }
-.footer .footer-container .footer-row2 .footer-r2-col .footer-social-media-news .social-icons {
+.footer .footer-container .footer-row2 .footer-r2-col .footer-social-media-news .social-icons-container {
+  width: 100%;
+  display: flex;
+}
+.footer .footer-container .footer-row2 .footer-r2-col .footer-social-media-news .social-icons-container .social-icons {
   width: 100%;
   display: flex;
   justify-content: space-around;
   align-items: flex-end;
 }
-.footer .footer-container .footer-row2 .footer-r2-col .footer-social-media-news .social-icons a:hover {
+.footer .footer-container .footer-row2 .footer-r2-col .footer-social-media-news .social-icons-container .social-icons a:hover {
   color: #F9D342;
 }
 
@@ -580,6 +584,9 @@ form.search-site button {
   }
   .footer-container .footer-row2 .fr2c2, .footer-container .footer-row2 .fr2c3 {
     display: none !important;
+  }
+  .footer-container .footer-row2 .footer-r2-col .social-icons-container {
+    height: 100%;
   }
   .footer-container .footer-row2 .footer-r2-col .contact-info-footer, .footer-container .footer-row2 .footer-r2-col .news-email-container {
     display: none !important;
