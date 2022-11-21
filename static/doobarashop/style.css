@@ -578,9 +578,14 @@ form.search-site button {
     align-items: center;
     min-width: 40%;
   }
-  .footer-container .footer-row2 .fr2c4 .social-icons {
+  .footer-container .footer-row2 .fr2c4 .social-icons-container {
+    flex-direction: column;
+    justify-content: space-around;
+  }
+  .footer-container .footer-row2 .fr2c4 .social-icons-container .social-icons {
     width: 100%;
-    justify-content: space-between;
+    justify-content: center;
+    padding-bottom: 15%;
   }
   .footer-container .footer-row2 .fr2c2, .footer-container .footer-row2 .fr2c3 {
     display: none !important;

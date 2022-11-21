@@ -158,14 +158,19 @@
             flex-direction: row;
             justify-content: space-between;
             .fr2c4 {
-            display: flex;
-            align-items: center;
-            min-width: 40%;
-            
-                .social-icons {
-                    width: 100%;
-                    justify-content: space-between;
-                }
+                display: flex;
+                align-items: center;
+                min-width: 40%;
+                
+                .social-icons-container {
+                    flex-direction: column;
+                    justify-content: space-around;
+                    .social-icons {
+                        width: 100%;
+                        justify-content: center;
+                        padding-bottom: 15%;
+                    }
+                }   
             }
             .fr2c2, .fr2c3 {
                 display: none !important;
