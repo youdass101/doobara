@@ -13,8 +13,10 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 import os
 
 import environ
+
 env = environ.Env()
 environ.Env.read_env()
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -28,6 +30,7 @@ SECRET_KEY = '&&#g)kp!ad^4*gyx6x-d&(tku-xk5!d9@8v%vvnl1wrqh+s$#='
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+
 
 ALLOWED_HOSTS = ['*']
 
