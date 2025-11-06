@@ -1,4 +1,4 @@
-.body-800width {
+.body-800width, .single-product-page-container .single-product-video, .single-product-page-container .single-product-image-long, .single-product-page-container .single-product-long-desc, .single-product-page-container .single-product-dimention {
   width: 100%;
   max-width: 800px;
   margin: 0 auto;
@@ -10,7 +10,7 @@
   color: #292826;
 }
 
-.input-style-prim, #contact-form-container .contact-inputs #contact-submit-form input, .form-default-style form input, .form-default-style form textarea {
+.input-style-prim, #contact-form-container .contact-inputs #contact-submit-form input, .new-edit-address-form-container .new-address-form-container form input, .new-edit-address-form-container .new-address-form-container form textarea, .login-register-container .login-container form input, .login-register-container .login-container form textarea, .checkout-page-container .checkout-shipping-details-container input, .checkout-page-container .checkout-shipping-details-container textarea, .checkout-page-container .checkout-shipping-details-container form input, .checkout-page-container .checkout-shipping-details-container form textarea, .form-default-style form input, #user-change-password-container form input, #email-change-container form input, #login-container form input, #signup-container form input, #logout-container form input, #user-set-password form input, #password-reset-container form input, #email-comfirmation-container form input, #reset-password-container form input, .auth-account-default form input, .form-default-style form textarea, #user-change-password-container form textarea, #email-change-container form textarea, #login-container form textarea, #signup-container form textarea, #logout-container form textarea, #user-set-password form textarea, #password-reset-container form textarea, #email-comfirmation-container form textarea, #reset-password-container form textarea, .auth-account-default form textarea {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -21,7 +21,7 @@
   background-color: #f2f2f2;
 }
 
-.input-submit-button-prim {
+.input-submit-button-prim, .new-edit-address-form-container .new-address-form-container .submit-new-address-button, #user-set-password form input[type=submit], #password-reset-container form input[type=submit], #reset-password-container form input[type=submit], .auth-account-default form input[type=submit], .login-register-container .login-container form input[type=submit] {
   width: 100%;
   background-color: #292826;
   color: #F9D342;
@@ -33,11 +33,11 @@
   font-size: 15px;
 }
 
-.form-default-style form label {
+.form-default-style form label, #user-change-password-container form label, #email-change-container form label, #login-container form label, #signup-container form label, #logout-container form label, #user-set-password form label, #password-reset-container form label, #email-comfirmation-container form label, #reset-password-container form label, .auth-account-default form label {
   font-size: 16px;
   font-weight: 400;
 }
-.form-default-style form button {
+.form-default-style form button, #user-change-password-container form button, #email-change-container form button, #login-container form button, #signup-container form button, #logout-container form button, #user-set-password form button, #password-reset-container form button, #email-comfirmation-container form button, #reset-password-container form button, .auth-account-default form button {
   color: #fff;
   background-color: #292826;
   font-family: "Archivo Narrow", Sans-serif;
@@ -50,7 +50,7 @@
   margin-top: 10px;
   margin-right: 10px;
 }
-.form-default-style form button:hover {
+.form-default-style form button:hover, #user-change-password-container form button:hover, #email-change-container form button:hover, #login-container form button:hover, #signup-container form button:hover, #logout-container form button:hover, #user-set-password form button:hover, #password-reset-container form button:hover, #email-comfirmation-container form button:hover, #reset-password-container form button:hover, .auth-account-default form button:hover {
   color: #F9D342;
 }
 
@@ -225,8 +225,7 @@ form.search-site button {
   color: white;
   font-size: 17px;
   border: 1px solid #F9D342;
-  border-left: none;
-  /* Prevent double borders */
+  border-left: none; /* Prevent double borders */
   cursor: pointer;
   border-bottom-right-radius: 4px;
 }
@@ -331,7 +330,6 @@ form.search-site button {
   #mobile-menu-btn span {
     pointer-events: none;
   }
-
   #navigation-mobile {
     grid-area: nmm;
     font-size: 16px;
@@ -418,7 +416,6 @@ form.search-site button {
   #myLinks, .dot, .imgd, #featured-products {
     display: none !important;
   }
-
   #logo-nav {
     padding-left: 0px;
   }
@@ -429,13 +426,11 @@ form.search-site button {
 
 .footter-wrapper {
   height: auto !important;
-  margin: 0 auto -142px;
-  /* the bottom margin is the negative value of the footer's height */
+  margin: 0 auto -142px; /* the bottom margin is the negative value of the footer's height */
 }
 
 .footer, .push {
-  height: 142px;
-  /* .push must be the same height as .footer */
+  height: 142px; /* .push must be the same height as .footer */
 }
 
 .footer {
@@ -597,64 +592,6 @@ form.search-site button {
     display: none !important;
   }
 }
-.body-800width {
-  width: 100%;
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.input-label {
-  font-size: 16px;
-  font-weight: 400;
-  color: #292826;
-}
-
-.input-style-prim, .form-default-style form input, .form-default-style form textarea {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-  background-color: #f2f2f2;
-}
-
-.input-submit-button-prim {
-  width: 100%;
-  background-color: #292826;
-  color: #F9D342;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 15px;
-}
-
-.form-default-style form label {
-  font-size: 16px;
-  font-weight: 400;
-}
-
-.form-default-style form button {
-  color: #fff;
-  background-color: #292826;
-  font-family: "Archivo Narrow", Sans-serif;
-  font-size: 14px;
-  border-style: groove;
-  border-width: 0;
-  border-radius: 6px;
-  padding: 7px 20px 7px 20px;
-  cursor: pointer;
-  margin-top: 10px;
-  margin-right: 10px;
-}
-
-.form-default-style form button:hover {
-  color: #F9D342;
-}
-
 #blog-carousel {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -690,126 +627,10 @@ form.search-site button {
     grid-template-columns: auto;
   }
 }
-.body-800width {
-  width: 100%;
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.input-label {
-  font-size: 16px;
-  font-weight: 400;
-  color: #292826;
-}
-
-.input-style-prim, .form-default-style form input, .form-default-style form textarea {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-  background-color: #f2f2f2;
-}
-
-.input-submit-button-prim {
-  width: 100%;
-  background-color: #292826;
-  color: #F9D342;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 15px;
-}
-
-.form-default-style form label {
-  font-size: 16px;
-  font-weight: 400;
-}
-
-.form-default-style form button {
-  color: #fff;
-  background-color: #292826;
-  font-family: "Archivo Narrow", Sans-serif;
-  font-size: 14px;
-  border-style: groove;
-  border-width: 0;
-  border-radius: 6px;
-  padding: 7px 20px 7px 20px;
-  cursor: pointer;
-  margin-top: 10px;
-  margin-right: 10px;
-}
-
-.form-default-style form button:hover {
-  color: #F9D342;
-}
-
 .blog-post-container {
   width: 100%;
   max-width: 800px;
   margin: 0 auto;
-}
-
-.body-800width {
-  width: 100%;
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.input-label {
-  font-size: 16px;
-  font-weight: 400;
-  color: #292826;
-}
-
-.input-style-prim, .form-default-style form input, .form-default-style form textarea {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-  background-color: #f2f2f2;
-}
-
-.input-submit-button-prim {
-  width: 100%;
-  background-color: #292826;
-  color: #F9D342;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 15px;
-}
-
-.form-default-style form label {
-  font-size: 16px;
-  font-weight: 400;
-}
-
-.form-default-style form button {
-  color: #fff;
-  background-color: #292826;
-  font-family: "Archivo Narrow", Sans-serif;
-  font-size: 14px;
-  border-style: groove;
-  border-width: 0;
-  border-radius: 6px;
-  padding: 7px 20px 7px 20px;
-  cursor: pointer;
-  margin-top: 10px;
-  margin-right: 10px;
-}
-
-.form-default-style form button:hover {
-  color: #F9D342;
 }
 
 #video-carousel-container {
@@ -826,8 +647,7 @@ form.search-site button {
   position: relative;
   overflow: hidden;
   width: 100%;
-  padding-top: 56.25%;
-  /* 16:9 Aspect Ratio (divide 9 by 16 = 0.5625) */
+  padding-top: 56.25%; /* 16:9 Aspect Ratio (divide 9 by 16 = 0.5625) */
 }
 #video-carousel-container .video-card iframe {
   position: absolute;
@@ -846,77 +666,17 @@ form.search-site button {
     grid-template-columns: auto;
   }
 }
-.body-800width {
-  width: 100%;
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.input-label {
-  font-size: 16px;
-  font-weight: 400;
-  color: #292826;
-}
-
-.input-style-prim, .checkout-page-container .checkout-shipping-details-container form input, .checkout-page-container .checkout-shipping-details-container form textarea, .checkout-page-container .checkout-shipping-details-container input, .checkout-page-container .checkout-shipping-details-container textarea, .form-default-style form input, .form-default-style form textarea {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-  background-color: #f2f2f2;
-}
-
-.input-submit-button-prim {
-  width: 100%;
-  background-color: #292826;
-  color: #F9D342;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 15px;
-}
-
-.form-default-style form label {
-  font-size: 16px;
-  font-weight: 400;
-}
-
-.form-default-style form button {
-  color: #fff;
-  background-color: #292826;
-  font-family: "Archivo Narrow", Sans-serif;
-  font-size: 14px;
-  border-style: groove;
-  border-width: 0;
-  border-radius: 6px;
-  padding: 7px 20px 7px 20px;
-  cursor: pointer;
-  margin-top: 10px;
-  margin-right: 10px;
-}
-
-.form-default-style form button:hover {
-  color: #F9D342;
-}
-
 .cart-table-container {
   display: flex;
   display: -webkit-flex;
   padding: 5% 0 5% 0;
   width: 75%;
 }
-
 .cart-table-container .products-in-cart {
   table-layout: auto;
   border-collapse: collapse;
   width: 100%;
 }
-
 .cart-table-container .products-in-cart thead th {
   font-size: 16px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -924,11 +684,9 @@ form.search-site button {
   text-align: left;
   padding: 30px 10px 30px 0px;
 }
-
 .cart-table-container .products-in-cart tbody tr td {
   padding: 20px 10px 20px 0px;
 }
-
 .cart-table-container .products-in-cart tbody tr .in-cart-qtty {
   width: 100%;
   padding: 7px;
@@ -941,52 +699,42 @@ form.search-site button {
   text-align: center;
   max-width: 60px;
 }
-
 .cart-table-container .products-in-cart tbody tr .in-cart-remove-icon {
   max-width: 15px;
   padding-right: 80px;
   padding-left: 20px;
 }
-
 .cart-table-container .products-in-cart tbody tr .in-cart-remove-icon .close-button {
   background-color: transparent;
   border: 0;
   cursor: pointer;
 }
-
 .cart-table-container .products-in-cart tbody tr .in-cart-remove-icon .close-icon {
   font-size: x-large;
   color: grey;
 }
-
 .cart-table-container .products-in-cart tbody tr .in-cart-remove-icon .close-icon:hover {
   color: #292826;
 }
-
 .cart-table-container .products-in-cart tbody tr .in-cart-img img {
   width: 60px;
 }
-
 .cart-table-container .products-in-cart tbody tr .in-cart-product-name {
   padding-right: 90px;
 }
-
 .cart-table-container .products-in-cart tfoot tr {
   background-color: white;
 }
-
 .cart-table-container .products-in-cart tfoot tr .in-cart-footer-container {
   width: 100%;
   display: flex;
   display: -webkit-flex;
   align-items: center;
 }
-
 .cart-table-container .products-in-cart tfoot tr .in-cart-footer-container .in-cart-coupon-input {
   flex: 0;
   padding-top: 20px;
 }
-
 .cart-table-container .products-in-cart tfoot tr .in-cart-footer-container .in-cart-coupon-input input {
   padding: 15px;
   background-color: #292826;
@@ -1002,13 +750,11 @@ form.search-site button {
   cursor: text !important;
   color: black;
 }
-
 .cart-table-container .products-in-cart tfoot tr .in-cart-footer-container .in-cart-apply-coupon-button {
   flex: 2;
   padding-top: 20px;
   padding-left: 10px;
 }
-
 .cart-table-container .products-in-cart tfoot tr .in-cart-footer-container .in-cart-apply-coupon-button button {
   padding: 15px;
   background-color: #292826;
@@ -1022,16 +768,13 @@ form.search-site button {
   cursor: pointer;
   font-weight: 600;
 }
-
 .cart-table-container .products-in-cart tfoot tr .in-cart-footer-container .in-cart-apply-coupon-button button:hover {
   background-color: #F9D342;
   color: #292826;
 }
-
 .cart-table-container .products-in-cart tfoot tr .in-cart-footer-container .in-cart-update-cart-button {
   padding-top: 20px;
 }
-
 .cart-table-container .products-in-cart tfoot tr .in-cart-footer-container .in-cart-update-cart-button button {
   padding: 15px;
   background-color: #292826;
@@ -1044,7 +787,6 @@ form.search-site button {
   font-weight: 600;
   cursor: pointer;
 }
-
 .cart-table-container .products-in-cart tfoot tr .in-cart-footer-container .in-cart-update-cart-button button:hover {
   background-color: #F9D342;
   color: #292826;
@@ -1054,96 +796,75 @@ form.search-site button {
   .cart-table-container {
     width: 90%;
   }
-
   .cart-table-container .products-in-cart table, .cart-table-container .products-in-cart thead, .cart-table-container .products-in-cart tbody, .cart-table-container .products-in-cart th, .cart-table-container .products-in-cart td, .cart-table-container .products-in-cart tr {
     display: block;
   }
-
   .cart-table-container .products-in-cart thead {
     display: none;
   }
-
   .cart-table-container .products-in-cart tr {
     background-color: rgba(245, 245, 245, 0.336);
     border: 8px solid white;
   }
-
   .cart-table-container .products-in-cart .in-cart-product-name p, .cart-table-container .products-in-cart .in-cart-unit-price p, .cart-table-container .products-in-cart .in-cart-units-subtotal p {
     text-align: right;
     margin: 0px !important;
   }
-
   .cart-table-container .products-in-cart .in-cart-product-qtt {
     display: flex;
     justify-content: right;
   }
-
   .cart-table-container .products-in-cart .in-cart-product-qtt input {
     text-align: right;
   }
-
   .cart-table-container .products-in-cart td {
     position: relative;
     padding-left: 45% !important;
     padding-top: 0px !important;
   }
-
   .cart-table-container .products-in-cart .in-cart-product-name {
     padding-right: 10px !important;
   }
-
   .cart-table-container .products-in-cart .in-cart-remove-icon {
     max-width: 100% !important;
     padding-right: 0px !important;
     padding-left: 0px !important;
   }
-
   .cart-table-container .products-in-cart .in-cart-remove-icon #close-button {
     float: right;
   }
-
   .cart-table-container .products-in-cart tfoot tr {
     background-color: white !important;
   }
-
   .cart-table-container .products-in-cart tfoot tr td::before {
     content: none !important;
   }
-
   .cart-table-container .products-in-cart tfoot tr td {
     padding-left: 0px !important;
   }
-
   .cart-table-container .products-in-cart tfoot tr .in-cart-footer-container {
     align-items: flex-start !important;
     flex-direction: column;
   }
-
   .cart-table-container .products-in-cart tfoot tr .in-cart-footer-container div {
     padding-bottom: 10px;
   }
-
   .cart-table-container .products-in-cart tfoot tr .in-cart-footer-container .in-cart-coupon-input {
     width: 100%;
   }
-
   .cart-table-container .products-in-cart tfoot tr .in-cart-footer-container .in-cart-coupon-input input {
     width: 100%;
   }
-
   .cart-table-container .products-in-cart tfoot tr .in-cart-footer-container .in-cart-apply-coupon-button, .cart-table-container .products-in-cart tfoot tr .in-cart-footer-container .in-cart-update-cart-button {
     padding-left: 0px;
     width: 100%;
   }
-
   .cart-table-container .products-in-cart tfoot tr .in-cart-footer-container .in-cart-apply-coupon-button button, .cart-table-container .products-in-cart tfoot tr .in-cart-footer-container .in-cart-update-cart-button button {
     float: right;
   }
-
   .cart-table-container .products-in-cart tfoot tr .in-cart-footer-container .in-cart-update-cart-button {
     padding-top: 20px;
   }
-
   .cart-table-container .products-in-cart td:before {
     position: absolute;
     left: 6px;
@@ -1153,27 +874,21 @@ form.search-site button {
     font-size: 15px;
     font-weight: 600;
   }
-
   .cart-table-container .products-in-cart td:nth-of-type(1):before {
     content: "";
   }
-
   .cart-table-container .products-in-cart td:nth-of-type(2):before {
     content: "";
   }
-
   .cart-table-container .products-in-cart td:nth-of-type(3):before {
     content: "Product:";
   }
-
   .cart-table-container .products-in-cart td:nth-of-type(4):before {
     content: "Price:";
   }
-
   .cart-table-container .products-in-cart td:nth-of-type(5):before {
     content: "Quantity:";
   }
-
   .cart-table-container .products-in-cart td:nth-of-type(6):before {
     content: "Subtotal:";
   }
@@ -1184,27 +899,22 @@ form.search-site button {
   display: -webkit-flex;
   justify-content: flex-end;
 }
-
 .cart-total-container div {
   width: 47%;
   padding: 0 0 30px 0;
 }
-
 .cart-total-container div table {
   width: 100%;
   border-collapse: collapse;
 }
-
 .cart-total-container div table th {
   padding: 15px 0px 15px 0px;
   vertical-align: top;
 }
-
 .cart-total-container div table td {
   padding: 17px 40px 0px 17px;
   vertical-align: top;
 }
-
 .cart-total-container div .cart-proceed-checkout-button {
   padding: 15px;
   background-color: #292826;
@@ -1219,7 +929,6 @@ form.search-site button {
   width: 100% !important;
   font-size: x-large;
 }
-
 .cart-total-container div .cart-proceed-checkout-button:hover {
   background-color: #F9D342;
   color: #292826;
@@ -1229,7 +938,6 @@ form.search-site button {
   .cart-total-container {
     width: 90%;
   }
-
   .cart-total-container div {
     width: 100%;
   }
@@ -1244,64 +952,6 @@ form.search-site button {
 .cart-page-container .empty-cart {
   height: 500px;
   padding: 10%;
-}
-
-.body-800width {
-  width: 100%;
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.input-label {
-  font-size: 16px;
-  font-weight: 400;
-  color: #292826;
-}
-
-.input-style-prim, .checkout-page-container .checkout-shipping-details-container input, .checkout-page-container .checkout-shipping-details-container textarea, .checkout-page-container .checkout-shipping-details-container form input, .checkout-page-container .checkout-shipping-details-container form textarea, .form-default-style form input, .form-default-style form textarea {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-  background-color: #f2f2f2;
-}
-
-.input-submit-button-prim {
-  width: 100%;
-  background-color: #292826;
-  color: #F9D342;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 15px;
-}
-
-.form-default-style form label {
-  font-size: 16px;
-  font-weight: 400;
-}
-
-.form-default-style form button {
-  color: #fff;
-  background-color: #292826;
-  font-family: "Archivo Narrow", Sans-serif;
-  font-size: 14px;
-  border-style: groove;
-  border-width: 0;
-  border-radius: 6px;
-  padding: 7px 20px 7px 20px;
-  cursor: pointer;
-  margin-top: 10px;
-  margin-right: 10px;
-}
-
-.form-default-style form button:hover {
-  color: #F9D342;
 }
 
 .change_address_popup {
@@ -1439,7 +1089,6 @@ form.search-site button {
   h1 {
     padding-left: 10px;
   }
-
   .checkout-page-container {
     display: block;
     width: 100%;
@@ -1455,80 +1104,6 @@ form.search-site button {
   }
   .checkout-page-container .checkout-order-invoice {
     padding-left: 0px;
-  }
-}
-.body-800width, .single-product-page-container .single-product-dimention, .single-product-page-container .single-product-long-desc, .single-product-page-container .single-product-image-long, .single-product-page-container .single-product-video {
-  width: 100%;
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.input-label {
-  font-size: 16px;
-  font-weight: 400;
-  color: #292826;
-}
-
-.input-style-prim, .form-default-style form input, .form-default-style form textarea {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-  background-color: #f2f2f2;
-}
-
-.input-submit-button-prim {
-  width: 100%;
-  background-color: #292826;
-  color: #F9D342;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 15px;
-}
-
-.form-default-style form label {
-  font-size: 16px;
-  font-weight: 400;
-}
-
-.form-default-style form button {
-  color: #fff;
-  background-color: #292826;
-  font-family: "Archivo Narrow", Sans-serif;
-  font-size: 14px;
-  border-style: groove;
-  border-width: 0;
-  border-radius: 6px;
-  padding: 7px 20px 7px 20px;
-  cursor: pointer;
-  margin-top: 10px;
-  margin-right: 10px;
-}
-
-.form-default-style form button:hover {
-  color: #F9D342;
-}
-
-#index-grid-container {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  grid-template-areas: "slider slider slider slider slider slider slider slider slider slider slider slider" "pcat pcat pcat fp fp fp fp fp fp fp fp fp" "ac ac ac ac ac ac ac ac ac ac ac ac";
-}
-
-@media screen and (max-width: 1206px) {
-  #index-grid-container {
-    grid-template-areas: "slider slider slider slider slider slider slider slider slider slider slider slider " "pcat pcat pcat pcat pcat pcat pcat pcat pcat pcat pcat pcat" "fp fp fp fp fp fp fp fp fp fp fp fp" "ac ac ac ac ac ac ac ac ac ac ac ac";
-  }
-}
-@media screen and (max-width: 530px) {
-  #index-grid-container {
-    grid-template-areas: "slider slider slider slider slider slider slider slider slider slider slider slider " "pcat pcat pcat pcat pcat pcat pcat pcat pcat pcat pcat pcat" "ac ac ac ac ac ac ac ac ac ac ac ac";
   }
 }
 .slider-img-desktop {
@@ -1562,7 +1137,9 @@ form.search-site button {
   font-size: 18px;
   transition: 0.6s ease;
   border-radius: 0 3px 3px 0;
-  user-select: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
 }
 
 .prev {
@@ -1605,15 +1182,6 @@ form.search-site button {
   animation-name: fade;
   animation-duration: 1.5s;
 }
-
-@-webkit-keyframes fade {
-  from {
-    opacity: 0.4;
-  }
-  to {
-    opacity: 1;
-  }
-}
 @keyframes fade {
   from {
     opacity: 0.4;
@@ -1626,21 +1194,17 @@ form.search-site button {
   .slider-img-mobile {
     display: block;
   }
-
   .slider-img-desktop {
     display: none;
   }
-
   .prev, .next {
     width: auto;
     position: relative;
     margin-top: -100px;
   }
-
   .prev {
     float: left;
   }
-
   .next {
     float: right;
   }
@@ -1774,64 +1338,22 @@ form.search-site button {
     flex: 100% !important;
   }
 }
-.body-800width, .single-product-page-container .single-product-dimention, .single-product-page-container .single-product-long-desc, .single-product-page-container .single-product-image-long, .single-product-page-container .single-product-video {
-  width: 100%;
-  max-width: 800px;
-  margin: 0 auto;
+#index-grid-container {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-areas: "slider slider slider slider slider slider slider slider slider slider slider slider" "pcat pcat pcat fp fp fp fp fp fp fp fp fp" "ac ac ac ac ac ac ac ac ac ac ac ac";
 }
 
-.input-label {
-  font-size: 16px;
-  font-weight: 400;
-  color: #292826;
+@media screen and (max-width: 1206px) {
+  #index-grid-container {
+    grid-template-areas: "slider slider slider slider slider slider slider slider slider slider slider slider " "pcat pcat pcat pcat pcat pcat pcat pcat pcat pcat pcat pcat" "fp fp fp fp fp fp fp fp fp fp fp fp" "ac ac ac ac ac ac ac ac ac ac ac ac";
+  }
 }
-
-.input-style-prim, .form-default-style form input, .form-default-style form textarea {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-  background-color: #f2f2f2;
+@media screen and (max-width: 530px) {
+  #index-grid-container {
+    grid-template-areas: "slider slider slider slider slider slider slider slider slider slider slider slider " "pcat pcat pcat pcat pcat pcat pcat pcat pcat pcat pcat pcat" "ac ac ac ac ac ac ac ac ac ac ac ac";
+  }
 }
-
-.input-submit-button-prim {
-  width: 100%;
-  background-color: #292826;
-  color: #F9D342;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 15px;
-}
-
-.form-default-style form label {
-  font-size: 16px;
-  font-weight: 400;
-}
-
-.form-default-style form button {
-  color: #fff;
-  background-color: #292826;
-  font-family: "Archivo Narrow", Sans-serif;
-  font-size: 14px;
-  border-style: groove;
-  border-width: 0;
-  border-radius: 6px;
-  padding: 7px 20px 7px 20px;
-  cursor: pointer;
-  margin-top: 10px;
-  margin-right: 10px;
-}
-
-.form-default-style form button:hover {
-  color: #F9D342;
-}
-
 .filterproduct {
   position: relative;
   font-family: Arial;
@@ -1853,18 +1375,7 @@ form.search-site button {
   cursor: pointer;
 }
 
-#container-shop {
-  clear: both;
-  padding: 7px 0 7px 0;
-  grid-gap: 5px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  background-color: #F9D342;
-}
-#container-shop a:link {
-  text-decoration: none;
-}
-#container-shop .shop-product {
+.shop-product {
   padding: 10px 10px 15px 10px;
   border-radius: 7px;
   background-color: white;
@@ -1873,14 +1384,14 @@ form.search-site button {
   align-items: center;
   box-shadow: 1px 1px 4px 5px rgba(0, 0, 0, 0.5);
 }
-#container-shop .shop-product img {
+.shop-product img {
   width: 100%;
   margin: 0;
 }
-#container-shop .shop-product .product-name {
+.shop-product .product-name {
   height: 45px;
 }
-#container-shop .shop-product button {
+.shop-product button {
   color: #fff;
   background-color: #292826;
   font-family: "Archivo Narrow", Sans-serif;
@@ -1891,77 +1402,31 @@ form.search-site button {
   padding: 7px 20px 7px 20px;
   cursor: pointer;
 }
-#container-shop .shop-product button:hover {
+.shop-product button:hover {
   background-color: #F9D342;
   color: #292826;
 }
-#container-shop .shop-product p {
+.shop-product p {
   text-align: center;
   font-size: 15px;
   font-weight: 550;
   margin: 0;
   color: #292826;
 }
-#container-shop .shop-product .product-price {
+.shop-product .product-price {
   padding-top: 15px;
 }
 
-.body-800width, .single-product-page-container .single-product-video, .single-product-page-container .single-product-image-long, .single-product-page-container .single-product-long-desc, .single-product-page-container .single-product-dimention {
-  width: 100%;
-  max-width: 800px;
-  margin: 0 auto;
+#container-shop {
+  clear: both;
+  padding: 25px;
+  grid-gap: 10px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(240px, 1fr));
+  background-color: #F9D342;
 }
-
-.input-label {
-  font-size: 16px;
-  font-weight: 400;
-  color: #292826;
-}
-
-.input-style-prim, .form-default-style form input, .form-default-style form textarea {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-  background-color: #f2f2f2;
-}
-
-.input-submit-button-prim {
-  width: 100%;
-  background-color: #292826;
-  color: #F9D342;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 15px;
-}
-
-.form-default-style form label {
-  font-size: 16px;
-  font-weight: 400;
-}
-
-.form-default-style form button {
-  color: #fff;
-  background-color: #292826;
-  font-family: "Archivo Narrow", Sans-serif;
-  font-size: 14px;
-  border-style: groove;
-  border-width: 0;
-  border-radius: 6px;
-  padding: 7px 20px 7px 20px;
-  cursor: pointer;
-  margin-top: 10px;
-  margin-right: 10px;
-}
-
-.form-default-style form button:hover {
-  color: #F9D342;
+#container-shop a:link {
+  text-decoration: none;
 }
 
 .single-product-page-container {
@@ -2045,8 +1510,7 @@ form.search-site button {
   position: relative;
   width: 100%;
   overflow: hidden;
-  padding-top: 56.25%;
-  /* 16:9 Aspect Ratio */
+  padding-top: 56.25%; /* 16:9 Aspect Ratio */
 }
 .single-product-page-container .single-product-video .single-video iframe {
   position: absolute;
@@ -2093,47 +1557,150 @@ form.search-site button {
     grid-template-areas: "nt nt nt nt nt nt nt nt nt nt nt nt" "i i i i i i i i i i i i" "h h h h h h h h h h h h" "v v v v v v v v v v v v" "il il il il il il il il il il il il" "ld ld ld ld ld ld ld ld ld ld ld ld" "d d d d d d d d d d d d";
   }
 }
-.body-800width {
-  width: 100%;
-  max-width: 800px;
-  margin: 0 auto;
+.my-account-navigation {
+  width: 20%;
+  margin: 0 !important;
+  display: inline-block;
+}
+.my-account-navigation ul li:hover a {
+  color: #F9D342 !important;
+}
+.my-account-navigation ul li {
+  font-size: 15px;
+  font-weight: 550;
+  cursor: pointer;
+  list-style: none;
+  border-style: solid;
+  border-width: 0.5px 0px;
+  border-color: gray;
+  padding: 6% 0 5% 0;
+}
+.my-account-navigation ul li i {
+  float: right;
+}
+.my-account-navigation ul li:hover {
+  color: #F9D342;
 }
 
-.input-label {
-  font-size: 16px;
-  font-weight: 400;
+@media screen and (max-width: 850px) {
+  .my-account-navigation {
+    width: 100% !important;
+  }
+  .my-account-navigation ul {
+    padding: 0;
+  }
+  .my-account-navigation ul li {
+    padding: 10px 0 10px 0;
+  }
+  .my-account-navigation ul li a {
+    padding-left: 7px;
+  }
+}
+#my-account-dashboard, #my-account-orders {
+  display: none;
+}
+#my-account-dashboard table, #my-account-orders table {
+  width: 100%;
+  text-align: center;
+  border-collapse: collapse;
+}
+#my-account-dashboard th, #my-account-orders th {
+  padding: 10px 0 10px 0;
+}
+#my-account-dashboard td, #my-account-orders td {
+  padding: 10px 0 10px 0;
+}
+#my-account-dashboard td button, #my-account-orders td button {
+  padding: 7px;
+  border-color: transparent;
+  cursor: pointer;
+}
+#my-account-dashboard td button:hover, #my-account-orders td button:hover {
+  background-color: #F9D342;
   color: #292826;
 }
 
-.input-style-prim, .new-edit-address-form-container .new-address-form-container form input, .new-edit-address-form-container .new-address-form-container form textarea, .login-register-container .login-container form input, .login-register-container .login-container form textarea, .form-default-style form input, #user-change-password-container form input, #email-change-container form input, #login-container form input, #signup-container form input, #logout-container form input, #user-set-password form input, #password-reset-container form input, #email-comfirmation-container form input, #reset-password-container form input, .auth-account-default form input, .form-default-style form textarea, #user-change-password-container form textarea, #email-change-container form textarea, #login-container form textarea, #signup-container form textarea, #logout-container form textarea, #user-set-password form textarea, #password-reset-container form textarea, #email-comfirmation-container form textarea, #reset-password-container form textarea, .auth-account-default form textarea {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-  background-color: #f2f2f2;
+#my-account-orders {
+  display: none;
 }
 
-.input-submit-button-prim, .new-edit-address-form-container .new-address-form-container .submit-new-address-button, #user-set-password form input[type=submit], #password-reset-container form input[type=submit], #reset-password-container form input[type=submit], .auth-account-default form input[type=submit], .login-register-container .login-container form input[type=submit] {
-  width: 100%;
-  background-color: #292826;
-  color: #F9D342;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 15px;
+@media screen and (max-width: 850px) {
+  #my-account-data {
+    width: 100%;
+    padding: 0;
+  }
+  #my-account-data #my-account-dashboard, #my-account-data #my-account-orders {
+    /* Force table to not be like tables anymore */
+    /* Hide table headers (but not display: none;, for accessibility) */
+    /*
+    DATA LABEL HEADER FOR EACH DATA LINE ON MOBILE
+    */
+  }
+  #my-account-data #my-account-dashboard table, #my-account-data #my-account-dashboard thead, #my-account-data #my-account-dashboard tbody, #my-account-data #my-account-dashboard th, #my-account-data #my-account-dashboard td, #my-account-data #my-account-dashboard tr, #my-account-data #my-account-orders table, #my-account-data #my-account-orders thead, #my-account-data #my-account-orders tbody, #my-account-data #my-account-orders th, #my-account-data #my-account-orders td, #my-account-data #my-account-orders tr {
+    display: block;
+  }
+  #my-account-data #my-account-dashboard thead, #my-account-data #my-account-orders thead {
+    display: none;
+  }
+  #my-account-data #my-account-dashboard tr, #my-account-data #my-account-orders tr {
+    border: 1px solid #ccc;
+  }
+  #my-account-data #my-account-dashboard td, #my-account-data #my-account-orders td {
+    /* Behave  like a "row" */
+    border: none;
+    position: relative;
+    padding-left: 50%;
+    padding-bottom: 22px;
+  }
+  #my-account-data #my-account-dashboard td:before, #my-account-data #my-account-orders td:before {
+    /* Now like a table header */
+    position: absolute;
+    /* Top/left values mimic padding */
+    top: 6px;
+    left: 6px;
+    width: 45%;
+    padding-right: 10px;
+    white-space: nowrap;
+    font-size: 15px;
+    font-weight: 550;
+  }
+  #my-account-data #my-account-dashboard td:nth-of-type(1):before, #my-account-data #my-account-orders td:nth-of-type(1):before {
+    content: "Order";
+  }
+  #my-account-data #my-account-dashboard td:nth-of-type(2):before, #my-account-data #my-account-orders td:nth-of-type(2):before {
+    content: "Date:";
+  }
+  #my-account-data #my-account-dashboard td:nth-of-type(3):before, #my-account-data #my-account-orders td:nth-of-type(3):before {
+    content: "Status:";
+  }
+  #my-account-data #my-account-dashboard td:nth-of-type(4):before, #my-account-data #my-account-orders td:nth-of-type(4):before {
+    content: "Total:";
+  }
+  #my-account-data #my-account-dashboard td:nth-of-type(5):before, #my-account-data #my-account-orders td:nth-of-type(5):before {
+    content: "Action:";
+  }
+}
+#account-wish-list {
+  display: none;
 }
 
-.form-default-style form label, #user-change-password-container form label, #email-change-container form label, #login-container form label, #signup-container form label, #logout-container form label, #user-set-password form label, #password-reset-container form label, #email-comfirmation-container form label, #reset-password-container form label, .auth-account-default form label {
-  font-size: 16px;
-  font-weight: 400;
+#account-detail {
+  display: none;
 }
-
-.form-default-style form button, #user-change-password-container form button, #email-change-container form button, #login-container form button, #signup-container form button, #logout-container form button, #user-set-password form button, #password-reset-container form button, #email-comfirmation-container form button, #reset-password-container form button, .auth-account-default form button {
+#account-detail .user-profile-data .user-username-display h3 {
+  margin: 0;
+}
+#account-detail .user-profile-data .user-email-profile {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+#account-detail .user-profile-data .default-user-shipping p {
+  padding: 0px !important;
+  margin: 0px;
+}
+#account-detail .user-profile-data .default-user-shipping button {
+  margin-top: 15px;
   color: #fff;
   background-color: #292826;
   font-family: "Archivo Narrow", Sans-serif;
@@ -2143,14 +1710,19 @@ form.search-site button {
   border-radius: 6px;
   padding: 7px 20px 7px 20px;
   cursor: pointer;
-  margin-top: 10px;
-  margin-right: 10px;
 }
 
-.form-default-style form button:hover, #user-change-password-container form button:hover, #email-change-container form button:hover, #login-container form button:hover, #signup-container form button:hover, #logout-container form button:hover, #user-set-password form button:hover, #password-reset-container form button:hover, #email-comfirmation-container form button:hover, #reset-password-container form button:hover, .auth-account-default form button:hover {
-  color: #F9D342;
+@media screen and (max-width: 750px) {
+  .account-1st-row {
+    display: block !important;
+  }
+  .account-1st-row .account-first-name {
+    padding-right: 0px !important;
+  }
+  .account-1st-row .account-first-name, .account-1st-row .account-last-name {
+    width: 100% !important;
+  }
 }
-
 #my-account-container {
   padding: 4%;
 }
@@ -2163,167 +1735,6 @@ form.search-site button {
   display: inline-block;
   vertical-align: top;
 }
-#my-account-container .my-account-navigation {
-  width: 20%;
-  margin: 0 !important;
-  display: inline-block;
-}
-#my-account-container .my-account-navigation ul li:hover a {
-  color: #F9D342 !important;
-}
-#my-account-container .my-account-navigation ul li {
-  font-size: 15px;
-  font-weight: 550;
-  cursor: pointer;
-  list-style: none;
-  border-style: solid;
-  border-width: 0.5px 0px;
-  border-color: gray;
-  padding: 6% 0 5% 0;
-}
-#my-account-container .my-account-navigation ul li i {
-  float: right;
-}
-#my-account-container .my-account-navigation ul li:hover {
-  color: #F9D342;
-}
-@media screen and (max-width: 850px) {
-  #my-account-container .my-account-navigation {
-    width: 100% !important;
-  }
-  #my-account-container .my-account-navigation ul {
-    padding: 0;
-  }
-  #my-account-container .my-account-navigation ul li {
-    padding: 10px 0 10px 0;
-  }
-  #my-account-container .my-account-navigation ul li a {
-    padding-left: 7px;
-  }
-}
-#my-account-container #my-account-dashboard, #my-account-container #my-account-orders {
-  display: none;
-}
-#my-account-container #my-account-dashboard table, #my-account-container #my-account-orders table {
-  width: 100%;
-  text-align: center;
-  border-collapse: collapse;
-}
-#my-account-container #my-account-dashboard th, #my-account-container #my-account-orders th {
-  padding: 10px 0 10px 0;
-}
-#my-account-container #my-account-dashboard td, #my-account-container #my-account-orders td {
-  padding: 10px 0 10px 0;
-}
-#my-account-container #my-account-dashboard td button, #my-account-container #my-account-orders td button {
-  padding: 7px;
-  border-color: transparent;
-  cursor: pointer;
-}
-#my-account-container #my-account-dashboard td button:hover, #my-account-container #my-account-orders td button:hover {
-  background-color: #F9D342;
-  color: #292826;
-}
-#my-account-container #my-account-orders {
-  display: none;
-}
-@media screen and (max-width: 850px) {
-  #my-account-container #my-account-data {
-    width: 100%;
-    padding: 0;
-  }
-  #my-account-container #my-account-data #my-account-dashboard, #my-account-container #my-account-data #my-account-orders {
-    /* Force table to not be like tables anymore */
-    /* Hide table headers (but not display: none;, for accessibility) */
-    /*
-    DATA LABEL HEADER FOR EACH DATA LINE ON MOBILE
-    */
-  }
-  #my-account-container #my-account-data #my-account-dashboard table, #my-account-container #my-account-data #my-account-dashboard thead, #my-account-container #my-account-data #my-account-dashboard tbody, #my-account-container #my-account-data #my-account-dashboard th, #my-account-container #my-account-data #my-account-dashboard td, #my-account-container #my-account-data #my-account-dashboard tr, #my-account-container #my-account-data #my-account-orders table, #my-account-container #my-account-data #my-account-orders thead, #my-account-container #my-account-data #my-account-orders tbody, #my-account-container #my-account-data #my-account-orders th, #my-account-container #my-account-data #my-account-orders td, #my-account-container #my-account-data #my-account-orders tr {
-    display: block;
-  }
-  #my-account-container #my-account-data #my-account-dashboard thead, #my-account-container #my-account-data #my-account-orders thead {
-    display: none;
-  }
-  #my-account-container #my-account-data #my-account-dashboard tr, #my-account-container #my-account-data #my-account-orders tr {
-    border: 1px solid #ccc;
-  }
-  #my-account-container #my-account-data #my-account-dashboard td, #my-account-container #my-account-data #my-account-orders td {
-    /* Behave  like a "row" */
-    border: none;
-    position: relative;
-    padding-left: 50%;
-    padding-bottom: 22px;
-  }
-  #my-account-container #my-account-data #my-account-dashboard td:before, #my-account-container #my-account-data #my-account-orders td:before {
-    /* Now like a table header */
-    position: absolute;
-    /* Top/left values mimic padding */
-    top: 6px;
-    left: 6px;
-    width: 45%;
-    padding-right: 10px;
-    white-space: nowrap;
-    font-size: 15px;
-    font-weight: 550;
-  }
-  #my-account-container #my-account-data #my-account-dashboard td:nth-of-type(1):before, #my-account-container #my-account-data #my-account-orders td:nth-of-type(1):before {
-    content: "Order";
-  }
-  #my-account-container #my-account-data #my-account-dashboard td:nth-of-type(2):before, #my-account-container #my-account-data #my-account-orders td:nth-of-type(2):before {
-    content: "Date:";
-  }
-  #my-account-container #my-account-data #my-account-dashboard td:nth-of-type(3):before, #my-account-container #my-account-data #my-account-orders td:nth-of-type(3):before {
-    content: "Status:";
-  }
-  #my-account-container #my-account-data #my-account-dashboard td:nth-of-type(4):before, #my-account-container #my-account-data #my-account-orders td:nth-of-type(4):before {
-    content: "Total:";
-  }
-  #my-account-container #my-account-data #my-account-dashboard td:nth-of-type(5):before, #my-account-container #my-account-data #my-account-orders td:nth-of-type(5):before {
-    content: "Action:";
-  }
-}
-#my-account-container #account-wish-list {
-  display: none;
-}
-#my-account-container #account-detail {
-  display: none;
-}
-#my-account-container #account-detail .user-profile-data .user-username-display h3 {
-  margin: 0;
-}
-#my-account-container #account-detail .user-profile-data .user-email-profile {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-}
-#my-account-container #account-detail .user-profile-data .default-user-shipping p {
-  padding: 0px !important;
-  margin: 0px;
-}
-#my-account-container #account-detail .user-profile-data .default-user-shipping button {
-  margin-top: 15px;
-  color: #fff;
-  background-color: #292826;
-  font-family: "Archivo Narrow", Sans-serif;
-  font-size: 14px;
-  border-style: groove;
-  border-width: 0;
-  border-radius: 6px;
-  padding: 7px 20px 7px 20px;
-  cursor: pointer;
-}
-@media screen and (max-width: 750px) {
-  #my-account-container .account-1st-row {
-    display: block !important;
-  }
-  #my-account-container .account-1st-row .account-first-name {
-    padding-right: 0px !important;
-  }
-  #my-account-container .account-1st-row .account-first-name, #my-account-container .account-1st-row .account-last-name {
-    width: 100% !important;
-  }
-}
 
 @media screen and (max-width: 850px) {
   #my-account-container {
@@ -2331,64 +1742,6 @@ form.search-site button {
     margin: 0;
   }
 }
-.body-800width {
-  width: 100%;
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.input-label {
-  font-size: 16px;
-  font-weight: 400;
-  color: #292826;
-}
-
-.input-style-prim, .new-edit-address-form-container .new-address-form-container form input, .new-edit-address-form-container .new-address-form-container form textarea, .login-register-container .login-container form input, .login-register-container .login-container form textarea, .form-default-style form input, #user-change-password-container form input, #email-change-container form input, #login-container form input, #signup-container form input, #logout-container form input, #user-set-password form input, #password-reset-container form input, #email-comfirmation-container form input, #reset-password-container form input, .auth-account-default form input, .form-default-style form textarea, #user-change-password-container form textarea, #email-change-container form textarea, #login-container form textarea, #signup-container form textarea, #logout-container form textarea, #user-set-password form textarea, #password-reset-container form textarea, #email-comfirmation-container form textarea, #reset-password-container form textarea, .auth-account-default form textarea {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-  background-color: #f2f2f2;
-}
-
-.input-submit-button-prim, .new-edit-address-form-container .new-address-form-container .submit-new-address-button, #user-set-password form input[type=submit], #password-reset-container form input[type=submit], #reset-password-container form input[type=submit], .auth-account-default form input[type=submit], .login-register-container .login-container form input[type=submit] {
-  width: 100%;
-  background-color: #292826;
-  color: #F9D342;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 15px;
-}
-
-.form-default-style form label, #user-change-password-container form label, #email-change-container form label, #login-container form label, #signup-container form label, #logout-container form label, #user-set-password form label, #password-reset-container form label, #email-comfirmation-container form label, #reset-password-container form label, .auth-account-default form label {
-  font-size: 16px;
-  font-weight: 400;
-}
-
-.form-default-style form button, #user-change-password-container form button, #email-change-container form button, #login-container form button, #signup-container form button, #logout-container form button, #user-set-password form button, #password-reset-container form button, #email-comfirmation-container form button, #reset-password-container form button, .auth-account-default form button {
-  color: #fff;
-  background-color: #292826;
-  font-family: "Archivo Narrow", Sans-serif;
-  font-size: 14px;
-  border-style: groove;
-  border-width: 0;
-  border-radius: 6px;
-  padding: 7px 20px 7px 20px;
-  cursor: pointer;
-  margin-top: 10px;
-  margin-right: 10px;
-}
-
-.form-default-style form button:hover, #user-change-password-container form button:hover, #email-change-container form button:hover, #login-container form button:hover, #signup-container form button:hover, #logout-container form button:hover, #user-set-password form button:hover, #password-reset-container form button:hover, #email-comfirmation-container form button:hover, #reset-password-container form button:hover, .auth-account-default form button:hover {
-  color: #F9D342;
-}
-
 .login-register-container {
   width: 100%;
   max-width: 800px;
@@ -2410,64 +1763,6 @@ form.search-site button {
   font-size: 16px;
   font-weight: 400;
 }
-.body-800width {
-  width: 100%;
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.input-label {
-  font-size: 16px;
-  font-weight: 400;
-  color: #292826;
-}
-
-.input-style-prim, .new-edit-address-form-container .new-address-form-container form input, .new-edit-address-form-container .new-address-form-container form textarea, .login-register-container .login-container form input, .login-register-container .login-container form textarea, .form-default-style form input, #user-change-password-container form input, #email-change-container form input, #login-container form input, #signup-container form input, #logout-container form input, #user-set-password form input, #password-reset-container form input, #email-comfirmation-container form input, #reset-password-container form input, .auth-account-default form input, .form-default-style form textarea, #user-change-password-container form textarea, #email-change-container form textarea, #login-container form textarea, #signup-container form textarea, #logout-container form textarea, #user-set-password form textarea, #password-reset-container form textarea, #email-comfirmation-container form textarea, #reset-password-container form textarea, .auth-account-default form textarea {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-  background-color: #f2f2f2;
-}
-
-.input-submit-button-prim, .new-edit-address-form-container .new-address-form-container .submit-new-address-button, .login-register-container .login-container form input[type=submit], #user-set-password form input[type=submit], #password-reset-container form input[type=submit], #reset-password-container form input[type=submit], .auth-account-default form input[type=submit] {
-  width: 100%;
-  background-color: #292826;
-  color: #F9D342;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 15px;
-}
-
-.form-default-style form label, #user-change-password-container form label, #email-change-container form label, #login-container form label, #signup-container form label, #logout-container form label, #user-set-password form label, #password-reset-container form label, #email-comfirmation-container form label, #reset-password-container form label, .auth-account-default form label {
-  font-size: 16px;
-  font-weight: 400;
-}
-
-.form-default-style form button, #user-change-password-container form button, #email-change-container form button, #login-container form button, #signup-container form button, #logout-container form button, #user-set-password form button, #password-reset-container form button, #email-comfirmation-container form button, #reset-password-container form button, .auth-account-default form button {
-  color: #fff;
-  background-color: #292826;
-  font-family: "Archivo Narrow", Sans-serif;
-  font-size: 14px;
-  border-style: groove;
-  border-width: 0;
-  border-radius: 6px;
-  padding: 7px 20px 7px 20px;
-  cursor: pointer;
-  margin-top: 10px;
-  margin-right: 10px;
-}
-
-.form-default-style form button:hover, #user-change-password-container form button:hover, #email-change-container form button:hover, #login-container form button:hover, #signup-container form button:hover, #logout-container form button:hover, #user-set-password form button:hover, #password-reset-container form button:hover, #email-comfirmation-container form button:hover, #reset-password-container form button:hover, .auth-account-default form button:hover {
-  color: #F9D342;
-}
-
 .auth-container {
   width: 100%;
   max-width: 800px;
@@ -2528,152 +1823,35 @@ form.search-site button {
   #id_remember {
     width: 10% !important;
   }
-
   .socialaccount_providers {
     display: flex;
     flex-direction: column;
   }
 }
-.body-800width {
-  width: 100%;
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.input-label {
-  font-size: 16px;
-  font-weight: 400;
-  color: #292826;
-}
-
-.input-style-prim, .new-edit-address-form-container .new-address-form-container form input, .new-edit-address-form-container .new-address-form-container form textarea, .login-register-container .login-container form input, .login-register-container .login-container form textarea, .form-default-style form input, #user-change-password-container form input, #email-change-container form input, #login-container form input, #signup-container form input, #logout-container form input, #user-set-password form input, #password-reset-container form input, #email-comfirmation-container form input, #reset-password-container form input, .auth-account-default form input, .form-default-style form textarea, #user-change-password-container form textarea, #email-change-container form textarea, #login-container form textarea, #signup-container form textarea, #logout-container form textarea, #user-set-password form textarea, #password-reset-container form textarea, #email-comfirmation-container form textarea, #reset-password-container form textarea, .auth-account-default form textarea {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-  background-color: #f2f2f2;
-}
-
-.input-submit-button-prim, .new-edit-address-form-container .new-address-form-container .submit-new-address-button, .login-register-container .login-container form input[type=submit], #user-set-password form input[type=submit], #password-reset-container form input[type=submit], #reset-password-container form input[type=submit], .auth-account-default form input[type=submit] {
-  width: 100%;
-  background-color: #292826;
-  color: #F9D342;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 15px;
-}
-
-.form-default-style form label, #user-change-password-container form label, #email-change-container form label, #login-container form label, #signup-container form label, #logout-container form label, #user-set-password form label, #password-reset-container form label, #email-comfirmation-container form label, #reset-password-container form label, .auth-account-default form label {
-  font-size: 16px;
-  font-weight: 400;
-}
-
-.form-default-style form button, #user-change-password-container form button, #email-change-container form button, #login-container form button, #signup-container form button, #logout-container form button, #user-set-password form button, #password-reset-container form button, #email-comfirmation-container form button, #reset-password-container form button, .auth-account-default form button {
-  color: #fff;
-  background-color: #292826;
-  font-family: "Archivo Narrow", Sans-serif;
-  font-size: 14px;
-  border-style: groove;
-  border-width: 0;
-  border-radius: 6px;
-  padding: 7px 20px 7px 20px;
-  cursor: pointer;
-  margin-top: 10px;
-  margin-right: 10px;
-}
-
-.form-default-style form button:hover, #user-change-password-container form button:hover, #email-change-container form button:hover, #login-container form button:hover, #signup-container form button:hover, #logout-container form button:hover, #user-set-password form button:hover, #password-reset-container form button:hover, #email-comfirmation-container form button:hover, #reset-password-container form button:hover, .auth-account-default form button:hover {
-  color: #F9D342;
-}
-
 .order_sucess_container {
   padding: 100px;
 }
 
-#view-order, #my-account-container #account-wish-list {
+#view-order {
   padding: 5% 10% 10% 10%;
 }
-#view-order .highlight, #my-account-container #account-wish-list .highlight {
+#view-order .highlight {
   font-weight: 800;
 }
-#view-order p, #my-account-container #account-wish-list p {
+#view-order p {
   padding: 1px;
   margin: 0;
 }
-#view-order table, #my-account-container #account-wish-list table {
+#view-order table {
   width: 100%;
   text-align: left;
   border-collapse: collapse;
 }
-#view-order table th, #my-account-container #account-wish-list table th {
+#view-order table th {
   padding: 15px 0 15px 20px;
 }
-#view-order table td, #my-account-container #account-wish-list table td {
+#view-order table td {
   padding: 15px 0 15px 20px;
-}
-
-.body-800width {
-  width: 100%;
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.input-label {
-  font-size: 16px;
-  font-weight: 400;
-  color: #292826;
-}
-
-.input-style-prim, .new-edit-address-form-container .new-address-form-container form input, .new-edit-address-form-container .new-address-form-container form textarea, .login-register-container .login-container form input, .login-register-container .login-container form textarea, .form-default-style form input, #user-change-password-container form input, #email-change-container form input, #login-container form input, #signup-container form input, #logout-container form input, #user-set-password form input, #password-reset-container form input, #email-comfirmation-container form input, #reset-password-container form input, .auth-account-default form input, .form-default-style form textarea, #user-change-password-container form textarea, #email-change-container form textarea, #login-container form textarea, #signup-container form textarea, #logout-container form textarea, #user-set-password form textarea, #password-reset-container form textarea, #email-comfirmation-container form textarea, #reset-password-container form textarea, .auth-account-default form textarea {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-  background-color: #f2f2f2;
-}
-
-.input-submit-button-prim, .new-edit-address-form-container .new-address-form-container .submit-new-address-button, .login-register-container .login-container form input[type=submit], #user-set-password form input[type=submit], #password-reset-container form input[type=submit], #reset-password-container form input[type=submit], .auth-account-default form input[type=submit] {
-  width: 100%;
-  background-color: #292826;
-  color: #F9D342;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 15px;
-}
-
-.form-default-style form label, #user-change-password-container form label, #email-change-container form label, #login-container form label, #signup-container form label, #logout-container form label, #user-set-password form label, #password-reset-container form label, #email-comfirmation-container form label, #reset-password-container form label, .auth-account-default form label {
-  font-size: 16px;
-  font-weight: 400;
-}
-
-.form-default-style form button, #user-change-password-container form button, #email-change-container form button, #login-container form button, #signup-container form button, #logout-container form button, #user-set-password form button, #password-reset-container form button, #email-comfirmation-container form button, #reset-password-container form button, .auth-account-default form button {
-  color: #fff;
-  background-color: #292826;
-  font-family: "Archivo Narrow", Sans-serif;
-  font-size: 14px;
-  border-style: groove;
-  border-width: 0;
-  border-radius: 6px;
-  padding: 7px 20px 7px 20px;
-  cursor: pointer;
-  margin-top: 10px;
-  margin-right: 10px;
-}
-
-.form-default-style form button:hover, #user-change-password-container form button:hover, #email-change-container form button:hover, #login-container form button:hover, #signup-container form button:hover, #logout-container form button:hover, #user-set-password form button:hover, #password-reset-container form button:hover, #email-comfirmation-container form button:hover, #reset-password-container form button:hover, .auth-account-default form button:hover {
-  color: #F9D342;
 }
 
 .delviery-address-title {
@@ -2714,69 +1892,10 @@ form.search-site button {
     width: 100%;
     padding: 20px;
   }
-
   .address_list {
     width: 100% !important;
   }
 }
-.body-800width {
-  width: 100%;
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.input-label {
-  font-size: 16px;
-  font-weight: 400;
-  color: #292826;
-}
-
-.input-style-prim, .login-register-container .login-container form input, .login-register-container .login-container form textarea, .new-edit-address-form-container .new-address-form-container form input, .new-edit-address-form-container .new-address-form-container form textarea, .form-default-style form input, #user-change-password-container form input, #email-change-container form input, #login-container form input, #signup-container form input, #logout-container form input, #user-set-password form input, #password-reset-container form input, #email-comfirmation-container form input, #reset-password-container form input, .auth-account-default form input, .form-default-style form textarea, #user-change-password-container form textarea, #email-change-container form textarea, #login-container form textarea, #signup-container form textarea, #logout-container form textarea, #user-set-password form textarea, #password-reset-container form textarea, #email-comfirmation-container form textarea, #reset-password-container form textarea, .auth-account-default form textarea {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-  background-color: #f2f2f2;
-}
-
-.input-submit-button-prim, .login-register-container .login-container form input[type=submit], #user-set-password form input[type=submit], #password-reset-container form input[type=submit], #reset-password-container form input[type=submit], .auth-account-default form input[type=submit], .new-edit-address-form-container .new-address-form-container .submit-new-address-button {
-  width: 100%;
-  background-color: #292826;
-  color: #F9D342;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 15px;
-}
-
-.form-default-style form label, #user-change-password-container form label, #email-change-container form label, #login-container form label, #signup-container form label, #logout-container form label, #user-set-password form label, #password-reset-container form label, #email-comfirmation-container form label, #reset-password-container form label, .auth-account-default form label {
-  font-size: 16px;
-  font-weight: 400;
-}
-
-.form-default-style form button, #user-change-password-container form button, #email-change-container form button, #login-container form button, #signup-container form button, #logout-container form button, #user-set-password form button, #password-reset-container form button, #email-comfirmation-container form button, #reset-password-container form button, .auth-account-default form button {
-  color: #fff;
-  background-color: #292826;
-  font-family: "Archivo Narrow", Sans-serif;
-  font-size: 14px;
-  border-style: groove;
-  border-width: 0;
-  border-radius: 6px;
-  padding: 7px 20px 7px 20px;
-  cursor: pointer;
-  margin-top: 10px;
-  margin-right: 10px;
-}
-
-.form-default-style form button:hover, #user-change-password-container form button:hover, #email-change-container form button:hover, #login-container form button:hover, #signup-container form button:hover, #logout-container form button:hover, #user-set-password form button:hover, #password-reset-container form button:hover, #email-comfirmation-container form button:hover, #reset-password-container form button:hover, .auth-account-default form button:hover {
-  color: #F9D342;
-}
-
 .new-edit-address-form-container .new-address-form-container {
   width: 100%;
   display: flex;
@@ -2807,64 +1926,6 @@ form.search-site button {
   font-weight: 600;
   cursor: pointer;
 }
-.body-800width {
-  width: 100%;
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.input-label {
-  font-size: 16px;
-  font-weight: 400;
-  color: #292826;
-}
-
-.input-style-prim, .form-default-style form input, .form-default-style form textarea {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-  background-color: #f2f2f2;
-}
-
-.input-submit-button-prim {
-  width: 100%;
-  background-color: #292826;
-  color: #F9D342;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 15px;
-}
-
-.form-default-style form label {
-  font-size: 16px;
-  font-weight: 400;
-}
-
-.form-default-style form button {
-  color: #fff;
-  background-color: #292826;
-  font-family: "Archivo Narrow", Sans-serif;
-  font-size: 14px;
-  border-style: groove;
-  border-width: 0;
-  border-radius: 6px;
-  padding: 7px 20px 7px 20px;
-  cursor: pointer;
-  margin-top: 10px;
-  margin-right: 10px;
-}
-
-.form-default-style form button:hover {
-  color: #F9D342;
-}
-
 .contact-info {
   background-color: #292826;
   opacity: 0.7;
@@ -2872,21 +1933,17 @@ form.search-site button {
   flex-direction: column;
   align-items: center;
 }
-
 .contact-info h1 {
   color: white;
   letter-spacing: 2px;
 }
-
 .contact-info i {
   color: white;
   padding-right: 15px;
 }
-
 .contact-info .whatsapp {
   color: green;
 }
-
 .contact-info .contact-phone {
   border-style: solid;
   border-width: 5px 0;
@@ -2907,54 +1964,44 @@ form.search-site button {
   align-content: space-around;
   align-items: center;
   padding: 50px 0 50px 0;
-  background-color: #cde1e9;
+  background-color: rgb(205, 225, 233);
 }
-
 #contact-form-container .form-desc {
   width: 35%;
   padding-left: 10px;
   align-self: flex-start;
 }
-
 #contact-form-container .form-desc h1, #contact-form-container .form-desc h2 {
   margin: 0;
 }
-
 #contact-form-container .form-desc p {
   font-size: 16px;
   font-weight: 400;
 }
-
 #contact-form-container .contact-inputs {
   padding-right: 10px;
 }
-
 #contact-form-container .contact-inputs #contact-submit-form input {
   background-color: white !important;
 }
-
 #contact-form-container .contact-inputs #contact-submit-form .contact-name, #contact-form-container .contact-inputs #contact-submit-form .contact-email {
   width: 49%;
   display: inline-block;
   margin: 0;
 }
-
 #contact-form-container .contact-inputs #contact-submit-form .contact-email {
   float: right;
 }
-
 #contact-form-container .contact-inputs textarea {
   width: 100%;
   border: none;
   height: 100px;
   margin: 5px 0 0 5px;
 }
-
 #contact-form-container .contact-inputs .contact-send-button {
   float: right;
   margin: 0;
 }
-
 #contact-form-container .contact-inputs .contact-send-button button {
   padding: 15px;
   background-color: #292826;
@@ -2969,7 +2016,6 @@ form.search-site button {
   padding: 10px 30px;
   letter-spacing: 2px;
 }
-
 #contact-form-container .contact-inputs .contact-send-button button:hover {
   background-color: #F9D342;
   color: #292826;
@@ -2979,12 +2025,10 @@ form.search-site button {
   #contact-form-container {
     padding: 15px !important;
   }
-
   #contact-form-container .form-desc, #contact-form-container .contact-inputs {
     width: 100% !important;
     text-align: center;
   }
-
   #contact-form-container .contact-name, #contact-form-container .contact-email {
     width: 100% !important;
   }
@@ -3004,6 +2048,4 @@ form.search-site button {
 }
 .inquiry-email-contact .inquiry-email-address {
   color: #F9D342;
-}
-
-/*# sourceMappingURL=style.css.map */
+}/*# sourceMappingURL=style.css.map */

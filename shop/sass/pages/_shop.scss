@@ -1,17 +1,22 @@
 // SHOP PAGE
 @use '../../../static/doobarashop/sass/abstracts/all' as var; 
 
-@import '../components/filterbar';
+@use '../components/filterbar';
+
+@use '../components/shop-product-item-block';
+
 
 // product countainer grid 
 #container-shop {
     clear: both;
-    padding: 7px 0 7px 0;
-    grid-gap: 5px;
+    padding: 25px;
+    grid-gap: 10px;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    grid-template-columns: repeat(4, minmax(240px, 1fr));
     background-color: var.$identity-color;
-    
-    @import '../components/shop-product-item-block';
 
+    a:link {
+    // should be created in mixin
+    text-decoration: none;
+    }       
 }

@@ -1,3 +1,16 @@
 {
-    "git.ignoreLimitWarning": true
+  "liveSassCompile.settings.includeItems": [
+    "/style.scss"
+  ],
+  "liveSassCompile.settings.formats": [
+    {
+      "format": "expanded",
+      "extensionName": ".css",
+      "savePath": "/static/doobarashop"
+    }
+  ],
+  "liveSassCompile.settings.excludeList": [
+    "/**/node_modules/**",
+    "/.vscode/**"
+  ]
 }

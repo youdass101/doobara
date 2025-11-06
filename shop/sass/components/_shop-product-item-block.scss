@@ -1,7 +1,7 @@
-a:link {
-    // should be created in mixin
-    text-decoration: none;
-}
+@use '../../../static/doobarashop/sass/abstracts/all' as var;
+
+
+
 
 // Each product element in grid 
 .shop-product {
