@@ -41,15 +41,17 @@ class Product(models.Model):
     # name is string
     # product name string of max 255 char
     name = models.CharField(max_length=255)
-    # price is decimale number
-    # product price decimal number 
-    price = models.DecimalField(max_digits=5, decimal_places=2)
     # short_description is string 
     # product short description more than 1000 char 
     short_description = models.TextField(blank=True)
     # long_description is string
     #product long decription more than 1000 char
-    long_description = models.TextField(blank=True)
+    description = models.TextField(blank=True)
+    # price is decimale number
+    # product price decimal number 
+    price = models.DecimalField(max_digits=5, decimal_places=2)
+    sale_price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)  # Sale price (if applicable)
+    currency = models.CharField(max_length=3, default="USD")  # Currency code (e.g., USD, EUR)
     # created_time is date
     # product object creation date 
     created_time = models.DateTimeField(null=True, blank=True, auto_now_add=True)
@@ -71,13 +73,19 @@ class Product(models.Model):
     # active is boolean 
     # true if product active, else false
     active = models.BooleanField(default=False)
-    # discount is boolean
-    # true if product on discount, else if not false
-    discount = models.BooleanField(default=False)
     # category is List of model-objects
     # product category model reference many to many (the product can belong to several catergories)
     category = models.ManyToManyField(Categorie, blank=True, default=None, related_name="products") 
-    
+    quantity = models.PositiveIntegerField(default=0)  # Quantity available
+    availability = models.CharField(
+        max_length=50,
+        choices=[
+            ("in stock", "In Stock"),
+            ("out of stock", "Out of Stock"),
+            ("preorder", "Preorder"),
+        ],
+        default="in stock",
+    )
     # IF any issue show will customize based on it so far when connected variant holder is deleted 
     #                       to connected product 
     # variantes are a list of objects
@@ -89,6 +97,14 @@ class Product(models.Model):
     # Variant_default is a boolean 
     # if product is variant and is the default variant in list result is true 
     variant_default = models.BooleanField(default=False)
+
+    # Shipping and logistics
+    weight = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)  # Weight in kilograms
+    dimensions = models.CharField(max_length=255, blank=True)  # Dimensions (e.g., "10x20x30 cm")
+    
+    def get_absolute_url(self):
+        return reverse('singleproduct', kwargs={'locat': self.name})  # adjust 'locat' to your slug/field
+    
 
     # Admin page tabel view of dojects column (key value)
     def __str__(self):

@@ -11,15 +11,15 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
-
 import environ
 
-env = environ.Env()
-environ.Env.read_env()
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+env = environ.Env()
+# explicitly load the .env file at project root
+env.read_env(os.path.join(BASE_DIR, '.env'))
 
 
 # Quick-start development settings - unsuitable for production
@@ -100,10 +100,6 @@ WSGI_APPLICATION = 'doobara.wsgi.application'
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    # }
     "default": {
         "ENGINE": "django.db.backends.postgresql",
         "NAME": os.environ.get('DB_NAME'),
@@ -133,6 +129,21 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+PASSWORD_HASHERS = [
+    # Used for *new* passwords and rehashes:
+    "django.contrib.auth.hashers.PBKDF2PasswordHasher",
+
+    # (Optional, but you can keep Django’s other defaults if you want)
+    # "django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher",
+    # "django.contrib.auth.hashers.Argon2PasswordHasher",
+    # "django.contrib.auth.hashers.BCryptSHA256PasswordHasher",
+    # "django.contrib.auth.hashers.ScryptPasswordHasher",
+
+    # Your WordPress hasher, LAST:
+    "users.hashers.WordPressPasswordHasher",
+]
+
 
 
 # Internationalization
@@ -220,11 +231,12 @@ ACCOUNT_FORMS = {
 
 # allauth email and username authentication
 ACCOUNT_AUTHENTICATION_METHOD = "username_email"
+ACCOUNT_UNIQUE_EMAIL = True
 
 # allauth signup email required
 ACCOUNT_EMAIL_REQUIRED=True
 # allauth email verification required
-ACCOUNT_EMAIL_VERIFICATION = "mandatory"
+ACCOUNT_EMAIL_VERIFICATION = "none"
 
 # Fix (go around untill smtp setup done) 1061 error after pressing signup shell email not real
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

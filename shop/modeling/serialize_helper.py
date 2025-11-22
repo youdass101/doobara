@@ -33,6 +33,7 @@ def product_serialize(object, tag):
         # else return None
         image = None
 
+
     # -> list of dictionary
     # convert a list of object to a list of dictionary usng helpers
     # return all images in a product album if no obejcts exist return none to avoid erors
@@ -64,6 +65,7 @@ def product_serialize(object, tag):
             "pid": object.id,
             "pname": object.name,
             "pprice": object.price,
+            "currency": object.currency,
             "pcategory": category_list,
             "pmainimage": image,
             # !!! HAVE TO BE REMOVED FROM HTML CODE IN ANY IF CONFITION
@@ -76,7 +78,7 @@ def product_serialize(object, tag):
             "pname": object.name,
             "pprice": object.price,
             "pshortdescription": object.short_description,
-            "plongdescription": object.long_description,
+            "plongdescription": object.description,
             "pvideo": object.video,
             "pcreationdate": object.created_time,
             "pcategory": category_list,

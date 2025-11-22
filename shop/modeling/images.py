@@ -10,7 +10,7 @@ class ImageAlbum(models.Model):
     # list of images -> image
     # return image object that have the default key value true
     def default(self):
-        return self.images.filter(default=True).first()
+        return self.images.filter(thumbnail=True).first()
     
     # list of images -> list of images
     # returns the image that fit the width and lenght 
@@ -30,19 +30,13 @@ class Image(models.Model):
     name = models.CharField(max_length=255)
     # alt is string
     # image short interpretation 
-    alt = models.CharField(max_length=255, blank=True)
-    # desctiption is string
-    # image description 
-    description = models.TextField(blank=True)
+    alt_text = models.CharField(max_length=255, blank=True)
     # image is image 
     # the image path
     image = models.ImageField(upload_to= 'static/doobarashop/upload/images')
     # default is boolean 
     # if true the image is the main image for the product 
-    default = models.BooleanField(default=False)
-    # long is boolean 
-    # if true it is for the product singal page long image which is a dimension type 
-    long = models.BooleanField(default=False)
+    thumbnail = models.BooleanField(default=False)  # True if this is a thumbnail image
     # album is model-object 
     # pointer to a specific album object id 
     album = models.ForeignKey(ImageAlbum, related_name='images', on_delete=models.CASCADE)
@@ -61,9 +55,7 @@ class Image(models.Model):
     def serialize(self):
         return{
             "iname": self.name,
-            "ialt": self.alt,
-            "idescription": self.description,
-            "idefault": self.default,
-            "ilong": self.long,
+            "ialt": self.alt_text,
+            "idefault": self.thumbnail,
             "iurl": self.img_path_customize()
         }
