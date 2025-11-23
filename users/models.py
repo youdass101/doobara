@@ -23,7 +23,7 @@ class Delivery_Address_Details (models.Model):
     building_appartment = models.CharField(max_length=255)
     # is number
     # reciever contact number 
-    phone_number = models.CharField(max_length=8)
+    phone_number = models.CharField(max_length=15)
     # is string 
     # delivery additional details
     delivery_details = models.CharField(max_length=400, blank=True)
