@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from shop.models import *
 from datetime import timedelta, datetime
 
+
 # is model object
 # user shippin address and information
 class Delivery_Address_Details (models.Model):
@@ -63,21 +64,22 @@ class Orders (models.Model):
     address = models.ForeignKey(Delivery_Address_Details, on_delete=models.SET_NULL, null=True)
     # is string
     # status names 
-    date = models.DateTimeField(auto_now_add=True)
-    prcs = "processing"
-    cmplt = "complete"
-    cncld = "canceled"
-    pndng = "pending"
+    date = models.DateTimeField()
+    processing = "processing"
+    completed = "completed"
+    cancelled = "cancelled"
+    pending = "pending"
     # is list 
     # list of status
-    STATUS_CHOICES = [(prcs, "processing"), (cmplt, "complete"), (cncld, "canceled"), (pndng, "pending") ]
+    STATUS_CHOICES = [(processing, "processing"), (completed, "completed"), (cancelled, "cancelled"), (pending, "pending") ]
     # is string
     # order staus to pick from list of choices 
-    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default=prcs)
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default=processing)
     # is Decimal number 
     # order total cost
-    total = models.DecimalField(max_digits=5, decimal_places=2)
+    total = models.DecimalField(max_digits=10, decimal_places=2)
     # is strin 
+    currency = models.CharField(max_length=10, default="USD")   
     # order notes 
     note = models.CharField(max_length=355,null=True, blank=True)
 

@@ -3,7 +3,9 @@ from pathlib import Path
 from django.contrib.auth.models import User
 from users.models import Delivery_Address_Details
 import re
-# from ...models import *
+from ...models import *
+from django.utils import timezone
+from datetime import datetime
 
 # print("starting")
 # print("importing")
@@ -53,7 +55,7 @@ def shipping_data():
     result = {}
     for i in data:
         id = i['post_id']
-        if   id not in result and i['meta_key'] in ['_billing_first_name', '_billing_last_name', '_billing_phone_number', '_billing_email', '_billing_address_1', '_billing_address_2', '_billing_city', '_billing_address_index', '_order_total', '_order_currency', '_customer_user']:
+        if id not in result and i['meta_key'] in ['_billing_first_name', '_billing_last_name', '_billing_phone_number', '_billing_email', '_billing_address_1', '_billing_address_2', '_billing_city', '_billing_address_index', '_order_total', '_order_currency', '_customer_user']:
             result[id] = {}
         if id not in result:
             pass
@@ -136,3 +138,58 @@ def createshipping(data):
             user=user,  # Pass the User instance here
             default=True
         )
+
+def orders():
+    with open(r'C:\Users\Hamze\Downloads\wp_postmeta.csv', 'r', newline='', encoding='utf-8') as file:
+        data = list(csv.DictReader(file))
+    with open(r'C:\Users\Hamze\Downloads\wp_orders.csv', 'r', newline='', encoding='utf-8') as file:
+        orders = list(csv.DictReader(file))
+    result = {}
+
+    for i in orders:
+        result[i['ID']] = {'order_date': i['post_date'], 'order_status': i['post_status']}
+        for j in data:
+            if j['post_id'] == i['ID']:
+                if j['meta_key'] == '_customer_user':
+                    result[i['ID']]['user_id'] = j['meta_value']
+                if j['meta_key'] == '_order_total':
+                    result[i['ID']]['order_total'] = j['meta_value']
+                if j['meta_key'] == '_order_currency':
+                    result[i['ID']]['order_currency'] = j['meta_value']
+
+    return(result)
+
+def createorders(data):
+    for i in data:
+        try:
+            user = User.objects.get(id=data[i]['user_id'])
+        except User.DoesNotExist:
+            continue  # Skip this iteration if the user does not exist
+
+        # Fetch a default delivery address for the user
+        try:
+            address = Delivery_Address_Details.objects.filter(user=user).first()
+        except Delivery_Address_Details.DoesNotExist:
+            address = None  # Handle case where no address exists
+        
+         # Remove the `wp_` prefix from the order status
+        order_status = str(data[i]['order_status']).replace('wc-', '')
+            # Parse the order_date and make it time zone aware
+        try:
+            naive_order_date = datetime.strptime(data[i]['order_date'], '%Y-%m-%d %H:%M:%S')  # Adjust format as needed
+            order_date = timezone.make_aware(naive_order_date)  # Convert to aware datetime
+        except ValueError:
+            print(f"Invalid date format for order {i}")
+            continue
+
+        Orders.objects.create(
+            id = i,
+            user=user,
+            address=address,
+            status=order_status,
+            total=data[i]['order_total'],
+            date=order_date,
+            currency=data[i]['order_currency'],
+            note=""
+        )
+
