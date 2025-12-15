@@ -1,33 +1,53 @@
 @use '../../../static/doobarashop/sass/abstracts/all' as var;
 
 // FEATURED PRODUCT CARDS BANNER 
+.carousel-container {
+    width: 100%;
+    margin-top: 4rem;
+    background-color: white;
 
+
+    h2 {
+        padding: 3rem 1rem 1rem 3rem;
+        font-family: 'Dancing Script', cursive; /* Use the handwriting font */
+        font-weight: 700; /* Use bold weight for better visibility */
+
+    }
     // Featured product elemet
     .product-card-container {
-        grid-area: fp;
-        padding-left: 1%;
-        @include var.flex-default;
+        display: flex;
+        display: -webkit-flex;        
         flex-wrap: wrap;
+        background-color: white !important;
+
         
         .product-card:hover {
-            @include var.hover-forth;
+            background-color: var.$back-color;
+            * {
+                color: var.$identity-color;
+            }
             .card-info {
-                @include var.hover-forth;
+                background-color: var.$back-color;
+                * {
+                    color: var.$identity-color;
+                }            
             }      
         }
 
         // each Product in parent product element 
         .product-card {
-            flex: 15% !important;
-            -webkit-flex: 15%;
-            width: 15%;
-            @include var.flex-default;
+            flex: 5% !important;
+            -webkit-flex: 5%;
+            width: 10%;
+            padding: 3rem;
+            display: flex;
+            display: -webkit-flex;  
             justify-content: space-around;
             align-content: space-between;
             flex-direction: column;
-            background-color: var.$identity-color;
+            background-color: white;
             color: var.$back-color;
-            box-shadow: 1px 1px 4px 5px rgba(0, 0, 0, 0.5 );
+            // box-shadow: 1px 1px 4px 5px rgba(0, 0, 0, 0.5 );
             text-decoration: none;
 
             // p element child of product-card
@@ -36,17 +56,18 @@
                 padding: 5% 1% 0 1%;
                 text-align: center;
                 line-height: 130%; 
-                @include var.nav-title;
-            } 
+                font-size: 15px;
+                font-weight: 550;            } 
          
             // Product-card information 
             .card-info {
-                background-color: var.$identity-color;
+                background-color: white;
                 margin: 0;  
                 height: 25%;              
             }
         }
     }
+}
 
 @media screen and (max-width: 1206px) {
     .product-card-container {

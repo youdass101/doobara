@@ -25,18 +25,17 @@
     }
 
     // Add to Cart button 
-    button {
-        @include var.button-secondary;
-    }
+    // button {
+    //     @include var.button-secondary;
+    // }
 
-    button:hover {
-        @include var.hover-secondary;
-    }
+    // button:hover {
+    //     @include var.hover-secondary;
+    // }
     
     // Product info text under p element
     p {
         text-align: center;
-        @include var.nav-title;
         margin: 0;  
         color: var.$back-color;
     }

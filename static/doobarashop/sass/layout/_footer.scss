@@ -1,194 +1,31 @@
 @use '../abstracts/all' as var;
-// for the footter push to the bottom always 
-.footter-wrapper {
-    height: auto !important;
-    margin: 0 auto -142px; /* the bottom margin is the negative value of the footer's height */
-    
-}
-
-// set the footer div at the end of the page 
-.footer, .push {
-    height: 142px; /* .push must be the same height as .footer */
-}
-
-// page footer 
-.footer {
-    grid-area: ft;
-    background-color: var.$back-color;
-    padding: 10px;
-
-    .footer-container {
-        display: flex;
-        .footer-row2 {
-            display: flex;
-            width: 100%;
-            .footer-r2-col{
-                display: flex;
-                justify-content: space-between;
-                width: 25%;
-
-                a {
-                    text-decoration: none;
-                    color: white;
-                }
-                .logo-copyright {
-                    display: inline-flexbox;
-                    align-items: flex-end;
 
 
-                    .logo {
-                        padding: 5px;
-                    }
+/* Footer */
 
-                    .copy-right-text {
-                        color: white;
-                    }
-                }
+footer {
+  width: 100%;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+  padding: 1.3rem 1.5rem 1.5rem;
+  background: #f4eee3;
+  font-size: 0.86rem;
 
-                .footer-index {
-                    width: 100%;
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: space-between;
-                    align-items: center;
-                    div {
+  .footer-inner {
+    max-width: var.$max-width;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
 
-                        display: inline-flex;
-                        flex-direction: column;
-                    } 
-                }
-
-                .contact-info-footer {
-                    display: flex;
-                    flex-direction: column;
-                    align-items: stretch;
-                    align-content: center;
-                    justify-content: space-between;
-                    padding-bottom: 10px;
-                    h4{
-                        color: white;
-                        margin-top: 0px;
-                        text-decoration: underline;
-                        text-decoration-color: var.$identity-color;
-                        text-decoration-thickness: 4px;
-                        font-family: sans-serif;
-                    }
-                    .email-text-icon {
-                        padding-left: 5%;
-                        font-size: 14px;
-                    }
-                    li {
-                        margin-left: 0px;
-                        list-style-type: none;
-
-                    }
-                }
-
-                .footer-social-media-news {
-                    width: 100%;
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: space-between;
-
-                    .news-email-container {
-                        width: 100%;
-                        margin-right: 50px;
-
-                        .email-news-form-label {
-                            color: white;
-                            margin: 0px;
-                        }
-
-                        .new-subscribe-form{
-                            display:flex;
-                            width: 100%;
-                            .news-email-input{
-                                // max-width: 50%;
-                                input {
-                                    @include var.input-style-wide;
-                                    background-color: white;
-                                }
-                            }
-                            .new-email-button {
-                                // max-width: 50%;
-                                button {
-                                    @include var.second-button-style-wide;
-                                }
-                                button:hover {
-                                    background-color: var.$back-color;
-                                    color: white;
-                                }
-                            }
-                        }
-
-                    }
-                    .social-icons-container {
-                        width: 100%;
-                        display: flex;
-                  
-               
-                    
-                        .social-icons {
-                            width: 100%;
-                            display: flex;
-                            justify-content: space-around;
-                            align-items: flex-end;
-                        
-                            a:hover {
-                                @include var.hover-primary;
-                            }
-                        }
-                    }
-                }
-            }
-
-        }
-
+    .footer-links {
+      display: flex;
+      gap: 1.25rem;
     }
 
-    
-}
-
-
-@media screen and (max-width: 530px){
-    .footer-container {
-        padding-bottom: 10%;
-
-        .footer-row2 {
-            flex-direction: row;
-            justify-content: space-between;
-            .fr2c4 {
-                display: flex;
-                align-items: center;
-                min-width: 40%;
-                
-                .social-icons-container {
-                    flex-direction: column;
-                    justify-content: space-around;
-                    .social-icons {
-                        width: 100%;
-                        justify-content: center;
-                        padding-bottom: 15%;
-                    }
-                }   
-            }
-            .fr2c2, .fr2c3 {
-                display: none !important;
-            }
-            display: block;
-            .footer-r2-col {
-                .social-icons-container {
-                    height: 100%;
-                  
-                }
-
-                .contact-info-footer, .news-email-container {
-                    display: none !important;
-                }
-
-            }
-        }
-        
+    .footer-links a {
+      opacity: 0.8;
     }
+  }
 }
-

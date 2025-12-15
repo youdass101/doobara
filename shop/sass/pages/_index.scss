@@ -1,46 +1,42 @@
-// INDEX PAGE SYLE ------------
-@use '../../../static/doobarashop/sass/abstracts/all' as var;
-// SLIDER 
-@use '../components/slider';
+@use '../../../static/doobarashop/sass/abstracts/all' as var; 
+@use '../components/index-featured-procuct-cards' as cards;
+.index-page-container {
+  background-color: var.$identity-color;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 1rem;
 
-// Category product menu icons 
-@use '../components/product-category-menu';
-@use '../components/index-featured-procuct-cards';
+  .top-section {
+    position: relative; /* Make this the positioning context for child elements */
 
-// Product featured add and bundles 
-@use '../section/home_hero' as hero;
-// Index page grid
-#index-grid-container {
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
+    .top-image {
+      width: 100%; /* Ensure the image scales properly */
+      height: auto; /* Maintain aspect ratio */
+      display: block; /* Remove any extra spacing below the image */
 
-    grid-template-areas: 
-    'slider slider slider slider slider slider slider slider slider slider slider slider'
-    'pcat pcat pcat fp fp fp fp fp fp fp fp fp'
-    'ac ac ac ac ac ac ac ac ac ac ac ac'  
- }
-
- @media screen and (max-width: 1206px) {
-    #index-grid-container {
-        grid-template-areas:  
-        'slider slider slider slider slider slider slider slider slider slider slider slider '
-        'pcat pcat pcat pcat pcat pcat pcat pcat pcat pcat pcat pcat'
-        'fp fp fp fp fp fp fp fp fp fp fp fp' 
-        'ac ac ac ac ac ac ac ac ac ac ac ac'  
+      img {
+        object-fit: cover;
+        border-radius: 10%;
+      }
     }
- }
-
-
-
-@media screen and (max-width: 530px) {
-    #index-grid-container {
-        grid-template-areas:  
-        'slider slider slider slider slider slider slider slider slider slider slider slider '
-        'pcat pcat pcat pcat pcat pcat pcat pcat pcat pcat pcat pcat'
-        'ac ac ac ac ac ac ac ac ac ac ac ac' 
-         
+  }
+  .top-section-title {
+    text-align: center;
+    position: absolute; /* Position relative to the .top-section */
+    bottom: 0; /* Align to the bottom of the .top-section */
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%); /* Adjust for centering */
+    background: rgba(0, 0, 0, 0.5); /* Optional: Add a semi-transparent background */
+    color: #fff; /* Optional: Set text color to white for better contrast */
+    padding: 10px 20px; /* Optional: Add padding around the text */
+    text-align: center; /* Center the text */
+    z-index: 10; /* Ensure it appears above the image */
+    h3 {
+      font-size: 24px;
+      color: white;
     }
-
+  } 
 }
-
 

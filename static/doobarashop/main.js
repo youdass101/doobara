@@ -8,32 +8,35 @@ function snumber(n) {
 document.addEventListener('DOMContentLoaded', function(){
 
     // mobile_menu_btn_nav is Element id
-    // Mobile menu button component container 
-    var mobile_menu_btn_nav = document.getElementById('mobile-menu-btn');
+    // Mobile menu button component container (IA)
+    // var mobile_menu_btn_nav = document.getElementById('mobile-menu-btn');
+    var mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    var mobileMenu = document.getElementById('navigation-mobile');
+    var mobileMenuChildren = mobileMenuBtn.querySelectorAll('i, p');
 
     // menubtn is Element id
     // mobile nav menu button element    
-    var menubtn = document.getElementById('btnm');
+    // var menubtn = document.getElementById('btnm');
 
     // mobilemenu is Element id
     // secondary navigaton menu container for mobile media
-    var mobilemenu = document.getElementById('navigation-mobile');
+    // var mobilemenu = document.getElementById('navigation-mobile');
 
     // logo_nav is Element id
     // site logo container in the header-nav area
-    var logo_nav = document.getElementById('logo-nav');   
+    // var logo_nav = document.getElementById('logo-nav');   
 
     // search_nav is Element id
     // search componenet container in the header-nav area 
-    var search_nav = document.getElementById('search-box-nav');
+    // var search_nav = document.getElementById('search-box-nav');
 
     // menu_nav is Element id
     // Primary meny componenet in the header-nav area 
-    var menu_nav = document.getElementById('navigation-menu');
+    // var menu_nav = document.getElementById('navigation-menu');
 
     // cart_nav is Element id
     // cart information component in header-nav area  
-    var cart_nav = document.getElementById('cart-nav');
+    // var cart_nav = document.getElementById('cart-nav');
     
     // Set all account page data element display to none
     function account_default() {
@@ -89,95 +92,69 @@ document.addEventListener('DOMContentLoaded', function(){
     // STICKY HEADER
     // sticky is Number
     // Get the offset position of the navbar Assign to var
-    var sticky = logo_nav.offsetTop;
+    // var sticky = logo_nav.offsetTop;
 
     // menubtn -> show mobile menu
     // MOBILE MENU ICON clicked (humberger) 
     //          display hidden menu nav container
-    menubtn.onclick = function() {
-        mobilemenu.classList.toggle('show');
-    }
-    
+    // mobile_menu_btn_nav.onclick = function (event) {
+    //     event.stopPropagation(); // Prevent the click from propagating to the window
+    //     mobilemenu.classList.toggle('show');
+    // };
+        // Toggle the mobile menu when the parent div is clicked
+    mobileMenuBtn.onclick = function () {
+        mobileMenu.classList.toggle('show');
+    };
+
+    // Ensure child elements also trigger the same event
+    mobileMenuChildren.forEach(function (child) {
+        child.onclick = function () {
+            mobileMenu.classList.toggle('show');
+        };
+    });
+        // Hide the mobile menu when clicking anywhere else
+    window.onclick = function (event) {
+        if (event.target !== mobileMenu && !mobileMenu.contains(event.target) && event.target !== mobileMenuBtn) {
+            mobileMenu.classList.remove('show');
+        }
+    };
     // anywhere click -> hide mobilemenu
     // ON MOUSE CLICK ON SCREEN HIDE MOBILE MENU DIV
-    window.onclick = function(event) {
-        if (event.target !== mobilemenu && event.target !== menubtn) {
-            mobilemenu.classList.toggle('show', false);
-        }   
-    }
+    // window.onclick = function(event) {
+    //     if (event.target !== mobilemenu && event.target !== mobile_menu_btn_nav) {
+    //         mobilemenu.classList.toggle('show', false);
+    //     }   
+    // };
 
     // window.onscroll is event function
     // ON MOUSE SCROLL call myfunction function
-    window.onscroll = function() {sticky_menu_fn()};
+    // window.onscroll = function() {sticky_menu_fn()};
 
     // event -> navbar
     // ADD sticky CLASS TO NAVIGATION when scroll of default postion
     // REMOVE sticky CLASS from navigation when heigh position at top default                                
-    function sticky_menu_fn() {
-        // add sticky-nav class to all header componenets
-        if (window.pageYOffset >= sticky) {
-        logo_nav.classList.add("sticky-nav");
-        search_nav.classList.add("sticky-nav");
-        menu_nav.classList.add("sticky-navb");
-        cart_nav.classList.add("sticky-navb");
-        mobile_menu_btn_nav.classList.add("sticky-nav");
-        mobilemenu.classList.add("sticky-navb");
-        }
-        // remove stick-nav class from all header components
-         else {
-        logo_nav.classList.remove("sticky-nav");
-        search_nav.classList.remove("sticky-nav");
-        menu_nav.classList.remove("sticky-navb");
-        cart_nav.classList.remove("sticky-navb");
-        mobile_menu_btn_nav.classList.remove("sticky-nav");
-        mobilemenu.classList.remove("sticky-navb");
-        }
-    }
+    // function sticky_menu_fn() {
+    //     // add sticky-nav class to all header componenets
+    //     if (window.pageYOffset >= sticky) {
+    //     logo_nav.classList.add("sticky-nav");
+    //     search_nav.classList.add("sticky-nav");
+    //     menu_nav.classList.add("sticky-navb");
+    //     cart_nav.classList.add("sticky-navb");
+    //     mobile_menu_btn_nav.classList.add("sticky-nav");
+    //     mobilemenu.classList.add("sticky-navb");
+    //     }
+    //     // remove stick-nav class from all header components
+    //      else {
+    //     logo_nav.classList.remove("sticky-nav");
+    //     search_nav.classList.remove("sticky-nav");
+    //     menu_nav.classList.remove("sticky-navb");
+    //     cart_nav.classList.remove("sticky-navb");
+    //     mobile_menu_btn_nav.classList.remove("sticky-nav");
+    //     mobilemenu.classList.remove("sticky-navb");
+    //     }
+    // }
 
-
-    // SLIDER component
-    // when index page is loaded (where mySlides class exist)
-    if (document.querySelector(".mySlides"))
-    {
-        // slidIndex is image count
-        var slideIndex = 1;
-        showSlides(slideIndex);
-
-        // onclick -> integer
-        // slider arrown control previews clicked substract 1 from plusSlides
-        document.getElementById("prv").onclick = function() {plusSlides(-1)};
-
-        // onclick -> integer
-        // slider arrown control next clicked add 1 to plusSlides 
-        document.getElementById("nxt").onclick = function() {plusSlides(1)};
-
-        // Number->Number
-        // Slider auto change counter
-        setInterval(function(){plusSlides(1) ; }, 5000);  
-
-        // Number -> Number
-        // Next/previous controls add n
-        function plusSlides(n) {
-            showSlides(slideIndex += n);
-        }   
-
-        // Number-> slides, SlideIndex(Number)
-        // set slideindex cuurent after calculation 
-        function showSlides(n) {
-            var i;
-            var slides = document.getElementsByClassName("mySlides");
-            // n is larger than index length (when next pressed on last index)
-            if (n > slides.length) {slideIndex = 1}
-            // n is smaller that index length (when previes is press on 1st index)
-            if (n < 1) {slideIndex = slides.length}
-            // set all element display to none
-            for (i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none";
-            }
-            // show targeted index
-            slides[slideIndex-1].style.display = "block";
-        }
-    }
+   
 
     // PRODUCT SINGLE PAGE SELECT ELEMENT TO CHANGE PRODUCT VARIANT DATA (SO FAR PRICE ONLY CHANGE)
     if (document.getElementById("variants")) {

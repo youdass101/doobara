@@ -33,7 +33,7 @@
 
     // PRODUCT THUMB IMAGE GALLERY TO CHOSE FROM
     .single-product-image-thumb {
-        @include var.flex-default;
+        // @include var.flex-default;
         justify-content: flex-start;    
         img {     
             max-width: 10%;
@@ -64,13 +64,13 @@
         
 
         // Product qtt yo add to cart 
-        .single-product-quantity {
-            @include var.single-input-number-v1;  
-        }
+        // .single-product-quantity {
+        //     @include var.single-input-number-v1;  
+        // }
 
         // add to cart button 
         .single-product-addtocart {
-            @include var.button-secondary;
+            // @include var.button-secondary;
             margin-left: 30px;
         }
 
@@ -93,7 +93,7 @@
         grid-area: v;    
         padding-top: 35px; 
         // the video box size
-        @extend .body-800width;
+        // @extend .body-800width;
             
         // Iframe wraper 
         .single-video { 
@@ -119,7 +119,7 @@
     .single-product-image-long {
         grid-area: il;
         padding-top: 20px;
-        @extend .body-800width;
+        // @extend .body-800width;
 
         img {
             width: 100%;
@@ -129,14 +129,14 @@
     // Long product description 
     .single-product-long-desc {
         grid-area: ld;
-        @extend .body-800width;
+        // @extend .body-800width;
     }
 
     // product dimension and packeging table
     .single-product-dimention {
         grid-area: d;
         padding-top: 25px;
-        @extend .body-800width;
+        // @extend .body-800width;
 
         table {
             border-collapse: collapse;
@@ -144,8 +144,8 @@
 
             tr {
                 th {
-                    @include var.header-title;
-                    background-color: var.$table-header-background-color-v1;
+                    // @include var.header-title;
+                    // background-color: var.$table-header-background-color-v1;
                     text-align: left;
                     padding: 10px 0px 10px 15px;
                 }
