@@ -1,42 +1,76 @@
 @use '../../../static/doobarashop/sass/abstracts/all' as var; 
 @use '../components/index-featured-procuct-cards' as cards;
-.index-page-container {
-  background-color: var.$identity-color;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  padding: 1rem;
+@use "sass:color"; /* Import the color module */
 
-  .top-section {
-    position: relative; /* Make this the positioning context for child elements */
+
+.index-page-container {
+  background: color.adjust(var.$identity-color, $lightness: -10%);  
+  width: 100%;
+  // padding: 0rem 13rem 2rem 13rem; /* Add padding to the sides and bottom */
+}
+.top-section {
+    position: relative;
+    width: 100%;
+    height: 60vh; /* Set a fixed height for the hero section */
 
     .top-image {
-      width: 100%; /* Ensure the image scales properly */
-      height: auto; /* Maintain aspect ratio */
-      display: block; /* Remove any extra spacing below the image */
+        width: 100%;
+        height: 100%;
+        img {
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+            border-radius: 0; /* Remove border-radius for a clean look */
+        }
+    }
 
-      img {
-        object-fit: cover;
-        border-radius: 10%;
+    .top-section-title {
+        position: absolute;
+        bottom: 10%; /* Move the title slightly above the bottom */
+        left: 50%;
+        transform: translateX(-50%);
+        text-align: center;
+        color: white;
+        z-index: 10;
+
+        h3 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+
+        .cta-button {
+            margin-top: 1rem;
+            padding: 0.8rem 2rem;
+            background: var.$identity-color;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s ease;
+
+            &:hover {
+              background: color.adjust(var.$identity-color, $lightness: -10%);
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+  .top-section {
+    height: 50vh;
+
+    .top-section-title {
+      h3 {
+        font-size: 2rem;
+      }
+
+      .cta-button {
+        font-size: 0.9rem;
+        padding: 0.6rem 1.5rem;
       }
     }
   }
-  .top-section-title {
-    text-align: center;
-    position: absolute; /* Position relative to the .top-section */
-    bottom: 0; /* Align to the bottom of the .top-section */
-    left: 50%; /* Center horizontally */
-    transform: translateX(-50%); /* Adjust for centering */
-    background: rgba(0, 0, 0, 0.5); /* Optional: Add a semi-transparent background */
-    color: #fff; /* Optional: Set text color to white for better contrast */
-    padding: 10px 20px; /* Optional: Add padding around the text */
-    text-align: center; /* Center the text */
-    z-index: 10; /* Ensure it appears above the image */
-    h3 {
-      font-size: 24px;
-      color: white;
-    }
-  } 
 }
 

@@ -11,7 +11,7 @@ from .modeling.filter_helper import *
 def index(request):
     # is int
     # number of items that will show in index featured bar
-    items_in_featrued = 5
+    items_in_featrued = 7
     # is list of dict | (loc: shop.modeling.serialize_helper (shop.models ))
     # all products objects with feature TRUE, in serialized dict
     slop = serialize(Product.objects.filter(featured=True), "main")
