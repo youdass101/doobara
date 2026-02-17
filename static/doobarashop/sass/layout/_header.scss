@@ -27,6 +27,19 @@ header {
             width: 15%;
         }
 
+        .whatsapp-btn {
+            background: #25D366;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: 0.2s ease;
+        }
+
+        .whatsapp-btn:hover {
+            background: #1ebe5d;
+        }
+
         .nav-links {
             display: flex;
             align-items: center;

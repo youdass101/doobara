@@ -28,7 +28,6 @@
             position: relative; /* Make this the positioning context for the pseudo-element */
             background: white;
             border-radius: 10px;
-            // box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             overflow: hidden;
             transition: transform 0.3s ease, box-shadow 0.4s ease;
 
@@ -85,7 +84,17 @@
         }
 
         .product-card-container {
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            gap: 1rem; /* Adjust spacing between cards */
+            padding: 1rem; /* Add padding for better spacing */
+
+            .product-card {
+                flex: 0 0 auto; /* Prevent shrinking and set width */
+                scroll-snap-align: start; /* Ensure cards snap into view */
+                width: 80%; /* Adjust width for better visibility */
+            }
         }
     }
 }

@@ -4,18 +4,22 @@
 
 
 .index-page-container {
-  background: color.adjust(var.$identity-color, $lightness: -10%);  
+  background: color.adjust(#eef3f8, $lightness: -10%);  
   width: 100%;
   // padding: 0rem 13rem 2rem 13rem; /* Add padding to the sides and bottom */
 }
 .top-section {
-    position: relative;
+    position:relative;
     width: 100%;
-    height: 60vh; /* Set a fixed height for the hero section */
+    height: 40vh; /* Set a fixed height for the hero section */
+    display: flex;              // activate flex
+    justify-content: center;    // horizontal center
+    align-items: center;        // vertical center
 
     .top-image {
-        width: 100%;
+        width: 80%;
         height: 100%;
+
         img {
             object-fit: cover;
             width: 100%;
