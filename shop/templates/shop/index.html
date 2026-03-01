@@ -5,69 +5,110 @@
 Home Automation
 {% endblock %}
 {% block body %}
+
 <div class="index-page-container">
-  <div class="top-section">
-    <div class="top-image">
-      <img src="{% static 'doobarashop/upload/images/lamp-hero-beta.jpg' %}" alt="Home Automation">
-    </div>
-    <div class="top-section-title">
-      <h3>Tapiu Forma Series of Lamshades</h3>
-      <button class="cta-button">Shop Now</button>
+    <!-- HERO -->
+    <section class="hero">
+        <div class="container hero__wrap">
+        <!-- Left: Copy -->
+        <div class="hero__copy">
+            <h1>Smart systems built<br/>for Lebanese homes.</h1>
 
-    </div>
-  </div>
+            <p class="hero__sub">
+            Pick a system. Choose a level. Get reliable control for power, safety,
+            monitoring, and lighting—without the gadget confusion.
+            </p>
 
-  <div class="carousel-container">
-    <h2>Checkout Tapiu lampshades!!</h2>
-    <div class="product-card-container">
-      {% for product in lop %}
-        <div class="product-card">
-          <a href="/single_product/{{product.pname}}">
-            <img src="{% static product.pmainimage.iurl %}" alt="{{product.pmainimage.ialt}}">
-            <div class="card-info">
-              <!-- <p class="card-product-name">{{product.pname}}</p> -->
-              <p class="card-product-price">$ {{product.pprice}}</p>
+            <div class="hero__cta">
+            <a class="btn btn--primary" href="#systems">Explore Systems</a>
+            <a class="btn btn--ghost" href="https://wa.me/96170856471" target="_blank" rel="noopener">
+                WhatsApp Support
+            </a>
             </div>
-          </a>
+
+            <ul class="hero__trust">
+            <li>Transparent bundles</li>
+            <li>Easy tutorials</li>
+            <li>Light WhatsApp support</li>
+            </ul>
         </div>
-    {% endfor %}
-    </div>
-  </div>
 
-
-  <div class="carousel-container">
-    <h2>GO Smart! Check these smart devices</h2>
-    <div class="product-card-container">
-      {% for product in lop %}
-        <div class="product-card">
-          <a href="/single_product/{{product.pname}}">
-            <img src="{% static product.pmainimage.iurl %}" alt="{{product.pmainimage.ialt}}">
-            <div class="card-info">
-              <p class="card-product-name">{{product.pname}}</p>
-              <p class="card-product-price">$ {{product.pprice}}</p>
+        <!-- Right: Visual -->
+        <div class="hero__visual">
+            <div class="hero__blob">
+            <div class="hero__stack">
+                <!-- Replace these with your real images -->  
+                <img class="hero__img hero__img--phone" src="{% static 'doobarashop/upload/images/phone-app-screen.png' %}" alt="Smart device" />
             </div>
-          </a>
-        </div>
-    {% endfor %}
-    </div>
-  </div>
-
-  <div class="carousel-container">
-    <h2>Items In Sale HERE!!</h2>
-    <div class="product-card-container">
-      {% for product in lop %}
-        <div class="product-card">
-          <a href="/single_product/{{product.pname}}">
-            <img src="{% static product.pmainimage.iurl %}" alt="{{product.pmainimage.ialt}}">
-            <div class="card-info">
-              <p class="card-product-name">{{product.pname}}</p>
-              <p class="card-product-price">$ {{product.pprice}}</p>
             </div>
-          </a>
         </div>
-    {% endfor %}
+        </div>
+    </section>
+
+    <!-- SYSTEMS GRID -->
+    <section id="systems" class="systems">
+        <div class="container">
+        <div class="systems__grid">
+            <article class="system-card">
+            <div class="system-card__top">
+                <div class="system-card__icon">⚡</div>
+                <h3 class="system-card__title">Power Control System</h3>
+            </div>
+            <p class="system-card__desc">Control appliances and power behavior during outages.</p>
+            <div class="system-card__price">Starting From <strong>$31.00</strong></div>
+            <a class="btn btn--primary btn--small" href="/power-control-system">View Levels →</a>
+            </article>
+
+            <article class="system-card">
+            <div class="system-card__top">
+                <div class="system-card__icon">📷</div>
+                <h3 class="system-card__title">Monitoring System</h3>
+            </div>
+            <p class="system-card__desc">Know what’s happening at home—temperature, doors, water.</p>
+            <div class="system-card__price">Starting From <strong>$23.00</strong></div>
+            <a class="btn btn--primary btn--small" href="/monitoring-system">View Levels →</a>
+            </article>
+
+            <article class="system-card">
+            <div class="system-card__top">
+                <div class="system-card__icon">🛡️</div>
+                <h3 class="system-card__title">Safety &amp; Security System</h3>
+            </div>
+            <p class="system-card__desc">Alerts for doors, smoke/CO, and intrusions—instantly.</p>
+            <div class="system-card__price">Starting From <strong>$30.00</strong></div>
+            <a class="btn btn--primary btn--small" href="/safety-security-system">View Levels →</a>
+            </article>
+
+            <article class="system-card">
+            <div class="system-card__top">
+                <div class="system-card__icon">💡</div>
+                <h3 class="system-card__title">Smart Living System</h3>
+            </div>
+            <p class="system-card__desc">Upgrade one room with smart lighting + automation.</p>
+            <div class="system-card__price">Starting From <strong>$42.00</strong></div>
+            <a class="btn btn--primary btn--small" href="/smart-living-system">View Levels →</a>
+            </article>
+        </div>
+        </div>
+    </section>
+
+    
+    <div class="carousel-container">
+        <h2>Checkout Tapiu lampshades!!</h2>
+        <div class="product-card-container">
+        {% for product in lop %}
+            <div class="product-card">
+            <a href="/single_product/{{product.pname}}">
+                <img src="{% static product.pmainimage.iurl %}" alt="{{product.pmainimage.ialt}}">
+                <div class="card-info">
+                <!-- <p class="card-product-name">{{product.pname}}</p> -->
+                <p class="card-product-price">$ {{product.pprice}}</p>
+                </div>
+            </a>
+            </div>
+        {% endfor %}
+        </div>
     </div>
-  </div>
-</div>  
+</div>
 
 {%endblock%}
