@@ -450,8 +450,9 @@ body {
 }
 
 .hero__wrap {
+  width: 100%;
   display: grid;
-  grid-template-columns: 1fr 1.2fr;
+  grid-template-columns: 1fr 1fr;
   gap: 1px;
   align-items: center;
 }
@@ -559,34 +560,88 @@ body {
 .systems__grid {
   margin-top: -24px;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 18px;
 }
 
+/* CARD base upgrade */
 .system-card {
-  background: var(--card);
-  border-radius: var(--radius);
-  padding: 18px;
-  box-shadow: var(--shadow);
-  border: 1px solid rgba(10, 20, 60, 0.06);
+  background: linear-gradient(180deg, #ffffff 0%, #f8faff 100%);
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(10, 20, 60, 0.08);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.system-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.12);
+}
+
+/* IMAGE HEADER (this creates the template look) */
+.system-card__media {
+  position: relative;
+  height: 200px; /* Desktop card image height */
+  background: #eef3ff; /* fallback */
+}
+
+.system-card__img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover; /* use cover for blended photo look */
+  display: block;
+}
+
+/* Blend overlay for readability + premium look */
+.system-card__media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.1) 45%, rgba(0, 0, 0, 0.25) 100%);
+  pointer-events: none;
+}
+
+/* Optional badge on image */
+.system-card__tag {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 2;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 800;
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid rgba(10, 20, 60, 0.1);
+}
+
+/* CONTENT padding */
+.system-card__top,
+.system-card__desc,
+.system-card__bullets,
+.system-card__price,
+.system-card .btn {
+  padding-left: 18px;
+  padding-right: 18px;
 }
 
 .system-card__top {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-bottom: 8px;
+  gap: 10px;
+  padding-top: 14px;
 }
 
 .system-card__icon {
-  width: 38px;
-  height: 38px;
+  width: 36px;
+  height: 36px;
   border-radius: 12px;
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
   background: rgba(30, 94, 255, 0.1);
-  font-size: 30px;
 }
 
 .system-card__title {
@@ -595,22 +650,78 @@ body {
 }
 
 .system-card__desc {
+  margin: 8px 0 10px;
+  color: #5f6b7a;
+}
+
+.system-card__bullets {
+  list-style: none;
+  padding-top: 0;
   margin: 0 0 12px;
-  color: var(--muted);
-  line-height: 1.45;
+  color: #5f6b7a;
+  font-size: 14px;
+}
+
+.system-card__bullets li {
+  margin: 6px 0;
 }
 
 .system-card__price {
-  margin-bottom: 12px;
-  font-size: 16px;
+  margin: 0 0 14px;
+  color: #6a7282;
 }
 
 .system-card__price strong {
-  font-size: 22px;
+  font-size: 24px;
+  color: #1e5eff;
+}
+
+/* Add bottom padding so button isn't stuck */
+.system-card .btn {
+  margin: 0 0 18px;
+}
+
+.power-card {
+  border-top: 5px solid #1e5eff;
+}
+
+.monitor-card {
+  border-top: 5px solid #00a8a8;
+}
+
+.security-card {
+  border-top: 5px solid #ff4a4a;
+}
+
+.living-card {
+  border-top: 5px solid #ffb400;
+}
+
+.system-card__overlay {
+  position: absolute;
+  left: 14px;
+  bottom: 14px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: white;
+}
+
+.system-card__overlay .system-card__icon {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.system-card__overlay .system-card__title {
+  color: white;
+  font-size: 18px;
 }
 
 /* Responsive */
 @media (max-width: 900px) {
+  .hero__visual {
+    margin-top: 20%;
+  }
   .hero__wrap {
     grid-template-columns: 1fr;
   }
@@ -624,6 +735,9 @@ body {
   .systems__grid {
     grid-template-columns: 1fr;
     margin-top: 18px;
+  }
+  .system-card__img {
+    height: 160px;
   }
 }
 .filterproduct {

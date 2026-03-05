@@ -10,85 +10,129 @@ Home Automation
     <!-- HERO -->
     <section class="hero">
         <div class="container hero__wrap">
-        <!-- Left: Copy -->
-        <div class="hero__copy">
-            <h1>Smart systems built<br/>for Lebanese homes.</h1>
+            <!-- Left: Copy -->
+            <div class="hero__copy">
+                <h1>Smart systems built<br/>for Lebanese homes.</h1>
 
-            <p class="hero__sub">
-            Pick a system. Choose a level. Get reliable control for power, safety,
-            monitoring, and lighting—without the gadget confusion.
-            </p>
+                <p class="hero__sub">
+                Pick a system. Choose a level. Get reliable control for power, safety,
+                monitoring, and lighting—without the gadget confusion.
+                </p>
 
-            <div class="hero__cta">
-            <a class="btn btn--primary" href="#systems">Explore Systems</a>
-            <a class="btn btn--ghost" href="https://wa.me/96170856471" target="_blank" rel="noopener">
-                WhatsApp Support
-            </a>
+                <div class="hero__cta">
+                    <a class="btn btn--primary" href="#systems">Explore Systems</a>
+                    <a class="btn btn--ghost" href="https://wa.me/96170856471" target="_blank" rel="noopener">
+                    WhatsApp Support
+                    </a>
+                </div>
+
+                <ul class="hero__trust">
+                    <li>Transparent bundles</li>
+                    <li>Easy tutorials</li>
+                    <li>Light WhatsApp support</li>
+                </ul>
             </div>
 
-            <ul class="hero__trust">
-            <li>Transparent bundles</li>
-            <li>Easy tutorials</li>
-            <li>Light WhatsApp support</li>
-            </ul>
-        </div>
-
-        <!-- Right: Visual -->
-        <div class="hero__visual">
-            <div class="hero__blob">
-            <div class="hero__stack">
-                <!-- Replace these with your real images -->  
-                <img class="hero__img hero__img--phone" src="{% static 'doobarashop/upload/images/phone-app-screen.png' %}" alt="Smart device" />
+            <!-- Right: Visual -->
+            <div class="hero__visual">
+                <div class="hero__blob">
+                    <div class="hero__stack">
+                        <!-- Replace these with your real images -->  
+                        <img class="hero__img hero__img--phone" src="{% static 'doobarashop/upload/images/phone-app-screen.png' %}" alt="Smart device" />
+                    </div>
+                </div>
             </div>
-            </div>
-        </div>
         </div>
     </section>
 
     <!-- SYSTEMS GRID -->
     <section id="systems" class="systems">
         <div class="container">
-        <div class="systems__grid">
-            <article class="system-card">
-            <div class="system-card__top">
-                <div class="system-card__icon">⚡</div>
-                <h3 class="system-card__title">Power Control System</h3>
-            </div>
-            <p class="system-card__desc">Control appliances and power behavior during outages.</p>
-            <div class="system-card__price">Starting From <strong>$31.00</strong></div>
-            <a class="btn btn--primary btn--small" href="/power-control-system">View Levels →</a>
-            </article>
+            <div class="systems__grid">
+                <!-- Power Control System card -->
+                <article class="system-card power-card">
+                    <div class="system-card__media">
+                        <div class="system-card__overlay">
+                            <div class="system-card__icon">⚡</div>
+                            <h3 class="system-card__title">Power Control System</h3>
+                        </div>
+                        <img class="system-card__img"
+                            src="{% static 'doobarashop/upload/images/power control.jpg' %}"
+                            alt="Power system devices">
+                        <div class="system-card__tag">Most Popular</div>
+                    </div>
+                    <p class="system-card__desc">Control appliances and power behavior during outages.</p>
+                    <ul class="system-card__bullets">
+                        <li>⚡ Appliance control</li>
+                        <li>📱 App control</li>
+                    </ul>
+                    <div class="system-card__price">Starting From <strong>$31.00</strong></div>
+                    <a class="btn btn--primary btn--small" href="/power-control-system">View Levels →</a>
+                </article>
 
-            <article class="system-card">
-            <div class="system-card__top">
-                <div class="system-card__icon">📷</div>
-                <h3 class="system-card__title">Monitoring System</h3>
-            </div>
-            <p class="system-card__desc">Know what’s happening at home—temperature, doors, water.</p>
-            <div class="system-card__price">Starting From <strong>$23.00</strong></div>
-            <a class="btn btn--primary btn--small" href="/monitoring-system">View Levels →</a>
-            </article>
+                <!-- Monitoring System card -->
+                <article class="system-card monitor-card">
+                    <div class="system-card__media">
+                        <div class="system-card__overlay">
+                            <div class="system-card__icon">📷</div>
+                            <h3 class="system-card__title">Monitoring System</h3>
+                        </div>
+                        <img class="system-card__img"
+                            src="{% static 'doobarashop/upload/images/power control.jpg' %}"
+                            alt="Power system devices">
+                        <!-- <div class="system-card__tag">Most Popular</div> -->
+                    </div>
+                    <p class="system-card__desc">Know what’s happening at home—temperature, doors, water.</p>
+                    <ul class="system-card__bullets">
+                        <li>⚡ Motion detection</li>
+                        <li>📱 Environment alerts</li>
+                    </ul>
+                    <div class="system-card__price">Starting From <strong>$23.00</strong></div>
+                    <a class="btn btn--primary btn--small" href="/monitoring-system">View Levels →</a>
+                </article>
 
-            <article class="system-card">
-            <div class="system-card__top">
-                <div class="system-card__icon">🛡️</div>
-                <h3 class="system-card__title">Safety &amp; Security System</h3>
-            </div>
-            <p class="system-card__desc">Alerts for doors, smoke/CO, and intrusions—instantly.</p>
-            <div class="system-card__price">Starting From <strong>$30.00</strong></div>
-            <a class="btn btn--primary btn--small" href="/safety-security-system">View Levels →</a>
-            </article>
+                <!-- security card system -->
+                <article class="system-card security-card">
+                    <div class="system-card__media">
+                        <div class="system-card__overlay">
+                        <div class="system-card__icon">🛡️</div>
+                            <h3 class="system-card__title">Safety &amp; Security System</h3>
+                        </div>
+                        <img class="system-card__img"
+                            src="{% static 'doobarashop/upload/images/power control.jpg' %}"
+                            alt="Securitu and safety system devices">
+                        <!-- <div class="system-card__tag">Most Popular</div> -->
+                    </div>
+                    <p class="system-card__desc">Alerts for doors, smoke/CO, and intrusions—instantly.</p>
+                    <ul class="system-card__bullets">
+                        <li>⚡ Door & window alerts</li>
+                        <li>📱 Smoke/CO alerts</li>
+                    </ul>
+                    <div class="system-card__price">Starting From <strong>$30.00</strong></div>
+                    <a class="btn btn--primary btn--small" href="/safety-security-system">View Levels →</a>
+                </article>
 
-            <article class="system-card">
-            <div class="system-card__top">
-                <div class="system-card__icon">💡</div>
-                <h3 class="system-card__title">Smart Living System</h3>
+                <!-- living and lighting card -->
+                <article class="system-card living-card">
+                    <div class="system-card__media">
+                        <div class="system-card__overlay">
+                            <div class="system-card__icon">💡</div>
+                            <h3 class="system-card__title">Smart Living System</h3>
+                        </div>
+                        <img class="system-card__img"
+                            src="{% static 'doobarashop/upload/images/power control.jpg' %}"
+                            alt="Securitu and safety system devices">
+                        <!-- <div class="system-card__tag">Most Popular</div> -->
+                    </div>
+                    <p class="system-card__desc">Upgrade one room with smart lighting + automation.</p>
+                    <ul class="system-card__bullets">
+                        <li>⚡ Smart switch and bulbs</li>
+                        <li>📱 Presence sensor</li>
+                    </ul>
+                    <div class="system-card__price">Starting From <strong>$42.00</strong></div>
+                    <a class="btn btn--primary btn--small" href="/smart-living-system">View Levels →</a>
+                </article>
             </div>
-            <p class="system-card__desc">Upgrade one room with smart lighting + automation.</p>
-            <div class="system-card__price">Starting From <strong>$42.00</strong></div>
-            <a class="btn btn--primary btn--small" href="/smart-living-system">View Levels →</a>
-            </article>
-        </div>
         </div>
     </section>
 
