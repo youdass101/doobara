@@ -379,7 +379,7 @@ footer .footer-inner .footer-links a {
   --white: #ffffff;
   --shadow: 0 10px 30px rgba(10, 20, 60, 0.18);
   --radius: 16px;
-  --max: 1100px;
+  --max: 1400px;
 }
 
 .index-page-container {
@@ -395,6 +395,12 @@ body {
   margin: 0;
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
   color: var(--text);
+}
+
+.hero__wrap--wide,
+.systems__inner--wide {
+  width: min(1600px, 100% - 24px);
+  margin: 0 auto;
 }
 
 .container {
@@ -455,6 +461,7 @@ body {
   grid-template-columns: 1fr 1fr;
   gap: 1px;
   align-items: center;
+  padding: 0 10%;
 }
 
 .hero__copy h1 {
@@ -554,10 +561,13 @@ body {
 
 /* SYSTEMS GRID */
 .systems {
+  width: 100%;
   padding: 56px 0 56px;
 }
 
 .systems__grid {
+  max-width: var(--max);
+  margin: auto;
   margin-top: -24px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -735,9 +745,6 @@ body {
   .systems__grid {
     grid-template-columns: 1fr;
     margin-top: 18px;
-  }
-  .system-card__img {
-    height: 160px;
   }
 }
 .filterproduct {
