@@ -238,7 +238,7 @@ body{
 /* Optional badge on image */
 .system-card__tag{
   position: absolute;
-  buttom: 12px;
+  bottom: 12px;
   left: 12px;
   z-index: 2;
   padding: 6px 10px;
@@ -273,18 +273,52 @@ body{
   display:flex;
   align-items:center;
   justify-content:center;
-  background: rgba(30,94,255,0.10);
 
-  .icon-electric{
+  .icon-electric, .icon-living, .icon-monitor, .icon-security{
     width: 40px;
     height: 40px;
-    color: #ffffff;
+  }
+  .icon-electric{ color: #ffffff; }
+
+  .icon-monitor {
+    color: #0e19b7;
+    filter: drop-shadow(0 0 1px rgba(51, 22, 149, 0.5))
+        drop-shadow(0 0 1px rgba(53, 60, 189, 0.5))
+        drop-shadow(0 0 1px rgba(56, 36, 171, 0.4));
+  }
+  .icon-security {
+    color: #ff4a4a;
+    filter: drop-shadow(0 0 4px rgba(182, 44, 44, 0.8))
+            drop-shadow(0 0 10px rgba(169, 50, 50, 0.6))
+            drop-shadow(0 0 18px rgba(219, 65, 65, 0.4));
+  } 
+  .icon-living {
+    color: #fad070;
+    display: inline-block;
+    filter: drop-shadow(0 0 4px rgba(255,196,0,0.8))
+            drop-shadow(0 0 10px rgba(255,196,0,0.6))
+            drop-shadow(0 0 18px rgba(255,196,0,0.4));
   }
 }
 
-.system-card__title{
+.system-card__overlay{
+  position:absolute;
+  left: 14px;
+  top: 14px;
+  z-index: 2;
+  display:flex;
+  align-items:center;
+  gap:5px;
+}
+
+.system-card__title {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 5px;
+  padding: 1px;
   margin: 0;
   font-size: 18px;
+  font-weight: 700;
+  color: #0c1220;
 }
 
 .system-card__desc{
@@ -297,10 +331,19 @@ body{
   padding-top: 0;
   margin: 0 0 12px;
   color:#5f6b7a;
-  font-size: 14px;
+  li{ 
+    font-size: 15px;
+    font-weight: 600;
+    margin: 6px 0; 
+    svg{
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      margin-bottom: -3px;
+    }
+  }
 }
 
-.system-card__bullets li{ margin: 6px 0; }
 
 .system-card__price{
   margin: 0 0 14px;
@@ -314,7 +357,7 @@ body{
 
 /* Add bottom padding so button isn't stuck */
 .system-card .btn{
-  margin: 0 0 18px;
+  margin: 10px 20px 18px;
 }
 
 .power-card{ border-top: 5px solid #1e5eff; }
@@ -322,27 +365,7 @@ body{
 .security-card{ border-top: 5px solid #ff4a4a; }
 .living-card{ border-top: 5px solid #ffb400; }
 
-.system-card__overlay{
-  position:absolute;
-  left: 14px;
-  top: 14px;
-  z-index: 2;
-  display:flex;
-  align-items:center;
-  gap:5px;
-  color: white;
-}
 
-.system-card__title {
-  background: rgba(255,255,255,0.18);
-}
-
-.system-card__overlay .system-card__title{
-  color: rgb(0, 0, 0);
-  font-size: 18px;
-  font-weight: 700;
- 
-}
 
 /* Responsive */
 @media (max-width: 900px){
