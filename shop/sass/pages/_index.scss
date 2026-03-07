@@ -238,7 +238,7 @@ body{
 /* Optional badge on image */
 .system-card__tag{
   position: absolute;
-  top: 12px;
+  buttom: 12px;
   left: 12px;
   z-index: 2;
   padding: 6px 10px;
@@ -267,13 +267,19 @@ body{
 }
 
 .system-card__icon{
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
   border-radius: 12px;
   display:flex;
   align-items:center;
   justify-content:center;
   background: rgba(30,94,255,0.10);
+
+  .icon-electric{
+    width: 40px;
+    height: 40px;
+    color: #ffffff;
+  }
 }
 
 .system-card__title{
@@ -319,21 +325,23 @@ body{
 .system-card__overlay{
   position:absolute;
   left: 14px;
-  bottom: 14px;
+  top: 14px;
   z-index: 2;
   display:flex;
   align-items:center;
-  gap:10px;
+  gap:5px;
   color: white;
 }
 
-.system-card__overlay .system-card__icon{
+.system-card__title {
   background: rgba(255,255,255,0.18);
 }
 
 .system-card__overlay .system-card__title{
-  color: white;
+  color: rgb(0, 0, 0);
   font-size: 18px;
+  font-weight: 700;
+ 
 }
 
 /* Responsive */
