@@ -123,7 +123,7 @@ header .nav .nav-links a {
   padding-bottom: 0.25rem;
   font-size: 1.2em;
   color: #F9D342;
-  padding-right: 2rem;
+  margin-right: 2rem;
 }
 header .nav .nav-links a::after {
   content: "";
