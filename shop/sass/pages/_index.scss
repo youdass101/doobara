@@ -3,36 +3,18 @@
 @use "sass:color"; /* Import the color module */
 
 :root{
-  --card: #ffffff;
-  --text: #0c1220;
-  --muted: #5a6475;
   --white: #ffffff;
-  --shadow: 0 10px 30px rgba(10, 20, 60, 0.18);
-  --radius: 16px;
   --max: 1400px;
 }
 
 .index-page-container {
   background: color.adjust(#eef3f8, $lightness: -10%);  
   width: 100%;
-  // padding: 0rem 13rem 2rem 13rem; /* Add padding to the sides and bottom */
-}
-
-*{ box-sizing: border-box; }
-body{
-  margin:0;
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  color: var(--text);
 }
 
 .hero__wrap--wide,
 .systems__inner--wide{
   width: min(1600px, calc(100% - 24px));
-  margin: 0 auto;
-}
-
-.container{
-  width: min(var(--max), calc(100% - 32px));
   margin: 0 auto;
 }
 
@@ -81,7 +63,7 @@ body{
   width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1px;
+  gap: 10px;
   align-items: center;
   padding: 0 10%;
 }
@@ -144,8 +126,6 @@ body{
 .hero__blob{
   width: 100%;
   max-width: 600px;
-  background: rgba(255,255,255,0.12);
-  border: 1px solid rgba(255,255,255,0.18);
   border-radius: 2300px 1500px 1500px 800px;
   padding: 2px;
   position: relative;
@@ -169,15 +149,12 @@ body{
   max-width: 100%;
   height: auto;
   filter: drop-shadow(0 12px 20px rgba(0,0,0,0.25));
-}
-
-/* Phone mock */
-.hero__img--phone{
   width: 210px;
   bottom: 0;
   z-index: 1;
-  margin-right: 20px;
+  margin-right: 22px;
 }
+
 
 /* SYSTEMS GRID */
 .systems{
@@ -259,17 +236,7 @@ body{
   padding-right: 18px;
 }
 
-.system-card__top{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  padding-top: 14px;
-}
-
 .system-card__icon{
-  width: 40px;
-  height: 40px;
-  border-radius: 12px;
   display:flex;
   align-items:center;
   justify-content:center;
@@ -278,6 +245,7 @@ body{
     width: 40px;
     height: 40px;
   }
+  
   .icon-electric{ color: #ffffff; }
 
   .icon-monitor {
@@ -353,6 +321,7 @@ body{
 .system-card__price strong{
   font-size: 24px;
   color:#1e5eff;
+  font-weight: 500;
 }
 
 /* Add bottom padding so button isn't stuck */
