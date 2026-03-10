@@ -14,8 +14,11 @@ def index(request):
     items_in_featrued = 7
     # is list of dict | (loc: shop.modeling.serialize_helper (shop.models ))
     # all products objects with feature TRUE, in serialized dict
+    
+    cards = Hero_Card.objects.filter(active=True)
+    cards = [card.serialize() for card in cards]
     slop = serialize(Product.objects.filter(featured=True), "main")
-    return render(request, "shop/index.html", {"lop":slop[:items_in_featrued]})
+    return render(request, "shop/index.html", {"lop":slop[:items_in_featrued], "cards": cards})
 
 # request -> render (url  * dict)
 # caller: navigation shop

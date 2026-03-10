@@ -712,6 +712,23 @@ footer .footer-inner .footer-links a {
   border-top: 5px solid #ffb400;
 }
 
+.catherotitle {
+  font-size: clamp(28px, 3.5vw, 42px);
+  line-height: 1.1;
+  margin: 0 0 40px;
+  width: 100%;
+  text-align: center;
+  animation: glow 3s infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 0 0 5px rgba(254, 255, 255, 0.4);
+  }
+  to {
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.9);
+  }
+}
 /* Responsive */
 @media (max-width: 900px) {
   .hero__visual {
