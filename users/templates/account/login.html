@@ -9,68 +9,113 @@
 
 {% block content %}
 <!-- facebook login button script definition -->
-<div id="fb-root"></div>
 <!-- <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v12.0&appId=429532295495332&autoLogAppEvents=1" nonce="DIUZ1knz"></script> -->
 
-<!-- SIGNUP AND LOGIN TOP BUTTON SWITCH  -->
-<!-- <button id="singup-secondary-button" onclick="location.href='{% url 'account_signup' %}'">Create New Account</button> -->
 
 <!-- LOGIN OPTIONS CONTAINER -->
-<div id="login-container">
 
-  <h1>{% trans "Sign In" %}</h1>
-  {% get_providers as socialaccount_providers %}
+<section class="auth-page">
+    <div class="auth-shell">
 
-  <!-- instruction for login options  -->
-  {% if socialaccount_providers %}
-    <p>{% blocktrans with site.name as site_name %}Please Sign In or Sign Up with one
-    of your existing third party accounts. Or, <a href="{{ signup_url }}">sign up by email</a>
-    for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
+        <div class="auth-layout">
 
-    <!-- GOOGLE LOGIN  -->
-    <div class="socialaccount_ballot">
-      <div class="socialaccount_providers">
-        <!-- this defualt is suspended -->
-        <!-- {% include "socialaccount/snippets/provider_list.html" with process="login" %} -->
-        <!-- google login ICON -->
-        <div>
-          <a href="/accounts/google/login"><img src="{% static 'doobarashop/upload/images/googleloginfocused.png'%}"></a>  
+            <!-- Left side -->
+            <div class="auth-brand-panel">
+                <span class="auth-brand-panel__eyebrow">Welcome to Doobara</span>
+                <h1>Smart living starts here.</h1>
+                <p>
+                    Access your account to manage orders, save delivery addresses,
+                    and explore smarter solutions for your home.
+                </p>
+
+                <div class="auth-brand-panel__features">
+                    <div class="auth-feature">
+                        <i class="fas fa-box-open"></i>
+                        <span>Track your orders</span>
+                    </div>
+                    <div class="auth-feature">
+                        <i class="fas fa-location-dot"></i>
+                        <span>Save delivery addresses</span>
+                    </div>
+                    <div class="auth-feature">
+                        <i class="fas fa-shield-halved"></i>
+                        <span>Secure account access</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right side -->
+            <div class="auth-card">
+                <div class="auth-card__header">
+                    <div class="auth-switch">
+                        <a href="{% url 'account_login' %}" class="auth-switch__item auth-switch__item--active">
+                            {% trans "Sign In" %}
+                        </a>
+                        <a href="{% url 'account_signup' %}" class="auth-switch__item">
+                            {% trans "Sign Up" %}
+                        </a>
+                    </div>
+
+                    <h2>{% trans "Sign In" %}</h2>
+                    <p>
+                        Enter your details below to access your account.
+                    </p>
+                </div>
+
+                {% get_providers as socialaccount_providers %}
+
+                {% if socialaccount_providers %}
+                    <div class="auth-social">
+                        <a class="auth-social__btn auth-social__btn--google" href="/accounts/google/login">
+                            <img src="{% static 'doobarashop/upload/images/googleloginfocused.png' %}" alt="Google login">
+                            <span>Continue with Google</span>
+                        </a>
+
+                        <a class="auth-social__btn auth-social__btn--facebook"
+                           href="{% provider_login_url 'facebook' method='js_sdk' %}">
+                            <img class="login-facbook-img" src="{% static 'doobarashop/upload/images/lfb2.png' %}" alt="Facebook login">
+                            <span>Continue with Facebook</span>
+                        </a>
+                    </div>
+
+                    <div class="auth-divider">
+                        <span>{% trans "or continue with email" %}</span>
+                    </div>
+
+                    {% include "socialaccount/snippets/login_extra.html" %}
+                {% endif %}
+
+                <form class="auth-form login" method="POST" action="{% url 'account_login' %}">
+                    {% csrf_token %}
+
+                    <div class="auth-form__fields">
+                        {{ form.as_p }}
+                    </div>
+
+                    {% if redirect_field_value %}
+                        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                    {% endif %}
+
+                    <div class="auth-form__footer">
+                        <a class="auth-forgot-link" href="{% url 'account_reset_password' %}">
+                            {% trans "Forgot Password?" %}
+                        </a>
+
+                        <button class="auth-submit-btn" type="submit">
+                            {% trans "Sign In" %}
+                        </button>
+                    </div>
+                </form>
+
+                <div class="auth-bottom-note">
+                    <p>
+                        {% trans "Don’t have an account?" %}
+                        <a href="{% url 'account_signup' %}">{% trans "Create one" %}</a>
+                    </p>
+                </div>
+            </div>
+
         </div>
-
-        <!-- I AM STRUGLLING HERE -->
-        <!-- facebook login icon -->
-        <div><a href="{% provider_login_url 'facebook' method='js_sdk' %}">
-          <!-- <div class="fb-login-button" data-width="" data-size="large" data-button-type="login_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="false"></div> -->
-            <img class="login-facbook-img" src="{% static 'doobarashop/upload/images/lfb2.png'%}">
-          </a>
-        </div>
-          
-      </div>
-    <div class="login-or">{% trans 'or' %}</div>
     </div>
-    {% include "socialaccount/snippets/login_extra.html" %}
-
-  {% else %}
-    <p>{% blocktrans %}If you have not created an account yet, then please
-    <a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
-  {% endif %}
-
-  
-  <!-- <a href="{% provider_login_url "facebook" method="js_sdk" %}">Facebook Connect</a> -->
-  <!-- GOOGLE LOGIN -->
-
-
-
-  <!-- login form  -->
-  <form class="login" method="POST" action="{% url 'account_login' %}">
-    {% csrf_token %}
-    {{ form.as_p }}
-    {% if redirect_field_value %}
-    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-    {% endif %}
-    <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
-    <button class="primaryAction" type="submit">{% trans "Sign In" %}</button>
-  </form>
-</div>
-
+</section>
 {% endblock %}
