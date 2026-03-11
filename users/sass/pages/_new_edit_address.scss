@@ -14,20 +14,20 @@
             width: 60%;
             padding: 0px 20px 20px 20px ;
         
-            label {
-                @include var.par-body-2;
-            }
+            // label {
+            //     @include var.par-body-2;
+            // }
 
-            input, textarea {
-                @extend .input-style-prim;
-            }
+            // input, textarea {
+            //     @extend .input-style-prim;
+            // }
         }
-        button {
-            @include var.button-style-wide;
-        }
+        // button {
+        //     @include var.button-style-wide;
+        // }
 
-        .submit-new-address-button {
-            @extend .input-submit-button-prim;
-        }
+        // .submit-new-address-button {
+        //     @extend .input-submit-button-prim;
+        // }
     }  
 } 

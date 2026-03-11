@@ -99,9 +99,8 @@ Home Automation
                         </div>
                         <h3 class="system-card__desc">{{card.title}}</h3>
                         <p class="system-card__desc">{{card.description}}</p>
-                       
                         <div class="system-card__price">Starting From <strong>${{card.price|floatformat:2}}</strong></div>
-                        <a class="btn btn--primary btn--small" href="/power-control-system">{{card.buton_text}} →</a>
+                        <a class="btns" href="/power-control-system">{{card.buton_text}} →</a>
                     </article>
                     {% endif %}
                 {% endfor %}
@@ -113,7 +112,7 @@ Home Automation
 
     
     <div class="carousel-container">
-        <h2>Checkout Tapiu lampshades!!</h2>
+        <h2>Most Popular!!</h2>
         <div class="product-card-container">
         {% for product in lop %}
             <div class="product-card">
@@ -128,6 +127,151 @@ Home Automation
         {% endfor %}
         </div>
     </div>
+
+    <!-- Why Choose Us -->
+    <section class="why-doobara">
+        <div class="container why-doobara__wrap">
+
+            <!-- Left side -->
+            <div class="why-doobara__content">
+                <span class="why-doobara__eyebrow">Why Choose Doobara</span>
+                <h2>Smart living, without the usual complexity.</h2>
+                <p class="why-doobara__intro">
+                    At Doobara, we focus on smart devices and systems that are actually useful,
+                    easy to use, and designed to fit modern homes. No gimmicks. Just practical
+                    automation, better comfort, and more control over your space.
+                </p>
+
+                <div class="why-doobara__grid">
+                    <article class="why-card">
+                        <div class="why-card__icon">⚙️</div>
+                        <div>
+                            <h3>Practical solutions</h3>
+                            <p>Products selected to solve real day-to-day needs, not just look smart on paper.</p>
+                        </div>
+                    </article>
+
+                    <article class="why-card">
+                        <div class="why-card__icon">📱</div>
+                        <div>
+                            <h3>Easy control</h3>
+                            <p>Manage your devices with simple app control, automation, and remote access.</p>
+                        </div>
+                    </article>
+
+                    <article class="why-card">
+                        <div class="why-card__icon">🎨</div>
+                        <div>
+                            <h3>Modern design</h3>
+                            <p>Smart products that blend into your home instead of making it look like a server room.</p>
+                        </div>
+                    </article>
+
+                    <article class="why-card">
+                        <div class="why-card__icon">🤝</div>
+                        <div>
+                            <h3>Local support</h3>
+                            <p>Guidance, product recommendations, and support tailored for customers in Lebanon.</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+
+            <!-- Right side review -->
+            <aside class="review-card">
+                <div class="singlereview">
+                    <div class="review-card__stars">★★★★★</div>
+                    <p class="review-card__text">
+                        “
+                            قمة الاخلاق في التواصل مع الزبائن
+                            جودة في المعاملة و الدقة في الجودة و البضاعة
+                            سعر بمتناول الجميع
+                            والاهمة شي تواصل من بعد الخدمة و المساعدة باي وقت و باي تفاصيل.  شكرا عالفيديو يلي بتعملن لانو اكثر شي كمان بفدونا”
+                    </p>
+
+                    <div class="review-card__author">
+                        <div class="review-card__avatar">M</div>
+                        <div>
+                            <strong>Mohammad S.</strong>
+                            <span>Verified customer</span>
+                        </div>
+                    </div> 
+                </div>
+
+                <div class="singlereview">
+                    <div class="review-card__stars">★★★★★</div>
+                    <p class="review-card__text">
+                        “Happy from my purchase of the smart pet feeder and the Tapiu camera ,very easy to use .
+                        And great thanks for the fast delivery.
+                            Recommend highly this store 💯”
+                    </p>
+
+                    <div class="review-card__author">
+                        <div class="review-card__avatar">N</div>
+                        <div>
+                            <strong>Nawal C.</strong>
+                            <span>Verified customer</span>
+                        </div>
+                    </div> 
+                </div>
+
+                <div class="singlereview">
+                    <div class="review-card__stars">★★★★★</div>
+                    <p class="review-card__text">
+                        “Excellent products for home automation and security with great support from Doobara 👍
+”
+                    </p>
+
+                    <div class="review-card__author">
+                        <div class="review-card__avatar">R</div>
+                        <div>
+                            <strong>Ramzi T.</strong>
+                            <span>Verified customer</span>
+                        </div>
+                    </div> 
+                </div>
+
+            
+            </aside>
+                
+
+        </div>
+    </section>
+
+      <div class="carousel-container">
+        <h2>Desk Lamps!!</h2>
+        <div class="product-card-container">
+        {% for product in lop %}
+            <div class="product-card">
+            <a href="/single_product/{{product.pname}}">
+                <img src="{% static product.pmainimage.iurl %}" alt="{{product.pmainimage.ialt}}">
+                <div class="card-info">
+                <!-- <p class="card-product-name">{{product.pname}}</p> -->
+                <p class="card-product-price">$ {{product.pprice}}</p>
+                </div>
+            </a>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+
+      <div class="carousel-container">
+        <h2>On SALE!!</h2>
+        <div class="product-card-container">
+        {% for product in lop %}
+            <div class="product-card">
+            <a href="/single_product/{{product.pname}}">
+                <img src="{% static product.pmainimage.iurl %}" alt="{{product.pmainimage.ialt}}">
+                <div class="card-info">
+                <!-- <p class="card-product-name">{{product.pname}}</p> -->
+                <p class="card-product-price">$ {{product.pprice}}</p>
+                </div>
+            </a>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+  
 </div>
 
 {%endblock%}

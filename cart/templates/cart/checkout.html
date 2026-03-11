@@ -5,136 +5,187 @@
 My Cart
 {% endblock %}
 {% block body %}
-<!-- POP UP CHANGE ADDRESS OUT OF CONTAINER -->
+<!-- Address popup -->
 <div class="change_address_popup" id="id_change_address_popup">
-    <div>
-        <h3>Delivery Address</h3>
-    </div>
-    <div class="address_list">
-        <ul>
-            {% for item in loa %}
-            <li>
-                <div class="delivery_container">
-                    <div class="delivery_address">
-                        <p class="deliver_name_phone"><span class="checkout_address_detail_name">{{item.name}} {{item.last_name}}</span> {{item.phone_number}}</p>
-                        <p>{{item.city_town}} {{item.street_name}}
-                            {{item.building_appartment}}</p>
-                        <p>{{item.delivery_details}}</p>
-                    </div>    
-                    <div>
-                        <form action="{% url 'checkout' %}" method="POST">
-                            {% csrf_token %}
-                            <input name="id" value={{item.id}} type="hidden">
-                            <div><button type="submit" formaction="/checkout" class="change_address" id="id_change_address">Use address</button></div>
-                        </form> 
-                    </div>
-                </div>
-            </li>
-            {% endfor %}
-        </ul>
-    </div>
-</div>
+    <div class="checkout-modal-backdrop"></div>
 
-<!-- shipping managment section -->
-<div class="checkout-page-container">
-    <div class="checkout-shipping-details-container">
-        <h1>Shipping details</h1>
-        
-        <!-- POP WHEN USER WANT TO CHOOSE DIFFERENT CHECKOUT DELIVER ADDRESSS -->
-        
-
-        <!-- SELECTED DELIVERY ADDRESS  -->
-        <form id="shipping-details-id" class="shipping-details" action="{% url 'placeorder'%}" method="POST">
-            {% csrf_token %}
-
-            <!-- IF USER ALREADY HAVE A 1 or More delivery addresses saved  -->
-            {% if address_id > 0 %}
-                {% for item in loa %}
-                    <!-- WHEN LOADED SHOW THE SET TO DEFAULT DELIVERY ADDRESS -->
-                    {% if item.id == address_id %}
-                        <input type="hidden" name="current_address_id" value={{item.id}}>
-                        <h3>Delivery Address</h3>
-                        <div class="delivery_container">
-                            <div class="delivery_address">
-                                <p class="deliver_name_phone"><span class="checkout_address_detail_name">{{item.name}} {{item.last_name}}</span> {{item.phone_number}}</p>
-                                <p>{{item.city_town}} {{item.street_name}}
-                                    {{item.building_appartment}}</p>
-                                <p>{{item.delivery_details}}</p>
-                            </div>    
-                            <div>
-                                <div>
-                                    <button type="button" class="change_address" id="id_change_address_checkout">
-                                        Change address
-                                    </button>
-                                </div>
-                                <div>
-                                    <form action="{% url 'checkout' %}" method="POST">
-                                        {% csrf_token %}
-                                        <input name=id type="hidden" value=0>
-                                        <button type="submit" formaction="/checkout" class="change_address" id="id_checkout_new_address">
-                                            + New Address
-                                        </button>
-                                        <div id="id_order_note">
-                                            <p><label for="ordernote">Notes</label></p>
-                                            <textarea form="shipping-details-id" type="textarea" name="ordernote" rows="4" cols="50"> </textarea>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    {% endif %}
-                {% endfor %}
-              
-            <!-- IF THERE IS NO SAVED ADDRESS CREATE A NEW ONE -->
-            {% else %}
-                {{form}}
-            {% endif %}
-                
-        </form>
-    
-    </div>
-    <div class="checkout-order-invoice">
-        <h1>Your order</h1>
-        <div class="checkout-invoice-table">
-            <table class="invoice-table">
-                {% for item in cart %} 
-                    <tr>
-                        <!-- product name -->
-                        <th>{{item.0.productname}}</th>
-                        <!-- product unit price -->
-                        <td>$ {{item.0.productunitprice}}</td>
-                        <!-- product quantity in cart -->
-                        <td>{{item.0.productquantity}}</td>
-                        <!-- Product subtotal (unit price * quantity) -->
-                        <td>$ {{item.1}}</td>
-                    </tr>
-                {% endfor %}
-            
-                <tr>
-                    <th> Subtotal </th>
-                    <td id="dsubtotal"> $ {{total}}</td> 
-                    </tr>
-                <tr>
-                    <th> Delivery </th>
-                    <td id="ddelivery">$ 2.00</td>
-                </tr>
-                <tr>
-                    <th> Total </th>
-                    <td id="dtotal">$ {{total}} </td>
-                </tr>
-            </table>
-            <div class="checkout-policy">
-                <p>Your personal data will be used to process your order,
-                     support your experience throughout this website,
-                      and for other purposes described in our privacy policy.</p>
-                <div class="policy-checkbox">
-                    <input type="checkbox">
-                    <p>I have read and agree to the website terms and conditions *</p>
-                </div>
-                <button type="submit" form="shipping-details-id"> Place order </button>
+    <div class="checkout-modal">
+        <div class="checkout-modal__header">
+            <div>
+                <span class="checkout-modal__eyebrow">Saved Addresses</span>
+                <h3>Choose a delivery address</h3>
             </div>
+
+            <button type="button" class="checkout-modal__close" id="id_close_address_popup" aria-label="Close">
+                &times;
+            </button>
+        </div>
+
+        <div class="checkout-modal__body">
+            <ul class="checkout-address-list">
+                {% for item in loa %}
+                <li>
+                    <div class="checkout-address-card">
+                        <div class="checkout-address-card__content">
+                            <p class="checkout-address-card__name">
+                                <span>{{item.name}} {{item.last_name}}</span>
+                                {{item.phone_number}}
+                            </p>
+                            <p>{{item.city_town}} {{item.street_name}} {{item.building_appartment}}</p>
+                            <p>{{item.delivery_details}}</p>
+                        </div>
+
+                        <form action="{% url 'checkout' %}" method="POST" class="checkout-address-card__form">
+                            {% csrf_token %}
+                            <input name="id" value="{{item.id}}" type="hidden">
+                            <button type="submit" class="checkout-btn checkout-btn--primary">
+                                Use Address
+                            </button>
+                        </form>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
         </div>
     </div>
 </div>
 
+
+<section class="checkout-page">
+    <div class="checkout-shell">
+
+        <div class="checkout-header">
+            <span class="checkout-header__eyebrow">Checkout</span>
+            <h1>Complete your order</h1>
+            <p>
+                Review your delivery details and confirm your order securely.
+            </p>
+        </div>
+
+        <div class="checkout-layout">
+
+            <!-- Left side -->
+            <div class="checkout-main">
+                <div class="checkout-card">
+                    <div class="checkout-card__header">
+                        <h2>Shipping details</h2>
+                        <p>Choose where you want your order delivered.</p>
+                    </div>
+
+                    <form id="shipping-details-id" class="checkout-form" action="{% url 'placeorder' %}" method="POST">
+                        {% csrf_token %}
+
+                        {% if address_id > 0 %}
+                            {% for item in loa %}
+                                {% if item.id == address_id %}
+                                    <input type="hidden" name="current_address_id" value="{{item.id}}">
+
+                                    <div class="checkout-selected-address">
+                                        <div class="checkout-selected-address__content">
+                                            <span class="checkout-selected-address__label">Selected Address</span>
+                                            <p class="checkout-selected-address__name">
+                                                <span>{{item.name}} {{item.last_name}}</span>
+                                                {{item.phone_number}}
+                                            </p>
+                                            <p>{{item.city_town}} {{item.street_name}} {{item.building_appartment}}</p>
+                                            <p>{{item.delivery_details}}</p>
+                                        </div>
+
+                                        <div class="checkout-selected-address__actions">
+                                            <button type="button"
+                                                    class="checkout-btn checkout-btn--outline"
+                                                    id="id_change_address_checkout">
+                                                Change Address
+                                            </button>
+
+                                            <a href="/checkout"
+                                               class="checkout-btn checkout-btn--ghost"
+                                               onclick="event.preventDefault(); document.getElementById('new-address-form').submit();">
+                                                + New Address
+                                            </a>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+
+                            <form id="new-address-form" action="{% url 'checkout' %}" method="POST" style="display:none;">
+                                {% csrf_token %}
+                                <input name="id" type="hidden" value="0">
+                            </form>
+
+                        {% else %}
+                            <div class="checkout-new-address-form">
+                                {{form}}
+                            </div>
+                        {% endif %}
+
+                        <div class="checkout-notes">
+                            <label for="ordernote">Order notes</label>
+                            <textarea id="ordernote" name="ordernote" rows="5" placeholder="Add any delivery notes or special instructions..."></textarea>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Right side -->
+            <aside class="checkout-sidebar">
+                <div class="checkout-summary-card">
+                    <div class="checkout-summary-card__header">
+                        <span class="checkout-summary-card__eyebrow">Order Summary</span>
+                        <h2>Your order</h2>
+                    </div>
+
+                    <div class="checkout-order-list">
+                        {% for item in cart %}
+                            <div class="checkout-order-item">
+                                <div class="checkout-order-item__main">
+                                    <h3>{{item.0.productname}}</h3>
+                                    <p>$ {{item.0.productunitprice|floatformat:2}} × {{item.0.productquantity}}</p>
+                                </div>
+                                <div class="checkout-order-item__subtotal">
+                                    $ {{item.1|floatformat:2}}
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="checkout-totals">
+                        <div class="checkout-totals__row">
+                            <span>Subtotal</span>
+                            <strong id="dsubtotal">$ {{total|floatformat:2}}</strong>
+                        </div>
+
+                        <div class="checkout-totals__row">
+                            <span>Delivery</span>
+                            <strong id="ddelivery">$ 2.00</strong>
+                        </div>
+
+                        <div class="checkout-totals__row checkout-totals__row--grand">
+                            <span>Total</span>
+                            <strong id="dtotal">$ {{total|floatformat:2}}</strong>
+                        </div>
+                    </div>
+
+                    <div class="checkout-policy">
+                        <p>
+                            Your personal data will be used to process your order, support your
+                            experience throughout this website, and for other purposes described
+                            in our privacy policy.
+                        </p>
+
+                        <label class="checkout-policy__check">
+                            <input type="checkbox" required>
+                            <span>I have read and agree to the website terms and conditions *</span>
+                        </label>
+
+                        <button type="submit" form="shipping-details-id" class="checkout-place-order-btn">
+                            Place Order
+                        </button>
+                    </div>
+                </div>
+            </aside>
+
+        </div>
+    </div>
+</section>
 {% endblock %}

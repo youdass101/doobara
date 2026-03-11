@@ -1,0 +1,299 @@
+:root {
+    --doobara-bg: #071120;
+    --doobara-surface: #0d1b2d;
+    --doobara-card: rgba(255, 255, 255, 0.9);
+    --doobara-card-strong: #ffffff;
+    --doobara-text: #0f172a;
+    --doobara-text-soft: #5b6b81;
+    --doobara-white: #ffffff;
+    --doobara-primary: #1570ef;
+    --doobara-primary-2: #1fb6ff;
+    --doobara-accent: #22c55e;
+    --doobara-border: rgba(21, 112, 239, 0.14);
+    --doobara-shadow: 0 20px 60px rgba(2, 12, 27, 0.18);
+}
+
+.contact-section {
+    width: 100%;
+    position: relative;
+    padding: 100px 20px;
+    background:
+        radial-gradient(circle at top left, rgba(31, 182, 255, 0.18), transparent 30%),
+        radial-gradient(circle at top right, rgba(21, 112, 239, 0.16), transparent 28%),
+        linear-gradient(180deg, #f5f9ff 0%, #eef5ff 100%);
+    overflow: hidden;
+}
+
+.contact-section::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size: 28px 28px;
+    pointer-events: none;
+    opacity: 0.25;
+}
+
+.contact-shell {
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.contact-hero {
+    text-align: center;
+    max-width: 760px;
+    margin: 0 auto 52px;
+}
+
+.contact-hero__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: rgba(21, 112, 239, 0.1);
+    border: 1px solid rgba(21, 112, 239, 0.16);
+    color: var(--doobara-primary);
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.contact-hero h1 {
+    margin: 0 0 16px;
+    font-size: clamp(2.4rem, 4vw, 4rem);
+    line-height: 1.06;
+    color: #08111f;
+}
+
+.contact-hero p {
+    margin: 0;
+    font-size: 1.05rem;
+    line-height: 1.85;
+    color: var(--doobara-text-soft);
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 24px;
+    align-items: stretch;
+}
+
+.contact-card,
+.contact-map-card {
+    position: relative;
+    border-radius: 28px;
+    overflow: hidden;
+    backdrop-filter: blur(14px);
+    box-shadow: var(--doobara-shadow);
+}
+
+.contact-card {
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.78);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+}
+
+.contact-card--primary {
+    min-height: 320px;
+    background:
+        linear-gradient(135deg, rgba(255,255,255,0.94) 0%, rgba(239,247,255,0.96) 100%);
+    border: 1px solid rgba(21, 112, 239, 0.14);
+}
+
+.contact-card__glow {
+    position: absolute;
+    width: 240px;
+    height: 240px;
+    right: -60px;
+    top: -80px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(31, 182, 255, 0.25) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.contact-card--location {
+    background:
+        linear-gradient(135deg, rgba(255,255,255,0.92) 0%, rgba(246,250,255,0.96) 100%);
+}
+
+.contact-card__top {
+    display: flex;
+    gap: 14px;
+    margin-bottom: 22px;
+}
+
+.icon-badge {
+    width: 58px;
+    height: 58px;
+    border-radius: 18px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.35rem;
+    box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
+}
+
+.icon-badge--phone {
+    background: linear-gradient(135deg, #1570ef 0%, #1fb6ff 100%);
+    color: #fff;
+}
+
+.icon-badge--whatsapp {
+    background: linear-gradient(135deg, #16a34a 0%, #22c55e 100%);
+    color: #fff;
+}
+
+.icon-badge--mail {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+.icon-badge--location {
+    background: linear-gradient(135deg, #1570ef 0%, #38bdf8 100%);
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+.contact-card h2 {
+    margin: 0 0 12px;
+    font-size: 1.55rem;
+    color: var(--doobara-text);
+}
+
+.contact-card__desc {
+    margin: 0 0 22px;
+    font-size: 1rem;
+    line-height: 1.75;
+    color: var(--doobara-text-soft);
+    max-width: 52ch;
+}
+
+.contact-link {
+    display: inline-block;
+    margin-bottom: 22px;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--doobara-text);
+    text-decoration: none;
+    transition: color 0.25s ease;
+    word-break: break-word;
+}
+
+.contact-link:hover {
+    color: var(--doobara-primary);
+}
+
+.contact-link--number {
+    font-size: 1.4rem;
+    letter-spacing: 0.02em;
+}
+
+.contact-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+}
+
+.contact-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 150px;
+    padding: 14px 22px;
+    border-radius: 16px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.96rem;
+    transition: transform 0.22s ease, box-shadow 0.22s ease, background 0.22s ease;
+}
+
+.contact-btn:hover {
+    transform: translateY(-2px);
+}
+
+.contact-btn--dark {
+    background: linear-gradient(135deg, #08111f 0%, #12233b 100%);
+    color: #fff;
+    box-shadow: 0 12px 30px rgba(8, 17, 31, 0.2);
+}
+
+.contact-btn--whatsapp {
+    background: linear-gradient(135deg, #16a34a 0%, #22c55e 100%);
+    color: #fff;
+    box-shadow: 0 12px 30px rgba(34, 197, 94, 0.2);
+}
+
+.contact-btn--outline {
+    background: rgba(21, 112, 239, 0.08);
+    color: var(--doobara-primary);
+    border: 1px solid rgba(21, 112, 239, 0.14);
+}
+
+.contact-map-card {
+    min-height: 100%;
+    border: 1px solid rgba(255,255,255,0.7);
+    background: rgba(255,255,255,0.86);
+}
+
+.contact-map-card iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+    min-height: 300px;
+    border: 0;
+    filter: saturate(1.05) contrast(1.02);
+}
+
+@media (max-width: 980px) {
+    .contact-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-map-card iframe {
+        min-height: 360px;
+    }
+}
+
+@media (max-width: 640px) {
+    .contact-section {
+        padding: 72px 16px;
+    }
+
+    .contact-card {
+        padding: 24px;
+        border-radius: 22px;
+    }
+
+    .contact-map-card {
+        border-radius: 22px;
+    }
+
+    .contact-hero {
+        margin-bottom: 38px;
+    }
+
+    .contact-actions {
+        flex-direction: column;
+    }
+
+    .contact-btn {
+        width: 100%;
+    }
+
+    .contact-link--number {
+        font-size: 1.2rem;
+    }
+
+    .contact-map-card iframe {
+        min-height: 280px;
+    }
+}

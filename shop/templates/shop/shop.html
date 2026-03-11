@@ -5,50 +5,73 @@
 SHOP
 {% endblock %}
 {% block body %}
-<!-- Shop carousel container -->
-<div class="filterproduct">
-    <form action="{% url 'orderby' %}" method="POST">
-        {% csrf_token %}
-        <select name="category">
-            <option value="all">Categories</option>
-            {% for cat in cats %}
-            <option value="{{cat.name}}">{{cat.name}}</option>
-            {% endfor %}
-        </select>
+<section class="shop-page">
 
-        <select name="byorder">
-            <option value="default">By order</option>
-            <option value="name">A-Z</option>
-            <option value="-name">Z-A</option>
-            <option value="price">Low Price</option>
-            <option value="-price">High Price</option>
-        </select>
-        <input class="filtersubmit" type="submit" value="Filter">
-    </form>
+    <!-- Shop top / filters -->
+    <div class="shop-toolbar">
+        <div class="shop-toolbar__intro">
+            <span class="shop-toolbar__eyebrow">Shop Doobara</span>
+            <h1>Smart products for better living</h1>
+            <p>
+                Explore our collection of smart devices, automation tools, and modern home solutions.
+            </p>
+        </div>
 
-</div>
-<div id="container-shop">
-    {% for row in lop %}
-        {% if row.pactive %}
-            <div class="shop-product">
-                <a href="/single_product/{{row.pname}}">
-                    <!-- Product Thumb, title price -->
-                    <!-- Product image -->
-                    <!-- <img src={{row.pmainimage}}> -->
-                    <img src="{% static row.pmainimage.iurl %}" alt="{{row.pmainimage.ialt}}">
-                    
-                    <!-- Product Name -->
-                    <p class="product-name">{{row.pname}}</p>
-                    <!-- product price -->
-                    <p class="product-price">$ {{row.pprice}}</p>
-                    <!-- <div class="vertical-center"> -->
-                </a>
-                <button class="shop-add-to-cart" value="{{row.pid}}">Add to Cart</button>    
-            </div>
-        {% endif %}
+        <div class="shop-filter-card">
+            <form action="{% url 'orderby' %}" method="POST" class="shop-filter-form">
+                {% csrf_token %}
 
-    {% endfor %}
-    
-</div>
+                <div class="shop-field">
+                    <label for="category">Category</label>
+                    <select name="category" id="category">
+                        <option value="all">All Categories</option>
+                        {% for cat in cats %}
+                        <option value="{{cat.name}}">{{cat.name}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="shop-field">
+                    <label for="byorder">Sort By</label>
+                    <select name="byorder" id="byorder">
+                        <option value="default">Default Order</option>
+                        <option value="name">Name: A-Z</option>
+                        <option value="-name">Name: Z-A</option>
+                        <option value="price">Price: Low to High</option>
+                        <option value="-price">Price: High to Low</option>
+                    </select>
+                </div>
+
+                <button class="shop-filter-btn" type="submit">Apply Filter</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Products grid -->
+    <div class="shop-grid">
+        {% for row in lop %}
+            {% if row.pactive %}
+                <article class="shop-card">
+                    <a href="/single_product/{{row.pname}}" class="shop-card__link">
+
+                        <div class="shop-card__media">
+                            <img src="{% static row.pmainimage.iurl %}" alt="{{row.pmainimage.ialt}}">
+                        </div>
+
+                        <div class="shop-card__content">
+                            <h2 class="shop-card__title">{{row.pname}}</h2>
+                            <p class="shop-card__price">$ {{row.pprice}}</p>
+                        </div>
+                    </a>
+
+                    <button class="shop-card__btn shop-add-to-cart" value="{{row.pid}}">
+                        Add to Cart
+                    </button>
+                </article>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+</section>
 
 {% endblock %}
