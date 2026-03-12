@@ -1,33 +1,153 @@
-@use '../../../static/doobarashop/sass/abstracts/all' as var;
+.address-form-page {
+    padding: 44px 20px 80px;
+}
 
-.new-edit-address-form-container {
-    .new-address-form-container {
-        width: 100%;
-        display: flex;
-        align-items: center;
-        padding: 5% 0 5% 0;
+.address-form-shell {
+    max-width: 760px;
+    margin: 0 auto;
+}
+
+.address-form-header {
+    margin-bottom: 24px;
+}
+
+.address-form-eyebrow {
+    display: inline-flex;
+    margin-bottom: 12px;
+    padding: 8px 14px;
+    border-radius: 999px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--account-primary);
+    background: rgba(21, 112, 239, 0.08);
+    border: 1px solid rgba(21, 112, 239, 0.12);
+}
+
+.address-form-header h1 {
+    margin: 0 0 10px;
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1.08;
+    color: var(--account-dark);
+}
+
+.address-form-header p {
+    margin: 0;
+    color: var(--account-text-soft);
+    line-height: 1.8;
+    max-width: 56ch;
+}
+
+.address-form-card {
+    padding: 24px;
+    border-radius: 24px;
+    background: var(--account-surface);
+    border: 1px solid rgba(255,255,255,0.78);
+    backdrop-filter: blur(14px);
+    box-shadow: var(--account-shadow);
+}
+
+.address-edit-form__fields {
+    display: grid;
+    gap: 16px;
+}
+
+.address-field label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: var(--account-text);
+}
+
+.address-field input,
+.address-field select,
+.address-field textarea {
+    width: 100%;
+    min-height: 52px;
+    padding: 0 16px;
+    border-radius: 14px;
+    border: 1px solid #dbe7f3;
+    background: #fff;
+    color: var(--account-text);
+    font: inherit;
+    box-sizing: border-box;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.address-field textarea {
+    min-height: 120px;
+    padding: 16px;
+    resize: vertical;
+}
+
+.address-field input:focus,
+.address-field select:focus,
+.address-field textarea:focus {
+    border-color: rgba(21, 112, 239, 0.45);
+    box-shadow: 0 0 0 4px rgba(21, 112, 239, 0.08);
+}
+
+.address-form-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.address-form-actions--separated {
+    margin-top: 18px;
+    padding-top: 18px;
+    border-top: 1px solid #e8eef7;
+}
+
+.address-form-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    padding: 0 18px;
+    border-radius: 14px;
+    border: none;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.22s ease, box-shadow 0.22s ease, opacity 0.22s ease;
+}
+
+.address-form-btn:hover {
+    transform: translateY(-2px);
+}
+
+.address-form-btn--primary {
+    background: linear-gradient(135deg, var(--account-primary) 0%, var(--account-primary-2) 100%);
+    color: #fff;
+    box-shadow: 0 14px 30px rgba(21, 112, 239, 0.18);
+}
+
+.address-form-btn--danger {
+    background: rgba(220, 38, 38, 0.08);
+    color: #b91c1c;
+    border: 1px solid rgba(220, 38, 38, 0.14);
+}
+
+@media (max-width: 640px) {
+    .address-form-page {
+        padding: 28px 16px 64px;
+    }
+
+    .address-form-card {
+        padding: 18px;
+        border-radius: 20px;
+    }
+
+    .address-form-actions {
         flex-direction: column;
-        .new-address-container-title {
-            text-align: center;
-        }
-        form {
-            width: 60%;
-            padding: 0px 20px 20px 20px ;
-        
-            // label {
-            //     @include var.par-body-2;
-            // }
+    }
 
-            // input, textarea {
-            //     @extend .input-style-prim;
-            // }
-        }
-        // button {
-        //     @include var.button-style-wide;
-        // }
-
-        // .submit-new-address-button {
-        //     @extend .input-submit-button-prim;
-        // }
-    }  
-} 
+    .address-form-btn {
+        width: 100%;
+    }
+}

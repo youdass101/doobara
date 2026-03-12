@@ -5,13 +5,67 @@
 {% block pagetitle %}
 Order Placed
 {% endblock %}
+
 {% block body %}
-<div class="order_sucess_container">
-    <h1>{{ordermessage}}</h1>
-    <h5>Your order ID number is {{order.orderid}}</h5> 
-    <h5>Order total of {{order.total}}</h5>
-    <h5>Order status {{order.status}}
-    <h5>Order Note: {{order.note}}</h5>
-    <p>You will receive your order within 2 to 4 business days</p>
-</div>
+<section class="order-success-page">
+    <div class="order-success-shell">
+
+        <div class="order-success-card">
+            <div class="order-success-icon">
+                <i class="fas fa-check"></i>
+            </div>
+
+            <span class="order-success-eyebrow">Order Confirmed</span>
+            <h1>{{ordermessage}}</h1>
+
+            <p class="order-success-lead">
+                Your order has been placed successfully. We’ve received it and will start processing it shortly.
+            </p>
+
+            <div class="order-success-meta">
+                <div class="order-success-meta__item">
+                    <span>Order ID</span>
+                    <strong>#{{order.orderid}}</strong>
+                </div>
+
+                <div class="order-success-meta__item">
+                    <span>Total</span>
+                    <strong>${{order.total|floatformat:2}}</strong>
+                </div>
+
+                <div class="order-success-meta__item">
+                    <span>Status</span>
+                    <strong class="order-success-status order-success-status--{{order.status|lower}}">
+                        {{order.status}}
+                    </strong>
+                </div>
+
+                <div class="order-success-meta__item">
+                    <span>Order Note</span>
+                    <strong>
+                        {% if order.note %}
+                            {{order.note}}
+                        {% else %}
+                            No note added
+                        {% endif %}
+                    </strong>
+                </div>
+            </div>
+
+            <div class="order-success-message">
+                <p>You will receive your order within 2 to 4 business days.</p>
+            </div>
+
+            <div class="order-success-actions">
+                <a href="/my_account" class="order-success-btn order-success-btn--dark">
+                    View My Orders
+                </a>
+                <a href="/shop" class="order-success-btn order-success-btn--outline">
+                    Continue Shopping
+                </a>
+            </div>
+        </div>
+
+    </div>
+</section>
 {% endblock %}

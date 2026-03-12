@@ -34,7 +34,7 @@ def createorder(request, form, new):
         # is instance object
         # current saved in data address
         id = int(form['current_address_id'])
-        note = form['ordernote']
+        note = form.get('ordernote', '').strip()
         delivery = Delivery_Address_Details.objects.get(id=id)
         
     # is instance | (loc: cart.modules.cartmanager)

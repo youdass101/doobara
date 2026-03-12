@@ -6,37 +6,57 @@
 {% endblock %}
 
 {% block body %}
+<section class="address-form-page">
+    <div class="address-form-shell">
 
-<div class="new-edit-address-form-container">
-        <div class="new-address-form-container">
-            <div class="new-address-container-title">
-                <h3>
-                    {% if new %}
-                        New 
-                    {% else %}
-                        Edit
-                    {% endif %} 
-                    Address
-                </h3>
-            </div> 
-            <form action="{% url 'update_address' %}" method="POST">   
-                {% csrf_token %}      
-                {% for field in form %}
-                    {% if field.name != "notes"%}
-                        {{field.label}} {{field}}
-                    {% endif %}
-                {% endfor %}
-                <input type="hidden" class="info" value={{info}} name="info">
-                <input type="submit" value="Save" class="submit-new-address-button">
-            </form> 
+        <div class="address-form-header">
+            <span class="address-form-eyebrow">Account Settings</span>
+            <h1>
+                {% if new %}
+                    New
+                {% else %}
+                    Edit
+                {% endif %}
+                Address
+            </h1>
+            <p>Fill in your delivery details and save the address to your account.</p>
+        </div>
+
+        <div class="address-form-card">
+            <form action="{% url 'update_address' %}" method="POST" class="address-edit-form">
+                {% csrf_token %}
+
+                <div class="address-edit-form__fields">
+                    {% for field in form %}
+                        {% if field.name != "notes" %}
+                            <div class="address-field">
+                                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                                {{ field }}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+
+                <input type="hidden" class="info" value="{{ info }}" name="info">
+
+                <div class="address-form-actions">
+                    <input type="submit" value="Save Address" class="address-form-btn address-form-btn--primary">
+                </div>
+            </form>
+
             {% if info != "new" %}
-                <form action="{% url 'update_address' %}" method="POST">   
-                    {% csrf_token %}   
+                <form action="{% url 'update_address' %}" method="POST" class="address-delete-form">
+                    {% csrf_token %}
                     <input type="hidden" value="del" name="info">
-                    <input type="hidden" value={{info}} name="aid">
-                    <input type="submit" value="Delete" class="submit-new-address-button">
+                    <input type="hidden" value="{{ info }}" name="aid">
+
+                    <div class="address-form-actions address-form-actions--separated">
+                        <input type="submit" value="Delete Address" class="address-form-btn address-form-btn--danger">
+                    </div>
                 </form>
             {% endif %}
         </div>
-</div>
+
+    </div>
+</section>
 {% endblock %}

@@ -2,124 +2,160 @@
 {% load static %}
 
 {% block pagetitle %}
-Product Name
+{{ product.pname }}
 {% endblock %}
+
 {% block body %}
-<!-- SINGLE PRODUCT PAGE ELEMENT CONTAINER -->
-<div class="single-product-page-container">
+<section class="single-product-page">
 
-    <!-- PRODUCT NAME TITLE -->
-    <h3 class="single-product-title">{{product.pname}}</h3>
+    <div class="single-product-shell">
 
-    <!-- PRODUCT IMAGE SLIDER -->
-    <div class="single-product-image">
-         <div class="spmainimae">
-            <img id="spi" width="400" height="400" src="{% static product.pmainimage.iurl %}">
-        </div>
-    
-        <!-- Images thumbnails -->
-        <div class="single-product-image-thumb">
-            {% for image in product.pallimages %}
-                {% if  image.ilong == False %}
-                    <!-- PRODUCT IMAGE IN THUMBNAIL SIZE TO USE IN IMAGE -->
-                    <img width="70" height="70" class="sp-thumb-image" src="{% static image.iurl %}">
-                {% endif %}
-            {% endfor %}
-        </div>
-    </div>
+        <div class="single-product-top">
+            <!-- Left: gallery -->
+            <div class="single-product-gallery">
+                <div class="single-product-gallery__main">
+                    <img id="spi"
+                         src="{% static product.pmainimage.iurl %}"
+                         alt="{{ product.pname }}">
+                </div>
 
-    <div class="product-highlight">
-        <!-- PRODUCT PRICE -->
-        <h3 id="spp" class="single-product-price">$ {{product.pprice}} </h3>
-        
-        <!-- PRODUCT VARIANTS IF EXIST loop over and add the variants to select element -->
-        <div class="single-product-variant">
-            {% if product.pvariant %}           
-                <select name="variant" id="variants">
-                    {% for var in product.pvariant %}
-                        {% if var.default %}
-                            <option selected="selected" class="svoption" value="{{var}}">{{var.title}}
-                            </option>
-                            
-                        {% else %}
-                            <option class="svoption" value="{{var}}">{{var.title}}
-                            </option>
-                            
-
+                <div class="single-product-gallery__thumbs">
+                    {% for image in product.pallimages %}
+                        {% if image.ilong == False %}
+                            <button type="button" class="single-product-thumb">
+                                <img class="sp-thumb-image"
+                                     src="{% static image.iurl %}"
+                                     alt="{{ product.pname }}">
+                            </button>
                         {% endif %}
-                        
                     {% endfor %}
-                </select>        
-            {% endif %}
+                </div>
+            </div>
+
+            <!-- Right: content / buy box -->
+            <div class="single-product-info">
+                <span class="single-product-info__eyebrow">Doobara Product</span>
+                <h1 class="single-product-title">{{ product.pname }}</h1>
+
+                <div class="single-product-price-row">
+                    <div class="single-product-price-wrap">
+                        <span class="single-product-price-label">Price</span>
+                        <h2 id="spp" class="single-product-price">$ {{ product.pprice|floatformat:2 }}</h2>
+                    </div>
+                </div>
+
+                {% if product.pvariant %}
+                    <div class="single-product-variant">
+                        <label for="variants">Choose Variant</label>
+                        <select name="variant" id="variants">
+                            {% for var in product.pvariant %}
+                                {% if var.default %}
+                                    <option selected="selected" class="svoption" value="{{ var }}">
+                                        {{ var.title }}
+                                    </option>
+                                {% else %}
+                                    <option class="svoption" value="{{ var }}">
+                                        {{ var.title }}
+                                    </option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+                {% endif %}
+
+                <div class="single-product-purchase">
+                    <div class="single-product-qty-wrap">
+                        <label for="spq">Quantity</label>
+                        <input id="spq" class="single-product-quantity" type="number" value="1" min="1">
+                    </div>
+
+                    <button id="spatc"
+                            class="single-product-addtocart shop-add-to-cart"
+                            value="{{ product.pid }}">
+                        Add to Cart
+                    </button>
+                </div>
+
+                <div class="single-product-trust">
+                    <div class="single-product-trust__item">Secure checkout</div>
+                    <div class="single-product-trust__item">Fast local delivery</div>
+                    <div class="single-product-trust__item">Support available</div>
+                </div>
+
+                <div class="single-product-specs">
+                    <h3>Specifications</h3>
+                    <div class="single-product-specs__content">
+                        {{ product.pshortdescription|safe }}
+                    </div>
+                </div>
+            </div>
         </div>
 
-
-        <!-- PRODUCT QUANTITY TO ADD TO CART (DEFAULT !) -->
-        <input id="spq" class="single-product-quantity" type="number" value="1" min="0">
-
-        <!-- ADD TO CART BUTTON -->
-        <button id="spatc" class="single-product-addtocart shop-add-to-cart" value="{{product.pid}}">Add to cart</button>
-
-        <!-- PRODUCT SHORT SPESIFICATION (MAINLY LIST) -->
-        <div class="single-product-specs">
-            <h3>Specification</h3>
-            {{product.pshortdescription|safe}}
-        </div>
-    </div>
-
-    <!-- PRODUCT VIDEO (DISPLAY NONE IF THERE IS NO VIDEO) -->
-    {% if product.pvideo %}
-        <div class="single-product-video">
+        {% if product.pvideo %}
+            <div class="single-product-video-card">
+                <div class="single-product-section-head">
+                    <h2>Product Video</h2>
+                </div>
                 <div class="single-video">
-                        <iframe 
-                        src={{product.pvideo}} 
-                        title="YouTube video player" frameborder="0" 
+                    <iframe
+                        src="{{ product.pvideo }}"
+                        title="Product video"
+                        frameborder="0"
                         allowfullscreen>
                     </iframe>
                 </div>
-        </div>
-    {% endif %}
-
-    <!-- LONG IMAGE TO DESCRIBE THE PRODUCT VISUALLY -->
-    {% for image in product.pallimages %}
-        {% if image.ilong %}
-            <img class="single-product-image-long" src="{% static image.iurl %}">
+            </div>
         {% endif %}
-    {% endfor %}
 
-    <!-- LONG DESCRITPION ABOUT THE PRODUCT DETAILS -->
-    <div class="single-product-long-desc">
-        <h3>Description</h3>
-        {{product.plongdescription|safe}}
-       
+        {% for image in product.pallimages %}
+            {% if image.ilong %}
+                <div class="single-product-long-image-card">
+                    <img class="single-product-image-long"
+                         src="{% static image.iurl %}"
+                         alt="{{ product.pname }}">
+                </div>
+            {% endif %}
+        {% endfor %}
+
+        <div class="single-product-details-grid">
+            <div class="single-product-long-desc card-surface">
+                <div class="single-product-section-head">
+                    <h2>Description</h2>
+                </div>
+                <div class="single-product-richtext">
+                    {{ product.plongdescription|safe }}
+                </div>
+            </div>
+
+            <div class="single-product-dimention card-surface">
+                <div class="single-product-section-head">
+                    <h2>Additional Information</h2>
+                </div>
+
+                <table class="single-product-info-table">
+                    <tr>
+                        <th>Weight</th>
+                        <td>33 g</td>
+                    </tr>
+                    <tr>
+                        <th>Dimension</th>
+                        <td>8.3 × 8.3 × 1.5</td>
+                    </tr>
+                    <tr>
+                        <th>In Package</th>
+                        <td>
+                            <ul>
+                                <li>Camera</li>
+                                <li>Reset pin</li>
+                                <li>Adapter 5V</li>
+                                <li>USB cable</li>
+                            </ul>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
     </div>
-
-    <!-- PODUCT DIMENTION AND WHAT IN PACKGE TABLE  -->
-    <div class="single-product-dimention">
-        <h3>Additional information</h3>
-        <table>
-            <tr>
-                <th>Weight </th>
-                <td>33 g</td>
-            </tr>
-            <tr>
-                <th>Dimension</th>
-                <td>8.3x8.3x1.5</td>
-            </tr>
-            <tr>
-                <th>In Package</th>
-                <td>
-                    <ul>
-                        <li>Camera</li>
-                        <li>Reset pin</li>
-                        <li>Adapte 5v</li>
-                        <li>USB Cable</li>
-                    </ul>
-                </td>
-            </tr>
-        </table>
-    </div>
-</div>
-
-
+</section>
 {% endblock %}

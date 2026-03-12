@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from shop.models import *
 from datetime import timedelta, datetime
+from django.utils import timezone
 
 
 # is model object
@@ -64,7 +65,7 @@ class Orders (models.Model):
     address = models.ForeignKey(Delivery_Address_Details, on_delete=models.SET_NULL, null=True)
     # is string
     # status names 
-    date = models.DateTimeField()
+    date = models.DateTimeField(default=timezone.now)
     processing = "processing"
     completed = "completed"
     cancelled = "cancelled"
