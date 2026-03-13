@@ -139,11 +139,7 @@
 
 .auth-brand-panel,
 .auth-card {
-    border-radius: var(--auth-radius);
-    background: var(--auth-surface);
-    border: 1px solid rgba(255,255,255,0.78);
-    backdrop-filter: blur(14px);
-    box-shadow: var(--auth-shadow);
+    @include var.surface-card(var(--auth-radius), var(--auth-surface), var(--auth-shadow));
 }
 
 .auth-brand-panel {
@@ -172,18 +168,9 @@
 }
 
 .auth-brand-panel__eyebrow {
-    display: inline-flex;
+    @include var.section-eyebrow(#dbeafe, rgba(255,255,255,0.08), rgba(255,255,255,0.12), 8px 14px, 0.8rem);
     width: fit-content;
     margin-bottom: 18px;
-    padding: 8px 14px;
-    border-radius: 999px;
-    font-size: 0.8rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: #dbeafe;
-    background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(255,255,255,0.12);
 }
 
 .auth-brand-panel h1 {
@@ -352,16 +339,7 @@
 .auth-form__fields input:not([type="checkbox"]):not([type="radio"]),
 .auth-form__fields select,
 .auth-form__fields textarea {
-    width: 100%;
-    min-height: 52px;
-    padding: 0 16px;
-    border-radius: 14px;
-    border: 1px solid #dbe7f3;
-    background: var(--auth-white);
-    color: var(--auth-text);
-    font: inherit;
-    box-sizing: border-box;
-    outline: none;
+    @include var.form-control(var(--auth-text), var(--auth-white));
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -373,8 +351,7 @@
 .auth-form__fields input:focus,
 .auth-form__fields select:focus,
 .auth-form__fields textarea:focus {
-    border-color: rgba(21, 112, 239, 0.45);
-    box-shadow: 0 0 0 4px rgba(21, 112, 239, 0.08);
+    @include var.form-control-focus;
 }
 
 .auth-form__footer {
@@ -396,21 +373,14 @@
 }
 
 .auth-submit-btn {
-    min-height: 52px;
-    padding: 0 24px;
-    border: none;
-    border-radius: 14px;
-    background: linear-gradient(135deg, #081120 0%, #10233f 100%);
-    color: #fff;
-    font-size: 0.96rem;
+    @include var.action-button-base(52px, 0 24px);
+    @include var.action-button-dark(var(--auth-dark), #10233f, 0 14px 28px rgba(8, 17, 32, 0.18));
     font-weight: 800;
-    cursor: pointer;
-    box-shadow: 0 14px 28px rgba(8, 17, 32, 0.18);
     transition: transform 0.22s ease, box-shadow 0.22s ease;
 }
 
 .auth-submit-btn:hover {
-    transform: translateY(-2px);
+    @include var.action-button-hover;
     box-shadow: 0 18px 32px rgba(8, 17, 32, 0.22);
 }
 

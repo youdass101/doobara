@@ -51,18 +51,8 @@
 }
 
 .checkout-header__eyebrow {
-    display: inline-flex;
-    align-items: center;
-    padding: 8px 14px;
+    @include var.section-eyebrow(var(--checkout-primary));
     margin-bottom: 16px;
-    border-radius: 999px;
-    font-size: 0.82rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--checkout-primary);
-    background: rgba(21, 112, 239, 0.08);
-    border: 1px solid rgba(21, 112, 239, 0.12);
 }
 
 .checkout-header h1 {
@@ -90,11 +80,7 @@
 
 .checkout-card,
 .checkout-summary-card {
-    border-radius: var(--checkout-radius);
-    background: var(--checkout-surface);
-    border: 1px solid rgba(255,255,255,0.78);
-    backdrop-filter: blur(14px);
-    box-shadow: var(--checkout-shadow);
+    @include var.surface-card(var(--checkout-radius), var(--checkout-surface), var(--checkout-shadow));
 }
 
 .checkout-card {
@@ -130,17 +116,8 @@
 }
 
 .checkout-selected-address__label {
-    display: inline-flex;
+    @include var.section-eyebrow(var(--checkout-primary), $padding: 6px 12px, $font-size: 0.76rem);
     margin-bottom: 12px;
-    padding: 6px 12px;
-    border-radius: 999px;
-    font-size: 0.76rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--checkout-primary);
-    background: rgba(21, 112, 239, 0.08);
-    border: 1px solid rgba(21, 112, 239, 0.12);
 }
 
 .checkout-selected-address__name {
@@ -182,40 +159,21 @@
 }
 
 .checkout-notes textarea {
-    width: 100%;
-    min-height: 120px;
-    padding: 16px;
-    border-radius: 18px;
-    border: 1px solid #dbe7f3;
-    background: var(--checkout-white);
-    color: var(--checkout-text);
-    font: inherit;
+    @include var.form-control(var(--checkout-text), var(--checkout-white), #dbe7f3, 120px, 18px, 16px);
     resize: vertical;
-    outline: none;
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
-    box-sizing: border-box;
 }
 
 .checkout-notes textarea:focus {
-    border-color: rgba(21, 112, 239, 0.45);
-    box-shadow: 0 0 0 4px rgba(21, 112, 239, 0.08);
+    @include var.form-control-focus;
 }
 
 /* Form fields from Django form */
 .checkout-new-address-form input,
 .checkout-new-address-form select,
 .checkout-new-address-form textarea {
-    width: 100%;
+    @include var.form-control(var(--checkout-text), var(--checkout-white), #dbe7f3, 50px);
     margin-bottom: 14px;
-    min-height: 50px;
-    padding: 0 16px;
-    border-radius: 14px;
-    border: 1px solid #dbe7f3;
-    background: var(--checkout-white);
-    color: var(--checkout-text);
-    font: inherit;
-    box-sizing: border-box;
-    outline: none;
 }
 
 .checkout-new-address-form textarea {
@@ -226,47 +184,28 @@
 .checkout-new-address-form input:focus,
 .checkout-new-address-form select:focus,
 .checkout-new-address-form textarea:focus {
-    border-color: rgba(21, 112, 239, 0.45);
-    box-shadow: 0 0 0 4px rgba(21, 112, 239, 0.08);
+    @include var.form-control-focus;
 }
 
 /* Buttons */
 .checkout-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 48px;
-    padding: 0 18px;
-    border-radius: 14px;
-    border: none;
-    text-decoration: none;
-    font-size: 0.95rem;
-    font-weight: 700;
-    cursor: pointer;
-    transition: transform 0.22s ease, box-shadow 0.22s ease, opacity 0.22s ease;
-    box-sizing: border-box;
+    @include var.action-button-base;
 }
 
 .checkout-btn:hover {
-    transform: translateY(-2px);
+    @include var.action-button-hover;
 }
 
 .checkout-btn--primary {
-    background: linear-gradient(135deg, var(--checkout-primary) 0%, var(--checkout-primary-2) 100%);
-    color: #fff;
-    box-shadow: 0 14px 30px rgba(21, 112, 239, 0.18);
+    @include var.action-button-primary(var(--checkout-primary), var(--checkout-primary-2));
 }
 
 .checkout-btn--outline {
-    background: rgba(21, 112, 239, 0.08);
-    color: var(--checkout-primary);
-    border: 1px solid rgba(21, 112, 239, 0.12);
+    @include var.action-button-outline(var(--checkout-primary));
 }
 
 .checkout-btn--ghost {
-    background: linear-gradient(135deg, #081120 0%, #10233f 100%);
-    color: #fff;
-    box-shadow: 0 12px 24px rgba(8, 17, 32, 0.16);
+    @include var.action-button-dark;
 }
 
 /* Summary */
@@ -284,17 +223,8 @@
 }
 
 .checkout-summary-card__eyebrow {
-    display: inline-flex;
+    @include var.section-eyebrow(var(--checkout-primary), $padding: 6px 12px, $font-size: 0.76rem);
     margin-bottom: 10px;
-    padding: 6px 12px;
-    border-radius: 999px;
-    font-size: 0.76rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--checkout-primary);
-    background: rgba(21, 112, 239, 0.08);
-    border: 1px solid rgba(21, 112, 239, 0.12);
 }
 
 .checkout-summary-card__header h2 {
@@ -393,21 +323,16 @@
 }
 
 .checkout-place-order-btn {
+    @include var.action-button-base(54px, 0 18px, 16px);
+    @include var.action-button-dark(var(--checkout-dark), #10233f, 0 14px 28px rgba(8, 17, 32, 0.18));
     width: 100%;
-    min-height: 54px;
-    border: none;
-    border-radius: 16px;
-    background: linear-gradient(135deg, #081120 0%, #10233f 100%);
-    color: #fff;
     font-size: 1rem;
     font-weight: 800;
-    cursor: pointer;
-    box-shadow: 0 14px 28px rgba(8, 17, 32, 0.18);
     transition: transform 0.22s ease, box-shadow 0.22s ease;
 }
 
 .checkout-place-order-btn:hover {
-    transform: translateY(-2px);
+    @include var.action-button-hover;
     box-shadow: 0 18px 32px rgba(8, 17, 32, 0.22);
 }
 
@@ -450,17 +375,8 @@
 }
 
 .checkout-modal__eyebrow {
-    display: inline-flex;
+    @include var.section-eyebrow(var(--checkout-primary), $padding: 6px 12px, $font-size: 0.76rem);
     margin-bottom: 10px;
-    padding: 6px 12px;
-    border-radius: 999px;
-    font-size: 0.76rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--checkout-primary);
-    background: rgba(21, 112, 239, 0.08);
-    border: 1px solid rgba(21, 112, 239, 0.12);
 }
 
 .checkout-modal__header h3 {

@@ -57,18 +57,8 @@
 }
 
 .account-header__eyebrow {
-    display: inline-flex;
-    align-items: center;
-    padding: 8px 14px;
+    @include var.section-eyebrow(var(--account-primary));
     margin-bottom: 16px;
-    border-radius: 999px;
-    font-size: 0.82rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--account-primary);
-    background: rgba(21, 112, 239, 0.08);
-    border: 1px solid rgba(21, 112, 239, 0.12);
 }
 
 .account-header h1 {
@@ -87,12 +77,8 @@
 }
 
 .account-header__snippet {
+    @include var.surface-card(var(--account-radius), var(--account-surface), var(--account-shadow));
     padding: 22px;
-    border-radius: var(--account-radius);
-    background: var(--account-surface);
-    border: 1px solid rgba(255,255,255,0.78);
-    backdrop-filter: blur(14px);
-    box-shadow: var(--account-shadow);
 }
 
 .account-layout {
@@ -110,11 +96,7 @@
 .account-sidebar__card,
 .account-table-card,
 .account-detail-card {
-    border-radius: var(--account-radius);
-    background: var(--account-surface);
-    border: 1px solid rgba(255,255,255,0.78);
-    backdrop-filter: blur(14px);
-    box-shadow: var(--account-shadow);
+    @include var.surface-card(var(--account-radius), var(--account-surface), var(--account-shadow));
 }
 
 .account-sidebar__card {
@@ -207,17 +189,8 @@
 }
 
 .account-panel__eyebrow {
-    display: inline-flex;
+    @include var.section-eyebrow(var(--account-primary), $padding: 6px 12px, $font-size: 0.76rem);
     margin-bottom: 10px;
-    padding: 6px 12px;
-    border-radius: 999px;
-    font-size: 0.76rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--account-primary);
-    background: rgba(21, 112, 239, 0.08);
-    border: 1px solid rgba(21, 112, 239, 0.12);
 }
 
 .account-panel__header h2 {
@@ -297,41 +270,23 @@
 }
 
 .account-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    min-height: 48px;
-    padding: 0 18px;
-    border-radius: 14px;
-    border: none;
-    text-decoration: none;
-    font-size: 0.95rem;
-    font-weight: 700;
-    cursor: pointer;
-    transition: transform 0.22s ease, box-shadow 0.22s ease, opacity 0.22s ease;
+    @include var.action-button-base;
 }
 
 .account-btn:hover {
-    transform: translateY(-2px);
+    @include var.action-button-hover;
 }
 
 .account-btn--primary {
-    background: linear-gradient(135deg, var(--account-primary) 0%, var(--account-primary-2) 100%);
-    color: #fff;
-    box-shadow: 0 14px 30px rgba(21, 112, 239, 0.18);
+    @include var.action-button-primary(var(--account-primary), var(--account-primary-2));
 }
 
 .account-btn--dark {
-    background: linear-gradient(135deg, #081120 0%, #10233f 100%);
-    color: #fff;
-    box-shadow: 0 12px 24px rgba(8, 17, 32, 0.16);
+    @include var.action-button-dark;
 }
 
 .account-btn--outline {
-    background: rgba(21, 112, 239, 0.08);
-    color: var(--account-primary);
-    border: 1px solid rgba(21, 112, 239, 0.12);
+    @include var.action-button-outline(var(--account-primary));
 }
 
 .account-details-grid {

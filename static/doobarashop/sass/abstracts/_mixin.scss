@@ -1,0 +1,118 @@
+@use 'variables' as var;
+
+@mixin surface-card(
+    $radius: var.$radius-lg,
+    $surface: var.$page-surface,
+    $shadow: var.$page-shadow,
+    $border: var.$page-border,
+    $blur: 14px
+) {
+    border-radius: $radius;
+    background: $surface;
+    border: 1px solid $border;
+    backdrop-filter: blur($blur);
+    box-shadow: $shadow;
+}
+
+@mixin section-eyebrow(
+    $color: var.$ui-primary,
+    $background: var.$page-accent-fill,
+    $border: var.$page-accent-border,
+    $padding: 8px 14px,
+    $font-size: 0.82rem
+) {
+    display: inline-flex;
+    align-items: center;
+    padding: $padding;
+    border-radius: var.$pill-radius;
+    font-size: $font-size;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: $color;
+    background: $background;
+    border: 1px solid $border;
+}
+
+@mixin form-control(
+    $text-color: var.$ui-text,
+    $background: var.$ui-white,
+    $border-color: #dbe7f3,
+    $min-height: 52px,
+    $radius: var.$control-radius,
+    $padding: 0 16px
+) {
+    width: 100%;
+    min-height: $min-height;
+    padding: $padding;
+    border-radius: $radius;
+    border: 1px solid $border-color;
+    background: $background;
+    color: $text-color;
+    font: inherit;
+    box-sizing: border-box;
+    outline: none;
+}
+
+@mixin form-control-focus(
+    $border-color: rgba(21, 112, 239, 0.45),
+    $ring-color: rgba(21, 112, 239, 0.08)
+) {
+    border-color: $border-color;
+    box-shadow: 0 0 0 4px $ring-color;
+}
+
+@mixin action-button-base(
+    $min-height: 48px,
+    $padding: 0 18px,
+    $radius: var.$control-radius
+) {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: $min-height;
+    padding: $padding;
+    border-radius: $radius;
+    border: none;
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.22s ease, box-shadow 0.22s ease, opacity 0.22s ease;
+    box-sizing: border-box;
+}
+
+@mixin action-button-hover($translate-y: -2px) {
+    transform: translateY($translate-y);
+}
+
+@mixin action-button-primary(
+    $from: var.$ui-primary,
+    $to: var.$ui-primary-soft,
+    $shadow: 0 14px 30px rgba(21, 112, 239, 0.18)
+) {
+    background: linear-gradient(135deg, $from 0%, $to 100%);
+    color: #fff;
+    box-shadow: $shadow;
+}
+
+@mixin action-button-dark(
+    $from: var.$ui-dark,
+    $to: #10233f,
+    $shadow: 0 12px 24px rgba(8, 17, 32, 0.16)
+) {
+    background: linear-gradient(135deg, $from 0%, $to 100%);
+    color: #fff;
+    box-shadow: $shadow;
+}
+
+@mixin action-button-outline(
+    $color: var.$ui-primary,
+    $background: var.$page-accent-fill,
+    $border: var.$page-accent-border
+) {
+    background: $background;
+    color: $color;
+    border: 1px solid $border;
+}
