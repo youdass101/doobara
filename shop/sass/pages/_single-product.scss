@@ -56,11 +56,7 @@
 .card-surface,
 .single-product-video-card,
 .single-product-long-image-card {
-    border-radius: var(--sp-radius);
-    background: var(--sp-surface);
-    border: 1px solid rgba(255,255,255,0.78);
-    backdrop-filter: blur(14px);
-    box-shadow: var(--sp-shadow);
+    @include var.surface-card(var(--sp-radius), var(--sp-surface), var(--sp-shadow));
 }
 
 .single-product-gallery {
@@ -124,17 +120,8 @@
 }
 
 .single-product-info__eyebrow {
-    display: inline-flex;
+    @include var.section-eyebrow(var(--sp-primary));
     margin-bottom: 14px;
-    padding: 8px 14px;
-    border-radius: 999px;
-    font-size: 0.82rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--sp-primary);
-    background: rgba(21, 112, 239, 0.08);
-    border: 1px solid rgba(21, 112, 239, 0.12);
 }
 
 .single-product-title {
@@ -179,23 +166,13 @@
 
 .single-product-variant select,
 .single-product-quantity {
-    width: 100%;
-    min-height: 52px;
-    padding: 0 16px;
-    border-radius: 14px;
-    border: 1px solid #dbe7f3;
-    background: var(--sp-white);
-    color: var(--sp-text);
-    font: inherit;
-    box-sizing: border-box;
-    outline: none;
+    @include var.form-control(var(--sp-text), var(--sp-white));
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .single-product-variant select:focus,
 .single-product-quantity:focus {
-    border-color: rgba(21, 112, 239, 0.45);
-    box-shadow: 0 0 0 4px rgba(21, 112, 239, 0.08);
+    @include var.form-control-focus;
 }
 
 .single-product-purchase {
@@ -207,20 +184,15 @@
 }
 
 .single-product-addtocart {
-    min-height: 52px;
-    border: none;
-    border-radius: 16px;
-    background: linear-gradient(135deg, #081120 0%, #10233f 100%);
-    color: #fff;
+    @include var.action-button-base(52px, 0 18px, 16px);
+    @include var.action-button-dark(var(--sp-dark), #10233f, 0 14px 28px rgba(8, 17, 32, 0.18));
     font-size: 0.98rem;
     font-weight: 800;
-    cursor: pointer;
-    box-shadow: 0 14px 28px rgba(8, 17, 32, 0.18);
     transition: transform 0.22s ease, box-shadow 0.22s ease;
 }
 
 .single-product-addtocart:hover {
-    transform: translateY(-2px);
+    @include var.action-button-hover;
     box-shadow: 0 18px 32px rgba(8, 17, 32, 0.22);
 }
 

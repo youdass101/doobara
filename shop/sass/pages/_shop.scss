@@ -63,18 +63,8 @@
 }
 
 .shop-toolbar__eyebrow {
-    display: inline-flex;
-    align-items: center;
-    padding: 8px 14px;
+    @include var.section-eyebrow(var(--shop-primary));
     margin-bottom: 16px;
-    border-radius: 999px;
-    font-size: 0.82rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--shop-primary);
-    background: rgba(21, 112, 239, 0.08);
-    border: 1px solid rgba(21, 112, 239, 0.12);
 }
 
 .shop-toolbar__intro h1 {
@@ -93,12 +83,8 @@
 }
 
 .shop-filter-card {
+    @include var.surface-card(var(--shop-radius), rgba(255,255,255,0.72), var(--shop-shadow), rgba(255,255,255,0.75), 16px);
     padding: 22px;
-    border-radius: 24px;
-    background: rgba(255,255,255,0.72);
-    border: 1px solid rgba(255,255,255,0.75);
-    backdrop-filter: blur(16px);
-    box-shadow: var(--shop-shadow);
 }
 
 .shop-filter-form {
@@ -121,39 +107,24 @@
 }
 
 .shop-field select {
-    width: 100%;
-    height: 50px;
-    padding: 0 16px;
-    border-radius: 14px;
-    border: 1px solid #dbe7f3;
-    background: var(--shop-white);
-    color: var(--shop-text);
+    @include var.form-control(var(--shop-text), var(--shop-white), #dbe7f3, 50px);
     font-size: 0.96rem;
-    outline: none;
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .shop-field select:focus {
-    border-color: rgba(21, 112, 239, 0.45);
-    box-shadow: 0 0 0 4px rgba(21, 112, 239, 0.08);
+    @include var.form-control-focus;
 }
 
 .shop-filter-btn {
-    height: 50px;
-    padding: 0 22px;
-    border: none;
-    border-radius: 14px;
-    background: linear-gradient(135deg, var(--shop-primary) 0%, var(--shop-primary-2) 100%);
-    color: #fff;
+    @include var.action-button-base(50px, 0 22px);
+    @include var.action-button-primary(var(--shop-primary), var(--shop-primary-2));
     font-size: 0.96rem;
-    font-weight: 700;
-    cursor: pointer;
-    box-shadow: 0 14px 30px rgba(21, 112, 239, 0.18);
     transition: transform 0.22s ease, box-shadow 0.22s ease;
 }
 
 .shop-filter-btn:hover {
-    transform: translateY(-2px);
+    @include var.action-button-hover;
     box-shadow: 0 18px 34px rgba(21, 112, 239, 0.24);
 }
 
@@ -166,15 +137,11 @@
 }
 
 .shop-card {
+    @include var.surface-card(var(--shop-radius), rgba(255,255,255,0.82), var(--shop-shadow), rgba(255,255,255,0.75), 14px);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    border-radius: var(--shop-radius);
     padding: 16px;
-    background: rgba(255,255,255,0.82);
-    border: 1px solid rgba(255,255,255,0.75);
-    backdrop-filter: blur(14px);
-    box-shadow: var(--shop-shadow);
     transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
     overflow: hidden;
 }
@@ -237,21 +204,14 @@
 }
 
 .shop-card__btn {
+    @include var.action-button-base;
+    @include var.action-button-dark;
     width: 100%;
-    min-height: 48px;
-    border: none;
-    border-radius: 14px;
-    background: linear-gradient(135deg, #081120 0%, #10233f 100%);
-    color: #fff;
-    font-size: 0.95rem;
-    font-weight: 700;
-    cursor: pointer;
     transition: transform 0.22s ease, opacity 0.22s ease, box-shadow 0.22s ease;
-    box-shadow: 0 12px 24px rgba(8, 17, 32, 0.16);
 }
 
 .shop-card__btn:hover {
-    transform: translateY(-2px);
+    @include var.action-button-hover;
     opacity: 0.96;
     box-shadow: 0 16px 28px rgba(8, 17, 32, 0.2);
 }

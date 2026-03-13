@@ -41,18 +41,8 @@
 }
 
 .cart-header__eyebrow {
-    display: inline-flex;
-    align-items: center;
-    padding: 8px 14px;
+    @include var.section-eyebrow(var.$text-color-purple, var.$button-color-transparent, var.$button-color-border-transparent);
     margin-bottom: 16px;
-    border-radius: 999px;
-    font-size: 0.82rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var.$text-color-purple;
-    background: var.$button-color-transparent;
-    border: 1px solid var.$button-color-border-transparent;
 }
 
 .cart-header h1 {
@@ -80,11 +70,7 @@
 .cart-items-card,
 .cart-summary__card,
 .empty-cart-card {
-    border-radius: var(--cart-radius);
-    background: var.$background-color-three;
-    border: 1px solid rgba(255,255,255,0.78);
-    backdrop-filter: blur(14px);
-    box-shadow: var(--cart-shadow);
+    @include var.surface-card(var(--cart-radius), var.$background-color-three, var(--cart-shadow));
 }
 
 .cart-items-card {
@@ -210,22 +196,15 @@
 }
 
 .in-cart-qtty {
+    @include var.form-control(var.$text-color-black, white, #dbe7f3, 48px, 14px, 0 14px);
     width: 92px;
-    height: 48px;
-    padding: 0 14px;
-    border-radius: 14px;
-    border: 1px solid #dbe7f3;
-    background: white;
-    color: var.$text-color-black;
     font-size: 1rem;
     font-weight: 700;
-    outline: none;
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .in-cart-qtty:focus {
-    border-color: rgba(21, 112, 239, 0.45);
-    box-shadow: 0 0 0 4px rgba(21, 112, 239, 0.08);
+    @include var.form-control-focus;
 }
 
 .cart-mobile-label {
@@ -254,34 +233,22 @@
 }
 
 .cart-coupon input {
+    @include var.form-control(var.$text-color-black, white, #dbe7f3, 50px);
     flex: 1;
     min-width: 180px;
-    height: 50px;
-    padding: 0 16px;
-    border-radius: 14px;
-    border: 1px solid #dbe7f3;
-    background: white;
-    color: var.$text-color-black;
     font-size: 0.96rem;
-    outline: none;
 }
 
 .cart-coupon input:focus {
-    border-color: rgba(21, 112, 239, 0.45);
-    box-shadow: 0 0 0 4px rgba(21, 112, 239, 0.08);
+    @include var.form-control-focus;
 }
 
 .cart-coupon button,
 .cart-update-btn,
 .cart-checkout-btn,
 .empty-cart-card__btn {
-    border: none;
-    border-radius: 14px;
+    @include var.action-button-base(48px, 0 18px);
     font-size: 0.96rem;
-    font-weight: 700;
-    cursor: pointer;
-    text-decoration: none;
-    transition: transform 0.22s ease, box-shadow 0.22s ease, opacity 0.22s ease;
 }
 
 .cart-coupon button,
@@ -291,22 +258,18 @@
 }
 
 .cart-coupon button {
-    background: var.$button-color-transparent;
-    color: var.$secondary-color;
-    border: 1px solid var.$button-color-border-transparent;
+    @include var.action-button-outline(var.$secondary-color, var.$button-color-transparent, var.$button-color-border-transparent);
 }
 
 .cart-update-btn {
-    background: linear-gradient(135deg, var.$secondary-color 0%, var.$secondary-color-light 100%);
-    color: #fff;
-    box-shadow: 0 14px 30px rgba(21, 112, 239, 0.18);
+    @include var.action-button-primary(var.$secondary-color, var.$secondary-color-light);
 }
 
 .cart-coupon button:hover,
 .cart-update-btn:hover,
 .cart-checkout-btn:hover,
 .empty-cart-card__btn:hover {
-    transform: translateY(-2px);
+    @include var.action-button-hover;
 }
 
 .cart-summary {
@@ -319,17 +282,8 @@
 }
 
 .cart-summary__eyebrow {
-    display: inline-flex;
+    @include var.section-eyebrow(var.$secondary-color, var.$button-color-transparent, var.$button-color-border-transparent, 6px 12px, 0.76rem);
     margin-bottom: 12px;
-    padding: 6px 12px;
-    border-radius: 999px;
-    font-size: 0.76rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var.$secondary-color;
-    background: var.$button-color-transparent;
-    border: 1px solid var.$button-color-border-transparent;
 }
 
 .cart-summary__card h3 {
@@ -364,12 +318,10 @@
 }
 
 .cart-checkout-btn {
+    @include var.action-button-dark(var.$secondary-color, var.$back-color, 0 14px 28px rgba(8, 17, 32, 0.18));
     width: 100%;
     min-height: 54px;
     padding: 0 18px;
-    background: linear-gradient(135deg, var.$secondary-color 0%, var.$back-color 100%);
-    color: #fff;
-    box-shadow: 0 14px 28px rgba(8, 17, 32, 0.18);
 }
 
 .empty-cart-card {
@@ -406,15 +358,10 @@
 }
 
 .empty-cart-card__btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+    @include var.action-button-primary(var.$secondary-color, var.$secondary-color-light);
     min-width: 180px;       
     min-height: 50px;
     padding: 0 20px;
-    background: linear-gradient(135deg, var.$secondary-color 0%, var.$secondary-color-light 100%);
-    color: #fff;
-    box-shadow: 0 14px 30px rgba(21, 112, 239, 0.18);
 }
 
 @media (max-width: 1100px) {
