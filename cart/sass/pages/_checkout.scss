@@ -2,17 +2,17 @@
 
 :root {
     --checkout-bg: #f5f9ff;
-    --checkout-surface: rgba(255, 255, 255, 0.84);
-    --checkout-white: #ffffff;
-    --checkout-text: #0f172a;
-    --checkout-text-soft: #64748b;
-    --checkout-primary: #1570ef;
-    --checkout-primary-2: #1fb6ff;
-    --checkout-dark: #081120;
-    --checkout-border: rgba(21, 112, 239, 0.12);
-    --checkout-shadow: 0 18px 50px rgba(15, 23, 42, 0.08);
-    --checkout-shadow-hover: 0 24px 60px rgba(15, 23, 42, 0.12);
-    --checkout-radius: 26px;
+    --checkout-surface: #{var.$page-surface};
+    --checkout-white: #{var.$ui-white};
+    --checkout-text: #{var.$ui-text};
+    --checkout-text-soft: #{var.$ui-text-soft};
+    --checkout-primary: #{var.$ui-primary};
+    --checkout-primary-2: #{var.$ui-primary-soft};
+    --checkout-dark: #{var.$ui-dark};
+    --checkout-border: #{var.$page-accent-border};
+    --checkout-shadow: #{var.$page-shadow};
+    --checkout-shadow-hover: #{var.$page-shadow-hover};
+    --checkout-radius: #{var.$radius-lg};
 }
 
 /* Page */

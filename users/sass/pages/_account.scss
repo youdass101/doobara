@@ -6,18 +6,18 @@
 // MY ACCOUNT PAGE STYLING 
 :root {
     --account-bg: #f5f9ff;
-    --account-surface: rgba(255, 255, 255, 0.84);
-    --account-white: #ffffff;
-    --account-text: #0f172a;
-    --account-text-soft: #64748b;
-    --account-primary: #1570ef;
-    --account-primary-2: #1fb6ff;
-    --account-dark: #081120;
-    --account-border: rgba(21, 112, 239, 0.12);
-    --account-danger: #dc2626;
-    --account-success: #16a34a;
-    --account-shadow: 0 18px 50px rgba(15, 23, 42, 0.08);
-    --account-radius: 26px;
+    --account-surface: #{var.$page-surface};
+    --account-white: #{var.$ui-white};
+    --account-text: #{var.$ui-text};
+    --account-text-soft: #{var.$ui-text-soft};
+    --account-primary: #{var.$ui-primary};
+    --account-primary-2: #{var.$ui-primary-soft};
+    --account-dark: #{var.$ui-dark};
+    --account-border: #{var.$page-accent-border};
+    --account-danger: #{var.$ui-danger};
+    --account-success: #{var.$ui-success};
+    --account-shadow: #{var.$page-shadow};
+    --account-radius: #{var.$radius-lg};
 }
 
 .account-page {

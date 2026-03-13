@@ -9,17 +9,17 @@
 // product countainer grid 
 :root {
     --shop-bg: #f4f8fc;
-    --shop-surface: rgba(255, 255, 255, 0.78);
-    --shop-white: #ffffff;
-    --shop-text: #0f172a;
-    --shop-text-soft: #64748b;
-    --shop-primary: #1570ef;
-    --shop-primary-2: #1fb6ff;
-    --shop-dark: #081120;
-    --shop-border: rgba(21, 112, 239, 0.12);
-    --shop-shadow: 0 18px 50px rgba(15, 23, 42, 0.08);
+    --shop-surface: #{var.$page-surface-soft};
+    --shop-white: #{var.$ui-white};
+    --shop-text: #{var.$ui-text};
+    --shop-text-soft: #{var.$ui-text-soft};
+    --shop-primary: #{var.$ui-primary};
+    --shop-primary-2: #{var.$ui-primary-soft};
+    --shop-dark: #{var.$ui-dark};
+    --shop-border: #{var.$page-accent-border};
+    --shop-shadow: #{var.$page-shadow};
     --shop-shadow-hover: 0 24px 60px rgba(15, 23, 42, 0.14);
-    --shop-radius: 24px;
+    --shop-radius: #{var.$radius-md};
 }
 
 .shop-page {

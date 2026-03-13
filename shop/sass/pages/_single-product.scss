@@ -1,16 +1,18 @@
+@use '../../../static/doobarashop/sass/abstracts/all' as var;
+
 :root {
     --sp-bg: #f5f9ff;
-    --sp-surface: rgba(255, 255, 255, 0.86);
-    --sp-white: #ffffff;
-    --sp-text: #0f172a;
-    --sp-text-soft: #64748b;
-    --sp-primary: #1570ef;
-    --sp-primary-2: #1fb6ff;
-    --sp-dark: #081120;
-    --sp-border: rgba(21, 112, 239, 0.12);
-    --sp-shadow: 0 18px 50px rgba(15, 23, 42, 0.08);
-    --sp-shadow-hover: 0 24px 60px rgba(15, 23, 42, 0.12);
-    --sp-radius: 28px;
+    --sp-surface: #{var.$page-surface-strong};
+    --sp-white: #{var.$ui-white};
+    --sp-text: #{var.$ui-text};
+    --sp-text-soft: #{var.$ui-text-soft};
+    --sp-primary: #{var.$ui-primary};
+    --sp-primary-2: #{var.$ui-primary-soft};
+    --sp-dark: #{var.$ui-dark};
+    --sp-border: #{var.$page-accent-border};
+    --sp-shadow: #{var.$page-shadow};
+    --sp-shadow-hover: #{var.$page-shadow-hover};
+    --sp-radius: #{var.$radius-xl};
 }
 
 .single-product-page {

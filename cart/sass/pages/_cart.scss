@@ -6,9 +6,9 @@
 
 // Cart page container
 :root {
-    --cart-shadow: 0 18px 50px rgba(15, 23, 42, 0.08);
+    --cart-shadow: #{var.$page-shadow};
     --cart-danger: #ef4444;
-    --cart-radius: 26px;
+    --cart-radius: #{var.$radius-lg};
 }
 
 .cart-page {
