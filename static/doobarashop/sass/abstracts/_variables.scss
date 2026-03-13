@@ -2,9 +2,29 @@
 $secondary-color: #331E6D; // dark purple
 $secondary-color-light: #4f2eaa; // lighter purple
 $back-color:  #292826;      //secondary color
+$background-color-one:  radial-gradient(circle at top left, rgba(31, 182, 255, 0.12), transparent 24%),
+                        radial-gradient(circle at top right, rgba(21, 112, 239, 0.12), transparent 22%),
+                        linear-gradient(180deg, #f8fbff 0%, #eef5fb 100%);
+$background-color-two: linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px);                 
+$background-color-three: rgba(255, 255, 255, 0.82); // light background color
+
+$text-color-white: #FFFFFF; // white
+$text-color-black: #000000; // black
+$text-color-gray: #808080;  // gray
 $identity-color: #F9D342;   //primary color 
+$text-color-purple: #331E6D; // dark purple
+$text-color-light-purple: #4f2eaa; // lighter purple
+$text-color-price: #4e42f9; // price color (primary color)
+
+$button-color-transparent: #331e6d17;
+
+$button-color-border-transparent: #331e6d2c;
+
 $primary-font: Arial, sans-serif;
 $secondary-font: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 $third-font: Verdana, Geneva, Tahoma, sans-serif;
+
 $max-width: 1120px;
+
 
