@@ -98,8 +98,8 @@
 }
 
 @mixin action-button-dark(
-    $from: var.$ui-dark,
-    $to: #10233f,
+    $from: var.$back-color,
+    $to: var.$ui-dark,
     $shadow: 0 12px 24px rgba(8, 17, 32, 0.16)
 ) {
     background: linear-gradient(135deg, $from 0%, $to 100%);

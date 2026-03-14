@@ -1,15 +1,7 @@
 // CART SINGLE PAGE 
 @use '../../../static/doobarashop/sass/abstracts/all' as var;
-// @use '../components/cart-in-cart-table';
-// @use '../components/cart-total-checkout';
 
 
-// Cart page container
-:root {
-    --cart-shadow: #{var.$page-shadow};
-    --cart-danger: #ef4444;
-    --cart-radius: #{var.$radius-lg};
-}
 
 .cart-page {
     width: 100%;
@@ -70,7 +62,7 @@
 .cart-items-card,
 .cart-summary__card,
 .empty-cart-card {
-    @include var.surface-card(var(--cart-radius), var.$background-color-three, var(--cart-shadow));
+    @include var.surface-card(var.$radius-lg, var.$background-color-three, var.$page-shadow);
 }
 
 .cart-items-card {
@@ -120,7 +112,7 @@
     border: none;
     border-radius: 50%;
     background: #fff;
-    color: var(--cart-danger);
+    color: #ef4444;
     box-shadow: 0 10px 22px rgba(15, 23, 42, 0.08);
     cursor: pointer;
     transition: transform 0.2s ease, background 0.2s ease;

@@ -1,20 +1,5 @@
 @use '../../../static/doobarashop/sass/abstracts/all' as var;
 
-:root {
-    --sp-bg: #f5f9ff;
-    --sp-surface: #{var.$page-surface-strong};
-    --sp-white: #{var.$ui-white};
-    --sp-text: #{var.$ui-text};
-    --sp-text-soft: #{var.$ui-text-soft};
-    --sp-primary: #{var.$ui-primary};
-    --sp-primary-2: #{var.$ui-primary-soft};
-    --sp-dark: #{var.$ui-dark};
-    --sp-border: #{var.$page-accent-border};
-    --sp-shadow: #{var.$page-shadow};
-    --sp-shadow-hover: #{var.$page-shadow-hover};
-    --sp-radius: #{var.$radius-xl};
-}
-
 .single-product-page {
     position: relative;
     padding: 44px 20px 90px;
@@ -56,7 +41,7 @@
 .card-surface,
 .single-product-video-card,
 .single-product-long-image-card {
-    @include var.surface-card(var(--sp-radius), var(--sp-surface), var(--sp-shadow));
+    @include var.surface-card(var.$radius-xl, var.$page-surface-strong, var.$page-shadow);
 }
 
 .single-product-gallery {
@@ -120,7 +105,7 @@
 }
 
 .single-product-info__eyebrow {
-    @include var.section-eyebrow(var(--sp-primary));
+    @include var.section-eyebrow(var.$ui-primary);
     margin-bottom: 14px;
 }
 
@@ -128,7 +113,7 @@
     margin: 0 0 18px;
     font-size: clamp(2rem, 4vw, 3rem);
     line-height: 1.08;
-    color: var(--sp-dark);
+    color: var.$ui-dark;
 }
 
 .single-product-price-row {
@@ -142,13 +127,13 @@
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    color: var(--sp-text-soft);
+    color: var.$ui-text-soft;
 }
 
 .single-product-price {
     margin: 0;
     font-size: 2rem;
-    color: var(--sp-primary);
+    color: var.$ui-primary;
 }
 
 .single-product-variant {
@@ -161,12 +146,12 @@
     margin-bottom: 8px;
     font-size: 0.92rem;
     font-weight: 700;
-    color: var(--sp-text);
+    color: var.$ui-text;
 }
 
 .single-product-variant select,
 .single-product-quantity {
-    @include var.form-control(var(--sp-text), var(--sp-white));
+    @include var.form-control(var.$ui-text, var.$ui-white);
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -185,7 +170,7 @@
 
 .single-product-addtocart {
     @include var.action-button-base(52px, 0 18px, 16px);
-    @include var.action-button-dark(var(--sp-dark), #10233f, 0 14px 28px rgba(8, 17, 32, 0.18));
+    @include var.action-button-dark(var.$ui-dark, #10233f, 0 14px 28px rgba(8, 17, 32, 0.18));
     font-size: 0.98rem;
     font-weight: 800;
     transition: transform 0.22s ease, box-shadow 0.22s ease;
@@ -208,7 +193,7 @@
     border-radius: 999px;
     background: rgba(21, 112, 239, 0.08);
     border: 1px solid rgba(21, 112, 239, 0.1);
-    color: var(--sp-primary);
+    color: var.$ui-primary;
     font-size: 0.88rem;
     font-weight: 700;
 }
@@ -217,12 +202,12 @@
 .single-product-section-head h2 {
     margin: 0 0 14px;
     font-size: 1.35rem;
-    color: var(--sp-text);
+    color: var.$ui-text;
 }
 
 .single-product-specs__content,
 .single-product-richtext {
-    color: var(--sp-text-soft);
+    color: var.$ui-text-soft;
     line-height: 1.8;
 }
 
@@ -282,12 +267,12 @@
 .single-product-info-table th {
     width: 34%;
     text-align: left;
-    color: var(--sp-text);
+    color: var.$ui-text;
     font-weight: 700;
 }
 
 .single-product-info-table td {
-    color: var(--sp-text-soft);
+    color: var.$ui-text-soft;
     line-height: 1.7;
 }
 

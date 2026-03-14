@@ -1,15 +1,7 @@
+@use '../../../static/doobarashop/sass/abstracts/all' as var; 
+
 :root {
-    --doobara-bg: #071120;
-    --doobara-surface: #0d1b2d;
-    --doobara-card: rgba(255, 255, 255, 0.9);
-    --doobara-card-strong: #ffffff;
-    --doobara-text: #0f172a;
-    --doobara-text-soft: #5b6b81;
-    --doobara-white: #ffffff;
     --doobara-primary: #1570ef;
-    --doobara-primary-2: #1fb6ff;
-    --doobara-accent: #22c55e;
-    --doobara-border: rgba(21, 112, 239, 0.14);
     --doobara-shadow: 0 20px 60px rgba(2, 12, 27, 0.18);
 }
 
@@ -76,7 +68,7 @@
     margin: 0;
     font-size: 1.05rem;
     line-height: 1.85;
-    color: var(--doobara-text-soft);
+    color: var.$ui-text;
 }
 
 .contact-grid {
@@ -166,14 +158,14 @@
 .contact-card h2 {
     margin: 0 0 12px;
     font-size: 1.55rem;
-    color: var(--doobara-text);
+    color: var.$ui-text;
 }
 
 .contact-card__desc {
     margin: 0 0 22px;
     font-size: 1rem;
     line-height: 1.75;
-    color: var(--doobara-text-soft);
+    color: var.$ui-text-soft;
     max-width: 52ch;
 }
 
@@ -182,7 +174,7 @@
     margin-bottom: 22px;
     font-size: 1.15rem;
     font-weight: 700;
-    color: var(--doobara-text);
+    color: var.$ui-text;
     text-decoration: none;
     transition: color 0.25s ease;
     word-break: break-word;

@@ -1,6 +1,7 @@
 // VIDEO PAGE CAROUSEL 
 @use '../../../static/doobarashop/sass/abstracts/all' as var;
 
+// TODO: Redesign this page to be more responsive and user-friendly, maybe add a video player instead of just embedding youtube videos. And rememeber to add a video thumbnail and title for each video in the carousel.and keep the design consistent with the rest of the site, using the same color palette and typography. Also consider adding some interactive elements like a play button overlay on the video thumbnails, and maybe a carousel navigation if there are multiple videos.and use the unidief css system mixin and vatiables
 #video-carousel-container {
     display: grid;
     grid-template-columns:  1fr 1fr;

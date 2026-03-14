@@ -3,7 +3,6 @@
 @use "sass:color"; /* Import the color module */
 
 :root{
-  --white: #ffffff;
   --max: 1400px;
 }
 
@@ -40,7 +39,7 @@
 }
 .btn--ghost{
   background: #25D366;
-  color: var(--white);
+  color: var.$ui-white;
   border-color: rgba(255,255,255,0.35);
   backdrop-filter: blur(6px);
 }
@@ -75,7 +74,7 @@
   width: 100%;
   background: radial-gradient(1200px 500px at 20% 20%, #1b66ff2a 0%, transparent 60%),
               linear-gradient(120deg, var.$secondary-color 0%, var.$secondary-color-light 100%);
-  color: var(--white);
+  color: var.$ui-white;
   padding: 56px 0 34px;
 }
 

@@ -4,18 +4,8 @@
 
 // product countainer grid 
 :root {
-    --shop-bg: #f4f8fc;
-    --shop-surface: #{var.$page-surface-soft};
-    --shop-white: #{var.$ui-white};
-    --shop-text: #{var.$ui-text};
-    --shop-text-soft: #{var.$ui-text-soft};
-    --shop-primary: #{var.$ui-primary};
-    --shop-primary-2: #{var.$ui-primary-soft};
-    --shop-dark: #{var.$ui-dark};
-    --shop-border: #{var.$page-accent-border};
     --shop-shadow: #{var.$page-shadow};
     --shop-shadow-hover: 0 24px 60px rgba(15, 23, 42, 0.14);
-    --shop-radius: #{var.$radius-md};
 }
 
 .shop-page {
@@ -59,7 +49,7 @@
 }
 
 .shop-toolbar__eyebrow {
-    @include var.section-eyebrow(var(--shop-primary));
+    @include var.section-eyebrow(var(var.$ui-primary));
     margin-bottom: 16px;
 }
 
@@ -67,7 +57,7 @@
     margin: 0 0 12px;
     font-size: clamp(2rem, 4vw, 3.3rem);
     line-height: 1.08;
-    color: var(--shop-dark);
+    color: var(var.$ui-dark);
 }
 
 .shop-toolbar__intro p {
@@ -75,11 +65,11 @@
     max-width: 60ch;
     font-size: 1rem;
     line-height: 1.8;
-    color: var(--shop-text-soft);
+    color: var(var.$ui-text-soft);
 }
 
 .shop-filter-card {
-    @include var.surface-card(var(--shop-radius), rgba(255,255,255,0.72), var(--shop-shadow), rgba(255,255,255,0.75), 16px);
+    @include var.surface-card(var(var.$radius-md), rgba(255,255,255,0.72), var(--shop-shadow), rgba(255,255,255,0.75), 16px);
     padding: 22px;
 }
 
@@ -99,11 +89,11 @@
 .shop-field label {
     font-size: 0.86rem;
     font-weight: 700;
-    color: var(--shop-text);
+    color: var(var.$ui-text);
 }
 
 .shop-field select {
-    @include var.form-control(var(--shop-text), var(--shop-white), #dbe7f3, 50px);
+    @include var.form-control(var(var.$ui-text), var(var.$ui-white), #dbe7f3, 50px);
     font-size: 0.96rem;
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
@@ -114,7 +104,7 @@
 
 .shop-filter-btn {
     @include var.action-button-base(50px, 0 22px);
-    @include var.action-button-primary(var(--shop-primary), var(--shop-primary-2));
+    @include var.action-button-primary(var(var.$ui-primary), var(var.$ui-primary-soft));
     font-size: 0.96rem;
     transition: transform 0.22s ease, box-shadow 0.22s ease;
 }
@@ -133,7 +123,7 @@
 }
 
 .shop-card {
-    @include var.surface-card(var(--shop-radius), rgba(255,255,255,0.82), var(--shop-shadow), rgba(255,255,255,0.75), 14px);
+    @include var.surface-card(var(var.$radius-md), rgba(255,255,255,0.82), var(--shop-shadow), rgba(255,255,255,0.75), 14px);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -145,7 +135,7 @@
 .shop-card:hover {
     transform: translateY(-8px);
     box-shadow: var(--shop-shadow-hover);
-    border-color: var(--shop-border);
+    border-color: var(var.$page-accent-border);
 }
 
 .shop-card__link {
@@ -188,15 +178,16 @@
     font-size: 1.02rem;
     font-weight: 700;
     line-height: 1.45;
-    color: var(--shop-text);
+    color: var(var.$ui-text);
     min-height: 2.9em;
 }
 
 .shop-card__price {
     margin: 0 0 18px;
-    font-size: 1.15rem;
-    font-weight: 800;
-    color: var(--shop-primary);
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var.$text-color-price;
+
 }
 
 .shop-card__btn {

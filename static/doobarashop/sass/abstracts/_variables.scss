@@ -5,11 +5,11 @@ $back-color: #292826;
 $identity-color: #F9D342;
 
 // Shared UI palette
-$ui-primary: #1570ef;
-$ui-primary-soft: #1fb6ff;
+$ui-primary: $secondary-color;
+$ui-primary-soft: $secondary-color-light;
 $ui-text: #0f172a;
 $ui-text-soft: #64748b;
-$ui-dark: #081120;
+$ui-dark: $secondary-color;
 $ui-success: #16a34a;
 $ui-danger: #dc2626;
 $ui-white: #ffffff;
@@ -49,7 +49,7 @@ $text-color-black: $ui-black;
 $text-color-gray: $ui-gray;
 $text-color-purple: $secondary-color;
 $text-color-light-purple: $secondary-color-light;
-$text-color-price: #4e42f9;
+$text-color-price: #f94242;
 $button-color-transparent: #331e6d17;
 $button-color-border-transparent: #331e6d2c;
 
