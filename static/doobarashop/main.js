@@ -216,9 +216,22 @@ document.addEventListener('DOMContentLoaded', function(){
                         true
                     }
                     else {
-                        // document.getElementById('carttotal').innerHTML = result.cart.total
-                        document.getElementById('cartitemsqtt').innerHTML = result.cart.item
-                        document.getElementById('footeritemqtt').innerHTML = result.cart.item
+                        const cartItemsElement = document.getElementById('cartitemsqtt')
+                        const footerItemsElement = document.getElementById('footeritemqtt')
+                        const cartTotalElement = document.getElementById('carttotal')
+
+                        if (cartItemsElement) {
+                            cartItemsElement.innerHTML = result.cart.item
+                        }
+
+                        if (footerItemsElement) {
+                            footerItemsElement.innerHTML = result.cart.item
+                        }
+
+                        if (cartTotalElement) {
+                            const cartTotal = Number(result.cart.total)
+                            cartTotalElement.innerHTML = "$ " + cartTotal.toFixed(2)
+                        }
                     }
                 })
             }
