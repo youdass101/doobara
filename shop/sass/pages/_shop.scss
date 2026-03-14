@@ -104,7 +104,7 @@
 
 .shop-filter-btn {
     @include var.action-button-base(50px, 0 22px);
-    @include var.action-button-primary(var(var.$ui-primary), var(var.$ui-primary-soft));
+    @include var.action-button-primary;
     font-size: 0.96rem;
     transition: transform 0.22s ease, box-shadow 0.22s ease;
 }

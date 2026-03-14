@@ -1,44 +1,89 @@
-// VIDEO PAGE CAROUSEL 
 @use '../../../static/doobarashop/sass/abstracts/all' as var;
 
-// TODO: Redesign this page to be more responsive and user-friendly, maybe add a video player instead of just embedding youtube videos. And rememeber to add a video thumbnail and title for each video in the carousel.and keep the design consistent with the rest of the site, using the same color palette and typography. Also consider adding some interactive elements like a play button overlay on the video thumbnails, and maybe a carousel navigation if there are multiple videos.and use the unidief css system mixin and vatiables
+.video-page {
+    max-width: var.$max-width;
+    margin: 0 auto;
+    padding: 28px 16px 42px;
+}
+
 #video-carousel-container {
     display: grid;
-    grid-template-columns:  1fr 1fr;
-    grid-gap: 10px;
-    padding: 5px;
-    
-    //Each video in carousel 
-    .video-card {
-        background-color: var.$back-color;
-        color: white;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+}
 
-        // Video wrapper element for screen responsivness
-        .youtube-video {
-            position: relative;
-            overflow: hidden;
-            width: 100%;
-            padding-top: 56.25%; /* 16:9 Aspect Ratio (divide 9 by 16 = 0.5625) */
-        }
-        // Video Iframe resize response
-        iframe {
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            width: 100%;
-            height: 100%;
-        }
-        // Video title 
-        h4 {
-            color: gainsboro;
-            padding: 0 0 0 18px;
-        }
-    }    
+.video-card {
+    border-radius: var.$radius-sm;
+    border: 1px solid var.$page-accent-border;
+    background: var.$page-surface;
+    box-shadow: 0 14px 30px rgba(15, 23, 42, 0.08);
+    overflow: hidden;
+    transition: transform 0.22s ease, box-shadow 0.22s ease;
+
+    &:hover {
+        transform: translateY(-4px);
+        box-shadow: var.$page-shadow-hover;
+    }
+}
+
+.youtube-video {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%;
+    background: #111827;
+
+    iframe {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        border: 0;
+        display: block;
+    }
+}
+
+.video-card__content {
+    padding: 0 18px 18px;
+}
+
+.video-card__title {
+    margin: 0;
+    padding: 14px 16px;
+    margin-inline: -18px;
+    text-align: center;
+    font-family: var.$secondary-font;
+    font-size: 1.08rem;
+    font-weight: 700;
+    color: var.$ui-primary;
+    background: rgba(255, 255, 255, 0.9);
+    border-top: 1px solid rgba(255, 255, 255, 0.75);
+    border-bottom: 1px solid rgba(21, 112, 239, 0.12);
+}
+
+.video-card__description {
+    margin: 14px 0 0;
+    text-align: center;
+    line-height: 1.6;
+    font-size: 0.96rem;
+    color: var.$ui-text-soft;
 }
 
 @media screen and (max-width: 780px) {
-    // VIDEO PAGE stretch
+    .video-page {
+        padding: 22px 12px 36px;
+    }
+
     #video-carousel-container {
-        grid-template-columns: auto;
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    .video-card__content {
+        padding: 0 14px 16px;
+    }
+
+    .video-card__title {
+        margin-inline: -14px;
+        font-size: 1rem;
     }
 }
