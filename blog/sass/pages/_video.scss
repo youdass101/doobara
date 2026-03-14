@@ -1,44 +1,90 @@
-// VIDEO PAGE CAROUSEL 
 @use '../../../static/doobarashop/sass/abstracts/all' as var;
 
-// TODO: Redesign this page to be more responsive and user-friendly, maybe add a video player instead of just embedding youtube videos. And rememeber to add a video thumbnail and title for each video in the carousel.and keep the design consistent with the rest of the site, using the same color palette and typography. Also consider adding some interactive elements like a play button overlay on the video thumbnails, and maybe a carousel navigation if there are multiple videos.and use the unidief css system mixin and vatiables
-#video-carousel-container {
-    display: grid;
-    grid-template-columns:  1fr 1fr;
-    grid-gap: 10px;
-    padding: 5px;
-    
-    //Each video in carousel 
-    .video-card {
-        background-color: var.$back-color;
-        color: white;
-
-        // Video wrapper element for screen responsivness
-        .youtube-video {
-            position: relative;
-            overflow: hidden;
-            width: 100%;
-            padding-top: 56.25%; /* 16:9 Aspect Ratio (divide 9 by 16 = 0.5625) */
-        }
-        // Video Iframe resize response
-        iframe {
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            width: 100%;
-            height: 100%;
-        }
-        // Video title 
-        h4 {
-            color: gainsboro;
-            padding: 0 0 0 18px;
-        }
-    }    
+.video-page {
+    width: 100%;
+    max-width: var.$max-width;
+    margin: 0 auto;
+    padding: clamp(1.25rem, 2vw, 2rem) 0 clamp(2rem, 4vw, 3rem);
 }
 
-@media screen and (max-width: 780px) {
-    // VIDEO PAGE stretch
-    #video-carousel-container {
-        grid-template-columns: auto;
+.video-page__header {
+    max-width: 680px;
+    margin-bottom: clamp(1.25rem, 2.5vw, 2rem);
+
+    h1 {
+        font-size: clamp(1.7rem, 2.8vw, 2.3rem);
+        line-height: 1.2;
+        color: var.$ui-primary;
+        margin-bottom: 0.65rem;
+    }
+}
+
+.video-page__eyebrow {
+    @include var.section-eyebrow;
+    margin-bottom: 0.85rem;
+}
+
+.video-page__intro {
+    color: var.$ui-text-soft;
+    font-size: 1rem;
+    line-height: 1.65;
+}
+
+.video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: clamp(1rem, 2vw, 1.5rem);
+}
+
+.video-card {
+    @include var.surface-card;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    transition: transform 0.22s ease, box-shadow 0.22s ease;
+
+    &:hover {
+        transform: translateY(-3px);
+        box-shadow: var.$page-shadow-hover;
+    }
+}
+
+.video-card__thumbnail {
+    display: block;
+    aspect-ratio: 16 / 9;
+    background: var.$back-color;
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+
+.video-card__content {
+    padding: 1rem 1rem 1.1rem;
+
+    h2 {
+        font-size: 1.05rem;
+        line-height: 1.35;
+        color: var.$ui-text;
+        margin-bottom: 0.5rem;
+    }
+
+    p {
+        color: var.$ui-text-soft;
+        font-size: 0.95rem;
+        line-height: 1.55;
+    }
+}
+
+@media screen and (max-width: 640px) {
+    .video-page {
+        padding-top: 1rem;
+    }
+
+    .video-card__content {
+        padding: 0.95rem;
     }
 }

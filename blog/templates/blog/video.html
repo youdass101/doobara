@@ -4,53 +4,58 @@
 {% block pagetitle %}
 VIDEO
 {% endblock %}
+
 {% block body %}
-<!-- video carousel page -->
-<div id="video-carousel-container">
-    <!-- single video  -->
-    <div class="video-card">
-        <h4>Door Sensor</h4>
-        <div class="youtube-video">
-            <iframe src="https://www.youtube.com/embed/NZtVLt9Twuw" 
-                title="YouTube video player" frameborder="0" 
-                allowfullscreen>
-            </iframe>
-        </div>
+<section class="video-page container" aria-labelledby="video-page-title">
+    <header class="video-page__header">
+        <p class="video-page__eyebrow">Doobara Smart</p>
+        <h1 id="video-page-title">Video Library</h1>
+        <p class="video-page__intro">
+            Explore short walkthroughs and product highlights from our YouTube channel.
+            Tap any card to watch the full video.
+        </p>
+    </header>
+
+    <div class="video-grid" role="list">
+        <article class="video-card" role="listitem">
+            <a class="video-card__thumbnail" href="https://www.youtube.com/watch?v=NZtVLt9Twuw" target="_blank" rel="noopener noreferrer" aria-label="Watch Door Sensor setup video on YouTube">
+                <img src="https://i.ytimg.com/vi/NZtVLt9Twuw/hqdefault.jpg" alt="Door Sensor video thumbnail">
+            </a>
+            <div class="video-card__content">
+                <h2>Door Sensor</h2>
+                <p>Quick guide showing how the Door Sensor works and how to start using it in your home.</p>
+            </div>
+        </article>
+
+        <article class="video-card" role="listitem">
+            <a class="video-card__thumbnail" href="https://www.youtube.com/watch?v=FTqQYB6CmUc" target="_blank" rel="noopener noreferrer" aria-label="Watch Motion Sensor feature video on YouTube">
+                <img src="https://i.ytimg.com/vi/FTqQYB6CmUc/hqdefault.jpg" alt="Motion Sensor video thumbnail">
+            </a>
+            <div class="video-card__content">
+                <h2>Motion Sensor</h2>
+                <p>Discover motion detection features and see how to position your sensor for better coverage.</p>
+            </div>
+        </article>
+
+        <article class="video-card" role="listitem">
+            <a class="video-card__thumbnail" href="https://www.youtube.com/watch?v=6Qy_9DDzV70" target="_blank" rel="noopener noreferrer" aria-label="Watch Door Sensor usage tips video on YouTube">
+                <img src="https://i.ytimg.com/vi/6Qy_9DDzV70/hqdefault.jpg" alt="Door Sensor usage tips video thumbnail">
+            </a>
+            <div class="video-card__content">
+                <h2>Door Sensor Tips</h2>
+                <p>Learn practical tips for everyday use, notifications, and getting the most from your Door Sensor.</p>
+            </div>
+        </article>
+
+        <article class="video-card" role="listitem">
+            <a class="video-card__thumbnail" href="https://www.youtube.com/watch?v=Rsq0DIjpWdk" target="_blank" rel="noopener noreferrer" aria-label="Watch Motion Sensor setup tips video on YouTube">
+                <img src="https://i.ytimg.com/vi/Rsq0DIjpWdk/hqdefault.jpg" alt="Motion Sensor setup tips video thumbnail">
+            </a>
+            <div class="video-card__content">
+                <h2>Motion Sensor Setup</h2>
+                <p>A simple walkthrough for setup, installation ideas, and how to tune sensor responsiveness.</p>
+            </div>
+        </article>
     </div>
-
-    <div class="video-card">
-        <h4>Motion Sensor</h4>
-        <div class="youtube-video">
-            <iframe
-                src="https://www.youtube.com/embed/FTqQYB6CmUc" 
-                title="YouTube video player" frameborder="0" 
-                allowfullscreen>
-            </iframe>
-        </div>
-    </div>
-
-    <div class="video-card">
-        <h4>Door Sensor</h4>
-        <div class="youtube-video">
-            <iframe src="https://www.youtube.com/embed/6Qy_9DDzV70" 
-                title="YouTube video player" frameborder="0" 
-                allowfullscreen>
-            </iframe>
-        </div>
-    </div>
-
-    <div class="video-card">
-        <h4>Motion Sensor</h4>
-        <div class="youtube-video">
-            <iframe 
-                src="https://www.youtube.com/embed/Rsq0DIjpWdk" 
-                title="YouTube video player" frameborder="0" 
-                allowfullscreen>
-            </iframe>
-        </div>
-    </div>
-</div>
- 
-
-{%endblock %}
-
+</section>
+{% endblock %}
