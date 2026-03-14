@@ -216,7 +216,7 @@ document.addEventListener('DOMContentLoaded', function(){
                         true
                     }
                     else {
-                        document.getElementById('carttotal').innerHTML = result.cart.total
+                        // document.getElementById('carttotal').innerHTML = result.cart.total
                         document.getElementById('cartitemsqtt').innerHTML = result.cart.item
                         document.getElementById('footeritemqtt').innerHTML = result.cart.item
                     }

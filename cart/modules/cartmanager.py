@@ -163,6 +163,7 @@ class CartManager:
                 result = {'pid': product['pid'],'quantity':(given - current)}
                 # edit cart item using add to cart method
                 self.add_to_cart(result)
+        return True
 
     # instance * instance -> boolean
     # delete object using product given id 
@@ -171,3 +172,4 @@ class CartManager:
         # product= Product.objects.get(id=item)
         # delete object
         Cart_Item.objects.get(product= item, cart=ucart).delete()
+        return True

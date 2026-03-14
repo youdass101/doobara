@@ -40,6 +40,7 @@ def shopaddtocart(request):
         # is dict | (loc: modules.cartmanager)
         # current cart data in dict 
         ccart = cartcontext(request) 
+        print(ccart)
         return JsonResponse({"result":"done", "cart": ccart}, status=201)
 
 # caller: cart
