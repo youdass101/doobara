@@ -4,53 +4,77 @@
 {% block pagetitle %}
 VIDEO
 {% endblock %}
+
 {% block body %}
-<!-- video carousel page -->
-<div id="video-carousel-container">
-    <!-- single video  -->
-    <div class="video-card">
-        <h4>Door Sensor</h4>
-        <div class="youtube-video">
-            <iframe src="https://www.youtube.com/embed/NZtVLt9Twuw" 
-                title="YouTube video player" frameborder="0" 
-                allowfullscreen>
-            </iframe>
-        </div>
+<section class="video-page" aria-label="Video gallery">
+    <div id="video-carousel-container">
+        <article class="video-card">
+            <div class="youtube-video">
+                <iframe
+                    src="https://www.youtube.com/embed/NZtVLt9Twuw"
+                    title="Door Sensor setup video"
+                    frameborder="0"
+                    allowfullscreen>
+                </iframe>
+            </div>
+            <div class="video-card__content">
+                <h3 class="video-card__title">Door Sensor</h3>
+                <p class="video-card__description">
+                    Learn how to install and position the door sensor for reliable alerts and smooth daily operation.
+                </p>
+            </div>
+        </article>
+
+        <article class="video-card">
+            <div class="youtube-video">
+                <iframe
+                    src="https://www.youtube.com/embed/FTqQYB6CmUc"
+                    title="Motion Sensor guide video"
+                    frameborder="0"
+                    allowfullscreen>
+                </iframe>
+            </div>
+            <div class="video-card__content">
+                <h3 class="video-card__title">Motion Sensor</h3>
+                <p class="video-card__description">
+                    A quick walkthrough for configuring motion sensitivity and placement to improve room coverage.
+                </p>
+            </div>
+        </article>
+
+        <article class="video-card">
+            <div class="youtube-video">
+                <iframe
+                    src="https://www.youtube.com/embed/6Qy_9DDzV70"
+                    title="Door Sensor troubleshooting video"
+                    frameborder="0"
+                    allowfullscreen>
+                </iframe>
+            </div>
+            <div class="video-card__content">
+                <h3 class="video-card__title">Door Sensor Tips</h3>
+                <p class="video-card__description">
+                    Discover practical troubleshooting steps and maintenance tips for long-term sensor performance.
+                </p>
+            </div>
+        </article>
+
+        <article class="video-card">
+            <div class="youtube-video">
+                <iframe
+                    src="https://www.youtube.com/embed/Rsq0DIjpWdk"
+                    title="Motion Sensor best practices video"
+                    frameborder="0"
+                    allowfullscreen>
+                </iframe>
+            </div>
+            <div class="video-card__content">
+                <h3 class="video-card__title">Motion Sensor Best Practices</h3>
+                <p class="video-card__description">
+                    Review recommended setup patterns to reduce false positives while keeping detection fast and accurate.
+                </p>
+            </div>
+        </article>
     </div>
-
-    <div class="video-card">
-        <h4>Motion Sensor</h4>
-        <div class="youtube-video">
-            <iframe
-                src="https://www.youtube.com/embed/FTqQYB6CmUc" 
-                title="YouTube video player" frameborder="0" 
-                allowfullscreen>
-            </iframe>
-        </div>
-    </div>
-
-    <div class="video-card">
-        <h4>Door Sensor</h4>
-        <div class="youtube-video">
-            <iframe src="https://www.youtube.com/embed/6Qy_9DDzV70" 
-                title="YouTube video player" frameborder="0" 
-                allowfullscreen>
-            </iframe>
-        </div>
-    </div>
-
-    <div class="video-card">
-        <h4>Motion Sensor</h4>
-        <div class="youtube-video">
-            <iframe 
-                src="https://www.youtube.com/embed/Rsq0DIjpWdk" 
-                title="YouTube video player" frameborder="0" 
-                allowfullscreen>
-            </iframe>
-        </div>
-    </div>
-</div>
- 
-
-{%endblock %}
-
+</section>
+{% endblock %}
