@@ -20,18 +20,24 @@ def serialize(lop, method):
 # model_object * string - > dictionary 
 # reutrning a dictionary of specified keys in a given object model (the engine of product serialize method)
 def product_serialize(object, tag):
+
     # is list of dict | (loc: shop.models )
     # all category object connected to the given object 
     category_list = [cat.serialize() for cat in object.category.all()]
+
     # image is image dict
     # return the default product image if the object album is empty return none to avoid error
     try:
         # if product have an album
         # (loc: shop.images )
-        image = object.album.default().serialize()
+        image= None
+        for items in object.images.all():           
+            if items.thumbnail:
+                image = {"url": items.image.url, "alt_text": items.alt_text}
     except:
         # else return None
         image = None
+    
 
 
     # -> list of dictionary
@@ -40,7 +46,9 @@ def product_serialize(object, tag):
     def allimages():
         try:
             # (loc: shop.images )
-            return [i.serialize() for i in object.album.thumbnails()]
+            allimag= [{"url": image.image.url, "alt_text": image.alt_text, "thumbnail": image.thumbnail}
+                        for image in object.images.all()]
+            return allimag
         except:
             return None
 

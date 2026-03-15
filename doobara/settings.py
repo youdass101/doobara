@@ -231,11 +231,11 @@ ACCOUNT_FORMS = {
 }
 
 # allauth email and username authentication
-ACCOUNT_AUTHENTICATION_METHOD = "username_email"
+ACCOUNT_LOGIN_METHODS = {'email', 'username'}
 ACCOUNT_UNIQUE_EMAIL = True
 
 # allauth signup email required
-ACCOUNT_EMAIL_REQUIRED=True
+ACCOUNT_SIGNUP_FIELDS = ['email*', 'username*', 'password1*', 'password2*']
 # allauth email verification required
 ACCOUNT_EMAIL_VERIFICATION = "none"
 

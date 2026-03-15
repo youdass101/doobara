@@ -7,27 +7,23 @@
 
 {% block body %}
 <section class="single-product-page">
-
     <div class="single-product-shell">
-
         <div class="single-product-top">
             <!-- Left: gallery -->
             <div class="single-product-gallery">
                 <div class="single-product-gallery__main">
                     <img id="spi"
-                         src="{% static product.pmainimage.iurl %}"
-                         alt="{{ product.pname }}">
+                         src="{{product.pmainimage.url}}"
+                         alt="{{ product.pmainimage.alt_text }}">
                 </div>
 
                 <div class="single-product-gallery__thumbs">
                     {% for image in product.pallimages %}
-                        {% if image.ilong == False %}
                             <button type="button" class="single-product-thumb">
                                 <img class="sp-thumb-image"
-                                     src="{% static image.iurl %}"
-                                     alt="{{ product.pname }}">
+                                     src="{{image.url }}"
+                                     alt="{{ image.alt_text }}">
                             </button>
-                        {% endif %}
                     {% endfor %}
                 </div>
             </div>

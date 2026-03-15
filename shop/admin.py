@@ -9,7 +9,6 @@ class ProductAdmin(ImportExportActionModelAdmin):
 # Register your models here.
 admin.site.register(Categorie, ProductAdmin)
 admin.site.register(Product, ProductAdmin)
-admin.site.register(Image, ProductAdmin)
-admin.site.register(ImageAlbum, ProductAdmin)
+admin.site.register(ProductImage, ProductAdmin)
 admin.site.register(VariantHolder, ProductAdmin)
 admin.site.register(Hero_Card, ProductAdmin)

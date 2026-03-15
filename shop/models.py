@@ -1,5 +1,4 @@
 from django.db import models
-from .modeling.images import *
 from .modeling.serialize_helper import *
 from django.dispatch import receiver
 
@@ -41,41 +40,24 @@ class Product(models.Model):
     # name is string
     # product name string of max 255 char
     name = models.CharField(max_length=255)
-    # short_description is string 
-    # product short description more than 1000 char 
-    short_description = models.TextField(blank=True)
     # long_description is string
     #product long decription more than 1000 char
     description = models.TextField(blank=True)
+    # short_description is string 
+    # product short description more than 1000 char 
+    short_description = models.TextField(blank=True)
     # price is decimale number
     # product price decimal number 
     price = models.DecimalField(max_digits=5, decimal_places=2)
     sale_price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)  # Sale price (if applicable)
     currency = models.CharField(max_length=3, default="USD")  # Currency code (e.g., USD, EUR)
-    # created_time is date
-    # product object creation date 
-    created_time = models.DateTimeField(null=True, blank=True, auto_now_add=True)
-    # video is string(url arg)
-    # product video URL string 
-    video = models.URLField(blank=True)
-    # album is model-object
-    # one to one filed with album images tabel object 
-    album = models.ForeignKey(ImageAlbum, related_name='model', on_delete=models.SET_NULL, null=True, blank=True) 
-    # stock is boolean
-    # boolean true if product in stock, false if out of stock 
-    stock = models.BooleanField(default=False)
-    # features is boolean
-    # boolean ture if the product is featured, else false
-    featured = models.BooleanField(default=False)
-    # variant is boolean
-    # if product have variant options true, else false
-    variant = models.BooleanField(default=False)
-    # active is boolean 
-    # true if product active, else false
-    active = models.BooleanField(default=False)
     # category is List of model-objects
     # product category model reference many to many (the product can belong to several catergories)
     category = models.ManyToManyField(Categorie, blank=True, default=None, related_name="products") 
+
+    # stock is boolean
+    # boolean true if product in stock, false if out of stock 
+    stock = models.BooleanField(default=False)
     quantity = models.PositiveIntegerField(default=0)  # Quantity available
     availability = models.CharField(
         max_length=50,
@@ -86,6 +68,26 @@ class Product(models.Model):
         ],
         default="in stock",
     )
+    
+    # created_time is date
+    # product object creation date 
+    created_time = models.DateTimeField(null=True, blank=True, auto_now_add=True)
+    # active is boolean 
+    # true if product active, else false
+    active = models.BooleanField(default=False)
+    # features is boolean
+    # boolean ture if the product is featured, else false
+    featured = models.BooleanField(default=False)
+    updated_time = models.DateTimeField(auto_now=True)  # Product last updated date
+
+    # video is string(url arg)
+    # product video URL string 
+    video = models.URLField(blank=True)
+
+
+    # variant is boolean
+    # if product have variant options true, else false
+    variant = models.BooleanField(default=False)
     # IF any issue show will customize based on it so far when connected variant holder is deleted 
     #                       to connected product 
     # variantes are a list of objects
@@ -102,13 +104,15 @@ class Product(models.Model):
     weight = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)  # Weight in kilograms
     dimensions = models.CharField(max_length=255, blank=True)  # Dimensions (e.g., "10x20x30 cm")
     
+
+    def __str__(self):
+        return f"{self.name}"
+    
     def get_absolute_url(self):
         return reverse('singleproduct', kwargs={'locat': self.name})  # adjust 'locat' to your slug/field
     
 
-    # Admin page tabel view of dojects column (key value)
-    def __str__(self):
-        return f"{self.name}, {self.album} "
+
 
     # SQL query set -> Dictionary(json)
     # Takes SQL(model) query set data and convert it to JSON dictionary records
@@ -160,12 +164,36 @@ class Hero_Card(models.Model):
             "link": self.link,
             "categorie": self.categorie
         }
+    
+
+
+# image is Sql django model
+# interp each object contain image informations and url
+class ProductImage(models.Model):
+    # name is string
+    # image title
+    product = models.ForeignKey('Product', related_name='images', on_delete=models.CASCADE)  # Link to the product
+    # alt is string
+    # image short interpretation 
+    alt_text = models.CharField(max_length=255, blank=True)
+    # image is image 
+    # the image path
+    image = models.ImageField(upload_to= 'static/doobarashop/upload/images')
+    # default is boolean 
+    # if true the image is the main image for the product 
+    thumbnail = models.BooleanField(default=False)  # True if this is a thumbnail image
+
+
+    # data to show on admin page 
+    # def __str__(self):
+    #     return f"{self.name}, {self.album} " 
+
 
 # !!! TEST IT IF ITS STILL WORKING AFTER THE VARIANT CUSTOMIZATION !!!
 # Delete product foreing connected objects
-@receiver(models.signals.post_delete, sender=Product)
-def handle_deleted_product(sender, instance, **kwargs):
-    # if instance.variant_list:
-    #     instance.variant_list.delete()
-    if instance.album:
-        instance.album.delete()
+# @receiver(models.signals.post_delete, sender=Product)
+# def handle_deleted_product(sender, instance, **kwargs):
+#     # if instance.variant_list:
+#     #     instance.variant_list.delete()
+#     if instance.album:
+#         instance.album.delete()
