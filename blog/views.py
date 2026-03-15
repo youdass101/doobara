@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from .models import *
 import objgraph
 
 # Create your views here.
@@ -8,9 +9,10 @@ def blog(request):
     return render(request, "blog/blog.html")
 
 def video(request):
-    objgraph.show_growth()
+    video = Video.objects.all()
+    video = [v.serialize() for v in video]
 
-    return render(request, "blog/video.html")
+    return render(request, "blog/video.html",{"video": video})
 
 def single_blog_post(request):
     objgraph.show_growth()
