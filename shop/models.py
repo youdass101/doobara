@@ -185,8 +185,8 @@ class ProductImage(models.Model):
 
 
     # data to show on admin page 
-    # def __str__(self):
-    #     return f"{self.name}, {self.album} " 
+    def __str__(self):
+        return f"{self.product.name} - {self.alt_text}" 
 
 
 # !!! TEST IT IF ITS STILL WORKING AFTER THE VARIANT CUSTOMIZATION !!!

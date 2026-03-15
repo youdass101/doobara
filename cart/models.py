@@ -35,5 +35,5 @@ class Cart_Item (models.Model):
             "productname" : self.product.name,
             "productunitprice" : self.product.price,
             "productquantity": self.quantity,
-            "productimage": self.product.album.default().serialize()
+            "productimage": self.product.images.filter(thumbnail=True).first() if self.product.images.filter(thumbnail=True).exists() else None
         }
