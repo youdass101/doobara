@@ -10,5 +10,7 @@ class ProductAdmin(ImportExportActionModelAdmin):
 admin.site.register(Categorie, ProductAdmin)
 admin.site.register(Product, ProductAdmin)
 admin.site.register(ProductImage, ProductAdmin)
-admin.site.register(VariantHolder, ProductAdmin)
+admin.site.register(ProductVariant, ProductAdmin)
+admin.site.register(ProductVariantImage, ProductAdmin)
+admin.site.register(ProductVariantItem, ProductAdmin)
 admin.site.register(Hero_Card, ProductAdmin)

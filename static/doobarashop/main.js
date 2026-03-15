@@ -14,79 +14,43 @@ document.addEventListener('DOMContentLoaded', function(){
     var mobileMenu = document.getElementById('navigation-mobile');
     var mobileMenuChildren = mobileMenuBtn.querySelectorAll('i, p');
 
-    // menubtn is Element id
-    // mobile nav menu button element    
-    // var menubtn = document.getElementById('btnm');
-
-    // mobilemenu is Element id
-    // secondary navigaton menu container for mobile media
-    // var mobilemenu = document.getElementById('navigation-mobile');
-
-    // logo_nav is Element id
-    // site logo container in the header-nav area
-    // var logo_nav = document.getElementById('logo-nav');   
-
-    // search_nav is Element id
-    // search componenet container in the header-nav area 
-    // var search_nav = document.getElementById('search-box-nav');
-
-    // menu_nav is Element id
-    // Primary meny componenet in the header-nav area 
-    // var menu_nav = document.getElementById('navigation-menu');
-
-    // cart_nav is Element id
-    // cart information component in header-nav area  
-    // var cart_nav = document.getElementById('cart-nav');
     
     // Set all account page data element display to none
-    function account_default() {
-        // document.getElementById('account-wish-list').classList.toggle('show', false)
-        document.getElementById('my-account-dashboard').classList.toggle('show', false)
-        document.getElementById('my-account-orders').classList.toggle('show', false)
-        document.getElementById('account-detail').classList.toggle('show', false)
-        // document.getElementById('view-order').classList.toggle("show",false)
-    }
+    // function account_default() {
+    //     // document.getElementById('account-wish-list').classList.toggle('show', false)
+    //     document.getElementById('my-account-dashboard').classList.toggle('show', false)
+    //     document.getElementById('my-account-orders').classList.toggle('show', false)
+    //     document.getElementById('account-detail').classList.toggle('show', false)
+    //     // document.getElementById('view-order').classList.toggle("show",false)
+    // }
 
-    // When account page compnents loaded 
-    if (document.getElementById('account-dash')) {
+    // // When account page compnents loaded 
+    // if (document.getElementById('account-dash')) {
 
-        // When dashboard button is clicked in account page 
-        // Show Account current active orders container
-        document.getElementById('account-dash').onclick = () => {
-            account_default()
-            document.getElementById('my-account-dashboard').classList.toggle('show')
-        }
+    //     // When dashboard button is clicked in account page 
+    //     // Show Account current active orders container
+    //     document.getElementById('account-dash').onclick = () => {
+    //         account_default()
+    //         document.getElementById('my-account-dashboard').classList.toggle('show')
+    //     }
 
-        // When Orders button clicked in account page 
-        // Show account order history container
-        document.getElementById('account-orders').onclick = () => {
-            account_default()
-            document.getElementById('my-account-orders').classList.toggle('show')
-        }
+    //     // When Orders button clicked in account page 
+    //     // Show account order history container
+    //     document.getElementById('account-orders').onclick = () => {
+    //         account_default()
+    //         document.getElementById('my-account-orders').classList.toggle('show')
+    //     }
 
-        // When whishlist button clicked in account page 
-        // Show account whishlistbutton container
-        // document.getElementById('account-whishlist').onclick = () => {
-        //     account_default()
-        //     document.getElementById('account-wish-list').classList.toggle('show')
-        // }
+    //     // When whishlist button clicked in account page 
 
-        // When account details button is clicked in account page 
-        //show Account edit form container 
-        document.getElementById('account-edit').onclick = () => {
-            account_default()
-            document.getElementById('account-detail').classList.toggle('show')
-        }
-        
-        // When view button is clicked in orders and dash container in account page 
-        // Show ACCOUNT single ORDER VIEW 
-        // document.querySelectorAll('.view-order-button').forEach (button => {
-        //     button.onclick = () => {
-        //     account_default()
-        //     document.getElementById('view-order').classList.toggle('show')
-        //     }
-        // }) 
-    }
+    //     // When account details button is clicked in account page 
+    //     //show Account edit form container 
+    //     document.getElementById('account-edit').onclick = () => {
+    //         account_default()
+    //         document.getElementById('account-detail').classList.toggle('show')
+    //     }
+ 
+    // }
 
 
     // STICKY HEADER

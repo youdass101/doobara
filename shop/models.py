@@ -25,13 +25,6 @@ class Categorie(models.Model):
             "description" : self.description
         }
 
-# Product variant table
-class VariantHolder(models.Model):
-    name = models.CharField(max_length=255)
-
-    def __str__(self):
-        return f"{self.name}"
-
 
 # PRODUCT is model-table (int (primary ID) * string * int * string * string * date * URL
 #                         * boolean * boolean * boolean * boolean * boolean *  model reference) model
@@ -88,17 +81,14 @@ class Product(models.Model):
     # variant is boolean
     # if product have variant options true, else false
     variant = models.BooleanField(default=False)
-    # IF any issue show will customize based on it so far when connected variant holder is deleted 
-    #                       to connected product 
-    # variantes are a list of objects
-    # if product have a variant they will be listed
-    variant_list = models.ForeignKey(VariantHolder, null=True, blank=True, default=None, related_name="products", on_delete=models.SET_NULL)
     # Variant_name is the string 
     # if variant true, name is the variant keyword of the product
     variant_name = models.CharField(max_length=255, blank=True, null=True, default=None)
     # Variant_default is a boolean 
     # if product is variant and is the default variant in list result is true 
     variant_default = models.BooleanField(default=False)
+    is_system = models.BooleanField(default=False)
+
 
     # Shipping and logistics
     weight = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)  # Weight in kilograms
@@ -188,6 +178,40 @@ class ProductImage(models.Model):
     def __str__(self):
         return f"{self.product.name} - {self.alt_text}" 
 
+class ProductVariant(models.Model):
+    product = models.ForeignKey("Product", related_name="variants", on_delete=models.CASCADE)
+    tier = models.CharField(max_length=20, choices=[("basic", "Basic"), ("advanced", "Advanced"), ("pro", "Pro")])
+    title = models.CharField(max_length=255)
+    short_description = models.TextField(blank=True)
+    description = models.TextField(blank=True)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+    sale_price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    currency = models.CharField(max_length=3, default="USD")
+    stock = models.BooleanField(default=True)
+    quantity = models.PositiveIntegerField(default=0)
+    active = models.BooleanField(default=True)
+    is_default = models.BooleanField(default=False)
+    sort_order = models.PositiveSmallIntegerField(default=0)
+
+    def __str__(self):
+        return f"{self.product.name} - {self.title}"
+
+class ProductVariantImage(models.Model):
+    variant = models.ForeignKey("ProductVariant", related_name="images", on_delete=models.CASCADE)
+    alt_text = models.CharField(max_length=255, blank=True)
+    image = models.ImageField(upload_to="static/doobarashop/upload/images")
+    thumbnail = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"{self.variant.product.name} - {self.variant.title} - {self.alt_text}"
+
+class ProductVariantItem(models.Model):
+    variant = models.ForeignKey("ProductVariant", related_name="package_items", on_delete=models.CASCADE)
+    included_product = models.ForeignKey("Product", related_name="included_in_variants", on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=1)
+
+    def __str__(self):
+        return f"{self.variant.product.name} - {self.variant.title} includes {self.quantity} x {self.included_product.name}"
 
 # !!! TEST IT IF ITS STILL WORKING AFTER THE VARIANT CUSTOMIZATION !!!
 # Delete product foreing connected objects

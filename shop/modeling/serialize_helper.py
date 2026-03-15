@@ -54,14 +54,14 @@ def product_serialize(object, tag):
 
     # -> ListOfDict
     # return product variants product lod data
-    def variants():
-        # (loc: shop.models )
-        if object.variant_list:
-            # Can't use serialize because to avoid an infinit loop of self recall at this line
-            return [{"title" : var.variant_name, "price":int(var.price), "id": var.id} 
-                    for var in object.variant_list.products.all()]
-        else:
-            return None
+    # def variants():
+    #     # (loc: shop.models )
+    #     if object.variant_list:
+    #         # Can't use serialize because to avoid an infinit loop of self recall at this line
+    #         return [{"title" : var.variant_name, "price":int(var.price), "id": var.id} 
+    #                 for var in object.variant_list.products.all()]
+    #     else:
+    #         return None
 
 
     # is a Dictionary
@@ -92,7 +92,7 @@ def product_serialize(object, tag):
             "pcategory": category_list,
             "pmainimage": image,
             "pallimages": allimages(),
-            "pvariant" : variants(),
-            "pvname" : object.variant_name
+            # "pvariant" : variants(),
+            # "pvname" : object.variant_name
         }
 
