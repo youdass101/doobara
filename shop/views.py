@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from .models import *
+from django.urls import reverse
 
 # Created modules to manage shop page functions
 from .modeling.serialize_helper import *
@@ -51,11 +52,74 @@ def filtering(request, locat):
 # caller: product icon anywhere
 # render single product html template with and given product data dict
 def single_product(request, locat):
+    parent_product = get_object_or_404(Product, name=locat)
+
     # is dict | (loc: shop.models)
     # given product name, prodcut object serialized dict (using models)
-    product = Product.objects.get(name=locat).serialize("all")
+    product = parent_product.serialize("all")
 
-    return render(request, "shop/single_product.html", {"product": product})
+    variants_qs = (
+        parent_product.variants.filter(active=True)
+        .prefetch_related("images", "package_items__included_product__images")
+        .order_by("sort_order")
+    )
+
+    tier_priority = {"advanced": 0, "basic": 1, "pro": 2}
+    variants = []
+    default_variant = None
+
+    for variant in variants_qs:
+        thumb = variant.images.filter(thumbnail=True).first() or variant.images.first()
+        images = [
+            {"url": image.image.url, "alt_text": image.alt_text}
+            for image in variant.images.all()
+        ]
+        package_items = []
+        for package_item in variant.package_items.all():
+            included_thumb = package_item.included_product.images.filter(thumbnail=True).first() or package_item.included_product.images.first()
+            package_items.append(
+                {
+                    "name": package_item.included_product.name,
+                    "url": reverse("single_product", kwargs={"locat": package_item.included_product.name}),
+                    "qty": package_item.quantity,
+                    "thumbnail": included_thumb.image.url if included_thumb else None,
+                }
+            )
+
+        variant_payload = {
+            "id": variant.id,
+            "tier": variant.tier,
+            "title": variant.title,
+            "short_description": variant.short_description,
+            "description": variant.description,
+            "price": float(variant.price),
+            "sale_price": float(variant.sale_price) if variant.sale_price else None,
+            "thumbnail": thumb.image.url if thumb else None,
+            "images": images,
+            "package_items": package_items,
+            "is_default": variant.is_default,
+            "sort_order": variant.sort_order,
+        }
+        variants.append(variant_payload)
+
+        if variant.is_default and not default_variant:
+            default_variant = variant_payload
+
+    if variants and not default_variant:
+        default_variant = sorted(
+            variants,
+            key=lambda item: (tier_priority.get(item["tier"], 99), item["sort_order"]),
+        )[0]
+
+    return render(
+        request,
+        "shop/single_product.html",
+        {
+            "product": product,
+            "variants": variants,
+            "default_variant": default_variant,
+        },
+    )
 
 
 # request -> render(url * dict)

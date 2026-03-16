@@ -4,172 +4,119 @@ from django.dispatch import receiver
 # project files
 from .snippethelper import *
 
-# When user login 
-# Migrate session cart to user cart
+
 @receiver(user_logged_in)
 def cart_after_login(request, **kwargs):
     userorsession(request)
     cart_migration(request)
 
-# !!! MOVE TO snippethelper file !!! ?
-# dict -> boolean 
-# move session cart item to use cart data if user cart is empty
+
 def cart_migration(request):
-    # is list of dict
-    # get given reg-user sub instance cart (connected instance) - sub instance items in cart instance
+    if not has_variant_column():
+        return
+
     user_cart = request.user.mycart.items.all()
-    # is list of dick 
-    # list of dictionary with product cart item data for none login user
-    session_cart = request.session['cart']
-    # in case the reg-user cart is empty and the session cart have data
-    # than we should migrate the session data to login user connected cart model sub data 
+    session_cart = ensure_session_cart(request.session)
+
     if cart_empty(user_cart) and (not cart_empty(session_cart)):
-        for item in session_cart:
-            # is dict
-            # cart item data with patttern that fit the cm method
-            itemdetail = {'pid': item, 'quantity': session_cart[item]['quantity']}
-            # is instance 
-            # cartmanager class 
+        for key in session_cart:
+            itemdetail = {'pid': key, 'quantity': session_cart[key]['quantity']}
             cart = CartManager(request)
             cart.add_to_cart(itemdetail)
 
 
-
-
-
-# Object 
-# Manage all cart request add, update, view and delete
 class CartManager:
-    # object * dict -> *
-    # object initial and default variables
     def __init__(self, request):
-        # is dict
-        # django request dict
         self.request = request
-        # is obejct or dict | (loc: modules.snippethelper)
-        # user object or session dict and user cart object or session cart dict 
         self.user, self.cart = userorsession(request)
-        # is boolean | (loc: models)
-        # true is user is logged in, else false
-        self.uli = request.user.is_authenticated
-    
-    # object -> listofdict 
-    # CART DATA RENDER METHOD
-    # if user is auth it will serialize self.cart using model serializer
-    # if no user is logged it will create a listofdict from session cart dict data 
-    # same listofdict template for both options
+        self.uli = request.user.is_authenticated and not isinstance(self.cart, dict)
+
     def cart_page(self):
-        # if self cart is a model object
         if self.uli:
-            # is listofdict | (loc: models)
-            # serialized cart objects in self.cart
-            ccart = [(item.serialize(),(item.quantity * item.product.price)) for item in self.cart]
-        # if self cart is session dict
+            ccart = []
+            for item in self.cart:
+                unit_price = item.variant.sale_price if item.variant and item.variant.sale_price else (item.variant.price if item.variant else item.product.price)
+                ccart.append((item.serialize(), (item.quantity * unit_price)))
         else:
-            # is list
-            # empty list pre assinged to be used in loop
-            # using helper from snippetherlper to setup the data structer template
             ccart = scart_data_setup(self.cart, [])
         return ccart
 
+    def _parse_item_identifier(self, item):
+        variant_id = item.get('variant_id')
+        pid = item.get('pid')
 
-    # instance * dict -> boolean
-    # ADD TO CART METHOD 
-    # create a new or edit existing object in cart_item model  
-    def add_to_cart (self, item):
-        # is object (Product) | (loc: models)
-        # load product object from Product model
-        product = Product.objects.get(id=int(item['pid']))
-        # is int 
-        # given quantity of items to be added to cart
+        if variant_id:
+            return ('variant', int(variant_id))
+
+        if not pid:
+            raise ValueError('Missing cart identifier')
+
+        if isinstance(pid, str) and '-' in pid:
+            kind, raw_id = pid.split('-', 1)
+            if kind == 'v':
+                return ('variant', int(raw_id))
+            return ('product', int(raw_id))
+
+        return ('product', int(pid))
+
+    def add_to_cart(self, item):
+        item_type, item_id = self._parse_item_identifier(item)
         pqtt = int(item['quantity'])
 
-        # IF USER LOGGED IN 
+        if item_type == 'variant':
+            variant = ProductVariant.objects.get(id=item_id)
+            product = variant.product
+            cart_key = f'v-{variant.id}'
+        else:
+            product = Product.objects.get(id=item_id)
+            variant = None
+            cart_key = f'p-{product.id}'
+
         if self.uli:
             try:
-                # is object | (loc: models)
-                # single object from cart item model 
-                citem = Cart_Item.objects.get(product=product, cart=self.user.mycart)
-                # is int 
-                # updating incrementing sub value by given int item 
+                if variant:
+                    citem = Cart_Item.objects.get(variant=variant, cart=self.user.mycart)
+                else:
+                    citem = Cart_Item.objects.get(product=product, variant__isnull=True, cart=self.user.mycart)
                 citem.quantity += pqtt
                 citem.save()
-                # if item in cart qtt is 0 delete it
                 if citem.quantity == 0:
                     citem.delete()
-                
-            # if previous failed excute this supose element does'nt exist
             except:
-                # if product item doesn't exist create new record | (loc: models)
-                Cart_Item.objects.create(product=product, quantity=pqtt, cart=self.user.mycart)
+                Cart_Item.objects.create(product=product, variant=variant, quantity=pqtt, cart=self.user.mycart)
 
-        # SESSION USER CART
         else:
             try:
-                # is Int
-                # quantity of a spesific product id in session cart 
-                qtt = int(self.user['cart'][item['pid']]['quantity'])
-                # is string 
-                # user session cart dict
-                self.user['cart'][item['pid']]['quantity'] = str(qtt + pqtt)
-                # if item in cart qtt is 0 delete it
+                qtt = int(self.user['cart'][cart_key]['quantity'])
+                self.user['cart'][cart_key]['quantity'] = str(qtt + pqtt)
                 if (qtt + pqtt) == 0:
-                    del self.user['cart'][item['pid']]
-            # key item doesn't exist so create a new one 
+                    del self.user['cart'][cart_key]
             except:
-                self.user['cart'][item['pid']] = {'quantity' : str(pqtt)}
-            
+                self.user['cart'][cart_key] = {'quantity': str(pqtt)}
+
             self.user.save()
 
         return True
 
-    # dict * dict -> dict
-    # UPDATE CART DATA METHOD 
-    # takes self variable and json cart update in dict 
-    # calculate the difference of quantity btw current car 
-    # and update cart, and returne a dict with product id and result
     def update_cart(self, cupdate):
         try:
-            # if delete button is used on page
-            print(cupdate['cart'])
             self.add_to_cart(cupdate['cart'])
-        # if change in qtt is made
         except:
-            # if user is logged in point to the instance cart
-            if self.uli: 
-                cart = self.cart 
-            # user not logged in so take a copy of session dict
+            if self.uli:
+                cart = self.cart
+                current_quantities = {item.serialize()['cartkey']: item.quantity for item in cart}
             else:
-                # get a copy of dict session  
                 cart = self.cart.copy()
+                current_quantities = {key: int(cart[key]['quantity']) for key in cart}
 
-            # loop over given update cart and current cart
-            for product, item in zip(cupdate['cart'], cart):
-                # is int
-                # the update cart product quantity
+            for product in cupdate['cart']:
+                cart_key = product['pid']
                 given = int(product['quantity'])
-                # if user login
-                if self.uli:
-                    # is int
-                    # current user cart product quantity
-                    current =  item.quantity
-                # if user is not logged in
-                else:
-                    # is int
-                    # current cart product quantity
-                    current = int(cart[item]['quantity'])
-                # is dict 
-                # product id and quantity difference 
-                result = {'pid': product['pid'],'quantity':(given - current)}
-                # edit cart item using add to cart method
+                current = current_quantities.get(cart_key, 0)
+                result = {'pid': cart_key, 'quantity': (given - current)}
                 self.add_to_cart(result)
         return True
 
-    # instance * instance -> boolean
-    # delete object using product given id 
-    # Helper function to delete object in a pattern 
     def delete_objct(self, item, ucart):
-        # product= Product.objects.get(id=item)
-        # delete object
-        Cart_Item.objects.get(product= item, cart=ucart).delete()
+        Cart_Item.objects.get(product=item, cart=ucart).delete()
         return True

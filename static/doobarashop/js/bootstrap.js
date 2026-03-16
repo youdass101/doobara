@@ -7,10 +7,12 @@ import { initMobileSearch } from './features/mobileSearch.js';
 import { initProductGallery } from './features/productGallery.js';
 import { initShopTabs } from './features/shopTabs.js';
 import { initProductVariants } from './features/productVariants.js';
+import { initSystemVariants } from './features/systemVariants.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   initMobileMenu();
   initProductVariants();
+  initSystemVariants();
   initProductGallery();
   initCartActions();
   initCheckoutTotals();

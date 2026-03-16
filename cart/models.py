@@ -16,6 +16,7 @@ class Cart_Item (models.Model):
     # is object
     # objects list of connected Products
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    variant = models.ForeignKey(ProductVariant, on_delete=models.CASCADE, null=True, blank=True)
     # is int
     # product quatity
     quantity = models.IntegerField()
@@ -30,10 +31,20 @@ class Cart_Item (models.Model):
     # object -> dict
     # convert object specified keys to a dict key/value
     def serialize(self):
+        target_name = self.variant.title if self.variant else self.product.name
+        target_price = self.variant.sale_price if self.variant and self.variant.sale_price else (self.variant.price if self.variant else self.product.price)
+        if self.variant:
+            image = self.variant.images.filter(thumbnail=True).first() or self.variant.images.first()
+            cart_key = f"v-{self.variant.id}"
+        else:
+            image = self.product.images.filter(thumbnail=True).first() if self.product.images.filter(thumbnail=True).exists() else None
+            cart_key = f"p-{self.product.id}"
+
         return{
             "productid" : self.product.id,
-            "productname" : self.product.name,
-            "productunitprice" : self.product.price,
+            "productname" : target_name,
+            "productunitprice" : target_price,
             "productquantity": self.quantity,
-            "productimage": self.product.images.filter(thumbnail=True).first() if self.product.images.filter(thumbnail=True).exists() else None
+            "productimage": image,
+            "cartkey": cart_key,
         }

@@ -1,23 +1,18 @@
+from django.db import connection
+from django.db.utils import OperationalError, ProgrammingError
 from shop.models import *
 from ..models import *
 
-# This a helper mini functions for cart application 
 
-# NOTES FOR OPTIMIZATION 
-# scart_data_setup function can be replace with the session cart itself 
-# but the session cart pattern should be costumized to match the cds function output pattern
+# This a helper mini functions for cart application
 
-
-# instance -> boolean
-# check if given dict is empty 
 def cart_empty(cart):
     if len(cart)== 0:
         return True
     else:
         return False
 
-# list(object) -> integer
-# take list of address and return ID of the one that have default as true 
+
 def default_address(lod):
     for i in lod:
         if i['default']:
@@ -25,95 +20,92 @@ def default_address(lod):
     return 0
 
 
-# list_of_instace -> list_of_dict
-# create a default dict template of user cart data for session
-# mimicing model serialization pattern
+def has_variant_column():
+    try:
+        with connection.cursor() as cursor:
+            columns = connection.introspection.get_table_description(cursor, Cart_Item._meta.db_table)
+        return any(column.name == 'variant_id' for column in columns)
+    except Exception:
+        return False
+
+
+def ensure_session_cart(session):
+    if 'cart' not in session:
+        session['cart'] = {}
+        session.save()
+    return session['cart']
+
+
 def scart_data_setup(cart, lst=[]):
-    for i in cart:
-        # is object model 
-        # product object with given id 
-        product = Product.objects.get(id=i)
-        # convert product data to dict with required keys and append dict to list
-        #  serialization
-        lst.append(({"productname" : product.name,
-                "productid" : product.id,
-                "productunitprice" : product.price,
-                "productquantity": cart[i]['quantity'],
-                "productimage": product.album.default().serialize()}, 
-                (int(cart[i]['quantity']) * float(product.price))
-                ))
+    for key in cart:
+        quantity = int(cart[key]['quantity'])
+
+        if key.startswith('v-'):
+            variant = ProductVariant.objects.get(id=int(key.split('-', 1)[1]))
+            price = variant.sale_price if variant.sale_price else variant.price
+            image = variant.images.filter(thumbnail=True).first() or variant.images.first()
+            name = variant.title
+            product_id = variant.product.id
+        else:
+            product = Product.objects.get(id=int(key.split('-', 1)[1]) if '-' in key else int(key))
+            price = product.price
+            image = product.images.filter(thumbnail=True).first() if product.images.filter(thumbnail=True).exists() else None
+            name = product.name
+            product_id = product.id
+
+        lst.append(({
+            "productname": name,
+            "productid": product_id,
+            "productunitprice": price,
+            "productquantity": quantity,
+            "productimage": image,
+            "cartkey": key,
+        }, (quantity * float(price))))
 
     return lst
 
 
-
-# dict -> object * object
-# helper that take request and return user or session data (user object or session dict
-# and user cart or session cart) depend if user logged in
 def userorsession(request):
-    # if user logged in
     if request.user.is_authenticated:
-        # is model object (class local)
-        # logged in user object
+        if not has_variant_column():
+            return request.session, ensure_session_cart(request.session)
+
         user = request.user
-        # check if user have my cart linked
         try:
-            # is model object (class local)
-            # logged in user in cart items
             cart = user.mycart.items.all()
-
-        # create new cart and linke it 
+        except (ProgrammingError, OperationalError):
+            return request.session, ensure_session_cart(request.session)
         except:
-            # is model object (class local)
-            # empty cart linked created 
             cart = [Cart.objects.create(user=user)]
-
-    # User not loged in   
-    # use the session insted of user
     else:
-        # is dict (class local)
-        # user session dict
         user = request.session
-        # if cart key exist
-        try:
-            # is dict
-            cart = user['cart']
-        # create a new cart key
-        except:
-            # empty cart 
-            user['cart'] = {}
-            # sace to session
-            user.save()
-            # is dict
-            cart = user.get('cart')
-    
+        cart = ensure_session_cart(user)
+
     return user, cart
-    
+
+
 def cart_context_process(request):
-        # is int 
-        # the all page cart update data for top and other use
-        items, total = 0, 0
-        # is dict
-        user, cart = userorsession(request)
-        # int * int -> true
-        # calculate the cart qtt and total price
-        def calc_cart (qtt, price):
-            nonlocal items, total
-            items += qtt
-            total += (float(qtt)*float(price))
+    items, total = 0, 0
+    user, cart = userorsession(request)
 
-        # loop over user cart item and can calculate totalt and item in cart qtt 
+    def calc_cart(qtt, price):
+        nonlocal items, total
+        items += qtt
+        total += (float(qtt)*float(price))
+
+    if isinstance(cart, dict):
         for i in cart:
-            # if user is logged in
-            if request.user.is_authenticated:
-                calc_cart(i.quantity, i.product.price)
-            # if user is not logged in 
+            if i.startswith('v-'):
+                variant = ProductVariant.objects.get(id=int(i.split('-', 1)[1]))
+                price = variant.sale_price if variant.sale_price else variant.price
+                calc_cart(int(cart[i]['quantity']), price)
             else:
-                # is instance 
-                # to keep price updated in cart we called the prduct price
-                product = Product.objects.get(id = i)
-                # calling the inner helper to get the totale and items qtt
+                product = Product.objects.get(id=int(i.split('-', 1)[1]) if '-' in i else int(i))
                 calc_cart(int(cart[i]['quantity']), product.price)
-
-        
         return items, total
+
+    for i in cart:
+        price = i.variant.sale_price if i.variant and i.variant.sale_price else (i.variant.price if i.variant else i.product.price)
+        calc_cart(i.quantity, price)
+
+    return items, total
