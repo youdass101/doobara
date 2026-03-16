@@ -8,84 +8,145 @@
 {% block body %}
 <section class="single-product-page">
     <div class="single-product-shell">
-        <div class="single-product-top">
-            <!-- Left: gallery -->
-            <div class="single-product-gallery">
-                <div class="single-product-gallery__main">
-                    <img id="spi"
-                         src="{{product.pmainimage.url}}"
-                         alt="{{ product.pmainimage.alt_text }}">
+        {% if product.system and variants %}
+            <div class="single-product-top">
+                <div class="single-product-gallery">
+                    <div class="single-product-gallery__main">
+                        <img id="system-variant-main-image"
+                             src="{% if default_variant.thumbnail %}{{ default_variant.thumbnail }}{% elif product.pmainimage %}{{ product.pmainimage.url }}{% endif %}"
+                             alt="{{ default_variant.title|default:product.pname }}">
+                    </div>
+                    <div id="system-variant-gallery" class="single-product-gallery__thumbs"></div>
                 </div>
 
-                <div class="single-product-gallery__thumbs">
-                    {% for image in product.pallimages %}
-                            <button type="button" class="single-product-thumb">
-                                <img class="sp-thumb-image"
-                                     src="{{image.url }}"
-                                     alt="{{ image.alt_text }}">
+                <div class="single-product-info">
+                    <span class="single-product-info__eyebrow">Doobara System</span>
+                    <h1 class="single-product-title">{{ product.pname }}</h1>
+                    <div class="single-product-richtext">{{ product.plongdescription|safe }}</div>
+
+                    <div class="system-variant-selector" id="system-variant-selector">
+                        {% for variant in variants %}
+                            <button
+                                type="button"
+                                class="system-variant-option {% if default_variant.id == variant.id %}is-active{% endif %}"
+                                data-variant-id="{{ variant.id }}">
+                                <span class="system-variant-option__tier">{{ variant.tier|title }}</span>
+                                <span class="system-variant-option__price">
+                                    $ {% if variant.sale_price %}{{ variant.sale_price|floatformat:2 }}{% else %}{{ variant.price|floatformat:2 }}{% endif %}
+                                </span>
                             </button>
-                    {% endfor %}
-                </div>
-            </div>
-
-            <!-- Right: content / buy box -->
-            <div class="single-product-info">
-                <span class="single-product-info__eyebrow">Doobara Product</span>
-                <h1 class="single-product-title">{{ product.pname }}</h1>
-
-                <div class="single-product-price-row">
-                    <div class="single-product-price-wrap">
-                        <span class="single-product-price-label">Price</span>
-                        <h2 id="spp" class="single-product-price">$ {{ product.pprice|floatformat:2 }}</h2>
-                    </div>
-                </div>
-
-                {% if product.pvariant %}
-                    <div class="single-product-variant">
-                        <label for="variants">Choose Variant</label>
-                        <select name="variant" id="variants">
-                            {% for var in product.pvariant %}
-                                {% if var.default %}
-                                    <option selected="selected" class="svoption" value="{{ var }}">
-                                        {{ var.title }}
-                                    </option>
-                                {% else %}
-                                    <option class="svoption" value="{{ var }}">
-                                        {{ var.title }}
-                                    </option>
-                                {% endif %}
-                            {% endfor %}
-                        </select>
-                    </div>
-                {% endif %}
-
-                <div class="single-product-purchase">
-                    <div class="single-product-qty-wrap">
-                        <label for="spq">Quantity</label>
-                        <input id="spq" class="single-product-quantity" type="number" value="1" min="1">
+                        {% endfor %}
                     </div>
 
-                    <button id="spatc"
+                    <div class="single-product-price-row">
+                        <div class="single-product-price-wrap">
+                            <span class="single-product-price-label">Selected Variant</span>
+                            <h2 id="system-variant-title" class="single-product-price">{{ default_variant.title }}</h2>
+                            <p id="system-variant-short-description">{{ default_variant.short_description }}</p>
+                            <h2 id="system-variant-price" class="single-product-price">
+                                $ {% if default_variant.sale_price %}{{ default_variant.sale_price|floatformat:2 }}{% else %}{{ default_variant.price|floatformat:2 }}{% endif %}
+                            </h2>
+                        </div>
+                    </div>
+
+                    <div class="single-product-purchase">
+                        <button
+                            id="spatc"
                             class="single-product-addtocart shop-add-to-cart"
-                            value="{{ product.pid }}">
-                        Add to Cart
-                    </button>
-                </div>
+                            data-variant-id="{{ default_variant.id }}">
+                            Add to Cart
+                        </button>
+                    </div>
 
-                <div class="single-product-trust">
-                    <div class="single-product-trust__item">Secure checkout</div>
-                    <div class="single-product-trust__item">Fast local delivery</div>
-                    <div class="single-product-trust__item">Support available</div>
-                </div>
-
-                <div class="single-product-specs">
-                    <h3>Specifications</h3>
-                    <div class="single-product-specs__content">
-                        {{ product.pshortdescription|safe }}
+                    <div class="single-product-specs">
+                        <h3>Included items</h3>
+                        <ul id="system-variant-package-items" class="system-variant-package-items"></ul>
                     </div>
                 </div>
             </div>
-        </div>
+
+            {{ variants|json_script:"variant-data" }}
+            {{ default_variant.id|json_script:"default-variant-id" }}
+        {% else %}
+            <div class="single-product-top">
+                <!-- Left: gallery -->
+                <div class="single-product-gallery">
+                    <div class="single-product-gallery__main">
+                        <img id="spi"
+                             src="{{product.pmainimage.url}}"
+                             alt="{{ product.pmainimage.alt_text }}">
+                    </div>
+
+                    <div class="single-product-gallery__thumbs">
+                        {% for image in product.pallimages %}
+                                <button type="button" class="single-product-thumb">
+                                    <img class="sp-thumb-image"
+                                         src="{{image.url }}"
+                                         alt="{{ image.alt_text }}">
+                                </button>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <!-- Right: content / buy box -->
+                <div class="single-product-info">
+                    <span class="single-product-info__eyebrow">Doobara Product</span>
+                    <h1 class="single-product-title">{{ product.pname }}</h1>
+
+                    <div class="single-product-price-row">
+                        <div class="single-product-price-wrap">
+                            <span class="single-product-price-label">Price</span>
+                            <h2 id="spp" class="single-product-price">$ {{ product.pprice|floatformat:2 }}</h2>
+                        </div>
+                    </div>
+
+                    {% if product.pvariant %}
+                        <div class="single-product-variant">
+                            <label for="variants">Choose Variant</label>
+                            <select name="variant" id="variants">
+                                {% for var in product.pvariant %}
+                                    {% if var.default %}
+                                        <option selected="selected" class="svoption" value="{{ var }}">
+                                            {{ var.title }}
+                                        </option>
+                                    {% else %}
+                                        <option class="svoption" value="{{ var }}">
+                                            {{ var.title }}
+                                        </option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
+                        </div>
+                    {% endif %}
+
+                    <div class="single-product-purchase">
+                        <div class="single-product-qty-wrap">
+                            <label for="spq">Quantity</label>
+                            <input id="spq" class="single-product-quantity" type="number" value="1" min="1">
+                        </div>
+
+                        <button id="spatc"
+                                class="single-product-addtocart shop-add-to-cart"
+                                value="{{ product.pid }}">
+                            Add to Cart
+                        </button>
+                    </div>
+
+                    <div class="single-product-trust">
+                        <div class="single-product-trust__item">Secure checkout</div>
+                        <div class="single-product-trust__item">Fast local delivery</div>
+                        <div class="single-product-trust__item">Support available</div>
+                    </div>
+
+                    <div class="single-product-specs">
+                        <h3>Specifications</h3>
+                        <div class="single-product-specs__content">
+                            {{ product.pshortdescription|safe }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
 
         {% if product.pvideo %}
             <div class="single-product-video-card">
@@ -154,4 +215,18 @@
 
     </div>
 </section>
+
+<style>
+.system-variant-selector { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin: 18px 0; }
+.system-variant-option { border: 1px solid #d9d9d9; background: #fff; border-radius: 10px; padding: 12px; text-align: left; cursor: pointer; }
+.system-variant-option.is-active { border-color: #000; box-shadow: 0 0 0 1px #000 inset; }
+.system-variant-option__tier { display: block; font-weight: 700; margin-bottom: 4px; }
+.system-variant-option__price { display: block; font-size: 0.95rem; }
+.system-variant-package-items { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+.system-variant-package-items li { display: flex; align-items: center; gap: 8px; }
+.system-variant-package-items img { width: 36px; height: 36px; object-fit: cover; border-radius: 6px; }
+@media (max-width: 768px) {
+    .system-variant-selector { grid-template-columns: 1fr; }
+}
+</style>
 {% endblock %}

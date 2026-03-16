@@ -38,13 +38,13 @@ My Cart
                                     <button class="cart-item__remove close-button"
                                             aria-label="Remove item"
                                             type="button"
-                                            value="{{item.0.productid}}">
+                                            value="{{item.0.cartkey}}">
                                         <span class="close-icon" aria-hidden="true">&times;</span>
                                     </button>
 
                                     <div class="cart-item__product">
                                         <div class="cart-item__image">
-                                            <img src="{{item.0.productimage.image.url }}" alt="{{item.0.productimage.alt_text}}">
+                                            {% if item.0.productimage %}<img src="{{item.0.productimage.image.url }}" alt="{{item.0.productimage.alt_text}}">{% endif %}
                                         </div>
 
                                         <div class="cart-item__details">
@@ -61,7 +61,7 @@ My Cart
                                     <div class="cart-item__quantity">
                                         <span class="cart-mobile-label">Quantity</span>
                                         <div class="cart-qty-box">
-                                            <input id="quantity-item-name" type="hidden" value="{{item.0.productid}}">
+                                            <input id="quantity-item-name" type="hidden" value="{{item.0.cartkey}}">
                                             <input class="in-cart-qtty" type="number" value="{{item.0.productquantity}}" min="0">
                                         </div>
                                     </div>

@@ -31,6 +31,10 @@ function bindAddToCartButtons() {
   }
 
   addToCartButtons.forEach((button) => {
+    if (button.dataset.variantId) {
+      return;
+    }
+
     button.addEventListener('click', async () => {
       const quantityField = document.getElementById('spq');
       const quantity = quantityField ? quantityField.value : 1;
