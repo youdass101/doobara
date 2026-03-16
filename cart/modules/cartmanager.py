@@ -12,8 +12,11 @@ def cart_after_login(request, **kwargs):
 
 
 def cart_migration(request):
+    if not has_variant_column():
+        return
+
     user_cart = request.user.mycart.items.all()
-    session_cart = request.session['cart']
+    session_cart = ensure_session_cart(request.session)
 
     if cart_empty(user_cart) and (not cart_empty(session_cart)):
         for key in session_cart:
@@ -26,7 +29,7 @@ class CartManager:
     def __init__(self, request):
         self.request = request
         self.user, self.cart = userorsession(request)
-        self.uli = request.user.is_authenticated
+        self.uli = request.user.is_authenticated and not isinstance(self.cart, dict)
 
     def cart_page(self):
         if self.uli:

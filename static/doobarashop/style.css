@@ -5578,3 +5578,61 @@ footer .footer-inner .footer-links a {
     width: 100%;
   }
 }/*# sourceMappingURL=style.css.map */
+.system-variant-selector {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin: 18px 0;
+}
+
+.system-variant-option {
+  border: 1px solid #d9d9d9;
+  background: #fff;
+  border-radius: 10px;
+  padding: 12px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.system-variant-option.is-active {
+  border-color: #000;
+  box-shadow: 0 0 0 1px #000 inset;
+}
+
+.system-variant-option__tier {
+  display: block;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.system-variant-option__price {
+  display: block;
+  font-size: 0.95rem;
+}
+
+.system-variant-package-items {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.system-variant-package-items li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.system-variant-package-items img {
+  width: 36px;
+  height: 36px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+@media (max-width: 768px) {
+  .system-variant-selector {
+    grid-template-columns: 1fr;
+  }
+}
