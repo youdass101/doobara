@@ -78,6 +78,7 @@ def product_serialize(object, tag):
             "pmainimage": image,
             # !!! HAVE TO BE REMOVED FROM HTML CODE IN ANY IF CONFITION
             "pactive" : object.active,
+            "system": object.is_system
         }
     # if loading in single product with full details data loaded
     else:
@@ -92,6 +93,8 @@ def product_serialize(object, tag):
             "pcategory": category_list,
             "pmainimage": image,
             "pallimages": allimages(),
+            "system": object.is_system,
+            "variant": object.variant,
             # "pvariant" : variants(),
             # "pvname" : object.variant_name
         }
