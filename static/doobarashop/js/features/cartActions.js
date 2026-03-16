@@ -73,7 +73,7 @@ function bindUpdateCartButton() {
 }
 
 function bindRemoveButtons() {
-  const removeButtons = document.querySelectorAll('.close-button');
+  const removeButtons = document.querySelectorAll('.cart-item__remove.close-button');
 
   if (!removeButtons.length) {
     return;
@@ -81,14 +81,15 @@ function bindRemoveButtons() {
 
   removeButtons.forEach((button) => {
     button.addEventListener('click', () => {
-      const productRow = button.parentElement?.parentElement;
+      const productRow = button.closest('.cart-item');
       const currentQuantity = productRow?.querySelector('.in-cart-qtty')?.value;
+      const quantityNumber = Number.parseInt(currentQuantity, 10);
 
-      if (!currentQuantity) {
+      if (!Number.isFinite(quantityNumber) || quantityNumber <= 0) {
         return;
       }
 
-      cartUpdate({ pid: button.value, quantity: 0 - currentQuantity });
+      cartUpdate({ pid: button.value, quantity: -quantityNumber });
     });
   });
 }
