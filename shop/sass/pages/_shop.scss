@@ -114,6 +114,33 @@
     box-shadow: 0 18px 34px rgba(21, 112, 239, 0.24);
 }
 
+
+.shop-tabs {
+    max-width: 1280px;
+    margin: 0 auto 26px;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px;
+    border-radius: var.$pill-radius;
+    background: rgba(255, 255, 255, 0.78);
+    border: 1px solid var(var.$page-border);
+    box-shadow: var(--shop-shadow);
+}
+
+.shop-tabs__btn {
+    @include var.action-button-base(44px, 0 18px, var.$pill-radius);
+    @include var.action-button-outline(var(var.$ui-dark), rgba(255, 255, 255, 0.72), rgba(51, 30, 109, 0.16));
+}
+
+.shop-tabs__btn[aria-pressed="true"] {
+    @include var.action-button-primary(var(var.$ui-primary), var(var.$ui-primary-soft), 0 12px 28px rgba(51, 30, 109, 0.22));
+}
+
+.shop-tabs__btn:hover {
+    @include var.action-button-hover;
+}
+
 .shop-grid {
     max-width: 1280px;
     margin: 0 auto;
@@ -240,6 +267,18 @@
 
     .shop-filter-form {
         grid-template-columns: 1fr;
+    }
+
+    .shop-tabs {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        padding: 8px;
+    }
+
+    .shop-tabs__btn {
+        width: 100%;
     }
 
     .shop-grid {
