@@ -30,7 +30,9 @@ function renderVariant(variant) {
   const gallery = document.getElementById('system-variant-gallery');
   const packageItems = document.getElementById('system-variant-package-items');
   const addToCartButton = document.getElementById('spatc');
+  const specifications = document.getElementById('longdescription');
 
+  if (specifications) specifications.textContent = variant.description || '';
   if (title) title.textContent = variant.title || '';
   if (shortDescription) shortDescription.textContent = variant.short_description || '';
   if (price) {

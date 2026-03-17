@@ -1,4 +1,5 @@
 from .. import models as md
+import markdown
 
 
 #  -> dict 
@@ -52,17 +53,6 @@ def product_serialize(object, tag):
         except:
             return None
 
-    # -> ListOfDict
-    # return product variants product lod data
-    # def variants():
-    #     # (loc: shop.models )
-    #     if object.variant_list:
-    #         # Can't use serialize because to avoid an infinit loop of self recall at this line
-    #         return [{"title" : var.variant_name, "price":int(var.price), "id": var.id} 
-    #                 for var in object.variant_list.products.all()]
-    #     else:
-    #         return None
-
 
     # is a Dictionary
     # if loading in carousel no details data loaded  
@@ -82,12 +72,17 @@ def product_serialize(object, tag):
         }
     # if loading in single product with full details data loaded
     else:
+        short_description_lines = [line.strip() for line in object.short_description.splitlines()
+            if line.strip()
+        ]
+        long_description = markdown.markdown(object.description)
+        
         return {
             "pid": object.id,
             "pname": object.name,
             "pprice": object.price,
-            "pshortdescription": object.short_description,
-            "plongdescription": object.description,
+            "pshortdescription": short_description_lines,
+            "plongdescription": long_description,
             "pvideo": object.video,
             "pcreationdate": object.created_time,
             "pcategory": category_list,
