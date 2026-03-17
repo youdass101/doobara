@@ -95,7 +95,7 @@ def product_serialize(object, tag):
             "pallimages": allimages(),
             "system": object.is_system,
             "variant": object.variant,
-            # "pvariant" : variants(),
-            # "pvname" : object.variant_name
+            "dimensions": object.dimensions,
+            "weight": object.weight,
         }
 
