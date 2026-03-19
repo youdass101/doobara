@@ -1,4 +1,4 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.decorators import login_required
 from .forms import *
 from .models import *
@@ -24,7 +24,7 @@ def myaccount(request):
         # is dict
         # default address serialized 
         saddress = address.serialize()
-    except:
+    except Delivery_Address_Details.DoesNotExist:
         saddress = False
     return render(request, "users/account.html", {"orders": orders, "address":saddress})
 
@@ -65,7 +65,8 @@ def order_log(request):
         orderid = request.POST['orderid']
         # is object  | (loc: models)
         # order instance the first in list 
-        order = Orders.objects.get(id=orderid)
+        # Security: ensure users can only access their own orders.
+        order = get_object_or_404(Orders, id=orderid, user=request.user)
         # is list of instance 
         # all order connected product item records 
         items = order.items.all()
@@ -81,6 +82,7 @@ def order_log(request):
 
 # caller: account 
 # render address list and change dedault address instance
+@login_required
 def address_list(request):
     # if request.method == "GET":
     user = request.user 
@@ -103,6 +105,7 @@ def address_list(request):
 # caller: account
 # render empty form for new address request or current address to edit in filled in form 
 # Method get for new address and POST to existing address instance 
+@login_required
 def new_edit_address(request):
     if request.method == "POST":
         # is dict | HTML submited data 
@@ -135,6 +138,7 @@ def new_edit_address(request):
     return render(request, "users/new_edit_address.html", {"form": form, "new":type, "info": info})
 
 
+@login_required
 # caller: account 
 # update existing address instance
 def update_address(request):
