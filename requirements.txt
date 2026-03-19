@@ -7,7 +7,7 @@ charset-normalizer==3.4.5
 cryptography==46.0.5
 defusedxml==0.7.1
 diff-match-patch==20241021
-Django==4.2.29
+Django==5.2
 django-allauth==65.14.3
 django-environ==0.13.0
 django-import-export==4.4.0
