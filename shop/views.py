@@ -6,6 +6,23 @@ from django.urls import reverse
 from .modeling.serialize_helper import *
 from .modeling.filter_helper import *
 
+def _serialize_main_products(queryset):
+    """
+    Shared list-page serializer path.
+    Keeps prefetch + serialization logic in one place so maintenance is easier.
+    """
+    return serialize(queryset.prefetch_related("category", "images"), "main")
+
+
+def _shop_page_response(request, products):
+    """
+    Shared shop page response builder.
+    Unifies repeated context wiring used by shop/filter/search/orderby views.
+    """
+    scats = serialized_categories()
+    return render(request, "shop/shop.html", {"lop": products, "cats": scats})
+
+
 # request -> render (url * dict)
 # caller: Navigation home (domain index page)
 # render the index html template and page data 
@@ -18,7 +35,8 @@ def index(request):
     
     cards = Hero_Card.objects.filter(active=True)
     cards = [card.serialize() for card in cards]
-    slop = serialize(Product.objects.filter(featured=True), "main")
+    # PERF: prefetch related records consumed by serializer (category/images) to reduce N+1 queries.
+    slop = _serialize_main_products(Product.objects.filter(featured=True))
     return render(request, "shop/index.html", {"lop":slop[:items_in_featrued], "cards": cards})
 
 # request -> render (url  * dict)
@@ -27,26 +45,18 @@ def index(request):
 def shop(request):
     # is list of dict | (loc: shop.modeling.serialize_helper (shop.models))
     # all products objects with active TRUE, in serialized dict
-    slop = serialize(Product.objects.filter(active=True), "main")
-    # is list of dict | (loc: shop.modeling.serialize_helper)
-    # filter all product in the given category, and serizled them in listof dicts
-    scats =  serialized_categories()
-
-    return render(request, "shop/shop.html", {"lop":slop, "cats":scats})
+    # PERF: serializer touches category/images for each product; prefetch once.
+    slop = _serialize_main_products(Product.objects.filter(active=True))
+    return _shop_page_response(request, slop)
 
 # I still use this function instead of orderby function for index nav category because here I can use less process
 # request * string -> render (url * dict)
 # caller: category navigation at index page
 # render shop html template and filtered product objects data serialized in list of dict
 def filtering(request, locat):
-    # is list of dict | (loc: shop.modeling.serialize_helper)
-    # filter all product in the given category, and serizled them in listof dicts (from snippets helper)
-    scats =  serialized_categories()
-    # is dict | (loc: shop.modeling.serialize_helper)
-    # serialized product list filterd by targeted cat (from helper)
-    slop = serialize(Categorie.objects.get(name=locat).products.all(), "main")
-
-    return render(request, "shop/shop.html", {"lop":slop, "cats":scats})
+    # PERF: category page serializes each product with category/images; prefetch in one query set.
+    slop = _serialize_main_products(Categorie.objects.get(name=locat).products.all())
+    return _shop_page_response(request, slop)
 
 # request * string -> render (url * dict)  
 # caller: product icon anywhere
@@ -130,14 +140,11 @@ def search(request):
         # is dict | HTML request data submition
         # form input data dictionary (from html)
         form = request.POST['keyword']
-        # is dict | (loc: shop.modeling.serialize_helper)
-        # this is serialized list of the filtered keyword products (from helper file )
-        slop = serialize(Product.objects.filter(name__contains=form), "main")
-         # is list of dict | (loc: shop.modeling.serialize_helper)
-        # filter all product in the given category, and serizled them in listof dicts (from snippets-helper)
-        scats =  serialized_categories()
+        # PERF: search uses the same serializer path as shop list views.
+        slop = _serialize_main_products(Product.objects.filter(name__contains=form))
+        return _shop_page_response(request, slop)
 
-    return render(request, "shop/shop.html", {"lop": slop, "cats":scats})
+    return _shop_page_response(request, [])
 
 # request -> render (url * dict)
 # caller: shp catergory tab (form)
@@ -150,12 +157,11 @@ def orderby(request):
         form = request.POST
         # is dict | (loc: shop.modeling.filter_helper)
         # serialized list of product filterd by givin filter keyowrds
+        # NOTE: filter_data still owns sort/filter rules; keep logic centralized.
         slop = filter_data(form)
-        # is list of dict | (loc: shop.modeling.serialize_helper)
-        # filter all product in the given category, and serizled them in listof dicts
-        scats =  serialized_categories()
+        return _shop_page_response(request, slop)
 
-    return render(request, "shop/shop.html", {"lop": slop, "cats":scats})
+    return _shop_page_response(request, [])
 
 
 # request -> render(url)

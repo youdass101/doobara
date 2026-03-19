@@ -19,9 +19,10 @@ def cart_migration(request):
     session_cart = ensure_session_cart(request.session)
 
     if cart_empty(user_cart) and (not cart_empty(session_cart)):
+        # PERF: reuse one manager instance; it already has request/user/cart context.
+        cart = CartManager(request)
         for key in session_cart:
             itemdetail = {'pid': key, 'quantity': session_cart[key]['quantity']}
-            cart = CartManager(request)
             cart.add_to_cart(itemdetail)
 
 
@@ -82,7 +83,7 @@ class CartManager:
                 citem.save()
                 if citem.quantity == 0:
                     citem.delete()
-            except:
+            except Cart_Item.DoesNotExist:
                 Cart_Item.objects.create(product=product, variant=variant, quantity=pqtt, cart=self.user.mycart)
 
         else:
@@ -91,7 +92,7 @@ class CartManager:
                 self.user['cart'][cart_key]['quantity'] = str(qtt + pqtt)
                 if (qtt + pqtt) == 0:
                     del self.user['cart'][cart_key]
-            except:
+            except KeyError:
                 self.user['cart'][cart_key] = {'quantity': str(pqtt)}
 
             self.user.save()
@@ -99,22 +100,26 @@ class CartManager:
         return True
 
     def update_cart(self, cupdate):
-        try:
-            self.add_to_cart(cupdate['cart'])
-        except:
-            if self.uli:
-                cart = self.cart
-                current_quantities = {item.serialize()['cartkey']: item.quantity for item in cart}
-            else:
-                cart = self.cart.copy()
-                current_quantities = {key: int(cart[key]['quantity']) for key in cart}
+        payload = cupdate.get('cart')
+        if isinstance(payload, dict):
+            self.add_to_cart(payload)
+            return True
+        if not isinstance(payload, list):
+            return True
 
-            for product in cupdate['cart']:
-                cart_key = product['pid']
-                given = int(product['quantity'])
-                current = current_quantities.get(cart_key, 0)
-                result = {'pid': cart_key, 'quantity': (given - current)}
-                self.add_to_cart(result)
+        if self.uli:
+            cart = self.cart
+            current_quantities = {item.serialize()['cartkey']: item.quantity for item in cart}
+        else:
+            cart = self.cart.copy()
+            current_quantities = {key: int(cart[key]['quantity']) for key in cart}
+
+        for product in payload:
+            cart_key = product['pid']
+            given = int(product['quantity'])
+            current = current_quantities.get(cart_key, 0)
+            result = {'pid': cart_key, 'quantity': (given - current)}
+            self.add_to_cart(result)
         return True
 
     def delete_objct(self, item, ucart):
