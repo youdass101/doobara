@@ -44,7 +44,7 @@
                             <p id="system-variant-short-description">{{ default_variant.short_description }}</p>
                             <h2 id="system-variant-price" class="single-product-price">
                                 $ {% if default_variant.sale_price %}{{ default_variant.sale_price|floatformat:2 }}{% else %}{{ default_variant.price|floatformat:2 }}{% endif %}
-                            </h2>x
+                            </h2>
                         </div>
                     </div>
 
@@ -95,7 +95,7 @@
                     <div class="single-product-price-row">
                         <div class="single-product-price-wrap">
                             <span class="single-product-price-label">Price</span>
-                            <h2 id="spp" class="single-product-price">$ {{ product.pprice|floatformat:2 }}</h2>
+                            <h2 id="spp" class="single-product-price">$ {{ product.pprice|floatformat:2 }}ss</h2>
                         </div>
                     </div>
 
@@ -182,7 +182,7 @@
                 <div class="single-product-section-head">
                     <h2>Description</h2>
                 </div>
-                <div class="single-product-richtext">
+                <div class="single-product-richtext" id="longdescription">
                     {{ product.plongdescription|safe }}
                 </div>
             </div>
