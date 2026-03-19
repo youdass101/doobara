@@ -239,16 +239,42 @@ ACCOUNT_SIGNUP_FIELDS = ['email*', 'username*', 'password1*', 'password2*']
 # allauth email verification required
 ACCOUNT_EMAIL_VERIFICATION = "none"
 
+
 # Fix (go around untill smtp setup done) 1061 error after pressing signup shell email not real
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # REAL email sending (activate it on production and ceratin tests)
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# DEFAULT_FROM_EMAIL = 'info@doobara.com'
-# EMAIL_HOST = env('EMAIL_HOST')
-# EMAIL_HOST_USER = env('EMAIL_HOST_USER')
-# EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
-# EMAIL_PORT = 587
-# EMAIL_USE_TLS = True
-# EMAIL_USE_SSL = False
 # check phone number field
+
+
+EMAIL_BACKEND = os.getenv("EMAIL_BACKEND", "django.core.mail.backends.console.EmailBackend")
+EMAIL_HOST = os.getenv("EMAIL_HOST", "")
+EMAIL_PORT = int(os.getenv("EMAIL_PORT", 587))
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER", "")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD", "")
+EMAIL_USE_SSL = os.getenv("EMAIL_USE_SSL", "False") == "True"
+EMAIL_USE_TLS = os.getenv("EMAIL_USE_TLS", "False") == "True"
+DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL", EMAIL_HOST_USER)
+SERVER_EMAIL = os.getenv("SERVER_EMAIL", EMAIL_HOST_USER)
+EMAIL_TIMEOUT = 20
+
+
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'smtp.zoho.com'
+# EMAIL_PORT = 587
+# EMAIL_HOST_USER = 'info@doobara.com'
+# EMAIL_HOST_PASSWORD = 'MXy563cG7hpC'
+# EMAIL_USE_SSL = False
+# EMAIL_USE_TLS = True
+# DEFAULT_FROM_EMAIL = 'Doobara <info@doobara.com>'
+# SERVER_EMAIL = 'info@doobara.com'
+# EMAIL_TIMEOUT = 20
+
+
+# send_mail(
+#     subject="Doobara email test", 
+#     message="If you received this, Zoho SMTP is working.",
+#       from_email=None,
+#         recipient_list=["hamzechalhoub@gmail.com"], 
+#         fail_silently=False,
+# )
