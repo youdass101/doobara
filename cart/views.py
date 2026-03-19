@@ -22,7 +22,16 @@ def cart(request):
     # is list of dict | (loc: modules.cartmanager)
     # get user cart manager module list of dict for cart items related
     cm = CartManager(request).cart_page() # helper class in cartmanager
-    return render(request, "cart/cart.html", {"cart": cm})
+    pricing = cart_pricing_breakdown(request)
+    shipping_methods = get_active_shipping_methods()
+    return render(request, "cart/cart.html", {
+        "cart": cm,
+        "subtotal": pricing["subtotal"],
+        "shipping_total": pricing["shipping_price"],
+        "grand_total": pricing["total"],
+        "selected_shipping_method": pricing["shipping_method"],
+        "shipping_methods": shipping_methods,
+    })
 
 # caller: shop , index
 # WHen user press the add to cart button
@@ -54,6 +63,8 @@ def updatecart(request):
     cm = CartManager(request) 
     # use cart method to update cart data items | (loc: modules.cartmanager)
     cm.update_cart(cartupdate)
+    if "shipping_method_id" in cartupdate:
+        set_selected_shipping_method(request, int(cartupdate["shipping_method_id"]))
  
     return JsonResponse({"result":"done"}, status=201)
 
@@ -83,10 +94,19 @@ def checkout(request):
 
     # is dict 
     # create a list of data wrapping all data in a dict 
+    if request.method == "POST" and request.POST.get("shipping_method_id"):
+        set_selected_shipping_method(request, int(request.POST["shipping_method_id"]))
+
+    pricing = cart_pricing_breakdown(request)
     output = {"form": Delivery_Information(),
             "cart":cm.cart_page(),
             "address_id":aid, 
-            "loa":sloa}
+            "loa":sloa,
+            "subtotal": pricing["subtotal"],
+            "shipping_total": pricing["shipping_price"],
+            "grand_total": pricing["total"],
+            "selected_shipping_method": pricing["shipping_method"],
+            "shipping_methods": get_active_shipping_methods(),}
 
     return render(request, "cart/checkout.html", output)
 

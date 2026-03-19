@@ -41,6 +41,14 @@
                 <span>Total</span>
                 <strong>${{order.total|floatformat:2}}</strong>
             </div>
+
+            <div class="order-meta-card">
+                <span>Delivery</span>
+                <strong>
+                    {{order.shipping_method}}
+                    ({% if order.shipping_price > 0 %}${{order.shipping_price|floatformat:2}}{% else %}Free{% endif %})
+                </strong>
+            </div>
         </div>
 
         <div class="order-view-card">

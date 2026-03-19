@@ -291,6 +291,28 @@
     margin-bottom: 24px;
 }
 
+.cart-delivery-methods {
+    padding-bottom: 12px;
+    border-bottom: 1px solid #e6eef7;
+}
+
+.cart-delivery-methods__title {
+    margin: 0 0 10px;
+    font-size: 0.84rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var.$text-color-gray;
+}
+
+.cart-delivery-option {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
 .cart-summary__row {
     display: flex;
     justify-content: space-between;

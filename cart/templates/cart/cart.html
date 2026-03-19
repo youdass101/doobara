@@ -95,19 +95,37 @@ My Cart
                         <h3>Cart totals</h3>
 
                         <div class="cart-summary__rows">
+                            <div class="cart-delivery-methods">
+                                <p class="cart-delivery-methods__title">Delivery option</p>
+                                {% for method in shipping_methods %}
+                                    <label class="cart-delivery-option">
+                                        <input
+                                            type="radio"
+                                            name="shipping_method"
+                                            value="{{ method.id }}"
+                                            class="shipping-method-input"
+                                            {% if selected_shipping_method and selected_shipping_method.id == method.id %}checked{% endif %}>
+                                        <span>{{ method.label }}</span>
+                                        <strong>
+                                            {% if method.price > 0 %}$ {{ method.price|floatformat:2 }}{% else %}Free{% endif %}
+                                        </strong>
+                                    </label>
+                                {% endfor %}
+                            </div>
+
                             <div class="cart-summary__row">
                                 <span>Subtotal</span>
-                                <strong id="dsubtotal">$ {{total|floatformat:2}}</strong>
+                                <strong id="dsubtotal">$ {{subtotal|floatformat:2}}</strong>
                             </div>
 
                             <div class="cart-summary__row">
                                 <span>Delivery</span>
-                                <strong id="ddelivery">$ 2.00</strong>
+                                <strong id="ddelivery">{% if shipping_total > 0 %}$ {{shipping_total|floatformat:2}}{% else %}Free{% endif %}</strong>
                             </div>
 
                             <div class="cart-summary__row cart-summary__row--total">
                                 <span>Total</span>
-                                <strong id="dtotal">$ {{total|floatformat:2}}</strong>
+                                <strong id="dtotal">$ {{grand_total|floatformat:2}}</strong>
                             </div>
                         </div>
 

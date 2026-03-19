@@ -119,6 +119,25 @@ My Cart
                             <label for="ordernote">Order notes</label>
                             <textarea id="ordernote" name="ordernote" rows="5" placeholder="Add any delivery notes or special instructions..."></textarea>
                         </div>
+
+                        <div class="checkout-shipping-methods">
+                            <h3>Delivery option</h3>
+                            <p>Select how you want to receive your order.</p>
+                            {% for method in shipping_methods %}
+                                <label class="checkout-shipping-option">
+                                    <input
+                                        type="radio"
+                                        name="shipping_method_id"
+                                        value="{{ method.id }}"
+                                        class="shipping-method-input"
+                                        {% if selected_shipping_method and selected_shipping_method.id == method.id %}checked{% endif %}>
+                                    <span class="checkout-shipping-option__label">{{ method.label }}</span>
+                                    <strong class="checkout-shipping-option__price">
+                                        {% if method.price > 0 %}$ {{method.price|floatformat:2}}{% else %}Free{% endif %}
+                                    </strong>
+                                </label>
+                            {% endfor %}
+                        </div>
                     </form>
                 </div>
             </div>
@@ -148,17 +167,17 @@ My Cart
                     <div class="checkout-totals">
                         <div class="checkout-totals__row">
                             <span>Subtotal</span>
-                            <strong id="dsubtotal">$ {{total|floatformat:2}}</strong>
+                            <strong id="dsubtotal">$ {{subtotal|floatformat:2}}</strong>
                         </div>
 
                         <div class="checkout-totals__row">
                             <span>Delivery</span>
-                            <strong id="ddelivery">$ 2.00</strong>
+                            <strong id="ddelivery">{% if shipping_total > 0 %}$ {{shipping_total|floatformat:2}}{% else %}Free{% endif %}</strong>
                         </div>
 
                         <div class="checkout-totals__row checkout-totals__row--grand">
                             <span>Total</span>
-                            <strong id="dtotal">$ {{total|floatformat:2}}</strong>
+                            <strong id="dtotal">$ {{grand_total|floatformat:2}}</strong>
                         </div>
                     </div>
 

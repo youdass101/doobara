@@ -2,10 +2,34 @@ from django.db import models
 from shop.models import *
 from django.contrib.auth.models import User
 
+
+# Dedicated delivery/shipping option model so options are fully data-driven.
+# Admins can enable/disable, reorder, rename, or reprice methods without code changes.
+class Shipping_Method(models.Model):
+    label = models.CharField(max_length=120)
+    price = models.DecimalField(max_digits=8, decimal_places=2, default=0)
+    active = models.BooleanField(default=True)
+    sort_order = models.PositiveIntegerField(default=0)
+    description = models.CharField(max_length=255, blank=True)
+
+    class Meta:
+        ordering = ("sort_order", "id")
+
+    def __str__(self):
+        return f"{self.label} (${self.price})"
+
 # Cart_holder is "SQL" django model 
 # is an object that hold the cart id, and point to cart items
 class Cart (models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="mycart")
+    # Persist selected shipping method at cart level so cart and checkout stay in sync.
+    shipping_method = models.ForeignKey(
+        Shipping_Method,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="carts",
+    )
 
     def __str__(self):
         return f"{self.user.username} "

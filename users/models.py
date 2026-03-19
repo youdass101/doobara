@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from shop.models import *
 from datetime import timedelta, datetime
 from django.utils import timezone
+from cart.models import Shipping_Method
 
 
 # is model object
@@ -79,6 +80,10 @@ class Orders (models.Model):
     # is Decimal number 
     # order total cost
     total = models.DecimalField(max_digits=10, decimal_places=2)
+    # Snapshot of selected shipping method so order history remains accurate even if method catalog changes later.
+    shipping_method = models.ForeignKey(Shipping_Method, on_delete=models.SET_NULL, null=True, blank=True)
+    shipping_label = models.CharField(max_length=120, blank=True)
+    shipping_price = models.DecimalField(max_digits=8, decimal_places=2, default=0)
     # is strin 
     currency = models.CharField(max_length=10, default="USD")   
     # order notes 
@@ -94,6 +99,8 @@ class Orders (models.Model):
             "orderid": self.id,
             "status": self.status,
             "total": self.total,
+            "shipping_method": self.shipping_label,
+            "shipping_price": self.shipping_price,
             "note": self.note,
             "date": self.date
         }
