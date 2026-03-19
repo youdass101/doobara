@@ -16,6 +16,7 @@ django-phonenumber-field==8.3.0
 et_xmlfile==2.0.0
 graphviz==0.21
 idna==3.11
+Markdown==3.10.2
 MarkupPy==1.18
 oauthlib==3.3.1
 objgraph==3.6.2
