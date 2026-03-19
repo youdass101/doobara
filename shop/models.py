@@ -7,7 +7,8 @@ from django.dispatch import receiver
 class Categorie(models.Model):
     # name is string
     # category name string max 255 characters
-    name = models.CharField(max_length=255)
+    # PERF (P2): indexed because category lookup by name is used in filter/navigation paths.
+    name = models.CharField(max_length=255, db_index=True)
     # description is string
     # category description filed more than 1000 characters
     description = models.TextField()
@@ -32,7 +33,8 @@ class Categorie(models.Model):
 class Product(models.Model):
     # name is string
     # product name string of max 255 char
-    name = models.CharField(max_length=255)
+    # PERF (P2): indexed because product lookups by name are used on product detail pages.
+    name = models.CharField(max_length=255, db_index=True)
     # long_description is string
     #product long decription more than 1000 char
     description = models.TextField(blank=True)
@@ -67,10 +69,12 @@ class Product(models.Model):
     created_time = models.DateTimeField(null=True, blank=True, auto_now_add=True)
     # active is boolean 
     # true if product active, else false
-    active = models.BooleanField(default=False)
+    # PERF (P2): indexed since list pages frequently filter by active flag.
+    active = models.BooleanField(default=False, db_index=True)
     # features is boolean
     # boolean ture if the product is featured, else false
-    featured = models.BooleanField(default=False)
+    # PERF (P2): indexed because index page pulls featured products frequently.
+    featured = models.BooleanField(default=False, db_index=True)
     updated_time = models.DateTimeField(auto_now=True)  # Product last updated date
 
     # video is string(url arg)
@@ -189,9 +193,16 @@ class ProductVariant(models.Model):
     currency = models.CharField(max_length=3, default="USD")
     stock = models.BooleanField(default=True)
     quantity = models.PositiveIntegerField(default=0)
-    active = models.BooleanField(default=True)
+    active = models.BooleanField(default=True, db_index=True)
     is_default = models.BooleanField(default=False)
     sort_order = models.PositiveSmallIntegerField(default=0)
+
+    class Meta:
+        indexes = [
+            # PERF (P2): supports common detail-page variant query:
+            # product filter + active filter + sort by sort_order.
+            models.Index(fields=["product", "active", "sort_order"], name="shop_var_prod_act_sort_idx"),
+        ]
 
     def __str__(self):
         return f"{self.product.name} - {self.title}"
