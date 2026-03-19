@@ -19,9 +19,10 @@ def cart_migration(request):
     session_cart = ensure_session_cart(request.session)
 
     if cart_empty(user_cart) and (not cart_empty(session_cart)):
+        # PERF: reuse one manager instance; it already has request/user/cart context.
+        cart = CartManager(request)
         for key in session_cart:
             itemdetail = {'pid': key, 'quantity': session_cart[key]['quantity']}
-            cart = CartManager(request)
             cart.add_to_cart(itemdetail)
 
 

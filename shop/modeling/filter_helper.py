@@ -1,5 +1,13 @@
 from ..models import *
 
+def _with_main_prefetch(queryset):
+    """
+    Shared prefetch shape for product list serialization.
+    Using one helper avoids repeating prefetch rules in many branches.
+    """
+    return queryset.prefetch_related("category", "images")
+
+
 # dict -> tuple(dict)
 # take a filter form input dict request and return the selection string name 
 # this function is for the product shop filter menu, 
@@ -13,9 +21,11 @@ def filter_data(form):
     # (loc: shop.models)
     # if catergory string value is (all) default filter only apply   
     if category == "all":
-        lop = Product.objects.filter(active=True)
+        # PERF: serializer reads category/images on each product; prefetch avoids N+1 lookups.
+        lop = _with_main_prefetch(Product.objects.filter(active=True))
     else:
-        lop = Categorie.objects.get(name=category).products.all()
+        # PERF: category relation used later during serialization as well.
+        lop = _with_main_prefetch(Categorie.objects.get(name=category).products.all())
     
    # loc: shop.modeling.serialize_helper 
    # if orderby string value is (default) no filter is applied 
