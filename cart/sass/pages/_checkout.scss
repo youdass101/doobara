@@ -154,6 +154,34 @@
     @include var.form-control-focus;
 }
 
+.checkout-shipping-methods {
+    margin-top: 20px;
+}
+
+.checkout-shipping-methods h3 {
+    margin: 0 0 6px;
+    font-size: 1rem;
+    color: var.$ui-text;
+}
+
+.checkout-shipping-methods p {
+    margin: 0 0 10px;
+    color: var.$ui-text-soft;
+    font-size: 0.92rem;
+}
+
+.checkout-shipping-option {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 10px;
+    align-items: center;
+    padding: 12px 14px;
+    border: 1px solid #e7eff8;
+    border-radius: 12px;
+    background: #fff;
+    margin-bottom: 10px;
+}
+
 /* Form fields from Django form */
 .checkout-new-address-form input,
 .checkout-new-address-form select,

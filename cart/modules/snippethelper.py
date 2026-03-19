@@ -1,6 +1,7 @@
 from django.db import connection
 from django.db.utils import OperationalError, ProgrammingError
 from functools import lru_cache
+from decimal import Decimal
 from shop.models import *
 from ..models import *
 
@@ -157,3 +158,74 @@ def cart_context_process(request):
         calc_cart(i.quantity, price)
 
     return items, total
+
+
+def get_active_shipping_methods():
+    """
+    Return active shipping methods ordered for display in cart/checkout selectors.
+    """
+    return Shipping_Method.objects.filter(active=True).order_by("sort_order", "id")
+
+
+def get_selected_shipping_method(request):
+    """
+    Resolve the selected shipping method for authenticated/session carts.
+    Falls back to the first active method when no explicit selection exists.
+    """
+    methods = list(get_active_shipping_methods())
+    if not methods:
+        return None
+
+    default_method = methods[0]
+    if request.user.is_authenticated:
+        cart_obj = Cart.objects.filter(user=request.user).select_related("shipping_method").first()
+        if cart_obj and cart_obj.shipping_method and cart_obj.shipping_method.active:
+            return cart_obj.shipping_method
+        return default_method
+
+    session_method_id = request.session.get("shipping_method_id")
+    if session_method_id:
+        for method in methods:
+            if method.id == int(session_method_id):
+                return method
+    return default_method
+
+
+def set_selected_shipping_method(request, method_id):
+    """
+    Persist selected shipping method on cart/session, validating active method IDs.
+    """
+    method = Shipping_Method.objects.filter(id=method_id, active=True).first()
+    if not method:
+        return None
+
+    if request.user.is_authenticated:
+        cart_obj = Cart.objects.filter(user=request.user).first()
+        if cart_obj:
+            cart_obj.shipping_method = method
+            cart_obj.save(update_fields=["shipping_method"])
+    else:
+        request.session["shipping_method_id"] = method.id
+        request.session.save()
+
+    return method
+
+
+def cart_pricing_breakdown(request):
+    """
+    Centralized cart pricing:
+    - subtotal comes from cart items
+    - shipping cost comes from selected shipping method
+    - total is subtotal + shipping
+    """
+    _, subtotal = cart_context_process(request)
+    shipping_method = get_selected_shipping_method(request)
+    shipping_price = Decimal(str(shipping_method.price if shipping_method else 0))
+    subtotal_decimal = Decimal(str(subtotal))
+    total = subtotal_decimal + shipping_price
+    return {
+        "subtotal": subtotal_decimal,
+        "shipping_price": shipping_price,
+        "total": total,
+        "shipping_method": shipping_method,
+    }

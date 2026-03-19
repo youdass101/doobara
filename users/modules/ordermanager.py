@@ -38,11 +38,17 @@ def createorder(request, form, new):
         note = form.get('ordernote', '').strip()
         delivery = Delivery_Address_Details.objects.get(id=id)
         
-    # is float 
-    # current cart total Note the cart context process returns a list 
-    # of two values at index 0 the item in cart total quantity and at index 1 the 
-    # cart total amount in usd
-    total = "{:.2f}".format(cart_context_process(request)[1])
+    # Shipping method can come from checkout POST; persist selection first so totals stay deterministic.
+    shipping_method_id = request.POST.get("shipping_method_id")
+    if shipping_method_id:
+        set_selected_shipping_method(request, int(shipping_method_id))
+
+    # Centralized pricing calculation to keep cart/checkout/order totals consistent.
+    pricing = cart_pricing_breakdown(request)
+    total = "{:.2f}".format(pricing["total"])
+    shipping_method = pricing["shipping_method"]
+    shipping_label = shipping_method.label if shipping_method else ""
+    shipping_price = pricing["shipping_price"]
 
     # Reliability + performance:
     # Create order and move items in one transaction so partial writes cannot happen.
@@ -50,7 +56,15 @@ def createorder(request, form, new):
     with transaction.atomic():
         # is instance 
         # create an new order object model
-        order = Orders.objects.create(user=user, address=delivery, total=total, note=note)
+        order = Orders.objects.create(
+            user=user,
+            address=delivery,
+            total=total,
+            note=note,
+            shipping_method=shipping_method,
+            shipping_label=shipping_label,
+            shipping_price=shipping_price,
+        )
 
         cart_items = list(user.mycart.items.select_related("product"))
         Item_Order.objects.bulk_create(

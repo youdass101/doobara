@@ -41,6 +41,14 @@ Order Placed
                 </div>
 
                 <div class="order-success-meta__item">
+                    <span>Delivery Option</span>
+                    <strong>
+                        {{order.shipping_method}}
+                        ({% if order.shipping_price > 0 %}${{order.shipping_price|floatformat:2}}{% else %}Free{% endif %})
+                    </strong>
+                </div>
+
+                <div class="order-success-meta__item">
                     <span>Order Note</span>
                     <strong>
                         {% if order.note %}
@@ -53,7 +61,7 @@ Order Placed
             </div>
 
             <div class="order-success-message">
-                <p>You will receive your order within 2 to 4 business days.</p>
+                <p>Your selected delivery option has been saved with this order.</p>
             </div>
 
             <div class="order-success-actions">

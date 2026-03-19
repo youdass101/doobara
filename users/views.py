@@ -5,6 +5,7 @@ from .models import *
 from .modules.ordermanager import *
 import json
 from .forms import *
+from cart.modules.snippethelper import cart_pricing_breakdown, get_active_shipping_methods
 
 # caller: main navigation
 # User account page render
@@ -53,7 +54,20 @@ def placeorder(request):
             return render(request, "users/orderplace.html", {'ordermessage':success, "order": order[1].serialize()})
         # If new form have invalid data return same form and chekout page to retry
         else:
-            return render(request, "cart/checkout.html", {"form": order[1], "cart": CartManager(request).cart_page()})
+            pricing = cart_pricing_breakdown(request)
+            loa = request.user.myaddress.all()
+            sloa = [item.serialize() for item in loa]
+            return render(request, "cart/checkout.html", {
+                "form": order[1],
+                "cart": CartManager(request).cart_page(),
+                "subtotal": pricing["subtotal"],
+                "shipping_total": pricing["shipping_price"],
+                "grand_total": pricing["total"],
+                "selected_shipping_method": pricing["shipping_method"],
+                "shipping_methods": get_active_shipping_methods(),
+                "address_id": 0,
+                "loa": sloa,
+            })
 
 # caller: account
 # render specific order instance and connected items
