@@ -24,12 +24,26 @@ export function initCheckoutTotals() {
     totalElement.innerHTML = `$ ${total}`;
   };
 
+  const getPriceFromInput = (input) => {
+    const fromDataAttribute = Number.parseFloat(input.dataset.shippingPrice);
+    if (Number.isFinite(fromDataAttribute)) {
+      return fromDataAttribute;
+    }
+
+    // Backward-compatible fallback for any older markup without data attributes.
+    const optionRow = input.closest('.checkout-shipping-option, .cart-delivery-option');
+    const priceText = optionRow?.querySelector('.checkout-shipping-option__price, strong')?.innerText || '0';
+    return parseMoney(priceText);
+  };
+
+  const selectedInput = document.querySelector('.shipping-method-input:checked');
+  if (selectedInput) {
+    updateDisplay(getPriceFromInput(selectedInput));
+  }
+
   shippingInputs.forEach((input) => {
-    input.addEventListener('change', async () => {
-      const optionRow = input.closest('.checkout-shipping-option, .cart-delivery-option');
-      const priceText = optionRow?.querySelector('.checkout-shipping-option__price, strong')?.innerText || '0';
-      const shippingPrice = parseMoney(priceText);
-      updateDisplay(shippingPrice);
+    input.addEventListener('input', async () => {
+      updateDisplay(getPriceFromInput(input));
       await sendJson('/updatecart', 'POST', { shipping_method_id: input.value });
     });
   });

@@ -129,6 +129,7 @@ My Cart
                                         type="radio"
                                         name="shipping_method_id"
                                         value="{{ method.id }}"
+                                        data-shipping-price="{{ method.price|floatformat:2 }}"
                                         class="shipping-method-input"
                                         {% if selected_shipping_method and selected_shipping_method.id == method.id %}checked{% endif %}>
                                     <span class="checkout-shipping-option__label">{{ method.label }}</span>
