@@ -11,28 +11,29 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
-import environ
+# import environ
 
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-env = environ.Env()
-# explicitly load the .env file at project root
-env.read_env(os.path.join(BASE_DIR, '.env'))
+# env = environ.Env()
+# # explicitly load the .env file at project root
+# env.read_env(os.path.join(BASE_DIR, '.env'))
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY')
-
+SECRET_KEY = os.environ.get("SECRET_KEY")
+if not SECRET_KEY:
+    raise ValueError("SECRET_KEY is not set")
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG', 'True') == 'True'
+DEBUG = os.getenv("DEBUG", "False").lower() == "true"
 
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = [host.strip() for host in os.getenv("ALLOWED_HOSTS", "localhost,127.0.0.1").split(",")]
 
 
 # Application definition
@@ -48,7 +49,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'livereload',
     # new allauth
     'django.contrib.sites',
     'allauth',
@@ -61,8 +61,6 @@ INSTALLED_APPS = [
 ]
 
 
-
-
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -72,10 +70,23 @@ MIDDLEWARE = [
     'allauth.account.middleware.AccountMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'livereload.middleware.LiveReloadScript',
 ]
 
+if DEBUG:
+    INSTALLED_APPS += ['livereload']
+    MIDDLEWARE += ['livereload.middleware.LiveReloadScript']
+
 ROOT_URLCONF = 'doobara.urls'
+
+template_context_processors = [
+    'django.template.context_processors.request',
+    'django.contrib.auth.context_processors.auth',
+    'django.contrib.messages.context_processors.messages',
+    'cart.views.cartcontext',
+]
+
+if DEBUG:
+    template_context_processors.insert(0, 'django.template.context_processors.debug')
 
 TEMPLATES = [
     {
@@ -83,13 +94,7 @@ TEMPLATES = [
         'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
-                'cart.views.cartcontext'
-            ],
+            'context_processors': template_context_processors,
         },
     },
 ]
@@ -102,7 +107,7 @@ WSGI_APPLICATION = 'doobara.wsgi.application'
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql",
+        "ENGINE": os.environ.get('DB_ENGINE', 'django.db.backends.postgresql'),
         "NAME": os.environ.get('DB_NAME'),
         "USER": os.environ.get('DB_USER'),
         "PASSWORD": os.environ.get('DB_PASSWORD'),
@@ -152,7 +157,7 @@ PASSWORD_HASHERS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Beirut'
 
 USE_I18N = True
 
@@ -165,13 +170,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
-# Add these new lines
-
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-)
-
-# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # new allauth
 # allauth backend authentication 
@@ -221,7 +221,7 @@ SOCIALACCOUNT_PROVIDERS = {
 # }
 # all auth id 
 
-# SITE_ID = 1
+SITE_ID = 1
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 SIGNUP_REDIRECT_URL = '/'
@@ -236,8 +236,8 @@ ACCOUNT_UNIQUE_EMAIL = True
 
 # allauth signup email required
 ACCOUNT_SIGNUP_FIELDS = ['email*', 'username*', 'password1*', 'password2*']
-# allauth email verification required
-ACCOUNT_EMAIL_VERIFICATION = "none"
+# allauth email verification required set none if not needed
+ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 
 
 # Fix (go around untill smtp setup done) 1061 error after pressing signup shell email not real
@@ -245,8 +245,6 @@ ACCOUNT_EMAIL_VERIFICATION = "none"
 
 # REAL email sending (activate it on production and ceratin tests)
 # check phone number field
-
-
 EMAIL_BACKEND = os.getenv("EMAIL_BACKEND", "django.core.mail.backends.console.EmailBackend")
 EMAIL_HOST = os.getenv("EMAIL_HOST", "")
 EMAIL_PORT = int(os.getenv("EMAIL_PORT", 587))
@@ -259,22 +257,24 @@ SERVER_EMAIL = os.getenv("SERVER_EMAIL", EMAIL_HOST_USER)
 EMAIL_TIMEOUT = 20
 
 
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_HOST = 'smtp.zoho.com'
-# EMAIL_PORT = 587
-# EMAIL_HOST_USER = 'info@doobara.com'
-# EMAIL_HOST_PASSWORD = 'MXy563cG7hpC'
-# EMAIL_USE_SSL = False
-# EMAIL_USE_TLS = True
-# DEFAULT_FROM_EMAIL = 'Doobara <info@doobara.com>'
-# SERVER_EMAIL = 'info@doobara.com'
-# EMAIL_TIMEOUT = 20
+
+# CSRF
+
+# PRODUCTION SETTINGS
+# Security settings
+SESSION_COOKIE_SECURE = not DEBUG
+CSRF_COOKIE_SECURE = not DEBUG
+SECURE_HSTS_SECONDS = 31536000 if not DEBUG else 0
+SECURE_HSTS_INCLUDE_SUBDOMAINS = not DEBUG
+SECURE_HSTS_PRELOAD = not DEBUG
+SECURE_SSL_REDIRECT = not DEBUG
+SECURE_CONTENT_TYPE_NOSNIFF = True
 
 
-# send_mail(
-#     subject="Doobara email test", 
-#     message="If you received this, Zoho SMTP is working.",
-#       from_email=None,
-#         recipient_list=["hamzechalhoub@gmail.com"], 
-#         fail_silently=False,
-# )
+
+CSRF_TRUSTED_ORIGINS = [
+    'http://127.0.0.1:8000',
+    'https://doobara.com',
+    'https://www.doobara.com',
+    'http://localhost:8000',
+]
