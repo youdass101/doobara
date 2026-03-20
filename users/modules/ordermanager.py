@@ -3,6 +3,8 @@ from ..forms import *
 from cart.modules.cartmanager import *
 from cart.modules.snippethelper import *
 from django.db import transaction
+from django.template.loader import render_to_string
+from django.core.mail import EmailMultiAlternatives
 
 
 def createorder(request, form, new):
@@ -123,3 +125,28 @@ def create_new_address(request, form):
         return True
     else:
         return form
+
+
+def send_order_confirmation_email_to_user_and_admin(order):
+    # send email to user with order details
+    if not order.email:
+        return
+    subject = f"Order Confirmation - Order #{order.id}"
+    from_email = "Doobara <info@doobara.com>"
+    to = [order.email]
+    text_content = f"Thank you for your order #{order.id}, {order.user.first_name}!\n\n"
+    html_content = render_to_string("doobarashop/order_confirmation_email.html", {'user': order.user, 'order': order})
+    msg = EmailMultiAlternatives(subject, text_content, from_email, to) 
+    msg.attach_alternative(html_content, "text/html")
+    msg.send()
+
+    # send email to admin with order details
+    subject = f"New Order Received - Order #{order.id}"
+    from_email = "Doobara <info@doobara.com>"
+    to = ["info@doobara.com"]  # Replace with actual admin email
+    text_content = f"A new order has been received: Order #{order.id}, {order.user.first_name}, {order.address}\n\n"
+    html_content = render_to_string("doobarashop/order_notification_admin.html", {'user': order.user, 'order': order})
+    msg = EmailMultiAlternatives(subject, text_content, from_email, to)
+    msg.attach_alternative(html_content, "text/html")
+    msg.send()
+

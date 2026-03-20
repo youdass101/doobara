@@ -50,6 +50,7 @@ def placeorder(request):
             # is string 
             # text to be shown on html page
             success = "Thank you for Your order"
+            send_order_confirmation_email_to_user_and_admin(order[1].serialize())
 
             return render(request, "users/orderplace.html", {'ordermessage':success, "order": order[1].serialize()})
         # If new form have invalid data return same form and chekout page to retry
