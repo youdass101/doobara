@@ -1,1 +1,85 @@
-<!-- TODOO Create order confirmation email template and insert the given data from the order object -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Order Confirmation</title>
+  </head>
+  <body style="margin:0;padding:0;background-color:#f6f7fb;font-family:Arial,Helvetica,sans-serif;color:#1f2937;">
+    <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background-color:#f6f7fb;padding:20px 10px;">
+      <tr>
+        <td align="center">
+          <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="max-width:640px;background:#ffffff;border:1px solid #e5e7eb;border-radius:10px;overflow:hidden;">
+            <tr>
+              <td style="padding:20px 24px;background-color:#111827;color:#ffffff;">
+                <h1 style="margin:0;font-size:22px;font-weight:700;">Doobara</h1>
+                <p style="margin:6px 0 0;font-size:14px;opacity:0.92;">Order confirmation</p>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding:24px;">
+                <p style="margin:0 0 10px;font-size:16px;line-height:1.5;">Hello {{ user.first_name|default:"Customer" }},</p>
+                <p style="margin:0 0 16px;font-size:15px;line-height:1.6;">Thank you for your order. We have received it and started processing it.</p>
+
+                <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:0 0 18px;border:1px solid #e5e7eb;border-radius:8px;">
+                  <tr>
+                    <td style="padding:14px 16px;font-size:14px;line-height:1.6;">
+                      <strong>Order #{{ order.id }}</strong><br />
+                      Date: {{ order.date|date:"M d, Y - H:i" }}<br />
+                      Status: {{ order.status|title }}
+                    </td>
+                  </tr>
+                </table>
+
+                <h2 style="margin:0 0 10px;font-size:16px;color:#111827;">Items</h2>
+                <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse:collapse;margin:0 0 20px;">
+                  <tr>
+                    <th align="left" style="padding:9px 8px;border-bottom:1px solid #e5e7eb;font-size:13px;color:#4b5563;">Product</th>
+                    <th align="center" style="padding:9px 8px;border-bottom:1px solid #e5e7eb;font-size:13px;color:#4b5563;">Qty</th>
+                    <th align="right" style="padding:9px 8px;border-bottom:1px solid #e5e7eb;font-size:13px;color:#4b5563;">Unit</th>
+                    <th align="right" style="padding:9px 8px;border-bottom:1px solid #e5e7eb;font-size:13px;color:#4b5563;">Subtotal</th>
+                  </tr>
+                  {% for item in items %}
+                  <tr>
+                    <td style="padding:9px 8px;border-bottom:1px solid #f1f5f9;font-size:14px;">{{ item.product_name }}</td>
+                    <td align="center" style="padding:9px 8px;border-bottom:1px solid #f1f5f9;font-size:14px;">{{ item.quantity }}</td>
+                    <td align="right" style="padding:9px 8px;border-bottom:1px solid #f1f5f9;font-size:14px;">${{ item.price|floatformat:2 }}</td>
+                    <td align="right" style="padding:9px 8px;border-bottom:1px solid #f1f5f9;font-size:14px;">${{ item.subtotal|floatformat:2 }}</td>
+                  </tr>
+                  {% endfor %}
+                </table>
+
+                <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:0 0 18px;">
+                  <tr>
+                    <td style="font-size:14px;color:#4b5563;padding:4px 0;">Shipping</td>
+                    <td align="right" style="font-size:14px;color:#111827;padding:4px 0;">${{ order.shipping_price|floatformat:2 }}</td>
+                  </tr>
+                  <tr>
+                    <td style="font-size:16px;color:#111827;padding:6px 0;"><strong>Total</strong></td>
+                    <td align="right" style="font-size:16px;color:#111827;padding:6px 0;"><strong>${{ order.total|floatformat:2 }}</strong></td>
+                  </tr>
+                </table>
+
+                {% if order.address %}
+                <h2 style="margin:0 0 10px;font-size:16px;color:#111827;">Delivery address</h2>
+                <p style="margin:0 0 14px;font-size:14px;line-height:1.6;color:#374151;">
+                  {{ order.address.name }} {{ order.address.last_name }}<br />
+                  {{ order.address.street_name }}, {{ order.address.building_appartment }}<br />
+                  {{ order.address.city_town }}<br />
+                  Phone: {{ order.address.phone_number }}
+                </p>
+                {% endif %}
+
+                {% if order.note %}
+                <p style="margin:0 0 14px;font-size:14px;line-height:1.6;color:#374151;"><strong>Order note:</strong> {{ order.note }}</p>
+                {% endif %}
+
+                <p style="margin:0;font-size:13px;line-height:1.6;color:#6b7280;">If you have any questions, reply to this email and our team will be happy to help.</p>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

@@ -128,25 +128,47 @@ def create_new_address(request, form):
 
 
 def send_order_confirmation_email_to_user_and_admin(order):
-    # send email to user with order details
-    if not order.email:
+    # Compatibility fix:
+    # checkout currently calls this function with order.serialize() (a dict),
+    # while this function needs full model relations (user/address/items) for email rendering.
+    if isinstance(order, dict):
+        order_id = order.get("orderid") or order.get("id")
+        if not order_id:
+            return
+        order = Orders.objects.select_related("user", "address").prefetch_related("items").filter(id=order_id).first()
+        if not order:
+            return
+
+    customer_email = order.user.email
+    if not customer_email:
         return
+
+    customer_name = order.user.first_name or (order.address.name if order.address else "Customer")
+    items = [
+        {
+            "product_name": item.product_name,
+            "quantity": item.quantity,
+            "price": item.price,
+            "subtotal": item.price * item.quantity,
+        }
+        for item in order.items.all()
+    ]
+
+    # send email to user with order details
     subject = f"Order Confirmation - Order #{order.id}"
     from_email = "Doobara <info@doobara.com>"
-    to = [order.email]
-    text_content = f"Thank you for your order #{order.id}, {order.user.first_name}!\n\n"
-    html_content = render_to_string("doobarashop/order_confirmation_email.html", {'user': order.user, 'order': order})
-    msg = EmailMultiAlternatives(subject, text_content, from_email, to) 
+    to = [customer_email]
+    text_content = f"Thank you for your order #{order.id}, {customer_name}!"
+    html_content = render_to_string("doobarashop/order_confirmation_email.html", {'user': order.user, 'order': order, 'items': items})
+    msg = EmailMultiAlternatives(subject, text_content, from_email, to)
     msg.attach_alternative(html_content, "text/html")
     msg.send()
 
     # send email to admin with order details
     subject = f"New Order Received - Order #{order.id}"
-    from_email = "Doobara <info@doobara.com>"
     to = ["info@doobara.com"]  # Replace with actual admin email
-    text_content = f"A new order has been received: Order #{order.id}, {order.user.first_name}, {order.address}\n\n"
-    html_content = render_to_string("doobarashop/order_notification_admin.html", {'user': order.user, 'order': order})
+    text_content = f"A new order has been received: Order #{order.id}, {customer_name}"
+    html_content = render_to_string("doobarashop/order_notification_admin.html", {'user': order.user, 'order': order, 'items': items})
     msg = EmailMultiAlternatives(subject, text_content, from_email, to)
     msg.attach_alternative(html_content, "text/html")
     msg.send()
-
