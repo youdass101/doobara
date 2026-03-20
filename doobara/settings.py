@@ -11,8 +11,26 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
-# import environ
+import environ
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
 
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+env = environ.Env()
+env.read_env(os.path.join(BASE_DIR, '.env'))
+
+# unlock on production (sentry is already set up and tested on staging, just need to add the dsn to .env on production)
+# Sentry configuration for error tracking and monitoring
+# SENTRY_DSN = os.getenv("SENTRY_DSN", "")
+
+# if SENTRY_DSN:
+#     sentry_sdk.init(
+#         dsn=SENTRY_DSN,
+#         integrations=[DjangoIntegration()],
+#         send_default_pii=True,
+#         environment=os.getenv("SENTRY_ENVIRONMENT", "local"),
+#         traces_sample_rate=float(os.getenv("SENTRY_TRACES_SAMPLE_RATE", "0.1")),
+#     )
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -26,7 +44,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get("SECRET_KEY")
+SECRET_KEY = os.getenv("SECRET_KEY")
 if not SECRET_KEY:
     raise ValueError("SECRET_KEY is not set")
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -107,12 +125,12 @@ WSGI_APPLICATION = 'doobara.wsgi.application'
 
 DATABASES = {
     "default": {
-        "ENGINE": os.environ.get('DB_ENGINE', 'django.db.backends.postgresql'),
-        "NAME": os.environ.get('DB_NAME'),
-        "USER": os.environ.get('DB_USER'),
-        "PASSWORD": os.environ.get('DB_PASSWORD'),
-        "HOST": os.environ.get('DB_HOST'),
-        "PORT": os.environ.get('DB_PORT'),
+        "ENGINE": os.getenv('DB_ENGINE', 'django.db.backends.postgresql'),
+        "NAME": os.getenv('DB_NAME'),
+        "USER": os.getenv('DB_USER'),
+        "PASSWORD": os.getenv('DB_PASSWORD'),
+        "HOST": os.getenv('DB_HOST'),
+        "PORT": os.getenv('DB_PORT'),
         "CONN_MAX_AGE": 60,
     }
 }
@@ -269,6 +287,9 @@ SECURE_HSTS_INCLUDE_SUBDOMAINS = not DEBUG
 SECURE_HSTS_PRELOAD = not DEBUG
 SECURE_SSL_REDIRECT = not DEBUG
 SECURE_CONTENT_TYPE_NOSNIFF = True
+SESSION_COOKIE_HTTPONLY = True
+
+X_FRAME_OPTIONS = "DENY"
 
 
 
