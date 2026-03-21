@@ -1,5 +1,29 @@
 import { sendJson } from '../core/http.js';
 
+function trackAddToCart(button) {
+  if (typeof window.gtag !== 'function') {
+    return;
+  }
+
+  const itemPrice = Number.parseFloat(button.dataset.gaPrice || '0');
+  const item = {
+    item_id: button.dataset.gaItemId || button.dataset.variantId || '',
+    item_name: button.dataset.gaItemName || '',
+    price: itemPrice,
+    quantity: 1,
+  };
+
+  if (button.dataset.gaItemCategory) {
+    item.item_category = button.dataset.gaItemCategory;
+  }
+
+  window.gtag('event', 'add_to_cart', {
+    currency: button.dataset.gaCurrency || 'USD',
+    value: Number(itemPrice.toFixed(2)),
+    items: [item],
+  });
+}
+
 function updateCartSummary(cart) {
   const cartItemsElement = document.getElementById('cartitemsqtt');
   const footerItemsElement = document.getElementById('footeritemqtt');
@@ -42,6 +66,10 @@ function renderVariant(variant) {
 
   if (addToCartButton) {
     addToCartButton.dataset.variantId = String(variant.id);
+    addToCartButton.dataset.gaItemId = String(variant.id);
+    addToCartButton.dataset.gaItemName = variant.title || '';
+    addToCartButton.dataset.gaPrice = String(variant.sale_price ?? variant.price ?? 0);
+    addToCartButton.dataset.gaCurrency = variant.currency || addToCartButton.dataset.gaCurrency || 'USD';
   }
 
   if (gallery) {
@@ -154,8 +182,9 @@ export function initSystemVariants() {
     });
 
     const result = await response.json();
-    if (result.result !== 'login') {
+    if (result.result === 'done') {
       updateCartSummary(result.cart);
+      trackAddToCart(addToCartButton);
     }
   });
 }

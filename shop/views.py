@@ -104,6 +104,7 @@ def single_product(request, locat):
             "description": variant.description,
             "price": float(variant.price),
             "sale_price": float(variant.sale_price) if variant.sale_price else None,
+            "currency": variant.currency,
             "thumbnail": thumb.image.url if thumb else None,
             "images": images,
             "package_items": package_items,

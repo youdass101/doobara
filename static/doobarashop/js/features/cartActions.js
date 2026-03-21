@@ -1,5 +1,30 @@
 import { sendJson } from '../core/http.js';
 
+function trackAddToCart(button, quantity) {
+  if (typeof window.gtag !== 'function') {
+    return;
+  }
+
+  const itemPrice = Number.parseFloat(button.dataset.gaPrice || '0');
+  const itemQuantity = Number.parseInt(quantity, 10) || 1;
+  const item = {
+    item_id: button.dataset.gaItemId || button.value,
+    item_name: button.dataset.gaItemName || '',
+    price: itemPrice,
+    quantity: itemQuantity,
+  };
+
+  if (button.dataset.gaItemCategory) {
+    item.item_category = button.dataset.gaItemCategory;
+  }
+
+  window.gtag('event', 'add_to_cart', {
+    currency: button.dataset.gaCurrency || 'USD',
+    value: Number((itemPrice * itemQuantity).toFixed(2)),
+    items: [item],
+  });
+}
+
 function updateCartSummary(cart) {
   const cartItemsElement = document.getElementById('cartitemsqtt');
   const footerItemsElement = document.getElementById('footeritemqtt');
@@ -46,8 +71,9 @@ function bindAddToCartButtons() {
 
       const result = await response.json();
 
-      if (result.result !== 'login') {
+      if (result.result === 'done') {
         updateCartSummary(result.cart);
+        trackAddToCart(button, quantity);
       }
     });
   });

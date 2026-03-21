@@ -51,8 +51,32 @@ def placeorder(request):
             # text to be shown on html page
             success = "Thank you for Your order"
             send_order_confirmation_email_to_user_and_admin(order[1].serialize())
+            order_items = order[1].items.select_related("product").all()
+            analytics_items = []
+            for item in order_items:
+                category = ""
+                if item.product:
+                    first_category = item.product.category.first()
+                    category = first_category.name if first_category else ""
+                analytics_items.append(
+                    {
+                        "item_id": item.product.id if item.product else "",
+                        "item_name": item.product_name,
+                        "price": item.price,
+                        "quantity": item.quantity,
+                        "item_category": category,
+                    }
+                )
 
-            return render(request, "users/orderplace.html", {'ordermessage':success, "order": order[1].serialize()})
+            return render(
+                request,
+                "users/orderplace.html",
+                {
+                    'ordermessage': success,
+                    "order": order[1].serialize(),
+                    "order_items": analytics_items,
+                },
+            )
         # If new form have invalid data return same form and chekout page to retry
         else:
             pricing = cart_pricing_breakdown(request)

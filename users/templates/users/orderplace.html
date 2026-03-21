@@ -76,4 +76,24 @@ Order Placed
 
     </div>
 </section>
+<script>
+  if (typeof window.gtag === 'function') {
+    window.gtag('event', 'purchase', {
+      transaction_id: '{{ order.orderid }}',
+      value: Number('{{ order.total|floatformat:2 }}'),
+      currency: '{{ order.currency|default:"USD"|escapejs }}',
+      items: [
+        {% for item in order_items %}
+        {
+          item_id: '{{ item.item_id }}',
+          item_name: '{{ item.item_name|escapejs }}',
+          price: Number('{{ item.price|floatformat:2 }}'),
+          quantity: {{ item.quantity }},
+          item_category: '{{ item.item_category|escapejs }}'
+        }{% if not forloop.last %},{% endif %}
+        {% endfor %}
+      ]
+    });
+  }
+</script>
 {% endblock %}

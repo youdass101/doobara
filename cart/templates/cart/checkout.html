@@ -204,4 +204,23 @@ My Cart
         </div>
     </div>
 </section>
+
+<script>
+  if (typeof window.gtag === 'function') {
+    window.gtag('event', 'begin_checkout', {
+      currency: '{% if cart and cart.0.0.productcurrency %}{{ cart.0.0.productcurrency|escapejs }}{% else %}USD{% endif %}',
+      value: Number('{{ grand_total|floatformat:2 }}'),
+      items: [
+        {% for item in cart %}
+        {
+          item_id: '{{ item.0.productid }}',
+          item_name: '{{ item.0.productname|escapejs }}',
+          price: Number('{{ item.0.productunitprice|floatformat:2 }}'),
+          quantity: {{ item.0.productquantity }}
+        }{% if not forloop.last %},{% endif %}
+        {% endfor %}
+      ]
+    });
+  }
+</script>
 {% endblock %}
