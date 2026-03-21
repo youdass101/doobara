@@ -116,7 +116,7 @@ Home Automation
         <div class="product-card-container">
         {% for product in lop %}
             <div class="product-card">
-            <a href="/single_product/{{product.pname}}">
+            <a href="{{ product.url }}">
                 <img src="{{product.pmainimage.url }}" alt="{{product.pmainimage.alt_text}}">
                 <div class="card-info">
                 <!-- <p class="card-product-name">{{product.pname}}</p> -->
@@ -243,7 +243,7 @@ Home Automation
         <div class="product-card-container">
         {% for product in lop %}
             <div class="product-card">
-            <a href="/single_product/{{product.pname}}">
+            <a href="{{ product.url }}">
                 <img src="{{product.pmainimage.url }}" alt="{{product.pmainimage.alt_text}}">
                 <div class="card-info">
                 <!-- <p class="card-product-name">{{product.pname}}</p> -->
@@ -260,7 +260,7 @@ Home Automation
         <div class="product-card-container">
         {% for product in lop %}
             <div class="product-card">
-            <a href="/single_product/{{product.pname}}">
+            <a href="{{ product.url }}">
                 <img src="{{product.pmainimage.url }}" alt="{{product.pmainimage.alt_text}}">
                 <div class="card-info">
                 <!-- <p class="card-product-name">{{product.pname}}</p> -->

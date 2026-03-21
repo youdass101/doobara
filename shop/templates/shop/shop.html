@@ -59,7 +59,7 @@ SHOP
         {% for row in lop %}
             {% if row.pactive %}
                 <article class="shop-card" data-system="{{ row.system|yesno:'true,false' }}">
-                    <a href="/single_product/{{row.pname}}" class="shop-card__link">
+                    <a href="{{ row.url }}" class="shop-card__link">
 
                         <div class="shop-card__media">
                             <img src="{{row.pmainimage.url}}" alt="{{row.pmainimage.alt_text}}">

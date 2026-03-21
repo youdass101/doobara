@@ -38,7 +38,7 @@ class ProductSitemap(Sitemap):
         return Product.objects.filter(active=True).order_by("name")
 
     def location(self, item):
-        return reverse("single_product", kwargs={"locat": item.name})
+        return reverse("single_product_by_slug", kwargs={"slug": item.slug})
 
     def lastmod(self, item):
         return item.updated_time
