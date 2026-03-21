@@ -120,6 +120,26 @@ class Product(models.Model):
                 counter += 1
             self.slug = slug_candidate
         super().save(*args, **kwargs)
+
+    @property
+    def normalized_quantity(self):
+        """
+        Return a defensive integer quantity for stock checks.
+        Keeps legacy/edge values safe (None, invalid types).
+        """
+        try:
+            return int(self.quantity or 0)
+        except (TypeError, ValueError):
+            return 0
+
+    @property
+    def in_stock(self):
+        """Authoritative availability rule: quantity > 0 means in stock."""
+        return self.normalized_quantity > 0
+
+    @property
+    def availability_label(self):
+        return "In Stock" if self.in_stock else "Out of Stock"
     
 
 
@@ -222,6 +242,26 @@ class ProductVariant(models.Model):
 
     def __str__(self):
         return f"{self.product.name} - {self.title}"
+
+    @property
+    def normalized_quantity(self):
+        """
+        Return a defensive integer quantity for stock checks.
+        Keeps legacy/edge values safe (None, invalid types).
+        """
+        try:
+            return int(self.quantity or 0)
+        except (TypeError, ValueError):
+            return 0
+
+    @property
+    def in_stock(self):
+        """Authoritative availability rule: quantity > 0 means in stock."""
+        return self.normalized_quantity > 0
+
+    @property
+    def availability_label(self):
+        return "In Stock" if self.in_stock else "Out of Stock"
 
 class ProductVariantImage(models.Model):
     variant = models.ForeignKey("ProductVariant", related_name="images", on_delete=models.CASCADE)

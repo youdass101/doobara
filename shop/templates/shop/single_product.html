@@ -42,6 +42,9 @@
                             <span class="single-product-price-label">Selected Variant</span>
                             <h2 id="system-variant-title" class="single-product-price">{{ default_variant.title }}</h2>
                             <p id="system-variant-short-description">{{ default_variant.short_description }}</p>
+                            <p id="system-variant-availability" class="single-product-availability {% if default_variant.in_stock %}is-in-stock{% else %}is-out-of-stock{% endif %}">
+                                {{ default_variant.availability_label }}
+                            </p>
                             <h2 id="system-variant-price" class="single-product-price">
                                 $ {% if default_variant.sale_price %}{{ default_variant.sale_price|floatformat:2 }}{% else %}{{ default_variant.price|floatformat:2 }}{% endif %}
                             </h2>
@@ -58,8 +61,9 @@
                             data-ga-item-name="{{ default_variant.title|escapejs }}"
                             data-ga-price="{% if default_variant.sale_price %}{{ default_variant.sale_price|floatformat:2 }}{% else %}{{ default_variant.price|floatformat:2 }}{% endif %}"
                             data-ga-currency="{{ product.currency|default:'USD' }}"
-                            data-ga-item-category="{% if product.pcategory.0 %}{{ product.pcategory.0.name|escapejs }}{% endif %}">
-                            Add to Cart
+                            data-ga-item-category="{% if product.pcategory.0 %}{{ product.pcategory.0.name|escapejs }}{% endif %}"
+                            {% if not default_variant.in_stock %}disabled{% endif %}>
+                            {% if default_variant.in_stock %}Add to Cart{% else %}Out of Stock{% endif %}
                         </button>
                     </div>
 
@@ -101,6 +105,9 @@
                     <div class="single-product-price-row">
                         <div class="single-product-price-wrap">
                             <span class="single-product-price-label">Price</span>
+                            <p class="single-product-availability {% if product.in_stock %}is-in-stock{% else %}is-out-of-stock{% endif %}">
+                                {{ product.availability_label }}
+                            </p>
                             <h2 id="spp" class="single-product-price">$ {{ product.pprice|floatformat:2 }}ss</h2>
                         </div>
                     </div>
@@ -137,8 +144,9 @@
                                 data-ga-item-name="{{ product.pname|escapejs }}"
                                 data-ga-price="{{ product.pprice|floatformat:2 }}"
                                 data-ga-currency="{{ product.currency|default:'USD' }}"
-                                data-ga-item-category="{% if product.pcategory.0 %}{{ product.pcategory.0.name|escapejs }}{% endif %}">
-                            Add to Cart
+                                data-ga-item-category="{% if product.pcategory.0 %}{{ product.pcategory.0.name|escapejs }}{% endif %}"
+                                {% if not product.in_stock %}disabled{% endif %}>
+                            {% if product.in_stock %}Add to Cart{% else %}Out of Stock{% endif %}
                         </button>
                     </div>
 
