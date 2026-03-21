@@ -49,10 +49,16 @@
                     </div>
 
                     <div class="single-product-purchase">
+                        {# GA4 analytics metadata for add_to_cart (system variant path). #}
                         <button
                             id="spatc"
                             class="single-product-addtocart shop-add-to-cart"
-                            data-variant-id="{{ default_variant.id }}">
+                            data-variant-id="{{ default_variant.id }}"
+                            data-ga-item-id="{{ default_variant.id }}"
+                            data-ga-item-name="{{ default_variant.title|escapejs }}"
+                            data-ga-price="{% if default_variant.sale_price %}{{ default_variant.sale_price|floatformat:2 }}{% else %}{{ default_variant.price|floatformat:2 }}{% endif %}"
+                            data-ga-currency="{{ product.currency|default:'USD' }}"
+                            data-ga-item-category="{% if product.pcategory.0 %}{{ product.pcategory.0.name|escapejs }}{% endif %}">
                             Add to Cart
                         </button>
                     </div>
@@ -123,10 +129,15 @@
                             <label for="spq">Quantity</label>
                             <input id="spq" class="single-product-quantity" type="number" value="1" min="1">
                         </div>
-
+                        {# GA4 analytics metadata for add_to_cart (standard product path). #}
                         <button id="spatc"
                                 class="single-product-addtocart shop-add-to-cart"
-                                value="{{ product.pid }}">
+                                value="{{ product.pid }}"
+                                data-ga-item-id="{{ product.pid }}"
+                                data-ga-item-name="{{ product.pname|escapejs }}"
+                                data-ga-price="{{ product.pprice|floatformat:2 }}"
+                                data-ga-currency="{{ product.currency|default:'USD' }}"
+                                data-ga-item-category="{% if product.pcategory.0 %}{{ product.pcategory.0.name|escapejs }}{% endif %}">
                             Add to Cart
                         </button>
                     </div>
@@ -207,5 +218,22 @@
 
     </div>
 </section>
+
+<script>
+  // GA4 analytics: product detail view event.
+  if (typeof window.gtag === 'function') {
+    window.gtag('event', 'view_item', {
+      currency: '{{ product.currency|default:"USD"|escapejs }}',
+      value: Number('{% if product.system and default_variant %}{% if default_variant.sale_price %}{{ default_variant.sale_price|floatformat:2 }}{% else %}{{ default_variant.price|floatformat:2 }}{% endif %}{% else %}{{ product.pprice|floatformat:2 }}{% endif %}'),
+      items: [{
+        item_id: '{% if product.system and default_variant %}{{ default_variant.id }}{% else %}{{ product.pid }}{% endif %}',
+        item_name: '{% if product.system and default_variant %}{{ default_variant.title|escapejs }}{% else %}{{ product.pname|escapejs }}{% endif %}',
+        price: Number('{% if product.system and default_variant %}{% if default_variant.sale_price %}{{ default_variant.sale_price|floatformat:2 }}{% else %}{{ default_variant.price|floatformat:2 }}{% endif %}{% else %}{{ product.pprice|floatformat:2 }}{% endif %}'),
+        quantity: 1,
+        item_category: '{% if product.pcategory.0 %}{{ product.pcategory.0.name|escapejs }}{% endif %}'
+      }]
+    });
+  }
+</script>
 
 {% endblock %}

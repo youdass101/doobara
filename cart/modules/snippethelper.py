@@ -82,6 +82,7 @@ def scart_data_setup(cart, lst=None):
             if not variant:
                 continue
             price = variant.sale_price if variant.sale_price else variant.price
+            currency = variant.currency
             image = variant.images.filter(thumbnail=True).first() or variant.images.first()
             name = variant.title
             product_id = variant.product.id
@@ -90,6 +91,7 @@ def scart_data_setup(cart, lst=None):
             if not product:
                 continue
             price = product.price
+            currency = product.currency
             # PERF: one query path instead of .exists()+.first() double query.
             image = product.images.filter(thumbnail=True).first() or product.images.first()
             name = product.name
@@ -99,6 +101,7 @@ def scart_data_setup(cart, lst=None):
             "productname": name,
             "productid": product_id,
             "productunitprice": price,
+            "productcurrency": currency,
             "productquantity": quantity,
             "productimage": image,
             "cartkey": key,
