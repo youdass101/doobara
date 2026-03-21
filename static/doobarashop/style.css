@@ -2691,6 +2691,20 @@ footer .footer-inner .footer-links a {
   color: #331E6D;
 }
 
+.single-product-availability {
+  margin: 0 0 10px;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.single-product-availability.is-in-stock {
+  color: #15803d;
+}
+
+.single-product-availability.is-out-of-stock {
+  color: #b91c1c;
+}
+
 .single-product-variant {
   margin-bottom: 20px;
 }
@@ -2759,6 +2773,13 @@ footer .footer-inner .footer-links a {
 .single-product-addtocart:hover {
   transform: translateY(-2px);
   box-shadow: 0 18px 32px rgba(8, 17, 32, 0.22);
+}
+
+.single-product-addtocart:disabled {
+  background: #cbd5e1;
+  box-shadow: none;
+  cursor: not-allowed;
+  transform: none;
 }
 
 .single-product-trust {
