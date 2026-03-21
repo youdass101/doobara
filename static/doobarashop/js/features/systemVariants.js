@@ -72,6 +72,7 @@ function renderVariant(variant) {
   const title = document.getElementById('system-variant-title');
   const shortDescription = document.getElementById('system-variant-short-description');
   const price = document.getElementById('system-variant-price');
+  const availability = document.getElementById('system-variant-availability');
   const mainImage = document.getElementById('system-variant-main-image');
   const gallery = document.getElementById('system-variant-gallery');
   const packageItems = document.getElementById('system-variant-package-items');
@@ -86,12 +87,20 @@ function renderVariant(variant) {
     price.textContent = `$ ${Number(activePrice).toFixed(2)}`;
   }
 
+  if (availability) {
+    availability.textContent = variant.availability_label || 'Out of Stock';
+    availability.classList.toggle('is-in-stock', Boolean(variant.in_stock));
+    availability.classList.toggle('is-out-of-stock', !variant.in_stock);
+  }
+
   if (addToCartButton) {
     addToCartButton.dataset.variantId = String(variant.id);
     addToCartButton.dataset.gaItemId = String(variant.id);
     addToCartButton.dataset.gaItemName = variant.title || '';
     addToCartButton.dataset.gaPrice = String(variant.sale_price ?? variant.price ?? 0);
     addToCartButton.dataset.gaCurrency = variant.currency || addToCartButton.dataset.gaCurrency || 'USD';
+    addToCartButton.disabled = !variant.in_stock;
+    addToCartButton.textContent = variant.in_stock ? 'Add to Cart' : 'Out of Stock';
   }
 
   if (gallery) {
@@ -193,6 +202,9 @@ export function initSystemVariants() {
   });
 
   addToCartButton.addEventListener('click', async () => {
+    if (addToCartButton.disabled) {
+      return;
+    }
     const variantId = Number(addToCartButton.dataset.variantId);
     if (!variantId) {
       return;
