@@ -61,8 +61,15 @@ def product_serialize(object, tag):
         if object.active:
             return {
             "pid": object.id,
+            "id": object.id,
             "pname": object.name,
+            "title": object.name,
+            "slug": object.slug,
+            "brand": object.brand,
+            "sku": object.sku,
+            "url": object.get_absolute_url(),
             "pprice": object.price,
+            "price": object.price,
             "currency": object.currency,
             "pcategory": category_list,
             "pmainimage": image,
@@ -79,8 +86,15 @@ def product_serialize(object, tag):
         
         return {
             "pid": object.id,
+            "id": object.id,
             "pname": object.name,
+            "title": object.name,
+            "slug": object.slug,
+            "brand": object.brand,
+            "sku": object.sku,
+            "url": object.get_absolute_url(),
             "pprice": object.price,
+            "price": object.price,
             "currency": object.currency,
             "pshortdescription": short_description_lines,
             "plongdescription": long_description,

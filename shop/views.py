@@ -1,6 +1,7 @@
 from django.shortcuts import get_object_or_404, render
 from .models import *
 from django.urls import reverse
+from django.db.models import Q
 
 # Created modules to manage shop page functions
 from .modeling.serialize_helper import *
@@ -61,8 +62,9 @@ def filtering(request, locat):
 # request * string -> render (url * dict)  
 # caller: product icon anywhere
 # render single product html template with and given product data dict
-def single_product(request, locat):
-    parent_product = get_object_or_404(Product, name=locat)
+def single_product(request, locat=None, slug=None):
+    lookup_key = slug or locat
+    parent_product = get_object_or_404(Product, Q(slug=lookup_key) | Q(name=lookup_key))
 
     # is dict | (loc: shop.models)
     # given product name, prodcut object serialized dict (using models)
@@ -90,7 +92,7 @@ def single_product(request, locat):
             package_items.append(
                 {
                     "name": package_item.included_product.name,
-                    "url": reverse("single_product", kwargs={"locat": package_item.included_product.name}),
+                    "url": package_item.included_product.get_absolute_url(),
                     "qty": package_item.quantity,
                     "thumbnail": included_thumb.image.url if included_thumb else None,
                 }

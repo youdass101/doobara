@@ -1,6 +1,8 @@
 from django.db import models
 from .modeling.serialize_helper import *
 from django.dispatch import receiver
+from django.urls import reverse
+from django.utils.text import slugify
 
 # Categories is (int(primary id) * string * string * int * int) model
 # interp. Product categories database SQL table 
@@ -35,6 +37,9 @@ class Product(models.Model):
     # product name string of max 255 char
     # PERF (P2): indexed because product lookups by name are used on product detail pages.
     name = models.CharField(max_length=255, db_index=True)
+    slug = models.SlugField(max_length=255, unique=True, blank=True)
+    brand = models.CharField(max_length=255, blank=True)
+    sku = models.CharField(max_length=64, blank=True)
     # long_description is string
     #product long decription more than 1000 char
     description = models.TextField(blank=True)
@@ -103,7 +108,18 @@ class Product(models.Model):
         return f"{self.name}"
     
     def get_absolute_url(self):
-        return reverse('singleproduct', kwargs={'locat': self.name})  # adjust 'locat' to your slug/field
+        return reverse("single_product_by_slug", kwargs={"slug": self.slug})
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            base_slug = slugify(self.name) or "product"
+            slug_candidate = base_slug
+            counter = 2
+            while Product.objects.filter(slug=slug_candidate).exclude(pk=self.pk).exists():
+                slug_candidate = f"{base_slug}-{counter}"
+                counter += 1
+            self.slug = slug_candidate
+        super().save(*args, **kwargs)
     
 
 

@@ -13,11 +13,12 @@ urlpatterns=[
     path("shop/<str:locat>/", views.filtering, name="filtering"),
     # Contact Us page request
     path("contactus", views.contactus, name="contactus"),
-    # Single product page request
+    # Canonical single product page request (slug-based)
+    path("products/<slug:slug>/", views.single_product, name="single_product_by_slug"),
+    # Backward-compatible legacy product path (name-based)
     path('single_product/<str:locat>/', views.single_product, name="single_product"),
     # search keyword request
     path('search', views.search, name="search"),
     # order list filter request
     path("orderby", views.orderby, name="orderby")
 ]
-
