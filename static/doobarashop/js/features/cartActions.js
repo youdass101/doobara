@@ -1,16 +1,20 @@
 import { sendJson } from '../core/http.js';
 
-// GA4 analytics: emit add_to_cart only after a successful backend add.
+// GA4 + Meta Pixel analytics: emit add_to_cart/AddToCart only after a successful backend add.
 function trackAddToCart(button, quantity) {
+  const itemId = button.dataset.gaItemId || button.value;
+  const itemName = button.dataset.gaItemName || '';
   if (typeof window.gtag !== 'function') {
-    return;
+    if (typeof window.fbq !== 'function') {
+      return;
+    }
   }
 
   const itemPrice = Number.parseFloat(button.dataset.gaPrice || '0');
   const itemQuantity = Number.parseInt(quantity, 10) || 1;
   const item = {
-    item_id: button.dataset.gaItemId || button.value,
-    item_name: button.dataset.gaItemName || '',
+    item_id: itemId,
+    item_name: itemName,
     price: itemPrice,
     quantity: itemQuantity,
   };
@@ -19,11 +23,28 @@ function trackAddToCart(button, quantity) {
     item.item_category = button.dataset.gaItemCategory;
   }
 
-  window.gtag('event', 'add_to_cart', {
-    currency: button.dataset.gaCurrency || 'USD',
-    value: Number((itemPrice * itemQuantity).toFixed(2)),
-    items: [item],
-  });
+  const currency = button.dataset.gaCurrency || 'USD';
+  const value = Number((itemPrice * itemQuantity).toFixed(2));
+
+  if (typeof window.gtag === 'function') {
+    window.gtag('event', 'add_to_cart', {
+      currency,
+      value,
+      items: [item],
+    });
+  }
+
+  if (typeof window.fbq === 'function') {
+    // Meta Pixel: AddToCart standard event.
+    window.fbq('track', 'AddToCart', {
+      content_ids: [itemId],
+      content_name: itemName,
+      content_type: 'product',
+      value,
+      currency,
+      num_items: itemQuantity,
+    });
+  }
 }
 
 function updateCartSummary(cart) {

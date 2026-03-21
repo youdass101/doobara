@@ -1,15 +1,19 @@
 import { sendJson } from '../core/http.js';
 
-// GA4 analytics: emit add_to_cart for system variants only after successful add.
+// GA4 + Meta Pixel analytics: emit add_to_cart/AddToCart for system variants only after successful add.
 function trackAddToCart(button) {
+  const itemId = button.dataset.gaItemId || button.dataset.variantId || '';
+  const itemName = button.dataset.gaItemName || '';
   if (typeof window.gtag !== 'function') {
-    return;
+    if (typeof window.fbq !== 'function') {
+      return;
+    }
   }
 
   const itemPrice = Number.parseFloat(button.dataset.gaPrice || '0');
   const item = {
-    item_id: button.dataset.gaItemId || button.dataset.variantId || '',
-    item_name: button.dataset.gaItemName || '',
+    item_id: itemId,
+    item_name: itemName,
     price: itemPrice,
     quantity: 1,
   };
@@ -18,11 +22,28 @@ function trackAddToCart(button) {
     item.item_category = button.dataset.gaItemCategory;
   }
 
-  window.gtag('event', 'add_to_cart', {
-    currency: button.dataset.gaCurrency || 'USD',
-    value: Number(itemPrice.toFixed(2)),
-    items: [item],
-  });
+  const currency = button.dataset.gaCurrency || 'USD';
+  const value = Number(itemPrice.toFixed(2));
+
+  if (typeof window.gtag === 'function') {
+    window.gtag('event', 'add_to_cart', {
+      currency,
+      value,
+      items: [item],
+    });
+  }
+
+  if (typeof window.fbq === 'function') {
+    // Meta Pixel: AddToCart standard event.
+    window.fbq('track', 'AddToCart', {
+      content_ids: [itemId],
+      content_name: itemName,
+      content_type: 'product',
+      value,
+      currency,
+      num_items: 1,
+    });
+  }
 }
 
 function updateCartSummary(cart) {

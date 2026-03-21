@@ -77,6 +77,17 @@ Order Placed
     </div>
 </section>
 <script>
+  // Meta Pixel: purchase event on successful order confirmation page.
+  if (typeof window.fbq === 'function') {
+    window.fbq('track', 'Purchase', {
+      content_ids: [{% for item in order_items %}'{{ item.item_id }}'{% if not forloop.last %}, {% endif %}{% endfor %}],
+      content_type: 'product',
+      value: Number('{{ order.total|floatformat:2 }}'),
+      currency: '{{ order.currency|default:"USD"|escapejs }}',
+      num_items: {{ order_items|length }}
+    });
+  }
+
   // GA4 analytics: purchase event on successful order confirmation page.
   if (typeof window.gtag === 'function') {
     window.gtag('event', 'purchase', {

@@ -206,6 +206,17 @@ My Cart
 </section>
 
 <script>
+  // Meta Pixel: checkout start event.
+  if (typeof window.fbq === 'function') {
+    window.fbq('track', 'InitiateCheckout', {
+      content_ids: [{% for item in cart %}'{{ item.0.productid }}'{% if not forloop.last %}, {% endif %}{% endfor %}],
+      content_type: 'product',
+      num_items: {{ cart|length }},
+      value: Number('{{ grand_total|floatformat:2 }}'),
+      currency: '{% if cart and cart.0.0.productcurrency %}{{ cart.0.0.productcurrency|escapejs }}{% else %}USD{% endif %}'
+    });
+  }
+
   // GA4 analytics: checkout-start event.
   if (typeof window.gtag === 'function') {
     window.gtag('event', 'begin_checkout', {
