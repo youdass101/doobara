@@ -220,6 +220,17 @@
 </section>
 
 <script>
+  // Meta Pixel: product detail view event.
+  if (typeof window.fbq === 'function') {
+    window.fbq('track', 'ViewContent', {
+      content_ids: ['{% if product.system and default_variant %}{{ default_variant.id }}{% else %}{{ product.pid }}{% endif %}'],
+      content_name: '{% if product.system and default_variant %}{{ default_variant.title|escapejs }}{% else %}{{ product.pname|escapejs }}{% endif %}',
+      content_type: 'product',
+      value: Number('{% if product.system and default_variant %}{% if default_variant.sale_price %}{{ default_variant.sale_price|floatformat:2 }}{% else %}{{ default_variant.price|floatformat:2 }}{% endif %}{% else %}{{ product.pprice|floatformat:2 }}{% endif %}'),
+      currency: '{{ product.currency|default:"USD"|escapejs }}'
+    });
+  }
+
   // GA4 analytics: product detail view event.
   if (typeof window.gtag === 'function') {
     window.gtag('event', 'view_item', {
