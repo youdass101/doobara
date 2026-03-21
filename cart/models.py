@@ -57,6 +57,7 @@ class Cart_Item (models.Model):
     def serialize(self):
         target_name = self.variant.title if self.variant else self.product.name
         target_price = self.variant.sale_price if self.variant and self.variant.sale_price else (self.variant.price if self.variant else self.product.price)
+        target_currency = self.variant.currency if self.variant else self.product.currency
         if self.variant:
             image = self.variant.images.filter(thumbnail=True).first() or self.variant.images.first()
             cart_key = f"v-{self.variant.id}"
@@ -68,6 +69,7 @@ class Cart_Item (models.Model):
             "productid" : self.product.id,
             "productname" : target_name,
             "productunitprice" : target_price,
+            "productcurrency": target_currency,
             "productquantity": self.quantity,
             "productimage": image,
             "cartkey": cart_key,

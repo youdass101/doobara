@@ -99,6 +99,7 @@ class Orders (models.Model):
             "orderid": self.id,
             "status": self.status,
             "total": self.total,
+            "currency": self.currency,
             "shipping_method": self.shipping_label,
             "shipping_price": self.shipping_price,
             "note": self.note,

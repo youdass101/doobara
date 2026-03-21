@@ -71,7 +71,14 @@ SHOP
                         </div>
                     </a>
 
-                    <button class="shop-card__btn shop-add-to-cart" value="{{row.pid}}">
+                    {# GA4 analytics metadata for add_to_cart from shop listing cards. #}
+                    <button class="shop-card__btn shop-add-to-cart"
+                            value="{{row.pid}}"
+                            data-ga-item-id="{{ row.pid }}"
+                            data-ga-item-name="{{ row.pname|escapejs }}"
+                            data-ga-price="{{ row.pprice|floatformat:2 }}"
+                            data-ga-currency="{{ row.currency|default:'USD' }}"
+                            data-ga-item-category="{% if row.pcategory.0 %}{{ row.pcategory.0.name|escapejs }}{% endif %}">
                         Add to Cart
                     </button>
                 </article>

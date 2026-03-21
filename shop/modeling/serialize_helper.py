@@ -81,6 +81,7 @@ def product_serialize(object, tag):
             "pid": object.id,
             "pname": object.name,
             "pprice": object.price,
+            "currency": object.currency,
             "pshortdescription": short_description_lines,
             "plongdescription": long_description,
             "pvideo": object.video,
@@ -93,4 +94,3 @@ def product_serialize(object, tag):
             "dimensions": object.dimensions,
             "weight": object.weight,
         }
-
