@@ -21,6 +21,7 @@ def serialize(lop, method):
 # model_object * string - > dictionary 
 # reutrning a dictionary of specified keys in a given object model (the engine of product serialize method)
 def product_serialize(object, tag):
+    inventory = object.get_inventory_data()
 
     # is list of dict | (loc: shop.models )
     # all category object connected to the given object 
@@ -71,9 +72,11 @@ def product_serialize(object, tag):
             "pprice": object.price,
             "price": object.price,
             "currency": object.currency,
-            "in_stock": object.in_stock,
-            "availability_label": object.availability_label,
-            "quantity": object.normalized_quantity,
+            "in_stock": inventory["in_stock"],
+            "availability_label": inventory["availability_label"],
+            "quantity": inventory["quantity"],
+            "stock": inventory["stock"],
+            "availability": inventory["availability"],
             "pcategory": category_list,
             "pmainimage": image,
             # !!! HAVE TO BE REMOVED FROM HTML CODE IN ANY IF CONFITION
@@ -99,9 +102,11 @@ def product_serialize(object, tag):
             "pprice": object.price,
             "price": object.price,
             "currency": object.currency,
-            "in_stock": object.in_stock,
-            "availability_label": object.availability_label,
-            "quantity": object.normalized_quantity,
+            "in_stock": inventory["in_stock"],
+            "availability_label": inventory["availability_label"],
+            "quantity": inventory["quantity"],
+            "stock": inventory["stock"],
+            "availability": inventory["availability"],
             "pshortdescription": short_description_lines,
             "plongdescription": long_description,
             "pvideo": object.video,
