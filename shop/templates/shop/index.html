@@ -117,10 +117,14 @@ Home Automation
         {% for product in lop %}
             <div class="product-card">
             <a href="{{ product.url }}">
-                <img src="{{product.pmainimage.url }}" alt="{{product.pmainimage.alt_text}}">
+                {% if product.main_image %}
+                    <img src="{{ product.main_image.url }}" alt="{{ product.main_image.alt_text }}">
+                {% else %}
+                    <span class="product-card__no-image" aria-label="{{ product.title }} image unavailable"></span>
+                {% endif %}
                 <div class="card-info">
                 <!-- <p class="card-product-name">{{product.pname}}</p> -->
-                <p class="card-product-price">$ {{product.pprice}}</p>
+                <p class="card-product-price">$ {{ product.price }}</p>
                 </div>
             </a>
             </div>
@@ -244,10 +248,14 @@ Home Automation
         {% for product in lop %}
             <div class="product-card">
             <a href="{{ product.url }}">
-                <img src="{{product.pmainimage.url }}" alt="{{product.pmainimage.alt_text}}">
+                {% if product.main_image %}
+                    <img src="{{ product.main_image.url }}" alt="{{ product.main_image.alt_text }}">
+                {% else %}
+                    <span class="product-card__no-image" aria-label="{{ product.title }} image unavailable"></span>
+                {% endif %}
                 <div class="card-info">
                 <!-- <p class="card-product-name">{{product.pname}}</p> -->
-                <p class="card-product-price">$ {{product.pprice}}</p>
+                <p class="card-product-price">$ {{ product.price }}</p>
                 </div>
             </a>
             </div>
@@ -261,10 +269,14 @@ Home Automation
         {% for product in lop %}
             <div class="product-card">
             <a href="{{ product.url }}">
-                <img src="{{product.pmainimage.url }}" alt="{{product.pmainimage.alt_text}}">
+                {% if product.main_image %}
+                    <img src="{{ product.main_image.url }}" alt="{{ product.main_image.alt_text }}">
+                {% else %}
+                    <span class="product-card__no-image" aria-label="{{ product.title }} image unavailable"></span>
+                {% endif %}
                 <div class="card-info">
                 <!-- <p class="card-product-name">{{product.pname}}</p> -->
-                <p class="card-product-price">$ {{product.pprice}}</p>
+                <p class="card-product-price">$ {{ product.price }}</p>
                 </div>
             </a>
             </div>

@@ -57,26 +57,30 @@ SHOP
     <!-- Products grid -->
     <div class="shop-grid">
         {% for row in lop %}
-            {% if row.pactive %}
+            {% if row.active %}
                 <article class="shop-card" data-system="{{ row.system|yesno:'true,false' }}">
                     <a href="{{ row.url }}" class="shop-card__link">
 
                         <div class="shop-card__media">
-                            <img src="{{row.pmainimage.url}}" alt="{{row.pmainimage.alt_text}}">
+                            {% if row.main_image %}
+                                <img src="{{ row.main_image.url }}" alt="{{ row.main_image.alt_text }}">
+                            {% else %}
+                                <span class="shop-card__no-image" aria-label="{{ row.title }} image unavailable"></span>
+                            {% endif %}
                         </div>
 
                         <div class="shop-card__content">
-                            <h2 class="shop-card__title">{{row.pname}}</h2>
-                            <p class="shop-card__price">$ {{row.pprice}}</p>
+                            <h2 class="shop-card__title">{{ row.title }}</h2>
+                            <p class="shop-card__price">$ {{ row.price }}</p>
                         </div>
                     </a>
 
                     {# GA4 analytics metadata for add_to_cart from shop listing cards. #}
                     <button class="shop-card__btn shop-add-to-cart"
-                            value="{{row.pid}}"
-                            data-ga-item-id="{{ row.pid }}"
-                            data-ga-item-name="{{ row.pname|escapejs }}"
-                            data-ga-price="{{ row.pprice|floatformat:2 }}"
+                            value="{{ row.id }}"
+                            data-ga-item-id="{{ row.id }}"
+                            data-ga-item-name="{{ row.title|escapejs }}"
+                            data-ga-price="{{ row.price|floatformat:2 }}"
                             data-ga-currency="{{ row.currency|default:'USD' }}"
                             data-ga-item-category="{% if row.pcategory.0 %}{{ row.pcategory.0.name|escapejs }}{% endif %}">
                         Add to Cart

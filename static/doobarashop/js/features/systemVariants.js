@@ -89,11 +89,11 @@ function renderVariant(variant) {
 
   if (availability) {
     const baseAvailability = variant.availability_label || 'Out of Stock';
-    availability.textContent = variant.in_stock
+    availability.textContent = variant.can_purchase
       ? `${baseAvailability} `
       : baseAvailability;
-    availability.classList.toggle('is-in-stock', Boolean(variant.in_stock));
-    availability.classList.toggle('is-out-of-stock', !variant.in_stock);
+    availability.classList.toggle('is-in-stock', Boolean(variant.can_purchase));
+    availability.classList.toggle('is-out-of-stock', !variant.can_purchase);
   }
 
   if (addToCartButton) {
@@ -102,8 +102,8 @@ function renderVariant(variant) {
     addToCartButton.dataset.gaItemName = variant.title || '';
     addToCartButton.dataset.gaPrice = String(variant.sale_price ?? variant.price ?? 0);
     addToCartButton.dataset.gaCurrency = variant.currency || addToCartButton.dataset.gaCurrency || 'USD';
-    addToCartButton.disabled = !variant.in_stock;
-    addToCartButton.textContent = variant.in_stock ? 'Add to Cart' : 'Out of Stock';
+    addToCartButton.disabled = !variant.can_purchase;
+    addToCartButton.textContent = variant.cart_cta_label || 'Out of Stock';
   }
 
   if (gallery) {
@@ -133,6 +133,11 @@ function renderVariant(variant) {
 
       gallery.appendChild(button);
     });
+
+    if (!(variant.images || []).length && mainImage) {
+      mainImage.removeAttribute('src');
+      mainImage.alt = variant.title || '';
+    }
   }
 
   if (packageItems) {
