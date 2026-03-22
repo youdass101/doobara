@@ -43,7 +43,7 @@
                             <h2 id="system-variant-title" class="single-product-price">{{ default_variant.title }}</h2>
                             <p id="system-variant-short-description">{{ default_variant.short_description }}</p>
                             <p id="system-variant-availability" class="single-product-availability {% if default_variant.in_stock %}is-in-stock{% else %}is-out-of-stock{% endif %}">
-                                {{ default_variant.availability_label }}{% if default_variant.in_stock %} ({{ default_variant.quantity }} available){% endif %}
+                                {{ default_variant.availability_label }}
                             </p>
                             <h2 id="system-variant-price" class="single-product-price">
                                 $ {% if default_variant.sale_price %}{{ default_variant.sale_price|floatformat:2 }}{% else %}{{ default_variant.price|floatformat:2 }}{% endif %}
@@ -106,7 +106,7 @@
                         <div class="single-product-price-wrap">
                             <span class="single-product-price-label">Price</span>
                             <p class="single-product-availability {% if product.in_stock %}is-in-stock{% else %}is-out-of-stock{% endif %}">
-                                {{ product.availability_label }}{% if product.in_stock %} ({{ product.quantity }} available){% endif %}
+                                {{ product.availability_label }}{% if product.in_stock %} {% endif %}
                             </p>
                             <h2 id="spp" class="single-product-price">$ {{ product.pprice|floatformat:2 }}</h2>
                         </div>

@@ -90,7 +90,7 @@ function renderVariant(variant) {
   if (availability) {
     const baseAvailability = variant.availability_label || 'Out of Stock';
     availability.textContent = variant.in_stock
-      ? `${baseAvailability} (${Number(variant.quantity || 0)} available)`
+      ? `${baseAvailability} `
       : baseAvailability;
     availability.classList.toggle('is-in-stock', Boolean(variant.in_stock));
     availability.classList.toggle('is-out-of-stock', !variant.in_stock);
