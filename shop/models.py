@@ -119,9 +119,6 @@ class Product(models.Model):
                 slug_candidate = f"{base_slug}-{counter}"
                 counter += 1
             self.slug = slug_candidate
-        # Keep legacy inventory fields aligned to authoritative quantity rule.
-        self.stock = self.in_stock
-        self.availability = self.availability_label.lower()
         super().save(*args, **kwargs)
 
     @property
@@ -147,18 +144,12 @@ class Product(models.Model):
     def get_inventory_data(self):
         """
         Normalized inventory payload used by templates/serializers.
-        Legacy fields are mirrored for backward compatibility.
+        Quantity is the only authoritative stock signal.
         """
-        in_stock = self.in_stock
-        availability_label = self.availability_label
-        normalized_quantity = self.normalized_quantity
         return {
-            "in_stock": in_stock,
-            "availability_label": availability_label,
-            "quantity": normalized_quantity,
-            # Backward-compatibility mirrors. Keep these until callers migrate.
-            "stock": in_stock,
-            "availability": availability_label.lower(),
+            "in_stock": self.in_stock,
+            "availability_label": self.availability_label,
+            "quantity": self.normalized_quantity,
         }
 
     # SQL query set -> Dictionary(json)
@@ -283,23 +274,13 @@ class ProductVariant(models.Model):
     def get_inventory_data(self):
         """
         Normalized inventory payload used by templates/serializers.
-        Legacy fields are mirrored for backward compatibility.
+        Quantity is the only authoritative stock signal.
         """
-        in_stock = self.in_stock
-        availability_label = self.availability_label
-        normalized_quantity = self.normalized_quantity
         return {
-            "in_stock": in_stock,
-            "availability_label": availability_label,
-            "quantity": normalized_quantity,
-            # Backward-compatibility mirrors. Keep these until callers migrate.
-            "stock": in_stock,
+            "in_stock": self.in_stock,
+            "availability_label": self.availability_label,
+            "quantity": self.normalized_quantity,
         }
-
-    def save(self, *args, **kwargs):
-        # Keep legacy inventory fields aligned to authoritative quantity rule.
-        self.stock = self.in_stock
-        super().save(*args, **kwargs)
 
 class ProductVariantImage(models.Model):
     variant = models.ForeignKey("ProductVariant", related_name="images", on_delete=models.CASCADE)

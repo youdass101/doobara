@@ -75,8 +75,6 @@ def product_serialize(object, tag):
             "in_stock": inventory["in_stock"],
             "availability_label": inventory["availability_label"],
             "quantity": inventory["quantity"],
-            "stock": inventory["stock"],
-            "availability": inventory["availability"],
             "pcategory": category_list,
             "pmainimage": image,
             # !!! HAVE TO BE REMOVED FROM HTML CODE IN ANY IF CONFITION
@@ -105,8 +103,6 @@ def product_serialize(object, tag):
             "in_stock": inventory["in_stock"],
             "availability_label": inventory["availability_label"],
             "quantity": inventory["quantity"],
-            "stock": inventory["stock"],
-            "availability": inventory["availability"],
             "pshortdescription": short_description_lines,
             "plongdescription": long_description,
             "pvideo": object.video,

@@ -111,8 +111,6 @@ def single_product(request, locat=None, slug=None):
             "in_stock": variant_inventory["in_stock"],
             "availability_label": variant_inventory["availability_label"],
             "quantity": variant_inventory["quantity"],
-            "stock": variant_inventory["stock"],
-            "availability": variant_inventory["availability_label"].lower(),
             "thumbnail": thumb.image.url if thumb else None,
             "images": images,
             "package_items": package_items,
