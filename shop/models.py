@@ -140,9 +140,17 @@ class Product(models.Model):
     @property
     def availability_label(self):
         return "In Stock" if self.in_stock else "Out of Stock"
-    
 
-
+    def get_inventory_data(self):
+        """
+        Normalized inventory payload used by templates/serializers.
+        Quantity is the only authoritative stock signal.
+        """
+        return {
+            "in_stock": self.in_stock,
+            "availability_label": self.availability_label,
+            "quantity": self.normalized_quantity,
+        }
 
     # SQL query set -> Dictionary(json)
     # Takes SQL(model) query set data and convert it to JSON dictionary records
@@ -262,6 +270,17 @@ class ProductVariant(models.Model):
     @property
     def availability_label(self):
         return "In Stock" if self.in_stock else "Out of Stock"
+
+    def get_inventory_data(self):
+        """
+        Normalized inventory payload used by templates/serializers.
+        Quantity is the only authoritative stock signal.
+        """
+        return {
+            "in_stock": self.in_stock,
+            "availability_label": self.availability_label,
+            "quantity": self.normalized_quantity,
+        }
 
 class ProductVariantImage(models.Model):
     variant = models.ForeignKey("ProductVariant", related_name="images", on_delete=models.CASCADE)

@@ -81,6 +81,7 @@ def single_product(request, locat=None, slug=None):
     default_variant = None
 
     for variant in variants_qs:
+        variant_inventory = variant.get_inventory_data()
         thumb = variant.images.filter(thumbnail=True).first() or variant.images.first()
         images = [
             {"url": image.image.url, "alt_text": image.alt_text}
@@ -107,9 +108,9 @@ def single_product(request, locat=None, slug=None):
             "price": float(variant.price),
             "sale_price": float(variant.sale_price) if variant.sale_price else None,
             "currency": variant.currency,
-            "in_stock": variant.in_stock,
-            "availability_label": variant.availability_label,
-            "quantity": variant.normalized_quantity,
+            "in_stock": variant_inventory["in_stock"],
+            "availability_label": variant_inventory["availability_label"],
+            "quantity": variant_inventory["quantity"],
             "thumbnail": thumb.image.url if thumb else None,
             "images": images,
             "package_items": package_items,

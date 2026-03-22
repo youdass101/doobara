@@ -88,7 +88,10 @@ function renderVariant(variant) {
   }
 
   if (availability) {
-    availability.textContent = variant.availability_label || 'Out of Stock';
+    const baseAvailability = variant.availability_label || 'Out of Stock';
+    availability.textContent = variant.in_stock
+      ? `${baseAvailability} (${Number(variant.quantity || 0)} available)`
+      : baseAvailability;
     availability.classList.toggle('is-in-stock', Boolean(variant.in_stock));
     availability.classList.toggle('is-out-of-stock', !variant.in_stock);
   }
