@@ -1,9 +1,8 @@
 {% extends "doobarashop/layout.html" %}
 {% load static %}
 
-{% block pagetitle %}
-{{ product.title }}
-{% endblock %}
+{% block title %}{{ product.title }} | Doobara{% endblock %}
+{% block meta_description %}{% if product.pshortdescription and product.pshortdescription.0 %}{{ product.pshortdescription.0|striptags|truncatechars:155 }}{% else %}Buy {{ product.title }} from Doobara with practical smart-home-focused support and fast local delivery options.{% endif %}{% endblock %}
 
 {% block body %}
 <section class="single-product-page">
