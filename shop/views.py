@@ -4,10 +4,25 @@ from django.shortcuts import get_object_or_404, render
 from .models import *
 from django.urls import reverse
 from django.db.models import Q
+from django.core.serializers.json import DjangoJSONEncoder
 
 # Created modules to manage shop page functions
 from .modeling.serialize_helper import *
 from .modeling.filter_helper import *
+
+_JSON_SCRIPT_ESCAPES = {
+    ord(">"): "\\u003E",
+    ord("<"): "\\u003C",
+    ord("&"): "\\u0026",
+}
+
+
+def _json_for_script_tag(value):
+    """
+    Serialize JSON for safe embedding in <script> text content.
+    Mirrors Django's json_script escaping to prevent </script> breakouts.
+    """
+    return json.dumps(value, cls=DjangoJSONEncoder).translate(_JSON_SCRIPT_ESCAPES)
 
 
 def _schema_offer_availability_url(*, in_stock=False, is_preorder=False):
@@ -223,7 +238,7 @@ def single_product(request, locat=None, slug=None):
             "product": product,
             "variants": variants,
             "default_variant": default_variant,
-            "product_json_ld": json.dumps(
+            "product_json_ld": _json_for_script_tag(
                 # JSON string consumed directly by <script type="application/ld+json">.
                 _build_product_json_ld(
                     request=request,
