@@ -1,11 +1,112 @@
+import json
+
 from django.shortcuts import get_object_or_404, render
 from .models import *
 from django.urls import reverse
 from django.db.models import Q
+from django.core.serializers.json import DjangoJSONEncoder
 
 # Created modules to manage shop page functions
 from .modeling.serialize_helper import *
 from .modeling.filter_helper import *
+
+_JSON_SCRIPT_ESCAPES = {
+    ord(">"): "\\u003E",
+    ord("<"): "\\u003C",
+    ord("&"): "\\u0026",
+}
+
+
+def _json_for_script_tag(value):
+    """
+    Serialize JSON for safe embedding in <script> text content.
+    Mirrors Django's json_script escaping to prevent </script> breakouts.
+    """
+    return json.dumps(value, cls=DjangoJSONEncoder).translate(_JSON_SCRIPT_ESCAPES)
+
+
+def _schema_offer_availability_url(*, in_stock=False, is_preorder=False):
+    """
+    Map normalized inventory booleans to Schema.org Offer availability URLs.
+    """
+    if is_preorder:
+        return "https://schema.org/PreOrder"
+    if in_stock:
+        return "https://schema.org/InStock"
+    return "https://schema.org/OutOfStock"
+
+
+def _build_product_json_ld(request, product_data, parent_product, default_variant=None):
+    """
+    Build Product JSON-LD for the product detail page.
+
+    Notes:
+    - Uses canonical absolute URL from product.get_absolute_url().
+    - For system products, offer values are sourced from the default variant.
+    - Optional fields are only included when source data exists.
+    """
+    canonical_url = request.build_absolute_uri(parent_product.get_absolute_url())
+
+    # System product path: keep the first implementation simple by exposing
+    # the default variant as the Offer currently represented on the page.
+    if default_variant:
+        offer_price = default_variant.get("sale_price") or default_variant.get("price")
+        offer_currency = default_variant.get("currency") or product_data.get("currency") or "USD"
+        offer_availability = _schema_offer_availability_url(
+            in_stock=bool(default_variant.get("in_stock")),
+            is_preorder=False,
+        )
+        image_url = default_variant.get("thumbnail") or (
+            product_data.get("main_image", {}) or {}
+        ).get("url")
+    # Standard product path: use base product pricing/inventory data.
+    else:
+        offer_price = product_data.get("price")
+        offer_currency = product_data.get("currency") or "USD"
+        offer_availability = _schema_offer_availability_url(
+            in_stock=bool(product_data.get("in_stock")),
+            is_preorder=bool(product_data.get("is_preorder")),
+        )
+        image_url = (product_data.get("main_image", {}) or {}).get("url")
+
+    json_ld = {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        "name": product_data.get("title") or "",
+        "url": canonical_url,
+        "offers": {
+            "@type": "Offer",
+            "url": canonical_url,
+            "price": str(offer_price) if offer_price is not None else None,
+            "priceCurrency": offer_currency,
+            "availability": offer_availability,
+        },
+    }
+
+    # Optional Product.image (absolute URL) when an image exists.
+    if image_url:
+        json_ld["image"] = request.build_absolute_uri(image_url)
+
+    # Optional Product.description from normalized model text fields.
+    description = (parent_product.short_description or parent_product.description or "").strip()
+    if description:
+        json_ld["description"] = description
+
+    if product_data.get("sku"):
+        json_ld["sku"] = product_data["sku"]
+
+    if product_data.get("brand"):
+        json_ld["brand"] = {
+            "@type": "Brand",
+            "name": product_data["brand"],
+        }
+
+    # Null-safe output: strip any None values before serializing to JSON.
+    return {
+        key: value
+        for key, value in json_ld.items()
+        if value is not None
+    }
 
 def _serialize_main_products(queryset):
     """
@@ -137,6 +238,15 @@ def single_product(request, locat=None, slug=None):
             "product": product,
             "variants": variants,
             "default_variant": default_variant,
+            "product_json_ld": _json_for_script_tag(
+                # JSON string consumed directly by <script type="application/ld+json">.
+                _build_product_json_ld(
+                    request=request,
+                    product_data=product,
+                    parent_product=parent_product,
+                    default_variant=default_variant if product.get("system") else None,
+                )
+            ),
         },
     )
 
