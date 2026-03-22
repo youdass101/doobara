@@ -20,5 +20,7 @@ urlpatterns=[
     # search keyword request
     path('search', views.search, name="search"),
     # order list filter request
-    path("orderby", views.orderby, name="orderby")
+    path("orderby", views.orderby, name="orderby"),
+    # Internal product feed export (JSON) for Merchant/Meta mapping QA.
+    path("internal/exports/products.json", views.internal_product_feed_export, name="internal_product_feed_export"),
 ]
