@@ -238,6 +238,8 @@ def single_product(request, locat=None, slug=None):
             "product": product,
             "variants": variants,
             "default_variant": default_variant,
+            # Always canonicalize product detail pages to the slug-based product URL.
+            "canonical_url": request.build_absolute_uri(parent_product.get_absolute_url()),
             "product_json_ld": _json_for_script_tag(
                 # JSON string consumed directly by <script type="application/ld+json">.
                 _build_product_json_ld(

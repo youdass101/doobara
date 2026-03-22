@@ -17,6 +17,9 @@
       gtag('config', '{{ GOOGLE_ANALYTICS_ID }}');
     </script>
     {% endif %}
+    {% if canonical_url %}
+    <link rel="canonical" href="{{ canonical_url }}">
+    {% endif %}
     {% if META_PIXEL_ID %}
     {# Meta Pixel: base code + PageView (global) #}
     <script>
