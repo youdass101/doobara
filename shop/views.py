@@ -1,5 +1,6 @@
 import json
 
+from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, render
 from .models import *
 from django.urls import reverse
@@ -9,6 +10,7 @@ from django.core.serializers.json import DjangoJSONEncoder
 # Created modules to manage shop page functions
 from .modeling.serialize_helper import *
 from .modeling.filter_helper import *
+from .modeling.feed_export import build_product_feed_payload
 
 _JSON_SCRIPT_ESCAPES = {
     ord(">"): "\\u003E",
@@ -283,6 +285,15 @@ def orderby(request):
         return _shop_page_response(request, slop)
 
     return _shop_page_response(request, [])
+
+
+def internal_product_feed_export(request):
+    """
+    Internal JSON export endpoint for catalog feed QA.
+    This is intentionally read-only and API-integration free.
+    """
+    payload = build_product_feed_payload(request)
+    return JsonResponse(payload)
 
 
 # request -> render(url)
