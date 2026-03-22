@@ -138,18 +138,32 @@ class Product(models.Model):
         return self.normalized_quantity > 0
 
     @property
+    def is_preorder(self):
+        return self.availability == "preorder"
+
+    @property
+    def can_purchase(self):
+        return self.in_stock or self.is_preorder
+
+    @property
     def availability_label(self):
+        if self.is_preorder:
+            return "Pre-order"
         return "In Stock" if self.in_stock else "Out of Stock"
 
     def get_inventory_data(self):
         """
         Normalized inventory payload used by templates/serializers.
-        Quantity is the only authoritative stock signal.
+        Quantity is the authoritative in-stock signal, but pre-order can still
+        make a product purchasable.
         """
         return {
             "in_stock": self.in_stock,
+            "is_preorder": self.is_preorder,
+            "can_purchase": self.can_purchase,
             "availability_label": self.availability_label,
             "quantity": self.normalized_quantity,
+            "cart_cta_label": "Pre-order" if self.is_preorder else ("Add to Cart" if self.in_stock else "Out of Stock"),
         }
 
     # SQL query set -> Dictionary(json)
@@ -278,8 +292,10 @@ class ProductVariant(models.Model):
         """
         return {
             "in_stock": self.in_stock,
+            "can_purchase": self.in_stock,
             "availability_label": self.availability_label,
             "quantity": self.normalized_quantity,
+            "cart_cta_label": "Add to Cart" if self.in_stock else "Out of Stock",
         }
 
 class ProductVariantImage(models.Model):
