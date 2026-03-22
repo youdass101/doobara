@@ -1,10 +1,14 @@
 from django.test import TestCase
 
-from .models import Product, ProductImage
+from .models import Categorie, Product, ProductImage
 
 
 class InternalProductFeedExportTests(TestCase):
     def setUp(self):
+        self.camera_category = Categorie.objects.create(
+            name="CCTV Camera",
+            description="Security camera products",
+        )
         self.product = Product.objects.create(
             name="Feed Ready Camera",
             price="149.99",
@@ -15,6 +19,7 @@ class InternalProductFeedExportTests(TestCase):
             brand="Doobara",
             sku="CAM-001",
         )
+        self.product.category.add(self.camera_category)
 
     def test_internal_feed_export_contains_required_fields(self):
         response = self.client.get("/internal/exports/products.json")
@@ -37,6 +42,9 @@ class InternalProductFeedExportTests(TestCase):
                 "brand",
                 "sku",
                 "condition",
+                "product_type",
+                "google_product_category",
+                "meta_fb_product_category",
             ],
         )
 
@@ -45,6 +53,16 @@ class InternalProductFeedExportTests(TestCase):
         self.assertEqual(product_row["title"], self.product.name)
         self.assertEqual(product_row["currency"], "USD")
         self.assertEqual(product_row["availability"], "in stock")
+        self.assertEqual(product_row["condition"], "new")
+        self.assertEqual(product_row["product_type"], "CCTV Camera")
+        self.assertEqual(
+            product_row["google_product_category"],
+            "Electronics > Video > Video Cameras",
+        )
+        self.assertEqual(
+            product_row["meta_fb_product_category"],
+            "Electronics > Cameras",
+        )
         self.assertIn("/products/", product_row["url"])
         self.assertTrue(product_row["url"].startswith("http://testserver/"))
 
@@ -65,4 +83,26 @@ class InternalProductFeedExportTests(TestCase):
     def test_internal_feed_export_exposes_missing_fields(self):
         response = self.client.get("/internal/exports/products.json")
         product_row = response.json()["products"][0]
-        self.assertIn("condition", product_row["missing_fields"])
+        self.assertNotIn("condition", product_row["missing_fields"])
+
+    def test_internal_feed_export_surfaces_unmapped_category_gaps(self):
+        unmapped_category = Categorie.objects.create(
+            name="Custom Bundle",
+            description="Internal-only grouping",
+        )
+        unmapped_product = Product.objects.create(
+            name="Unmapped Product",
+            price="299.99",
+            currency="USD",
+            active=True,
+            quantity=5,
+            availability="in stock",
+        )
+        unmapped_product.category.add(unmapped_category)
+
+        response = self.client.get("/internal/exports/products.json")
+        readiness_gaps = response.json()["readiness_gaps"]
+
+        self.assertIn("manual_category_mapping_products", readiness_gaps)
+        self.assertIn("manual_category_mapping_product_types", readiness_gaps)
+        self.assertIn("Custom Bundle", readiness_gaps["manual_category_mapping_product_types"])
