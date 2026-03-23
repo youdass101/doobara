@@ -231,7 +231,7 @@ class ProductImage(models.Model):
     alt_text = models.CharField(max_length=255, blank=True)
     # image is image 
     # the image path
-    image = models.ImageField(upload_to= 'static/doobarashop/upload/images')
+    image = models.ImageField(upload_to='products/images/')
     # default is boolean 
     # if true the image is the main image for the product 
     thumbnail = models.BooleanField(default=False)  # True if this is a thumbnail image
@@ -349,7 +349,7 @@ class ProductVariant(models.Model):
 class ProductVariantImage(models.Model):
     variant = models.ForeignKey("ProductVariant", related_name="images", on_delete=models.CASCADE)
     alt_text = models.CharField(max_length=255, blank=True)
-    image = models.ImageField(upload_to="static/doobarashop/upload/images")
+    image = models.ImageField(upload_to='products/variants/images/')
     thumbnail = models.BooleanField(default=False)
 
     class Meta:
