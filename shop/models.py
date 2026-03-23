@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.exceptions import ValidationError
 from .modeling.serialize_helper import *
 from django.dispatch import receiver
 from django.urls import reverse
@@ -261,9 +262,30 @@ class ProductVariant(models.Model):
             # product filter + active filter + sort by sort_order.
             models.Index(fields=["product", "active", "sort_order"], name="shop_var_prod_act_sort_idx"),
         ]
+        constraints = [
+            models.UniqueConstraint(
+                fields=["product"],
+                condition=models.Q(is_default=True),
+                name="shop_one_default_variant_per_product",
+            ),
+        ]
 
     def __str__(self):
         return f"{self.product.name} - {self.title}"
+
+    def clean(self):
+        super().clean()
+        if not self.is_default or not self.product_id:
+            return
+
+        duplicate_default_exists = ProductVariant.objects.filter(
+            product_id=self.product_id,
+            is_default=True,
+        ).exclude(pk=self.pk).exists()
+        if duplicate_default_exists:
+            raise ValidationError(
+                {"is_default": "Only one default variant is allowed per product."}
+            )
 
     @property
     def normalized_quantity(self):
