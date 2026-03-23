@@ -236,10 +236,32 @@ class ProductImage(models.Model):
     # if true the image is the main image for the product 
     thumbnail = models.BooleanField(default=False)  # True if this is a thumbnail image
 
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["product"],
+                condition=models.Q(thumbnail=True),
+                name="shop_one_product_thumbnail_per_product",
+            ),
+        ]
 
     # data to show on admin page 
     def __str__(self):
         return f"{self.product.name} - {self.alt_text}" 
+
+    def clean(self):
+        super().clean()
+        if not self.thumbnail or not self.product_id:
+            return
+
+        duplicate_thumbnail_exists = ProductImage.objects.filter(
+            product_id=self.product_id,
+            thumbnail=True,
+        ).exclude(pk=self.pk).exists()
+        if duplicate_thumbnail_exists:
+            raise ValidationError(
+                {"thumbnail": "Only one thumbnail image is allowed per product."}
+            )
 
 class ProductVariant(models.Model):
     product = models.ForeignKey("Product", related_name="variants", on_delete=models.CASCADE)
@@ -326,8 +348,31 @@ class ProductVariantImage(models.Model):
     image = models.ImageField(upload_to="static/doobarashop/upload/images")
     thumbnail = models.BooleanField(default=False)
 
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["variant"],
+                condition=models.Q(thumbnail=True),
+                name="shop_one_variant_thumbnail_per_variant",
+            ),
+        ]
+
     def __str__(self):
         return f"{self.variant.product.name} - {self.variant.title} - {self.alt_text}"
+
+    def clean(self):
+        super().clean()
+        if not self.thumbnail or not self.variant_id:
+            return
+
+        duplicate_thumbnail_exists = ProductVariantImage.objects.filter(
+            variant_id=self.variant_id,
+            thumbnail=True,
+        ).exclude(pk=self.pk).exists()
+        if duplicate_thumbnail_exists:
+            raise ValidationError(
+                {"thumbnail": "Only one thumbnail image is allowed per variant."}
+            )
 
 class ProductVariantItem(models.Model):
     variant = models.ForeignKey("ProductVariant", related_name="package_items", on_delete=models.CASCADE)
