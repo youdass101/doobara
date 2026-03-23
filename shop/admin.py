@@ -1,5 +1,6 @@
 from django.contrib import admin
 from django.utils.html import format_html
+from django import forms
 from import_export.admin import ImportExportActionModelAdmin
 
 from .models import (
@@ -63,8 +64,36 @@ class ProductVariantImageInline(admin.TabularInline):
     image_preview.short_description = "Preview"
 
 
+class ProductAdminForm(forms.ModelForm):
+    class Meta:
+        model = Product
+        fields = "__all__"
+        help_texts = {
+            "quantity": (
+                "Inventory source of truth. Quantity > 0 = in stock. "
+                "Quantity <= 0 = out of stock."
+            ),
+            "availability": (
+                "Use Preorder only for products you intentionally sell before stock arrives. "
+                "For normal inventory, availability is auto-aligned from quantity."
+            ),
+        }
+
+    def clean(self):
+        cleaned_data = super().clean()
+        quantity = cleaned_data.get("quantity") or 0
+        availability = cleaned_data.get("availability")
+
+        # Keep preorder as an explicit operator choice.
+        if availability != "preorder":
+            cleaned_data["availability"] = "in stock" if quantity > 0 else "out of stock"
+
+        return cleaned_data
+
+
 @admin.register(Product)
 class ProductAdmin(ImportExportActionModelAdmin):
+    form = ProductAdminForm
     list_display = (
         "name",
         "slug",
@@ -79,7 +108,7 @@ class ProductAdmin(ImportExportActionModelAdmin):
     search_fields = ("name", "slug", "sku", "brand")
     list_filter = ("active", "featured", "availability", "stock", "category")
     ordering = ("-updated_time", "name")
-    readonly_fields = ("created_time", "updated_time")
+    readonly_fields = ("stock", "created_time", "updated_time")
     prepopulated_fields = {"slug": ("name",)}
     filter_horizontal = ("category",)
     inlines = (ProductImageInline, ProductVariantInline)
@@ -94,7 +123,6 @@ class ProductAdmin(ImportExportActionModelAdmin):
                     "sku",
                     "active",
                     "featured",
-                    "is_system",
                 )
             },
         ),
@@ -112,12 +140,12 @@ class ProductAdmin(ImportExportActionModelAdmin):
             "Inventory",
             {
                 "fields": (
-                    "stock",
                     "quantity",
                     "availability",
                     "variant",
                     "variant_name",
                     "variant_default",
+                    "stock",
                 )
             },
         ),
@@ -147,12 +175,24 @@ class ProductAdmin(ImportExportActionModelAdmin):
             },
         ),
         (
+            "Advanced/internal",
+            {
+                "classes": ("collapse",),
+                "fields": ("is_system",),
+            },
+        ),
+        (
             "Timestamps",
             {
                 "fields": ("created_time", "updated_time"),
             },
         ),
     )
+
+    def save_model(self, request, obj, form, change):
+        quantity = obj.quantity or 0
+        obj.stock = quantity > 0
+        super().save_model(request, obj, form, change)
 
 
 @admin.register(ProductVariant)
