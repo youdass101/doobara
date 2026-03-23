@@ -179,12 +179,10 @@
                     <h2>Product Video</h2>
                 </div>
                 <div class="single-video">
-                    <iframe
-                        src="{{ product.pvideo }}"
-                        title="Product video"
-                        frameborder="0"
-                        allowfullscreen>
-                    </iframe>
+                    <iframe width="560" height="315" src="{{ product.pvideo }}" title="{{ product.title }}" 
+                            frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+                        </iframe>
                 </div>
             </div>
         {% endif %}
