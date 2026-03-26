@@ -115,7 +115,12 @@ def _serialize_main_products(queryset):
     Shared list-page serializer path.
     Keeps prefetch + serialization logic in one place so maintenance is easier.
     """
-    return serialize(queryset.prefetch_related("category", "images"), "main")
+    # Include both variant relation types so listing-card pricing/CTA logic
+    # can detect configurable products without extra queries.
+    return serialize(
+        queryset.prefetch_related("category", "images", "variants", "normal_variants"),
+        "main",
+    )
 
 
 def _shop_page_response(request, products):

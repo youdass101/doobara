@@ -24,6 +24,46 @@ def _get_all_images(product):
     ]
 
 
+def _format_price_range(min_price, max_price):
+    """
+    Format listing price consistently with existing two-decimal display style.
+    Returns either "$ X.XX" or "$ X.XX - $ Y.YY" when range exists.
+    """
+    if min_price is None or max_price is None:
+        return "$ 0.00"
+    if min_price == max_price:
+        return f"$ {float(min_price):.2f}"
+    return f"$ {float(min_price):.2f} - $ {float(max_price):.2f}"
+
+
+def _get_selectable_price_bounds(product):
+    """
+    Compute min/max price for selectable options on listing cards.
+    - System products use active system variants.
+    - Non-system products with normal variants use active normal variants.
+    - Simple products fall back to product-level price.
+    """
+    # Use .all() so view-level prefetching can satisfy this without extra DB hits.
+    if product.is_system:
+        prices = [
+            variant.sale_price if variant.sale_price else variant.price
+            for variant in product.variants.all()
+            if variant.active
+        ]
+    else:
+        prices = [
+            variant.sale_price if variant.sale_price else variant.price
+            for variant in product.normal_variants.all()
+            if variant.active
+        ]
+
+    if not prices:
+        base_price = product.sale_price if product.sale_price else product.price
+        return base_price, base_price
+
+    return min(prices), max(prices)
+
+
 #  -> dict 
 # serialized dict for category objects list
 def serialized_categories():
@@ -52,6 +92,9 @@ def product_serialize(object, tag):
     image = _get_primary_image(object)
     all_images = _get_all_images(object)
     # Normal product variants are intentionally separate from system variants.
+    active_normal_variants = [
+        variant for variant in object.normal_variants.all() if variant.active
+    ]
     variant_options = [
         {
             "id": variant.id,
@@ -62,8 +105,13 @@ def product_serialize(object, tag):
             "short_description": variant.short_description,
             "image": variant.image.url if variant.image else None,
         }
-        for variant in object.normal_variants.filter(active=True).order_by("sort_order")
+        for variant in sorted(active_normal_variants, key=lambda item: item.sort_order)
     ]
+    # Shop cards must force option selection for configurable products.
+    requires_option_selection = object.is_system or bool(variant_options)
+    # Listing price reflects selectable option price range when needed.
+    price_min, price_max = _get_selectable_price_bounds(object)
+    price_display = _format_price_range(price_min, price_max)
 
 
     # is a Dictionary
@@ -82,6 +130,10 @@ def product_serialize(object, tag):
             "url": object.get_absolute_url(),
             "pprice": object.price,
             "price": object.price,
+            "price_display": price_display,
+            "price_min": price_min,
+            "price_max": price_max,
+            "requires_option_selection": requires_option_selection,
             "currency": object.currency,
             "in_stock": inventory["in_stock"],
             "can_purchase": inventory["can_purchase"],
@@ -116,6 +168,10 @@ def product_serialize(object, tag):
             "url": object.get_absolute_url(),
             "pprice": object.price,
             "price": object.price,
+            "price_display": price_display,
+            "price_min": price_min,
+            "price_max": price_max,
+            "requires_option_selection": requires_option_selection,
             "currency": object.currency,
             "in_stock": inventory["in_stock"],
             "can_purchase": inventory["can_purchase"],
