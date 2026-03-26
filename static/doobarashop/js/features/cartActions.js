@@ -86,10 +86,16 @@ function bindAddToCartButtons() {
       const quantityField = document.getElementById('spq');
       const quantity = quantityField ? quantityField.value : 1;
 
-      const response = await sendJson('/shopaddtocart', 'PUT', {
+      const responsePayload = {
         pid: button.value,
         quantity,
-      });
+      };
+      // Keep normal single-product variant cart payload separate from system variants.
+      if (button.dataset.normalVariantId) {
+        responsePayload.normal_variant_id = Number(button.dataset.normalVariantId);
+      }
+
+      const response = await sendJson('/shopaddtocart', 'PUT', responsePayload);
 
       const result = await response.json();
 

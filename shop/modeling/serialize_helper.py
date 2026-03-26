@@ -51,13 +51,18 @@ def product_serialize(object, tag):
 
     image = _get_primary_image(object)
     all_images = _get_all_images(object)
+    # Normal product variants are intentionally separate from system variants.
     variant_options = [
         {
             "id": variant.id,
             "title": variant.title,
             "default": variant.is_default,
+            "price": variant.price,
+            "sale_price": variant.sale_price,
+            "short_description": variant.short_description,
+            "image": variant.image.url if variant.image else None,
         }
-        for variant in object.variants.filter(active=True).order_by("sort_order")
+        for variant in object.normal_variants.filter(active=True).order_by("sort_order")
     ]
 
 

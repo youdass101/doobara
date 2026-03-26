@@ -11,6 +11,7 @@ from .models import (
     ProductVariant,
     ProductVariantImage,
     ProductVariantItem,
+    NormalProductVariant,
 )
 
 
@@ -40,6 +41,20 @@ class ProductVariantInline(admin.TabularInline):
         "price",
         "sale_price",
         "quantity",
+        "active",
+        "is_default",
+        "sort_order",
+    )
+    show_change_link = True
+
+
+class NormalProductVariantInline(admin.TabularInline):
+    model = NormalProductVariant
+    extra = 0
+    fields = (
+        "title",
+        "price",
+        "sale_price",
         "active",
         "is_default",
         "sort_order",
@@ -112,7 +127,7 @@ class ProductAdmin(ImportExportActionModelAdmin):
     readonly_fields = ("stock", "created_time", "updated_time")
     prepopulated_fields = {"slug": ("name",)}
     filter_horizontal = ("category",)
-    inlines = (ProductImageInline, ProductVariantInline)
+    inlines = (ProductImageInline, ProductVariantInline, NormalProductVariantInline)
     fieldsets = (
         (
             "Basic info",
@@ -250,6 +265,50 @@ class ProductVariantAdmin(ImportExportActionModelAdmin):
             "Description",
             {
                 "fields": ("short_description", "description"),
+            },
+        ),
+    )
+
+
+@admin.register(NormalProductVariant)
+class NormalProductVariantAdmin(ImportExportActionModelAdmin):
+    list_display = (
+        "title",
+        "product",
+        "price",
+        "active",
+        "is_default",
+        "sort_order",
+    )
+    search_fields = ("title", "product__name", "product__sku")
+    list_filter = ("active", "is_default")
+    ordering = ("product__name", "sort_order", "title")
+    fieldsets = (
+        (
+            "Variant",
+            {
+                "fields": (
+                    "product",
+                    "title",
+                    "active",
+                    "is_default",
+                    "sort_order",
+                )
+            },
+        ),
+        (
+            "Pricing",
+            {
+                "fields": (
+                    "price",
+                    "sale_price",
+                )
+            },
+        ),
+        (
+            "Content",
+            {
+                "fields": ("short_description", "image"),
             },
         ),
     )

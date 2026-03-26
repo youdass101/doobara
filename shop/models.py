@@ -265,6 +265,57 @@ class ProductImage(models.Model):
                 {"thumbnail": "Only one thumbnail image is allowed per product."}
             )
 
+
+class NormalProductVariant(models.Model):
+    # Separate variant model for regular (non-system) products.
+    # We intentionally keep this isolated from ProductVariant (system kits)
+    # so each concept stays clear and maintainable.
+    product = models.ForeignKey(
+        "Product",
+        related_name="normal_variants",
+        on_delete=models.CASCADE,
+    )
+    title = models.CharField(max_length=255)
+    short_description = models.TextField(blank=True)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+    sale_price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    image = models.ImageField(upload_to="products/normal_variants/images/", blank=True, null=True)
+    active = models.BooleanField(default=True, db_index=True)
+    is_default = models.BooleanField(default=False)
+    sort_order = models.PositiveSmallIntegerField(default=0)
+
+    class Meta:
+        indexes = [
+            # Detail-page query path: active variants for one product in UI order.
+            models.Index(fields=["product", "active", "sort_order"], name="shop_nvar_prod_act_sort_idx"),
+        ]
+        constraints = [
+            # Enforce a single default normal variant per parent product.
+            models.UniqueConstraint(
+                fields=["product"],
+                condition=models.Q(is_default=True),
+                name="shop_one_default_normal_variant_per_product",
+            ),
+        ]
+
+    def __str__(self):
+        return f"{self.product.name} - {self.title}"
+
+    def clean(self):
+        super().clean()
+        if not self.is_default or not self.product_id:
+            return
+
+        # Friendly validation error before DB constraint raises.
+        duplicate_default_exists = NormalProductVariant.objects.filter(
+            product_id=self.product_id,
+            is_default=True,
+        ).exclude(pk=self.pk).exists()
+        if duplicate_default_exists:
+            raise ValidationError(
+                {"is_default": "Only one default normal variant is allowed per product."}
+            )
+
 class ProductVariant(models.Model):
     product = models.ForeignKey("Product", related_name="variants", on_delete=models.CASCADE)
     tier = models.CharField(max_length=20, choices=[("basic", "Basic"), ("advanced", "Advanced"), ("pro", "Pro")])

@@ -173,17 +173,18 @@ def single_product(request, locat=None, slug=None):
     # given product name, prodcut object serialized dict (using models)
     product = parent_product.serialize("all")
 
-    variants_qs = (
+    # System-kit variants keep using the existing ProductVariant model.
+    system_variants_qs = (
         parent_product.variants.filter(active=True)
         .prefetch_related("images", "package_items__included_product__images")
         .order_by("sort_order")
     )
 
     tier_priority = {"advanced": 0, "basic": 1, "pro": 2}
-    variants = []
-    default_variant = None
+    system_variants = []
+    default_system_variant = None
 
-    for variant in variants_qs:
+    for variant in system_variants_qs:
         variant_inventory = variant.get_inventory_data()
         thumb = variant.images.filter(thumbnail=True).first() or variant.images.first()
         images = [
@@ -222,24 +223,47 @@ def single_product(request, locat=None, slug=None):
             "is_default": variant.is_default,
             "sort_order": variant.sort_order,
         }
-        variants.append(variant_payload)
+        system_variants.append(variant_payload)
 
-        if variant.is_default and not default_variant:
-            default_variant = variant_payload
+        if variant.is_default and not default_system_variant:
+            default_system_variant = variant_payload
 
-    if variants and not default_variant:
-        default_variant = sorted(
-            variants,
+    if system_variants and not default_system_variant:
+        default_system_variant = sorted(
+            system_variants,
             key=lambda item: (tier_priority.get(item["tier"], 99), item["sort_order"]),
         )[0]
+
+    # Normal single-product variants are separate from system variants by design.
+    normal_variants = []
+    default_normal_variant = None
+    for variant in parent_product.normal_variants.filter(active=True).order_by("sort_order"):
+        variant_payload = {
+            "id": variant.id,
+            "title": variant.title,
+            "short_description": variant.short_description,
+            "price": float(variant.price),
+            "sale_price": float(variant.sale_price) if variant.sale_price else None,
+            "image": variant.image.url if variant.image else None,
+            "is_default": variant.is_default,
+            "sort_order": variant.sort_order,
+        }
+        normal_variants.append(variant_payload)
+        if variant.is_default and not default_normal_variant:
+            default_normal_variant = variant_payload
+
+    if normal_variants and not default_normal_variant:
+        default_normal_variant = normal_variants[0]
 
     return render(
         request,
         "shop/single_product.html",
         {
             "product": product,
-            "variants": variants,
-            "default_variant": default_variant,
+            "system_variants": system_variants,
+            "default_system_variant": default_system_variant,
+            "normal_variants": normal_variants,
+            "default_normal_variant": default_normal_variant,
             # Always canonicalize product detail pages to the slug-based product URL.
             "canonical_url": request.build_absolute_uri(parent_product.get_absolute_url()),
             "product_json_ld": _json_for_script_tag(
@@ -248,7 +272,7 @@ def single_product(request, locat=None, slug=None):
                     request=request,
                     product_data=product,
                     parent_product=parent_product,
-                    default_variant=default_variant if product.get("system") else None,
+                    default_variant=default_system_variant if product.get("system") else None,
                 )
             ),
         },
