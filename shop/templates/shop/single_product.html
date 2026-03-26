@@ -7,13 +7,13 @@
 {% block body %}
 <section class="single-product-page">
     <div class="single-product-shell">
-        {% if product.system and variants %}
+        {% if product.system and system_variants %}
             <div class="single-product-top">
                 <div class="single-product-gallery">
                     <div class="single-product-gallery__main">
                         <img id="system-variant-main-image"
-                             src="{% if default_variant.thumbnail %}{{ default_variant.thumbnail }}{% elif product.main_image %}{{ product.main_image.url }}{% endif %}"
-                             alt="{{ default_variant.title|default:product.title }}">
+                             src="{% if default_system_variant.thumbnail %}{{ default_system_variant.thumbnail }}{% elif product.main_image %}{{ product.main_image.url }}{% endif %}"
+                             alt="{{ default_system_variant.title|default:product.title }}">
                     </div>
                     <div id="system-variant-gallery" class="single-product-gallery__thumbs"></div>
                 </div>
@@ -23,10 +23,10 @@
                     <h1 class="single-product-title">{{ product.title }}</h1>
 
                     <div class="system-variant-selector" id="system-variant-selector">
-                        {% for variant in variants %}
+                        {% for variant in system_variants %}
                             <button
                                 type="button"
-                                class="system-variant-option {% if default_variant.id == variant.id %}is-active{% endif %}"
+                                class="system-variant-option {% if default_system_variant.id == variant.id %}is-active{% endif %}"
                                 data-variant-id="{{ variant.id }}">
                                 <span class="system-variant-option__tier">{{ variant.tier|title }}</span>
                                 <span class="system-variant-option__price">
@@ -39,13 +39,13 @@
                     <div class="single-product-price-row">
                         <div class="single-product-price-wrap">
                             <span class="single-product-price-label">Selected Variant</span>
-                            <h2 id="system-variant-title" class="single-product-price">{{ default_variant.title }}</h2>
-                            <p id="system-variant-short-description">{{ default_variant.short_description }}</p>
-                            <p id="system-variant-availability" class="single-product-availability {% if default_variant.can_purchase %}is-in-stock{% else %}is-out-of-stock{% endif %}">
-                                {{ default_variant.availability_label }}
+                            <h2 id="system-variant-title" class="single-product-price">{{ default_system_variant.title }}</h2>
+                            <p id="system-variant-short-description">{{ default_system_variant.short_description }}</p>
+                            <p id="system-variant-availability" class="single-product-availability {% if default_system_variant.can_purchase %}is-in-stock{% else %}is-out-of-stock{% endif %}">
+                                {{ default_system_variant.availability_label }}
                             </p>
                             <h2 id="system-variant-price" class="single-product-price">
-                                $ {% if default_variant.sale_price %}{{ default_variant.sale_price|floatformat:2 }}{% else %}{{ default_variant.price|floatformat:2 }}{% endif %}
+                                $ {% if default_system_variant.sale_price %}{{ default_system_variant.sale_price|floatformat:2 }}{% else %}{{ default_system_variant.price|floatformat:2 }}{% endif %}
                             </h2>
                         </div>
                     </div>
@@ -55,14 +55,14 @@
                         <button
                             id="spatc"
                             class="single-product-addtocart shop-add-to-cart"
-                            data-variant-id="{{ default_variant.id }}"
-                            data-ga-item-id="{{ default_variant.id }}"
-                            data-ga-item-name="{{ default_variant.title|escapejs }}"
-                            data-ga-price="{% if default_variant.sale_price %}{{ default_variant.sale_price|floatformat:2 }}{% else %}{{ default_variant.price|floatformat:2 }}{% endif %}"
+                            data-variant-id="{{ default_system_variant.id }}"
+                            data-ga-item-id="{{ default_system_variant.id }}"
+                            data-ga-item-name="{{ default_system_variant.title|escapejs }}"
+                            data-ga-price="{% if default_system_variant.sale_price %}{{ default_system_variant.sale_price|floatformat:2 }}{% else %}{{ default_system_variant.price|floatformat:2 }}{% endif %}"
                             data-ga-currency="{{ product.currency|default:'USD' }}"
                             data-ga-item-category="{% if product.pcategory.0 %}{{ product.pcategory.0.name|escapejs }}{% endif %}"
-                            {% if not default_variant.can_purchase %}disabled{% endif %}>
-                            {{ default_variant.cart_cta_label|default:"Out of Stock" }}
+                            {% if not default_system_variant.can_purchase %}disabled{% endif %}>
+                            {{ default_system_variant.cart_cta_label|default:"Out of Stock" }}
                         </button>
                     </div>
 
@@ -73,8 +73,8 @@
                 </div>
             </div>
 
-            {{ variants|json_script:"variant-data" }}
-            {{ default_variant.id|json_script:"default-variant-id" }}
+            {{ system_variants|json_script:"variant-data" }}
+            {{ default_system_variant.id|json_script:"default-variant-id" }}
         {% else %}
             <div class="single-product-top">
                 <!-- Left: gallery -->
@@ -111,26 +111,31 @@
                             <p class="single-product-availability {% if product.can_purchase %}is-in-stock{% else %}is-out-of-stock{% endif %}">
                                 {{ product.availability_label }}
                             </p>
-                            <h2 id="spp" class="single-product-price">$ {{ product.price|floatformat:2 }}</h2>
+                            <h2 id="spp" class="single-product-price">
+                                $ {% if default_normal_variant and default_normal_variant.sale_price %}{{ default_normal_variant.sale_price|floatformat:2 }}{% elif default_normal_variant %}{{ default_normal_variant.price|floatformat:2 }}{% else %}{{ product.price|floatformat:2 }}{% endif %}
+                            </h2>
                         </div>
                     </div>
 
-                    {% if product.variant_options %}
+                    {% if normal_variants %}
                         <div class="single-product-variant">
-                            <label for="variants">Choose Variant</label>
-                            <select name="variant" id="variants">
-                                {% for var in product.variant_options %}
-                                    {% if var.default %}
-                                        <option selected="selected" class="svoption" value="{{ var }}">
-                                            {{ var.title }}
-                                        </option>
-                                    {% else %}
-                                        <option class="svoption" value="{{ var }}">
-                                            {{ var.title }}
-                                        </option>
-                                    {% endif %}
+                            <label>Choose Variant</label>
+                            <div class="system-variant-selector" id="normal-variant-selector">
+                                {% for variant in normal_variants %}
+                                    <button
+                                        type="button"
+                                        class="system-variant-option {% if default_normal_variant.id == variant.id %}is-active{% endif %}"
+                                        data-normal-variant-id="{{ variant.id }}">
+                                        <span class="system-variant-option__tier">{{ variant.title }}</span>
+                                        <span class="system-variant-option__price">
+                                            $ {% if variant.sale_price %}{{ variant.sale_price|floatformat:2 }}{% else %}{{ variant.price|floatformat:2 }}{% endif %}
+                                        </span>
+                                    </button>
                                 {% endfor %}
-                            </select>
+                            </div>
+                            <p id="normal-variant-short-description" class="single-product-variant-note">
+                                {{ default_normal_variant.short_description|default:"" }}
+                            </p>
                         </div>
                     {% endif %}
 
@@ -143,9 +148,10 @@
                         <button id="spatc"
                                 class="single-product-addtocart shop-add-to-cart"
                                 value="{{ product.pid }}"
+                                {% if default_normal_variant %}data-normal-variant-id="{{ default_normal_variant.id }}"{% endif %}
                                 data-ga-item-id="{{ product.id }}"
-                                data-ga-item-name="{{ product.title|escapejs }}"
-                                data-ga-price="{{ product.price|floatformat:2 }}"
+                                data-ga-item-name="{% if default_normal_variant %}{{ default_normal_variant.title|escapejs }}{% else %}{{ product.title|escapejs }}{% endif %}"
+                                data-ga-price="{% if default_normal_variant and default_normal_variant.sale_price %}{{ default_normal_variant.sale_price|floatformat:2 }}{% elif default_normal_variant %}{{ default_normal_variant.price|floatformat:2 }}{% else %}{{ product.price|floatformat:2 }}{% endif %}"
                                 data-ga-currency="{{ product.currency|default:'USD' }}"
                                 data-ga-item-category="{% if product.pcategory.0 %}{{ product.pcategory.0.name|escapejs }}{% endif %}"
                                 {% if not product.can_purchase %}disabled{% endif %}>
@@ -171,6 +177,10 @@
                     </div>
                 </div>
             </div>
+            {% if normal_variants %}
+                {{ normal_variants|json_script:"normal-variant-data" }}
+                {{ default_normal_variant.id|json_script:"default-normal-variant-id" }}
+            {% endif %}
         {% endif %}
 
         {% if product.pvideo %}
@@ -232,10 +242,10 @@
   // Meta Pixel: product detail view event.
   if (typeof window.fbq === 'function') {
     window.fbq('track', 'ViewContent', {
-      content_ids: ['{% if product.system and default_variant %}{{ default_variant.id }}{% else %}{{ product.id }}{% endif %}'],
-      content_name: '{% if product.system and default_variant %}{{ default_variant.title|escapejs }}{% else %}{{ product.title|escapejs }}{% endif %}',
+      content_ids: ['{% if product.system and default_system_variant %}{{ default_system_variant.id }}{% elif default_normal_variant %}{{ default_normal_variant.id }}{% else %}{{ product.id }}{% endif %}'],
+      content_name: '{% if product.system and default_system_variant %}{{ default_system_variant.title|escapejs }}{% elif default_normal_variant %}{{ default_normal_variant.title|escapejs }}{% else %}{{ product.title|escapejs }}{% endif %}',
       content_type: 'product',
-      value: Number('{% if product.system and default_variant %}{% if default_variant.sale_price %}{{ default_variant.sale_price|floatformat:2 }}{% else %}{{ default_variant.price|floatformat:2 }}{% endif %}{% else %}{{ product.price|floatformat:2 }}{% endif %}'),
+      value: Number('{% if product.system and default_system_variant %}{% if default_system_variant.sale_price %}{{ default_system_variant.sale_price|floatformat:2 }}{% else %}{{ default_system_variant.price|floatformat:2 }}{% endif %}{% elif default_normal_variant %}{% if default_normal_variant.sale_price %}{{ default_normal_variant.sale_price|floatformat:2 }}{% else %}{{ default_normal_variant.price|floatformat:2 }}{% endif %}{% else %}{{ product.price|floatformat:2 }}{% endif %}'),
       currency: '{{ product.currency|default:"USD"|escapejs }}'
     });
   }
@@ -244,11 +254,11 @@
   if (typeof window.gtag === 'function') {
     window.gtag('event', 'view_item', {
       currency: '{{ product.currency|default:"USD"|escapejs }}',
-      value: Number('{% if product.system and default_variant %}{% if default_variant.sale_price %}{{ default_variant.sale_price|floatformat:2 }}{% else %}{{ default_variant.price|floatformat:2 }}{% endif %}{% else %}{{ product.price|floatformat:2 }}{% endif %}'),
+      value: Number('{% if product.system and default_system_variant %}{% if default_system_variant.sale_price %}{{ default_system_variant.sale_price|floatformat:2 }}{% else %}{{ default_system_variant.price|floatformat:2 }}{% endif %}{% elif default_normal_variant %}{% if default_normal_variant.sale_price %}{{ default_normal_variant.sale_price|floatformat:2 }}{% else %}{{ default_normal_variant.price|floatformat:2 }}{% endif %}{% else %}{{ product.price|floatformat:2 }}{% endif %}'),
       items: [{
-        item_id: '{% if product.system and default_variant %}{{ default_variant.id }}{% else %}{{ product.id }}{% endif %}',
-        item_name: '{% if product.system and default_variant %}{{ default_variant.title|escapejs }}{% else %}{{ product.title|escapejs }}{% endif %}',
-        price: Number('{% if product.system and default_variant %}{% if default_variant.sale_price %}{{ default_variant.sale_price|floatformat:2 }}{% else %}{{ default_variant.price|floatformat:2 }}{% endif %}{% else %}{{ product.price|floatformat:2 }}{% endif %}'),
+        item_id: '{% if product.system and default_system_variant %}{{ default_system_variant.id }}{% elif default_normal_variant %}{{ default_normal_variant.id }}{% else %}{{ product.id }}{% endif %}',
+        item_name: '{% if product.system and default_system_variant %}{{ default_system_variant.title|escapejs }}{% elif default_normal_variant %}{{ default_normal_variant.title|escapejs }}{% else %}{{ product.title|escapejs }}{% endif %}',
+        price: Number('{% if product.system and default_system_variant %}{% if default_system_variant.sale_price %}{{ default_system_variant.sale_price|floatformat:2 }}{% else %}{{ default_system_variant.price|floatformat:2 }}{% endif %}{% elif default_normal_variant %}{% if default_normal_variant.sale_price %}{{ default_normal_variant.sale_price|floatformat:2 }}{% else %}{{ default_normal_variant.price|floatformat:2 }}{% endif %}{% else %}{{ product.price|floatformat:2 }}{% endif %}'),
         quantity: 1,
         item_category: '{% if product.pcategory.0 %}{{ product.pcategory.0.name|escapejs }}{% endif %}'
       }]

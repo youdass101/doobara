@@ -36,7 +36,12 @@ class CartManager:
         if self.uli:
             ccart = []
             for item in self.cart:
-                unit_price = item.variant.sale_price if item.variant and item.variant.sale_price else (item.variant.price if item.variant else item.product.price)
+                if item.variant:
+                    unit_price = item.variant.sale_price if item.variant.sale_price else item.variant.price
+                elif item.normal_variant:
+                    unit_price = item.normal_variant.sale_price if item.normal_variant.sale_price else item.normal_variant.price
+                else:
+                    unit_price = item.product.sale_price if item.product.sale_price else item.product.price
                 ccart.append((item.serialize(), (item.quantity * unit_price)))
         else:
             ccart = scart_data_setup(self.cart, [])
@@ -44,18 +49,23 @@ class CartManager:
 
     def _parse_item_identifier(self, item):
         variant_id = item.get('variant_id')
+        normal_variant_id = item.get('normal_variant_id')
         pid = item.get('pid')
 
         if variant_id:
-            return ('variant', int(variant_id))
+            return ('system_variant', int(variant_id))
+        if normal_variant_id:
+            return ('normal_variant', int(normal_variant_id))
 
         if not pid:
             raise ValueError('Missing cart identifier')
 
         if isinstance(pid, str) and '-' in pid:
             kind, raw_id = pid.split('-', 1)
-            if kind == 'v':
-                return ('variant', int(raw_id))
+            if kind in ('v', 'sv'):
+                return ('system_variant', int(raw_id))
+            if kind == 'nv':
+                return ('normal_variant', int(raw_id))
             return ('product', int(raw_id))
 
         return ('product', int(pid))
@@ -64,27 +74,42 @@ class CartManager:
         item_type, item_id = self._parse_item_identifier(item)
         pqtt = int(item['quantity'])
 
-        if item_type == 'variant':
+        if item_type == 'system_variant':
             variant = ProductVariant.objects.get(id=item_id)
+            normal_variant = None
             product = variant.product
-            cart_key = f'v-{variant.id}'
-        else:
-            product = Product.objects.get(id=item_id)
+            cart_key = f'sv-{variant.id}'
+        elif item_type == 'normal_variant':
+            normal_variant = NormalProductVariant.objects.get(id=item_id)
             variant = None
+            product = normal_variant.product
+            cart_key = f'nv-{normal_variant.id}'
+        else:
+            normal_variant = None
+            variant = None
+            product = Product.objects.get(id=item_id)
             cart_key = f'p-{product.id}'
 
         if self.uli:
             try:
                 if variant:
                     citem = Cart_Item.objects.get(variant=variant, cart=self.user.mycart)
+                elif normal_variant:
+                    citem = Cart_Item.objects.get(normal_variant=normal_variant, cart=self.user.mycart)
                 else:
-                    citem = Cart_Item.objects.get(product=product, variant__isnull=True, cart=self.user.mycart)
+                    citem = Cart_Item.objects.get(product=product, variant__isnull=True, normal_variant__isnull=True, cart=self.user.mycart)
                 citem.quantity += pqtt
                 citem.save()
                 if citem.quantity == 0:
                     citem.delete()
             except Cart_Item.DoesNotExist:
-                Cart_Item.objects.create(product=product, variant=variant, quantity=pqtt, cart=self.user.mycart)
+                Cart_Item.objects.create(
+                    product=product,
+                    variant=variant,
+                    normal_variant=normal_variant,
+                    quantity=pqtt,
+                    cart=self.user.mycart,
+                )
 
         else:
             try:

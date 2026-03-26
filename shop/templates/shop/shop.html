@@ -70,20 +70,27 @@
 
                         <div class="shop-card__content">
                             <h2 class="shop-card__title">{{ row.title }}</h2>
-                            <p class="shop-card__price">$ {{ row.price }}</p>
+                            <p class="shop-card__price">{{ row.price_display|default:"$ 0.00" }}</p>
                         </div>
                     </a>
 
-                    {# GA4 analytics metadata for add_to_cart from shop listing cards. #}
-                    <button class="shop-card__btn shop-add-to-cart"
-                            value="{{ row.id }}"
-                            data-ga-item-id="{{ row.id }}"
-                            data-ga-item-name="{{ row.title|escapejs }}"
-                            data-ga-price="{{ row.price|floatformat:2 }}"
-                            data-ga-currency="{{ row.currency|default:'USD' }}"
-                            data-ga-item-category="{% if row.pcategory.0 %}{{ row.pcategory.0.name|escapejs }}{% endif %}">
-                        Add to Cart
-                    </button>
+                    {% if row.requires_option_selection %}
+                        {# Configurable products must be chosen from single-product page first. #}
+                        <a class="shop-card__btn shop-card__btn--choose" href="{{ row.url }}">
+                            Choose Option
+                        </a>
+                    {% else %}
+                        {# GA4 analytics metadata for add_to_cart from simple shop listing cards. #}
+                        <button class="shop-card__btn shop-add-to-cart"
+                                value="{{ row.id }}"
+                                data-ga-item-id="{{ row.id }}"
+                                data-ga-item-name="{{ row.title|escapejs }}"
+                                data-ga-price="{{ row.price|floatformat:2 }}"
+                                data-ga-currency="{{ row.currency|default:'USD' }}"
+                                data-ga-item-category="{% if row.pcategory.0 %}{{ row.pcategory.0.name|escapejs }}{% endif %}">
+                            Add to Cart
+                        </button>
+                    {% endif %}
                 </article>
             {% endif %}
         {% endfor %}

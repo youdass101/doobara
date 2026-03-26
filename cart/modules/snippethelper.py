@@ -29,7 +29,9 @@ def has_variant_column():
     try:
         with connection.cursor() as cursor:
             columns = connection.introspection.get_table_description(cursor, Cart_Item._meta.db_table)
-        return any(column.name == 'variant_id' for column in columns)
+        column_names = {column.name for column in columns}
+        # Require both FK columns used by cart variant support paths.
+        return {'variant_id', 'normal_variant_id'}.issubset(column_names)
     except Exception:
         return False
 
@@ -43,8 +45,10 @@ def ensure_session_cart(session):
 
 def _parse_cart_key(key):
     # Normalized parser for both legacy keys ("12") and typed keys ("p-12"/"v-7")
-    if key.startswith('v-'):
-        return ("variant", int(key.split('-', 1)[1]))
+    if key.startswith('sv-') or key.startswith('v-'):
+        return ("system_variant", int(key.split('-', 1)[1]))
+    if key.startswith('nv-'):
+        return ("normal_variant", int(key.split('-', 1)[1]))
     if key.startswith('p-'):
         return ("product", int(key.split('-', 1)[1]))
     return ("product", int(key))
@@ -52,17 +56,20 @@ def _parse_cart_key(key):
 
 def _load_session_cart_maps(cart):
     # PERF: bulk-load Product/ProductVariant rows once instead of querying in each loop iteration.
-    product_ids, variant_ids = set(), set()
+    product_ids, variant_ids, normal_variant_ids = set(), set(), set()
     for key in cart.keys():
         kind, object_id = _parse_cart_key(key)
-        if kind == "variant":
+        if kind == "system_variant":
             variant_ids.add(object_id)
+        elif kind == "normal_variant":
+            normal_variant_ids.add(object_id)
         else:
             product_ids.add(object_id)
 
     products = Product.objects.filter(id__in=product_ids).prefetch_related("images")
     variants = ProductVariant.objects.filter(id__in=variant_ids).select_related("product").prefetch_related("images")
-    return {p.id: p for p in products}, {v.id: v for v in variants}
+    normal_variants = NormalProductVariant.objects.filter(id__in=normal_variant_ids).select_related("product")
+    return {p.id: p for p in products}, {v.id: v for v in variants}, {nv.id: nv for nv in normal_variants}
 
 
 def scart_data_setup(cart, lst=None):
@@ -71,13 +78,13 @@ def scart_data_setup(cart, lst=None):
         lst = []
 
     # PERF: load all referenced products/variants up-front and reuse in-memory maps.
-    product_map, variant_map = _load_session_cart_maps(cart)
+    product_map, variant_map, normal_variant_map = _load_session_cart_maps(cart)
 
     for key in cart:
         quantity = int(cart[key]['quantity'])
 
         kind, object_id = _parse_cart_key(key)
-        if kind == "variant":
+        if kind == "system_variant":
             variant = variant_map.get(object_id)
             if not variant:
                 continue
@@ -86,6 +93,15 @@ def scart_data_setup(cart, lst=None):
             image = variant.images.filter(thumbnail=True).first() or variant.images.first()
             name = variant.title
             product_id = variant.product.id
+        elif kind == "normal_variant":
+            normal_variant = normal_variant_map.get(object_id)
+            if not normal_variant:
+                continue
+            price = normal_variant.sale_price if normal_variant.sale_price else normal_variant.price
+            currency = normal_variant.product.currency
+            image = normal_variant.image
+            name = normal_variant.title
+            product_id = normal_variant.product.id
         else:
             product = product_map.get(object_id)
             if not product:
@@ -140,14 +156,20 @@ def cart_context_process(request):
 
     if isinstance(cart, dict):
         # PERF: use bulk-loaded maps to avoid one DB query per cart key.
-        product_map, variant_map = _load_session_cart_maps(cart)
+        product_map, variant_map, normal_variant_map = _load_session_cart_maps(cart)
         for i in cart:
             kind, object_id = _parse_cart_key(i)
-            if kind == "variant":
+            if kind == "system_variant":
                 variant = variant_map.get(object_id)
                 if not variant:
                     continue
                 price = variant.sale_price if variant.sale_price else variant.price
+                calc_cart(int(cart[i]['quantity']), price)
+            elif kind == "normal_variant":
+                normal_variant = normal_variant_map.get(object_id)
+                if not normal_variant:
+                    continue
+                price = normal_variant.sale_price if normal_variant.sale_price else normal_variant.price
                 calc_cart(int(cart[i]['quantity']), price)
             else:
                 product = product_map.get(object_id)
@@ -157,7 +179,12 @@ def cart_context_process(request):
         return items, total
 
     for i in cart:
-        price = i.variant.sale_price if i.variant and i.variant.sale_price else (i.variant.price if i.variant else i.product.price)
+        if i.variant:
+            price = i.variant.sale_price if i.variant.sale_price else i.variant.price
+        elif i.normal_variant:
+            price = i.normal_variant.sale_price if i.normal_variant.sale_price else i.normal_variant.price
+        else:
+            price = i.product.sale_price if i.product.sale_price else i.product.price
         calc_cart(i.quantity, price)
 
     return items, total

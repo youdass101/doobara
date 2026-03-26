@@ -40,7 +40,15 @@ class Cart_Item (models.Model):
     # is object
     # objects list of connected Products
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    # System-kit variant selection (existing behavior).
     variant = models.ForeignKey(ProductVariant, on_delete=models.CASCADE, null=True, blank=True)
+    # Normal single-product variant selection (new behavior, kept separate).
+    normal_variant = models.ForeignKey(
+        NormalProductVariant,
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+    )
     # is int
     # product quatity
     quantity = models.IntegerField()
@@ -55,12 +63,24 @@ class Cart_Item (models.Model):
     # object -> dict
     # convert object specified keys to a dict key/value
     def serialize(self):
-        target_name = self.variant.title if self.variant else self.product.name
-        target_price = self.variant.sale_price if self.variant and self.variant.sale_price else (self.variant.price if self.variant else self.product.price)
-        target_currency = self.variant.currency if self.variant else self.product.currency
+        target_name = self.product.name
+        target_price = self.product.sale_price if self.product.sale_price else self.product.price
+        target_currency = self.product.currency
+
+        if self.variant:
+            target_name = self.variant.title
+            target_price = self.variant.sale_price if self.variant.sale_price else self.variant.price
+            target_currency = self.variant.currency
+        elif self.normal_variant:
+            target_name = self.normal_variant.title
+            target_price = self.normal_variant.sale_price if self.normal_variant.sale_price else self.normal_variant.price
+
         if self.variant:
             image = self.variant.images.filter(thumbnail=True).first() or self.variant.images.first()
-            cart_key = f"v-{self.variant.id}"
+            cart_key = f"sv-{self.variant.id}"
+        elif self.normal_variant:
+            image = self.normal_variant.image
+            cart_key = f"nv-{self.normal_variant.id}"
         else:
             image = self.product.images.filter(thumbnail=True).first() if self.product.images.filter(thumbnail=True).exists() else None
             cart_key = f"p-{self.product.id}"
