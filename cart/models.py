@@ -55,7 +55,8 @@ class Cart_Item (models.Model):
     # object -> dict
     # convert object specified keys to a dict key/value
     def serialize(self):
-        target_name = self.variant.title if self.variant else self.product.name
+        # Keep cart line item labels explicit so selected variants are clear to the customer.
+        target_name = f"{self.product.name} — {self.variant.title}" if self.variant else self.product.name
         target_price = self.variant.sale_price if self.variant and self.variant.sale_price else (self.variant.price if self.variant else self.product.price)
         target_currency = self.variant.currency if self.variant else self.product.currency
         if self.variant:

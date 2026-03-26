@@ -173,73 +173,117 @@ def single_product(request, locat=None, slug=None):
     # given product name, prodcut object serialized dict (using models)
     product = parent_product.serialize("all")
 
-    variants_qs = (
-        parent_product.variants.filter(active=True)
-        .prefetch_related("images", "package_items__included_product__images")
-        .order_by("sort_order")
-    )
+    # Keep system bundle/tier flow and normal product variant flow isolated so
+    # existing system logic remains unchanged.
+    variants_qs = parent_product.variants.filter(active=True).prefetch_related("images")
+    system_variants = []
+    default_system_variant = None
+    normal_variants = []
+    default_normal_variant = None
 
-    tier_priority = {"advanced": 0, "basic": 1, "pro": 2}
-    variants = []
-    default_variant = None
+    if parent_product.is_system:
+        variants_qs = variants_qs.prefetch_related("package_items__included_product__images").order_by("sort_order")
+        tier_priority = {"advanced": 0, "basic": 1, "pro": 2}
 
-    for variant in variants_qs:
-        variant_inventory = variant.get_inventory_data()
-        thumb = variant.images.filter(thumbnail=True).first() or variant.images.first()
-        images = [
-            {"url": image.image.url, "alt_text": image.alt_text}
-            for image in variant.images.all()
-        ]
-        package_items = []
-        for package_item in variant.package_items.all():
-            included_thumb = package_item.included_product.images.filter(thumbnail=True).first() or package_item.included_product.images.first()
-            package_items.append(
-                {
-                    "name": package_item.included_product.name,
-                    "url": package_item.included_product.get_absolute_url(),
-                    "qty": package_item.quantity,
-                    "thumbnail": included_thumb.image.url if included_thumb else None,
-                }
-            )
+        for variant in variants_qs:
+            variant_inventory = variant.get_inventory_data()
+            thumb = variant.images.filter(thumbnail=True).first() or variant.images.first()
+            images = [
+                {"url": image.image.url, "alt_text": image.alt_text}
+                for image in variant.images.all()
+            ]
+            package_items = []
+            for package_item in variant.package_items.all():
+                included_thumb = package_item.included_product.images.filter(thumbnail=True).first() or package_item.included_product.images.first()
+                package_items.append(
+                    {
+                        "name": package_item.included_product.name,
+                        "url": package_item.included_product.get_absolute_url(),
+                        "qty": package_item.quantity,
+                        "thumbnail": included_thumb.image.url if included_thumb else None,
+                    }
+                )
 
-        variant_payload = {
-            "id": variant.id,
-            "tier": variant.tier,
-            "title": variant.title,
-            "short_description": variant.short_description,
-            "description": variant.description,
-            "price": float(variant.price),
-            "sale_price": float(variant.sale_price) if variant.sale_price else None,
-            "currency": variant.currency,
-            "in_stock": variant_inventory["in_stock"],
-            "can_purchase": variant_inventory["can_purchase"],
-            "availability_label": variant_inventory["availability_label"],
-            "quantity": variant_inventory["quantity"],
-            "cart_cta_label": variant_inventory["cart_cta_label"],
-            "thumbnail": thumb.image.url if thumb else None,
-            "images": images,
-            "package_items": package_items,
-            "is_default": variant.is_default,
-            "sort_order": variant.sort_order,
-        }
-        variants.append(variant_payload)
+            variant_payload = {
+                "id": variant.id,
+                "tier": variant.tier,
+                "title": variant.title,
+                "short_description": variant.short_description,
+                "description": variant.description,
+                "price": float(variant.price),
+                "sale_price": float(variant.sale_price) if variant.sale_price else None,
+                "currency": variant.currency,
+                "in_stock": variant_inventory["in_stock"],
+                "can_purchase": variant_inventory["can_purchase"],
+                "availability_label": variant_inventory["availability_label"],
+                "quantity": variant_inventory["quantity"],
+                "cart_cta_label": variant_inventory["cart_cta_label"],
+                "thumbnail": thumb.image.url if thumb else None,
+                "images": images,
+                "package_items": package_items,
+                "is_default": variant.is_default,
+                "sort_order": variant.sort_order,
+            }
+            system_variants.append(variant_payload)
 
-        if variant.is_default and not default_variant:
-            default_variant = variant_payload
+            if variant.is_default and not default_system_variant:
+                default_system_variant = variant_payload
 
-    if variants and not default_variant:
-        default_variant = sorted(
-            variants,
-            key=lambda item: (tier_priority.get(item["tier"], 99), item["sort_order"]),
-        )[0]
+        if system_variants and not default_system_variant:
+            default_system_variant = sorted(
+                system_variants,
+                key=lambda item: (tier_priority.get(item["tier"], 99), item["sort_order"]),
+            )[0]
+    else:
+        variants_qs = variants_qs.order_by("sort_order")
+        for variant in variants_qs:
+            variant_inventory = variant.get_inventory_data()
+            variant_images = [
+                {"url": image.image.url, "alt_text": image.alt_text or variant.title}
+                for image in variant.images.all()
+            ]
+            short_lines = [
+                line.strip()
+                for line in (variant.short_description or "").splitlines()
+                if line.strip()
+            ]
+            normal_variant_payload = {
+                "id": variant.id,
+                "title": variant.title,
+                "sku": getattr(variant, "sku", "") if hasattr(variant, "sku") else "",
+                "short_description": variant.short_description,
+                "short_description_lines": short_lines,
+                "description": variant.description,
+                "price": float(variant.price),
+                "sale_price": float(variant.sale_price) if variant.sale_price else None,
+                "currency": variant.currency,
+                "in_stock": variant_inventory["in_stock"],
+                "can_purchase": variant_inventory["can_purchase"],
+                "availability_label": variant_inventory["availability_label"],
+                "quantity": variant_inventory["quantity"],
+                "cart_cta_label": variant_inventory["cart_cta_label"],
+                "images": variant_images,
+                "is_default": variant.is_default,
+                "sort_order": variant.sort_order,
+            }
+            normal_variants.append(normal_variant_payload)
+            if variant.is_default and not default_normal_variant:
+                default_normal_variant = normal_variant_payload
+
+        # Default-selection rule for normal products:
+        # configured default first, otherwise first active ordered variant.
+        if normal_variants and not default_normal_variant:
+            default_normal_variant = normal_variants[0]
 
     return render(
         request,
         "shop/single_product.html",
         {
             "product": product,
-            "variants": variants,
-            "default_variant": default_variant,
+            "variants": system_variants,
+            "default_variant": default_system_variant,
+            "normal_variants": normal_variants,
+            "default_normal_variant": default_normal_variant,
             # Always canonicalize product detail pages to the slug-based product URL.
             "canonical_url": request.build_absolute_uri(parent_product.get_absolute_url()),
             "product_json_ld": _json_for_script_tag(
@@ -248,7 +292,7 @@ def single_product(request, locat=None, slug=None):
                     request=request,
                     product_data=product,
                     parent_product=parent_product,
-                    default_variant=default_variant if product.get("system") else None,
+                    default_variant=default_system_variant if product.get("system") else None,
                 )
             ),
         },

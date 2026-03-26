@@ -136,6 +136,20 @@
     color: var.$ui-primary;
 }
 
+.single-product-compare-price {
+    margin: 4px 0 0;
+    color: #64748b;
+    font-size: 0.92rem;
+}
+
+.single-product-compare-price span {
+    text-decoration: line-through;
+}
+
+.single-product-compare-price.is-hidden {
+    display: none;
+}
+
 .single-product-availability {
     margin: 0 0 10px;
     font-size: 0.9rem;

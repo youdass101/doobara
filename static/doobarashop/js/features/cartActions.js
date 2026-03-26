@@ -78,18 +78,24 @@ function bindAddToCartButtons() {
   }
 
   addToCartButtons.forEach((button) => {
-    if (button.dataset.variantId) {
+    // System bundle variants are handled by their dedicated controller to avoid duplicate requests.
+    if (button.dataset.cartHandler === 'system') {
       return;
     }
 
     button.addEventListener('click', async () => {
       const quantityField = document.getElementById('spq');
       const quantity = quantityField ? quantityField.value : 1;
-
-      const response = await sendJson('/shopaddtocart', 'PUT', {
-        pid: button.value,
+      const payload = {
         quantity,
-      });
+      };
+      if (button.dataset.variantId) {
+        payload.variant_id = button.dataset.variantId;
+      } else {
+        payload.pid = button.value;
+      }
+
+      const response = await sendJson('/shopaddtocart', 'PUT', payload);
 
       const result = await response.json();
 

@@ -55,6 +55,7 @@
                         <button
                             id="spatc"
                             class="single-product-addtocart shop-add-to-cart"
+                            data-cart-handler="system"
                             data-variant-id="{{ default_variant.id }}"
                             data-ga-item-id="{{ default_variant.id }}"
                             data-ga-item-name="{{ default_variant.title|escapejs }}"
@@ -89,7 +90,7 @@
                         {% endif %}
                     </div>
 
-                    <div class="single-product-gallery__thumbs">
+                    <div class="single-product-gallery__thumbs" id="normal-variant-gallery">
                         {% for image in product.all_images %}
                                 <button type="button" class="single-product-thumb">
                                     <img class="sp-thumb-image"
@@ -108,27 +109,24 @@
                     <div class="single-product-price-row">
                         <div class="single-product-price-wrap">
                             <span class="single-product-price-label">Price</span>
-                            <p class="single-product-availability {% if product.can_purchase %}is-in-stock{% else %}is-out-of-stock{% endif %}">
-                                {{ product.availability_label }}
+                            <p id="normal-variant-availability" class="single-product-availability {% if default_normal_variant %}{% if default_normal_variant.can_purchase %}is-in-stock{% else %}is-out-of-stock{% endif %}{% else %}{% if product.can_purchase %}is-in-stock{% else %}is-out-of-stock{% endif %}{% endif %}">
+                                {% if default_normal_variant %}{{ default_normal_variant.availability_label }}{% else %}{{ product.availability_label }}{% endif %}
                             </p>
-                            <h2 id="spp" class="single-product-price">$ {{ product.price|floatformat:2 }}</h2>
+                            <h2 id="spp" class="single-product-price">$ {% if default_normal_variant %}{% if default_normal_variant.sale_price %}{{ default_normal_variant.sale_price|floatformat:2 }}{% else %}{{ default_normal_variant.price|floatformat:2 }}{% endif %}{% else %}{{ product.price|floatformat:2 }}{% endif %}</h2>
+                            <p id="normal-variant-compare-price" class="single-product-compare-price {% if not default_normal_variant or not default_normal_variant.sale_price %}is-hidden{% endif %}">
+                                {% if default_normal_variant and default_normal_variant.sale_price %}<span>$ {{ default_normal_variant.price|floatformat:2 }}</span>{% endif %}
+                            </p>
                         </div>
                     </div>
 
-                    {% if product.variant_options %}
+                    {% if normal_variants %}
                         <div class="single-product-variant">
                             <label for="variants">Choose Variant</label>
                             <select name="variant" id="variants">
-                                {% for var in product.variant_options %}
-                                    {% if var.default %}
-                                        <option selected="selected" class="svoption" value="{{ var }}">
-                                            {{ var.title }}
-                                        </option>
-                                    {% else %}
-                                        <option class="svoption" value="{{ var }}">
-                                            {{ var.title }}
-                                        </option>
-                                    {% endif %}
+                                {% for var in normal_variants %}
+                                    <option class="svoption" value="{{ var.id }}" {% if default_normal_variant and default_normal_variant.id == var.id %}selected="selected"{% endif %}>
+                                        {{ var.title }}
+                                    </option>
                                 {% endfor %}
                             </select>
                         </div>
@@ -143,13 +141,14 @@
                         <button id="spatc"
                                 class="single-product-addtocart shop-add-to-cart"
                                 value="{{ product.pid }}"
-                                data-ga-item-id="{{ product.id }}"
-                                data-ga-item-name="{{ product.title|escapejs }}"
-                                data-ga-price="{{ product.price|floatformat:2 }}"
-                                data-ga-currency="{{ product.currency|default:'USD' }}"
+                                {% if default_normal_variant %}data-variant-id="{{ default_normal_variant.id }}"{% endif %}
+                                data-ga-item-id="{% if default_normal_variant %}{{ default_normal_variant.id }}{% else %}{{ product.id }}{% endif %}"
+                                data-ga-item-name="{% if default_normal_variant %}{{ default_normal_variant.title|escapejs }}{% else %}{{ product.title|escapejs }}{% endif %}"
+                                data-ga-price="{% if default_normal_variant %}{% if default_normal_variant.sale_price %}{{ default_normal_variant.sale_price|floatformat:2 }}{% else %}{{ default_normal_variant.price|floatformat:2 }}{% endif %}{% else %}{{ product.price|floatformat:2 }}{% endif %}"
+                                data-ga-currency="{% if default_normal_variant and default_normal_variant.currency %}{{ default_normal_variant.currency }}{% else %}{{ product.currency|default:'USD' }}{% endif %}"
                                 data-ga-item-category="{% if product.pcategory.0 %}{{ product.pcategory.0.name|escapejs }}{% endif %}"
-                                {% if not product.can_purchase %}disabled{% endif %}>
-                            {{ product.cart_cta_label|default:"Out of Stock" }}
+                                {% if default_normal_variant %}{% if not default_normal_variant.can_purchase %}disabled{% endif %}{% else %}{% if not product.can_purchase %}disabled{% endif %}{% endif %}>
+                            {% if default_normal_variant %}{{ default_normal_variant.cart_cta_label|default:"Out of Stock" }}{% else %}{{ product.cart_cta_label|default:"Out of Stock" }}{% endif %}
                         </button>
                     </div>
 
@@ -162,15 +161,26 @@
                     <div class="single-product-specs">
                         <h3>Specifications</h3>
                         <div class="single-product-specs__content">
-                            <ul class="single-product-spec-list">
-                                {% for line in product.pshortdescription %}
-                                <li>{{ line }}</li>
-                                {% endfor %}
+                            <ul class="single-product-spec-list" id="normal-variant-short-specs">
+                                {% if default_normal_variant and default_normal_variant.short_description_lines %}
+                                    {% for line in default_normal_variant.short_description_lines %}
+                                    <li>{{ line }}</li>
+                                    {% endfor %}
+                                {% else %}
+                                    {% for line in product.pshortdescription %}
+                                    <li>{{ line }}</li>
+                                    {% endfor %}
+                                {% endif %}
                             </ul>
                         </div>
                     </div>
                 </div>
             </div>
+            {% if normal_variants %}
+                {# JSON payload for normal-product variant switching on the same canonical URL. #}
+                {{ normal_variants|json_script:"normal-variant-data" }}
+                {{ default_normal_variant.id|default:0|json_script:"default-normal-variant-id" }}
+            {% endif %}
         {% endif %}
 
         {% if product.pvideo %}
@@ -203,7 +213,11 @@
                     <h2>Description</h2>
                 </div>
                 <div class="single-product-richtext" id="longdescription">
-                    {{ product.plongdescription|safe }}
+                    {% if default_normal_variant and default_normal_variant.description %}
+                        {{ default_normal_variant.description|safe }}
+                    {% else %}
+                        {{ product.plongdescription|safe }}
+                    {% endif %}
                 </div>
             </div>
 
