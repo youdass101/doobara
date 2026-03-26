@@ -7,6 +7,35 @@ from django.template.loader import render_to_string
 from django.core.mail import EmailMultiAlternatives
 
 
+def _build_order_item_snapshot(cart_item):
+    # NEW: Build an immutable purchase snapshot from the exact cart selection
+    # so historical orders do not fall back to mutable parent-product defaults.
+    unit_price = cart_item.product.sale_price if cart_item.product.sale_price else cart_item.product.price
+    product_name = cart_item.product.name
+
+    # NEW: Preserve existing system-variant behavior by snapshotting the selected
+    # system variant title and price at order-creation time.
+    if cart_item.variant:
+        unit_price = cart_item.variant.sale_price if cart_item.variant.sale_price else cart_item.variant.price
+        product_name = cart_item.variant.title
+    # NEW: For normal single-product variants, snapshot variant-specific price and
+    # a display name that keeps parent product context for order/admin/email views.
+    elif cart_item.normal_variant:
+        unit_price = (
+            cart_item.normal_variant.sale_price
+            if cart_item.normal_variant.sale_price
+            else cart_item.normal_variant.price
+        )
+        product_name = f"{cart_item.product.name} - {cart_item.normal_variant.title}"
+
+    return {
+        "product": cart_item.product,
+        "quantity": cart_item.quantity,
+        "price": unit_price,
+        "product_name": product_name,
+    }
+
+
 def createorder(request, form, new):
     user = request.user
     # result = create_new_address(request, form)
@@ -68,17 +97,20 @@ def createorder(request, form, new):
             shipping_price=shipping_price,
         )
 
-        cart_items = list(user.mycart.items.select_related("product"))
+        # NEW: Prefetch variant relations used by purchase snapshot selection logic.
+        cart_items = list(user.mycart.items.select_related("product", "variant", "normal_variant"))
+        # NEW: Convert each cart row into a variant-aware immutable purchase snapshot.
+        item_snapshots = [_build_order_item_snapshot(item) for item in cart_items]
         Item_Order.objects.bulk_create(
             [
                 Item_Order(
-                    product=item.product,
-                    quantity=item.quantity,
-                    price=item.product.price,
-                    product_name=item.product.name,
+                    product=snapshot["product"],
+                    quantity=snapshot["quantity"],
+                    price=snapshot["price"],
+                    product_name=snapshot["product_name"],
                     order=order,
                 )
-                for item in cart_items
+                for snapshot in item_snapshots
             ]
         )
         user.mycart.items.filter(id__in=[item.id for item in cart_items]).delete()
