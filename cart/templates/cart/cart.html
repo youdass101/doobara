@@ -44,7 +44,11 @@ My Cart
 
                                     <div class="cart-item__product">
                                         <div class="cart-item__image">
-                                            {% if item.0.productimage %}<img src="{{item.0.productimage.image.url }}" alt="{{item.0.productimage.alt_text}}">{% endif %}
+                                            {% if item.0.productimage %}
+                                                {# Support both model-backed images (.image.url) and direct file images (.url) for variant cart rows. #}
+                                                <img src="{% if item.0.productimage.image %}{{ item.0.productimage.image.url }}{% else %}{{ item.0.productimage.url }}{% endif %}"
+                                                     alt="{{ item.0.productimage.alt_text|default:item.0.productname }}">
+                                            {% endif %}
                                         </div>
 
                                         <div class="cart-item__details">
