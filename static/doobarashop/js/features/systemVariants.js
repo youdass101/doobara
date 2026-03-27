@@ -79,9 +79,18 @@ function renderVariant(variant) {
   const addToCartButton = document.getElementById('spatc');
   const specifications = document.getElementById('longdescription');
 
-  if (specifications) specifications.textContent = variant.description || '';
+  // NEW: System variant long description is pre-rendered HTML from server-side markdown conversion.
+  if (specifications) specifications.innerHTML = variant.long_description_html || '';
   if (title) title.textContent = variant.title || '';
-  if (shortDescription) shortDescription.textContent = variant.short_description || '';
+  // NEW: Rebuild bullet list from pre-split short description lines.
+  if (shortDescription) {
+    shortDescription.innerHTML = '';
+    (variant.short_description_lines || []).forEach((line) => {
+      const listItem = document.createElement('li');
+      listItem.textContent = line;
+      shortDescription.appendChild(listItem);
+    });
+  }
   if (price) {
     const activePrice = variant.sale_price ?? variant.price;
     price.textContent = `$ ${Number(activePrice).toFixed(2)}`;

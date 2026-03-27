@@ -1,4 +1,5 @@
 import json
+import markdown
 
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, render
@@ -191,6 +192,13 @@ def single_product(request, locat=None, slug=None):
 
     for variant in system_variants_qs:
         variant_inventory = variant.get_inventory_data()
+        # NEW: Pre-split multiline short description into bullet-ready lines
+        # so system variants match normal product formatting behavior.
+        short_description_lines = [
+            line.strip() for line in (variant.short_description or "").splitlines() if line.strip()
+        ]
+        # NEW: Convert markdown/plain long description to HTML server-side.
+        long_description_html = markdown.markdown(variant.description or "")
         thumb = variant.images.filter(thumbnail=True).first() or variant.images.first()
         images = [
             {"url": image.image.url, "alt_text": image.alt_text}
@@ -214,6 +222,9 @@ def single_product(request, locat=None, slug=None):
             "title": variant.title,
             "short_description": variant.short_description,
             "description": variant.description,
+            # NEW: Ready-to-render description payload for system tier switching.
+            "short_description_lines": short_description_lines,
+            "long_description_html": long_description_html,
             "price": float(variant.price),
             "sale_price": float(variant.sale_price) if variant.sale_price else None,
             "currency": variant.currency,
