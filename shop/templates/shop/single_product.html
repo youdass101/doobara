@@ -40,7 +40,12 @@
                         <div class="single-product-price-wrap">
                             <span class="single-product-price-label">Selected Variant</span>
                             <h2 id="system-variant-title" class="single-product-price">{{ default_system_variant.title }}</h2>
-                            <p id="system-variant-short-description">{{ default_system_variant.short_description }}</p>
+                            {# NEW: Render pre-split system variant short description as bullet list items. #}
+                            <ul id="system-variant-short-description" class="single-product-spec-list">
+                                {% for line in default_system_variant.short_description_lines %}
+                                    <li>{{ line }}</li>
+                                {% endfor %}
+                            </ul>
                             <p id="system-variant-availability" class="single-product-availability {% if default_system_variant.can_purchase %}is-in-stock{% else %}is-out-of-stock{% endif %}">
                                 {{ default_system_variant.availability_label }}
                             </p>
@@ -213,7 +218,12 @@
                     <h2>Description</h2>
                 </div>
                 <div class="single-product-richtext" id="longdescription">
-                    {{ product.plongdescription|safe }}
+                    {# NEW: Keep initial system variant long description consistent with switched state. #}
+                    {% if product.system and default_system_variant %}
+                        {{ default_system_variant.long_description_html|safe }}
+                    {% else %}
+                        {{ product.plongdescription|safe }}
+                    {% endif %}
                 </div>
             </div>
 
