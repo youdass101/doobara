@@ -11,7 +11,7 @@ from django.core.serializers.json import DjangoJSONEncoder
 # Created modules to manage shop page functions
 from .modeling.serialize_helper import *
 from .modeling.filter_helper import *
-from .modeling.feed_export import build_product_feed_payload
+from .modeling.feed_export import build_catalog_csv_response, build_product_feed_payload
 
 _JSON_SCRIPT_ESCAPES = {
     ord(">"): "\\u003E",
@@ -337,6 +337,22 @@ def internal_product_feed_export(request):
     """
     payload = build_product_feed_payload(request)
     return JsonResponse(payload)
+
+
+def google_product_feed_csv(request):
+    """
+    NEW: Public CSV endpoint for Google Merchant Center scheduled fetches.
+    Keeps feed generation centralized in modeling.feed_export.
+    """
+    return build_catalog_csv_response(request, filename="google-product-feed.csv")
+
+
+def meta_catalog_feed_csv(request):
+    """
+    NEW: Public CSV endpoint for Meta Commerce Manager scheduled fetches.
+    Uses the same normalized offer rows to avoid logic drift.
+    """
+    return build_catalog_csv_response(request, filename="meta-catalog-feed.csv")
 
 
 # request -> render(url)
