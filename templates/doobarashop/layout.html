@@ -6,6 +6,22 @@
     <title>{% block title %}Doobara | Smart Home Products & Automation{% endblock %}</title>
     <meta name="description" content="{% block meta_description %}Discover Doobara smart home products, practical automation systems, and reliable support for modern living in Lebanon.{% endblock %}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {# NEW: Canonical URL remains overrideable via view context for SEO and sharing consistency. #}
+    {% if canonical_url %}
+    <link rel="canonical" href="{{ canonical_url }}">
+    {% endif %}
+    {# NEW: Open Graph defaults with dedicated blocks so child templates can override per page. #}
+    <meta property="og:title" content="{% block og_title %}{% block social_title %}Doobara | Smart Home Products & Automation{% endblock %}{% endblock %}">
+    <meta property="og:type" content="{% block og_type %}website{% endblock %}">
+    <meta property="og:url" content="{% block og_url %}{% if canonical_url %}{{ canonical_url }}{% else %}{{ request.build_absolute_uri }}{% endif %}{% endblock %}">
+    <meta property="og:image" content="{% block og_image %}{{ request.scheme }}://{{ request.get_host }}{% static 'doobarashop/upload/images/logo-creation.png' %}{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}{% block social_description %}Discover Doobara smart home products, practical automation systems, and reliable support for modern living in Lebanon.{% endblock %}{% endblock %}">
+    <meta property="og:site_name" content="{% block og_site_name %}Doobara{% endblock %}">
+    {# NEW: Twitter/X card tags mirror social defaults for consistent previews across platforms. #}
+    <meta name="twitter:card" content="{% block twitter_card %}summary_large_image{% endblock %}">
+    <meta name="twitter:title" content="{% block twitter_title %}{% block social_title_twitter %}Doobara | Smart Home Products & Automation{% endblock %}{% endblock %}">
+    <meta name="twitter:description" content="{% block twitter_description %}{% block social_description_twitter %}Discover Doobara smart home products, practical automation systems, and reliable support for modern living in Lebanon.{% endblock %}{% endblock %}">
+    <meta name="twitter:image" content="{% block twitter_image %}{{ request.scheme }}://{{ request.get_host }}{% static 'doobarashop/upload/images/logo-creation.png' %}{% endblock %}">
     {% if GOOGLE_SITE_VERIFICATION %}
     <meta name="google-site-verification" content="{{ GOOGLE_SITE_VERIFICATION }}">
     {% endif %}
@@ -17,9 +33,6 @@
       gtag('js', new Date());
       gtag('config', '{{ GOOGLE_ANALYTICS_ID }}');
     </script>
-    {% endif %}
-    {% if canonical_url %}
-    <link rel="canonical" href="{{ canonical_url }}">
     {% endif %}
     {% if META_PIXEL_ID %}
     {# Meta Pixel: base code + PageView (global) #}

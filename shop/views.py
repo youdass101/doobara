@@ -274,6 +274,21 @@ def single_product(request, locat=None, slug=None):
     if normal_variants and not default_normal_variant:
         default_normal_variant = normal_variants[0]
 
+    # NEW: Build social preview metadata once in view so templates stay clean and block-driven.
+    social_title = (product.get("title") or "").strip()
+    social_description = (
+        ((product.get("pshortdescription") or [None])[0] or "").strip()
+        or (f"Buy {social_title} from Doobara with practical smart-home-focused support and fast local delivery options." if social_title else "")
+    )
+    social_url = request.build_absolute_uri(parent_product.get_absolute_url())
+
+    # NEW: Social cards require absolute image URLs; prefer variant thumbnail for systems then product image.
+    social_image = None
+    if product.get("system") and default_system_variant and default_system_variant.get("thumbnail"):
+        social_image = request.build_absolute_uri(default_system_variant["thumbnail"])
+    elif product.get("main_image", {}).get("url"):
+        social_image = request.build_absolute_uri(product["main_image"]["url"])
+
     return render(
         request,
         "shop/single_product.html",
@@ -284,7 +299,12 @@ def single_product(request, locat=None, slug=None):
             "normal_variants": normal_variants,
             "default_normal_variant": default_normal_variant,
             # Always canonicalize product detail pages to the slug-based product URL.
-            "canonical_url": request.build_absolute_uri(parent_product.get_absolute_url()),
+            "canonical_url": social_url,
+            # NEW: Product detail template uses these for Open Graph and Twitter/X blocks.
+            "social_title": social_title,
+            "social_description": social_description,
+            "social_image": social_image,
+            "social_url": social_url,
             "product_json_ld": _json_for_script_tag(
                 # JSON string consumed directly by <script type="application/ld+json">.
                 _build_product_json_ld(
