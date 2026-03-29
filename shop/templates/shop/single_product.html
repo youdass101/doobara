@@ -3,6 +3,15 @@
 
 {% block title %}{{ product.title }} | Doobara{% endblock %}
 {% block meta_description %}{% if product.pshortdescription and product.pshortdescription.0 %}{{ product.pshortdescription.0|striptags|truncatechars:155 }}{% else %}Buy {{ product.title }} from Doobara with practical smart-home-focused support and fast local delivery options.{% endif %}{% endblock %}
+{# NEW: Product pages override social metadata blocks so previews use real product data. #}
+{% block og_type %}product{% endblock %}
+{% block og_title %}{{ social_title|default:product.title }}{% endblock %}
+{% block og_description %}{{ social_description|default:product.title }}{% endblock %}
+{% block og_url %}{{ social_url|default:canonical_url }}{% endblock %}
+{% block og_image %}{% if social_image %}{{ social_image }}{% else %}{{ request.scheme }}://{{ request.get_host }}{% static 'doobarashop/upload/images/logo-creation.png' %}{% endif %}{% endblock %}
+{% block twitter_title %}{{ social_title|default:product.title }}{% endblock %}
+{% block twitter_description %}{{ social_description|default:product.title }}{% endblock %}
+{% block twitter_image %}{% if social_image %}{{ social_image }}{% else %}{{ request.scheme }}://{{ request.get_host }}{% static 'doobarashop/upload/images/logo-creation.png' %}{% endif %}{% endblock %}
 
 {% block body %}
 <section class="single-product-page">
