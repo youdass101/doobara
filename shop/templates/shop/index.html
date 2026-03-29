@@ -39,7 +39,13 @@
                     <div class="hero__blob">
                         <div class="hero__stack">
                             <!-- Replace these with your real images -->  
-                            <img class="hero__img hero__img--phone" src="{% static 'doobarashop/upload/images/phone-app-screen.png' %}" alt="Smart device" />
+                            <img class="hero__img hero__img--phone"
+                                 src="{% static 'doobarashop/upload/images/phone-app-screen.png' %}"
+                                 alt="Smart device"
+                                 width="1080"
+                                 height="1920"
+                                 loading="eager"
+                                 fetchpriority="high" />
                         </div>
                     </div>
                 </div>
@@ -63,7 +69,8 @@
                                 </div>
                                 <img class="system-card__img"
                                     src="{{card.image}}"
-                                    alt="Power system devices">
+                                    alt="Power system devices"
+                                    loading="lazy">
                                 <div class="system-card__tag">{{card.tag}}</div>
                             </div>
                             <p class="system-card__desc">{{card.description}}</p>
@@ -97,7 +104,8 @@
                         <div class="system-card__media"> 
                             <img class="system-card__img"
                                 src="{{card.image}}"
-                                alt="Power system devices">
+                                alt="Power system devices"
+                                loading="lazy">
                         </div>
                         <h3 class="system-card__desc">{{card.title}}</h3>
                         <p class="system-card__desc">{{card.description}}</p>
@@ -120,7 +128,11 @@
             <div class="product-card">
             <a href="{{ product.url }}">
                 {% if product.main_image %}
-                    <img src="{{ product.main_image.url }}" alt="{{ product.main_image.alt_text }}">
+                    <img src="{{ product.main_image.url }}"
+                         alt="{{ product.main_image.alt_text }}"
+                         width="400"
+                         height="400"
+                         loading="lazy">
                 {% else %}
                     <span class="product-card__no-image" aria-label="{{ product.title }} image unavailable"></span>
                 {% endif %}
@@ -254,7 +266,11 @@
             <div class="product-card">
             <a href="{{ product.url }}">
                 {% if product.main_image %}
-                    <img src="{{ product.main_image.url }}" alt="{{ product.main_image.alt_text }}">
+                    <img src="{{ product.main_image.url }}"
+                         alt="{{ product.main_image.alt_text }}"
+                         width="400"
+                         height="400"
+                         loading="lazy">
                 {% else %}
                     <span class="product-card__no-image" aria-label="{{ product.title }} image unavailable"></span>
                 {% endif %}
@@ -275,7 +291,11 @@
             <div class="product-card">
             <a href="{{ product.url }}">
                 {% if product.main_image %}
-                    <img src="{{ product.main_image.url }}" alt="{{ product.main_image.alt_text }}">
+                    <img src="{{ product.main_image.url }}"
+                         alt="{{ product.main_image.alt_text }}"
+                         width="400"
+                         height="400"
+                         loading="lazy">
                 {% else %}
                     <span class="product-card__no-image" aria-label="{{ product.title }} image unavailable"></span>
                 {% endif %}
