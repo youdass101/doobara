@@ -139,7 +139,7 @@ def _shop_page_response(request, products):
 def index(request):
     # is int
     # number of items that will show in index featured bar
-    items_in_featrued = 7
+    items_in_featrued = 6
     # is list of dict | (loc: shop.modeling.serialize_helper (shop.models ))
     # all products objects with feature TRUE, in serialized dict
     
@@ -147,7 +147,10 @@ def index(request):
     cards = [card.serialize() for card in cards]
     # PERF: prefetch related records consumed by serializer (category/images) to reduce N+1 queries.
     slop = _serialize_main_products(Product.objects.filter(featured=True))
-    return render(request, "shop/index.html", {"lop":slop[:items_in_featrued], "cards": cards})
+    slols = _serialize_main_products(Categorie.objects.get(name="Desk Lamp").products.all())
+    sloz = _serialize_main_products(Categorie.objects.get(name="ZigBee").products.all())
+
+    return render(request, "shop/index.html", {"lop":slop[:items_in_featrued], "cards": cards, "slols": slols[:items_in_featrued], "sloz": sloz[:items_in_featrued]})
 
 # request -> render (url  * dict)
 # caller: navigation shop

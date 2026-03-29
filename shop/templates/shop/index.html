@@ -19,7 +19,7 @@
                 </p>
 
                 <div class="hero__cta">
-                    <a class="btn btn--primary" href="#systems">Explore Systems</a>
+                    <a class="btn btn--primary" href="shop?tab=systems#systems">Explore Systems</a>
                     <a class="btn btn--ghost" href="https://wa.me/96170856471" target="_blank" rel="noopener">
                     WhatsApp Support
                     </a>
@@ -99,7 +99,7 @@
                         <h3 class="system-card__desc">{{card.title}}</h3>
                         <p class="system-card__desc">{{card.description}}</p>
                         <div class="system-card__price">Starting From <strong>${{card.price|floatformat:2}}</strong></div>
-                        <a class="btns" href="/power-control-system">{{card.buton_text}} →</a>
+                        <a class="btns" href="{{card.link}}">{{card.buton_text}} →</a>
                     </article>
                     {% endif %}
                 {% endfor %}
@@ -244,7 +244,7 @@
       <div class="carousel-container">
         <h2>Desk Lamps!!</h2>
         <div class="product-card-container">
-        {% for product in lop %}
+        {% for product in slols %}
             <div class="product-card">
             <a href="{{ product.url }}">
                 {% if product.main_image %}
@@ -265,7 +265,7 @@
       <div class="carousel-container">
         <h2>On SALE!!</h2>
         <div class="product-card-container">
-        {% for product in lop %}
+        {% for product in sloz %}
             <div class="product-card">
             <a href="{{ product.url }}">
                 {% if product.main_image %}
