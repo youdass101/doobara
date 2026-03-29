@@ -62,7 +62,11 @@
 
                         <div class="shop-card__media">
                             {% if row.main_image %}
-                                <img src="{{ row.main_image.url }}" alt="{{ row.main_image.alt_text }}">
+                                <img src="{{ row.main_image.url }}"
+                                     alt="{{ row.main_image.alt_text }}"
+                                     width="600"
+                                     height="600"
+                                     loading="lazy">
                             {% else %}
                                 <span class="shop-card__no-image" aria-label="{{ row.title }} image unavailable"></span>
                             {% endif %}

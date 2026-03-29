@@ -22,7 +22,11 @@
                     <div class="single-product-gallery__main">
                         <img id="system-variant-main-image"
                              src="{% if default_system_variant.thumbnail %}{{ default_system_variant.thumbnail }}{% elif product.main_image %}{{ product.main_image.url }}{% endif %}"
-                             alt="{{ default_system_variant.title|default:product.title }}">
+                             alt="{{ default_system_variant.title|default:product.title }}"
+                             width="1000"
+                             height="1000"
+                             loading="eager"
+                             fetchpriority="high">
                     </div>
                     <div id="system-variant-gallery" class="single-product-gallery__thumbs"></div>
                 </div>
@@ -97,7 +101,11 @@
                         {% if product.main_image %}
                             <img id="spi"
                                  src="{{ product.main_image.url }}"
-                                 alt="{{ product.main_image.alt_text }}">
+                                 alt="{{ product.main_image.alt_text }}"
+                                 width="1000"
+                                 height="1000"
+                                 loading="eager"
+                                 fetchpriority="high">
                         {% else %}
                             <div class="single-product-gallery__empty" id="spi" aria-label="{{ product.title }} image unavailable"></div>
                         {% endif %}
@@ -108,7 +116,10 @@
                                 <button type="button" class="single-product-thumb">
                                     <img class="sp-thumb-image"
                                          src="{{image.url }}"
-                                         alt="{{ image.alt_text }}">
+                                         alt="{{ image.alt_text }}"
+                                         width="78"
+                                         height="78"
+                                         loading="lazy">
                                 </button>
                         {% endfor %}
                     </div>
@@ -216,7 +227,8 @@
                 <div class="single-product-long-image-card">
                     <img class="single-product-image-long"
                          src="{% static image.iurl %}"
-                         alt="{{ product.title }}">
+                         alt="{{ product.title }}"
+                         loading="lazy">
                 </div>
             {% endif %}
         {% endfor %}
