@@ -1,5 +1,5 @@
 {% extends "doobarashop/layout.html" %}
-{% load static %}
+{% load static cache %}
 
 {% block pagetitle %}
 BLOG
@@ -7,48 +7,50 @@ BLOG
 
 
 {% block body %}
-<!-- Blog page carousel container -->
-<div id="blog-carousel">
+{% cache 900 "blog_post_sidebare" using="template_fragments" %}
+    <!-- Blog page carousel container -->
+    <div id="blog-carousel">
 
-    <!-- Block post thumbnail, title and descriptioj -->
-    <!-- Post Url -->
-    <a href="single_blog_post">
-        <div class="post-card">
-            <!-- Post Image -->
-            <img src="{% static 'doobarashop/upload/images/blog1.jpg' %}">
-            <!-- Post title -->
-            <h3>Smart Light Switch</h3>
-            <!-- Post Meta description -->
-            <p>A good smart light switch that wroks on radio frequency and is a good one to use</p>   
-        </div>
-    </a>
+        <!-- Block post thumbnail, title and descriptioj -->
+        <!-- Post Url -->
+        <a href="single_blog_post">
+            <div class="post-card">
+                <!-- Post Image -->
+                <img src="{% static 'doobarashop/upload/images/blog1.jpg' %}">
+                <!-- Post title -->
+                <h3>Smart Light Switch</h3>
+                <!-- Post Meta description -->
+                <p>A good smart light switch that wroks on radio frequency and is a good one to use</p>   
+            </div>
+        </a>
 
-    <a href="single_blog_post">
-        <div class="post-card">
-            <img src="{% static 'doobarashop/upload/images/blog2.jpg' %}">
-            <h3>Home automation</h3>
-            <p>Home automation is not a luxery but it can be too, though its mainly about 
-                    making things and routinique task easier and more efficient</p>
-        </div>
-    </a>
+        <a href="single_blog_post">
+            <div class="post-card">
+                <img src="{% static 'doobarashop/upload/images/blog2.jpg' %}">
+                <h3>Home automation</h3>
+                <p>Home automation is not a luxery but it can be too, though its mainly about 
+                        making things and routinique task easier and more efficient</p>
+            </div>
+        </a>
 
-    <a href="single_blog_post">
-        <div class="post-card">
-            <img src="{% static 'doobarashop/upload/images/blog3.jpg' %}">
-            <h3>Smart Home devices</h3>
-            <p>To convert your house to a smart one you should teach how to do and orginize 
-                    things in your daily life, like coffee, blind, Security and more </p>
-        </div>
-    </a>
+        <a href="single_blog_post">
+            <div class="post-card">
+                <img src="{% static 'doobarashop/upload/images/blog3.jpg' %}">
+                <h3>Smart Home devices</h3>
+                <p>To convert your house to a smart one you should teach how to do and orginize 
+                        things in your daily life, like coffee, blind, Security and more </p>
+            </div>
+        </a>
 
-    <a href="single_blog_post">
-        <div class="post-card">
-            <img src="{% static 'doobarashop/upload/images/blog4.jpg' %}">
-            <h3>Smart Relay Switch</h3>
-             <p>Remotely using this relay switch turn ON/OFF any connected 220v appliance
-                all you need is internet connectivity and a smart phone to control and automate it
-            </p>
-        </div>
-    </a>
-</div>
+        <a href="single_blog_post">
+            <div class="post-card">
+                <img src="{% static 'doobarashop/upload/images/blog4.jpg' %}">
+                <h3>Smart Relay Switch</h3>
+                <p>Remotely using this relay switch turn ON/OFF any connected 220v appliance
+                    all you need is internet connectivity and a smart phone to control and automate it
+                </p>
+            </div>
+        </a>
+    </div>
+{% endcache %}
 {%endblock%}

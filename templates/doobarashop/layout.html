@@ -1,5 +1,4 @@
-{% load static %}
-<!DOCTYPE html>
+{% load static cache %}<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -153,6 +152,8 @@
         </div>
 
         <div class="footer-inner">
+          {% cache 3600 "footer_public_links" using="template_fragments" %}
+          {# Safe to cache: only public footer links/social items, no user/session/cart state. #}
           <span>© <span id="year"></span> Doobra. All rights reserved.</span>
 
           <a href="tel:+96170856471">+961 70 856 471</a>
@@ -171,6 +172,7 @@
 
           <a href="/">Home</a>
           <a href="/shop">Shop</a>
+          {% endcache %}
           {% if user.is_authenticated %}
           <a href="/myaccount">Account</a>
           {%else%}

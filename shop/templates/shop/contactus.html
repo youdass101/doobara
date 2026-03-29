@@ -1,10 +1,12 @@
 {% extends "doobarashop/layout.html" %}
 {% load static %}
+{% load cache %}
 
 {% block pagetitle %}
 Contact Us
 {% endblock %}
 {% block body %}
+{% cache 1800 "contact_us" using="template_fragments" %}
 <section class="contact-section">
     <div class="contact-shell">
 
@@ -99,5 +101,6 @@ Contact Us
         </div>
     </div>
 </section>
+{% endcache %}
 
 {% endblock %}

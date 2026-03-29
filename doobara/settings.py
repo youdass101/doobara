@@ -86,6 +86,9 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    # WhiteNoise serves versioned static assets directly from Django in a
+    # production-safe way without touching user/media uploads.
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -200,6 +203,55 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
+
+# Optional but reasonable for WhiteNoise
+WHITENOISE_MAX_AGE = 31536000  # 1 year for versioned static assets
+
+# redis cache configuration
+REDIS_URL = os.getenv("REDIS_URL", "redis://127.0.0.1:6379/1")
+if DEBUG:
+        CACHES = {
+        "default": {
+            "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
+            "LOCATION": "doobara-local",
+        },
+        "template_fragments": {
+            "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
+            "LOCATION": "doobara-template-fragments",
+        },
+    }
+else:
+    CACHES = {
+        "default": {
+            "BACKEND": "django_redis.cache.RedisCache",
+            "LOCATION": REDIS_URL,
+            "OPTIONS": {
+                "CLIENT_CLASS": "django_redis.client.DefaultClient",
+            },
+            "KEY_PREFIX": "doobara",
+            "TIMEOUT": 300,  # default fallback: 5 minutes
+        },
+
+        "template_fragments": {
+            "BACKEND": "django_redis.cache.RedisCache",
+            "LOCATION": REDIS_URL,
+            "OPTIONS": {
+                "CLIENT_CLASS": "django_redis.client.DefaultClient",
+            },
+            "KEY_PREFIX": "doobara_fragments",
+            "TIMEOUT": 600,
+        },
+    }
+
+
 # new allauth
 # allauth backend authentication 
 AUTHENTICATION_BACKENDS = [
@@ -211,13 +263,8 @@ AUTHENTICATION_BACKENDS = [
 # allauth google 
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
-        'SCOPE': [
-            'profile',
-            'email',
-        ],
-        'AUTH_PARAMS': {
-            'access_type': 'online',
-        }
+        'SCOPE': ['profile','email',],
+        'AUTH_PARAMS': {'access_type': 'online',}
     }
 }
 

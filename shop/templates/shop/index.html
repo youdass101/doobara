@@ -1,48 +1,51 @@
 {% extends "doobarashop/layout.html" %}
-{% load static %}
+{% load static cache %}
 
 {% block title %}Smart Home Automation in Lebanon | Doobara{% endblock %}
 {% block meta_description %}Explore practical smart home automation systems, devices, and support from Doobara for safer, easier everyday living in Lebanon.{% endblock %}
 {% block body %}
 
 <div class="index-page-container">
-    <!-- HERO -->
-    <section class="hero">
-        <div class="hero__wrap--wide hero__wrap">
-            <!-- Left: Copy -->
-            <div class="hero__copy">
-                <h1>Smart systems built<br/>for Lebanese homes.</h1>
+    {% cache 1800 "homepage_marketing_hero" using="template_fragments" %}
+    {# Safe to cache: static marketing copy/assets only; no user/session/variant controls. #}
+        <!-- HERO -->
+        <section class="hero">
+            <div class="hero__wrap--wide hero__wrap">
+                <!-- Left: Copy -->
+                <div class="hero__copy">
+                    <h1>Smart systems built<br/>for Lebanese homes.</h1>
 
-                <p class="hero__sub">
-                Pick a system. Choose a level. Get reliable control for power, safety,
-                monitoring, and lighting—without the gadget confusion.
-                </p>
+                    <p class="hero__sub">
+                    Pick a system. Choose a level. Get reliable control for power, safety,
+                    monitoring, and lighting—without the gadget confusion.
+                    </p>
 
-                <div class="hero__cta">
-                    <a class="btn btn--primary" href="shop?tab=systems#systems">Explore Systems</a>
-                    <a class="btn btn--ghost" href="https://wa.me/96170856471" target="_blank" rel="noopener">
-                    WhatsApp Support
-                    </a>
+                    <div class="hero__cta">
+                        <a class="btn btn--primary" href="shop?tab=systems#systems">Explore Systems</a>
+                        <a class="btn btn--ghost" href="https://wa.me/96170856471" target="_blank" rel="noopener">
+                        WhatsApp Support
+                        </a>
+                    </div>
+
+                    <ul class="hero__trust">
+                        <li>Transparent bundles</li>
+                        <li>Easy tutorials</li>
+                        <li>Light WhatsApp support</li>
+                    </ul>
                 </div>
 
-                <ul class="hero__trust">
-                    <li>Transparent bundles</li>
-                    <li>Easy tutorials</li>
-                    <li>Light WhatsApp support</li>
-                </ul>
-            </div>
-
-            <!-- Right: Visual -->
-            <div class="hero__visual">
-                <div class="hero__blob">
-                    <div class="hero__stack">
-                        <!-- Replace these with your real images -->  
-                        <img class="hero__img hero__img--phone" src="{% static 'doobarashop/upload/images/phone-app-screen.png' %}" alt="Smart device" />
+                <!-- Right: Visual -->
+                <div class="hero__visual">
+                    <div class="hero__blob">
+                        <div class="hero__stack">
+                            <!-- Replace these with your real images -->  
+                            <img class="hero__img hero__img--phone" src="{% static 'doobarashop/upload/images/phone-app-screen.png' %}" alt="Smart device" />
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    {% endcache %}
 
     <section id="systems" class="systems">
         <div class="systems__inner systems__inner--wide">
@@ -131,115 +134,118 @@
         </div>
     </div>
 
-    <!-- Why Choose Us -->
-    <section class="why-doobara">
-        <div class="container why-doobara__wrap">
+    {% cache 1800 "homepage_marketing_why_choose" using="template_fragments" %}
+    {# Safe to cache: static trust/review marketing content without cart/account/session data. #}
+        <!-- Why Choose Us -->
+        <section class="why-doobara">
+            <div class="container why-doobara__wrap">
 
-            <!-- Left side -->
-            <div class="why-doobara__content">
-                <span class="why-doobara__eyebrow">Why Choose Doobara</span>
-                <h2>Smart living, without the usual complexity.</h2>
-                <p class="why-doobara__intro">
-                    At Doobara, we focus on smart devices and systems that are actually useful,
-                    easy to use, and designed to fit modern homes. No gimmicks. Just practical
-                    automation, better comfort, and more control over your space.
-                </p>
-
-                <div class="why-doobara__grid">
-                    <article class="why-card">
-                        <div class="why-card__icon">⚙️</div>
-                        <div>
-                            <h3>Practical solutions</h3>
-                            <p>Products selected to solve real day-to-day needs, not just look smart on paper.</p>
-                        </div>
-                    </article>
-
-                    <article class="why-card">
-                        <div class="why-card__icon">📱</div>
-                        <div>
-                            <h3>Easy control</h3>
-                            <p>Manage your devices with simple app control, automation, and remote access.</p>
-                        </div>
-                    </article>
-
-                    <article class="why-card">
-                        <div class="why-card__icon">🎨</div>
-                        <div>
-                            <h3>Modern design</h3>
-                            <p>Smart products that blend into your home instead of making it look like a server room.</p>
-                        </div>
-                    </article>
-
-                    <article class="why-card">
-                        <div class="why-card__icon">🤝</div>
-                        <div>
-                            <h3>Local support</h3>
-                            <p>Guidance, product recommendations, and support tailored for customers in Lebanon.</p>
-                        </div>
-                    </article>
-                </div>
-            </div>
-
-            <!-- Right side review -->
-            <aside class="review-card">
-                <div class="singlereview">
-                    <div class="review-card__stars">★★★★★</div>
-                    <p class="review-card__text">
-                        “
-                            قمة الاخلاق في التواصل مع الزبائن
-                            جودة في المعاملة و الدقة في الجودة و البضاعة
-                            سعر بمتناول الجميع
-                            والاهمة شي تواصل من بعد الخدمة و المساعدة باي وقت و باي تفاصيل.  شكرا عالفيديو يلي بتعملن لانو اكثر شي كمان بفدونا”
+                <!-- Left side -->
+                <div class="why-doobara__content">
+                    <span class="why-doobara__eyebrow">Why Choose Doobara</span>
+                    <h2>Smart living, without the usual complexity.</h2>
+                    <p class="why-doobara__intro">
+                        At Doobara, we focus on smart devices and systems that are actually useful,
+                        easy to use, and designed to fit modern homes. No gimmicks. Just practical
+                        automation, better comfort, and more control over your space.
                     </p>
 
-                    <div class="review-card__author">
-                        <div class="review-card__avatar">M</div>
-                        <div>
-                            <strong>Mohammad S.</strong>
-                            <span>Verified customer</span>
-                        </div>
-                    </div> 
+                    <div class="why-doobara__grid">
+                        <article class="why-card">
+                            <div class="why-card__icon">⚙️</div>
+                            <div>
+                                <h3>Practical solutions</h3>
+                                <p>Products selected to solve real day-to-day needs, not just look smart on paper.</p>
+                            </div>
+                        </article>
+
+                        <article class="why-card">
+                            <div class="why-card__icon">📱</div>
+                            <div>
+                                <h3>Easy control</h3>
+                                <p>Manage your devices with simple app control, automation, and remote access.</p>
+                            </div>
+                        </article>
+
+                        <article class="why-card">
+                            <div class="why-card__icon">🎨</div>
+                            <div>
+                                <h3>Modern design</h3>
+                                <p>Smart products that blend into your home instead of making it look like a server room.</p>
+                            </div>
+                        </article>
+
+                        <article class="why-card">
+                            <div class="why-card__icon">🤝</div>
+                            <div>
+                                <h3>Local support</h3>
+                                <p>Guidance, product recommendations, and support tailored for customers in Lebanon.</p>
+                            </div>
+                        </article>
+                    </div>
                 </div>
 
-                <div class="singlereview">
-                    <div class="review-card__stars">★★★★★</div>
-                    <p class="review-card__text">
-                        “Happy from my purchase of the smart pet feeder and the Tapiu camera ,very easy to use .
-                        And great thanks for the fast delivery.
-                            Recommend highly this store 💯”
-                    </p>
+                <!-- Right side review -->
+                <aside class="review-card">
+                    <div class="singlereview">
+                        <div class="review-card__stars">★★★★★</div>
+                        <p class="review-card__text">
+                            “
+                                قمة الاخلاق في التواصل مع الزبائن
+                                جودة في المعاملة و الدقة في الجودة و البضاعة
+                                سعر بمتناول الجميع
+                                والاهمة شي تواصل من بعد الخدمة و المساعدة باي وقت و باي تفاصيل.  شكرا عالفيديو يلي بتعملن لانو اكثر شي كمان بفدونا”
+                        </p>
 
-                    <div class="review-card__author">
-                        <div class="review-card__avatar">N</div>
-                        <div>
-                            <strong>Nawal C.</strong>
-                            <span>Verified customer</span>
-                        </div>
-                    </div> 
-                </div>
+                        <div class="review-card__author">
+                            <div class="review-card__avatar">M</div>
+                            <div>
+                                <strong>Mohammad S.</strong>
+                                <span>Verified customer</span>
+                            </div>
+                        </div> 
+                    </div>
 
-                <div class="singlereview">
-                    <div class="review-card__stars">★★★★★</div>
-                    <p class="review-card__text">
-                        “Excellent products for home automation and security with great support from Doobara 👍
-”
-                    </p>
+                    <div class="singlereview">
+                        <div class="review-card__stars">★★★★★</div>
+                        <p class="review-card__text">
+                            “Happy from my purchase of the smart pet feeder and the Tapiu camera ,very easy to use .
+                            And great thanks for the fast delivery.
+                                Recommend highly this store 💯”
+                        </p>
 
-                    <div class="review-card__author">
-                        <div class="review-card__avatar">R</div>
-                        <div>
-                            <strong>Ramzi T.</strong>
-                            <span>Verified customer</span>
-                        </div>
-                    </div> 
-                </div>
+                        <div class="review-card__author">
+                            <div class="review-card__avatar">N</div>
+                            <div>
+                                <strong>Nawal C.</strong>
+                                <span>Verified customer</span>
+                            </div>
+                        </div> 
+                    </div>
 
-            
-            </aside>
+                    <div class="singlereview">
+                        <div class="review-card__stars">★★★★★</div>
+                        <p class="review-card__text">
+                            “Excellent products for home automation and security with great support from Doobara 👍
+    ”
+                        </p>
+
+                        <div class="review-card__author">
+                            <div class="review-card__avatar">R</div>
+                            <div>
+                                <strong>Ramzi T.</strong>
+                                <span>Verified customer</span>
+                            </div>
+                        </div> 
+                    </div>
+
                 
+                </aside>
+                    
 
-        </div>
-    </section>
+            </div>
+        </section>
+    {% endcache %}
 
       <div class="carousel-container">
         <h2>Desk Lamps!!</h2>
