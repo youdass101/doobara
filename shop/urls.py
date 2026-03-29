@@ -23,4 +23,8 @@ urlpatterns=[
     path("orderby", views.orderby, name="orderby"),
     # Internal product feed export (JSON) for Merchant/Meta mapping QA.
     path("internal/exports/products.json", views.internal_product_feed_export, name="internal_product_feed_export"),
+    # NEW: Live Google Merchant Center CSV feed endpoint.
+    path("google-product-feed.csv", views.google_product_feed_csv, name="google_product_feed_csv"),
+    # NEW: Live Meta Commerce Manager CSV feed endpoint.
+    path("meta-catalog-feed.csv", views.meta_catalog_feed_csv, name="meta_catalog_feed_csv"),
 ]
