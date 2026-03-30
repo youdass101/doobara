@@ -311,6 +311,8 @@ ACCOUNT_FORMS = {
 # reCAPTCHA keys are read from environment variables so secrets are never hardcoded.
 RECAPTCHA_PUBLIC_KEY = os.getenv("RECAPTCHA_PUBLIC_KEY", "")
 RECAPTCHA_PRIVATE_KEY = os.getenv("RECAPTCHA_PRIVATE_KEY", "")
+# Keep Google's default verification/script domain unless deployment explicitly overrides it.
+RECAPTCHA_DOMAIN = os.getenv("RECAPTCHA_DOMAIN", "www.google.com")
 
 # allauth email and username authentication
 ACCOUNT_LOGIN_METHODS = {'email', 'username'}
