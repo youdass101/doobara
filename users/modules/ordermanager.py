@@ -67,7 +67,9 @@ def createorder(request, form, new):
         # current saved in data address
         id = int(form['current_address_id'])
         note = form.get('ordernote', '').strip()
-        delivery = Delivery_Address_Details.objects.get(id=id)
+        # Security: lock address selection to the authenticated user so posted
+        # IDs cannot attach someone else's saved address to this order.
+        delivery = Delivery_Address_Details.objects.get(id=id, user=user)
         
     # Shipping method can come from checkout POST; persist selection first so totals stay deterministic.
     shipping_method_id = request.POST.get("shipping_method_id")
@@ -136,16 +138,16 @@ def address_post(form):
     return form, state
             
 def change_default_address(user, aid):
-    # get current default addres and set it to default to false and and save model instance
-    # loc: models
-    old = Delivery_Address_Details.objects.get(user=user, default=True)
-    old.default = False
-    old.save()
-    # set new address to default 
-    # get new address and set default to true and save instance
-    caddress = Delivery_Address_Details.objects.get(id=aid)
+    # Clear current default only when it exists so first-time default assignment
+    # cannot fail with DoesNotExist.
+    old = Delivery_Address_Details.objects.filter(user=user, default=True).first()
+    if old:
+        old.default = False
+        old.save(update_fields=["default"])
+    # Security: only allow switching defaults within the same user's addresses.
+    caddress = Delivery_Address_Details.objects.get(id=aid, user=user)
     caddress.default = True
-    caddress.save()
+    caddress.save(update_fields=["default"])
 
 
 def create_new_address(request, form):

@@ -33,6 +33,10 @@ def myaccount(request):
 # Create a new order instance
 @login_required
 def placeorder(request):
+    if request.method != "POST":
+        # placeorder is a write endpoint; redirect non-POST access to checkout.
+        return redirect("checkout")
+
     if request.method == "POST":
         # is dictionarry form
         form =request.POST 
@@ -99,23 +103,26 @@ def placeorder(request):
 # render specific order instance and connected items
 @login_required
 def order_log(request):
-    if request.method == "POST":
-        # is int | HTML submited data 
-        # given order record id 
-        orderid = request.POST['orderid']
-        # is object  | (loc: models)
-        # order instance the first in list 
-        # Security: ensure users can only access their own orders.
-        order = get_object_or_404(Orders, id=orderid, user=request.user)
-        # is list of instance 
-        # all order connected product item records 
-        items = order.items.all()
-        # is dict 
-        # serilized copy of order record fields
-        sorder = order.serialize()
-        # is list of dict 
-        # list of serialized copy of order item record objects list
-        sitems = [item.serialize() for item in items]
+    if request.method != "POST":
+        # Keep endpoint predictable: account page submits POST order IDs.
+        return redirect("myaccount")
+
+    # is int | HTML submited data 
+    # given order record id 
+    orderid = request.POST['orderid']
+    # is object  | (loc: models)
+    # order instance the first in list 
+    # Security: ensure users can only access their own orders.
+    order = get_object_or_404(Orders, id=orderid, user=request.user)
+    # is list of instance 
+    # all order connected product item records 
+    items = order.items.all()
+    # is dict 
+    # serilized copy of order record fields
+    sorder = order.serialize()
+    # is list of dict 
+    # list of serialized copy of order item record objects list
+    sitems = [item.serialize() for item in items]
 
     return render(request, "users/orderlog.html", {"order": sorder, "items": sitems})
 

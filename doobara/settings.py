@@ -263,16 +263,10 @@ AUTHENTICATION_BACKENDS = [
 # allauth google 
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
-        'SCOPE': ['profile','email',],
-        'AUTH_PARAMS': {'access_type': 'offline',},
-        'LOGIN_ON_GET': True
-    }
-}
-SOCIALACCOUNT_LOGIN_ON_GET = True
-
-
-
-SOCIALACCOUNT_PROVIDERS = {
+        'SCOPE': ['profile', 'email'],
+        'AUTH_PARAMS': {'access_type': 'offline'},
+        'LOGIN_ON_GET': True,
+    },
     'facebook': {
         'METHOD': 'oauth2',
         'SCOPE': ['email', 'public_profile'],
@@ -293,6 +287,7 @@ SOCIALACCOUNT_PROVIDERS = {
         'GRAPH_API_URL': 'https://graph.facebook.com/v13.0',
     }
 }
+SOCIALACCOUNT_LOGIN_ON_GET = True
 # all auth id 
 
 SITE_ID = 2
