@@ -79,6 +79,8 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.facebook',
+    # Enables django-recaptcha form fields/widgets used by allauth forms.
+    'captcha',
     'import_export',
     'phonenumber_field'
 ]
@@ -302,7 +304,12 @@ SIGNUP_REDIRECT_URL = '/'
 
 ACCOUNT_FORMS = {
 'signup': 'users.forms.CustomSignupForm',
+'login': 'users.forms.CustomLoginForm',
 }
+
+# reCAPTCHA keys are environment-driven so secrets stay out of source control.
+RECAPTCHA_PUBLIC_KEY = os.getenv("RECAPTCHA_PUBLIC_KEY", "")
+RECAPTCHA_PRIVATE_KEY = os.getenv("RECAPTCHA_PRIVATE_KEY", "")
 
 # allauth email and username authentication
 ACCOUNT_LOGIN_METHODS = {'email', 'username'}

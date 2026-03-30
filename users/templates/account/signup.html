@@ -93,7 +93,21 @@
                     {% csrf_token %}
 
                     <div class="auth-form__fields">
-                        {{ form.as_p }}
+                        {# Includes required JS/CSS for widget-based fields such as reCAPTCHA. #}
+                        {{ form.media }}
+                        {# Keeps allauth non-field validation errors visible above input fields. #}
+                        {{ form.non_field_errors }}
+                        {# Render fields explicitly so the captcha block stays predictable in the auth layout. #}
+                        {% for field in form %}
+                            <p>
+                                {{ field.label_tag }}
+                                {{ field }}
+                                {% if field.help_text %}
+                                    <small>{{ field.help_text }}</small>
+                                {% endif %}
+                                {{ field.errors }}
+                            </p>
+                        {% endfor %}
                     </div>
 
                     {% if redirect_field_value %}

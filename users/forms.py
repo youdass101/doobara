@@ -7,12 +7,17 @@ from django.utils.translation import gettext_lazy as _
 from users.models import *
 from datetime import datetime
 from allauth.account.forms import SignupForm
+from allauth.account.forms import LoginForm
 from django.core.validators import MaxValueValidator
+from captcha.fields import ReCaptchaField
+from captcha.widgets import ReCaptchaV2Checkbox
 # from phonenumber_field.modelfields import PhoneNumberField
 
 
 
 class CustomSignupForm(SignupForm):
+    # Adds a server-validated reCAPTCHA challenge to the allauth signup flow.
+    captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox)
     first_name = forms.CharField(max_length=30, label='First Name')
     last_name = forms.CharField(max_length=30, label='Last Name')
 
@@ -28,6 +33,11 @@ class CustomSignupForm(SignupForm):
 
         # You must return the original result.
         return user
+
+
+class CustomLoginForm(LoginForm):
+    # Adds a server-validated reCAPTCHA challenge to the allauth login flow.
+    captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox)
         
 # class Delivery_Information(forms.Form):
 #     first_name = forms.CharField(widget=forms.TextInput() ,max_length=30, required=True)
