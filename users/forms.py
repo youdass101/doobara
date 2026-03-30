@@ -6,13 +6,17 @@ from django.forms import ModelForm
 from django.utils.translation import gettext_lazy as _
 from users.models import *
 from datetime import datetime
-from allauth.account.forms import SignupForm
+from allauth.account.forms import LoginForm, SignupForm
 from django.core.validators import MaxValueValidator
+from captcha.fields import ReCaptchaField
+from captcha.widgets import ReCaptchaV2Checkbox
 # from phonenumber_field.modelfields import PhoneNumberField
 
 
 
 class CustomSignupForm(SignupForm):
+    # Add captcha to signup to block automated account creation attempts.
+    captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox())
     first_name = forms.CharField(max_length=30, label='First Name')
     last_name = forms.CharField(max_length=30, label='Last Name')
 
@@ -28,6 +32,11 @@ class CustomSignupForm(SignupForm):
 
         # You must return the original result.
         return user
+
+
+class CustomLoginForm(LoginForm):
+    # Add captcha to login to reduce credential stuffing/bot sign-in attempts.
+    captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox())
         
 # class Delivery_Information(forms.Form):
 #     first_name = forms.CharField(widget=forms.TextInput() ,max_length=30, required=True)
