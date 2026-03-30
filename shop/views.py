@@ -20,6 +20,17 @@ _JSON_SCRIPT_ESCAPES = {
 }
 
 
+def _pick_thumbnail_from_prefetched(images):
+    """
+    Return the thumbnail image object from an already-prefetched image iterable.
+    Falls back to the first image when no thumbnail is marked.
+    """
+    image_list = list(images)
+    if not image_list:
+        return None
+    return next((image for image in image_list if image.thumbnail), image_list[0])
+
+
 def _json_for_script_tag(value):
     """
     Serialize JSON for safe embedding in <script> text content.
@@ -202,14 +213,18 @@ def single_product(request, locat=None, slug=None):
         ]
         # NEW: Convert markdown/plain long description to HTML server-side.
         long_description_html = markdown.markdown(variant.description or "")
-        thumb = variant.images.filter(thumbnail=True).first() or variant.images.first()
+        # Use prefetched images in memory to avoid per-variant thumbnail lookup queries.
+        thumb = _pick_thumbnail_from_prefetched(variant.images.all())
         images = [
             {"url": image.image.url, "alt_text": image.alt_text}
             for image in variant.images.all()
         ]
         package_items = []
         for package_item in variant.package_items.all():
-            included_thumb = package_item.included_product.images.filter(thumbnail=True).first() or package_item.included_product.images.first()
+            # package_items prefetches included product images; keep thumbnail selection in-memory.
+            included_thumb = _pick_thumbnail_from_prefetched(
+                package_item.included_product.images.all()
+            )
             package_items.append(
                 {
                     "name": package_item.included_product.name,

@@ -47,7 +47,10 @@ My Cart
                                             {% if item.0.productimage %}
                                                 {# Support both model-backed images (.image.url) and direct file images (.url) for variant cart rows. #}
                                                 <img src="{% if item.0.productimage.image %}{{ item.0.productimage.image.url }}{% else %}{{ item.0.productimage.url }}{% endif %}"
-                                                     alt="{{ item.0.productimage.alt_text|default:item.0.productname }}">
+                                                     alt="{{ item.0.productimage.alt_text|default:item.0.productname }}"
+                                                     width="120"
+                                                     height="120"
+                                                     loading="lazy">
                                             {% endif %}
                                         </div>
 
