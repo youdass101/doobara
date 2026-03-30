@@ -50,6 +50,10 @@
     <div class="shop-tabs" data-shop-tabs>
         <button class="shop-tabs__btn" type="button" data-tab="products" aria-pressed="true">All Products</button>
         <button class="shop-tabs__btn" type="button" data-tab="systems" aria-pressed="false">Systems</button>
+        <!-- New desk-lamp tab: keeps filtering in the same JS tab system without changing layout structure. -->
+        <button class="shop-tabs__btn" type="button" data-tab="desk-lamps" aria-pressed="false">Desk Lamps</button>
+        <!-- New smart-devices tab: uses client-side category/system markers already rendered on cards. -->
+        <button class="shop-tabs__btn" type="button" data-tab="smart-devices" aria-pressed="false">Smart Devices</button>
     </div>
     </div>
 
@@ -57,7 +61,10 @@
     <div class="shop-grid">
         {% for row in lop %}
             {% if row.active %}
-                <article class="shop-card" data-system="{{ row.system|yesno:'true,false' }}">
+                <article class="shop-card"
+                         data-system="{{ row.system|yesno:'true,false' }}"
+                         {# Category marker used by JS tabs for Desk Lamps / Smart Devices filtering. #}
+                         data-category="{% if row.pcategory.0 %}{{ row.pcategory.0.name|lower }}{% endif %}">
                     <a href="{{ row.url }}" class="shop-card__link">
 
                         <div class="shop-card__media">
