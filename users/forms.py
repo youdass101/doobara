@@ -8,8 +8,8 @@ from users.models import *
 from datetime import datetime
 from allauth.account.forms import LoginForm, SignupForm
 from django.core.validators import MaxValueValidator
-from captcha.fields import ReCaptchaField
-from captcha.widgets import ReCaptchaV2Checkbox
+from django_recaptcha.fields import ReCaptchaField
+from django_recaptcha.widgets import ReCaptchaV2Checkbox
 # from phonenumber_field.modelfields import PhoneNumberField
 
 

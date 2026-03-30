@@ -79,8 +79,8 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.facebook',
-    # django-recaptcha app provides the server-side field/widget used in auth forms.
-    'captcha',
+    # django-recaptcha 4.x uses the django_recaptcha app label.
+    'django_recaptcha',
     'import_export',
     'phonenumber_field'
 ]
