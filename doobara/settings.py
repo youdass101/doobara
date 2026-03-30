@@ -19,25 +19,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 env = environ.Env()
 env.read_env(os.path.join(BASE_DIR, '.env'))
 
-# unlock on production (sentry is already set up and tested on staging, just need to add the dsn to .env on production)
-# Sentry configuration for error tracking and monitoring
-# SENTRY_DSN = os.getenv("SENTRY_DSN", "")
-
-# if SENTRY_DSN:
-#     sentry_sdk.init(
-#         dsn=SENTRY_DSN,
-#         integrations=[DjangoIntegration()],
-#         send_default_pii=True,
-#         environment=os.getenv("SENTRY_ENVIRONMENT", "local"),
-#         traces_sample_rate=float(os.getenv("SENTRY_TRACES_SAMPLE_RATE", "0.1")),
-#     )
 
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-# env = environ.Env()
-# # explicitly load the .env file at project root
-# env.read_env(os.path.join(BASE_DIR, '.env'))
+
 
 
 # Quick-start development settings - unsuitable for production
@@ -50,6 +34,20 @@ if not SECRET_KEY:
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DEBUG", "False").lower() == "true"
 
+
+# unlock on production (sentry is already set up and tested on staging, just need to add the dsn to .env on production)
+# Sentry configuration for error tracking and monitoring
+if not DEBUG:
+    SENTRY_DSN = os.getenv("SENTRY_DSN", "")
+
+    if SENTRY_DSN:
+        sentry_sdk.init(
+            dsn=SENTRY_DSN,
+            integrations=[DjangoIntegration()],
+            send_default_pii=True,
+            environment=os.getenv("SENTRY_ENVIRONMENT", "local"),
+            traces_sample_rate=float(os.getenv("SENTRY_TRACES_SAMPLE_RATE", "0.1")),
+        )
 
 ALLOWED_HOSTS = [host.strip() for host in os.getenv("ALLOWED_HOSTS", "localhost,127.0.0.1").split(",")]
 GOOGLE_ANALYTICS_ID = os.getenv("GOOGLE_ANALYTICS_ID", "")
