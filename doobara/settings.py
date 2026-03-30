@@ -79,6 +79,8 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.facebook',
+    # django-recaptcha 4.x uses the django_recaptcha app label.
+    'django_recaptcha',
     'import_export',
     'phonenumber_field'
 ]
@@ -301,8 +303,16 @@ LOGOUT_REDIRECT_URL = '/'
 SIGNUP_REDIRECT_URL = '/'
 
 ACCOUNT_FORMS = {
-'signup': 'users.forms.CustomSignupForm',
+    # Keep signup customization and add login override so both forms enforce captcha validation.
+    'signup': 'users.forms.CustomSignupForm',
+    'login': 'users.forms.CustomLoginForm',
 }
+
+# reCAPTCHA keys are read from environment variables so secrets are never hardcoded.
+RECAPTCHA_PUBLIC_KEY = os.getenv("RECAPTCHA_PUBLIC_KEY", "")
+RECAPTCHA_PRIVATE_KEY = os.getenv("RECAPTCHA_PRIVATE_KEY", "")
+# Keep Google's default verification/script domain unless deployment explicitly overrides it.
+RECAPTCHA_DOMAIN = os.getenv("RECAPTCHA_DOMAIN", "www.google.com")
 
 # allauth email and username authentication
 ACCOUNT_LOGIN_METHODS = {'email', 'username'}

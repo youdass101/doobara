@@ -92,7 +92,11 @@
                 <form class="auth-form login" method="POST" action="{% url 'account_login' %}">
                     {% csrf_token %}
 
+                    {# Render widget media so reCAPTCHA JS is loaded when the captcha field is present. #}
+                    {{ form.media }}
+
                     <div class="auth-form__fields">
+                        {# Keep existing allauth form rendering and include captcha field from the custom login form. #}
                         {{ form.as_p }}
                     </div>
 
