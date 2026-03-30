@@ -12,14 +12,32 @@ export function initShopTabs() {
   }
 
   // for URL query param, if we want to link to a specific tab
-  const validTabs = ['products', 'systems'];
+  // Keep the same tab-driven architecture, but allow the two new product-only filters.
+  const validTabs = ['products', 'systems', 'desk-lamps', 'smart-devices'];
 
   const filterCards = (selectedTab) => {
-    const shouldShowSystem = selectedTab === 'systems';
-
     cards.forEach((card) => {
       const isSystem = card.dataset.system === 'true';
-      card.style.display = isSystem === shouldShowSystem ? '' : 'none';
+      // Category marker comes from template data-category and is normalized to lowercase there.
+      const category = card.dataset.category || '';
+      let shouldShow = false;
+
+      if (selectedTab === 'systems') {
+        // Existing behavior: systems tab shows only system products.
+        shouldShow = isSystem;
+      } else if (selectedTab === 'products') {
+        // Existing behavior: all products tab shows non-system products.
+        shouldShow = !isSystem;
+      } else if (selectedTab === 'desk-lamps') {
+        // New behavior: desk-lamps tab shows only non-system products in Desk Lamp category.
+        shouldShow = !isSystem && category === 'desk lamp';
+      } else if (selectedTab === 'smart-devices') {
+        // New behavior: smart-devices is the safe fallback bucket for non-system, non-desk-lamp products.
+        // Assumption: if there is no explicit smart-device category marker, all remaining non-system products are smart devices.
+        shouldShow = !isSystem && category !== 'desk lamp';
+      }
+
+      card.style.display = shouldShow ? '' : 'none';
     });
 
     tabs.forEach((tab) => {
@@ -28,7 +46,7 @@ export function initShopTabs() {
     });
   };
 
-  // Check URL for ?tab=systems or ?tab=products to set initial state
+  // Check URL for known tab values (including new tabs) to set initial state
   const getInitialTab = () => {
     const urlParams = new URLSearchParams(window.location.search);
     const tab = urlParams.get('tab');
@@ -43,7 +61,7 @@ export function initShopTabs() {
 
   tabs.forEach((tab) => {
     tab.addEventListener('click', () => {
-      // dataset.tab is either 'products' or 'systems'
+      // dataset.tab is one of the values in validTabs.
       const selectedTab = tab.dataset.tab;
       filterCards(selectedTab);
       // URL UPDATE
