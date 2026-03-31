@@ -1,16 +1,27 @@
-from django.shortcuts import get_object_or_404, redirect, render
-from django.contrib.auth.decorators import login_required
-from .forms import *
-from .models import *
-from .modules.ordermanager import *
 import json
-from .forms import *
+
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import get_object_or_404, redirect, render
+from django.views.decorators.cache import never_cache
+
 from cart.modules.snippethelper import cart_pricing_breakdown, get_active_shipping_methods
+from cart.modules.cartmanager import CartManager
+
+from .forms import Delivery_Information
+from .models import Delivery_Address_Details, Orders
+from .modules.ordermanager import (
+    address_post,
+    change_default_address,
+    create_new_address,
+    createorder,
+    send_order_confirmation_email_to_user_and_admin,
+)
 
 # caller: main navigation
 # User account page render
 # User has to be login
 @login_required
+@never_cache
 def myaccount(request):
     # is list of instances | (loc: models)
     # currnet user list of related records in orders model
@@ -32,6 +43,7 @@ def myaccount(request):
 # caller: checkout
 # Create a new order instance
 @login_required
+@never_cache
 def placeorder(request):
     if request.method != "POST":
         # placeorder is a write endpoint; redirect non-POST access to checkout.
@@ -102,6 +114,7 @@ def placeorder(request):
 # caller: account
 # render specific order instance and connected items
 @login_required
+@never_cache
 def order_log(request):
     if request.method != "POST":
         # Keep endpoint predictable: account page submits POST order IDs.
@@ -130,6 +143,7 @@ def order_log(request):
 # caller: account 
 # render address list and change dedault address instance
 @login_required
+@never_cache
 def address_list(request):
     # if request.method == "GET":
     user = request.user 
@@ -153,6 +167,7 @@ def address_list(request):
 # render empty form for new address request or current address to edit in filled in form 
 # Method get for new address and POST to existing address instance 
 @login_required
+@never_cache
 def new_edit_address(request):
     if request.method == "POST":
         # is dict | HTML submited data 
@@ -188,6 +203,7 @@ def new_edit_address(request):
 @login_required
 # caller: account 
 # update existing address instance
+@never_cache
 def update_address(request):
     if request.method == "POST":
         # is string | HTML submited data
@@ -199,12 +215,7 @@ def update_address(request):
             # fill form with given information
             new_address = Delivery_Information(request.POST)
             create_new_address(request, new_address)
-            # if new_address.is_valid:
-            #     # add missing fields to form and save form to instance 
-            #     new_address.instance.user = request.user
-            #     new_address.instance.default = False
-            #     new_address.save()
-            
+
         # delete existing instance 
         elif address_state == "del":
             # is int

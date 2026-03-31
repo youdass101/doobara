@@ -1,27 +1,24 @@
-from django.shortcuts import render
-from django.http import  JsonResponse
-from django.contrib.auth.decorators import login_required
 import json
-# project files
-from .models import *
-from .modules.cartmanager import *
-from users.forms import *
-from .modules.snippethelper import *
+from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
+from django.shortcuts import render
+from django.views.decorators.cache import never_cache
+
+from users.forms import Delivery_Information
+
+from .modules.cartmanager import CartManager
+from .modules.snippethelper import (
+    cart_pricing_breakdown,
+    cart_context_process,
+    default_address,
+    get_active_shipping_methods,
+    set_selected_shipping_method,
+)
 
 
-
-# NOTES FOR OPTIMIZATION 
-# Request the CartManager instance for the samse session is highly repetetive
-# Other thant the CM repetation I cannot find any major optimazation that can be done 
-# there is 38 line of codes and the rest commenting
-
-
-# Request(model) -> render
-# return the user or session cart data list 
+@never_cache
 def cart(request):
-    # is list of dict | (loc: modules.cartmanager)
-    # get user cart manager module list of dict for cart items related
-    cm = CartManager(request).cart_page() # helper class in cartmanager
+    cm = CartManager(request).cart_page()
     pricing = cart_pricing_breakdown(request)
     shipping_methods = get_active_shipping_methods()
     return render(request, "cart/cart.html", {
@@ -67,7 +64,7 @@ def updatecart(request):
  
     return JsonResponse({"result":"done"}, status=201)
 
-# caller: cart     
+@never_cache
 @login_required
 def checkout(request):
     # is instance object | (loc: modules.cartmanager)
@@ -110,10 +107,6 @@ def checkout(request):
     return render(request, "cart/checkout.html", output)
 
 
-# request -> dict 
-# DATA UPDATES COLLECTER return the user attached cart items qtty and total price 
 def cartcontext(request):
-    # | (loc: modules.cartmanager)
-    # is dict * int (requested function from snippethelper file)
     items, total = cart_context_process(request)
     return {'item': items, 'total': "{:.2f}".format(total)}
