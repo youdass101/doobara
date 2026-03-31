@@ -1,150 +1,318 @@
 {% extends "doobarashop/layout.html" %}
-{% load static %}
+{% load static cache %}
 
-{% block pagetitle %}
-Home Automation
-{% endblock %}
+{% block title %}Smart Home Automation in Lebanon | Doobara{% endblock %}
+{% block meta_description %}Explore practical smart home automation systems, devices, and support from Doobara for safer, easier everyday living in Lebanon.{% endblock %}
 {% block body %}
 
-  <div id="index-grid-container">
+<div class="index-page-container">
+    {% cache 1800 "homepage_marketing_hero" using="template_fragments" %}
+    {# Safe to cache: static marketing copy/assets only; no user/session/variant controls. #}
+        <!-- HERO -->
+        <section class="hero">
+            <div class="hero__wrap--wide hero__wrap">
+                <!-- Left: Copy -->
+                <div class="hero__copy">
+                    <h1>Smart systems built<br/>for Lebanese homes.</h1>
 
-    <!-- Slideshow container -->
-    <div class="slideshow-container">
+                    <p class="hero__sub">
+                    Pick a system. Choose a level. Get reliable control for power, safety,
+                    monitoring, and lighting—without the gadget confusion.
+                    </p>
 
-      <!-- Full-width images with number and caption text -->
-      <div class="mySlides slide-fade">
-        <div class="numbertext">1 / 3</div>
-        <img class="slider-img-desktop" src="{% static 'doobarashop/upload/images/img1.jpg' %}" style="width:100%">
-        <img class="slider-img-mobile" src="{% static 'doobarashop/upload/images/img1m.jpg' %}" style="width:100%">
-        <div class="slider-caption">Caption Text</div>
-      </div>
+                    <div class="hero__cta">
+                        <a class="btn btn--primary" href="shop?tab=systems#systems">Explore Systems</a>
+                        <a class="btn btn--ghost" href="https://wa.me/96170856471" target="_blank" rel="noopener">
+                        WhatsApp Support
+                        </a>
+                    </div>
 
-      <div class="mySlides slide-fade">
-        <div class="numbertext">2 / 3</div>
-        <img class="slider-img-desktop" src="{% static 'doobarashop/upload/images/img2.jpg' %}" style="width:100%">
-        <img class="slider-img-mobile" src="{% static 'doobarashop/upload/images/img2m.jpg' %}" style="width:100%">
-        <div class="slider-caption">Caption Two</div>
-      </div>
+                    <ul class="hero__trust">
+                        <li>Transparent bundles</li>
+                        <li>Easy tutorials</li>
+                        <li>Light WhatsApp support</li>
+                    </ul>
+                </div>
 
-      <div class="mySlides slide-fade">
-        <div class="numbertext">3 / 3</div>
-        <img class="slider-img-desktop" src="{% static 'doobarashop/upload/images/img3.jpg' %}" style="width:100%">
-        <img class="slider-img-mobile" src="{% static 'doobarashop/upload/images/img3m.jpg' %}" style="width:100%">
-        <div class="slider-caption">Caption Three</div>
-      </div>
+                <!-- Right: Visual -->
+                <div class="hero__visual">
+                    <div class="hero__blob">
+                        <div class="hero__stack">
+                            <!-- Replace these with your real images -->  
+                            <img class="hero__img hero__img--phone"
+                                 src="{% static 'doobarashop/upload/images/phone-app-screen.png' %}"
+                                 alt="Smart device"
+                                 width="1080"
+                                 height="1920"
+                                 loading="eager"
+                                 fetchpriority="high" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    {% endcache %}
 
-      <!-- Next and previous buttons -->
-      <a class="prev" id="prv">&#10094;</a>
-      <a class="next" id="nxt" >&#10095;</a>
-    </div>
-
-    <!-- CATEGORY MENU AND FEATUR ROW -->
-    <div id="product-category">
-
-      <!-- <div class="icon-title-container">
-        <div>
-          <a href="shop/Smart%20Life"><object data="{% static 'doobarashop/upload/images/icon/smartlifebigger.svg' %}"></object></a>
+    <section id="systems" class="systems">
+        <div class="systems__inner systems__inner--wide">
+            <div class="systems__grid">
+                {% for card in cards %}
+                    {% if card.categorie == "system" %}
+                        <!-- Power Control System card -->
+                        <article class="system-card {{card.classname}}">
+                            <div class="system-card__media">
+                                <div class="system-card__overlay">
+                                    <div class="system-card__icon">
+                                        {{card.icon|safe}}
+                                    </div>
+                                    <h3 class="system-card__title">{{card.title}}</h3>
+                                </div>
+                                <img class="system-card__img"
+                                    src="{{card.image}}"
+                                    alt="Power system devices"
+                                    width="640"
+                                    height="640"
+                                    loading="lazy">
+                                <div class="system-card__tag">{{card.tag}}</div>
+                            </div>
+                            <p class="system-card__desc">{{card.description}}</p>
+                            <ul class="system-card__bullets">
+                                <li>
+                                    {{card.lifirsti|safe}}
+                                    {{card.lifirst}}</li>
+                                <li>
+                                    {{card.lisecondi|safe}}
+                                    {{card.lisecond}}</li>
+                            </ul>
+                            <div class="system-card__price">Starting From <strong>${{card.price|floatformat:2}}</strong></div>
+                            <a class="btn btn--primary btn--small" href="{{card.link}}">{{card.buton_text}} →</a>
+                        </article>
+                    {% endif %}
+                {% endfor %}
+            </div>
         </div>
-        <p>Smart Life</p>
-      </div> -->
+    </section>
 
-      <div class="icon-title-container">
-        <div>
-          <a href="shop"><object data="{% static 'doobarashop/upload/images/icon/iot.svg' %}"></object></a>
+
+    <!-- HERO -->
+    <section id="systems" class="systems">
+        <div class="systems__inner systems__inner--wide">
+            <h2 class="catherotitle">Smart Solutions for every day problems!!</h2>
+            <div class="systems__grid">
+                {% for card in cards %}
+                    {% if card.categorie == "categoriehero" %}
+                    <!-- Power Control System card -->
+                    <article class="system-card {{card.classname}}">
+                        <div class="system-card__media"> 
+                            <img class="system-card__img"
+                                src="{{card.image}}"
+                                alt="Power system devices"
+                                width="640"
+                                height="640"
+                                loading="lazy">
+                        </div>
+                        <h3 class="system-card__desc">{{card.title}}</h3>
+                        <p class="system-card__desc">{{card.description}}</p>
+                        <div class="system-card__price">Starting From <strong>${{card.price|floatformat:2}}</strong></div>
+                        <a class="btns" href="{{card.link}}">{{card.buton_text}} →</a>
+                    </article>
+                    {% endif %}
+                {% endfor %}
+                
+
+            </div>
         </div>
-        <p>All</p>
-      </div>
+    </section>
 
-      <div class="icon-title-container">
-        <div></object>
-          <a href="shop/Infrared"><object data="{% static 'doobarashop/upload/images/icon/ir.svg' %}"></object></a>
-        </div>
-        <p>Infrared</p>
-      </div>
-
-      <div class="icon-title-container">
-        <div>
-          <a href="shop/Security"><object data="{% static 'doobarashop/upload/images/icon/security.svg' %}"></object></a>
-        </div>
-        <p>Security</p>
-      </div>
-
-      <div class="icon-title-container">
-        <div>
-          <a href="shop/Cameras"><object data="{% static 'doobarashop/upload/images/icon/cctv.svg' %}"></object></a>
-        </div>
-        <p>Cameras</p>
-      </div>
-
-      <!-- <div class="icon-title-container">
-        <div>
-          <a href="shop/Broadlink"><object data="{% static 'doobarashop/upload/images/icon/ihcbigger.svg' %}"></object></a>
-        </div>
-        <p>Broadlink</p>
-      </div> -->
-
-      <div class="icon-title-container">
-        <div>
-          <a href="shop/Sensors"><object data="{% static 'doobarashop/upload/images/icon/sensor2.svg' %}"></object></a>
-        </div>
-        <p>Sensors</p>
-      </div>
-
-      <div class="icon-title-container">
-        <div>
-          <a href="shop/Light"><object data="{% static 'doobarashop/upload/images/icon/light.svg' %}"></object></a>
-        </div>
-        <p>Light</p>
-      </div>
-
-      <div class="icon-title-container">
-        <div>
-          <a href="shop/Plug"><object data="{% static 'doobarashop/upload/images/icon/plug.svg' %}"></object></a>
-        </div>
-        <p>Plugs</p>
-      </div>
-
-      <div class="icon-title-container">
-        <div>
-          <a href="shop/Bundle"><object data="{% static 'doobarashop/upload/images/icon/ir.svg' %}"></object></a>
-        </div>
-        <p>Bundle</p>
-      </div>
-
-    </div>
-
-    <!-- featured-products PRODUCTS CARD -->
-
-    <div class="product-card-container">
-      {% for i in lop %}
-        <a href="single_product/{{i.pname}}" class="product-card">
-          <img class="card-img" src="{% static i.pmainimage.iurl %}">
-          <div class="card-info"><p >{{i.pname}}</p></div>
-          <!-- <div class="card-price"><p>$ 42.00</p></div> -->
-        </a>
-      {% endfor %}
-    </div>
-
-    <!-- featured-products products ads  -->
-    <div class="ad-container">
     
-      <div class="single-add-home">
-        <img class="card-img" src="{% static 'doobarashop/upload/images/bundel1.jpg' %}">
-      </div>
+    <div class="carousel-container">
+        <h2>Most Popular!!</h2>
+        <div class="product-card-container">
+        {% for product in lop %}
+            <div class="product-card">
+            <a href="{{ product.url }}">
+                {% if product.main_image %}
+                    <img src="{{ product.main_image.url }}"
+                         alt="{{ product.main_image.alt_text }}"
+                         width="400"
+                         height="400"
+                         loading="lazy">
+                {% else %}
+                    <span class="product-card__no-image" aria-label="{{ product.title }} image unavailable"></span>
+                {% endif %}
+                <div class="card-info">
+                <!-- <p class="card-product-name">{{product.pname}}</p> -->
+                <p class="card-product-price">$ {{ product.price }}</p>
+                </div>
+            </a>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
 
-      <div class="single-add-home">
-        <img class="card-img" src="{% static 'doobarashop/upload/images/bundel1.jpg' %}">
-      </div>
+    {% cache 1800 "homepage_marketing_why_choose" using="template_fragments" %}
+    {# Safe to cache: static trust/review marketing content without cart/account/session data. #}
+        <!-- Why Choose Us -->
+        <section class="why-doobara">
+            <div class="container why-doobara__wrap">
 
-        <div class="single-add-home">
-        <img class="card-img" src="{% static 'doobarashop/upload/images/bundle2.jpg' %}">
-      </div>
-      
-      <div class="single-add-home">
-        <img class="card-img" src="{% static 'doobarashop/upload/images/bundle2.jpg' %}">
-      </div>
-    </div> 
-  </div>
+                <!-- Left side -->
+                <div class="why-doobara__content">
+                    <span class="why-doobara__eyebrow">Why Choose Doobara</span>
+                    <h2>Smart living, without the usual complexity.</h2>
+                    <p class="why-doobara__intro">
+                        At Doobara, we focus on smart devices and systems that are actually useful,
+                        easy to use, and designed to fit modern homes. No gimmicks. Just practical
+                        automation, better comfort, and more control over your space.
+                    </p>
 
+                    <div class="why-doobara__grid">
+                        <article class="why-card">
+                            <div class="why-card__icon">⚙️</div>
+                            <div>
+                                <h3>Practical solutions</h3>
+                                <p>Products selected to solve real day-to-day needs, not just look smart on paper.</p>
+                            </div>
+                        </article>
+
+                        <article class="why-card">
+                            <div class="why-card__icon">📱</div>
+                            <div>
+                                <h3>Easy control</h3>
+                                <p>Manage your devices with simple app control, automation, and remote access.</p>
+                            </div>
+                        </article>
+
+                        <article class="why-card">
+                            <div class="why-card__icon">🎨</div>
+                            <div>
+                                <h3>Modern design</h3>
+                                <p>Smart products that blend into your home instead of making it look like a server room.</p>
+                            </div>
+                        </article>
+
+                        <article class="why-card">
+                            <div class="why-card__icon">🤝</div>
+                            <div>
+                                <h3>Local support</h3>
+                                <p>Guidance, product recommendations, and support tailored for customers in Lebanon.</p>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+
+                <!-- Right side review -->
+                <aside class="review-card">
+                    <div class="singlereview">
+                        <div class="review-card__stars">★★★★★</div>
+                        <p class="review-card__text">
+                            “
+                                قمة الاخلاق في التواصل مع الزبائن
+                                جودة في المعاملة و الدقة في الجودة و البضاعة
+                                سعر بمتناول الجميع
+                                والاهمة شي تواصل من بعد الخدمة و المساعدة باي وقت و باي تفاصيل.  شكرا عالفيديو يلي بتعملن لانو اكثر شي كمان بفدونا”
+                        </p>
+
+                        <div class="review-card__author">
+                            <div class="review-card__avatar">M</div>
+                            <div>
+                                <strong>Mohammad S.</strong>
+                                <span>Verified customer</span>
+                            </div>
+                        </div> 
+                    </div>
+
+                    <div class="singlereview">
+                        <div class="review-card__stars">★★★★★</div>
+                        <p class="review-card__text">
+                            “Happy from my purchase of the smart pet feeder and the Tapiu camera ,very easy to use .
+                            And great thanks for the fast delivery.
+                                Recommend highly this store 💯”
+                        </p>
+
+                        <div class="review-card__author">
+                            <div class="review-card__avatar">N</div>
+                            <div>
+                                <strong>Nawal C.</strong>
+                                <span>Verified customer</span>
+                            </div>
+                        </div> 
+                    </div>
+
+                    <div class="singlereview">
+                        <div class="review-card__stars">★★★★★</div>
+                        <p class="review-card__text">
+                            “Excellent products for home automation and security with great support from Doobara 👍
+    ”
+                        </p>
+
+                        <div class="review-card__author">
+                            <div class="review-card__avatar">R</div>
+                            <div>
+                                <strong>Ramzi T.</strong>
+                                <span>Verified customer</span>
+                            </div>
+                        </div> 
+                    </div>
+
+                
+                </aside>
+                    
+
+            </div>
+        </section>
+    {% endcache %}
+
+      <div class="carousel-container">
+        <h2>Desk Lamps!!</h2>
+        <div class="product-card-container">
+        {% for product in slols %}
+            <div class="product-card">
+            <a href="{{ product.url }}">
+                {% if product.main_image %}
+                    <img src="{{ product.main_image.url }}"
+                         alt="{{ product.main_image.alt_text }}"
+                         width="400"
+                         height="400"
+                         loading="lazy">
+                {% else %}
+                    <span class="product-card__no-image" aria-label="{{ product.title }} image unavailable"></span>
+                {% endif %}
+                <div class="card-info">
+                <!-- <p class="card-product-name">{{product.pname}}</p> -->
+                <p class="card-product-price">$ {{ product.price }}</p>
+                </div>
+            </a>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+
+      <div class="carousel-container">
+        <h2>On SALE!!</h2>
+        <div class="product-card-container">
+        {% for product in sloz %}
+            <div class="product-card">
+            <a href="{{ product.url }}">
+                {% if product.main_image %}
+                    <img src="{{ product.main_image.url }}"
+                         alt="{{ product.main_image.alt_text }}"
+                         width="400"
+                         height="400"
+                         loading="lazy">
+                {% else %}
+                    <span class="product-card__no-image" aria-label="{{ product.title }} image unavailable"></span>
+                {% endif %}
+                <div class="card-info">
+                <!-- <p class="card-product-name">{{product.pname}}</p> -->
+                <p class="card-product-price">$ {{ product.price }}</p>
+                </div>
+            </a>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+  
+</div>
 
 {%endblock%}

@@ -1,143 +1,194 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="eng">
-    <head>
-        <!-- MOBILE RESPONSIVILITY -->
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% load static cache %}<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>{% block title %}Doobara | Smart Home Products & Automation{% endblock %}</title>
+    <meta name="description" content="{% block meta_description %}Discover Doobara smart home products, practical automation systems, and reliable support for modern living in Lebanon.{% endblock %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {# NEW: Canonical URL remains overrideable via view context for SEO and sharing consistency. #}
+    {% if canonical_url %}
+    <link rel="canonical" href="{{ canonical_url }}">
+    {% endif %}
+    {# NEW: Open Graph defaults with dedicated blocks so child templates can override per page. #}
+    <meta property="og:title" content="{% block og_title %}{% block social_title %}Doobara | Smart Home Products & Automation{% endblock %}{% endblock %}">
+    <meta property="og:type" content="{% block og_type %}website{% endblock %}">
+    <meta property="og:url" content="{% block og_url %}{% if canonical_url %}{{ canonical_url }}{% else %}{{ request.build_absolute_uri }}{% endif %}{% endblock %}">
+    <meta property="og:image" content="{% block og_image %}{{ request.scheme }}://{{ request.get_host }}{% static 'doobarashop/upload/images/logo-creation.png' %}{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}{% block social_description %}Discover Doobara smart home products, practical automation systems, and reliable support for modern living in Lebanon.{% endblock %}{% endblock %}">
+    <meta property="og:site_name" content="{% block og_site_name %}Doobara{% endblock %}">
+    {# NEW: Twitter/X card tags mirror social defaults for consistent previews across platforms. #}
+    <meta name="twitter:card" content="{% block twitter_card %}summary_large_image{% endblock %}">
+    <meta name="twitter:title" content="{% block twitter_title %}{% block social_title_twitter %}Doobara | Smart Home Products & Automation{% endblock %}{% endblock %}">
+    <meta name="twitter:description" content="{% block twitter_description %}{% block social_description_twitter %}Discover Doobara smart home products, practical automation systems, and reliable support for modern living in Lebanon.{% endblock %}{% endblock %}">
+    <meta name="twitter:image" content="{% block twitter_image %}{{ request.scheme }}://{{ request.get_host }}{% static 'doobarashop/upload/images/logo-creation.png' %}{% endblock %}">
+    {% if GOOGLE_SITE_VERIFICATION %}
+    <meta name="google-site-verification" content="{{ GOOGLE_SITE_VERIFICATION }}">
+    {% endif %}
+    {% if GOOGLE_ANALYTICS_ID %}
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ GOOGLE_ANALYTICS_ID }}"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', '{{ GOOGLE_ANALYTICS_ID }}');
+    </script>
+    {% endif %}
+    {% if META_PIXEL_ID %}
+    {# Meta Pixel: base code + PageView (global) #}
+    <script>
+      !function(f,b,e,v,n,t,s)
+      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)}(window, document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', '{{ META_PIXEL_ID|escapejs }}');
+      fbq('track', 'PageView');
+    </script>
+    {% endif %}
+      <!-- CSS and JS -->
+      <link href="{% static 'doobarashop/style.css' %}" rel="stylesheet">
+      <script type="module" src="{% static 'doobarashop/js/bootstrap.js' %}"></script>
 
-        <link href="{% static 'doobarashop/style.css' %}" rel="stylesheet">
-        <script src="{% static 'doobarashop/main.js'%}"></script>
+      <!-- Font awesome -->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
-        <!-- Font awesome -->
-        <link href="{% static 'doobarashop/all.css' %}" rel="stylesheet">
-        <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
+      <link href="{% static 'doobarashop/all.css' %}" rel="stylesheet">
+      <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
 
-        <!-- Page TITLE -->
-        <title>{% block pagetitle %}{%endblock%}</title>
-    </head>
-    <body>
-        <div class="layout-grid-container">
-            
-            <!-- PHONE AND PAYMENT ON DELIVERY left section of top bar -->
-            <div class="header-top-bar-left">
-                <ul>
-                    <li class="phone-number"><a href="tel:96170856471"><i class="icons fas fa-phone-alt"></i> 70-856 471</a></li>
-                    <li><i class="icons fas fa-dollar-sign"></i> Cash on delivery</li>
-                </ul>
-            </div>
-            <!-- SOCIAL MEDIA ICONS right top bar section contain link -->
-            <div class="header-top-bar-right">
-                <a href="https://www.facebook.com/doobarashop" target="_blank"><i class="social-media-nav fab fa-facebook-f fa-2x"></i></a>
-                <a href="https://www.instagram.com/doobarashop/" target="_blank"><i class="social-media-nav fab fa-instagram fa-2x"></i></a>
-                <a href="https://www.youtube.com/gadgetsfreak" target="_blank"><i class="social-media-nav fab fa-youtube fa-2x"></i></a>
-            </div>
-    
-            <!-- LOGO first top left section in navigation contain logo with home link -->
-            <div id="logo-nav">
-                <a href="/"> 
-                    <img src="{% static 'doobarashop/upload/images/home-automaion-doobara-logo.png' %}" alt="home automation doobara">
-                </a>
-            </div>
+      <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+  </head>
 
-            <!-- MOBILE MENU HUMBERGER --> 
-            <div id ="mobile-menu-btn" >
-                <button class="humberger" id="btnm">
-                    <span>
-                        <i class="menu-btn fas fa-bars"></i>
-                    </span>
-                    <span>
-                        <p>Menu</p>
-                    </span>  
-                </button>
-            </div>
-
-            <!-- SEARCH BOX second right top section of navigation bar contain search box  -->
-            <div id="search-box-nav" >   
-                <form action="{% url 'search' %}" method="POST" class="search-site">
-                    <!-- text input for search  -->
-                    {% csrf_token %}
-                    <input name="keyword" class="search-input" type="text" placeholder="Search Products">
-                    <!-- button icon for search submit -->
-                    <button type="submit"><i class="fa fa-search"></i></button>
-                </form>       
-            </div>
+  <body>
+    {% if META_PIXEL_ID %}
+    {# Meta Pixel: noscript fallback #}
+    <noscript>
+      <img height="1" width="1" style="display:none"
+           src="https://www.facebook.com/tr?id={{ META_PIXEL_ID|urlencode }}&ev=PageView&noscript=1" alt="">
+    </noscript>
+    {% endif %}
+    <div class="page">
+      <!-- Header / Navigation -->
+      <header>
         
-            <!-- MENU LINK ICON BAR 3d left buttom section of navigatio bar contain navigation menu links -->
-            <div id="navigation-menu">
-                <a href="/shop"><i class="icons fas fa-store"></i>Shop</a>
-                <!-- <a href="/blog"><i class="icons fab fa-blogger-b"></i>Blog</a> -->
-                <a href="/video"><i class="icons fab fa-youtube"></i>Video</a>
-                <a href="/contactus"><i class="icons fas fa-inbox"></i>Contact Us</a>
-                {% if user.is_authenticated %}
-                <a href="/myaccount"><i class="icons fas fa-user"></i>My Account</a>
-                {%else%}
-                <a href="/accounts/login"><i class="icons fas fa-user"></i>Create Account</a>
-                {% endif%}
-            </div>
-            
-            <!-- CART final right buttom section of navigation bar contain cart and totla url -->
-            <div id="cart-nav">
-                <p class="homeTotal">$ <span class="homeTotal" id="carttotal">{{total}}</span></p>
-                <a href="/cart" class="cartUrl"><span id="cartitemsqtt">{{item}}</span> Items
-                    <i class="icons fas fa-shopping-cart fa-2x"></i></a>
-            </div>
+        <!-- Mobile menu button -->
+        <div class="nav">
+          <!-- MOBILE MENU HUMBERGER --> 
+          <div id="mobile-menu-btn">
+            <i class="menu-btn fas fa-bars"></i>
+            <p>Menu</p>
+          </div>
 
-            <!-- MOBILE MENU LINKS ICON (Normaly hidden) -->
-            <div id="navigation-mobile"> 
-                <ul>
-                    <li><a href="/shop"><i class="icons fas fa-store"></i><span class="navigationMenuName"> Shop</span></a></li>
-                    <!-- <li><a href="/blog"><i class="icons fab fa-blogger-b"></i><span class="navigationMenuName"> Blog</span></a></li> -->
-                    <li><a href="/video"><i class="icons fab fa-youtube"></i><span class="navigationMenuName"> Video</span></a></li>
-                    <li><a href="/contactus"><i class="icons fas fa-inbox"></i><span class="navigationMenuName"> Contact Us</span></a></li>
-                    {% if user.is_authenticated %}
-                    <li><a href="/myaccount"><i class="icons fas fa-user"></i><span class="navigationMenuName"> My Account</span></a></li>
-                    {%else%}
-                    <li><a href="/accounts/login"><i class="icons fas fa-user"></i><span class="navigationMenuName"> Create Account</span></a></li>
-                    {% endif%}
-                </ul>
-            </div>
+          <!-- Logo -->
+          <div class="nav-logo">
+            <a href="/"> 
+              <img src="{% static 'doobarashop/upload/images/logo-creation.png' %}"
+                   alt="home automation doobara"
+                   loading="eager">
+            </a>
+          </div>
 
-    
-            <!-- PAGE BODY CONTENT SECTION  -->
-            <div class="page-content">
-                {% block body %} {%endblock%}   
-            </div>
+          <!-- desktop nav -->
+          <nav class="nav-links" aria-label="main navigation">
+            <a href="/shop">Shop</a>
+              <!-- <a href="/blog">Blog</a> -->
+              <a href="/video">Video</a>
+              <a href="/contactus">Contact Us</a>
+          </nav>
+          
+          <div class="nav-right">
+            <a href="https://wa.me/96170856471" 
+              target="_blank" 
+              class="whatsapp-btn">
+                WhatsApp
+            </a>
+          </div>
 
-         
-            <!-- MOBILE FOOTER MENU -->
-            <div id="mobile-footer-menu">
-                <div class="searchproductmobile" id="popsearch">
-                    <form action="{% url 'search' %}" method="POST" class="search-site">
-                        <!-- text input for search  -->
-                        {% csrf_token %}
-                        <input name="keyword" class="search-input" type="text" placeholder="Search Products">
-                        <!-- button icon for search submit -->
-                        <button type="submit"><i class="fa fa-search"></i></button>
-                    </form>
-                </div>  
-                <div class="footer-navigation">
-                    <a href="/"><i class="icons fas fa-home fa-3x"></i></a>
-                    <a href="/shop"><i class="icons fas fa-store fa-3x"></i></a>
-                    {% if user.is_authenticated %}
-                    <a href="/myaccount"><i class="icons fas fa-user fa-3x"></i></a>
-                    {%else%}
-                    <a href="/accounts/login"><i class="icons fas fa-user fa-3x"></i></a>
-                    {% endif%}
-                    <div class="search_icon_footer_menu" id="search_icon"><i class="icons fas fa-search fa-3x"></i></div>
-                    <a href="/cart"><i class="icons fas fa-shopping-cart fa-3x"></i><p id="footeritemqtt">{{item}}</p></a>
-                </div>
+          <!-- account link -->
+          <div class="nav-actions">
+            <div class="nav-account">
+              <div class="nav-account-icon" aria-hidden="true"></div>
+              {% if user.is_authenticated %}
+              <a href="/myaccount">My Account</a>
+              {%else%}
+              <a href="/accounts/login">Create Account</a>
+              {% endif%}
             </div>
-
-            <!-- ALL PAGES FOOTER -->
-            <div class="footter-wrapper">
-                <div class="push">
-                </div>               
+            <!-- cart icon -->
+            <div class="nav-cart" aria-label="Cart">
+              <a href="/cart" class="cartUrl"> 🛒 </a>
+              <span id="cartitemsqtt" class="nav-cart-count">{{item}}</span>
+              <span id="carttotal" class="carttotal">$ {{total|floatformat:2}}</span>
             </div>
-            
-            <div class="footer">
-            
-            </div>  
-        </div>    
-    </body>
+          </div>
+        </div>
 
+        <!-- MOBILE MENU LINKS ICON (Normaly hidden) -->
+        <div id="navigation-mobile"> 
+          <ul>
+            <li><a href="/shop"><i class="icons fas fa-store"></i><span class="navigationMenuName"> Shop</span></a></li>
+            <!-- <li><a href="/blog"><i class="icons fab fa-blogger-b"></i><span class="navigationMenuName"> Blog</span></a></li> -->
+            <li><a href="/video"><i class="icons fab fa-youtube"></i><span class="navigationMenuName"> Video</span></a></li>
+            <li><a href="/contactus"><i class="icons fas fa-inbox"></i><span class="navigationMenuName"> Contact Us</span></a></li>
+            {% if user.is_authenticated %}
+            <li><a href="/myaccount"><i class="icons fas fa-user"></i><span class="navigationMenuName"> My Account</span></a></li>
+            {%else%}
+            <li><a href="/accounts/login"><i class="icons fas fa-user"></i><span class="navigationMenuName"> Create Account</span></a></li>
+            {% endif%}
+          </ul>
+        </div>
+      </header>
+
+      {% block body %} {%endblock%}   
+
+      <!-- Footer -->
+      <footer>
+        <div class="searchproductmobile" id="popsearch">
+          <form action="{% url 'search' %}" method="POST" class="search-site">
+            {% csrf_token %}
+            <input name="keyword" class="search-input" type="text" placeholder="Search Products">
+            <button type="submit"><i class="fa fa-search"></i></button>
+          </form>
+        </div>
+
+        <div class="footer-inner">
+          {% cache 3600 "footer_public_links" using="template_fragments" %}
+          {# Safe to cache: only public footer links/social items, no user/session/cart state. #}
+          <span>© <span id="year"></span> Doobra. All rights reserved.</span>
+
+          <a href="tel:+96170856471">+961 70 856 471</a>
+
+          <a href="https://instagram.com/doobarashop" target="_blank" aria-label="Instagram">
+            <i class="fa-brands fa-instagram"></i>
+          </a>
+
+          <a href="https://tiktok.com/@doobarasmart" target="_blank" aria-label="TikTok">
+              <i class="fa-brands fa-tiktok"></i>
+          </a>
+
+          <a href="https://youtube.com/@doobarasmart" target="_blank" aria-label="YouTube">
+              <i class="fa-brands fa-youtube"></i>
+          </a>
+
+          <a href="/">Home</a>
+          <a href="/shop">Shop</a>
+          {% endcache %}
+          {% if user.is_authenticated %}
+          <a href="/myaccount">Account</a>
+          {%else%}
+          <a href="/accounts/login">New Account</a>
+          {% endif%}
+          <div class="search_icon_footer_menu" id="search_icon"></div>
+          <a href="/cart"><p id="footeritemqtt">Cart</p></a>
+        </div>
+      </footer>
+    </div>
+
+    <script>
+      // just to keep the year auto-updated
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+  </body>
 </html>

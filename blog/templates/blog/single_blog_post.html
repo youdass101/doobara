@@ -1,23 +1,24 @@
 {% extends "doobarashop/layout.html" %}
-{% load static %}
+{% load static cache %}
 
-{% block pagetitle %}
-Product Name
-{% endblock %}
+{% block title %}Home Automation Definition and Introduction | Doobara Blog{% endblock %}
+{% block meta_description %}Learn what home automation means, how it works, and why practical smart systems can improve comfort, control, and daily routines.{% endblock %}
 {% block body %}
-<div class="blog-post-container">
-    <div class="blog-title-container">
-        <h1>Home Automation Definition And Introduction</h1>
-    </div>
+{% cache 1800 "single_blog_post" using="template_fragments" %}
+    <div class="blog-post-container">
+        <div class="blog-title-container">
+            <h1>Home Automation Definition And Introduction</h1>
+        </div>
 
-    <div class="blog-featured-image">
-        <img src="{% static 'doobarashop/upload/images/blog.jpg' %}">
-    </div>
+        <div class="blog-featured-image">
+            <img src="{% static 'doobarashop/upload/images/herokit.jpg' %}" alt="Home automation blog cover" width="1200" height="800" loading="eager" fetchpriority="high">
+        </div>
 
-    <div class="post-body-content">
-        Here will be a customized html css style for each single post, until I layout a general template 
-        base on behavior
-    </div>
+        <div class="post-body-content">
+            Here will be a customized html css style for each single post, until I layout a general template 
+            base on behavior
+        </div>
 
-</div>
+    </div>
+{% endcache %}
 {% endblock %}

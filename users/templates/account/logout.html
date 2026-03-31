@@ -3,25 +3,35 @@
 {% load i18n %}
 {% load account %}
 
-
 {% block head_title %}{% trans "Sign Out" %}{% endblock %}
 
 {% block content %}
-<!-- logged  in user name snippet-->
-{% include 'account/snippets/already_logged_in.html' %}
+<section class="logout-page">
+    <div class="logout-shell">
 
-<div id="logout-container">
-<h1>{% trans "Sign Out" %}</h1>
+        {% include 'account/snippets/already_logged_in.html' %}
 
-<p>{% trans 'Are you sure you want to sign out?' %}</p>
+        <div class="logout-card">
+            <div class="logout-header">
+                <span class="logout-eyebrow">Account</span>
+                <h1>{% trans "Sign Out" %}</h1>
+                <p>{% trans 'Are you sure you want to sign out?' %}</p>
+            </div>
 
-<form method="post" action="{% url 'account_logout' %}">
-  {% csrf_token %}
-  {% if redirect_field_value %}
-  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
-  {% endif %}
-  <button type="submit">{% trans 'Sign Out' %}</button>
-</form>
-</div>
+            <form method="post" action="{% url 'account_logout' %}" class="logout-form">
+                {% csrf_token %}
+                {% if redirect_field_value %}
+                    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+                {% endif %}
 
+                <div class="logout-actions">
+                    <button type="submit" class="logout-btn logout-btn--danger">
+                        {% trans 'Sign Out' %}
+                    </button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</section>
 {% endblock %}

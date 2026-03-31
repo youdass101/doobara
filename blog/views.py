@@ -1,18 +1,15 @@
 from django.shortcuts import render
-import objgraph
+from .models import *
 
 # Create your views here.
 def blog(request):
-    objgraph.show_growth()
-
     return render(request, "blog/blog.html")
 
 def video(request):
-    objgraph.show_growth()
+    video = Video.objects.all()
+    video = [v.serialize() for v in video]
 
-    return render(request, "blog/video.html")
+    return render(request, "blog/video.html",{"video": video})
 
 def single_blog_post(request):
-    objgraph.show_growth()
-
     return render(request, "blog/single_blog_post.html")

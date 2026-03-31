@@ -1,2 +1,2 @@
-@import 'pages/cart';  //all authentication pages
-@import 'pages/checkout';  //all authentication pages
+@forward 'pages/cart';  //all authentication pages
+@forward 'pages/checkout';  //all authentication pages

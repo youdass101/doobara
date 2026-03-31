@@ -1,59 +1,113 @@
+@use '../../../static/doobarashop/sass/abstracts/all' as var;
+
 // FEATURED PRODUCT CARDS BANNER 
-
-    // Featured product elemet
-    .product-card-container {
-        grid-area: fp;
-        padding-left: 1%;
-        @include var.flex-default;
-        flex-wrap: wrap;
+.carousel-container {
+    // background-color: white;
+    padding: 2rem;
+    width: 90%;
+    margin-top: 1rem;
+    border-radius: 9px; 
+    margin-right: 5%;
+    margin-left: 5%;
+    
+    h2 {
         
-        .product-card:hover {
-            @include var.hover-forth;
-            .card-info {
-                @include var.hover-forth;
-            }      
-        }
+        font-size: 2rem;
+        text-align: center;
+        margin-bottom: 2rem;
+    }
 
-        // each Product in parent product element 
+    .product-card-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Responsive grid */
+        gap: 2rem; /* Add spacing between cards */
+
         .product-card {
-            flex: 15% !important;
-            -webkit-flex: 15%;
-            width: 15%;
-            @include var.flex-default;
-            justify-content: space-around;
-            align-content: space-between;
-            flex-direction: column;
-            background-color: var.$identity-color;
-            color: var.$back-color;
-            box-shadow: 1px 1px 4px 5px rgba(0, 0, 0, 0.5 );
-            text-decoration: none;
+            position: relative; /* Make this the positioning context for the pseudo-element */
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.4s ease;
 
-            // p element child of product-card
-            p { 
-                margin: 0px 0px 15px 0px;
-                padding: 5% 1% 0 1%;
-                text-align: center;
-                line-height: 130%; 
-                @include var.nav-title;
-            } 
-         
-            // Product-card information 
-            .card-info {
-                background-color: var.$identity-color;
-                margin: 0;  
-                height: 25%;              
+            &:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 6px 20px rgba(239, 200, 5, 0.3);
+            }
+
+            a {
+                text-decoration: none;
+                color: inherit;
+
+                img {
+                    width: 100%;
+                    height: 200px;
+                    object-fit:cover;
+                }
+
+                .card-info {
+                    padding: 1rem;
+                    text-align: center;
+
+                    .card-product-name {
+                        font-size: 1.2rem;
+                        font-weight: 600;
+                        margin-bottom: 0.5rem;
+                    }
+
+                    .card-product-price {
+                        font-size: 1.5rem;
+                        font-family: 'Dancing Script', cursive;
+                        font-weight: 700;
+                        color: black;
+                    }
+                }
             }
         }
     }
-
-@media screen and (max-width: 1206px) {
-    .product-card-container {
-        padding-left: 0;
-    }   
 }
 
-@media screen and (max-width: 760px) {
-    .product-card-container {
-        display: none;
+
+@media screen and (max-width: 1200px) {
+    .carousel-container {
+        .product-card-container {
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .carousel-container {
+        h2 {
+            font-size: 1.5rem;
+        }
+
+        .product-card-container {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            gap: 1rem; /* Adjust spacing between cards */
+            padding: 1rem; /* Add padding for better spacing */
+
+            .product-card {
+                flex: 0 0 auto; /* Prevent shrinking and set width */
+                scroll-snap-align: start; /* Ensure cards snap into view */
+                width: 80%; /* Adjust width for better visibility */
+            }
+        }
+    }
+}
+
+.product-card {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }

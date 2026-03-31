@@ -1,125 +1,302 @@
 {% extends "doobarashop/layout.html" %}
 {% load static %}
 
-{% block pagetitle %}
-Product Name
-{% endblock %}
+{% block title %}{{ product.title }} | Doobara{% endblock %}
+{% block meta_description %}{% if product.pshortdescription and product.pshortdescription.0 %}{{ product.pshortdescription.0|striptags|truncatechars:155 }}{% else %}Buy {{ product.title }} from Doobara with practical smart-home-focused support and fast local delivery options.{% endif %}{% endblock %}
+{# NEW: Product pages override social metadata blocks so previews use real product data. #}
+{% block og_type %}product{% endblock %}
+{% block og_title %}{{ social_title|default:product.title }}{% endblock %}
+{% block og_description %}{{ social_description|default:product.title }}{% endblock %}
+{% block og_url %}{{ social_url|default:canonical_url }}{% endblock %}
+{% block og_image %}{% if social_image %}{{ social_image }}{% else %}{{ request.scheme }}://{{ request.get_host }}{% static 'doobarashop/upload/images/logo-creation.png' %}{% endif %}{% endblock %}
+{% block twitter_title %}{{ social_title|default:product.title }}{% endblock %}
+{% block twitter_description %}{{ social_description|default:product.title }}{% endblock %}
+{% block twitter_image %}{% if social_image %}{{ social_image }}{% else %}{{ request.scheme }}://{{ request.get_host }}{% static 'doobarashop/upload/images/logo-creation.png' %}{% endif %}{% endblock %}
+
 {% block body %}
-<!-- SINGLE PRODUCT PAGE ELEMENT CONTAINER -->
-<div class="single-product-page-container">
-
-    <!-- PRODUCT NAME TITLE -->
-    <h3 class="single-product-title">{{product.pname}}</h3>
-
-    <!-- PRODUCT IMAGE SLIDER -->
-    <div class="single-product-image">
-         <div class="spmainimae">
-            <img id="spi" width="400" height="400" src="{% static product.pmainimage.iurl %}">
-        </div>
-    
-        <!-- Images thumbnails -->
-        <div class="single-product-image-thumb">
-            {% for image in product.pallimages %}
-                {% if  image.ilong == False %}
-                    <!-- PRODUCT IMAGE IN THUMBNAIL SIZE TO USE IN IMAGE -->
-                    <img width="70" height="70" class="sp-thumb-image" src="{% static image.iurl %}">
-                {% endif %}
-            {% endfor %}
-        </div>
-    </div>
-
-    <div class="product-highlight">
-        <!-- PRODUCT PRICE -->
-        <h3 id="spp" class="single-product-price">$ {{product.pprice}} </h3>
-        
-        <!-- PRODUCT VARIANTS IF EXIST loop over and add the variants to select element -->
-        <div class="single-product-variant">
-            {% if product.pvariant %}           
-                <select name="variant" id="variants">
-                    {% for var in product.pvariant %}
-                        {% if var.default %}
-                            <option selected="selected" class="svoption" value="{{var}}">{{var.title}}
-                            </option>
-                            
-                        {% else %}
-                            <option class="svoption" value="{{var}}">{{var.title}}
-                            </option>
-                            
-
-                        {% endif %}
-                        
-                    {% endfor %}
-                </select>        
-            {% endif %}
-        </div>
-
-
-        <!-- PRODUCT QUANTITY TO ADD TO CART (DEFAULT !) -->
-        <input id="spq" class="single-product-quantity" type="number" value="1" min="0">
-
-        <!-- ADD TO CART BUTTON -->
-        <button id="spatc" class="single-product-addtocart shop-add-to-cart" value="{{product.pid}}">Add to cart</button>
-
-        <!-- PRODUCT SHORT SPESIFICATION (MAINLY LIST) -->
-        <div class="single-product-specs">
-            <h3>Specification</h3>
-            {{product.pshortdescription|safe}}
-        </div>
-    </div>
-
-    <!-- PRODUCT VIDEO (DISPLAY NONE IF THERE IS NO VIDEO) -->
-    {% if product.pvideo %}
-        <div class="single-product-video">
-                <div class="single-video">
-                        <iframe 
-                        src={{product.pvideo}} 
-                        title="YouTube video player" frameborder="0" 
-                        allowfullscreen>
-                    </iframe>
+<section class="single-product-page">
+    <div class="single-product-shell">
+        {% if product.system and system_variants %}
+            <div class="single-product-top">
+                <div class="single-product-gallery">
+                    <div class="single-product-gallery__main">
+                        <img id="system-variant-main-image"
+                             src="{% if default_system_variant.thumbnail %}{{ default_system_variant.thumbnail }}{% elif product.main_image %}{{ product.main_image.url }}{% endif %}"
+                             alt="{{ default_system_variant.title|default:product.title }}"
+                             width="1000"
+                             height="1000"
+                             loading="eager"
+                             fetchpriority="high">
+                    </div>
+                    <div id="system-variant-gallery" class="single-product-gallery__thumbs"></div>
                 </div>
-        </div>
-    {% endif %}
 
-    <!-- LONG IMAGE TO DESCRIBE THE PRODUCT VISUALLY -->
-    {% for image in product.pallimages %}
-        {% if image.ilong %}
-            <img class="single-product-image-long" src="{% static image.iurl %}">
+                <div class="single-product-info">
+                    <span class="single-product-info__eyebrow">Doobara System</span>
+                    <h1 class="single-product-title">{{ product.title }}</h1>
+
+                    <div class="system-variant-selector" id="system-variant-selector">
+                        {% for variant in system_variants %}
+                            <button
+                                type="button"
+                                class="system-variant-option {% if default_system_variant.id == variant.id %}is-active{% endif %}"
+                                data-variant-id="{{ variant.id }}">
+                                <span class="system-variant-option__tier">{{ variant.tier|title }}</span>
+                                <span class="system-variant-option__price">
+                                    $ {% if variant.sale_price %}{{ variant.sale_price|floatformat:2 }}{% else %}{{ variant.price|floatformat:2 }}{% endif %}
+                                </span>
+                            </button>
+                        {% endfor %}
+                    </div>
+
+                    <div class="single-product-price-row">
+                        <div class="single-product-price-wrap">
+                            <span class="single-product-price-label">Selected Variant</span>
+                            <h2 id="system-variant-title" class="single-product-price">{{ default_system_variant.title }}</h2>
+                            {# NEW: Render pre-split system variant short description as bullet list items. #}
+                            <ul id="system-variant-short-description" class="single-product-spec-list">
+                                {% for line in default_system_variant.short_description_lines %}
+                                    <li>{{ line }}</li>
+                                {% endfor %}
+                            </ul>
+                            <p id="system-variant-availability" class="single-product-availability {% if default_system_variant.can_purchase %}is-in-stock{% else %}is-out-of-stock{% endif %}">
+                                {{ default_system_variant.availability_label }}
+                            </p>
+                            <h2 id="system-variant-price" class="single-product-price">
+                                $ {% if default_system_variant.sale_price %}{{ default_system_variant.sale_price|floatformat:2 }}{% else %}{{ default_system_variant.price|floatformat:2 }}{% endif %}
+                            </h2>
+                        </div>
+                    </div>
+
+                    <div class="single-product-purchase">
+                        {# GA4 analytics metadata for add_to_cart (system variant path). #}
+                        <button
+                            id="spatc"
+                            class="single-product-addtocart shop-add-to-cart"
+                            data-variant-id="{{ default_system_variant.id }}"
+                            data-ga-item-id="{{ default_system_variant.id }}"
+                            data-ga-item-name="{{ default_system_variant.title|escapejs }}"
+                            data-ga-price="{% if default_system_variant.sale_price %}{{ default_system_variant.sale_price|floatformat:2 }}{% else %}{{ default_system_variant.price|floatformat:2 }}{% endif %}"
+                            data-ga-currency="{{ product.currency|default:'USD' }}"
+                            data-ga-item-category="{% if product.pcategory.0 %}{{ product.pcategory.0.name|escapejs }}{% endif %}"
+                            {% if not default_system_variant.can_purchase %}disabled{% endif %}>
+                            {{ default_system_variant.cart_cta_label|default:"Out of Stock" }}
+                        </button>
+                    </div>
+
+                    <div class="single-product-specs">
+                        <h3>Included items</h3>
+                        <ul id="system-variant-package-items" class="system-variant-package-items"></ul>
+                    </div>
+                </div>
+            </div>
+
+            {{ system_variants|json_script:"variant-data" }}
+            {{ default_system_variant.id|json_script:"default-variant-id" }}
+        {% else %}
+            <div class="single-product-top">
+                <!-- Left: gallery -->
+                <div class="single-product-gallery">
+                    <div class="single-product-gallery__main">
+                        {% if product.main_image %}
+                            <img id="spi"
+                                 src="{{ product.main_image.url }}"
+                                 alt="{{ product.main_image.alt_text }}"
+                                 width="1000"
+                                 height="1000"
+                                 loading="eager"
+                                 fetchpriority="high">
+                        {% else %}
+                            <div class="single-product-gallery__empty" id="spi" aria-label="{{ product.title }} image unavailable"></div>
+                        {% endif %}
+                    </div>
+
+                    <div class="single-product-gallery__thumbs">
+                        {% for image in product.all_images %}
+                                <button type="button" class="single-product-thumb">
+                                    <img class="sp-thumb-image"
+                                         src="{{image.url }}"
+                                         alt="{{ image.alt_text }}"
+                                         width="78"
+                                         height="78"
+                                         loading="lazy">
+                                </button>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <!-- Right: content / buy box -->
+                <div class="single-product-info">
+                    <span class="single-product-info__eyebrow">Doobara Product</span>
+                    <h1 class="single-product-title">{{ product.title }}</h1>
+
+                    <div class="single-product-price-row">
+                        <div class="single-product-price-wrap">
+                            <span class="single-product-price-label">Price</span>
+                            <p class="single-product-availability {% if product.can_purchase %}is-in-stock{% else %}is-out-of-stock{% endif %}">
+                                {{ product.availability_label }}
+                            </p>
+                            <h2 id="spp" class="single-product-price">
+                                $ {% if default_normal_variant and default_normal_variant.sale_price %}{{ default_normal_variant.sale_price|floatformat:2 }}{% elif default_normal_variant %}{{ default_normal_variant.price|floatformat:2 }}{% else %}{{ product.price|floatformat:2 }}{% endif %}
+                            </h2>
+                        </div>
+                    </div>
+
+                    {% if normal_variants %}
+                        <div class="single-product-variant">
+                            <label>Choose Variant</label>
+                            <div class="system-variant-selector" id="normal-variant-selector">
+                                {% for variant in normal_variants %}
+                                    <button
+                                        type="button"
+                                        class="system-variant-option {% if default_normal_variant.id == variant.id %}is-active{% endif %}"
+                                        data-normal-variant-id="{{ variant.id }}">
+                                        <span class="system-variant-option__tier">{{ variant.title }}</span>
+                                        <span class="system-variant-option__price">
+                                            $ {% if variant.sale_price %}{{ variant.sale_price|floatformat:2 }}{% else %}{{ variant.price|floatformat:2 }}{% endif %}
+                                        </span>
+                                    </button>
+                                {% endfor %}
+                            </div>
+                            <p id="normal-variant-short-description" class="single-product-variant-note">
+                                {{ default_normal_variant.short_description|default:"" }}
+                            </p>
+                        </div>
+                    {% endif %}
+
+                    <div class="single-product-purchase">
+                        <div class="single-product-qty-wrap">
+                            <label for="spq">Quantity</label>
+                            <input id="spq" class="single-product-quantity" type="number" value="1" min="1">
+                        </div>
+                        {# GA4 analytics metadata for add_to_cart (standard product path). #}
+                        <button id="spatc"
+                                class="single-product-addtocart shop-add-to-cart"
+                                value="{{ product.pid }}"
+                                {% if default_normal_variant %}data-normal-variant-id="{{ default_normal_variant.id }}"{% endif %}
+                                data-ga-item-id="{{ product.id }}"
+                                data-ga-item-name="{% if default_normal_variant %}{{ default_normal_variant.title|escapejs }}{% else %}{{ product.title|escapejs }}{% endif %}"
+                                data-ga-price="{% if default_normal_variant and default_normal_variant.sale_price %}{{ default_normal_variant.sale_price|floatformat:2 }}{% elif default_normal_variant %}{{ default_normal_variant.price|floatformat:2 }}{% else %}{{ product.price|floatformat:2 }}{% endif %}"
+                                data-ga-currency="{{ product.currency|default:'USD' }}"
+                                data-ga-item-category="{% if product.pcategory.0 %}{{ product.pcategory.0.name|escapejs }}{% endif %}"
+                                {% if not product.can_purchase %}disabled{% endif %}>
+                            {{ product.cart_cta_label|default:"Out of Stock" }}
+                        </button>
+                    </div>
+
+                    <div class="single-product-trust">
+                        <div class="single-product-trust__item">Secure checkout</div>
+                        <div class="single-product-trust__item">Fast local delivery</div>
+                        <div class="single-product-trust__item">Support available</div>
+                    </div>
+
+                    <div class="single-product-specs">
+                        <h3>Specifications</h3>
+                        <div class="single-product-specs__content">
+                            <ul class="single-product-spec-list">
+                                {% for line in product.pshortdescription %}
+                                <li>{{ line }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% if normal_variants %}
+                {{ normal_variants|json_script:"normal-variant-data" }}
+                {{ default_normal_variant.id|json_script:"default-normal-variant-id" }}
+            {% endif %}
         {% endif %}
-    {% endfor %}
 
-    <!-- LONG DESCRITPION ABOUT THE PRODUCT DETAILS -->
-    <div class="single-product-long-desc">
-        <h3>Description</h3>
-        {{product.plongdescription|safe}}
-       
+        {% if product.pvideo %}
+            <div class="single-product-video-card">
+                <div class="single-product-section-head">
+                    <h2>Product Video</h2>
+                </div>
+                <div class="single-video">
+                    <iframe width="560" height="315" src="{{ product.pvideo }}" title="{{ product.title }}" 
+                            frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                            referrerpolicy="strict-origin-when-cross-origin" loading="lazy" allowfullscreen>
+                        </iframe>
+                </div>
+            </div>
+        {% endif %}
+
+        {% for image in product.all_images %}
+            {% if image.ilong %}
+                <div class="single-product-long-image-card">
+                    <img class="single-product-image-long"
+                         src="{% static image.iurl %}"
+                         alt="{{ product.title }}"
+                         loading="lazy">
+                </div>
+            {% endif %}
+        {% endfor %}
+
+        <div class="single-product-details-grid">
+            <div class="single-product-long-desc card-surface">
+                <div class="single-product-section-head">
+                    <h2>Description</h2>
+                </div>
+                <div class="single-product-richtext" id="longdescription">
+                    {# NEW: Keep initial system variant long description consistent with switched state. #}
+                    {% if product.system and default_system_variant %}
+                        {{ default_system_variant.long_description_html|safe }}
+                    {% else %}
+                        {{ product.plongdescription|safe }}
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="single-product-dimention card-surface">
+                <div class="single-product-section-head">
+                    <h2>Additional Information</h2>
+                </div>
+
+                <table class="single-product-info-table">
+                    <tr>
+                        <th>Weight</th>
+                        <td>{{ product.weight }}g</td>
+                    </tr>
+                    <tr>
+                        <th>Dimension</th>
+                        <td>{{ product.dimensions }}cm</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
     </div>
+</section>
 
-    <!-- PODUCT DIMENTION AND WHAT IN PACKGE TABLE  -->
-    <div class="single-product-dimention">
-        <h3>Additional information</h3>
-        <table>
-            <tr>
-                <th>Weight </th>
-                <td>33 g</td>
-            </tr>
-            <tr>
-                <th>Dimension</th>
-                <td>8.3x8.3x1.5</td>
-            </tr>
-            <tr>
-                <th>In Package</th>
-                <td>
-                    <ul>
-                        <li>Camera</li>
-                        <li>Reset pin</li>
-                        <li>Adapte 5v</li>
-                        <li>USB Cable</li>
-                    </ul>
-                </td>
-            </tr>
-        </table>
-    </div>
-</div>
+<script>
+  // Meta Pixel: product detail view event.
+  if (typeof window.fbq === 'function') {
+    window.fbq('track', 'ViewContent', {
+      content_ids: ['{% if product.system and default_system_variant %}{{ default_system_variant.id }}{% elif default_normal_variant %}{{ default_normal_variant.id }}{% else %}{{ product.id }}{% endif %}'],
+      content_name: '{% if product.system and default_system_variant %}{{ default_system_variant.title|escapejs }}{% elif default_normal_variant %}{{ default_normal_variant.title|escapejs }}{% else %}{{ product.title|escapejs }}{% endif %}',
+      content_type: 'product',
+      value: Number('{% if product.system and default_system_variant %}{% if default_system_variant.sale_price %}{{ default_system_variant.sale_price|floatformat:2 }}{% else %}{{ default_system_variant.price|floatformat:2 }}{% endif %}{% elif default_normal_variant %}{% if default_normal_variant.sale_price %}{{ default_normal_variant.sale_price|floatformat:2 }}{% else %}{{ default_normal_variant.price|floatformat:2 }}{% endif %}{% else %}{{ product.price|floatformat:2 }}{% endif %}'),
+      currency: '{{ product.currency|default:"USD"|escapejs }}'
+    });
+  }
 
+  // GA4 analytics: product detail view event.
+  if (typeof window.gtag === 'function') {
+    window.gtag('event', 'view_item', {
+      currency: '{{ product.currency|default:"USD"|escapejs }}',
+      value: Number('{% if product.system and default_system_variant %}{% if default_system_variant.sale_price %}{{ default_system_variant.sale_price|floatformat:2 }}{% else %}{{ default_system_variant.price|floatformat:2 }}{% endif %}{% elif default_normal_variant %}{% if default_normal_variant.sale_price %}{{ default_normal_variant.sale_price|floatformat:2 }}{% else %}{{ default_normal_variant.price|floatformat:2 }}{% endif %}{% else %}{{ product.price|floatformat:2 }}{% endif %}'),
+      items: [{
+        item_id: '{% if product.system and default_system_variant %}{{ default_system_variant.id }}{% elif default_normal_variant %}{{ default_normal_variant.id }}{% else %}{{ product.id }}{% endif %}',
+        item_name: '{% if product.system and default_system_variant %}{{ default_system_variant.title|escapejs }}{% elif default_normal_variant %}{{ default_normal_variant.title|escapejs }}{% else %}{{ product.title|escapejs }}{% endif %}',
+        price: Number('{% if product.system and default_system_variant %}{% if default_system_variant.sale_price %}{{ default_system_variant.sale_price|floatformat:2 }}{% else %}{{ default_system_variant.price|floatformat:2 }}{% endif %}{% elif default_normal_variant %}{% if default_normal_variant.sale_price %}{{ default_normal_variant.sale_price|floatformat:2 }}{% else %}{{ default_normal_variant.price|floatformat:2 }}{% endif %}{% else %}{{ product.price|floatformat:2 }}{% endif %}'),
+        quantity: 1,
+        item_category: '{% if product.pcategory.0 %}{{ product.pcategory.0.name|escapejs }}{% endif %}'
+      }]
+    });
+  }
+</script>
+{# Product structured data for SEO (Schema.org Product + Offer). #}
+<script type="application/ld+json">{{ product_json_ld|safe }}</script>
 
 {% endblock %}

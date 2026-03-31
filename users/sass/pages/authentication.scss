@@ -19,21 +19,21 @@
     }
 }
 
-#user-change-password-container, #email-change-container, #login-container, #signup-container, #logout-container, #user-set-password, #password-reset-container, #email-comfirmation-container, #reset-password-container, .auth-account-default {
-    @extend .form-default-style;
-}
+// #user-change-password-container, #email-change-container, #login-container, #signup-container, #logout-container, #user-set-password, #password-reset-container, #email-comfirmation-container, #reset-password-container, .auth-account-default {
+//     @extend .form-default-style;
+// }
 
 // when social user change a password (set new one) button style 
-#user-set-password, #password-reset-container, #reset-password-container, .auth-account-default {
-        form {
-        input[type='submit'] {
-            @extend .input-submit-button-prim;
-        }
-        input[type='submit']:hover {
-            @include var.hover-secondary;
-        }
-    }
-}
+// #user-set-password, #password-reset-container, #reset-password-container, .auth-account-default {
+//         form {
+//         input[type='submit'] {
+//             @extend .input-submit-button-prim;
+//         }
+//         input[type='submit']:hover {
+//             @include var.hover-secondary;
+//         }
+//     }
+// }
 
 // Logout page button space 
 #logout-container {
@@ -51,7 +51,7 @@
 
 // top page button to signup or login depend on which page 
 #singup-secondary-button {
-    @include var.button-secondary;
+    // @include var.button-secondary;
     background-color: var.$identity-color;
     color: var.$back-color;
     font-weight: 700;

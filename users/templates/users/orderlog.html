@@ -1,41 +1,98 @@
 {% extends "doobarashop/layout.html"%}
 {% load static %}
+
 {% block pagetitle %}
     Order
 {% endblock %}
 
 {% block body %}
-    <div id="view-order" class="">
-        <h3>Order details</h3>
-        <p>Order Number #<span class="highlight">{{order.orderid}}</span></p>
-        <p>Order date:  <span class="highlight">{{order.date}}</span></p>
-        <p>Order status: <span class="highlight">{{order.status}}</span></p> 
-        <table>
-            <thead>
-                <tr>
-                    <th>Product</th>
-                    <th>Quantity</th>
-                    <th>Unit price</th>
-                    <th>Subtotal</th>
-                </tr>
-            </thead>
-            <tbody>
+<section class="order-view-page">
+    <div class="order-view-shell">
+
+        <div class="order-view-header">
+            <div>
+                <span class="order-view-header__eyebrow">Order Details</span>
+                <h1>Order #{{order.orderid}}</h1>
+                <p>Review your order details, products, and total amount.</p>
+            </div>
+
+            <a href="/myaccount" class="order-view-back-btn">← Back to Account</a>
+        </div>
+
+        <div class="order-view-meta">
+            <div class="order-meta-card">
+                <span>Order Number</span>
+                <strong>#{{order.orderid}}</strong>
+            </div>
+
+            <div class="order-meta-card">
+                <span>Date</span>
+                <strong>{{order.date}}</strong>
+            </div>
+
+            <div class="order-meta-card">
+                <span>Status</span>
+                <strong class="order-status-badge order-status-badge--{{order.status|lower}}">
+                    {{order.status}}
+                </strong>
+            </div>
+
+            <div class="order-meta-card">
+                <span>Total</span>
+                <strong>${{order.total|floatformat:2}}</strong>
+            </div>
+
+            <div class="order-meta-card">
+                <span>Delivery</span>
+                <strong>
+                    {{order.shipping_method}}
+                    ({% if order.shipping_price > 0 %}${{order.shipping_price|floatformat:2}}{% else %}Free{% endif %})
+                </strong>
+            </div>
+        </div>
+
+        <div class="order-view-card">
+            <div class="order-view-card__header">
+                <h2>Items in this order</h2>
+            </div>
+
+            <div class="order-items-list">
                 {% for item in items %}
-                    <tr>
-                        <td><a href="single_product/{{item.product_name}}"><b>{{item.product_name}}</b></td>
-                        <td>{{item.quantity}}</td>
-                        <td>{{item.price}}</td>
-                        <td>{{item.subtotal}}</td>
-                    </tr>
+                    <article class="order-item-row">
+                        <div class="order-item-row__product">
+                            <h3>
+                                <a href="/single_product/{{item.product_name}}">
+                                    {{item.product_name}}
+                                </a>
+                            </h3>
+                        </div>
+
+                        <div class="order-item-row__meta">
+                            <div class="order-item-cell">
+                                <span class="order-item-label">Quantity</span>
+                                <strong>{{item.quantity}}</strong>
+                            </div>
+
+                            <div class="order-item-cell">
+                                <span class="order-item-label">Unit Price</span>
+                                <strong>${{item.price|floatformat:2}}</strong>
+                            </div>
+
+                            <div class="order-item-cell">
+                                <span class="order-item-label">Subtotal</span>
+                                <strong>${{item.subtotal|floatformat:2}}</strong>
+                            </div>
+                        </div>
+                    </article>
                 {% endfor %}
-            </tbody>
-            <tfoot>
-                <tr>
-                    <th>Total</th>
-                    <td></td><td></td>
-                    <td class="highlight">${{order.total}}</td>
-                </tr>
-            </tfoot>
-        </table>
+            </div>
+
+            <div class="order-view-total">
+                <span>Total</span>
+                <strong>${{order.total|floatformat:2}}</strong>
+            </div>
+        </div>
+
     </div>
+</section>
 {% endblock %}

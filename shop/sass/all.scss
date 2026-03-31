@@ -1,3 +1,4 @@
-@import 'pages/index';  
-@import 'pages/shop';  
-@import 'pages/single-product'; 
+@forward 'pages/index';  
+@forward 'pages/shop';  
+@forward 'pages/single-product'; 
+@forward 'pages/contact-us';

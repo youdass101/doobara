@@ -4,53 +4,26 @@
 {% block pagetitle %}
 VIDEO
 {% endblock %}
+
 {% block body %}
-<!-- video carousel page -->
-<div id="video-carousel-container">
-    <!-- single video  -->
-    <div class="video-card">
-        <h4>Door Sensor</h4>
-        <div class="youtube-video">
-            <iframe src="https://www.youtube.com/embed/NZtVLt9Twuw" 
-                title="YouTube video player" frameborder="0" 
-                allowfullscreen>
-            </iframe>
+    <section class="video-page" aria-label="Video gallery">
+        <div id="video-carousel-container">
+            {% for v in video %}
+                <article class="video-card">
+                    <div class="youtube-video">
+                        <iframe width="560" height="315" src="{{ v.video_url}}" title="{{ v.title }}" 
+                            frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+                        </iframe>
+                    </div>
+                    <div class="video-card__content">
+                        <h3 class="video-card__title">{{ v.title }}</h3>
+                        <p class="video-card__description">
+                            {{ v.description }}
+                        </p>
+                    </div>
+                </article>
+            {% endfor %}
         </div>
-    </div>
-
-    <div class="video-card">
-        <h4>Motion Sensor</h4>
-        <div class="youtube-video">
-            <iframe
-                src="https://www.youtube.com/embed/FTqQYB6CmUc" 
-                title="YouTube video player" frameborder="0" 
-                allowfullscreen>
-            </iframe>
-        </div>
-    </div>
-
-    <div class="video-card">
-        <h4>Door Sensor</h4>
-        <div class="youtube-video">
-            <iframe src="https://www.youtube.com/embed/6Qy_9DDzV70" 
-                title="YouTube video player" frameborder="0" 
-                allowfullscreen>
-            </iframe>
-        </div>
-    </div>
-
-    <div class="video-card">
-        <h4>Motion Sensor</h4>
-        <div class="youtube-video">
-            <iframe 
-                src="https://www.youtube.com/embed/Rsq0DIjpWdk" 
-                title="YouTube video player" frameborder="0" 
-                allowfullscreen>
-            </iframe>
-        </div>
-    </div>
-</div>
- 
-
-{%endblock %}
-
+    </section>
+{% endblock %}

@@ -1,5 +1,12 @@
-@import 'pages/account';
-@import 'pages/register-login';
-@import 'pages/authentication.scss';
-@import 'pages/orderplace.scss';
-@import 'pages/account-order-view';
+@forward 'pages/account';
+@forward 'pages/register-login';
+@forward 'pages/authentication.scss';
+@forward 'pages/orderplace.scss';
+@forward 'pages/account-order-view';
+@forward 'pages/address-list';
+@forward 'pages/new_edit_address';
+@forward 'pages/order-details';
+@forward 'pages/orderplace';
+@forward 'pages/change-email';
+@forward 'pages/change-password';
+@forward 'pages/logout';

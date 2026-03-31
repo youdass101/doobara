@@ -1,54 +1,39 @@
 @use '../abstracts/all' as var;
 // Layout all page style Default
-html {
-    height: 100%;
-    width: 100%; 
-    line-height: 1.618; 
-    font-family: var.$primary-font;
-    color: var.$back-color;
- 
-}
-
-html, body {
-    margin: 0;
-    padding: 0;
-}
-
-// CONSTANT TO ALL NAVIGATION ICONS STYLE
-.icons {
-    color: var.$identity-color;
-}
-
-// Slider images hide on all pages by default 
-.slider-img-desktop, .slider-img-mobile {
-    display: none;
-}
-
 // All pages element border boxing 
 * {
     box-sizing: border-box;
     font-size: 14px;
     font-weight: 400;
+    margin: 0;
+    padding: 0;
 }
 
-/* Any Page content to be used for sevarel elements */
-.page-content {
-    padding: 0px;
+
+a {
+  color: inherit;
+  text-decoration: none;
 }
 
-// to be used on JS on any div display
-.show {
-    display: block !important;
+img {
+  max-width: 100%;
+  display: block;
 }
 
-th {
-    @include var.header-title;
-    background-color:var.$table-header-background-color-v1;
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%; 
+    line-height: 1.618; 
+    font-family: var.$primary-font;
+    color: var.$back-color;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif, Roboto, Arial;
+    background: #ece8df;
 }
 
-td {
-    background-color: var.$table-body-background-color-v1;
-}
 
 h1 {
     font-size: 60px;
@@ -75,5 +60,39 @@ h5{
     font-size: 16px;
     font-weight: 400;
 }
+
+
+.page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.container {
+  width: 100%;
+  max-width: var.$max-width;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+// to be used on JS on any div display
+.show {
+    display: block !important;
+}
+
+
+
+// TO RECONSIDER
+
+// CONSTANT TO ALL NAVIGATION ICONS STYLE
+.icons {
+    color: var.$identity-color;
+}
+
+
+
+
+
 
 

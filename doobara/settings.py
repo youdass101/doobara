@@ -11,25 +11,49 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
-
 import environ
-env = environ.Env()
-environ.Env.read_env()
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+env = environ.Env()
+env.read_env(os.path.join(BASE_DIR, '.env'))
+
+
+
+
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '&&#g)kp!ad^4*gyx6x-d&(tku-xk5!d9@8v%vvnl1wrqh+s$#='
-
+SECRET_KEY = os.getenv("SECRET_KEY")
+if not SECRET_KEY:
+    raise ValueError("SECRET_KEY is not set")
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv("DEBUG", "False").lower() == "true"
 
-ALLOWED_HOSTS = ['*']
+
+# unlock on production (sentry is already set up and tested on staging, just need to add the dsn to .env on production)
+# Sentry configuration for error tracking and monitoring
+if not DEBUG:
+    SENTRY_DSN = os.getenv("SENTRY_DSN", "")
+
+    if SENTRY_DSN:
+        sentry_sdk.init(
+            dsn=SENTRY_DSN,
+            integrations=[DjangoIntegration()],
+            send_default_pii=True,
+            environment=os.getenv("SENTRY_ENVIRONMENT", "local"),
+            traces_sample_rate=float(os.getenv("SENTRY_TRACES_SAMPLE_RATE", "0.1")),
+        )
+
+ALLOWED_HOSTS = [host.strip() for host in os.getenv("ALLOWED_HOSTS", "localhost,127.0.0.1").split(",")]
+GOOGLE_ANALYTICS_ID = os.getenv("GOOGLE_ANALYTICS_ID", "")
+GOOGLE_SITE_VERIFICATION = os.getenv("GOOGLE_SITE_VERIFICATION", "")
+# Meta Pixel configuration.
+META_PIXEL_ID = os.getenv("META_PIXEL_ID", "")
 
 
 # Application definition
@@ -45,7 +69,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'livereload',
+    'django.contrib.sitemaps',
     # new allauth
     'django.contrib.sites',
     'allauth',
@@ -53,25 +77,43 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.facebook',
+    # django-recaptcha 4.x uses the django_recaptcha app label.
+    'django_recaptcha',
     'import_export',
     'phonenumber_field'
 ]
 
 
-
-
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    # WhiteNoise serves versioned static assets directly from Django in a
+    # production-safe way without touching user/media uploads.
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'livereload.middleware.LiveReloadScript',
 ]
 
+if DEBUG:
+    INSTALLED_APPS += ['livereload']
+    MIDDLEWARE += ['livereload.middleware.LiveReloadScript']
+
 ROOT_URLCONF = 'doobara.urls'
+
+template_context_processors = [
+    'django.template.context_processors.request',
+    'django.contrib.auth.context_processors.auth',
+    'django.contrib.messages.context_processors.messages',
+    'cart.views.cartcontext',
+    'doobara.context_processors.analytics_context',
+]
+
+if DEBUG:
+    template_context_processors.insert(0, 'django.template.context_processors.debug')
 
 TEMPLATES = [
     {
@@ -79,13 +121,7 @@ TEMPLATES = [
         'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
-                'cart.views.cartcontext'
-            ],
+            'context_processors': template_context_processors,
         },
     },
 ]
@@ -97,9 +133,14 @@ WSGI_APPLICATION = 'doobara.wsgi.application'
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    "default": {
+        "ENGINE": os.getenv('DB_ENGINE', 'django.db.backends.postgresql'),
+        "NAME": os.getenv('DB_NAME'),
+        "USER": os.getenv('DB_USER'),
+        "PASSWORD": os.getenv('DB_PASSWORD'),
+        "HOST": os.getenv('DB_HOST'),
+        "PORT": os.getenv('DB_PORT'),
+        "CONN_MAX_AGE": 60,
     }
 }
 
@@ -122,13 +163,28 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+PASSWORD_HASHERS = [
+    # Used for *new* passwords and rehashes:
+    "django.contrib.auth.hashers.PBKDF2PasswordHasher",
+
+    # (Optional, but you can keep Django’s other defaults if you want)
+    # "django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher",
+    # "django.contrib.auth.hashers.Argon2PasswordHasher",
+    # "django.contrib.auth.hashers.BCryptSHA256PasswordHasher",
+    # "django.contrib.auth.hashers.ScryptPasswordHasher",
+
+    # Your WordPress hasher, LAST:
+    "users.hashers.WordPressPasswordHasher",
+]
+
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Beirut'
 
 USE_I18N = True
 
@@ -141,13 +197,60 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
-# Add these new lines
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-)
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
+
+# Optional but reasonable for WhiteNoise
+WHITENOISE_MAX_AGE = 31536000  # 1 year for versioned static assets
+
+# redis cache configuration
+REDIS_URL = os.getenv("REDIS_URL", "redis://127.0.0.1:6379/1")
+if DEBUG:
+        CACHES = {
+        "default": {
+            "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
+            "LOCATION": "doobara-local",
+        },
+        "template_fragments": {
+            "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
+            "LOCATION": "doobara-template-fragments",
+        },
+    }
+else:
+    CACHES = {
+        "default": {
+            "BACKEND": "django_redis.cache.RedisCache",
+            "LOCATION": REDIS_URL,
+            "OPTIONS": {
+                "CLIENT_CLASS": "django_redis.client.DefaultClient",
+            },
+            "KEY_PREFIX": "doobara",
+            "TIMEOUT": 300,  # default fallback: 5 minutes
+        },
+
+        "template_fragments": {
+            "BACKEND": "django_redis.cache.RedisCache",
+            "LOCATION": REDIS_URL,
+            "OPTIONS": {
+                "CLIENT_CLASS": "django_redis.client.DefaultClient",
+            },
+            "KEY_PREFIX": "doobara_fragments",
+            "TIMEOUT": 600,
+        },
+    }
+
 
 # new allauth
 # allauth backend authentication 
@@ -160,69 +263,98 @@ AUTHENTICATION_BACKENDS = [
 # allauth google 
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
-        'SCOPE': [
-            'profile',
-            'email',
+        'SCOPE': ['profile', 'email'],
+        'AUTH_PARAMS': {'access_type': 'offline'},
+        'LOGIN_ON_GET': True,
+    },
+    'facebook': {
+        'METHOD': 'oauth2',
+        'SCOPE': ['email', 'public_profile'],
+        'AUTH_PARAMS': {'auth_type': 'reauthenticate'},
+        'FIELDS': [
+            'id',
+            'first_name',
+            'last_name',
+            'middle_name',
+            'name',
+            'name_format',
+            'picture',
+            'short_name'
         ],
-        'AUTH_PARAMS': {
-            'access_type': 'online',
-        }
+        'EXCHANGE_TOKEN': True,
+        'VERIFIED_EMAIL': False,
+        'VERSION': 'v13.0',
+        'GRAPH_API_URL': 'https://graph.facebook.com/v13.0',
     }
 }
-
-
-
-# SOCIALACCOUNT_PROVIDERS = {
-#     'facebook': {
-#         'METHOD': 'oauth2',
-#         'SDK_URL': '//connect.facebook.net/{locale}/sdk.js',
-#         'SCOPE': ['email', 'public_profile'],
-#         'AUTH_PARAMS': {'auth_type': 'reauthenticate'},
-#         'INIT_PARAMS': {'cookie': True},
-#         'FIELDS': [
-#             'id',
-#             'first_name',
-#             'last_name',
-#             'middle_name',
-#             'name',
-#             'name_format',
-#             'picture',
-#             'short_name'
-#         ],
-#         'EXCHANGE_TOKEN': True,
-#         'LOCALE_FUNC': 'path.to.callable',
-#         'VERIFIED_EMAIL': False,
-#         'VERSION': 'v7.0',
-#     }
-# }
+SOCIALACCOUNT_LOGIN_ON_GET = True
 # all auth id 
 
-# SITE_ID = 1
+SITE_ID = 2
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 SIGNUP_REDIRECT_URL = '/'
 
 ACCOUNT_FORMS = {
-'signup': 'users.forms.CustomSignupForm',
+    # Keep signup customization and add login override so both forms enforce captcha validation.
+    'signup': 'users.forms.CustomSignupForm',
+    'login': 'users.forms.CustomLoginForm',
 }
 
+# reCAPTCHA keys are read from environment variables so secrets are never hardcoded.
+RECAPTCHA_PUBLIC_KEY = os.getenv("RECAPTCHA_PUBLIC_KEY", "")
+RECAPTCHA_PRIVATE_KEY = os.getenv("RECAPTCHA_PRIVATE_KEY", "")
+# Keep Google's default verification/script domain unless deployment explicitly overrides it.
+RECAPTCHA_DOMAIN = os.getenv("RECAPTCHA_DOMAIN", "www.google.com")
+
 # allauth email and username authentication
-ACCOUNT_AUTHENTICATION_METHOD = "username_email"
+ACCOUNT_LOGIN_METHODS = {'email', 'username'}
+ACCOUNT_UNIQUE_EMAIL = True
 
 # allauth signup email required
-ACCOUNT_EMAIL_REQUIRED=True
-# allauth email verification required
+ACCOUNT_SIGNUP_FIELDS = ['email*', 'username*', 'password1*', 'password2*']
+# allauth email verification required set none if not needed
 ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 
+
 # Fix (go around untill smtp setup done) 1061 error after pressing signup shell email not real
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # REAL email sending (activate it on production and ceratin tests)
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# DEFAULT_FROM_EMAIL = 'info@doobara.com'
-# EMAIL_HOST = env('EMAIL_HOST')
-# EMAIL_HOST_USER = env('EMAIL_HOST_USER')
-# EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
-# EMAIL_PORT = 587
-# EMAIL_USE_TLS = True
-# EMAIL_USE_SSL = False
+# check phone number field
+EMAIL_BACKEND = os.getenv("EMAIL_BACKEND", "django.core.mail.backends.console.EmailBackend")
+EMAIL_HOST = os.getenv("EMAIL_HOST", "")
+EMAIL_PORT = int(os.getenv("EMAIL_PORT", 587))
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER", "")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD", "")
+EMAIL_USE_SSL = os.getenv("EMAIL_USE_SSL", "False") == "True"
+EMAIL_USE_TLS = os.getenv("EMAIL_USE_TLS", "False") == "True"
+DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL", EMAIL_HOST_USER)
+SERVER_EMAIL = os.getenv("SERVER_EMAIL", EMAIL_HOST_USER)
+EMAIL_TIMEOUT = 20
+
+
+
+# CSRF
+
+# PRODUCTION SETTINGS
+# Security settings
+SESSION_COOKIE_SECURE = not DEBUG
+CSRF_COOKIE_SECURE = not DEBUG
+SECURE_HSTS_SECONDS = 31536000 if not DEBUG else 0
+SECURE_HSTS_INCLUDE_SUBDOMAINS = not DEBUG
+SECURE_HSTS_PRELOAD = not DEBUG
+SECURE_SSL_REDIRECT = not DEBUG
+SECURE_CONTENT_TYPE_NOSNIFF = True
+SESSION_COOKIE_HTTPONLY = True
+
+X_FRAME_OPTIONS = "DENY"
+
+
+
+CSRF_TRUSTED_ORIGINS = [
+    'http://127.0.0.1:8000',
+    'https://doobara.com',
+    'https://www.doobara.com',
+    'http://localhost:8000',
+]

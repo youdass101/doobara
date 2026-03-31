@@ -1,0 +1,62 @@
+{% extends "doobarashop/layout.html" %}
+{% load static %}
+
+{% block pagetitle %}
+    Address Edit
+{% endblock %}
+
+{% block body %}
+<section class="address-form-page">
+    <div class="address-form-shell">
+
+        <div class="address-form-header">
+            <span class="address-form-eyebrow">Account Settings</span>
+            <h1>
+                {% if new %}
+                    New
+                {% else %}
+                    Edit
+                {% endif %}
+                Address
+            </h1>
+            <p>Fill in your delivery details and save the address to your account.</p>
+        </div>
+
+        <div class="address-form-card">
+            <form action="{% url 'update_address' %}" method="POST" class="address-edit-form">
+                {% csrf_token %}
+
+                <div class="address-edit-form__fields">
+                    {% for field in form %}
+                        {% if field.name != "notes" %}
+                            <div class="address-field">
+                                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                                {{ field }}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+
+                <input type="hidden" class="info" value="{{ info }}" name="info">
+
+                <div class="address-form-actions">
+                    <input type="submit" value="Save Address" class="address-form-btn address-form-btn--primary">
+                </div>
+            </form>
+
+            {% if info != "new" %}
+                <form action="{% url 'update_address' %}" method="POST" class="address-delete-form">
+                    {% csrf_token %}
+                    <input type="hidden" value="del" name="info">
+                    <input type="hidden" value="{{ info }}" name="aid">
+
+                    <div class="address-form-actions address-form-actions--separated">
+                        <input type="submit" value="Delete Address" class="address-form-btn address-form-btn--danger">
+                    </div>
+                </form>
+            {% endif %}
+        </div>
+
+    </div>
+</section>
+{% endblock %}

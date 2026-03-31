@@ -1,55 +1,106 @@
 {% extends "doobarashop/layout.html" %}
 {% load static %}
+{% load cache %}
 
 {% block pagetitle %}
 Contact Us
 {% endblock %}
 {% block body %}
-<!-- Contact page container -->
-    
-<!-- First element Phone and whatsapp number -->
-<div class="contact-info">
-    <h1>CONTACT US</h1>
-    <div class="contact-icon">
-        <a href="tel:96170856471" target="_blank"><i class="phone-icon fas fa-phone-alt fa-3x"></i></a>
-        <a href="https://wa.me/96170856471?text=I%27m%20interested%20in%20your%20products" target="_blank">
-            <i class="whatsapp fab fa-whatsapp fa-4x"></i>
-        </a>
+{% cache 1800 "contact_us" using="template_fragments" %}
+<section class="contact-section">
+    <div class="contact-shell">
+
+        <div class="contact-hero">
+            <span class="contact-hero__eyebrow">Contact Doobara</span>
+            <h1>Let’s make your space smarter.</h1>
+            <p>
+                Whether you need help choosing the right product, placing an order,
+                or asking about smart solutions, we’re here to help.
+            </p>
+        </div>
+
+        <div class="contact-grid">
+
+            <!-- Main contact card -->
+            <div class="contact-card contact-card--primary">
+                <div class="contact-card__glow"></div>
+
+                <div class="contact-card__top">
+                    <div class="icon-badge icon-badge--phone">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <div class="icon-badge icon-badge--whatsapp">
+                        <i class="fab fa-whatsapp"></i>
+                    </div>
+                </div>
+
+                <h2>Call or WhatsApp</h2>
+                <p class="contact-card__desc">
+                    Reach out directly for product questions, support, and quick assistance.
+                </p>
+
+                <a class="contact-link contact-link--number" href="tel:+96170856471">
+                    +961 70 856 471
+                </a>
+
+                <div class="contact-actions">
+                    <a class="contact-btn contact-btn--dark" href="tel:+96170856471">
+                        Call Now
+                    </a>
+
+                    <a class="contact-btn contact-btn--whatsapp"
+                       href="https://wa.me/96170856471?text=I%27m%20interested%20in%20your%20products"
+                       target="_blank"
+                       rel="noopener noreferrer">
+                        WhatsApp
+                    </a>
+                </div>
+            </div>
+
+            <!-- Email card -->
+            <div class="contact-card">
+                <div class="icon-badge icon-badge--mail">
+                    <i class="fas fa-envelope"></i>
+                </div>
+
+                <h2>Email Us</h2>
+                <p class="contact-card__desc">
+                    Prefer email? Send us your inquiry and we’ll get back to you with the details you need.
+                </p>
+
+                <a class="contact-link" href="mailto:info@doobara.com">
+                    info@doobara.com
+                </a>
+            </div>
+
+            <!-- Location card -->
+            <div class="contact-card contact-card--location">
+                <div class="icon-badge icon-badge--location">
+                    <i class="fas fa-location-dot"></i>
+                </div>
+
+                <h2>Our Location</h2>
+                <p class="contact-card__desc">
+                    Based in Lebanon and serving customers across the country with smart products and solutions.
+                </p>
+
+                <a class="contact-btn contact-btn--outline"
+                   href="https://maps.app.goo.gl/GmCBULySND619J5z6"
+                   target="_blank"
+                   rel="noopener noreferrer">
+                    Open in Google Maps
+                </a>
+            </div>
+
+            <!-- Map -->
+            <div class="contact-map-card">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3308.4965269761838!2d35.6157016!3d33.979777999999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151f3e5e49ef2301%3A0x1dce11e369567bc2!2sdoobara!5e0!3m2!1sen!2slb!4v1773589203604!5m2!1sen!2slb" 
+                    width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+        </div>
     </div>
-    <h1 class="contact-phone">70-856 471</h1>
-</div>
-
-<!-- Second element Submition form  -->
-<div id="contact-form-container">
-    <div class="form-desc">
-        <h2>Write To Us</h2>
-        <h3>How can we Help?</h3>
-        <p>We’d love to hear from you, 
-            whether you have any question 
-            about features, pricing, assistance 
-            or anything else our team is ready to answer all your questions</p>
-    </div>
-
-    <!-- Submition form inputs -->
-    <div class="contact-inputs">
-        <form id="contact-submit-form">
-            <div class="contact-name">
-            <input type="text" placeholder="Name"></div>
-            <div class="contact-email"><input type="email" placeholder="Email Address"></div>
-            <input class="contact-subject" type="text" placeholder="Subject">
-        </form>
-        <textarea class="contact-comment" name="comment" form="contact-submit-form" placeholder="Enter text here..."></textarea>
-        <div class="contact-send-button"><button>SEND</button></div>
-    </div>  
-
-        <!-- Submition form description -->
-
-</div>
-
-<!-- Last element Email address  -->
-<div class="inquiry-email-contact">
-    <h4>Email Us</h4>
-    <h4 class="inquiry-email-address">Info@doobara.com</h4>
-</div>
+</section>
+{% endcache %}
 
 {% endblock %}
