@@ -80,9 +80,8 @@ if DEBUG:
 
 ROOT_URLCONF = "doobara.urls"
 
-ADMIN_URL = env("ADMIN_URL", default="hamzeadmin/").lstrip("/")
-if not ADMIN_URL.endswith("/"):
-    ADMIN_URL = f"{ADMIN_URL}/"
+ADMIN_URL = (env("ADMIN_URL", default="hamzeadmin/") or "hamzeadmin/").strip().strip("/")
+ADMIN_URL = f"{ADMIN_URL}/"
 
 template_context_processors = [
     "django.template.context_processors.request",
