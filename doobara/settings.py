@@ -33,9 +33,7 @@ if not DEBUG:
             environment=env("SENTRY_ENVIRONMENT", default="local"),
             traces_sample_rate=env.float("SENTRY_TRACES_SAMPLE_RATE", default=0.1),
         )
-
-ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=["localhost", "127.0.0.1"])
-
+ALLOWED_HOSTS = [h.strip() for h in env.list("ALLOWED_HOSTS", default=[]) if h.strip()]
 GOOGLE_ANALYTICS_ID = env("GOOGLE_ANALYTICS_ID", default="")
 GOOGLE_SITE_VERIFICATION = env("GOOGLE_SITE_VERIFICATION", default="")
 META_PIXEL_ID = env("META_PIXEL_ID", default="")
