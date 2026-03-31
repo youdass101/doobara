@@ -44,9 +44,10 @@ urlpatterns = [
     path("", include("users.urls")),
     path("", include("blog.urls")),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='sitemap'),
-    path('sentry-debug/', trigger_error)
 ]
 
 
 if settings.DEBUG:
+    # Keep Sentry's intentional crash route strictly in debug environments.
+    urlpatterns += [path('sentry-debug/', trigger_error)]
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,8 +1,5 @@
 from django.contrib.auth.hashers import BasePasswordHasher
-from passlib.hash import phpass as wp_hash  # <-- THIS is the right one
-
-
-print("### users.hashers module imported ###")  # debug: should print once when Django starts
+from passlib.hash import phpass as wp_hash
 
 
 class WordPressPasswordHasher(BasePasswordHasher):
@@ -14,7 +11,6 @@ class WordPressPasswordHasher(BasePasswordHasher):
     We rely on passlib's `phpass`, which is compatible with WordPress'
     $P$ hashes.
     """
-    print("### WordPressPasswordHasher class loaded ###")  # debug: should print once when Django starts
     algorithm = "wordpress"
 
     def salt(self):
@@ -33,19 +29,12 @@ class WordPressPasswordHasher(BasePasswordHasher):
         return f"{self.algorithm}${raw}"
 
     def verify(self, password, encoded):
-        # DEBUG: this should print when check_password() uses this hasher
-        print(">>> WordPressPasswordHasher.verify CALLED")
-        print("    password:", repr(password))
-        print("    encoded:", repr(encoded))
-
         try:
             algorithm, rest = encoded.split("$", 1)
         except ValueError:
-            print("    ! Could not split encoded string:", encoded)
             return False
 
         if algorithm != self.algorithm:
-            print("    ! Algorithm mismatch:", algorithm)
             return False
 
         # rest may be "$P$..." (your current DB) or "P$..." depending on import
@@ -54,15 +43,11 @@ class WordPressPasswordHasher(BasePasswordHasher):
         elif rest.startswith("P$"):
             wp_encoded = "$" + rest
         else:
-            print("    ! Not a valid WP hash segment:", rest)
             return False
 
-        ok = wp_hash.verify(password, wp_encoded)
-        print("    verify result:", ok)
-        return ok
+        return wp_hash.verify(password, wp_encoded)
 
     def must_update(self, encoded):
-        print(">>> WordPressPasswordHasher.must_update CALLED")
         # After a successful login, rehash using Django's default hasher
         return True
 

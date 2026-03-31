@@ -7,6 +7,13 @@ from django.template.loader import render_to_string
 from django.core.mail import EmailMultiAlternatives
 
 
+def _build_checkout_error_form(message):
+    # Centralize non-field checkout errors so caller can re-render checkout safely.
+    form = Delivery_Information()
+    form.add_error(None, message)
+    return form
+
+
 def _build_order_item_snapshot(cart_item):
     # NEW: Build an immutable purchase snapshot from the exact cart selection
     # so historical orders do not fall back to mutable parent-product defaults.
@@ -38,6 +45,10 @@ def _build_order_item_snapshot(cart_item):
 
 def createorder(request, form, new):
     user = request.user
+    cart_items = list(user.mycart.items.select_related("product", "variant", "normal_variant"))
+    if not cart_items:
+        return (False, _build_checkout_error_form("Your cart is empty. Please add products before placing an order."))
+
     # result = create_new_address(request, form)
     if new:
         if form.is_valid():
@@ -69,7 +80,10 @@ def createorder(request, form, new):
         note = form.get('ordernote', '').strip()
         # Security: lock address selection to the authenticated user so posted
         # IDs cannot attach someone else's saved address to this order.
-        delivery = Delivery_Address_Details.objects.get(id=id, user=user)
+        try:
+            delivery = Delivery_Address_Details.objects.get(id=id, user=user)
+        except Delivery_Address_Details.DoesNotExist:
+            return (False, _build_checkout_error_form("Selected delivery address is invalid. Please choose an address again."))
         
     # Shipping method can come from checkout POST; persist selection first so totals stay deterministic.
     shipping_method_id = request.POST.get("shipping_method_id")
@@ -99,8 +113,6 @@ def createorder(request, form, new):
             shipping_price=shipping_price,
         )
 
-        # NEW: Prefetch variant relations used by purchase snapshot selection logic.
-        cart_items = list(user.mycart.items.select_related("product", "variant", "normal_variant"))
         # NEW: Convert each cart row into a variant-aware immutable purchase snapshot.
         item_snapshots = [_build_order_item_snapshot(item) for item in cart_items]
         Item_Order.objects.bulk_create(
