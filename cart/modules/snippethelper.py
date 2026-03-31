@@ -1,8 +1,11 @@
+from decimal import Decimal
+from functools import lru_cache
+
 from django.db import connection
 from django.db.utils import OperationalError, ProgrammingError
-from functools import lru_cache
-from decimal import Decimal
+
 from shop.models import *
+
 from ..models import *
 
 
@@ -106,7 +109,7 @@ def scart_data_setup(cart, lst=None):
             product = product_map.get(object_id)
             if not product:
                 continue
-            price = product.price
+            price = product.sale_price if product.sale_price else product.price
             currency = product.currency
             # PERF: one query path instead of .exists()+.first() double query.
             image = product.images.filter(thumbnail=True).first() or product.images.first()
@@ -134,10 +137,11 @@ def userorsession(request):
         user = request.user
         try:
             cart = user.mycart.items.all()
+        except Cart.DoesNotExist:
+            cart, _ = Cart.objects.get_or_create(user=user)
+            cart = cart.items.all()
         except (ProgrammingError, OperationalError):
             return request.session, ensure_session_cart(request.session)
-        except:
-            cart = [Cart.objects.create(user=user)]
     else:
         user = request.session
         cart = ensure_session_cart(user)
@@ -175,7 +179,8 @@ def cart_context_process(request):
                 product = product_map.get(object_id)
                 if not product:
                     continue
-                calc_cart(int(cart[i]['quantity']), product.price)
+                price = product.sale_price if product.sale_price else product.price
+                calc_cart(int(cart[i]['quantity']), price)
         return items, total
 
     for i in cart:

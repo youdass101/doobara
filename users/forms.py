@@ -1,16 +1,10 @@
 from django import forms
-# users model file
-from .models import *
-# user model import 
 from django.forms import ModelForm
-from django.utils.translation import gettext_lazy as _
-from users.models import *
-from datetime import datetime
 from allauth.account.forms import LoginForm, SignupForm
-from django.core.validators import MaxValueValidator
 from django_recaptcha.fields import ReCaptchaField
 from django_recaptcha.widgets import ReCaptchaV2Checkbox
-# from phonenumber_field.modelfields import PhoneNumberField
+
+from .models import Delivery_Address_Details
 
 
 
@@ -37,17 +31,7 @@ class CustomSignupForm(SignupForm):
 class CustomLoginForm(LoginForm):
     # Add captcha to login to reduce credential stuffing/bot sign-in attempts.
     captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox())
-        
-# class Delivery_Information(forms.Form):
-#     first_name = forms.CharField(widget=forms.TextInput() ,max_length=30, required=True)
-#     last_name = forms.CharField(widget=forms.TextInput(),max_length=40,required=True)
-#     phone = forms.IntegerField(widget=forms.TextInput(), required=True,validators=[MaxValueValidator(99999999)])
-#     city_town = forms.CharField(max_length=200, required=True)
-#     street = forms.CharField(max_length=200)
-#     building_appartement = forms.CharField(max_length=200)
-#     additional_information = forms.CharField(max_length=255, required=False)
-#     note = forms.CharField(max_length=200, required=False)
-    
+
 class Delivery_Information(ModelForm):
     
     notes = forms.CharField(max_length=200, required=False)
