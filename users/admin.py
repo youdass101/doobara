@@ -46,6 +46,8 @@ class OrdersAdmin(admin.ModelAdmin):
         "date",
         "shipping_label",
         "shipping_price",
+        "coupon_code",
+        "coupon_discount_amount",
     )
     list_filter = ("status", "date", "currency", "shipping_label")
     search_fields = (
@@ -90,6 +92,8 @@ class OrdersAdmin(admin.ModelAdmin):
                     "shipping_method",
                     "shipping_label",
                     "shipping_price",
+                    "coupon_code",
+                    "coupon_discount_amount",
                 )
             },
         ),

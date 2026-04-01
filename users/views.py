@@ -6,6 +6,7 @@ from django.views.decorators.cache import never_cache
 
 from cart.modules.snippethelper import cart_pricing_breakdown, get_active_shipping_methods
 from cart.modules.cartmanager import CartManager
+from promotions.services import pop_coupon_feedback
 
 from .forms import Delivery_Information
 from .models import Delivery_Address_Details, Orders
@@ -105,6 +106,11 @@ def placeorder(request):
                 "subtotal": pricing["subtotal"],
                 "shipping_total": pricing["shipping_price"],
                 "grand_total": pricing["total"],
+                "coupon_code": pricing["coupon_code"],
+                "coupon_discount": pricing["coupon_discount"],
+                "coupon_valid": pricing["coupon_valid"],
+                "coupon_error": pricing["coupon_error"],
+                "coupon_feedback": pop_coupon_feedback(request),
                 "selected_shipping_method": pricing["shipping_method"],
                 "shipping_methods": get_active_shipping_methods(),
                 "address_id": 0,

@@ -84,6 +84,9 @@ class Orders (models.Model):
     shipping_method = models.ForeignKey(Shipping_Method, on_delete=models.SET_NULL, null=True, blank=True)
     shipping_label = models.CharField(max_length=120, blank=True)
     shipping_price = models.DecimalField(max_digits=8, decimal_places=2, default=0)
+    # Coupon snapshot fields preserve the exact checkout discount in immutable order history.
+    coupon_code = models.CharField(max_length=50, blank=True)
+    coupon_discount_amount = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     # is strin 
     currency = models.CharField(max_length=10, default="USD")   
     # order notes 
@@ -102,6 +105,8 @@ class Orders (models.Model):
             "currency": self.currency,
             "shipping_method": self.shipping_label,
             "shipping_price": self.shipping_price,
+            "coupon_code": self.coupon_code,
+            "coupon_discount_amount": self.coupon_discount_amount,
             "note": self.note,
             "date": self.date
         }
