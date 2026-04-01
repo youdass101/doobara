@@ -379,7 +379,11 @@ def google_product_feed_csv(request):
     NEW: Public CSV endpoint for Google Merchant Center scheduled fetches.
     Keeps feed generation centralized in modeling.feed_export.
     """
-    return build_catalog_csv_response(request, filename="google-product-feed.csv")
+    return build_catalog_csv_response(
+        request,
+        filename="google-product-feed.csv",
+        google_price_format=True,
+    )
 
 
 def meta_catalog_feed_csv(request):
