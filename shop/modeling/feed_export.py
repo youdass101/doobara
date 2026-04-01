@@ -213,7 +213,17 @@ def product_feed_queryset():
 # NEW: Shared purchasable-offer expansion.
 # We emit one row per actual selectable option when variants/tiers exist, and one
 # row for simple products. This avoids ambiguous parent-level rows.
-def _iter_feed_offers(request):
+def _google_price(amount, currency):
+    # Google Merchant requires the `price` field to include amount + ISO currency
+    # in one value (e.g., "15.00 USD"). Returning None keeps invalid rows honest.
+    normalized_amount = _normalized_price(amount)
+    normalized_currency = (currency or "").strip().upper()
+    if not normalized_amount or not normalized_currency:
+        return None
+    return f"{normalized_amount} {normalized_currency}"
+
+
+def _iter_feed_offers(request, *, google_price_format=False):
     for product in product_feed_queryset():
         base_description = _plain_text_description(
             product.short_description or product.description
@@ -243,7 +253,11 @@ def _iter_feed_offers(request):
                     "description": offer_description,
                     "availability": "in stock" if inventory["in_stock"] else "out of stock",
                     "condition": base_condition,
-                    "price": _normalized_price(variant.sale_price or variant.price),
+                    "price": (
+                        _google_price(variant.sale_price or variant.price, variant.currency)
+                        if google_price_format
+                        else _normalized_price(variant.sale_price or variant.price)
+                    ),
                     "link": base_link,
                     "image_link": image_url,
                     "brand": base_brand,
@@ -272,7 +286,14 @@ def _iter_feed_offers(request):
                     "description": offer_description,
                     "availability": base_availability,
                     "condition": base_condition,
-                    "price": _normalized_price(variant.sale_price or variant.price),
+                    "price": (
+                        _google_price(
+                            variant.sale_price or variant.price,
+                            getattr(variant, "currency", None) or product.currency,
+                        )
+                        if google_price_format
+                        else _normalized_price(variant.sale_price or variant.price)
+                    ),
                     "link": base_link,
                     "image_link": image_url,
                     "brand": base_brand,
@@ -288,7 +309,11 @@ def _iter_feed_offers(request):
             "description": base_description,
             "availability": base_availability,
             "condition": base_condition,
-            "price": _normalized_price(product.sale_price or product.price),
+            "price": (
+                _google_price(product.sale_price or product.price, product.currency)
+                if google_price_format
+                else _normalized_price(product.sale_price or product.price)
+            ),
             "link": base_link,
             "image_link": _absolute_image_url(request, product),
             "brand": base_brand,
@@ -298,13 +323,13 @@ def _iter_feed_offers(request):
 
 
 # NEW: Shared CSV response builder for scheduled catalog fetches.
-def build_catalog_csv_response(request, *, filename):
+def build_catalog_csv_response(request, *, filename, google_price_format=False):
     response = HttpResponse(content_type="text/csv; charset=utf-8")
     response["Content-Disposition"] = f'inline; filename="{filename}"'
 
     writer = csv.DictWriter(response, fieldnames=_CSV_FIELDS, extrasaction="ignore")
     writer.writeheader()
-    for row in _iter_feed_offers(request):
+    for row in _iter_feed_offers(request, google_price_format=google_price_format):
         writer.writerow(row)
 
     return response
