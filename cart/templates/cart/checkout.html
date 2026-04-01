@@ -157,10 +157,10 @@ My Cart
                             {% endif %}
                         </div>
                         {% if coupon_feedback %}
-                            <p>{{ coupon_feedback.message }}</p>
+                            <p class="checkout-coupon-feedback">{{ coupon_feedback.message }}</p>
                         {% endif %}
                         {% if coupon_error %}
-                            <p>{{ coupon_error }}</p>
+                            <p class="checkout-coupon-error">{{ coupon_error }}</p>
                         {% endif %}
                     </div>
                 </div>

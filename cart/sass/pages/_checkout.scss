@@ -154,6 +154,38 @@
     @include var.form-control-focus;
 }
 
+.checkout-notes form {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.checkout-notes input[type="text"] {
+    @include var.form-control(var.$ui-text, var.$ui-white, #dbe7f3, 50px);
+    flex: 1;
+    min-width: 180px;
+}
+
+.checkout-notes input[type="text"]:focus {
+    @include var.form-control-focus;
+}
+
+.checkout-coupon-feedback,
+.checkout-coupon-error {
+    margin: 8px 0 0;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.checkout-coupon-feedback {
+    color: var.$ui-text-soft;
+}
+
+.checkout-coupon-error {
+    color: #d32f2f;
+}
+
 .checkout-shipping-methods {
     margin-top: 20px;
 }

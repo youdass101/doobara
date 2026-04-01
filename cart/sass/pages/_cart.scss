@@ -222,6 +222,18 @@
     display: flex;
     gap: 12px;
     flex: 1 1 420px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.cart-coupon form {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.cart-coupon form:first-child {
+    flex: 1 1 320px;
 }
 
 .cart-coupon input {
@@ -251,6 +263,22 @@
 
 .cart-coupon button {
     @include var.action-button-outline(var.$secondary-color, var.$button-color-transparent, var.$button-color-border-transparent);
+}
+
+.cart-coupon-feedback,
+.cart-coupon-error {
+    margin: 0;
+    width: 100%;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.cart-coupon-feedback {
+    color: var.$text-color-gray;
+}
+
+.cart-coupon-error {
+    color: #d32f2f;
 }
 
 .cart-update-btn {
