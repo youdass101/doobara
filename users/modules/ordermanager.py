@@ -6,6 +6,7 @@ from django.db import transaction
 from django.template.loader import render_to_string
 from django.core.mail import EmailMultiAlternatives
 from promotions.services import (
+    check_usage_limits_atomic,
     get_coupon_pricing_for_request,
     record_coupon_usage,
     remove_coupon_from_session,
@@ -108,6 +109,13 @@ def createorder(request, form, new):
     # Create order and move items in one transaction so partial writes cannot happen.
     # Also use bulk_create for order items to minimize insert queries.
     with transaction.atomic():
+        if coupon_pricing["coupon_valid"]:
+            # Re-check limits under row lock so concurrent checkouts cannot over-redeem capped coupons.
+            usage_ok, usage_error, locked_coupon = check_usage_limits_atomic(coupon_pricing["coupon"], user)
+            if not usage_ok:
+                return (False, _build_checkout_error_form(usage_error))
+            coupon_pricing["coupon"] = locked_coupon
+
         # is instance 
         # create an new order object model
         order = Orders.objects.create(

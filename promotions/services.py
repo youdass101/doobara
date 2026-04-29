@@ -1,5 +1,6 @@
 from decimal import Decimal
 
+from django.db import transaction
 from django.db.models import Q
 from django.utils import timezone
 
@@ -166,6 +167,29 @@ def check_usage_limits(coupon, user):
     return True, ""
 
 
+def check_usage_limits_atomic(coupon, user, at_time=None):
+    """Lock coupon row and evaluate limits atomically to prevent concurrent over-redemption."""
+    if not coupon:
+        return False, "Coupon is invalid or expired.", None
+
+    now = at_time or timezone.now()
+    locked_coupon = (
+        Coupon.objects.select_for_update()
+        .filter(id=coupon.id, active=True)
+        .filter(Q(valid_from__isnull=True) | Q(valid_from__lte=now))
+        .filter(Q(valid_until__isnull=True) | Q(valid_until__gte=now))
+        .first()
+    )
+    if not locked_coupon:
+        return False, "Coupon is invalid or expired.", None
+
+    usage_ok, usage_error = check_usage_limits(locked_coupon, user)
+    if not usage_ok:
+        return False, usage_error, locked_coupon
+
+    return True, "", locked_coupon
+
+
 def check_coupon_applicability_to_cart(coupon, cart_lines):
     """Return line-subtotal eligible for discount, based on product/category targeting rules."""
     if coupon.applies_to_all:
@@ -288,16 +312,21 @@ def snapshot_coupon_to_order(order, pricing):
 
 
 def record_coupon_usage(order, pricing):
-    """Record usage only after order success, so abandoned checkouts do not consume limits."""
+    """Record usage after order success and enforce limits under lock for concurrent checkouts."""
     coupon = pricing.get("coupon")
     discount = pricing.get("coupon_discount", Decimal("0.00"))
     if not coupon or discount <= 0:
         return None
 
-    return CouponUsage.objects.create(
-        coupon=coupon,
-        user=order.user if order.user.is_authenticated else None,
-        order=order,
-        coupon_code_snapshot=pricing.get("coupon_code", coupon.code),
-        discount_amount=discount,
-    )
+    with transaction.atomic():
+        usage_ok, usage_error, locked_coupon = check_usage_limits_atomic(coupon, order.user)
+        if not usage_ok:
+            raise ValueError(usage_error)
+
+        return CouponUsage.objects.create(
+            coupon=locked_coupon,
+            user=order.user if order.user.is_authenticated else None,
+            order=order,
+            coupon_code_snapshot=pricing.get("coupon_code", locked_coupon.code),
+            discount_amount=discount,
+        )
