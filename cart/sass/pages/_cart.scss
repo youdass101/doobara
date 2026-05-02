@@ -216,6 +216,7 @@
     justify-content: space-between;
     gap: 16px;
     flex-wrap: wrap;
+    align-items: flex-start;
 }
 
 .cart-coupon {
@@ -230,16 +231,21 @@
     display: flex;
     gap: 10px;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 .cart-coupon form:first-child {
     flex: 1 1 320px;
 }
 
+.cart-coupon form:last-child {
+    flex: 0 0 auto;
+}
+
 .cart-coupon input {
     @include var.form-control(var.$text-color-black, white, #dbe7f3, 50px);
     flex: 1;
-    min-width: 180px;
+    min-width: 220px;
     font-size: 0.96rem;
 }
 
@@ -259,6 +265,8 @@
 .cart-update-btn {
     min-height: 50px;
     padding: 0 20px;
+    white-space: nowrap;
+    flex: 0 0 auto;
 }
 
 .cart-coupon button {
@@ -271,14 +279,21 @@
     width: 100%;
     font-size: 0.9rem;
     line-height: 1.5;
+    padding: 10px 12px;
+    border-radius: 12px;
+    border: 1px solid transparent;
 }
 
 .cart-coupon-feedback {
     color: var.$text-color-gray;
+    background: rgba(12, 74, 110, 0.05);
+    border-color: rgba(12, 74, 110, 0.12);
 }
 
 .cart-coupon-error {
     color: #d32f2f;
+    background: rgba(211, 47, 47, 0.07);
+    border-color: rgba(211, 47, 47, 0.2);
 }
 
 .cart-update-btn {
@@ -488,6 +503,11 @@
 
     .cart-coupon {
         flex-direction: column;
+        align-items: stretch;
+    }
+
+    .cart-coupon form {
+        width: 100%;
     }
 
     .cart-coupon button,
