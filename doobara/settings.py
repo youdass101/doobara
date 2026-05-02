@@ -42,6 +42,7 @@ META_PIXEL_ID = env("META_PIXEL_ID", default="")
 INSTALLED_APPS = [
     "shop",
     "cart",
+    "promotions",
     "blog",
     "users",
     "django.contrib.admin",

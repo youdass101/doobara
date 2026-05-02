@@ -119,7 +119,6 @@ My Cart
                             <label for="ordernote">Order notes</label>
                             <textarea id="ordernote" name="ordernote" rows="5" placeholder="Add any delivery notes or special instructions..."></textarea>
                         </div>
-
                         <div class="checkout-shipping-methods">
                             <h3>Delivery option</h3>
                             <p>Select how you want to receive your order.</p>
@@ -140,6 +139,30 @@ My Cart
                             {% endfor %}
                         </div>
                     </form>
+                    <div class="checkout-notes">
+                        <label>Coupon code</label>
+                        <div>
+                            <form action="{% url 'apply_coupon' %}" method="post">
+                                {% csrf_token %}
+                                <input type="hidden" name="next" value="{{ request.path }}">
+                                <input type="text" name="code" value="{{ coupon_code|default:'' }}" placeholder="Coupon code">
+                                <button type="submit" class="checkout-btn checkout-btn--outline">Apply</button>
+                            </form>
+                            {% if coupon_code %}
+                                <form action="{% url 'remove_coupon' %}" method="post">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="next" value="{{ request.path }}">
+                                    <button type="submit" class="checkout-btn checkout-btn--ghost">Remove</button>
+                                </form>
+                            {% endif %}
+                        </div>
+                        {% if coupon_feedback %}
+                            <p class="checkout-coupon-feedback">{{ coupon_feedback.message }}</p>
+                        {% endif %}
+                        {% if coupon_error %}
+                            <p class="checkout-coupon-error">{{ coupon_error }}</p>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
 
@@ -175,10 +198,16 @@ My Cart
                             <span>Delivery</span>
                             <strong id="ddelivery">{% if shipping_total > 0 %}$ {{shipping_total|floatformat:2}}{% else %}Free{% endif %}</strong>
                         </div>
+                        {% if coupon_discount > 0 %}
+                            <div class="checkout-totals__row">
+                                <span>Coupon{% if coupon_code %} ({{ coupon_code }}){% endif %}</span>
+                                <strong id="dcoupon">- $ {{coupon_discount|floatformat:2}}</strong>
+                            </div>
+                        {% endif %}
 
                         <div class="checkout-totals__row checkout-totals__row--grand">
                             <span>Total</span>
-                            <strong id="dtotal">$ {{grand_total|floatformat:2}}</strong>
+                            <strong id="dtotal" data-coupon-discount="{{ coupon_discount|floatformat:2 }}">$ {{grand_total|floatformat:2}}</strong>
                         </div>
                     </div>
 

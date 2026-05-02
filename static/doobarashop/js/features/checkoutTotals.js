@@ -12,6 +12,7 @@ export function initCheckoutTotals() {
 
   const parseMoney = (value) => Number.parseFloat(String(value).replace('$', '').trim()) || 0;
   const subTotal = parseMoney(subTotalElement.innerHTML);
+  const couponDiscount = Number.parseFloat(totalElement.dataset.couponDiscount || '0') || 0;
 
   const updateDisplay = (shippingPrice) => {
     if (shippingPrice > 0) {
@@ -20,7 +21,7 @@ export function initCheckoutTotals() {
       deliveryElement.innerHTML = 'Free';
     }
 
-    const total = (subTotal + shippingPrice).toFixed(2);
+    const total = Math.max(subTotal - couponDiscount + shippingPrice, 0).toFixed(2);
     totalElement.innerHTML = `$ ${total}`;
   };
 

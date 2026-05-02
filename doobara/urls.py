@@ -41,6 +41,7 @@ urlpatterns = [
     path(settings.ADMIN_URL, admin.site.urls),
     path("", include("shop.urls")),
     path("", include("cart.urls")),
+    path("", include("promotions.urls")),
     path("", include("users.urls")),
     path("", include("blog.urls")),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='sitemap'),
