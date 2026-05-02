@@ -51,6 +51,8 @@ def _get_canonical_url(request):
 
 def analytics_context(request):
     return {
+        # Only enable third-party tracking scripts outside of debug/local mode.
+        "TRACKING_ENABLED": not settings.DEBUG,
         "GOOGLE_ANALYTICS_ID": settings.GOOGLE_ANALYTICS_ID,
         "GOOGLE_SITE_VERIFICATION": settings.GOOGLE_SITE_VERIFICATION,
         # Meta Pixel id for template usage.
