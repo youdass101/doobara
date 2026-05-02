@@ -7,7 +7,6 @@ from django.template.loader import render_to_string
 from django.core.mail import EmailMultiAlternatives
 from promotions.services import (
     check_usage_limits_atomic,
-    get_coupon_pricing_for_request,
     record_coupon_usage,
     remove_coupon_from_session,
     snapshot_coupon_to_order,
@@ -99,7 +98,15 @@ def createorder(request, form, new):
 
     # Centralized pricing calculation to keep cart/checkout/order totals consistent.
     pricing = cart_pricing_breakdown(request)
-    coupon_pricing = get_coupon_pricing_for_request(request, pricing["subtotal"])
+    # Reuse the coupon validation already embedded in cart_pricing_breakdown()
+    # so order totals and coupon snapshot/usage are based on one consistent read.
+    coupon_pricing = {
+        "coupon_code": pricing.get("coupon_code", ""),
+        "coupon": pricing.get("coupon"),
+        "coupon_valid": pricing.get("coupon_valid", False),
+        "coupon_discount": pricing.get("coupon_discount", 0),
+        "coupon_error": pricing.get("coupon_error", ""),
+    }
     total = "{:.2f}".format(pricing["total"])
     shipping_method = pricing["shipping_method"]
     shipping_label = shipping_method.label if shipping_method else ""
