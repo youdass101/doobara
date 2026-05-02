@@ -57,7 +57,7 @@ def find_active_coupon_by_code(code, at_time=None):
 
     now = at_time or timezone.now()
     return (
-        Coupon.objects.filter(code__iexact=normalized, active=True)
+        Coupon.objects.filter(code=normalized, active=True)
         .filter(Q(valid_from__isnull=True) | Q(valid_from__lte=now))
         .filter(Q(valid_until__isnull=True) | Q(valid_until__gte=now))
         .prefetch_related("products", "categories")

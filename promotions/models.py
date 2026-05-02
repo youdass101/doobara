@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.db import models
+from django.db.models.functions import Lower
 from django.utils import timezone
 
 from shop.models import Categorie, Product
@@ -13,7 +14,7 @@ class Coupon(models.Model):
         (DISCOUNT_PERCENT, "Percent"),
     )
 
-    code = models.CharField(max_length=50, unique=True)
+    code = models.CharField(max_length=50)
     active = models.BooleanField(default=True)
     discount_type = models.CharField(max_length=20, choices=DISCOUNT_TYPE_CHOICES)
     value = models.DecimalField(max_digits=10, decimal_places=2)
@@ -30,9 +31,21 @@ class Coupon(models.Model):
 
     class Meta:
         ordering = ("-created_at",)
+        constraints = [
+            models.UniqueConstraint(
+                Lower("code"),
+                name="promotions_coupon_code_ci_unique",
+            ),
+        ]
 
     def __str__(self):
         return self.code
+
+    def save(self, *args, **kwargs):
+        # Store coupon codes in a canonical uppercase format so admin/data-import
+        # writes stay aligned with case-insensitive lookup semantics.
+        self.code = (self.code or "").strip().upper()
+        return super().save(*args, **kwargs)
 
     def is_currently_valid_by_date(self, at_time=None):
         now = at_time or timezone.now()
