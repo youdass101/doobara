@@ -255,6 +255,9 @@ def single_product(request, locat=None, slug=None):
             "images": images,
             "package_items": package_items,
             "is_default": variant.is_default,
+            # Optional admin/model flag support: if present in data model later,
+            # frontend can highlight the recommended tier without template rewrites.
+            "is_recommended": bool(getattr(variant, "is_recommended", False)),
             "sort_order": variant.sort_order,
         }
         system_variants.append(variant_payload)

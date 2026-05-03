@@ -28,12 +28,19 @@
                              loading="eager"
                              fetchpriority="high">
                     </div>
-                    <div id="system-variant-gallery" class="single-product-gallery__thumbs"></div>
+                    <div class="single-product-gallery__thumb-carousel">
+                        <button type="button" class="single-product-gallery__thumb-arrow is-left" data-gallery-scroll="left" aria-label="Scroll thumbnails left">‹</button>
+                        <div id="system-variant-gallery" class="single-product-gallery__thumbs"></div>
+                        <button type="button" class="single-product-gallery__thumb-arrow is-right" data-gallery-scroll="right" aria-label="Scroll thumbnails right">›</button>
+                    </div>
                 </div>
 
                 <div class="single-product-info">
                     <span class="single-product-info__eyebrow">Doobara System</span>
                     <h1 class="single-product-title">{{ product.title }}</h1>
+                    {% if default_system_variant.short_description_lines %}
+                        <p class="single-product-system-promise">{{ default_system_variant.short_description_lines.0 }}</p>
+                    {% endif %}
 
                     <div class="system-variant-selector" id="system-variant-selector">
                         {% for variant in system_variants %}
@@ -42,6 +49,9 @@
                                 class="system-variant-option {% if default_system_variant.id == variant.id %}is-active{% endif %}"
                                 data-variant-id="{{ variant.id }}">
                                 <span class="system-variant-option__tier">{{ variant.tier|title }}</span>
+                                {% if variant.is_recommended %}
+                                    <span class="system-variant-option__badge">Recommended</span>
+                                {% endif %}
                                 <span class="system-variant-option__price">
                                     $ {% if variant.sale_price %}{{ variant.sale_price|floatformat:2 }}{% else %}{{ variant.price|floatformat:2 }}{% endif %}
                                 </span>
@@ -82,6 +92,14 @@
                             {% if not default_system_variant.can_purchase %}disabled{% endif %}>
                             {{ default_system_variant.cart_cta_label|default:"Out of Stock" }}
                         </button>
+                    </div>
+
+                    <div id="system-mobile-sticky-bar" class="single-product-mobile-sticky-bar" aria-hidden="true">
+                        <div class="single-product-mobile-sticky-bar__meta">
+                            <strong id="system-mobile-sticky-tier">{{ default_system_variant.tier|title }}</strong>
+                            <span id="system-mobile-sticky-price">$ {% if default_system_variant.sale_price %}{{ default_system_variant.sale_price|floatformat:2 }}{% else %}{{ default_system_variant.price|floatformat:2 }}{% endif %}</span>
+                        </div>
+                        <button type="button" id="system-mobile-sticky-atc" class="single-product-mobile-sticky-bar__button">{{ default_system_variant.cart_cta_label|default:"Out of Stock" }}</button>
                     </div>
 
                     <div class="single-product-specs">

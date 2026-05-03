@@ -78,6 +78,9 @@ function renderVariant(variant) {
   const packageItems = document.getElementById('system-variant-package-items');
   const addToCartButton = document.getElementById('spatc');
   const specifications = document.getElementById('longdescription');
+  const stickyTier = document.getElementById('system-mobile-sticky-tier');
+  const stickyPrice = document.getElementById('system-mobile-sticky-price');
+  const stickyAtc = document.getElementById('system-mobile-sticky-atc');
 
   // NEW: System variant long description is pre-rendered HTML from server-side markdown conversion.
   if (specifications) specifications.innerHTML = variant.long_description_html || '';
@@ -113,6 +116,20 @@ function renderVariant(variant) {
     addToCartButton.dataset.gaCurrency = variant.currency || addToCartButton.dataset.gaCurrency || 'USD';
     addToCartButton.disabled = !variant.can_purchase;
     addToCartButton.textContent = variant.cart_cta_label || 'Out of Stock';
+  }
+
+  if (stickyTier) {
+    stickyTier.textContent = variant.tier
+      ? variant.tier.charAt(0).toUpperCase() + variant.tier.slice(1)
+      : (variant.title || 'Selected Tier');
+  }
+  if (stickyPrice) {
+    const activePrice = variant.sale_price ?? variant.price;
+    stickyPrice.textContent = `$ ${Number(activePrice).toFixed(2)}`;
+  }
+  if (stickyAtc) {
+    stickyAtc.disabled = !variant.can_purchase;
+    stickyAtc.textContent = variant.cart_cta_label || 'Out of Stock';
   }
 
   if (gallery) {
@@ -172,6 +189,9 @@ export function initSystemVariants() {
   const variantDataElement = document.getElementById('variant-data');
   const selector = document.getElementById('system-variant-selector');
   const addToCartButton = document.getElementById('spatc');
+  const stickyBar = document.getElementById('system-mobile-sticky-bar');
+  const stickyAtc = document.getElementById('system-mobile-sticky-atc');
+  const gallery = document.getElementById('system-variant-gallery');
 
   if (!variantDataElement || !selector || !addToCartButton) {
     return;
@@ -197,8 +217,23 @@ export function initSystemVariants() {
     });
   }
 
+  function syncGalleryArrows() {
+    // Keep arrow affordances accurate so users can discover hidden thumbnails on mobile.
+    if (!gallery) return;
+    const leftArrow = document.querySelector('[data-gallery-scroll="left"]');
+    const rightArrow = document.querySelector('[data-gallery-scroll="right"]');
+    if (!leftArrow || !rightArrow) return;
+
+    const canScroll = gallery.scrollWidth > gallery.clientWidth + 2;
+    leftArrow.disabled = !canScroll || gallery.scrollLeft <= 0;
+    rightArrow.disabled = !canScroll || (gallery.scrollLeft + gallery.clientWidth >= gallery.scrollWidth - 1);
+    leftArrow.classList.toggle('is-hidden', !canScroll);
+    rightArrow.classList.toggle('is-hidden', !canScroll);
+  }
+
   renderVariant(selectedVariant);
   syncActiveState();
+  syncGalleryArrows();
 
   selector.addEventListener('click', (event) => {
     const targetButton = event.target.closest('.system-variant-option');
@@ -216,6 +251,38 @@ export function initSystemVariants() {
     selectedVariant = found;
     renderVariant(selectedVariant);
     syncActiveState();
+    syncGalleryArrows();
+  });
+
+  gallery?.addEventListener('scroll', syncGalleryArrows, { passive: true });
+  window.addEventListener('resize', syncGalleryArrows);
+
+  document.querySelector('[data-gallery-scroll="left"]')?.addEventListener('click', () => {
+    gallery?.scrollBy({ left: -180, behavior: 'smooth' });
+  });
+
+  document.querySelector('[data-gallery-scroll="right"]')?.addEventListener('click', () => {
+    gallery?.scrollBy({ left: 180, behavior: 'smooth' });
+  });
+
+  if (stickyBar) {
+    const purchaseBlock = document.querySelector('.single-product-purchase');
+    const mobileQuery = window.matchMedia('(max-width: 980px)');
+    // Show sticky add-to-cart only after primary CTA scrolls out of view on mobile.
+    const observer = new IntersectionObserver((entries) => {
+      const [entry] = entries;
+      const showBar = mobileQuery.matches && !entry.isIntersecting;
+      stickyBar.classList.toggle('is-visible', showBar);
+      stickyBar.setAttribute('aria-hidden', showBar ? 'false' : 'true');
+    }, { threshold: 0.15 });
+
+    if (purchaseBlock) {
+      observer.observe(purchaseBlock);
+    }
+  }
+
+  stickyAtc?.addEventListener('click', () => {
+    addToCartButton.click();
   });
 
   addToCartButton.addEventListener('click', async () => {
