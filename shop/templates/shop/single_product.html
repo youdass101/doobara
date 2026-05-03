@@ -53,12 +53,6 @@
                         <div class="single-product-price-wrap">
                             <span class="single-product-price-label">Selected Variant</span>
                             <h2 id="system-variant-title" class="single-product-price">{{ default_system_variant.title }}</h2>
-                            {# NEW: Render pre-split system variant short description as bullet list items. #}
-                            <ul id="system-variant-short-description" class="single-product-spec-list">
-                                {% for line in default_system_variant.short_description_lines %}
-                                    <li>{{ line }}</li>
-                                {% endfor %}
-                            </ul>
                             <p id="system-variant-availability" class="single-product-availability {% if default_system_variant.can_purchase %}is-in-stock{% else %}is-out-of-stock{% endif %}">
                                 {{ default_system_variant.availability_label }}
                             </p>
@@ -83,6 +77,12 @@
                             {{ default_system_variant.cart_cta_label|default:"Out of Stock" }}
                         </button>
                     </div>
+                    {# Keep system variant CTA aligned with normal product flow: price -> CTA -> short description. #}
+                    <ul id="system-variant-short-description" class="single-product-spec-list">
+                        {% for line in default_system_variant.short_description_lines %}
+                            <li>{{ line }}</li>
+                        {% endfor %}
+                    </ul>
 
                     <div class="single-product-specs">
                         <h3>Included items</h3>

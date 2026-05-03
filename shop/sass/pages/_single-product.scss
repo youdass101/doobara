@@ -321,7 +321,12 @@
 
 @media (max-width: 640px) {
     .single-product-page {
-        padding: 28px 16px 72px;
+        padding: 18px 16px 64px;
+    }
+
+    .single-product-top {
+        gap: 14px;
+        margin-bottom: 14px;
     }
 
     .single-product-gallery,
@@ -337,7 +342,7 @@
     .card-surface,
     .single-product-video-card,
     .single-product-long-image-card {
-        padding: 18px;
+        padding: 14px 18px;
     }
 
     .single-product-gallery__main,
@@ -348,12 +353,39 @@
 
     .single-product-purchase {
         grid-template-columns: 1fr;
+        margin-bottom: 12px;
     }
 
     .single-product-thumb {
-        width: 68px;
-        height: 68px;
-        border-radius: 14px;
+        width: 58px;
+        height: 58px;
+        border-radius: 12px;
+    }
+
+    .single-product-gallery__thumbs {
+        /* Make mobile thumbnails swipeable horizontally while hiding overflowed items. */
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        padding-bottom: 2px;
+    }
+
+    .single-product-gallery__thumbs::-webkit-scrollbar {
+        display: none;
+    }
+
+    .single-product-title {
+        margin-bottom: 10px;
+    }
+
+    .single-product-price-row {
+        margin-bottom: 10px;
+    }
+
+    .system-variant-selector {
+        margin: 10px 0;
     }
 
     .single-product-price {
@@ -427,6 +459,15 @@
 
 @media (max-width: 768px) {
     .system-variant-selector {
-        grid-template-columns: 1fr;
+        /* Keep all tier options in one mobile row with horizontal scrolling when needed. */
+        grid-template-columns: repeat(3, minmax(108px, 1fr));
+        overflow-x: auto;
+        overflow-y: hidden;
+        padding-bottom: 2px;
+        scrollbar-width: none;
+    }
+
+    .system-variant-selector::-webkit-scrollbar {
+        display: none;
     }
 }
