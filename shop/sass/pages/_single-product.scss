@@ -345,6 +345,10 @@
         padding: 14px 18px;
     }
 
+    .single-product-gallery {
+        overflow: hidden;
+    }
+
     .single-product-gallery__main,
     .single-video,
     .single-product-image-long {
@@ -357,6 +361,7 @@
     }
 
     .single-product-thumb {
+        flex: 0 0 58px;
         width: 58px;
         height: 58px;
         border-radius: 12px;
@@ -364,9 +369,12 @@
 
     .single-product-gallery__thumbs {
         /* Make mobile thumbnails swipeable horizontally while hiding overflowed items. */
+        width: 100%;
+        max-width: 100%;
         flex-wrap: nowrap;
         overflow-x: auto;
         overflow-y: hidden;
+        overscroll-behavior-x: contain;
         -webkit-overflow-scrolling: touch;
         scrollbar-width: none;
         padding-bottom: 2px;
@@ -460,9 +468,12 @@
 @media (max-width: 768px) {
     .system-variant-selector {
         /* Keep all tier options in one mobile row with horizontal scrolling when needed. */
+        width: 100%;
+        max-width: 100%;
         grid-template-columns: repeat(3, minmax(108px, 1fr));
         overflow-x: auto;
         overflow-y: hidden;
+        overscroll-behavior-x: contain;
         padding-bottom: 2px;
         scrollbar-width: none;
     }
