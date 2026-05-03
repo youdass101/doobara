@@ -2811,6 +2811,7 @@ footer .footer-inner .footer-links a {
   padding: 28px;
   position: sticky;
   top: 110px;
+  min-width: 0;
 }
 
 .single-product-info__eyebrow {
@@ -3063,7 +3064,11 @@ footer .footer-inner .footer-links a {
 }
 @media (max-width: 640px) {
   .single-product-page {
-    padding: 28px 16px 72px;
+    padding: 18px 16px 64px;
+  }
+  .single-product-top {
+    gap: 14px;
+    margin-bottom: 14px;
   }
   .single-product-gallery,
   .single-product-info,
@@ -3077,7 +3082,10 @@ footer .footer-inner .footer-links a {
   .card-surface,
   .single-product-video-card,
   .single-product-long-image-card {
-    padding: 18px;
+    padding: 14px 18px;
+  }
+  .single-product-gallery {
+    overflow: hidden;
   }
   .single-product-gallery__main,
   .single-video,
@@ -3086,11 +3094,37 @@ footer .footer-inner .footer-links a {
   }
   .single-product-purchase {
     grid-template-columns: 1fr;
+    margin-bottom: 12px;
   }
   .single-product-thumb {
-    width: 68px;
-    height: 68px;
-    border-radius: 14px;
+    flex: 0 0 58px;
+    width: 58px;
+    height: 58px;
+    border-radius: 12px;
+  }
+  .single-product-gallery__thumbs {
+    /* Make mobile thumbnails swipeable horizontally while hiding overflowed items. */
+    width: 100%;
+    max-width: 100%;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    overscroll-behavior-x: contain;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: 2px;
+  }
+  .single-product-gallery__thumbs::-webkit-scrollbar {
+    display: none;
+  }
+  .single-product-title {
+    margin-bottom: 10px;
+  }
+  .single-product-price-row {
+    margin-bottom: 10px;
+  }
+  .system-variant-selector {
+    margin: 10px 0;
   }
   .single-product-price {
     font-size: 1.7rem;
@@ -3160,8 +3194,23 @@ footer .footer-inner .footer-links a {
 }
 
 @media (max-width: 768px) {
+  .single-product-page--system {
+    /* Prevent horizontal page drag on system-variant mobile view from wide internal rails. */
+    overflow-x: clip;
+  }
   .system-variant-selector {
-    grid-template-columns: 1fr;
+    /* Keep Basic/Advanced/Pro fitting in one mobile row without horizontal sliding. */
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    gap: 8px;
+  }
+  .system-variant-option {
+    min-width: 0;
+    width: 100%;
+    padding: 10px 8px;
   }
 }
 :root {
