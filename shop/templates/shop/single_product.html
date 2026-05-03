@@ -14,7 +14,7 @@
 {% block twitter_image %}{% if social_image %}{{ social_image }}{% else %}{{ request.scheme }}://{{ request.get_host }}{% static 'doobarashop/upload/images/logo-creation.png' %}{% endif %}{% endblock %}
 
 {% block body %}
-<section class="single-product-page">
+<section class="single-product-page {% if product.system %}single-product-page--system{% endif %}">
     <div class="single-product-shell">
         {% if product.system and system_variants %}
             <div class="single-product-top">

@@ -102,6 +102,7 @@
     padding: 28px;
     position: sticky;
     top: 110px;
+    min-width: 0;
 }
 
 .single-product-info__eyebrow {
@@ -466,16 +467,26 @@
 }
 
 @media (max-width: 768px) {
+    .single-product-page--system {
+        /* Prevent horizontal page drag on system-variant mobile view from wide internal rails. */
+        overflow-x: clip;
+    }
+
     .system-variant-selector {
-        /* Keep all tier options in one mobile row with horizontal scrolling when needed. */
+        /* Use a single-row horizontal rail to avoid grid min-content width stretching. */
+        display: flex;
+        flex-wrap: nowrap;
         width: 100%;
         max-width: 100%;
-        grid-template-columns: repeat(3, minmax(108px, 1fr));
         overflow-x: auto;
         overflow-y: hidden;
         overscroll-behavior-x: contain;
         padding-bottom: 2px;
         scrollbar-width: none;
+    }
+
+    .system-variant-option {
+        flex: 0 0 108px;
     }
 
     .system-variant-selector::-webkit-scrollbar {
