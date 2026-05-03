@@ -160,6 +160,10 @@
     font-size: 0.92rem;
 }
 
+.single-product-mobile-short-description {
+    margin-bottom: 14px;
+}
+
 .single-product-variant label,
 .single-product-qty-wrap label {
     display: block;
@@ -321,7 +325,12 @@
 
 @media (max-width: 640px) {
     .single-product-page {
-        padding: 28px 16px 72px;
+        padding: 16px 12px 56px;
+    }
+
+    .single-product-top {
+        gap: 12px;
+        margin-bottom: 12px;
     }
 
     .single-product-gallery,
@@ -329,7 +338,7 @@
     .card-surface,
     .single-product-video-card,
     .single-product-long-image-card {
-        border-radius: 22px;
+        border-radius: 18px;
     }
 
     .single-product-gallery,
@@ -337,27 +346,56 @@
     .card-surface,
     .single-product-video-card,
     .single-product-long-image-card {
-        padding: 18px;
+        padding: 12px;
     }
 
     .single-product-gallery__main,
     .single-video,
     .single-product-image-long {
-        border-radius: 18px;
+        border-radius: 14px;
+    }
+
+    .single-product-title {
+        margin: 0 0 10px;
+        font-size: clamp(1.5rem, 8vw, 2rem);
+    }
+
+    .single-product-price-row {
+        margin-bottom: 10px;
+    }
+
+    .single-product-price-label {
+        margin-bottom: 2px;
+    }
+
+    .single-product-availability {
+        margin: 0 0 6px;
     }
 
     .single-product-purchase {
         grid-template-columns: 1fr;
+        gap: 8px;
+        margin-bottom: 10px;
+    }
+
+    /* Make thumbs smaller and swipeable for mobile quick gallery browsing. */
+    .single-product-gallery__thumbs {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        gap: 8px;
+        padding-bottom: 2px;
+        -webkit-overflow-scrolling: touch;
     }
 
     .single-product-thumb {
-        width: 68px;
-        height: 68px;
-        border-radius: 14px;
+        width: 56px;
+        height: 56px;
+        min-width: 56px;
+        border-radius: 12px;
     }
 
     .single-product-price {
-        font-size: 1.7rem;
+        font-size: 1.55rem;
     }
 
     .single-product-info-table th,
@@ -426,7 +464,10 @@
 }
 
 @media (max-width: 768px) {
+    /* Keep tier options on one row and allow horizontal scroll on narrow devices. */
     .system-variant-selector {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(3, minmax(120px, 1fr));
+        overflow-x: auto;
+        padding-bottom: 2px;
     }
 }
