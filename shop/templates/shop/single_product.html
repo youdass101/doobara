@@ -34,6 +34,7 @@
                 <div class="single-product-info">
                     <span class="single-product-info__eyebrow">Doobara System</span>
                     <h1 class="single-product-title">{{ product.title }}</h1>
+                    <p class="single-product-promise">Control key devices, monitor electricity usage, and automate your setup between EDL and generator.</p>
 
                     <div class="system-variant-selector" id="system-variant-selector">
                         {% for variant in system_variants %}
@@ -42,6 +43,7 @@
                                 class="system-variant-option {% if default_system_variant.id == variant.id %}is-active{% endif %}"
                                 data-variant-id="{{ variant.id }}">
                                 <span class="system-variant-option__tier">{{ variant.tier|title }}</span>
+                                {% if variant.tier|lower == "advanced" %}<span class="system-variant-option__badge">Recommended</span>{% endif %}
                                 <span class="system-variant-option__price">
                                     $ {% if variant.sale_price %}{{ variant.sale_price|floatformat:2 }}{% else %}{{ variant.price|floatformat:2 }}{% endif %}
                                 </span>
@@ -82,6 +84,7 @@
                             {% if not default_system_variant.can_purchase %}disabled{% endif %}>
                             {{ default_system_variant.cart_cta_label|default:"Out of Stock" }}
                         </button>
+                        <a class="single-product-whatsapp-help" href="https://wa.me/96170856471?text=I%27m%20interested%20in%20the%20Power%20Control%20System" target="_blank" rel="noopener">Need help choosing a tier? WhatsApp us</a>
                     </div>
 
                     <div class="single-product-specs">
@@ -93,6 +96,14 @@
 
             {{ system_variants|json_script:"variant-data" }}
             {{ default_system_variant.id|json_script:"default-variant-id" }}
+            <div class="single-product-sticky-cart" id="system-sticky-cart" aria-hidden="true">
+                <div class="single-product-sticky-cart__details">
+                    <span id="system-sticky-tier" class="single-product-sticky-cart__tier">{{ default_system_variant.tier|title }}</span>
+                    <span id="system-sticky-price" class="single-product-sticky-cart__price">$ {% if default_system_variant.sale_price %}{{ default_system_variant.sale_price|floatformat:2 }}{% else %}{{ default_system_variant.price|floatformat:2 }}{% endif %}</span>
+                </div>
+                <button type="button" id="system-sticky-addtocart" class="single-product-addtocart single-product-sticky-cart__button" {% if not default_system_variant.can_purchase %}disabled{% endif %}>{{ default_system_variant.cart_cta_label|default:"Out of Stock" }}</button>
+            </div>
+
         {% else %}
             <div class="single-product-top">
                 <!-- Left: gallery -->
