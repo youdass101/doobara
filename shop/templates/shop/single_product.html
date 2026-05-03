@@ -28,7 +28,11 @@
                              loading="eager"
                              fetchpriority="high">
                     </div>
-                    <div id="system-variant-gallery" class="single-product-gallery__thumbs"></div>
+                    <div class="single-product-gallery__thumbs-wrap">
+                        <button type="button" class="single-product-thumbs-arrow single-product-thumbs-arrow--left" data-thumbs-nav="left" aria-label="Scroll thumbnails left">‹</button>
+                        <div id="system-variant-gallery" class="single-product-gallery__thumbs"></div>
+                        <button type="button" class="single-product-thumbs-arrow single-product-thumbs-arrow--right" data-thumbs-nav="right" aria-label="Scroll thumbnails right">›</button>
+                    </div>
                 </div>
 
                 <div class="single-product-info">
@@ -114,7 +118,9 @@
                         {% endif %}
                     </div>
 
-                    <div class="single-product-gallery__thumbs">
+                    <div class="single-product-gallery__thumbs-wrap">
+                        <button type="button" class="single-product-thumbs-arrow single-product-thumbs-arrow--left" data-thumbs-nav="left" aria-label="Scroll thumbnails left">‹</button>
+                        <div class="single-product-gallery__thumbs">
                         {% for image in product.all_images %}
                                 <button type="button" class="single-product-thumb">
                                     <img class="sp-thumb-image"
@@ -125,6 +131,8 @@
                                          loading="lazy">
                                 </button>
                         {% endfor %}
+                        </div>
+                        <button type="button" class="single-product-thumbs-arrow single-product-thumbs-arrow--right" data-thumbs-nav="right" aria-label="Scroll thumbnails right">›</button>
                     </div>
                 </div>
 
