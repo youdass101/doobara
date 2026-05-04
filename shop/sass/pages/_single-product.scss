@@ -318,11 +318,20 @@
     .single-product-info {
         position: static;
     }
+
+    .single-product-gallery {
+        padding-top: 5px;
+    }
+
+    .single-product-gallery__main{
+        margin-bottom: 5px;
+    }
+    
 }
 
 @media (max-width: 640px) {
     .single-product-page {
-        padding: 18px 16px 64px;
+        padding: 5px 16px 64px;
     }
 
     .single-product-top {
@@ -343,7 +352,7 @@
     .card-surface,
     .single-product-video-card,
     .single-product-long-image-card {
-        padding: 14px 18px;
+        padding: 1px 18px;
     }
 
     .single-product-gallery {

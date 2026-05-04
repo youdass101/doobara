@@ -263,7 +263,7 @@
 
 @media (max-width: 640px) {
     .shop-page {
-        padding: 36px 16px 72px;
+        padding: 10px 16px 72px;
     }
 
     .shop-filter-card {
@@ -303,5 +303,9 @@
 
     .shop-card__title {
         min-height: auto;
+    }
+
+    .shop-toolbar__intro {
+        display: none;
     }
 }
