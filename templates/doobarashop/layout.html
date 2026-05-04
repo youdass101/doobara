@@ -24,7 +24,7 @@
     {% if GOOGLE_SITE_VERIFICATION %}
     <meta name="google-site-verification" content="{{ GOOGLE_SITE_VERIFICATION }}">
     {% endif %}
-    {% if GOOGLE_ANALYTICS_ID %}
+    {% if TRACKING_ENABLED and GOOGLE_ANALYTICS_ID %}
     <script async src="https://www.googletagmanager.com/gtag/js?id={{ GOOGLE_ANALYTICS_ID }}"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -33,7 +33,7 @@
       gtag('config', '{{ GOOGLE_ANALYTICS_ID }}');
     </script>
     {% endif %}
-    {% if META_PIXEL_ID %}
+    {% if TRACKING_ENABLED and META_PIXEL_ID %}
     {# Meta Pixel: base code + PageView (global) #}
     <script>
       !function(f,b,e,v,n,t,s)
@@ -62,7 +62,7 @@
   </head>
 
   <body>
-    {% if META_PIXEL_ID %}
+    {% if TRACKING_ENABLED and META_PIXEL_ID %}
     {# Meta Pixel: noscript fallback #}
     <noscript>
       <img height="1" width="1" style="display:none"
@@ -101,6 +101,8 @@
           <div class="nav-right">
             <a href="https://wa.me/96170856471" 
               target="_blank" 
+              rel="noopener noreferrer"
+              id="whatsapp-header-link"
               class="whatsapp-btn">
                 WhatsApp
             </a>
@@ -189,9 +191,5 @@
       </footer>
     </div>
 
-    <script>
-      // just to keep the year auto-updated
-      document.getElementById("year").textContent = new Date().getFullYear();
-    </script>
   </body>
 </html>

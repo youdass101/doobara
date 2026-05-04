@@ -83,9 +83,26 @@ My Cart
 
                         <div class="cart-actions">
                             <div class="cart-coupon">
-                                <input type="text" placeholder="Coupon code">
-                                <button type="button">Apply Coupon</button>
+                                <form action="{% url 'apply_coupon' %}" method="post">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="next" value="{{ request.path }}">
+                                    <input type="text" name="code" placeholder="Coupon code" value="{{ coupon_code|default:'' }}">
+                                    <button type="submit">Apply Coupon</button>
+                                </form>
+                                {% if coupon_code %}
+                                    <form action="{% url 'remove_coupon' %}" method="post">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="next" value="{{ request.path }}">
+                                        <button type="submit">Remove Coupon</button>
+                                    </form>
+                                {% endif %}
                             </div>
+                            {% if coupon_feedback %}
+                                <p class="cart-coupon-feedback">{{ coupon_feedback.message }}</p>
+                            {% endif %}
+                            {% if coupon_error %}
+                                <p class="cart-coupon-error">{{ coupon_error }}</p>
+                            {% endif %}
 
                             <button class="cart-update-btn" id="update-cart-button" type="button">
                                 Update Cart
@@ -130,10 +147,16 @@ My Cart
                                 <span>Delivery</span>
                                 <strong id="ddelivery">{% if shipping_total > 0 %}$ {{shipping_total|floatformat:2}}{% else %}Free{% endif %}</strong>
                             </div>
+                            {% if coupon_discount > 0 %}
+                                <div class="cart-summary__row">
+                                    <span>Coupon{% if coupon_code %} ({{ coupon_code }}){% endif %}</span>
+                                    <strong id="dcoupon">- $ {{coupon_discount|floatformat:2}}</strong>
+                                </div>
+                            {% endif %}
 
                             <div class="cart-summary__row cart-summary__row--total">
                                 <span>Total</span>
-                                <strong id="dtotal">$ {{grand_total|floatformat:2}}</strong>
+                                <strong id="dtotal" data-coupon-discount="{{ coupon_discount|floatformat:2 }}">$ {{grand_total|floatformat:2}}</strong>
                             </div>
                         </div>
 

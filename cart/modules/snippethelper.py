@@ -5,7 +5,6 @@ from django.db import connection
 from django.db.utils import OperationalError, ProgrammingError
 
 from shop.models import *
-
 from ..models import *
 
 
@@ -257,10 +256,21 @@ def cart_pricing_breakdown(request):
     shipping_method = get_selected_shipping_method(request)
     shipping_price = Decimal(str(shipping_method.price if shipping_method else 0))
     subtotal_decimal = Decimal(str(subtotal))
-    total = subtotal_decimal + shipping_price
+    # Import lazily to avoid app-loading cycles from context processors at startup.
+    from promotions.services import get_coupon_pricing_for_request
+
+    coupon_pricing = get_coupon_pricing_for_request(request, subtotal_decimal)
+    total = (subtotal_decimal - coupon_pricing["coupon_discount"]) + shipping_price
+    if total < 0:
+        total = Decimal("0.00")
     return {
         "subtotal": subtotal_decimal,
         "shipping_price": shipping_price,
         "total": total,
         "shipping_method": shipping_method,
+        "coupon_code": coupon_pricing["coupon_code"],
+        "coupon": coupon_pricing["coupon"],
+        "coupon_valid": coupon_pricing["coupon_valid"],
+        "coupon_discount": coupon_pricing["coupon_discount"],
+        "coupon_error": coupon_pricing["coupon_error"],
     }

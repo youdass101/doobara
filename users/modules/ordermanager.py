@@ -5,6 +5,12 @@ from cart.modules.snippethelper import *
 from django.db import transaction
 from django.template.loader import render_to_string
 from django.core.mail import EmailMultiAlternatives
+from promotions.services import (
+    check_usage_limits_atomic,
+    record_coupon_usage,
+    remove_coupon_from_session,
+    snapshot_coupon_to_order,
+)
 
 
 def _build_checkout_error_form(message):
@@ -92,6 +98,15 @@ def createorder(request, form, new):
 
     # Centralized pricing calculation to keep cart/checkout/order totals consistent.
     pricing = cart_pricing_breakdown(request)
+    # Reuse the coupon validation already embedded in cart_pricing_breakdown()
+    # so order totals and coupon snapshot/usage are based on one consistent read.
+    coupon_pricing = {
+        "coupon_code": pricing.get("coupon_code", ""),
+        "coupon": pricing.get("coupon"),
+        "coupon_valid": pricing.get("coupon_valid", False),
+        "coupon_discount": pricing.get("coupon_discount", 0),
+        "coupon_error": pricing.get("coupon_error", ""),
+    }
     total = "{:.2f}".format(pricing["total"])
     shipping_method = pricing["shipping_method"]
     shipping_label = shipping_method.label if shipping_method else ""
@@ -101,6 +116,13 @@ def createorder(request, form, new):
     # Create order and move items in one transaction so partial writes cannot happen.
     # Also use bulk_create for order items to minimize insert queries.
     with transaction.atomic():
+        if coupon_pricing["coupon_valid"]:
+            # Re-check limits under row lock so concurrent checkouts cannot over-redeem capped coupons.
+            usage_ok, usage_error, locked_coupon = check_usage_limits_atomic(coupon_pricing["coupon"], user)
+            if not usage_ok:
+                return (False, _build_checkout_error_form(usage_error))
+            coupon_pricing["coupon"] = locked_coupon
+
         # is instance 
         # create an new order object model
         order = Orders.objects.create(
@@ -111,6 +133,8 @@ def createorder(request, form, new):
             shipping_method=shipping_method,
             shipping_label=shipping_label,
             shipping_price=shipping_price,
+            coupon_code=coupon_pricing["coupon_code"] if coupon_pricing["coupon_valid"] else "",
+            coupon_discount_amount=coupon_pricing["coupon_discount"] if coupon_pricing["coupon_valid"] else 0,
         )
 
         # NEW: Convert each cart row into a variant-aware immutable purchase snapshot.
@@ -128,6 +152,11 @@ def createorder(request, form, new):
             ]
         )
         user.mycart.items.filter(id__in=[item.id for item in cart_items]).delete()
+        if coupon_pricing["coupon_valid"]:
+            # Snapshot and usage tracking happen only after a successful committed order.
+            snapshot_coupon_to_order(order, coupon_pricing)
+            record_coupon_usage(order, coupon_pricing)
+            remove_coupon_from_session(request)
     
     return (True, order)
 

@@ -14,6 +14,7 @@ from .modules.snippethelper import (
     get_active_shipping_methods,
     set_selected_shipping_method,
 )
+from promotions.services import pop_coupon_feedback
 
 
 @never_cache
@@ -21,11 +22,17 @@ def cart(request):
     cm = CartManager(request).cart_page()
     pricing = cart_pricing_breakdown(request)
     shipping_methods = get_active_shipping_methods()
+    coupon_feedback = pop_coupon_feedback(request)
     return render(request, "cart/cart.html", {
         "cart": cm,
         "subtotal": pricing["subtotal"],
         "shipping_total": pricing["shipping_price"],
         "grand_total": pricing["total"],
+        "coupon_code": pricing["coupon_code"],
+        "coupon_discount": pricing["coupon_discount"],
+        "coupon_valid": pricing["coupon_valid"],
+        "coupon_error": pricing["coupon_error"],
+        "coupon_feedback": coupon_feedback,
         "selected_shipping_method": pricing["shipping_method"],
         "shipping_methods": shipping_methods,
     })
@@ -94,6 +101,7 @@ def checkout(request):
         set_selected_shipping_method(request, int(request.POST["shipping_method_id"]))
 
     pricing = cart_pricing_breakdown(request)
+    coupon_feedback = pop_coupon_feedback(request)
     output = {"form": Delivery_Information(),
             "cart":cm.cart_page(),
             "address_id":aid, 
@@ -101,6 +109,11 @@ def checkout(request):
             "subtotal": pricing["subtotal"],
             "shipping_total": pricing["shipping_price"],
             "grand_total": pricing["total"],
+            "coupon_code": pricing["coupon_code"],
+            "coupon_discount": pricing["coupon_discount"],
+            "coupon_valid": pricing["coupon_valid"],
+            "coupon_error": pricing["coupon_error"],
+            "coupon_feedback": coupon_feedback,
             "selected_shipping_method": pricing["shipping_method"],
             "shipping_methods": get_active_shipping_methods(),}
 
