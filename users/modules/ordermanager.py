@@ -15,7 +15,9 @@ from promotions.services import (
 
 def _build_checkout_error_form(message):
     # Centralize non-field checkout errors so caller can re-render checkout safely.
-    form = Delivery_Information()
+    # Call full_clean() first so cleaned_data exists before add_error() mutates form state.
+    form = Delivery_Information(data={})
+    form.full_clean()
     form.add_error(None, message)
     return form
 
