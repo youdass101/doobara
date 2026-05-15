@@ -76,6 +76,7 @@ function renderVariant(variant) {
   const mainImage = document.getElementById('system-variant-main-image');
   const gallery = document.getElementById('system-variant-gallery');
   const packageItems = document.getElementById('system-variant-package-items');
+  const galleryDots = document.getElementById('system-variant-gallery-dots');
   const addToCartButton = document.getElementById('spatc');
   const specifications = document.getElementById('longdescription');
 
@@ -117,6 +118,7 @@ function renderVariant(variant) {
 
   if (gallery) {
     gallery.innerHTML = '';
+    if (galleryDots) galleryDots.innerHTML = '';
     (variant.images || []).forEach((image, index) => {
       const button = document.createElement('button');
       button.type = 'button';
@@ -141,7 +143,29 @@ function renderVariant(variant) {
       }
 
       gallery.appendChild(button);
+
+      if (galleryDots && (variant.images || []).length > 1) {
+        const dot = document.createElement('button');
+        dot.type = 'button';
+        dot.className = 'single-product-gallery__dot';
+        dot.setAttribute('aria-label', `Go to image ${index + 1}`);
+        dot.addEventListener('click', () => {
+          if (mainImage) {
+            mainImage.src = image.url;
+            mainImage.alt = image.alt_text || variant.title;
+          }
+          galleryDots.querySelectorAll('button').forEach((node, dotIndex) => node.classList.toggle('is-active', dotIndex === index));
+        });
+        if (index === 0) {
+          dot.classList.add('is-active');
+        }
+        galleryDots.appendChild(dot);
+      }
     });
+
+    if (galleryDots && (variant.images || []).length <= 1) {
+      galleryDots.innerHTML = '';
+    }
 
     if (!(variant.images || []).length && mainImage) {
       mainImage.removeAttribute('src');
@@ -199,6 +223,39 @@ export function initSystemVariants() {
 
   renderVariant(selectedVariant);
   syncActiveState();
+
+  const mainMedia = document.querySelector('.single-product-gallery__main');
+  let touchStartX = 0;
+
+  if (mainMedia) {
+    mainMedia.addEventListener('touchstart', (event) => {
+      touchStartX = event.changedTouches[0].clientX;
+    }, { passive: true });
+
+    mainMedia.addEventListener('touchend', (event) => {
+      const images = selectedVariant && selectedVariant.images ? selectedVariant.images : [];
+      if (images.length <= 1) {
+        return;
+      }
+      const deltaX = event.changedTouches[0].clientX - touchStartX;
+      if (Math.abs(deltaX) < 30) {
+        return;
+      }
+
+      const mainImage = document.getElementById('system-variant-main-image');
+      const currentIndex = Math.max(0, images.findIndex((image) => image.url === (mainImage ? mainImage.src : '')));
+      const nextIndex = (currentIndex + (deltaX < 0 ? 1 : -1) + images.length) % images.length;
+      const nextImage = images[nextIndex];
+
+      if (mainImage && nextImage) {
+        mainImage.src = nextImage.url;
+        mainImage.alt = nextImage.alt_text || (selectedVariant ? selectedVariant.title : '');
+      }
+
+      const dots = document.querySelectorAll('#system-variant-gallery-dots .single-product-gallery__dot');
+      dots.forEach((dot, dotIndex) => dot.classList.toggle('is-active', dotIndex === nextIndex));
+    }, { passive: true });
+  }
 
   selector.addEventListener('click', (event) => {
     const targetButton = event.target.closest('.system-variant-option');

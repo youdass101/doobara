@@ -357,6 +357,13 @@
 
     .single-product-gallery {
         overflow: hidden;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    .single-product-gallery__main {
+        aspect-ratio: 1.18 / 1;
+        margin-bottom: 8px;
     }
 
     .single-product-gallery__main,
@@ -377,22 +384,7 @@
         border-radius: 12px;
     }
 
-    .single-product-gallery__thumbs {
-        /* Make mobile thumbnails swipeable horizontally while hiding overflowed items. */
-        width: 100%;
-        max-width: 100%;
-        flex-wrap: nowrap;
-        overflow-x: auto;
-        overflow-y: hidden;
-        overscroll-behavior-x: contain;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none;
-        padding-bottom: 2px;
-    }
-
-    .single-product-gallery__thumbs::-webkit-scrollbar {
-        display: none;
-    }
+    .single-product-gallery__thumbs { display: none; }
 
     .single-product-title {
         margin-bottom: 10px;
@@ -497,3 +489,39 @@
         padding: 10px 8px;
     }
 }
+
+
+.single-product-gallery__dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.single-product-gallery__dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    border: 0;
+    background: #d1d5db;
+}
+
+.single-product-gallery__dot.is-active { background: var.$ui-primary; }
+
+.single-product-whatsapp-help {
+    display: block;
+    margin-top: 10px;
+    text-align: center;
+    border: 1px solid #25D366;
+    color: #1f9b4d;
+    border-radius: 12px;
+    padding: 11px 12px;
+    font-weight: 700;
+}
+
+.single-product-hero-description {
+    margin: 0 0 10px;
+    color: var.$ui-text-soft;
+}
+
+.single-product-spec-list--hero { margin: 0 0 12px; }

@@ -4,18 +4,21 @@ export function initFooterAndWhatsapp() {
     yearElement.textContent = String(new Date().getFullYear());
   }
 
-  const whatsappHeaderLink = document.getElementById('whatsapp-header-link');
-  if (!whatsappHeaderLink) {
-    return;
-  }
-
   const pageTitle = document.title ? document.title.trim() : '';
+  const pageUrl = window.location.href;
   if (!pageTitle) {
     return;
   }
 
-  // Build a page-aware prefilled message so support can instantly see where the user came from.
-  const message = `Hi Doobara, I'm visiting: ${pageTitle}`;
+  // Reuse one shared WhatsApp prefilled message across header and product CTA links.
+  const message = `Hi Doobara, I'm visiting: ${pageTitle} (${pageUrl})`;
   const encodedMessage = encodeURIComponent(message);
-  whatsappHeaderLink.href = `${whatsappHeaderLink.href}?text=${encodedMessage}`;
+
+  document.querySelectorAll('#whatsapp-header-link, [data-whatsapp-help-link]').forEach((link) => {
+    if (!(link instanceof HTMLAnchorElement)) {
+      return;
+    }
+    const baseHref = link.href.split('?')[0];
+    link.href = `${baseHref}?text=${encodedMessage}`;
+  });
 }

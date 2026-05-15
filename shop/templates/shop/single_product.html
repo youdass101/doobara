@@ -29,11 +29,17 @@
                              fetchpriority="high">
                     </div>
                     <div id="system-variant-gallery" class="single-product-gallery__thumbs"></div>
+                    <div id="system-variant-gallery-dots" class="single-product-gallery__dots" aria-label="Image pagination"></div>
                 </div>
 
                 <div class="single-product-info">
                     <span class="single-product-info__eyebrow">Doobara System</span>
                     <h1 class="single-product-title">{{ product.title }}</h1>
+                    <ul id="system-variant-short-description" class="single-product-spec-list single-product-spec-list--hero">
+                        {% for line in default_system_variant.short_description_lines %}
+                            <li>{{ line }}</li>
+                        {% endfor %}
+                    </ul>
 
                     <div class="system-variant-selector" id="system-variant-selector">
                         {% for variant in system_variants %}
@@ -76,13 +82,14 @@
                             {% if not default_system_variant.can_purchase %}disabled{% endif %}>
                             {{ default_system_variant.cart_cta_label|default:"Out of Stock" }}
                         </button>
+                        <a href="https://wa.me/96170856471"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           class="single-product-whatsapp-help"
+                           data-whatsapp-help-link>
+                            Not sure which tier fits your setup? Ask us on WhatsApp
+                        </a>
                     </div>
-                    {# Keep system variant CTA aligned with normal product flow: price -> CTA -> short description. #}
-                    <ul id="system-variant-short-description" class="single-product-spec-list">
-                        {% for line in default_system_variant.short_description_lines %}
-                            <li>{{ line }}</li>
-                        {% endfor %}
-                    </ul>
 
                     <div class="single-product-specs">
                         <h3>Included items</h3>
@@ -123,12 +130,16 @@
                                 </button>
                         {% endfor %}
                     </div>
+                    <div class="single-product-gallery__dots" id="normal-gallery-dots" aria-label="Image pagination"></div>
                 </div>
 
                 <!-- Right: content / buy box -->
                 <div class="single-product-info">
                     <span class="single-product-info__eyebrow">Doobara Product</span>
                     <h1 class="single-product-title">{{ product.title }}</h1>
+                    {% if product.pshortdescription and product.pshortdescription.0 %}
+                        <p class="single-product-hero-description">{{ product.pshortdescription.0 }}</p>
+                    {% endif %}
 
                     <div class="single-product-price-row">
                         <div class="single-product-price-wrap">
@@ -182,6 +193,13 @@
                                 {% if not product.can_purchase %}disabled{% endif %}>
                             {{ product.cart_cta_label|default:"Out of Stock" }}
                         </button>
+                        <a href="https://wa.me/96170856471"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           class="single-product-whatsapp-help"
+                           data-whatsapp-help-link>
+                            Not sure which tier fits your setup? Ask us on WhatsApp
+                        </a>
                     </div>
 
                     <div class="single-product-trust">
