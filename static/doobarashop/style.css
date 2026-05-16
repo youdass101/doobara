@@ -3107,7 +3107,7 @@ footer .footer-inner .footer-links a {
   }
   .single-product-gallery {
     display: grid;
-    grid-template-columns: minmax(0, 54%) minmax(120px, 46%);
+    grid-template-columns: minmax(0, 46%) minmax(120px, 54%);
     align-items: stretch;
     -moz-column-gap: 0;
          column-gap: 0;
