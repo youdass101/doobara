@@ -65,43 +65,48 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    touch-action: pan-y;
+    cursor: grab;
 }
 
 .single-product-gallery__main img {
     width: 88%;
     height: 88%;
     object-fit: contain;
+    user-select: none;
+    transition: opacity 0.18s ease;
 }
 
 .single-product-gallery__thumbs {
     display: flex;
     flex-wrap: wrap;
-    gap: 12px;
+    justify-content: center;
+    gap: 10px;
 }
 
 .single-product-thumb {
-    width: 78px;
-    height: 78px;
+    width: 11px;
+    height: 11px;
     padding: 0;
-    border: 1px solid #dfe9f5;
-    border-radius: 18px;
-    background: #fff;
-    overflow: hidden;
+    border: 0;
+    border-radius: 999px;
+    background: #bfd0e4;
     cursor: pointer;
-    transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+    transition: transform 0.22s ease, background-color 0.22s ease, box-shadow 0.22s ease;
 }
 
-.single-product-thumb:hover {
-    transform: translateY(-2px);
-    border-color: rgba(21, 112, 239, 0.2);
-    box-shadow: 0 10px 22px rgba(15, 23, 42, 0.08);
+.single-product-thumb:hover,
+.single-product-thumb.is-active {
+    background: var.$ui-primary;
+    transform: scale(1.18);
+    box-shadow: 0 0 0 5px rgba(21, 112, 239, 0.12);
 }
 
-.single-product-thumb img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+.single-product-thumb:focus-visible {
+    outline: 2px solid var.$ui-primary;
+    outline-offset: 4px;
 }
+
 
 .single-product-info {
     padding: 28px;
@@ -392,24 +397,12 @@
         margin-bottom: 12px;
     }
 
-    .single-product-thumb {
-        flex: 0 0 58px;
-        width: 58px;
-        height: 58px;
-        border-radius: 12px;
-    }
-
     .single-product-gallery__thumbs {
-        /* Make mobile thumbnails swipeable horizontally while hiding overflowed items. */
+        /* Keep gallery dots centered and compact below the swipeable main image. */
         width: 100%;
         max-width: 100%;
-        flex-wrap: nowrap;
-        overflow-x: auto;
-        overflow-y: hidden;
-        overscroll-behavior-x: contain;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none;
-        padding-bottom: 2px;
+        justify-content: center;
+        padding: 10px 0 2px;
     }
 
     .single-product-gallery__thumbs::-webkit-scrollbar {

@@ -121,18 +121,23 @@ function renderVariant(variant) {
       const button = document.createElement('button');
       button.type = 'button';
       button.className = 'single-product-thumb';
-
-      const img = document.createElement('img');
-      img.className = 'sp-thumb-image';
-      img.src = image.url;
-      img.alt = image.alt_text || variant.title;
-
-      button.appendChild(img);
+      button.dataset.imageSrc = image.url;
+      button.dataset.imageAlt = image.alt_text || variant.title;
+      button.setAttribute('aria-label', `View image ${index + 1} of ${variant.images.length}`);
+      button.classList.toggle('is-active', index === 0);
+      button.setAttribute('aria-current', index === 0 ? 'true' : 'false');
       button.addEventListener('click', () => {
-        if (mainImage) {
-          mainImage.src = image.url;
-          mainImage.alt = image.alt_text || variant.title;
+        if (!mainImage) {
+          return;
         }
+
+        mainImage.src = image.url;
+        mainImage.alt = image.alt_text || variant.title;
+        gallery.querySelectorAll('.single-product-thumb').forEach((dot, dotIndex) => {
+          const isActive = dotIndex === index;
+          dot.classList.toggle('is-active', isActive);
+          dot.setAttribute('aria-current', isActive ? 'true' : 'false');
+        });
       });
 
       if (index === 0 && mainImage) {
@@ -142,6 +147,10 @@ function renderVariant(variant) {
 
       gallery.appendChild(button);
     });
+
+    // Let the shared gallery module bind swipe navigation after variant dots are rebuilt.
+    gallery.closest('.single-product-gallery')?.removeAttribute('data-gallery-ready');
+    document.dispatchEvent(new CustomEvent('productGallery:updated', { detail: { gallery: gallery.closest('.single-product-gallery') } }));
 
     if (!(variant.images || []).length && mainImage) {
       mainImage.removeAttribute('src');

@@ -113,13 +113,11 @@
 
                     <div class="single-product-gallery__thumbs">
                         {% for image in product.all_images %}
-                                <button type="button" class="single-product-thumb">
-                                    <img class="sp-thumb-image"
-                                         src="{{image.url }}"
-                                         alt="{{ image.alt_text }}"
-                                         width="78"
-                                         height="78"
-                                         loading="lazy">
+                                <button type="button"
+                                        class="single-product-thumb"
+                                        data-image-src="{{ image.url }}"
+                                        data-image-alt="{{ image.alt_text }}"
+                                        aria-label="View image {{ forloop.counter }} of {{ product.all_images|length }}">
                                 </button>
                         {% endfor %}
                     </div>
