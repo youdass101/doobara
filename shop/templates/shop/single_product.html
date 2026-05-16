@@ -19,6 +19,19 @@
         {% if product.system and system_variants %}
             <div class="single-product-top">
                 <div class="single-product-gallery">
+                    <div class="single-product-mobile-hero">
+                        <div class="single-product-mobile-hero__copy">
+                            <span class="single-product-info__eyebrow">Doobara System</span>
+                            <h1 class="single-product-title">{{ product.title }}</h1>
+                            <div class="single-product-mobile-hero__description">
+                                {% for line in default_system_variant.short_description_lines %}
+                                    {% if forloop.counter <= 3 %}
+                                        <p>{{ line }}</p>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
                     <div class="single-product-gallery__main">
                         <img id="system-variant-main-image"
                              src="{% if default_system_variant.thumbnail %}{{ default_system_variant.thumbnail }}{% elif product.main_image %}{{ product.main_image.url }}{% endif %}"
@@ -97,6 +110,19 @@
             <div class="single-product-top">
                 <!-- Left: gallery -->
                 <div class="single-product-gallery">
+                    <div class="single-product-mobile-hero">
+                        <div class="single-product-mobile-hero__copy">
+                            <span class="single-product-info__eyebrow">Doobara Product</span>
+                            <h1 class="single-product-title">{{ product.title }}</h1>
+                            <div class="single-product-mobile-hero__description">
+                                {% for line in product.pshortdescription %}
+                                    {% if forloop.counter <= 3 %}
+                                        <p>{{ line }}</p>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
                     <div class="single-product-gallery__main">
                         {% if product.main_image %}
                             <img id="spi"

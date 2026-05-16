@@ -53,6 +53,10 @@
     padding: 20px;
 }
 
+.single-product-mobile-hero {
+    display: none;
+}
+
 .single-product-gallery__main {
     width: 100%;
     aspect-ratio: 1 / 1;
@@ -105,6 +109,10 @@
 .single-product-thumb:focus-visible {
     outline: 2px solid var.$ui-primary;
     outline-offset: 4px;
+}
+
+.single-product-thumb img {
+    display: none;
 }
 
 
@@ -350,6 +358,12 @@
     }
 
     .single-product-gallery { 
+        display: grid;
+        grid-template-columns: minmax(0, 54%) minmax(120px, 46%);
+        align-items: stretch;
+        column-gap: 0;
+        min-height: 190px;
+        background: #fff;
         padding: 0 !important;
         margin: 0 !important;
         overflow: hidden;
@@ -357,17 +371,67 @@
 
     }
 
+    .single-product-mobile-hero {
+        display: flex;
+        align-items: center;
+        min-width: 0;
+        padding: 20px 0 18px 20px;
+        position: relative;
+        z-index: 1;
+    }
+
+    .single-product-mobile-hero__copy {
+        min-width: 0;
+        max-width: 190px;
+    }
+
+    .single-product-mobile-hero .single-product-info__eyebrow {
+        display: inline-flex;
+        margin-bottom: 12px;
+        padding: 6px 10px;
+        font-size: 0.58rem;
+        line-height: 1;
+        letter-spacing: 0.08em;
+    }
+
+    .single-product-mobile-hero .single-product-title {
+        margin: 0 0 10px;
+        font-size: clamp(1.45rem, 7.2vw, 2.15rem);
+        line-height: 1.02;
+        overflow-wrap: anywhere;
+    }
+
+    .single-product-mobile-hero__description {
+        display: grid;
+        gap: 2px;
+    }
+
+    .single-product-mobile-hero__description p {
+        margin: 0;
+        color: var.$ui-text;
+        font-size: 0.78rem;
+        line-height: 1.28;
+    }
+
     .single-product-gallery__main {
         margin-bottom: 0 !important;
-
+        min-height: 190px;
         background: none !important;
         aspect-ratio: auto;
-        justify-content: flex-end;
+        justify-content: center;
         border-radius: 0 !important;
         img {
-            width: 60%;
-            height: auto;
+            width: 128%;
+            max-width: none;
+            height: 100%;
+            max-height: 210px;
+            object-fit: contain;
+            object-position: center right;
         }
+    }
+
+    .single-product-gallery__thumbs {
+        grid-column: 1 / -1;
     }
 
 
@@ -411,6 +475,11 @@
 
     .single-product-title {
         margin-bottom: 10px;
+    }
+
+    .single-product-info > .single-product-info__eyebrow,
+    .single-product-info > .single-product-title {
+        display: none;
     }
 
     .single-product-price-row {
