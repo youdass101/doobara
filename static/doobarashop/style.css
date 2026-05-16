@@ -209,15 +209,16 @@ header .nav .nav-cart .carttotal {
 
 @media (max-width: 720px) {
   .nav {
-    padding-inline: 1rem;
+    padding: 0 !important;
   }
   .nav #mobile-menu-btn {
     display: flex;
+    padding-left: 10px;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    width: 60px; /* Set a fixed width */
-    height: 60px; /* Set a fixed height */
+    width: 40px; /* Set a fixed width */
+    height: 40px; /* Set a fixed height */
     cursor: pointer; /* Make the entire div clickable */
     background: none; /* Optional: Add a background if needed */
     border: none; /* Remove any default border styling */
@@ -235,7 +236,11 @@ header .nav .nav-cart .carttotal {
     pointer-events: none; /* Disable pointer events on child elements */
   }
   .nav .nav-logo {
-    width: 30% !important;
+    width: 20% !important;
+  }
+  .nav .whatsapp-btn {
+    padding: 4px 10px !important;
+    font-size: 0.9rem !important;
   }
   .nav .nav-links {
     display: none !important; /* simple: hide links on small screens */
@@ -247,7 +252,7 @@ header .nav .nav-cart .carttotal {
     margin-right: 0.7rem;
   }
   .nav .nav-cart .carttotal {
-    font-size: 0.68rem;
+    display: none !important;
   }
   #navigation-mobile {
     display: none;
@@ -2744,7 +2749,15 @@ footer .footer-inner .footer-links a {
   margin-bottom: 28px;
 }
 
-.single-product-gallery,
+@media (min-width: 690px) {
+  .single-product-gallery {
+    border-radius: 28px;
+    background: rgba(255, 255, 255, 0.86);
+    border: 1px solid rgba(255, 255, 255, 0.78);
+    backdrop-filter: blur(14px);
+    box-shadow: 0 18px 50px rgba(15, 23, 42, 0.08);
+  }
+}
 .single-product-info,
 .card-surface,
 .single-product-video-card,
@@ -3073,30 +3086,41 @@ footer .footer-inner .footer-links a {
 }
 @media (max-width: 640px) {
   .single-product-page {
-    padding: 5px 16px 64px;
+    padding: 0px 0px 64px;
   }
   .single-product-top {
     gap: 14px;
     margin-bottom: 14px;
   }
-  .single-product-gallery,
+  .single-product-gallery {
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: hidden;
+    border-radius: 0 !important;
+  }
+  .single-product-gallery__main {
+    margin-bottom: 0 !important;
+    background: none !important;
+    aspect-ratio: auto;
+    justify-content: flex-end;
+    border-radius: 0 !important;
+  }
+  .single-product-gallery__main img {
+    width: 60%;
+    height: auto;
+  }
   .single-product-info,
   .card-surface,
   .single-product-video-card,
   .single-product-long-image-card {
     border-radius: 22px;
   }
-  .single-product-gallery,
   .single-product-info,
   .card-surface,
   .single-product-video-card,
   .single-product-long-image-card {
     padding: 1px 18px;
   }
-  .single-product-gallery {
-    overflow: hidden;
-  }
-  .single-product-gallery__main,
   .single-video,
   .single-product-image-long {
     border-radius: 18px;
