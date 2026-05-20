@@ -106,13 +106,18 @@ function renderVariant(variant) {
   }
 
   if (addToCartButton) {
+    const addToCartLabel = addToCartButton.querySelector('.single-product-addtocart__label');
     addToCartButton.dataset.variantId = String(variant.id);
     addToCartButton.dataset.gaItemId = String(variant.id);
     addToCartButton.dataset.gaItemName = variant.title || '';
     addToCartButton.dataset.gaPrice = String(variant.sale_price ?? variant.price ?? 0);
     addToCartButton.dataset.gaCurrency = variant.currency || addToCartButton.dataset.gaCurrency || 'USD';
     addToCartButton.disabled = !variant.can_purchase;
-    addToCartButton.textContent = variant.cart_cta_label || 'Out of Stock';
+    if (addToCartLabel) {
+      addToCartLabel.textContent = variant.cart_cta_label || 'Out of Stock';
+    } else {
+      addToCartButton.textContent = variant.cart_cta_label || 'Out of Stock';
+    }
   }
 
   if (gallery) {

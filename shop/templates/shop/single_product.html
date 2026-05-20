@@ -23,13 +23,13 @@
                         <div class="single-product-mobile-hero__copy">
                             <span class="single-product-info__eyebrow">Doobara System</span>
                             <h1 class="single-product-title">{{ product.title }}</h1>
-                            <div class="single-product-mobile-hero__description">
+                            <!-- <div class="single-product-mobile-hero__description">
                                 {% for line in default_system_variant.short_description_lines %}
                                     {% if forloop.counter <= 3 %}
                                         <p>{{ line }}</p>
                                     {% endif %}
                                 {% endfor %}
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                     <div class="single-product-gallery__main">
@@ -87,20 +87,32 @@
                             data-ga-currency="{{ product.currency|default:'USD' }}"
                             data-ga-item-category="{% if product.pcategory.0 %}{{ product.pcategory.0.name|escapejs }}{% endif %}"
                             {% if not default_system_variant.can_purchase %}disabled{% endif %}>
-                            {{ default_system_variant.cart_cta_label|default:"Out of Stock" }}
+                            <i class="fas fa-shopping-cart" aria-hidden="true"></i>
+                            <span class="single-product-addtocart__label">{{ default_system_variant.cart_cta_label|default:"Out of Stock" }}</span>
                         </button>
+                        <a class="single-product-whatsapp"
+                           href="https://wa.me/96170856471"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           data-whatsapp-page-title>
+                            <i class="fab fa-whatsapp" aria-hidden="true"></i>
+                            <span class="single-product-whatsapp__copy">
+                                <strong>Not sure which tier fits your setup?</strong>
+                                <span>Ask us on WhatsApp</span>
+                            </span>
+                        </a>
                     </div>
                     {# Keep system variant CTA aligned with normal product flow: price -> CTA -> short description. #}
+                     <div class="single-product-specs">
+                        <h3>Included items</h3>
+                        <ul id="system-variant-package-items" class="system-variant-package-items"></ul>
+                    </div>
+
                     <ul id="system-variant-short-description" class="single-product-spec-list">
                         {% for line in default_system_variant.short_description_lines %}
                             <li>{{ line }}</li>
                         {% endfor %}
                     </ul>
-
-                    <div class="single-product-specs">
-                        <h3>Included items</h3>
-                        <ul id="system-variant-package-items" class="system-variant-package-items"></ul>
-                    </div>
                 </div>
             </div>
 
@@ -114,13 +126,13 @@
                         <div class="single-product-mobile-hero__copy">
                             <span class="single-product-info__eyebrow">Doobara Product</span>
                             <h1 class="single-product-title">{{ product.title }}</h1>
-                            <div class="single-product-mobile-hero__description">
+                            <!-- <div class="single-product-mobile-hero__description">
                                 {% for line in product.pshortdescription %}
                                     {% if forloop.counter <= 3 %}
                                         <p>{{ line }}</p>
                                     {% endif %}
                                 {% endfor %}
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                     <div class="single-product-gallery__main">
@@ -204,8 +216,20 @@
                                 data-ga-currency="{{ product.currency|default:'USD' }}"
                                 data-ga-item-category="{% if product.pcategory.0 %}{{ product.pcategory.0.name|escapejs }}{% endif %}"
                                 {% if not product.can_purchase %}disabled{% endif %}>
-                            {{ product.cart_cta_label|default:"Out of Stock" }}
+                            <i class="fas fa-shopping-cart" aria-hidden="true"></i>
+                            <span class="single-product-addtocart__label">{{ product.cart_cta_label|default:"Out of Stock" }}</span>
                         </button>
+                        <a class="single-product-whatsapp"
+                           href="https://wa.me/96170856471"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           data-whatsapp-page-title>
+                            <i class="fab fa-whatsapp" aria-hidden="true"></i>
+                            <span class="single-product-whatsapp__copy">
+                                <strong>Not sure which tier fits your setup?</strong>
+                                <span>Ask us on WhatsApp</span>
+                            </span>
+                        </a>
                     </div>
 
                     <div class="single-product-trust">
