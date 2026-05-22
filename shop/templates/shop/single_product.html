@@ -23,13 +23,13 @@
                         <div class="single-product-mobile-hero__copy">
                             <span class="single-product-info__eyebrow">Doobara System</span>
                             <h1 class="single-product-title">{{ product.title }}</h1>
-                            <!-- <div class="single-product-mobile-hero__description">
+                            <div class="single-product-mobile-hero__description">
                                 {% for line in default_system_variant.short_description_lines %}
                                     {% if forloop.counter <= 3 %}
                                         <p>{{ line }}</p>
                                     {% endif %}
                                 {% endfor %}
-                            </div> -->
+                            </div>
                         </div>
                     </div>
                     <div class="single-product-gallery__main">
@@ -108,11 +108,11 @@
                         <ul id="system-variant-package-items" class="system-variant-package-items"></ul>
                     </div>
 
-                    <ul id="system-variant-short-description" class="single-product-spec-list">
+                    <!-- <ul id="system-variant-short-description" class="single-product-spec-list">
                         {% for line in default_system_variant.short_description_lines %}
                             <li>{{ line }}</li>
                         {% endfor %}
-                    </ul>
+                    </ul> -->
                 </div>
             </div>
 
@@ -240,13 +240,13 @@
 
                     <div class="single-product-specs">
                         <h3>Specifications</h3>
-                        <div class="single-product-specs__content">
+                        <!-- <div class="single-product-specs__content">
                             <ul class="single-product-spec-list">
                                 {% for line in product.pshortdescription %}
                                 <li>{{ line }}</li>
                                 {% endfor %}
                             </ul>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -344,7 +344,7 @@
                 </div>
             </div>
 
-            <div class="single-product-dimention card-surface">
+            <!-- <div class="single-product-dimention card-surface">
                 <div class="single-product-section-head">
                     <h2>Additional Information</h2>
                 </div>
@@ -359,7 +359,7 @@
                         <td>{{ product.dimensions }}cm</td>
                     </tr>
                 </table>
-            </div>
+            </div> -->
         </div>
 
     </div>
