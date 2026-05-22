@@ -280,22 +280,7 @@
                 </div>
             {% endif %}
         {% endfor %}
-
-        <div class="single-product-details-grid">
-            <div class="single-product-long-desc card-surface">
-                <div class="single-product-section-head">
-                    <h2>Description</h2>
-                </div>
-                <div class="single-product-richtext" id="longdescription">
-                    {# NEW: Keep initial system variant long description consistent with switched state. #}
-                    {% if product.system and default_system_variant %}
-                        {{ default_system_variant.long_description_html|safe }}
-                    {% else %}
-                        {{ product.plongdescription|safe }}
-                    {% endif %}
-                </div>
-            </div>
-            {% if product_feature_cards %}
+        {% if product_feature_cards %}
                 <div class="single-product-feature-card card-surface">
                     <div class="single-product-section-head">
                         <h2>Why you&rsquo;ll love it</h2>
@@ -318,13 +303,26 @@
                     </div>
                 </div>
             {% endif %}
+        <div class="single-product-details-grid">
+            <div class="single-product-long-desc card-surface">
+                <div class="single-product-section-head">
+                    <h2>Description</h2>
+                </div>
+                <div class="single-product-richtext" id="longdescription">
+                    {# NEW: Keep initial system variant long description consistent with switched state. #}
+                    {% if product.system and default_system_variant %}
+                        {{ default_system_variant.long_description_html|safe }}
+                    {% else %}
+                        {{ product.plongdescription|safe }}
+                    {% endif %}
+                </div>
+            </div>
+            
 
             {% if service_badges %}
                 <div class="single-product-service-card card-surface">
-                    <div class="single-product-section-head">
-                        <h2>Delivery &amp; Support</h2>
-                    </div>
-                    <div class="single-product-benefit-grid">
+                
+                    <div class="single-product-benefit-grid service-badges-fork">
                         {% for badge in service_badges %}
                             <article class="single-product-benefit-item">
                                 {% if badge.icon_url %}
