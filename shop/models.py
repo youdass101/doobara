@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.exceptions import ValidationError
+from django.core.validators import FileExtensionValidator
 from .modeling.serialize_helper import *
 from django.dispatch import receiver
 from django.urls import reverse
@@ -173,6 +174,75 @@ class Product(models.Model):
     def serialize(self, tag):
         # function at helper file 
         return product_serialize(self, tag)
+
+
+class ProductFeature(models.Model):
+    title = models.CharField(max_length=255)
+    description = models.TextField(blank=True)
+    icon = models.FileField(
+        upload_to="product_features/icons/",
+        blank=True,
+        validators=[
+            FileExtensionValidator(allowed_extensions=["svg", "png", "webp", "jpg", "jpeg"])
+        ],
+    )
+    is_active = models.BooleanField(default=True, db_index=True)
+    sort_order = models.PositiveSmallIntegerField(default=0)
+
+    class Meta:
+        ordering = ["sort_order", "title"]
+
+    def __str__(self):
+        return self.title
+
+
+class ProductFeatureAssignment(models.Model):
+    product = models.ForeignKey(
+        "Product",
+        related_name="feature_assignments",
+        on_delete=models.CASCADE,
+    )
+    feature = models.ForeignKey(
+        "ProductFeature",
+        related_name="product_assignments",
+        on_delete=models.CASCADE,
+    )
+    sort_order = models.PositiveSmallIntegerField(default=0)
+    custom_title = models.CharField(max_length=255, blank=True)
+    custom_description = models.TextField(blank=True)
+
+    class Meta:
+        ordering = ["sort_order", "id"]
+        constraints = [
+            models.UniqueConstraint(
+                fields=["product", "feature"],
+                name="shop_unique_product_feature_assignment",
+            ),
+        ]
+
+    def __str__(self):
+        return f"{self.product.name} → {self.feature.title}"
+
+
+class ServiceBadge(models.Model):
+    title = models.CharField(max_length=255)
+    description = models.TextField(blank=True)
+    icon = models.FileField(
+        upload_to="service_badges/icons/",
+        blank=True,
+        validators=[
+            FileExtensionValidator(allowed_extensions=["svg", "png", "webp", "jpg", "jpeg"])
+        ],
+    )
+    is_active = models.BooleanField(default=True, db_index=True)
+    is_global_default = models.BooleanField(default=False, db_index=True)
+    sort_order = models.PositiveSmallIntegerField(default=0)
+
+    class Meta:
+        ordering = ["sort_order", "title"]
+
+    def __str__(self):
+        return self.title
 
 class Hero_Card(models.Model):
     title = models.CharField(max_length=255)
