@@ -179,7 +179,7 @@ class Product(models.Model):
 class ProductFeature(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField(blank=True)
-    icon = models.ImageField(
+    icon = models.FileField(
         upload_to="product_features/icons/",
         blank=True,
         validators=[
@@ -227,7 +227,7 @@ class ProductFeatureAssignment(models.Model):
 class ServiceBadge(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField(blank=True)
-    icon = models.ImageField(
+    icon = models.FileField(
         upload_to="service_badges/icons/",
         blank=True,
         validators=[

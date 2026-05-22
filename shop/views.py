@@ -20,6 +20,25 @@ _JSON_SCRIPT_ESCAPES = {
 }
 
 
+def _safe_uploaded_icon_url(file_field):
+    """
+    Return a safe media URL for uploaded icon files.
+    Guards against legacy bad values (e.g. raw SVG/HTML strings previously
+    stored in icon fields) so templates never emit broken /media/<svg...> URLs.
+    """
+    if not file_field:
+        return ""
+    file_name = (getattr(file_field, "name", "") or "").strip()
+    if not file_name:
+        return ""
+    if "<" in file_name or ">" in file_name or file_name.lower().startswith("data:"):
+        return ""
+    try:
+        return file_field.url
+    except ValueError:
+        return ""
+
+
 def _pick_thumbnail_from_prefetched(images):
     """
     Return the thumbnail image object from an already-prefetched image iterable.
@@ -308,7 +327,7 @@ def single_product(request, locat=None, slug=None):
         product_feature_cards.append(
             {
                 # Keep template rendering simple and safe: only expose URL, never raw HTML.
-                "icon_url": feature.icon.url if feature.icon else "",
+                "icon_url": _safe_uploaded_icon_url(feature.icon),
                 "title": assignment.custom_title or feature.title,
                 "description": assignment.custom_description or feature.description,
             }
@@ -325,7 +344,7 @@ def single_product(request, locat=None, slug=None):
             service_badges.append(
                 {
                     # Keep template rendering simple and safe: only expose URL, never raw HTML.
-                    "icon_url": badge.icon.url if badge.icon else "",
+                    "icon_url": _safe_uploaded_icon_url(badge.icon),
                     "title": badge.title,
                     "description": badge.description,
                 }
