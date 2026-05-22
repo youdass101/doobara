@@ -319,6 +319,9 @@
     margin-bottom: 24px;
 }
 
+.single-product-service-card {
+    background-color: #f4eee3;
+}
 .single-product-benefit-grid {
     display: grid;
     grid-template-columns: repeat(5, minmax(0, 1fr));
@@ -441,10 +444,6 @@
     .single-product-gallery__main{
         margin-bottom: 5px;
     }
-
-    .single-product-benefit-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
     
 }
 
@@ -533,8 +532,8 @@
 
     .single-product-gallery__thumbs {
         grid-column: 1 / -1;
-        padding-top: 0px !important;
-        padding-bottom: 15px !important;
+        padding-top: 10px !important;
+        padding-bottom: 10px !important;
     }
 
     .single-product-info{
@@ -600,8 +599,14 @@
     }
 
     .single-product-benefit-grid {
-        grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
         gap: 5px;
+    }
+
+    .service-badges-fork {
+        grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+        padding-top: 10px !important;
+
     }
 
     .single-product-benefit-item {
@@ -630,16 +635,6 @@
     }
 }
 
-@media (max-width: 420px) {
-    .single-product-benefit-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .single-product-benefit-item__icon {
-        width: 28px;
-        height: 28px;
-    }
-}
 
 .system-variant-selector {
     display: grid;

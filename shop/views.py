@@ -209,6 +209,7 @@ def single_product(request, locat=None, slug=None):
     parent_product = get_object_or_404(
         Product.objects.prefetch_related(
             "feature_assignments__feature",
+            "service_badge_assignments__badge",
             "normal_variants",
         ),
         Q(slug=lookup_key) | Q(name=lookup_key),
@@ -333,10 +334,26 @@ def single_product(request, locat=None, slug=None):
             }
         )
 
-    # Service badges are global defaults selected in admin.
-    # They are rendered for system products without product-level assignment setup.
+    # Build service badges from product-level assignments, mirroring feature cards.
+    # If a system product has no explicit assignments, fallback to global defaults.
     service_badges = []
-    if parent_product.is_system:
+    for assignment in sorted(
+        parent_product.service_badge_assignments.all(),
+        key=lambda item: (item.sort_order, item.id),
+    ):
+        badge = assignment.badge
+        if not badge or not badge.is_active:
+            continue
+        service_badges.append(
+            {
+                # Keep template rendering simple and safe: only expose URL, never raw HTML.
+                "icon_url": _safe_uploaded_icon_url(badge.icon),
+                "title": assignment.custom_title or badge.title,
+                "description": assignment.custom_description or badge.description,
+            }
+        )
+
+    if parent_product.is_system and not service_badges:
         for badge in ServiceBadge.objects.filter(
             is_active=True,
             is_global_default=True,

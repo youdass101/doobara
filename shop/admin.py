@@ -15,6 +15,7 @@ from .models import (
     ProductFeature,
     ProductFeatureAssignment,
     ServiceBadge,
+    ServiceBadgeAssignment,
 )
 
 
@@ -70,6 +71,14 @@ class ProductFeatureAssignmentInline(admin.TabularInline):
     extra = 0
     fields = ("feature", "sort_order", "custom_title", "custom_description")
     autocomplete_fields = ("feature",)
+    ordering = ("sort_order", "id")
+
+
+class ServiceBadgeAssignmentInline(admin.TabularInline):
+    model = ServiceBadgeAssignment
+    extra = 0
+    fields = ("badge", "sort_order", "custom_title", "custom_description")
+    autocomplete_fields = ("badge",)
     ordering = ("sort_order", "id")
 
 
@@ -138,7 +147,13 @@ class ProductAdmin(ImportExportActionModelAdmin):
     readonly_fields = ("stock", "created_time", "updated_time")
     prepopulated_fields = {"slug": ("name",)}
     filter_horizontal = ("category",)
-    inlines = (ProductImageInline, ProductVariantInline, NormalProductVariantInline, ProductFeatureAssignmentInline)
+    inlines = (
+        ProductImageInline,
+        ProductVariantInline,
+        NormalProductVariantInline,
+        ProductFeatureAssignmentInline,
+        ServiceBadgeAssignmentInline,
+    )
     fieldsets = (
         (
             "Basic info",
