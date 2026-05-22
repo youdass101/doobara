@@ -58,6 +58,9 @@
                                 <span class="system-variant-option__price">
                                     $ {% if variant.sale_price %}{{ variant.sale_price|floatformat:2 }}{% else %}{{ variant.price|floatformat:2 }}{% endif %}
                                 </span>
+                                <span class="system-variant-option__items-count">
+                                    {{ variant.package_items|length }} items
+                                </span>
                             </button>
                         {% endfor %}
                     </div>
