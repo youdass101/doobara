@@ -307,7 +307,8 @@ def single_product(request, locat=None, slug=None):
             continue
         product_feature_cards.append(
             {
-                "icon": feature.icon,
+                # Keep template rendering simple and safe: only expose URL, never raw HTML.
+                "icon_url": feature.icon.url if feature.icon else "",
                 "title": assignment.custom_title or feature.title,
                 "description": assignment.custom_description or feature.description,
             }
@@ -323,7 +324,8 @@ def single_product(request, locat=None, slug=None):
         ).order_by("sort_order", "title"):
             service_badges.append(
                 {
-                    "icon": badge.icon,
+                    # Keep template rendering simple and safe: only expose URL, never raw HTML.
+                    "icon_url": badge.icon.url if badge.icon else "",
                     "title": badge.title,
                     "description": badge.description,
                 }

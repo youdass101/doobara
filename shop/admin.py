@@ -376,17 +376,35 @@ class HeroCardAdmin(ImportExportActionModelAdmin):
 
 @admin.register(ProductFeature)
 class ProductFeatureAdmin(ImportExportActionModelAdmin):
-    list_display = ("title", "is_active", "sort_order")
+    list_display = ("title", "icon_preview", "is_active", "sort_order")
     search_fields = ("title", "description")
     list_filter = ("is_active",)
     list_editable = ("is_active", "sort_order")
     ordering = ("sort_order", "title")
+    fields = ("title", "description", "icon", "icon_preview", "is_active", "sort_order")
+    readonly_fields = ("icon_preview",)
+
+    def icon_preview(self, obj):
+        if obj.icon:
+            return format_html('<img src="{}" style="height: 28px; width: 28px; object-fit: contain;" />', obj.icon.url)
+        return "-"
+
+    icon_preview.short_description = "Icon"
 
 
 @admin.register(ServiceBadge)
 class ServiceBadgeAdmin(ImportExportActionModelAdmin):
-    list_display = ("title", "is_active", "is_global_default", "sort_order")
+    list_display = ("title", "icon_preview", "is_active", "is_global_default", "sort_order")
     search_fields = ("title", "description")
     list_filter = ("is_active", "is_global_default")
     list_editable = ("is_active", "is_global_default", "sort_order")
     ordering = ("sort_order", "title")
+    fields = ("title", "description", "icon", "icon_preview", "is_active", "is_global_default", "sort_order")
+    readonly_fields = ("icon_preview",)
+
+    def icon_preview(self, obj):
+        if obj.icon:
+            return format_html('<img src="{}" style="height: 28px; width: 28px; object-fit: contain;" />', obj.icon.url)
+        return "-"
+
+    icon_preview.short_description = "Icon"

@@ -264,8 +264,11 @@
                 <div class="single-product-benefit-grid">
                     {% for feature in product_feature_cards %}
                         <article class="single-product-benefit-item">
-                            {% if feature.icon %}
-                                <span class="single-product-benefit-item__icon" aria-hidden="true">{{ feature.icon }}</span>
+                            {% if feature.icon_url %}
+                                <img class="single-product-benefit-item__icon"
+                                     src="{{ feature.icon_url }}"
+                                     alt="{{ feature.title }} icon"
+                                     loading="lazy">
                             {% endif %}
                             <h3>{{ feature.title }}</h3>
                             {% if feature.description %}
@@ -285,8 +288,11 @@
                 <div class="single-product-benefit-grid single-product-benefit-grid--service">
                     {% for badge in service_badges %}
                         <article class="single-product-benefit-item single-product-benefit-item--service">
-                            {% if badge.icon %}
-                                <span class="single-product-benefit-item__icon" aria-hidden="true">{{ badge.icon }}</span>
+                            {% if badge.icon_url %}
+                                <img class="single-product-benefit-item__icon"
+                                     src="{{ badge.icon_url }}"
+                                     alt="{{ badge.title }} icon"
+                                     loading="lazy">
                             {% endif %}
                             <h3>{{ badge.title }}</h3>
                             {% if badge.description %}

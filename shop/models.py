@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.exceptions import ValidationError
+from django.core.validators import FileExtensionValidator
 from .modeling.serialize_helper import *
 from django.dispatch import receiver
 from django.urls import reverse
@@ -178,7 +179,13 @@ class Product(models.Model):
 class ProductFeature(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField(blank=True)
-    icon = models.CharField(max_length=255, blank=True)
+    icon = models.ImageField(
+        upload_to="product_features/icons/",
+        blank=True,
+        validators=[
+            FileExtensionValidator(allowed_extensions=["svg", "png", "webp", "jpg", "jpeg"])
+        ],
+    )
     is_active = models.BooleanField(default=True, db_index=True)
     sort_order = models.PositiveSmallIntegerField(default=0)
 
@@ -220,7 +227,13 @@ class ProductFeatureAssignment(models.Model):
 class ServiceBadge(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField(blank=True)
-    icon = models.CharField(max_length=255, blank=True)
+    icon = models.ImageField(
+        upload_to="service_badges/icons/",
+        blank=True,
+        validators=[
+            FileExtensionValidator(allowed_extensions=["svg", "png", "webp", "jpg", "jpeg"])
+        ],
+    )
     is_active = models.BooleanField(default=True, db_index=True)
     is_global_default = models.BooleanField(default=False, db_index=True)
     sort_order = models.PositiveSmallIntegerField(default=0)

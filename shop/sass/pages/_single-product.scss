@@ -333,10 +333,11 @@
 }
 
 .single-product-benefit-item__icon {
-    display: inline-flex;
+    display: block;
     margin-bottom: 8px;
-    font-size: 1.15rem;
-    color: var.$ui-primary;
+    width: 34px;
+    height: 34px;
+    object-fit: contain;
 }
 
 .single-product-benefit-item h3 {
@@ -594,6 +595,11 @@
         padding: 12px;
     }
 
+    .single-product-benefit-item__icon {
+        width: 30px;
+        height: 30px;
+    }
+
     .single-product-info-table th,
     .single-product-info-table td {
         display: block;
@@ -609,6 +615,11 @@
 @media (max-width: 420px) {
     .single-product-benefit-grid {
         grid-template-columns: 1fr;
+    }
+
+    .single-product-benefit-item__icon {
+        width: 28px;
+        height: 28px;
     }
 }
 
