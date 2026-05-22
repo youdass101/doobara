@@ -3149,7 +3149,6 @@ footer .footer-inner .footer-links a {
 
 .single-product-details-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(300px, 0.9fr);
   gap: 24px;
   align-items: start;
 }
@@ -3381,6 +3380,13 @@ footer .footer-inner .footer-links a {
 .system-variant-option__price {
   display: block;
   font-size: 0.95rem;
+}
+
+.system-variant-option__items-count {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.82rem;
+  color: #6b7280;
 }
 
 .system-variant-package-items {

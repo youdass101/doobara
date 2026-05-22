@@ -320,47 +320,28 @@
                     {% endif %}
                 </div>
             </div>
-            
-
-            {% if service_badges %}
-                <div class="single-product-service-card card-surface">
-                
-                    <div class="single-product-benefit-grid service-badges-fork">
-                        {% for badge in service_badges %}
-                            <article class="single-product-benefit-item">
-                                {% if badge.icon_url %}
-                                    <img class="single-product-benefit-item__icon"
-                                         src="{{ badge.icon_url }}"
-                                         alt="{{ badge.title }} icon"
-                                         loading="lazy">
-                                {% endif %}
-                                <h3>{{ badge.title }}</h3>
-                                {% if badge.description %}
-                                    <p>{{ badge.description }}</p>
-                                {% endif %}
-                            </article>
-                        {% endfor %}
-                    </div>
-                </div>
-            {% endif %}
-
-            <!-- <div class="single-product-dimention card-surface">
-                <div class="single-product-section-head">
-                    <h2>Additional Information</h2>
-                </div>
-
-                <table class="single-product-info-table">
-                    <tr>
-                        <th>Weight</th>
-                        <td>{{ product.weight }}g</td>
-                    </tr>
-                    <tr>
-                        <th>Dimension</th>
-                        <td>{{ product.dimensions }}cm</td>
-                    </tr>
-                </table>
-            </div> -->
         </div>
+        {% if service_badges %}
+            <div class="single-product-service-card card-surface">
+            
+                <div class="single-product-benefit-grid service-badges-fork">
+                    {% for badge in service_badges %}
+                        <article class="single-product-benefit-item">
+                            {% if badge.icon_url %}
+                                <img class="single-product-benefit-item__icon"
+                                        src="{{ badge.icon_url }}"
+                                        alt="{{ badge.title }} icon"
+                                        loading="lazy">
+                            {% endif %}
+                            <h3>{{ badge.title }}</h3>
+                            {% if badge.description %}
+                                <p>{{ badge.description }}</p>
+                            {% endif %}
+                        </article>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
 
     </div>
 </section>
