@@ -78,6 +78,15 @@ function renderVariant(variant) {
   const packageItems = document.getElementById('system-variant-package-items');
   const addToCartButton = document.getElementById('spatc');
   const specifications = document.getElementById('longdescription');
+  const featureSection = document.getElementById('single-product-feature-card');
+  const featureGrid = document.getElementById('single-product-benefit-grid');
+  const defaultFeatureCardsElement = document.getElementById('default-feature-cards-data');
+  let defaultFeatureCards = [];
+  try {
+    defaultFeatureCards = defaultFeatureCardsElement ? JSON.parse(defaultFeatureCardsElement.textContent || '[]') : [];
+  } catch (error) {
+    defaultFeatureCards = [];
+  }
 
   // NEW: System variant long description is pre-rendered HTML from server-side markdown conversion.
   if (specifications) specifications.innerHTML = variant.long_description_html || '';
@@ -179,6 +188,34 @@ function renderVariant(variant) {
       listItem.appendChild(link);
       packageItems.appendChild(listItem);
     });
+  }
+
+  if (featureSection && featureGrid) {
+    const cards = (variant.feature_cards || []).length ? (variant.feature_cards || []) : defaultFeatureCards;
+    // Preserve card styling by rendering the same card/item DOM structure used by Django template.
+    featureGrid.innerHTML = '';
+    cards.forEach((feature) => {
+      const article = document.createElement('article');
+      article.className = 'single-product-benefit-item';
+      if (feature.icon_url) {
+        const icon = document.createElement('img');
+        icon.className = 'single-product-benefit-item__icon';
+        icon.src = feature.icon_url;
+        icon.alt = `${feature.title || ''} icon`;
+        icon.loading = 'lazy';
+        article.appendChild(icon);
+      }
+      const titleElement = document.createElement('h3');
+      titleElement.textContent = feature.title || '';
+      article.appendChild(titleElement);
+      if (feature.description) {
+        const descriptionElement = document.createElement('p');
+        descriptionElement.textContent = feature.description;
+        article.appendChild(descriptionElement);
+      }
+      featureGrid.appendChild(article);
+    });
+    featureSection.hidden = !cards.length;
   }
 }
 

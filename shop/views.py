@@ -222,7 +222,11 @@ def single_product(request, locat=None, slug=None):
     # System-kit variants keep using the existing ProductVariant model.
     system_variants_qs = (
         parent_product.variants.filter(active=True)
-        .prefetch_related("images", "package_items__included_product__images")
+        .prefetch_related(
+            "images",
+            "package_items__included_product__images",
+            "feature_assignments__feature",
+        )
         .order_by("sort_order")
     )
 
@@ -282,6 +286,16 @@ def single_product(request, locat=None, slug=None):
             "package_items": package_items,
             "is_default": variant.is_default,
             "sort_order": variant.sort_order,
+            # Variant-level features are applied as add/remove overrides in JS.
+            "feature_cards": [
+                {
+                    "icon_url": _safe_uploaded_icon_url(assignment.feature.icon),
+                    "title": assignment.custom_title or assignment.feature.title,
+                    "description": assignment.custom_description or assignment.feature.description,
+                }
+                for assignment in variant.feature_assignments.all()
+                if assignment.feature and assignment.feature.is_active
+            ],
         }
         system_variants.append(variant_payload)
 
@@ -297,7 +311,7 @@ def single_product(request, locat=None, slug=None):
     # Normal single-product variants are separate from system variants by design.
     normal_variants = []
     default_normal_variant = None
-    for variant in parent_product.normal_variants.filter(active=True).order_by("sort_order"):
+    for variant in parent_product.normal_variants.filter(active=True).prefetch_related("feature_assignments__feature").order_by("sort_order"):
         variant_payload = {
             "id": variant.id,
             "title": variant.title,
@@ -307,6 +321,16 @@ def single_product(request, locat=None, slug=None):
             "image": variant.image.url if variant.image else None,
             "is_default": variant.is_default,
             "sort_order": variant.sort_order,
+            # Variant-level features are applied as add/remove overrides in JS.
+            "feature_cards": [
+                {
+                    "icon_url": _safe_uploaded_icon_url(assignment.feature.icon),
+                    "title": assignment.custom_title or assignment.feature.title,
+                    "description": assignment.custom_description or assignment.feature.description,
+                }
+                for assignment in variant.feature_assignments.all()
+                if assignment.feature and assignment.feature.is_active
+            ],
         }
         normal_variants.append(variant_payload)
         if variant.is_default and not default_normal_variant:
