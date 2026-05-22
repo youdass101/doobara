@@ -12,6 +12,9 @@ from .models import (
     ProductVariantImage,
     ProductVariantItem,
     NormalProductVariant,
+    ProductFeature,
+    ProductFeatureAssignment,
+    ServiceBadge,
 )
 
 
@@ -60,6 +63,14 @@ class NormalProductVariantInline(admin.TabularInline):
         "sort_order",
     )
     show_change_link = True
+
+
+class ProductFeatureAssignmentInline(admin.TabularInline):
+    model = ProductFeatureAssignment
+    extra = 0
+    fields = ("feature", "sort_order", "custom_title", "custom_description")
+    autocomplete_fields = ("feature",)
+    ordering = ("sort_order", "id")
 
 
 class ProductVariantImageInline(admin.TabularInline):
@@ -127,7 +138,7 @@ class ProductAdmin(ImportExportActionModelAdmin):
     readonly_fields = ("stock", "created_time", "updated_time")
     prepopulated_fields = {"slug": ("name",)}
     filter_horizontal = ("category",)
-    inlines = (ProductImageInline, ProductVariantInline, NormalProductVariantInline)
+    inlines = (ProductImageInline, ProductVariantInline, NormalProductVariantInline, ProductFeatureAssignmentInline)
     fieldsets = (
         (
             "Basic info",
@@ -361,3 +372,21 @@ class HeroCardAdmin(ImportExportActionModelAdmin):
     list_display = ("title", "tag", "price", "active")
     search_fields = ("title", "tag", "categorie")
     list_filter = ("active",)
+
+
+@admin.register(ProductFeature)
+class ProductFeatureAdmin(ImportExportActionModelAdmin):
+    list_display = ("title", "is_active", "sort_order")
+    search_fields = ("title", "description")
+    list_filter = ("is_active",)
+    list_editable = ("is_active", "sort_order")
+    ordering = ("sort_order", "title")
+
+
+@admin.register(ServiceBadge)
+class ServiceBadgeAdmin(ImportExportActionModelAdmin):
+    list_display = ("title", "is_active", "is_global_default", "sort_order")
+    search_fields = ("title", "description")
+    list_filter = ("is_active", "is_global_default")
+    list_editable = ("is_active", "is_global_default", "sort_order")
+    ordering = ("sort_order", "title")

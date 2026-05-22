@@ -256,6 +256,48 @@
             {% endif %}
         {% endif %}
 
+        {% if product_feature_cards %}
+            <div class="single-product-feature-card card-surface">
+                <div class="single-product-section-head">
+                    <h2>Why you&rsquo;ll love it</h2>
+                </div>
+                <div class="single-product-benefit-grid">
+                    {% for feature in product_feature_cards %}
+                        <article class="single-product-benefit-item">
+                            {% if feature.icon %}
+                                <span class="single-product-benefit-item__icon" aria-hidden="true">{{ feature.icon }}</span>
+                            {% endif %}
+                            <h3>{{ feature.title }}</h3>
+                            {% if feature.description %}
+                                <p>{{ feature.description }}</p>
+                            {% endif %}
+                        </article>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+
+        {% if service_badges %}
+            <div class="single-product-service-card card-surface">
+                <div class="single-product-section-head">
+                    <h2>Delivery &amp; Support</h2>
+                </div>
+                <div class="single-product-benefit-grid single-product-benefit-grid--service">
+                    {% for badge in service_badges %}
+                        <article class="single-product-benefit-item single-product-benefit-item--service">
+                            {% if badge.icon %}
+                                <span class="single-product-benefit-item__icon" aria-hidden="true">{{ badge.icon }}</span>
+                            {% endif %}
+                            <h3>{{ badge.title }}</h3>
+                            {% if badge.description %}
+                                <p>{{ badge.description }}</p>
+                            {% endif %}
+                        </article>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+
         {% if product.pvideo %}
             <div class="single-product-video-card">
                 <div class="single-product-section-head">
