@@ -244,6 +244,34 @@ class ServiceBadge(models.Model):
     def __str__(self):
         return self.title
 
+
+class ServiceBadgeAssignment(models.Model):
+    product = models.ForeignKey(
+        "Product",
+        related_name="service_badge_assignments",
+        on_delete=models.CASCADE,
+    )
+    badge = models.ForeignKey(
+        "ServiceBadge",
+        related_name="product_assignments",
+        on_delete=models.CASCADE,
+    )
+    sort_order = models.PositiveSmallIntegerField(default=0)
+    custom_title = models.CharField(max_length=255, blank=True)
+    custom_description = models.TextField(blank=True)
+
+    class Meta:
+        ordering = ["sort_order", "id"]
+        constraints = [
+            models.UniqueConstraint(
+                fields=["product", "badge"],
+                name="shop_unique_product_service_badge_assignment",
+            ),
+        ]
+
+    def __str__(self):
+        return f"{self.product.name} → {self.badge.title}"
+
 class Hero_Card(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField(blank=True)
