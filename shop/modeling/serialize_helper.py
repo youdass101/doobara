@@ -20,8 +20,18 @@ def _get_all_images(product):
             "alt_text": image.alt_text or product.name,
             "thumbnail": image.thumbnail,
         }
-        for image in product.images.all()
+        for image in product.images.filter(long_image=False)
     ]
+
+
+def _get_long_image(product):
+    long_image = product.images.filter(long_image=True).first()
+    if not long_image:
+        return None
+    return {
+        "url": long_image.image.url,
+        "alt_text": long_image.alt_text or product.name,
+    }
 
 
 def _format_price_range(min_price, max_price):
@@ -91,6 +101,7 @@ def product_serialize(object, tag):
 
     image = _get_primary_image(object)
     all_images = _get_all_images(object)
+    long_image = _get_long_image(object)
     # Normal product variants are intentionally separate from system variants.
     active_normal_variants = [
         variant for variant in object.normal_variants.all() if variant.active
@@ -191,6 +202,7 @@ def product_serialize(object, tag):
             "main_image": image,
             "pallimages": all_images,
             "all_images": all_images,
+            "long_image": long_image,
             "system": object.is_system,
             "variant": object.variant,
             "pvariant": variant_options,

@@ -247,8 +247,12 @@ def single_product(request, locat=None, slug=None):
         thumb = _pick_thumbnail_from_prefetched(variant.images.all())
         images = [
             {"url": image.image.url, "alt_text": image.alt_text}
-            for image in variant.images.all()
+            for image in variant.images.all() if not image.long_image
         ]
+        variant_long_image = next(
+            ({"url": image.image.url, "alt_text": image.alt_text} for image in variant.images.all() if image.long_image),
+            None,
+        )
         package_items = []
         for package_item in variant.package_items.all():
             # package_items prefetches included product images; keep thumbnail selection in-memory.
@@ -283,6 +287,7 @@ def single_product(request, locat=None, slug=None):
             "cart_cta_label": variant_inventory["cart_cta_label"],
             "thumbnail": thumb.image.url if thumb else None,
             "images": images,
+            "long_image": variant_long_image,
             "package_items": package_items,
             "is_default": variant.is_default,
             "sort_order": variant.sort_order,
@@ -320,6 +325,7 @@ def single_product(request, locat=None, slug=None):
             "price": float(variant.price),
             "sale_price": float(variant.sale_price) if variant.sale_price else None,
             "image": variant.image.url if variant.image else None,
+            "long_image": variant.long_image.url if variant.long_image else None,
             "is_default": variant.is_default,
             "sort_order": variant.sort_order,
             # Variant-level features are applied as add/remove overrides in JS.

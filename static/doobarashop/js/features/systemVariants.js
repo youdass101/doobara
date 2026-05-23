@@ -81,6 +81,8 @@ function renderVariant(variant) {
   const featureSection = document.getElementById('single-product-feature-card');
   const featureGrid = document.getElementById('single-product-benefit-grid');
   const defaultFeatureCardsElement = document.getElementById('default-feature-cards-data');
+  const longImageWrap = document.getElementById('single-product-long-image-wrap');
+  const longImage = document.getElementById('single-product-long-image');
   let defaultFeatureCards = [];
   try {
     defaultFeatureCards = defaultFeatureCardsElement ? JSON.parse(defaultFeatureCardsElement.textContent || '[]') : [];
@@ -233,6 +235,16 @@ function renderVariant(variant) {
       featureGrid.appendChild(article);
     });
     featureSection.hidden = !cards.length;
+  }
+
+  if (longImageWrap && longImage) {
+    if (variant.long_image && variant.long_image.url) {
+      longImage.src = variant.long_image.url;
+      longImage.alt = variant.long_image.alt_text || variant.title || longImage.alt;
+      longImageWrap.hidden = false;
+    } else {
+      longImageWrap.hidden = true;
+    }
   }
 }
 

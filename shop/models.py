@@ -333,6 +333,7 @@ class ProductImage(models.Model):
     # default is boolean 
     # if true the image is the main image for the product 
     thumbnail = models.BooleanField(default=False)  # True if this is a thumbnail image
+    long_image = models.BooleanField(default=False)
 
     class Meta:
         constraints = [
@@ -378,6 +379,7 @@ class NormalProductVariant(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2)
     sale_price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     image = models.ImageField(upload_to="products/normal_variants/images/", blank=True, null=True)
+    long_image = models.ImageField(upload_to="products/normal_variants/long_images/", blank=True, null=True)
     active = models.BooleanField(default=True, db_index=True)
     is_default = models.BooleanField(default=False)
     sort_order = models.PositiveSmallIntegerField(default=0)
@@ -559,6 +561,7 @@ class ProductVariantImage(models.Model):
     alt_text = models.CharField(max_length=255, blank=True)
     image = models.ImageField(upload_to='products/variants/images/')
     thumbnail = models.BooleanField(default=False)
+    long_image = models.BooleanField(default=False)
 
     class Meta:
         constraints = [

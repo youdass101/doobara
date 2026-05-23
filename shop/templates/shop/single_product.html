@@ -287,6 +287,13 @@
             {% endif %}
         {% endif %}
 
+        <div class="single-product-long-image-card" id="single-product-long-image-wrap" {% if not product.long_image and not product.system %}hidden{% endif %}>
+            <img id="single-product-long-image"
+                 src="{% if product.system and default_system_variant.long_image %}{{ default_system_variant.long_image.url }}{% elif default_normal_variant and default_normal_variant.long_image %}{{ default_normal_variant.long_image }}{% elif product.long_image %}{{ product.long_image.url }}{% endif %}"
+                 alt="{% if product.system and default_system_variant.long_image and default_system_variant.long_image.alt_text %}{{ default_system_variant.long_image.alt_text }}{% elif product.long_image and product.long_image.alt_text %}{{ product.long_image.alt_text }}{% else %}{{ product.title }}{% endif %}"
+                 loading="lazy">
+        </div>
+
         {% if product.pvideo %}
             <div class="single-product-video-card">
                 <div class="single-product-section-head">
