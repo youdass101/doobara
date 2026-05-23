@@ -61,17 +61,18 @@ export function initProductVariants() {
   }
 
   function mergeFeatureCards(baseCards, variantCards) {
-    // Variant feature cards should be added on top of product default cards.
-    // We de-duplicate by a stable content key so repeated assignments do not render twice.
-    const merged = [];
-    const seen = new Set();
-    [...(baseCards || []), ...(variantCards || [])].forEach((feature) => {
-      const key = `${feature.icon_url || ''}::${feature.title || ''}::${feature.description || ''}`;
-      if (seen.has(key)) return;
-      seen.add(key);
-      merged.push(feature);
+    // Variant feature cards override product defaults by feature identity.
+    // This prevents duplicated cards when a variant customizes the same feature.
+    const merged = new Map();
+    (baseCards || []).forEach((feature) => {
+      if (!feature || feature.feature_id == null) return;
+      merged.set(String(feature.feature_id), feature);
     });
-    return merged;
+    (variantCards || []).forEach((feature) => {
+      if (!feature || feature.feature_id == null) return;
+      merged.set(String(feature.feature_id), feature);
+    });
+    return Array.from(merged.values());
   }
 
   function syncButtons() {

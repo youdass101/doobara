@@ -191,16 +191,18 @@ function renderVariant(variant) {
   }
 
   if (featureSection && featureGrid) {
-    // Variant feature cards should be added to the original product cards.
-    // We de-duplicate by a stable content key to avoid repeated visual cards.
-    const cards = [];
-    const seen = new Set();
-    [...defaultFeatureCards, ...(variant.feature_cards || [])].forEach((feature) => {
-      const key = `${feature.icon_url || ''}::${feature.title || ''}::${feature.description || ''}`;
-      if (seen.has(key)) return;
-      seen.add(key);
-      cards.push(feature);
+    // Variant feature cards override product defaults by feature identity.
+    // This keeps exactly one card per feature when variant text differs from defaults.
+    const mergedByFeature = new Map();
+    defaultFeatureCards.forEach((feature) => {
+      if (!feature || feature.feature_id == null) return;
+      mergedByFeature.set(String(feature.feature_id), feature);
     });
+    (variant.feature_cards || []).forEach((feature) => {
+      if (!feature || feature.feature_id == null) return;
+      mergedByFeature.set(String(feature.feature_id), feature);
+    });
+    const cards = Array.from(mergedByFeature.values());
     // Preserve card styling by rendering the same card/item DOM structure used by Django template.
     featureGrid.innerHTML = '';
     cards.forEach((feature) => {
