@@ -23,6 +23,7 @@ export function initProductLightbox() {
   }
 
   const body = document.body;
+  const mobileQuery = window.matchMedia('(max-width: 640px)');
   let lastFocused = null;
   let currentIndex = 0;
   let touchStartX = null;
@@ -79,6 +80,11 @@ export function initProductLightbox() {
   }
 
   function open() {
+    // Keep the lightbox mobile-only to match the requested UX scope.
+    if (!mobileQuery.matches) {
+      return;
+    }
+
     const images = getImages();
     if (!images.length) {
       return;
@@ -109,6 +115,13 @@ export function initProductLightbox() {
   }
 
   openButton.addEventListener('click', open);
+
+  mobileQuery.addEventListener('change', (event) => {
+    // If viewport exits mobile size while open, force-close and restore scrolling/focus state.
+    if (!event.matches) {
+      close();
+    }
+  });
   closeButton.addEventListener('click', close);
   prevButton.addEventListener('click', () => move(-1));
   nextButton.addEventListener('click', () => move(1));

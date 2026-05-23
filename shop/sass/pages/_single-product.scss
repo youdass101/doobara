@@ -724,6 +724,7 @@
 }
 
 .single-product-gallery__zoom-btn {
+    display: none;
     position: absolute;
     left: 14px;
     bottom: 14px;
@@ -733,7 +734,6 @@
     border-radius: 999px;
     background: rgba(255, 255, 255, 0.88);
     color: #111827;
-    display: inline-flex;
     align-items: center;
     justify-content: center;
     box-shadow: 0 6px 14px rgba(15, 23, 42, 0.2);
@@ -812,6 +812,7 @@ body.is-lightbox-open {
 
 @media (max-width: 640px) {
     .single-product-gallery__zoom-btn {
+        display: inline-flex;
         left: 10px;
         bottom: 10px;
         width: 40px;
