@@ -24,7 +24,7 @@ from .models import (
 class ProductImageInline(admin.TabularInline):
     model = ProductImage
     extra = 1
-    fields = ("image", "image_preview", "alt_text", "thumbnail")
+    fields = ("image", "image_preview", "alt_text", "thumbnail", "long_image")
     readonly_fields = ("image_preview",)
 
     def image_preview(self, obj):
@@ -103,7 +103,7 @@ class SystemVariantFeatureAssignmentInline(admin.TabularInline):
 class ProductVariantImageInline(admin.TabularInline):
     model = ProductVariantImage
     extra = 1
-    fields = ("image", "image_preview", "alt_text", "thumbnail")
+    fields = ("image", "image_preview", "alt_text", "thumbnail", "long_image")
     readonly_fields = ("image_preview",)
 
     def image_preview(self, obj):
@@ -353,7 +353,7 @@ class NormalProductVariantAdmin(ImportExportActionModelAdmin):
         (
             "Content",
             {
-                "fields": ("short_description", "image"),
+                "fields": ("short_description", "image", "long_image"),
             },
         ),
     )
@@ -361,17 +361,17 @@ class NormalProductVariantAdmin(ImportExportActionModelAdmin):
 
 @admin.register(ProductImage)
 class ProductImageAdmin(ImportExportActionModelAdmin):
-    list_display = ("product", "alt_text", "thumbnail")
+    list_display = ("product", "alt_text", "thumbnail", "long_image")
     search_fields = ("product__name", "product__sku", "alt_text")
-    list_filter = ("thumbnail",)
+    list_filter = ("thumbnail", "long_image")
     ordering = ("product__name", "id")
 
 
 @admin.register(ProductVariantImage)
 class ProductVariantImageAdmin(ImportExportActionModelAdmin):
-    list_display = ("variant", "variant_product", "alt_text", "thumbnail")
+    list_display = ("variant", "variant_product", "alt_text", "thumbnail", "long_image")
     search_fields = ("variant__title", "variant__product__name", "alt_text")
-    list_filter = ("thumbnail",)
+    list_filter = ("thumbnail", "long_image")
     ordering = ("variant__product__name", "variant__title", "id")
 
     def variant_product(self, obj):

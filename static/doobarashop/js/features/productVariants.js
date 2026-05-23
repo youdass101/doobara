@@ -8,6 +8,8 @@ export function initProductVariants() {
   const shortDescription = document.getElementById('normal-variant-short-description');
   const productImage = document.getElementById('spi');
   const defaultFeatureCardsElement = document.getElementById('default-feature-cards-data');
+  const longImageWrap = document.getElementById('single-product-long-image-wrap');
+  const longImage = document.getElementById('single-product-long-image');
 
   if (!variantDataElement || !selector || !addToCartButton || !productPrice) {
     return;
@@ -112,6 +114,16 @@ export function initProductVariants() {
     if (productImage && selectedVariant.image) {
       productImage.src = selectedVariant.image;
       productImage.alt = selectedVariant.title || productImage.alt;
+    }
+
+    if (longImageWrap && longImage) {
+      if (selectedVariant.long_image) {
+        longImage.src = selectedVariant.long_image;
+        longImage.alt = selectedVariant.title || longImage.alt;
+        longImageWrap.hidden = false;
+      } else {
+        longImageWrap.hidden = true;
+      }
     }
   }
 
