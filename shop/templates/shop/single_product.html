@@ -40,8 +40,22 @@
                              height="1000"
                              loading="eager"
                              fetchpriority="high">
+                                            <button type="button"
+                                class="single-product-gallery__zoom-btn"
+                                data-product-lightbox-open
+                                aria-label="Open image gallery">
+                            <i class="fas fa-search-plus" aria-hidden="true"></i>
+                        </button>
                     </div>
                     <div id="system-variant-gallery" class="single-product-gallery__thumbs"></div>
+                    <div class="single-product-lightbox" data-product-lightbox role="dialog" aria-modal="true" hidden>
+                        <button type="button" class="single-product-lightbox__close" data-product-lightbox-close aria-label="Close image gallery">&times;</button>
+                        <button type="button" class="single-product-lightbox__nav single-product-lightbox__nav--prev" data-product-lightbox-prev aria-label="Previous image">&#10094;</button>
+                        <div class="single-product-lightbox__stage">
+                            <img src="" alt="" data-product-lightbox-image>
+                        </div>
+                        <button type="button" class="single-product-lightbox__nav single-product-lightbox__nav--next" data-product-lightbox-next aria-label="Next image">&#10095;</button>
+                    </div>
                 </div>
 
                 <div class="single-product-info">
@@ -150,6 +164,12 @@
                         {% else %}
                             <div class="single-product-gallery__empty" id="spi" aria-label="{{ product.title }} image unavailable"></div>
                         {% endif %}
+                                            <button type="button"
+                                class="single-product-gallery__zoom-btn"
+                                data-product-lightbox-open
+                                aria-label="Open image gallery">
+                            <i class="fas fa-search-plus" aria-hidden="true"></i>
+                        </button>
                     </div>
 
                     <div class="single-product-gallery__thumbs">
@@ -161,6 +181,14 @@
                                         aria-label="View image {{ forloop.counter }} of {{ product.all_images|length }}">
                                 </button>
                         {% endfor %}
+                    </div>
+                    <div class="single-product-lightbox" data-product-lightbox role="dialog" aria-modal="true" hidden>
+                        <button type="button" class="single-product-lightbox__close" data-product-lightbox-close aria-label="Close image gallery">&times;</button>
+                        <button type="button" class="single-product-lightbox__nav single-product-lightbox__nav--prev" data-product-lightbox-prev aria-label="Previous image">&#10094;</button>
+                        <div class="single-product-lightbox__stage">
+                            <img src="" alt="" data-product-lightbox-image>
+                        </div>
+                        <button type="button" class="single-product-lightbox__nav single-product-lightbox__nav--next" data-product-lightbox-next aria-label="Next image">&#10095;</button>
                     </div>
                 </div>
 
