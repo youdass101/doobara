@@ -65,12 +65,18 @@ export function initProductVariants() {
     // This prevents duplicated cards when a variant customizes the same feature.
     const merged = new Map();
     (baseCards || []).forEach((feature) => {
-      if (!feature || feature.feature_id == null) return;
-      merged.set(String(feature.feature_id), feature);
+      if (!feature) return;
+      const key = feature.feature_id != null
+        ? `feature:${feature.feature_id}`
+        : `content:${feature.icon_url || ''}::${feature.title || ''}::${feature.description || ''}`;
+      merged.set(key, feature);
     });
     (variantCards || []).forEach((feature) => {
-      if (!feature || feature.feature_id == null) return;
-      merged.set(String(feature.feature_id), feature);
+      if (!feature) return;
+      const key = feature.feature_id != null
+        ? `feature:${feature.feature_id}`
+        : `content:${feature.icon_url || ''}::${feature.title || ''}::${feature.description || ''}`;
+      merged.set(key, feature);
     });
     return Array.from(merged.values());
   }

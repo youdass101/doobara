@@ -289,6 +289,7 @@ def single_product(request, locat=None, slug=None):
             # Variant-level features are applied as add/remove overrides in JS.
             "feature_cards": [
                 {
+                    "feature_id": assignment.feature_id,
                     "icon_url": _safe_uploaded_icon_url(assignment.feature.icon),
                     "title": assignment.custom_title or assignment.feature.title,
                     "description": assignment.custom_description or assignment.feature.description,
@@ -324,6 +325,7 @@ def single_product(request, locat=None, slug=None):
             # Variant-level features are applied as add/remove overrides in JS.
             "feature_cards": [
                 {
+                    "feature_id": assignment.feature_id,
                     "icon_url": _safe_uploaded_icon_url(assignment.feature.icon),
                     "title": assignment.custom_title or assignment.feature.title,
                     "description": assignment.custom_description or assignment.feature.description,
@@ -352,6 +354,7 @@ def single_product(request, locat=None, slug=None):
         product_feature_cards.append(
             {
                 # Keep template rendering simple and safe: only expose URL, never raw HTML.
+                "feature_id": assignment.feature_id,
                 "icon_url": _safe_uploaded_icon_url(feature.icon),
                 "title": assignment.custom_title or feature.title,
                 "description": assignment.custom_description or feature.description,

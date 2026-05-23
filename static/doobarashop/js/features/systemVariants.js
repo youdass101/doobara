@@ -195,12 +195,18 @@ function renderVariant(variant) {
     // This keeps exactly one card per feature when variant text differs from defaults.
     const mergedByFeature = new Map();
     defaultFeatureCards.forEach((feature) => {
-      if (!feature || feature.feature_id == null) return;
-      mergedByFeature.set(String(feature.feature_id), feature);
+      if (!feature) return;
+      const key = feature.feature_id != null
+        ? `feature:${feature.feature_id}`
+        : `content:${feature.icon_url || ''}::${feature.title || ''}::${feature.description || ''}`;
+      mergedByFeature.set(key, feature);
     });
     (variant.feature_cards || []).forEach((feature) => {
-      if (!feature || feature.feature_id == null) return;
-      mergedByFeature.set(String(feature.feature_id), feature);
+      if (!feature) return;
+      const key = feature.feature_id != null
+        ? `feature:${feature.feature_id}`
+        : `content:${feature.icon_url || ''}::${feature.title || ''}::${feature.description || ''}`;
+      mergedByFeature.set(key, feature);
     });
     const cards = Array.from(mergedByFeature.values());
     // Preserve card styling by rendering the same card/item DOM structure used by Django template.
