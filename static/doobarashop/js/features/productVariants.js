@@ -60,6 +60,20 @@ export function initProductVariants() {
     featureSection.hidden = !(cards || []).length;
   }
 
+  function mergeFeatureCards(baseCards, variantCards) {
+    // Variant feature cards should be added on top of product default cards.
+    // We de-duplicate by a stable content key so repeated assignments do not render twice.
+    const merged = [];
+    const seen = new Set();
+    [...(baseCards || []), ...(variantCards || [])].forEach((feature) => {
+      const key = `${feature.icon_url || ''}::${feature.title || ''}::${feature.description || ''}`;
+      if (seen.has(key)) return;
+      seen.add(key);
+      merged.push(feature);
+    });
+    return merged;
+  }
+
   function syncButtons() {
     selector.querySelectorAll('.system-variant-option').forEach((button) => {
       const currentId = Number(button.dataset.normalVariantId);
@@ -84,8 +98,8 @@ export function initProductVariants() {
       shortDescription.textContent = selectedVariant.short_description || '';
     }
     const variantFeatures = selectedVariant.feature_cards || [];
-    // Variant-level feature cards replace the default product cards when present.
-    renderFeatureCards(variantFeatures.length ? variantFeatures : defaultFeatureCards);
+    // Variant-level feature cards are additive to the base product feature cards.
+    renderFeatureCards(mergeFeatureCards(defaultFeatureCards, variantFeatures));
 
     // Update the main product image only when this variant has its own image.
     if (productImage && selectedVariant.image) {

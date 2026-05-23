@@ -191,7 +191,16 @@ function renderVariant(variant) {
   }
 
   if (featureSection && featureGrid) {
-    const cards = (variant.feature_cards || []).length ? (variant.feature_cards || []) : defaultFeatureCards;
+    // Variant feature cards should be added to the original product cards.
+    // We de-duplicate by a stable content key to avoid repeated visual cards.
+    const cards = [];
+    const seen = new Set();
+    [...defaultFeatureCards, ...(variant.feature_cards || [])].forEach((feature) => {
+      const key = `${feature.icon_url || ''}::${feature.title || ''}::${feature.description || ''}`;
+      if (seen.has(key)) return;
+      seen.add(key);
+      cards.push(feature);
+    });
     // Preserve card styling by rendering the same card/item DOM structure used by Django template.
     featureGrid.innerHTML = '';
     cards.forEach((feature) => {
