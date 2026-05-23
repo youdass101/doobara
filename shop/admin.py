@@ -12,13 +12,19 @@ from .models import (
     ProductVariantImage,
     ProductVariantItem,
     NormalProductVariant,
+    ProductFeature,
+    ProductFeatureAssignment,
+    ServiceBadge,
+    ServiceBadgeAssignment,
+    NormalVariantFeatureAssignment,
+    SystemVariantFeatureAssignment,
 )
 
 
 class ProductImageInline(admin.TabularInline):
     model = ProductImage
     extra = 1
-    fields = ("image", "image_preview", "alt_text", "thumbnail")
+    fields = ("image", "image_preview", "alt_text", "thumbnail", "long_image")
     readonly_fields = ("image_preview",)
 
     def image_preview(self, obj):
@@ -62,10 +68,42 @@ class NormalProductVariantInline(admin.TabularInline):
     show_change_link = True
 
 
+class ProductFeatureAssignmentInline(admin.TabularInline):
+    model = ProductFeatureAssignment
+    extra = 0
+    fields = ("feature", "sort_order", "custom_title", "custom_description")
+    autocomplete_fields = ("feature",)
+    ordering = ("sort_order", "id")
+
+
+class ServiceBadgeAssignmentInline(admin.TabularInline):
+    model = ServiceBadgeAssignment
+    extra = 0
+    fields = ("badge", "sort_order", "custom_title", "custom_description")
+    autocomplete_fields = ("badge",)
+    ordering = ("sort_order", "id")
+
+
+
+
+class NormalVariantFeatureAssignmentInline(admin.TabularInline):
+    model = NormalVariantFeatureAssignment
+    extra = 0
+    fields = ("feature", "sort_order", "custom_title", "custom_description")
+    autocomplete_fields = ("feature",)
+    ordering = ("sort_order", "id")
+
+
+class SystemVariantFeatureAssignmentInline(admin.TabularInline):
+    model = SystemVariantFeatureAssignment
+    extra = 0
+    fields = ("feature", "sort_order", "custom_title", "custom_description")
+    autocomplete_fields = ("feature",)
+    ordering = ("sort_order", "id")
 class ProductVariantImageInline(admin.TabularInline):
     model = ProductVariantImage
     extra = 1
-    fields = ("image", "image_preview", "alt_text", "thumbnail")
+    fields = ("image", "image_preview", "alt_text", "thumbnail", "long_image")
     readonly_fields = ("image_preview",)
 
     def image_preview(self, obj):
@@ -127,7 +165,13 @@ class ProductAdmin(ImportExportActionModelAdmin):
     readonly_fields = ("stock", "created_time", "updated_time")
     prepopulated_fields = {"slug": ("name",)}
     filter_horizontal = ("category",)
-    inlines = (ProductImageInline, ProductVariantInline, NormalProductVariantInline)
+    inlines = (
+        ProductImageInline,
+        ProductVariantInline,
+        NormalProductVariantInline,
+        ProductFeatureAssignmentInline,
+        ServiceBadgeAssignmentInline,
+    )
     fieldsets = (
         (
             "Basic info",
@@ -227,7 +271,7 @@ class ProductVariantAdmin(ImportExportActionModelAdmin):
     search_fields = ("title", "product__name", "product__sku")
     list_filter = ("active", "tier", "currency", "is_default")
     ordering = ("product__name", "sort_order", "title")
-    inlines = (ProductVariantImageInline,)
+    inlines = (ProductVariantImageInline, SystemVariantFeatureAssignmentInline)
     fieldsets = (
         (
             "Variant",
@@ -283,6 +327,7 @@ class NormalProductVariantAdmin(ImportExportActionModelAdmin):
     search_fields = ("title", "product__name", "product__sku")
     list_filter = ("active", "is_default")
     ordering = ("product__name", "sort_order", "title")
+    inlines = (NormalVariantFeatureAssignmentInline,)
     fieldsets = (
         (
             "Variant",
@@ -308,7 +353,7 @@ class NormalProductVariantAdmin(ImportExportActionModelAdmin):
         (
             "Content",
             {
-                "fields": ("short_description", "image"),
+                "fields": ("short_description", "image", "long_image"),
             },
         ),
     )
@@ -316,17 +361,17 @@ class NormalProductVariantAdmin(ImportExportActionModelAdmin):
 
 @admin.register(ProductImage)
 class ProductImageAdmin(ImportExportActionModelAdmin):
-    list_display = ("product", "alt_text", "thumbnail")
+    list_display = ("product", "alt_text", "thumbnail", "long_image")
     search_fields = ("product__name", "product__sku", "alt_text")
-    list_filter = ("thumbnail",)
+    list_filter = ("thumbnail", "long_image")
     ordering = ("product__name", "id")
 
 
 @admin.register(ProductVariantImage)
 class ProductVariantImageAdmin(ImportExportActionModelAdmin):
-    list_display = ("variant", "variant_product", "alt_text", "thumbnail")
+    list_display = ("variant", "variant_product", "alt_text", "thumbnail", "long_image")
     search_fields = ("variant__title", "variant__product__name", "alt_text")
-    list_filter = ("thumbnail",)
+    list_filter = ("thumbnail", "long_image")
     ordering = ("variant__product__name", "variant__title", "id")
 
     def variant_product(self, obj):
@@ -361,3 +406,39 @@ class HeroCardAdmin(ImportExportActionModelAdmin):
     list_display = ("title", "tag", "price", "active")
     search_fields = ("title", "tag", "categorie")
     list_filter = ("active",)
+
+
+@admin.register(ProductFeature)
+class ProductFeatureAdmin(ImportExportActionModelAdmin):
+    list_display = ("title", "icon_preview", "is_active", "sort_order")
+    search_fields = ("title", "description")
+    list_filter = ("is_active",)
+    list_editable = ("is_active", "sort_order")
+    ordering = ("sort_order", "title")
+    fields = ("title", "description", "icon", "icon_preview", "is_active", "sort_order")
+    readonly_fields = ("icon_preview",)
+
+    def icon_preview(self, obj):
+        if obj.icon:
+            return format_html('<img src="{}" style="height: 28px; width: 28px; object-fit: contain;" />', obj.icon.url)
+        return "-"
+
+    icon_preview.short_description = "Icon"
+
+
+@admin.register(ServiceBadge)
+class ServiceBadgeAdmin(ImportExportActionModelAdmin):
+    list_display = ("title", "icon_preview", "is_active", "is_global_default", "sort_order")
+    search_fields = ("title", "description")
+    list_filter = ("is_active", "is_global_default")
+    list_editable = ("is_active", "is_global_default", "sort_order")
+    ordering = ("sort_order", "title")
+    fields = ("title", "description", "icon", "icon_preview", "is_active", "is_global_default", "sort_order")
+    readonly_fields = ("icon_preview",)
+
+    def icon_preview(self, obj):
+        if obj.icon:
+            return format_html('<img src="{}" style="height: 28px; width: 28px; object-fit: contain;" />', obj.icon.url)
+        return "-"
+
+    icon_preview.short_description = "Icon"

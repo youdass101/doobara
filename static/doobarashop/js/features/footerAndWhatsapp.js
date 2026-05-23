@@ -4,11 +4,6 @@ export function initFooterAndWhatsapp() {
     yearElement.textContent = String(new Date().getFullYear());
   }
 
-  const whatsappHeaderLink = document.getElementById('whatsapp-header-link');
-  if (!whatsappHeaderLink) {
-    return;
-  }
-
   const pageTitle = document.title ? document.title.trim() : '';
   if (!pageTitle) {
     return;
@@ -17,5 +12,9 @@ export function initFooterAndWhatsapp() {
   // Build a page-aware prefilled message so support can instantly see where the user came from.
   const message = `Hi Doobara, I'm visiting: ${pageTitle}`;
   const encodedMessage = encodeURIComponent(message);
-  whatsappHeaderLink.href = `${whatsappHeaderLink.href}?text=${encodedMessage}`;
+  const pageAwareWhatsappLinks = document.querySelectorAll('#whatsapp-header-link, [data-whatsapp-page-title]');
+  pageAwareWhatsappLinks.forEach((link) => {
+    const baseHref = link.href.split('?')[0];
+    link.href = `${baseHref}?text=${encodedMessage}`;
+  });
 }

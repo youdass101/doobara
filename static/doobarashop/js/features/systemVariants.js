@@ -78,6 +78,17 @@ function renderVariant(variant) {
   const packageItems = document.getElementById('system-variant-package-items');
   const addToCartButton = document.getElementById('spatc');
   const specifications = document.getElementById('longdescription');
+  const featureSection = document.getElementById('single-product-feature-card');
+  const featureGrid = document.getElementById('single-product-benefit-grid');
+  const defaultFeatureCardsElement = document.getElementById('default-feature-cards-data');
+  const longImageWrap = document.getElementById('single-product-long-image-wrap');
+  const longImage = document.getElementById('single-product-long-image');
+  let defaultFeatureCards = [];
+  try {
+    defaultFeatureCards = defaultFeatureCardsElement ? JSON.parse(defaultFeatureCardsElement.textContent || '[]') : [];
+  } catch (error) {
+    defaultFeatureCards = [];
+  }
 
   // NEW: System variant long description is pre-rendered HTML from server-side markdown conversion.
   if (specifications) specifications.innerHTML = variant.long_description_html || '';
@@ -106,13 +117,18 @@ function renderVariant(variant) {
   }
 
   if (addToCartButton) {
+    const addToCartLabel = addToCartButton.querySelector('.single-product-addtocart__label');
     addToCartButton.dataset.variantId = String(variant.id);
     addToCartButton.dataset.gaItemId = String(variant.id);
     addToCartButton.dataset.gaItemName = variant.title || '';
     addToCartButton.dataset.gaPrice = String(variant.sale_price ?? variant.price ?? 0);
     addToCartButton.dataset.gaCurrency = variant.currency || addToCartButton.dataset.gaCurrency || 'USD';
     addToCartButton.disabled = !variant.can_purchase;
-    addToCartButton.textContent = variant.cart_cta_label || 'Out of Stock';
+    if (addToCartLabel) {
+      addToCartLabel.textContent = variant.cart_cta_label || 'Out of Stock';
+    } else {
+      addToCartButton.textContent = variant.cart_cta_label || 'Out of Stock';
+    }
   }
 
   if (gallery) {
@@ -121,18 +137,23 @@ function renderVariant(variant) {
       const button = document.createElement('button');
       button.type = 'button';
       button.className = 'single-product-thumb';
-
-      const img = document.createElement('img');
-      img.className = 'sp-thumb-image';
-      img.src = image.url;
-      img.alt = image.alt_text || variant.title;
-
-      button.appendChild(img);
+      button.dataset.imageSrc = image.url;
+      button.dataset.imageAlt = image.alt_text || variant.title;
+      button.setAttribute('aria-label', `View image ${index + 1} of ${variant.images.length}`);
+      button.classList.toggle('is-active', index === 0);
+      button.setAttribute('aria-current', index === 0 ? 'true' : 'false');
       button.addEventListener('click', () => {
-        if (mainImage) {
-          mainImage.src = image.url;
-          mainImage.alt = image.alt_text || variant.title;
+        if (!mainImage) {
+          return;
         }
+
+        mainImage.src = image.url;
+        mainImage.alt = image.alt_text || variant.title;
+        gallery.querySelectorAll('.single-product-thumb').forEach((dot, dotIndex) => {
+          const isActive = dotIndex === index;
+          dot.classList.toggle('is-active', isActive);
+          dot.setAttribute('aria-current', isActive ? 'true' : 'false');
+        });
       });
 
       if (index === 0 && mainImage) {
@@ -142,6 +163,10 @@ function renderVariant(variant) {
 
       gallery.appendChild(button);
     });
+
+    // Let the shared gallery module bind swipe navigation after variant dots are rebuilt.
+    gallery.closest('.single-product-gallery')?.removeAttribute('data-gallery-ready');
+    document.dispatchEvent(new CustomEvent('productGallery:updated', { detail: { gallery: gallery.closest('.single-product-gallery') } }));
 
     if (!(variant.images || []).length && mainImage) {
       mainImage.removeAttribute('src');
@@ -165,6 +190,61 @@ function renderVariant(variant) {
       listItem.appendChild(link);
       packageItems.appendChild(listItem);
     });
+  }
+
+  if (featureSection && featureGrid) {
+    // Variant feature cards override product defaults by feature identity.
+    // This keeps exactly one card per feature when variant text differs from defaults.
+    const mergedByFeature = new Map();
+    defaultFeatureCards.forEach((feature) => {
+      if (!feature) return;
+      const key = feature.feature_id != null
+        ? `feature:${feature.feature_id}`
+        : `content:${feature.icon_url || ''}::${feature.title || ''}::${feature.description || ''}`;
+      mergedByFeature.set(key, feature);
+    });
+    (variant.feature_cards || []).forEach((feature) => {
+      if (!feature) return;
+      const key = feature.feature_id != null
+        ? `feature:${feature.feature_id}`
+        : `content:${feature.icon_url || ''}::${feature.title || ''}::${feature.description || ''}`;
+      mergedByFeature.set(key, feature);
+    });
+    const cards = Array.from(mergedByFeature.values());
+    // Preserve card styling by rendering the same card/item DOM structure used by Django template.
+    featureGrid.innerHTML = '';
+    cards.forEach((feature) => {
+      const article = document.createElement('article');
+      article.className = 'single-product-benefit-item';
+      if (feature.icon_url) {
+        const icon = document.createElement('img');
+        icon.className = 'single-product-benefit-item__icon';
+        icon.src = feature.icon_url;
+        icon.alt = `${feature.title || ''} icon`;
+        icon.loading = 'lazy';
+        article.appendChild(icon);
+      }
+      const titleElement = document.createElement('h3');
+      titleElement.textContent = feature.title || '';
+      article.appendChild(titleElement);
+      if (feature.description) {
+        const descriptionElement = document.createElement('p');
+        descriptionElement.textContent = feature.description;
+        article.appendChild(descriptionElement);
+      }
+      featureGrid.appendChild(article);
+    });
+    featureSection.hidden = !cards.length;
+  }
+
+  if (longImageWrap && longImage) {
+    if (variant.long_image && variant.long_image.url) {
+      longImage.src = variant.long_image.url;
+      longImage.alt = variant.long_image.alt_text || variant.title || longImage.alt;
+      longImageWrap.hidden = false;
+    } else {
+      longImageWrap.hidden = true;
+    }
   }
 }
 

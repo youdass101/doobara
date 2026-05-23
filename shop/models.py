@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.exceptions import ValidationError
+from django.core.validators import FileExtensionValidator
 from .modeling.serialize_helper import *
 from django.dispatch import receiver
 from django.urls import reverse
@@ -174,6 +175,103 @@ class Product(models.Model):
         # function at helper file 
         return product_serialize(self, tag)
 
+
+class ProductFeature(models.Model):
+    title = models.CharField(max_length=255)
+    description = models.TextField(blank=True)
+    icon = models.FileField(
+        upload_to="product_features/icons/",
+        blank=True,
+        validators=[
+            FileExtensionValidator(allowed_extensions=["svg", "png", "webp", "jpg", "jpeg"])
+        ],
+    )
+    is_active = models.BooleanField(default=True, db_index=True)
+    sort_order = models.PositiveSmallIntegerField(default=0)
+
+    class Meta:
+        ordering = ["sort_order", "title"]
+
+    def __str__(self):
+        return self.title
+
+
+class ProductFeatureAssignment(models.Model):
+    product = models.ForeignKey(
+        "Product",
+        related_name="feature_assignments",
+        on_delete=models.CASCADE,
+    )
+    feature = models.ForeignKey(
+        "ProductFeature",
+        related_name="product_assignments",
+        on_delete=models.CASCADE,
+    )
+    sort_order = models.PositiveSmallIntegerField(default=0)
+    custom_title = models.CharField(max_length=255, blank=True)
+    custom_description = models.TextField(blank=True)
+
+    class Meta:
+        ordering = ["sort_order", "id"]
+        constraints = [
+            models.UniqueConstraint(
+                fields=["product", "feature"],
+                name="shop_unique_product_feature_assignment",
+            ),
+        ]
+
+    def __str__(self):
+        return f"{self.product.name} → {self.feature.title}"
+
+
+class ServiceBadge(models.Model):
+    title = models.CharField(max_length=255)
+    description = models.TextField(blank=True)
+    icon = models.FileField(
+        upload_to="service_badges/icons/",
+        blank=True,
+        validators=[
+            FileExtensionValidator(allowed_extensions=["svg", "png", "webp", "jpg", "jpeg"])
+        ],
+    )
+    is_active = models.BooleanField(default=True, db_index=True)
+    is_global_default = models.BooleanField(default=False, db_index=True)
+    sort_order = models.PositiveSmallIntegerField(default=0)
+
+    class Meta:
+        ordering = ["sort_order", "title"]
+
+    def __str__(self):
+        return self.title
+
+
+class ServiceBadgeAssignment(models.Model):
+    product = models.ForeignKey(
+        "Product",
+        related_name="service_badge_assignments",
+        on_delete=models.CASCADE,
+    )
+    badge = models.ForeignKey(
+        "ServiceBadge",
+        related_name="product_assignments",
+        on_delete=models.CASCADE,
+    )
+    sort_order = models.PositiveSmallIntegerField(default=0)
+    custom_title = models.CharField(max_length=255, blank=True)
+    custom_description = models.TextField(blank=True)
+
+    class Meta:
+        ordering = ["sort_order", "id"]
+        constraints = [
+            models.UniqueConstraint(
+                fields=["product", "badge"],
+                name="shop_unique_product_service_badge_assignment",
+            ),
+        ]
+
+    def __str__(self):
+        return f"{self.product.name} → {self.badge.title}"
+
 class Hero_Card(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField(blank=True)
@@ -235,6 +333,7 @@ class ProductImage(models.Model):
     # default is boolean 
     # if true the image is the main image for the product 
     thumbnail = models.BooleanField(default=False)  # True if this is a thumbnail image
+    long_image = models.BooleanField(default=False)
 
     class Meta:
         constraints = [
@@ -280,6 +379,7 @@ class NormalProductVariant(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2)
     sale_price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     image = models.ImageField(upload_to="products/normal_variants/images/", blank=True, null=True)
+    long_image = models.ImageField(upload_to="products/normal_variants/long_images/", blank=True, null=True)
     active = models.BooleanField(default=True, db_index=True)
     is_default = models.BooleanField(default=False)
     sort_order = models.PositiveSmallIntegerField(default=0)
@@ -397,11 +497,71 @@ class ProductVariant(models.Model):
             "cart_cta_label": "Add to Cart" if self.in_stock else "Out of Stock",
         }
 
+
+
+class NormalVariantFeatureAssignment(models.Model):
+    """Variant-level feature overrides for normal product variants."""
+    variant = models.ForeignKey(
+        "NormalProductVariant",
+        related_name="feature_assignments",
+        on_delete=models.CASCADE,
+    )
+    feature = models.ForeignKey(
+        "ProductFeature",
+        related_name="normal_variant_assignments",
+        on_delete=models.CASCADE,
+    )
+    sort_order = models.PositiveSmallIntegerField(default=0)
+    custom_title = models.CharField(max_length=255, blank=True)
+    custom_description = models.TextField(blank=True)
+
+    class Meta:
+        ordering = ["sort_order", "id"]
+        constraints = [
+            models.UniqueConstraint(
+                fields=["variant", "feature"],
+                name="shop_unique_normal_variant_feature_assignment",
+            ),
+        ]
+
+    def __str__(self):
+        return f"{self.variant.product.name} - {self.variant.title} → {self.feature.title}"
+
+
+class SystemVariantFeatureAssignment(models.Model):
+    """Variant-level feature overrides for system product variants."""
+    variant = models.ForeignKey(
+        "ProductVariant",
+        related_name="feature_assignments",
+        on_delete=models.CASCADE,
+    )
+    feature = models.ForeignKey(
+        "ProductFeature",
+        related_name="system_variant_assignments",
+        on_delete=models.CASCADE,
+    )
+    sort_order = models.PositiveSmallIntegerField(default=0)
+    custom_title = models.CharField(max_length=255, blank=True)
+    custom_description = models.TextField(blank=True)
+
+    class Meta:
+        ordering = ["sort_order", "id"]
+        constraints = [
+            models.UniqueConstraint(
+                fields=["variant", "feature"],
+                name="shop_unique_system_variant_feature_assignment",
+            ),
+        ]
+
+    def __str__(self):
+        return f"{self.variant.product.name} - {self.variant.title} → {self.feature.title}"
+
 class ProductVariantImage(models.Model):
     variant = models.ForeignKey("ProductVariant", related_name="images", on_delete=models.CASCADE)
     alt_text = models.CharField(max_length=255, blank=True)
     image = models.ImageField(upload_to='products/variants/images/')
     thumbnail = models.BooleanField(default=False)
+    long_image = models.BooleanField(default=False)
 
     class Meta:
         constraints = [

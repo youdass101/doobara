@@ -149,15 +149,17 @@ header {
 
 @media (max-width: 720px) {
     .nav {
-        padding-inline: 1rem;
+        // padding-inline: 1rem;
+        padding: 0 !important;
         // Mobile menu button styles
         #mobile-menu-btn {
             display: flex;
+            padding-left: 10px;
             justify-content: center;
             align-items: center;
             flex-direction: column;
-            width: 60px; /* Set a fixed width */
-            height: 60px; /* Set a fixed height */
+            width: 40px; /* Set a fixed width */
+            height: 40px; /* Set a fixed height */
             cursor: pointer; /* Make the entire div clickable */
             background: none; /* Optional: Add a background if needed */
             border: none; /* Remove any default border styling */
@@ -178,7 +180,13 @@ header {
         }
 
         .nav-logo {
-            width: 30% !important;
+            width: 20% !important;
+        }
+
+        .whatsapp-btn {
+            padding: 4px 10px !important;
+             font-size: 0.9rem !important;
+            
         }
 
         .nav-links {
@@ -192,7 +200,7 @@ header {
             margin-right: .7rem;
 
             .carttotal {
-                font-size: 0.68rem;
+                display: none !important;
             }
         }
     }

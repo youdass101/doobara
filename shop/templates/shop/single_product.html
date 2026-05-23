@@ -19,6 +19,19 @@
         {% if product.system and system_variants %}
             <div class="single-product-top">
                 <div class="single-product-gallery">
+                    <div class="single-product-mobile-hero">
+                        <div class="single-product-mobile-hero__copy">
+                            <span class="single-product-info__eyebrow">Doobara System</span>
+                            <h1 class="single-product-title">{{ product.title }}</h1>
+                            <div class="single-product-mobile-hero__description">
+                                {% for line in default_system_variant.short_description_lines %}
+                                    {% if forloop.counter <= 3 %}
+                                        <p>{{ line }}</p>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
                     <div class="single-product-gallery__main">
                         <img id="system-variant-main-image"
                              src="{% if default_system_variant.thumbnail %}{{ default_system_variant.thumbnail }}{% elif product.main_image %}{{ product.main_image.url }}{% endif %}"
@@ -27,8 +40,22 @@
                              height="1000"
                              loading="eager"
                              fetchpriority="high">
+                                            <button type="button"
+                                class="single-product-gallery__zoom-btn"
+                                data-product-lightbox-open
+                                aria-label="Open image gallery">
+                            <i class="fas fa-search-plus" aria-hidden="true"></i>
+                        </button>
                     </div>
                     <div id="system-variant-gallery" class="single-product-gallery__thumbs"></div>
+                    <div class="single-product-lightbox" data-product-lightbox role="dialog" aria-modal="true" hidden>
+                        <button type="button" class="single-product-lightbox__close" data-product-lightbox-close aria-label="Close image gallery">&times;</button>
+                        <button type="button" class="single-product-lightbox__nav single-product-lightbox__nav--prev" data-product-lightbox-prev aria-label="Previous image">&#10094;</button>
+                        <div class="single-product-lightbox__stage">
+                            <img src="" alt="" data-product-lightbox-image>
+                        </div>
+                        <button type="button" class="single-product-lightbox__nav single-product-lightbox__nav--next" data-product-lightbox-next aria-label="Next image">&#10095;</button>
+                    </div>
                 </div>
 
                 <div class="single-product-info">
@@ -44,6 +71,9 @@
                                 <span class="system-variant-option__tier">{{ variant.tier|title }}</span>
                                 <span class="system-variant-option__price">
                                     $ {% if variant.sale_price %}{{ variant.sale_price|floatformat:2 }}{% else %}{{ variant.price|floatformat:2 }}{% endif %}
+                                </span>
+                                <span class="system-variant-option__items-count">
+                                    {{ variant.package_items|length }} items
                                 </span>
                             </button>
                         {% endfor %}
@@ -74,20 +104,27 @@
                             data-ga-currency="{{ product.currency|default:'USD' }}"
                             data-ga-item-category="{% if product.pcategory.0 %}{{ product.pcategory.0.name|escapejs }}{% endif %}"
                             {% if not default_system_variant.can_purchase %}disabled{% endif %}>
-                            {{ default_system_variant.cart_cta_label|default:"Out of Stock" }}
+                            <i class="fas fa-shopping-cart" aria-hidden="true"></i>
+                            <span class="single-product-addtocart__label">{{ default_system_variant.cart_cta_label|default:"Out of Stock" }}</span>
                         </button>
+                        <a class="single-product-whatsapp"
+                           href="https://wa.me/96170856471"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           data-whatsapp-page-title>
+                            <i class="fab fa-whatsapp" aria-hidden="true"></i>
+                            <span class="single-product-whatsapp__copy">
+                                <strong>Not sure which tier fits your setup?</strong>
+                                <span>Ask us on WhatsApp</span>
+                            </span>
+                        </a>
                     </div>
                     {# Keep system variant CTA aligned with normal product flow: price -> CTA -> short description. #}
-                    <ul id="system-variant-short-description" class="single-product-spec-list">
-                        {% for line in default_system_variant.short_description_lines %}
-                            <li>{{ line }}</li>
-                        {% endfor %}
-                    </ul>
-
-                    <div class="single-product-specs">
+                     <div class="single-product-specs">
                         <h3>Included items</h3>
                         <ul id="system-variant-package-items" class="system-variant-package-items"></ul>
                     </div>
+
                 </div>
             </div>
 
@@ -97,6 +134,19 @@
             <div class="single-product-top">
                 <!-- Left: gallery -->
                 <div class="single-product-gallery">
+                    <div class="single-product-mobile-hero">
+                        <div class="single-product-mobile-hero__copy">
+                            <span class="single-product-info__eyebrow">Doobara Product</span>
+                            <h1 class="single-product-title">{{ product.title }}</h1>
+                            <div class="single-product-mobile-hero__description">
+                                {% for line in product.pshortdescription %}
+                                    {% if forloop.counter <= 3 %}
+                                        <p>{{ line }}</p>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
                     <div class="single-product-gallery__main">
                         {% if product.main_image %}
                             <img id="spi"
@@ -109,19 +159,31 @@
                         {% else %}
                             <div class="single-product-gallery__empty" id="spi" aria-label="{{ product.title }} image unavailable"></div>
                         {% endif %}
+                                            <button type="button"
+                                class="single-product-gallery__zoom-btn"
+                                data-product-lightbox-open
+                                aria-label="Open image gallery">
+                            <i class="fas fa-search-plus" aria-hidden="true"></i>
+                        </button>
                     </div>
 
                     <div class="single-product-gallery__thumbs">
                         {% for image in product.all_images %}
-                                <button type="button" class="single-product-thumb">
-                                    <img class="sp-thumb-image"
-                                         src="{{image.url }}"
-                                         alt="{{ image.alt_text }}"
-                                         width="78"
-                                         height="78"
-                                         loading="lazy">
+                                <button type="button"
+                                        class="single-product-thumb"
+                                        data-image-src="{{ image.url }}"
+                                        data-image-alt="{{ image.alt_text }}"
+                                        aria-label="View image {{ forloop.counter }} of {{ product.all_images|length }}">
                                 </button>
                         {% endfor %}
+                    </div>
+                    <div class="single-product-lightbox" data-product-lightbox role="dialog" aria-modal="true" hidden>
+                        <button type="button" class="single-product-lightbox__close" data-product-lightbox-close aria-label="Close image gallery">&times;</button>
+                        <button type="button" class="single-product-lightbox__nav single-product-lightbox__nav--prev" data-product-lightbox-prev aria-label="Previous image">&#10094;</button>
+                        <div class="single-product-lightbox__stage">
+                            <img src="" alt="" data-product-lightbox-image>
+                        </div>
+                        <button type="button" class="single-product-lightbox__nav single-product-lightbox__nav--next" data-product-lightbox-next aria-label="Next image">&#10095;</button>
                     </div>
                 </div>
 
@@ -132,7 +194,7 @@
 
                     <div class="single-product-price-row">
                         <div class="single-product-price-wrap">
-                            <span class="single-product-price-label">Price</span>
+                            <!-- <span class="single-product-price-label">Price</span> -->
                             <p class="single-product-availability {% if product.can_purchase %}is-in-stock{% else %}is-out-of-stock{% endif %}">
                                 {{ product.availability_label }}
                             </p>
@@ -180,26 +242,22 @@
                                 data-ga-currency="{{ product.currency|default:'USD' }}"
                                 data-ga-item-category="{% if product.pcategory.0 %}{{ product.pcategory.0.name|escapejs }}{% endif %}"
                                 {% if not product.can_purchase %}disabled{% endif %}>
-                            {{ product.cart_cta_label|default:"Out of Stock" }}
+                            <i class="fas fa-shopping-cart" aria-hidden="true"></i>
+                            <span class="single-product-addtocart__label">{{ product.cart_cta_label|default:"Out of Stock" }}</span>
                         </button>
+                        <a class="single-product-whatsapp"
+                           href="https://wa.me/96170856471"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           data-whatsapp-page-title>
+                            <i class="fab fa-whatsapp" aria-hidden="true"></i>
+                            <span class="single-product-whatsapp__copy">
+                                <strong>Not sure which tier fits your setup?</strong>
+                                <span>Ask us on WhatsApp</span>
+                            </span>
+                        </a>
                     </div>
 
-                    <div class="single-product-trust">
-                        <div class="single-product-trust__item">Secure checkout</div>
-                        <div class="single-product-trust__item">Fast local delivery</div>
-                        <div class="single-product-trust__item">Support available</div>
-                    </div>
-
-                    <div class="single-product-specs">
-                        <h3>Specifications</h3>
-                        <div class="single-product-specs__content">
-                            <ul class="single-product-spec-list">
-                                {% for line in product.pshortdescription %}
-                                <li>{{ line }}</li>
-                                {% endfor %}
-                            </ul>
-                        </div>
-                    </div>
                 </div>
             </div>
             {% if normal_variants %}
@@ -207,6 +265,38 @@
                 {{ default_normal_variant.id|json_script:"default-normal-variant-id" }}
             {% endif %}
         {% endif %}
+
+              {% if product_feature_cards %}
+                <div id="single-product-feature-card" class="single-product-feature-card card-surface">
+                    <div class="single-product-section-head">
+                        <h2>Why you&rsquo;ll love it</h2>
+                    </div>
+                    <div id="single-product-benefit-grid" class="single-product-benefit-grid">
+                        {% for feature in product_feature_cards %}
+                            <article class="single-product-benefit-item">
+                                {% if feature.icon_url %}
+                                    <img class="single-product-benefit-item__icon"
+                                         src="{{ feature.icon_url }}"
+                                         alt="{{ feature.title }} icon"
+                                         loading="lazy">
+                                {% endif %}
+                                <h3>{{ feature.title }}</h3>
+                                {% if feature.description %}
+                                    <p>{{ feature.description }}</p>
+                                {% endif %}
+                            </article>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+        {{ product_feature_cards|json_script:"default-feature-cards-data" }}
+
+        <div class="single-product-long-image-card" id="single-product-long-image-wrap" {% if not product.long_image and not product.system %}hidden{% endif %}>
+            <img id="single-product-long-image"
+                 src="{% if product.system and default_system_variant.long_image %}{{ default_system_variant.long_image.url }}{% elif default_normal_variant and default_normal_variant.long_image %}{{ default_normal_variant.long_image }}{% elif product.long_image %}{{ product.long_image.url }}{% endif %}"
+                 alt="{% if product.system and default_system_variant.long_image and default_system_variant.long_image.alt_text %}{{ default_system_variant.long_image.alt_text }}{% elif product.long_image and product.long_image.alt_text %}{{ product.long_image.alt_text }}{% else %}{{ product.title }}{% endif %}"
+                 loading="lazy">
+        </div>
 
         {% if product.pvideo %}
             <div class="single-product-video-card">
@@ -232,7 +322,7 @@
                 </div>
             {% endif %}
         {% endfor %}
-
+  
         <div class="single-product-details-grid">
             <div class="single-product-long-desc card-surface">
                 <div class="single-product-section-head">
@@ -247,24 +337,28 @@
                     {% endif %}
                 </div>
             </div>
-
-            <div class="single-product-dimention card-surface">
-                <div class="single-product-section-head">
-                    <h2>Additional Information</h2>
-                </div>
-
-                <table class="single-product-info-table">
-                    <tr>
-                        <th>Weight</th>
-                        <td>{{ product.weight }}g</td>
-                    </tr>
-                    <tr>
-                        <th>Dimension</th>
-                        <td>{{ product.dimensions }}cm</td>
-                    </tr>
-                </table>
-            </div>
         </div>
+        {% if service_badges %}
+            <div class="single-product-service-card card-surface">
+            
+                <div class="single-product-benefit-grid service-badges-fork">
+                    {% for badge in service_badges %}
+                        <article class="single-product-benefit-item">
+                            {% if badge.icon_url %}
+                                <img class="single-product-benefit-item__icon"
+                                        src="{{ badge.icon_url }}"
+                                        alt="{{ badge.title }} icon"
+                                        loading="lazy">
+                            {% endif %}
+                            <h3>{{ badge.title }}</h3>
+                            {% if badge.description %}
+                                <p>{{ badge.description }}</p>
+                            {% endif %}
+                        </article>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
 
     </div>
 </section>

@@ -20,6 +20,25 @@ _JSON_SCRIPT_ESCAPES = {
 }
 
 
+def _safe_uploaded_icon_url(file_field):
+    """
+    Return a safe media URL for uploaded icon files.
+    Guards against legacy bad values (e.g. raw SVG/HTML strings previously
+    stored in icon fields) so templates never emit broken /media/<svg...> URLs.
+    """
+    if not file_field:
+        return ""
+    file_name = (getattr(file_field, "name", "") or "").strip()
+    if not file_name:
+        return ""
+    if "<" in file_name or ">" in file_name or file_name.lower().startswith("data:"):
+        return ""
+    try:
+        return file_field.url
+    except ValueError:
+        return ""
+
+
 def _pick_thumbnail_from_prefetched(images):
     """
     Return the thumbnail image object from an already-prefetched image iterable.
@@ -187,7 +206,14 @@ def filtering(request, locat):
 # render single product html template with and given product data dict
 def single_product(request, locat=None, slug=None):
     lookup_key = slug or locat
-    parent_product = get_object_or_404(Product, Q(slug=lookup_key) | Q(name=lookup_key))
+    parent_product = get_object_or_404(
+        Product.objects.prefetch_related(
+            "feature_assignments__feature",
+            "service_badge_assignments__badge",
+            "normal_variants",
+        ),
+        Q(slug=lookup_key) | Q(name=lookup_key),
+    )
 
     # is dict | (loc: shop.models)
     # given product name, prodcut object serialized dict (using models)
@@ -196,7 +222,11 @@ def single_product(request, locat=None, slug=None):
     # System-kit variants keep using the existing ProductVariant model.
     system_variants_qs = (
         parent_product.variants.filter(active=True)
-        .prefetch_related("images", "package_items__included_product__images")
+        .prefetch_related(
+            "images",
+            "package_items__included_product__images",
+            "feature_assignments__feature",
+        )
         .order_by("sort_order")
     )
 
@@ -217,8 +247,12 @@ def single_product(request, locat=None, slug=None):
         thumb = _pick_thumbnail_from_prefetched(variant.images.all())
         images = [
             {"url": image.image.url, "alt_text": image.alt_text}
-            for image in variant.images.all()
+            for image in variant.images.all() if not image.long_image
         ]
+        variant_long_image = next(
+            ({"url": image.image.url, "alt_text": image.alt_text} for image in variant.images.all() if image.long_image),
+            None,
+        )
         package_items = []
         for package_item in variant.package_items.all():
             # package_items prefetches included product images; keep thumbnail selection in-memory.
@@ -253,9 +287,21 @@ def single_product(request, locat=None, slug=None):
             "cart_cta_label": variant_inventory["cart_cta_label"],
             "thumbnail": thumb.image.url if thumb else None,
             "images": images,
+            "long_image": variant_long_image,
             "package_items": package_items,
             "is_default": variant.is_default,
             "sort_order": variant.sort_order,
+            # Variant-level features are applied as add/remove overrides in JS.
+            "feature_cards": [
+                {
+                    "feature_id": assignment.feature_id,
+                    "icon_url": _safe_uploaded_icon_url(assignment.feature.icon),
+                    "title": assignment.custom_title or assignment.feature.title,
+                    "description": assignment.custom_description or assignment.feature.description,
+                }
+                for assignment in variant.feature_assignments.all()
+                if assignment.feature and assignment.feature.is_active
+            ],
         }
         system_variants.append(variant_payload)
 
@@ -271,7 +317,7 @@ def single_product(request, locat=None, slug=None):
     # Normal single-product variants are separate from system variants by design.
     normal_variants = []
     default_normal_variant = None
-    for variant in parent_product.normal_variants.filter(active=True).order_by("sort_order"):
+    for variant in parent_product.normal_variants.filter(active=True).prefetch_related("feature_assignments__feature").order_by("sort_order"):
         variant_payload = {
             "id": variant.id,
             "title": variant.title,
@@ -279,8 +325,20 @@ def single_product(request, locat=None, slug=None):
             "price": float(variant.price),
             "sale_price": float(variant.sale_price) if variant.sale_price else None,
             "image": variant.image.url if variant.image else None,
+            "long_image": variant.long_image.url if variant.long_image else None,
             "is_default": variant.is_default,
             "sort_order": variant.sort_order,
+            # Variant-level features are applied as add/remove overrides in JS.
+            "feature_cards": [
+                {
+                    "feature_id": assignment.feature_id,
+                    "icon_url": _safe_uploaded_icon_url(assignment.feature.icon),
+                    "title": assignment.custom_title or assignment.feature.title,
+                    "description": assignment.custom_description or assignment.feature.description,
+                }
+                for assignment in variant.feature_assignments.all()
+                if assignment.feature and assignment.feature.is_active
+            ],
         }
         normal_variants.append(variant_payload)
         if variant.is_default and not default_normal_variant:
@@ -288,6 +346,59 @@ def single_product(request, locat=None, slug=None):
 
     if normal_variants and not default_normal_variant:
         default_normal_variant = normal_variants[0]
+
+    # Build reusable product feature cards from admin-managed assignments.
+    # We keep this server-side payload compact so the template only renders ready data.
+    product_feature_cards = []
+    for assignment in sorted(
+        parent_product.feature_assignments.all(),
+        key=lambda item: (item.sort_order, item.id),
+    ):
+        feature = assignment.feature
+        if not feature or not feature.is_active:
+            continue
+        product_feature_cards.append(
+            {
+                # Keep template rendering simple and safe: only expose URL, never raw HTML.
+                "feature_id": assignment.feature_id,
+                "icon_url": _safe_uploaded_icon_url(feature.icon),
+                "title": assignment.custom_title or feature.title,
+                "description": assignment.custom_description or feature.description,
+            }
+        )
+
+    # Build service badges from product-level assignments, mirroring feature cards.
+    # If a system product has no explicit assignments, fallback to global defaults.
+    service_badges = []
+    for assignment in sorted(
+        parent_product.service_badge_assignments.all(),
+        key=lambda item: (item.sort_order, item.id),
+    ):
+        badge = assignment.badge
+        if not badge or not badge.is_active:
+            continue
+        service_badges.append(
+            {
+                # Keep template rendering simple and safe: only expose URL, never raw HTML.
+                "icon_url": _safe_uploaded_icon_url(badge.icon),
+                "title": assignment.custom_title or badge.title,
+                "description": assignment.custom_description or badge.description,
+            }
+        )
+
+    if parent_product.is_system and not service_badges:
+        for badge in ServiceBadge.objects.filter(
+            is_active=True,
+            is_global_default=True,
+        ).order_by("sort_order", "title"):
+            service_badges.append(
+                {
+                    # Keep template rendering simple and safe: only expose URL, never raw HTML.
+                    "icon_url": _safe_uploaded_icon_url(badge.icon),
+                    "title": badge.title,
+                    "description": badge.description,
+                }
+            )
 
     # NEW: Build social preview metadata once in view so templates stay clean and block-driven.
     social_title = (product.get("title") or "").strip()
@@ -329,6 +440,8 @@ def single_product(request, locat=None, slug=None):
                     default_variant=default_system_variant if product.get("system") else None,
                 )
             ),
+            "product_feature_cards": product_feature_cards,
+            "service_badges": service_badges,
         },
     )
 
