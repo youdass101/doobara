@@ -125,11 +125,6 @@
                         <ul id="system-variant-package-items" class="system-variant-package-items"></ul>
                     </div>
 
-                    <!-- <ul id="system-variant-short-description" class="single-product-spec-list">
-                        {% for line in default_system_variant.short_description_lines %}
-                            <li>{{ line }}</li>
-                        {% endfor %}
-                    </ul> -->
                 </div>
             </div>
 
@@ -143,13 +138,13 @@
                         <div class="single-product-mobile-hero__copy">
                             <span class="single-product-info__eyebrow">Doobara Product</span>
                             <h1 class="single-product-title">{{ product.title }}</h1>
-                            <!-- <div class="single-product-mobile-hero__description">
+                            <div class="single-product-mobile-hero__description">
                                 {% for line in product.pshortdescription %}
                                     {% if forloop.counter <= 3 %}
                                         <p>{{ line }}</p>
                                     {% endif %}
                                 {% endfor %}
-                            </div> -->
+                            </div>
                         </div>
                     </div>
                     <div class="single-product-gallery__main">
@@ -263,22 +258,6 @@
                         </a>
                     </div>
 
-                    <div class="single-product-trust">
-                        <div class="single-product-trust__item">Secure checkout</div>
-                        <div class="single-product-trust__item">Fast local delivery</div>
-                        <div class="single-product-trust__item">Support available</div>
-                    </div>
-
-                    <div class="single-product-specs">
-                        <h3>Specifications</h3>
-                        <!-- <div class="single-product-specs__content">
-                            <ul class="single-product-spec-list">
-                                {% for line in product.pshortdescription %}
-                                <li>{{ line }}</li>
-                                {% endfor %}
-                            </ul>
-                        </div> -->
-                    </div>
                 </div>
             </div>
             {% if normal_variants %}
@@ -286,6 +265,31 @@
                 {{ default_normal_variant.id|json_script:"default-normal-variant-id" }}
             {% endif %}
         {% endif %}
+
+              {% if product_feature_cards %}
+                <div id="single-product-feature-card" class="single-product-feature-card card-surface">
+                    <div class="single-product-section-head">
+                        <h2>Why you&rsquo;ll love it</h2>
+                    </div>
+                    <div id="single-product-benefit-grid" class="single-product-benefit-grid">
+                        {% for feature in product_feature_cards %}
+                            <article class="single-product-benefit-item">
+                                {% if feature.icon_url %}
+                                    <img class="single-product-benefit-item__icon"
+                                         src="{{ feature.icon_url }}"
+                                         alt="{{ feature.title }} icon"
+                                         loading="lazy">
+                                {% endif %}
+                                <h3>{{ feature.title }}</h3>
+                                {% if feature.description %}
+                                    <p>{{ feature.description }}</p>
+                                {% endif %}
+                            </article>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+        {{ product_feature_cards|json_script:"default-feature-cards-data" }}
 
         <div class="single-product-long-image-card" id="single-product-long-image-wrap" {% if not product.long_image and not product.system %}hidden{% endif %}>
             <img id="single-product-long-image"
@@ -318,30 +322,7 @@
                 </div>
             {% endif %}
         {% endfor %}
-        {% if product_feature_cards %}
-                <div id="single-product-feature-card" class="single-product-feature-card card-surface">
-                    <div class="single-product-section-head">
-                        <h2>Why you&rsquo;ll love it</h2>
-                    </div>
-                    <div id="single-product-benefit-grid" class="single-product-benefit-grid">
-                        {% for feature in product_feature_cards %}
-                            <article class="single-product-benefit-item">
-                                {% if feature.icon_url %}
-                                    <img class="single-product-benefit-item__icon"
-                                         src="{{ feature.icon_url }}"
-                                         alt="{{ feature.title }} icon"
-                                         loading="lazy">
-                                {% endif %}
-                                <h3>{{ feature.title }}</h3>
-                                {% if feature.description %}
-                                    <p>{{ feature.description }}</p>
-                                {% endif %}
-                            </article>
-                        {% endfor %}
-                    </div>
-                </div>
-            {% endif %}
-        {{ product_feature_cards|json_script:"default-feature-cards-data" }}
+  
         <div class="single-product-details-grid">
             <div class="single-product-long-desc card-surface">
                 <div class="single-product-section-head">
