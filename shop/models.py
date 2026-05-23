@@ -495,6 +495,65 @@ class ProductVariant(models.Model):
             "cart_cta_label": "Add to Cart" if self.in_stock else "Out of Stock",
         }
 
+
+
+class NormalVariantFeatureAssignment(models.Model):
+    """Variant-level feature overrides for normal product variants."""
+    variant = models.ForeignKey(
+        "NormalProductVariant",
+        related_name="feature_assignments",
+        on_delete=models.CASCADE,
+    )
+    feature = models.ForeignKey(
+        "ProductFeature",
+        related_name="normal_variant_assignments",
+        on_delete=models.CASCADE,
+    )
+    sort_order = models.PositiveSmallIntegerField(default=0)
+    custom_title = models.CharField(max_length=255, blank=True)
+    custom_description = models.TextField(blank=True)
+
+    class Meta:
+        ordering = ["sort_order", "id"]
+        constraints = [
+            models.UniqueConstraint(
+                fields=["variant", "feature"],
+                name="shop_unique_normal_variant_feature_assignment",
+            ),
+        ]
+
+    def __str__(self):
+        return f"{self.variant.product.name} - {self.variant.title} → {self.feature.title}"
+
+
+class SystemVariantFeatureAssignment(models.Model):
+    """Variant-level feature overrides for system product variants."""
+    variant = models.ForeignKey(
+        "ProductVariant",
+        related_name="feature_assignments",
+        on_delete=models.CASCADE,
+    )
+    feature = models.ForeignKey(
+        "ProductFeature",
+        related_name="system_variant_assignments",
+        on_delete=models.CASCADE,
+    )
+    sort_order = models.PositiveSmallIntegerField(default=0)
+    custom_title = models.CharField(max_length=255, blank=True)
+    custom_description = models.TextField(blank=True)
+
+    class Meta:
+        ordering = ["sort_order", "id"]
+        constraints = [
+            models.UniqueConstraint(
+                fields=["variant", "feature"],
+                name="shop_unique_system_variant_feature_assignment",
+            ),
+        ]
+
+    def __str__(self):
+        return f"{self.variant.product.name} - {self.variant.title} → {self.feature.title}"
+
 class ProductVariantImage(models.Model):
     variant = models.ForeignKey("ProductVariant", related_name="images", on_delete=models.CASCADE)
     alt_text = models.CharField(max_length=255, blank=True)

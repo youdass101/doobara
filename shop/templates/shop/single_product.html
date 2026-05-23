@@ -284,11 +284,11 @@
             {% endif %}
         {% endfor %}
         {% if product_feature_cards %}
-                <div class="single-product-feature-card card-surface">
+                <div id="single-product-feature-card" class="single-product-feature-card card-surface">
                     <div class="single-product-section-head">
                         <h2>Why you&rsquo;ll love it</h2>
                     </div>
-                    <div class="single-product-benefit-grid">
+                    <div id="single-product-benefit-grid" class="single-product-benefit-grid">
                         {% for feature in product_feature_cards %}
                             <article class="single-product-benefit-item">
                                 {% if feature.icon_url %}
@@ -306,6 +306,7 @@
                     </div>
                 </div>
             {% endif %}
+        {{ product_feature_cards|json_script:"default-feature-cards-data" }}
         <div class="single-product-details-grid">
             <div class="single-product-long-desc card-surface">
                 <div class="single-product-section-head">

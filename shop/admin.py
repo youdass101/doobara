@@ -16,6 +16,8 @@ from .models import (
     ProductFeatureAssignment,
     ServiceBadge,
     ServiceBadgeAssignment,
+    NormalVariantFeatureAssignment,
+    SystemVariantFeatureAssignment,
 )
 
 
@@ -82,6 +84,22 @@ class ServiceBadgeAssignmentInline(admin.TabularInline):
     ordering = ("sort_order", "id")
 
 
+
+
+class NormalVariantFeatureAssignmentInline(admin.TabularInline):
+    model = NormalVariantFeatureAssignment
+    extra = 0
+    fields = ("feature", "sort_order", "custom_title", "custom_description")
+    autocomplete_fields = ("feature",)
+    ordering = ("sort_order", "id")
+
+
+class SystemVariantFeatureAssignmentInline(admin.TabularInline):
+    model = SystemVariantFeatureAssignment
+    extra = 0
+    fields = ("feature", "sort_order", "custom_title", "custom_description")
+    autocomplete_fields = ("feature",)
+    ordering = ("sort_order", "id")
 class ProductVariantImageInline(admin.TabularInline):
     model = ProductVariantImage
     extra = 1
@@ -253,7 +271,7 @@ class ProductVariantAdmin(ImportExportActionModelAdmin):
     search_fields = ("title", "product__name", "product__sku")
     list_filter = ("active", "tier", "currency", "is_default")
     ordering = ("product__name", "sort_order", "title")
-    inlines = (ProductVariantImageInline,)
+    inlines = (ProductVariantImageInline, SystemVariantFeatureAssignmentInline)
     fieldsets = (
         (
             "Variant",
@@ -309,6 +327,7 @@ class NormalProductVariantAdmin(ImportExportActionModelAdmin):
     search_fields = ("title", "product__name", "product__sku")
     list_filter = ("active", "is_default")
     ordering = ("product__name", "sort_order", "title")
+    inlines = (NormalVariantFeatureAssignmentInline,)
     fieldsets = (
         (
             "Variant",
