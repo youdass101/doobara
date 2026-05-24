@@ -342,7 +342,7 @@ class ProductImage(models.Model):
     alt_text = models.CharField(max_length=255, blank=True)
     # image is image 
     # the image path
-    image = models.ImageField(upload_to='products/images/')
+    image = models.ImageField(upload_to='products/images/', blank=True, null=True)
     asset = models.ForeignKey(
         "MediaAsset",
         related_name="product_images",
@@ -371,6 +371,12 @@ class ProductImage(models.Model):
 
     def clean(self):
         super().clean()
+        # During MediaAsset transition we accept either a reusable asset or
+        # legacy uploaded image so existing workflows remain backward-compatible.
+        if not self.asset_id and not self.image:
+            raise ValidationError(
+                {"image": "Upload an image or choose a Media Asset."}
+            )
         if not self.thumbnail or not self.product_id:
             return
 
@@ -579,7 +585,7 @@ class SystemVariantFeatureAssignment(models.Model):
 class ProductVariantImage(models.Model):
     variant = models.ForeignKey("ProductVariant", related_name="images", on_delete=models.CASCADE)
     alt_text = models.CharField(max_length=255, blank=True)
-    image = models.ImageField(upload_to='products/variants/images/')
+    image = models.ImageField(upload_to='products/variants/images/', blank=True, null=True)
     asset = models.ForeignKey(
         "MediaAsset",
         related_name="variant_images",
@@ -605,6 +611,12 @@ class ProductVariantImage(models.Model):
 
     def clean(self):
         super().clean()
+        # During MediaAsset transition we accept either a reusable asset or
+        # legacy uploaded image so existing workflows remain backward-compatible.
+        if not self.asset_id and not self.image:
+            raise ValidationError(
+                {"image": "Upload an image or choose a Media Asset."}
+            )
         if not self.thumbnail or not self.variant_id:
             return
 
