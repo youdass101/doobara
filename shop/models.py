@@ -317,6 +317,19 @@ class Hero_Card(models.Model):
         }
     
 
+class MediaAsset(models.Model):
+    file = models.ImageField(upload_to="product_media/")
+    alt_text = models.CharField(max_length=255, blank=True)
+    title = models.CharField(max_length=255, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ["-created_at"]
+
+    def __str__(self):
+        return self.title or self.alt_text or self.file.name
+
 
 # image is Sql django model
 # interp each object contain image informations and url
@@ -330,6 +343,13 @@ class ProductImage(models.Model):
     # image is image 
     # the image path
     image = models.ImageField(upload_to='products/images/')
+    asset = models.ForeignKey(
+        "MediaAsset",
+        related_name="product_images",
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+    )
     # default is boolean 
     # if true the image is the main image for the product 
     thumbnail = models.BooleanField(default=False)  # True if this is a thumbnail image
@@ -560,6 +580,13 @@ class ProductVariantImage(models.Model):
     variant = models.ForeignKey("ProductVariant", related_name="images", on_delete=models.CASCADE)
     alt_text = models.CharField(max_length=255, blank=True)
     image = models.ImageField(upload_to='products/variants/images/')
+    asset = models.ForeignKey(
+        "MediaAsset",
+        related_name="variant_images",
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+    )
     thumbnail = models.BooleanField(default=False)
     long_image = models.BooleanField(default=False)
 
