@@ -50,6 +50,26 @@ def _pick_thumbnail_from_prefetched(images):
     return next((image for image in image_list if image.thumbnail), image_list[0])
 
 
+def _resolved_image_url(image_relation):
+    """
+    Resolve the effective media URL.
+    Asset file is preferred, then legacy fallback image field.
+    """
+    if image_relation.asset and image_relation.asset.file:
+        return image_relation.asset.file.url
+    if image_relation.image:
+        return image_relation.image.url
+    return None
+
+
+def _resolved_alt_text(image_relation, fallback_text):
+    if image_relation.asset and image_relation.asset.alt_text:
+        return image_relation.asset.alt_text
+    if image_relation.alt_text:
+        return image_relation.alt_text
+    return fallback_text
+
+
 def _json_for_script_tag(value):
     """
     Serialize JSON for safe embedding in <script> text content.
@@ -223,8 +243,9 @@ def single_product(request, locat=None, slug=None):
     system_variants_qs = (
         parent_product.variants.filter(active=True)
         .prefetch_related(
-            "images",
+            "images__asset",
             "package_items__included_product__images",
+            "package_items__included_product__images__asset",
             "feature_assignments__feature",
         )
         .order_by("sort_order")
@@ -245,12 +266,30 @@ def single_product(request, locat=None, slug=None):
         long_description_html = markdown.markdown(variant.description or "")
         # Use prefetched images in memory to avoid per-variant thumbnail lookup queries.
         thumb = _pick_thumbnail_from_prefetched(variant.images.all())
-        images = [
-            {"url": image.image.url, "alt_text": image.alt_text}
-            for image in variant.images.all() if not image.long_image
-        ]
+        images = []
+        seen_urls = set()
+        for image in variant.images.all():
+            if image.long_image:
+                continue
+            image_url = _resolved_image_url(image)
+            if not image_url or image_url in seen_urls:
+                continue
+            seen_urls.add(image_url)
+            images.append(
+                {
+                    "url": image_url,
+                    "alt_text": _resolved_alt_text(image, variant.title or parent_product.name),
+                }
+            )
         variant_long_image = next(
-            ({"url": image.image.url, "alt_text": image.alt_text} for image in variant.images.all() if image.long_image),
+            (
+                {
+                    "url": _resolved_image_url(image),
+                    "alt_text": _resolved_alt_text(image, variant.title or parent_product.name),
+                }
+                for image in variant.images.all()
+                if image.long_image and _resolved_image_url(image)
+            ),
             None,
         )
         package_items = []
@@ -264,7 +303,7 @@ def single_product(request, locat=None, slug=None):
                     "name": package_item.included_product.name,
                     "url": package_item.included_product.get_absolute_url(),
                     "qty": package_item.quantity,
-                    "thumbnail": included_thumb.image.url if included_thumb else None,
+                    "thumbnail": _resolved_image_url(included_thumb) if included_thumb else None,
                 }
             )
 
@@ -285,7 +324,7 @@ def single_product(request, locat=None, slug=None):
             "availability_label": variant_inventory["availability_label"],
             "quantity": variant_inventory["quantity"],
             "cart_cta_label": variant_inventory["cart_cta_label"],
-            "thumbnail": thumb.image.url if thumb else None,
+            "thumbnail": _resolved_image_url(thumb) if thumb else None,
             "images": images,
             "long_image": variant_long_image,
             "package_items": package_items,
