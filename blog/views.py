@@ -6,7 +6,7 @@ from .models import *
 def blog(request):
     return render(request, "blog/blog.html")
 
-
+# video view to display all videos in the database
 def video(request):
     video = Video.objects.all()
     video = [v.serialize() for v in video]
