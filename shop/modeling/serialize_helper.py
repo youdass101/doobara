@@ -2,25 +2,50 @@ from .. import models as md
 import markdown
 
 
+def _resolved_media_url(image_relation):
+    """
+    Resolve image URL with reusable asset-first fallback.
+    """
+    if image_relation.asset and image_relation.asset.file:
+        return image_relation.asset.file.url
+    if image_relation.image:
+        return image_relation.image.url
+    return None
+
+
+def _resolved_alt_text(image_relation, fallback_text):
+    if image_relation.asset and image_relation.asset.alt_text:
+        return image_relation.asset.alt_text
+    if image_relation.alt_text:
+        return image_relation.alt_text
+    return fallback_text
+
+
 def _get_primary_image(product):
     primary = product.images.filter(thumbnail=True).first() or product.images.first()
     if not primary:
         return None
+    image_url = _resolved_media_url(primary)
+    if not image_url:
+        return None
     return {
-        "url": primary.image.url,
-        "alt_text": primary.alt_text or product.name,
+        "url": image_url,
+        "alt_text": _resolved_alt_text(primary, product.name),
         "thumbnail": primary.thumbnail,
     }
 
 
 def _get_all_images(product):
     return [
-        {
-            "url": image.image.url,
-            "alt_text": image.alt_text or product.name,
-            "thumbnail": image.thumbnail,
-        }
+        payload
         for image in product.images.filter(long_image=False)
+        if (
+            payload := {
+                "url": _resolved_media_url(image),
+                "alt_text": _resolved_alt_text(image, product.name),
+                "thumbnail": image.thumbnail,
+            }
+        )["url"]
     ]
 
 
@@ -28,9 +53,12 @@ def _get_long_image(product):
     long_image = product.images.filter(long_image=True).first()
     if not long_image:
         return None
+    image_url = _resolved_media_url(long_image)
+    if not image_url:
+        return None
     return {
-        "url": long_image.image.url,
-        "alt_text": long_image.alt_text or product.name,
+        "url": image_url,
+        "alt_text": _resolved_alt_text(long_image, product.name),
     }
 
 

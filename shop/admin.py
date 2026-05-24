@@ -10,6 +10,7 @@ from .models import (
     ProductImage,
     ProductVariant,
     ProductVariantImage,
+    MediaAsset,
     ProductVariantItem,
     NormalProductVariant,
     ProductFeature,
@@ -24,14 +25,21 @@ from .models import (
 class ProductImageInline(admin.TabularInline):
     model = ProductImage
     extra = 1
-    fields = ("image", "image_preview", "alt_text", "thumbnail", "long_image")
+    fields = ("asset", "image", "image_preview", "alt_text", "thumbnail", "long_image")
+    autocomplete_fields = ("asset",)
     readonly_fields = ("image_preview",)
 
     def image_preview(self, obj):
-        if obj and obj.image:
+        if obj and obj.asset and obj.asset.file:
+            preview_url = obj.asset.file.url
+        elif obj and obj.image:
+            preview_url = obj.image.url
+        else:
+            preview_url = None
+        if preview_url:
             return format_html(
                 '<img src="{}" style="max-height: 70px; border-radius: 4px;" />',
-                obj.image.url,
+                preview_url,
             )
         return "-"
 
@@ -103,14 +111,21 @@ class SystemVariantFeatureAssignmentInline(admin.TabularInline):
 class ProductVariantImageInline(admin.TabularInline):
     model = ProductVariantImage
     extra = 1
-    fields = ("image", "image_preview", "alt_text", "thumbnail", "long_image")
+    fields = ("asset", "image", "image_preview", "alt_text", "thumbnail", "long_image")
+    autocomplete_fields = ("asset",)
     readonly_fields = ("image_preview",)
 
     def image_preview(self, obj):
-        if obj and obj.image:
+        if obj and obj.asset and obj.asset.file:
+            preview_url = obj.asset.file.url
+        elif obj and obj.image:
+            preview_url = obj.image.url
+        else:
+            preview_url = None
+        if preview_url:
             return format_html(
                 '<img src="{}" style="max-height: 70px; border-radius: 4px;" />',
-                obj.image.url,
+                preview_url,
             )
         return "-"
 
@@ -361,7 +376,7 @@ class NormalProductVariantAdmin(ImportExportActionModelAdmin):
 
 @admin.register(ProductImage)
 class ProductImageAdmin(ImportExportActionModelAdmin):
-    list_display = ("product", "alt_text", "thumbnail", "long_image")
+    list_display = ("product", "asset", "alt_text", "thumbnail", "long_image")
     search_fields = ("product__name", "product__sku", "alt_text")
     list_filter = ("thumbnail", "long_image")
     ordering = ("product__name", "id")
@@ -369,7 +384,7 @@ class ProductImageAdmin(ImportExportActionModelAdmin):
 
 @admin.register(ProductVariantImage)
 class ProductVariantImageAdmin(ImportExportActionModelAdmin):
-    list_display = ("variant", "variant_product", "alt_text", "thumbnail", "long_image")
+    list_display = ("variant", "variant_product", "asset", "alt_text", "thumbnail", "long_image")
     search_fields = ("variant__title", "variant__product__name", "alt_text")
     list_filter = ("thumbnail", "long_image")
     ordering = ("variant__product__name", "variant__title", "id")
@@ -378,6 +393,13 @@ class ProductVariantImageAdmin(ImportExportActionModelAdmin):
         return obj.variant.product
 
     variant_product.short_description = "Product"
+
+
+@admin.register(MediaAsset)
+class MediaAssetAdmin(ImportExportActionModelAdmin):
+    list_display = ("id", "title", "alt_text", "created_at")
+    search_fields = ("title", "alt_text", "file")
+    ordering = ("-created_at",)
 
 
 @admin.register(Categorie)
