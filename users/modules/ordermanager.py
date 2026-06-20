@@ -2,6 +2,7 @@ from ..models import *
 from ..forms import *
 from cart.modules.cartmanager import *
 from cart.modules.snippethelper import *
+from cart.modules.snippethelper import _load_session_cart_maps, _parse_cart_key
 from django.db import transaction
 from django.template.loader import render_to_string
 from django.core.mail import EmailMultiAlternatives
@@ -51,10 +52,53 @@ def _build_order_item_snapshot(cart_item):
     }
 
 
+def _build_session_order_item_snapshots(session_cart):
+    # Convert anonymous session cart rows into the same immutable order snapshots
+    # used for authenticated carts, without requiring a temporary user account.
+    product_map, variant_map, normal_variant_map = _load_session_cart_maps(session_cart)
+    snapshots = []
+    for key, data in session_cart.items():
+        quantity = int(data.get("quantity", 0) or 0)
+        if quantity <= 0:
+            continue
+
+        kind, object_id = _parse_cart_key(key)
+        if kind == "system_variant":
+            variant = variant_map.get(object_id)
+            if not variant:
+                continue
+            price = variant.sale_price if variant.sale_price else variant.price
+            snapshots.append({"product": variant.product, "quantity": quantity, "price": price, "product_name": variant.title})
+        elif kind == "normal_variant":
+            normal_variant = normal_variant_map.get(object_id)
+            if not normal_variant:
+                continue
+            price = normal_variant.sale_price if normal_variant.sale_price else normal_variant.price
+            snapshots.append({
+                "product": normal_variant.product,
+                "quantity": quantity,
+                "price": price,
+                "product_name": f"{normal_variant.product.name} - {normal_variant.title}",
+            })
+        else:
+            product = product_map.get(object_id)
+            if not product:
+                continue
+            price = product.sale_price if product.sale_price else product.price
+            snapshots.append({"product": product, "quantity": quantity, "price": price, "product_name": product.name})
+    return snapshots
+
+
 def createorder(request, form, new):
-    user = request.user
-    cart_items = list(user.mycart.items.select_related("product", "variant", "normal_variant"))
-    if not cart_items:
+    user = request.user if request.user.is_authenticated else None
+    if user:
+        cart_items = list(user.mycart.items.select_related("product", "variant", "normal_variant"))
+        item_snapshots = [_build_order_item_snapshot(item) for item in cart_items]
+    else:
+        cart_items = []
+        item_snapshots = _build_session_order_item_snapshots(request.session.get("cart", {}))
+
+    if not item_snapshots:
         return (False, _build_checkout_error_form("Your cart is empty. Please add products before placing an order."))
 
     # result = create_new_address(request, form)
@@ -66,16 +110,20 @@ def createorder(request, form, new):
             state = False
             # is list
             # list of user saved delivery addresses
-            allad = user.myaddress.all()
+            allad = user.myaddress.all() if user else []
            
-            if len(allad) == 0:
+            if user and len(allad) == 0:
                 state=True
             
             # record instance
             # create a new instance deliver address data
             note = form.cleaned_data.get('notes')
+            guest_email = form.cleaned_data.get('guest_email', '').strip()
+            if not user and not guest_email:
+                form.add_error('guest_email', 'Email is required for guest checkout.')
+                return (False, form)
             form.instance.user = user
-            form.instance.default = state
+            form.instance.default = state if user else False
             delivery =form.save()        
 
         else:
@@ -86,6 +134,7 @@ def createorder(request, form, new):
         # current saved in data address
         id = int(form['current_address_id'])
         note = form.get('ordernote', '').strip()
+        guest_email = ''
         # Security: lock address selection to the authenticated user so posted
         # IDs cannot attach someone else's saved address to this order.
         try:
@@ -120,7 +169,7 @@ def createorder(request, form, new):
     with transaction.atomic():
         if coupon_pricing["coupon_valid"]:
             # Re-check limits under row lock so concurrent checkouts cannot over-redeem capped coupons.
-            usage_ok, usage_error, locked_coupon = check_usage_limits_atomic(coupon_pricing["coupon"], user)
+            usage_ok, usage_error, locked_coupon = check_usage_limits_atomic(coupon_pricing["coupon"], request.user)
             if not usage_ok:
                 return (False, _build_checkout_error_form(usage_error))
             coupon_pricing["coupon"] = locked_coupon
@@ -129,6 +178,7 @@ def createorder(request, form, new):
         # create an new order object model
         order = Orders.objects.create(
             user=user,
+            guest_email=guest_email,
             address=delivery,
             total=total,
             note=note,
@@ -139,8 +189,6 @@ def createorder(request, form, new):
             coupon_discount_amount=coupon_pricing["coupon_discount"] if coupon_pricing["coupon_valid"] else 0,
         )
 
-        # NEW: Convert each cart row into a variant-aware immutable purchase snapshot.
-        item_snapshots = [_build_order_item_snapshot(item) for item in cart_items]
         Item_Order.objects.bulk_create(
             [
                 Item_Order(
@@ -153,7 +201,11 @@ def createorder(request, form, new):
                 for snapshot in item_snapshots
             ]
         )
-        user.mycart.items.filter(id__in=[item.id for item in cart_items]).delete()
+        if user:
+            user.mycart.items.filter(id__in=[item.id for item in cart_items]).delete()
+        else:
+            request.session["cart"] = {}
+            request.session.save()
         if coupon_pricing["coupon_valid"]:
             # Snapshot and usage tracking happen only after a successful committed order.
             snapshot_coupon_to_order(order, coupon_pricing)
@@ -216,11 +268,11 @@ def send_order_confirmation_email_to_user_and_admin(order):
         if not order:
             return
 
-    customer_email = order.user.email
+    customer_email = order.user.email if order.user else order.guest_email
     if not customer_email:
         return
 
-    customer_name = order.user.first_name or (order.address.name if order.address else "Customer")
+    customer_name = (order.user.first_name if order.user else "") or (order.address.name if order.address else "Customer")
     items = [
         {
             "product_name": item.product_name,

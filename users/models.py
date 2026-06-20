@@ -32,7 +32,7 @@ class Delivery_Address_Details (models.Model):
     delivery_details = models.CharField(max_length=400, blank=True)
     # is object instance
     # user account 
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="myaddress")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="myaddress", null=True, blank=True)
     # is boolean 
     # address default
     default = models.BooleanField(default=False)
@@ -60,7 +60,9 @@ class Delivery_Address_Details (models.Model):
 class Orders (models.Model):
     # is instance 
     # user who placed the order 
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="myorders")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="myorders", null=True, blank=True)
+    # Guest checkout email snapshot for orders placed without a user account.
+    guest_email = models.EmailField(blank=True)
     # is instance
     # delivery address of user who placed the order 
     address = models.ForeignKey(Delivery_Address_Details, on_delete=models.SET_NULL, null=True)

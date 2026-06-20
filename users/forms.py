@@ -40,6 +40,7 @@ class CustomLoginForm(LoginForm):
 class Delivery_Information(ModelForm):
     
     notes = forms.CharField(max_length=200, required=False)
+    guest_email = forms.EmailField(label="Email", required=False)
 
 
     class Meta:
