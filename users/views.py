@@ -43,7 +43,6 @@ def myaccount(request):
 
 # caller: checkout
 # Create a new order instance
-@login_required
 @never_cache
 def placeorder(request):
     if request.method != "POST":
@@ -98,7 +97,7 @@ def placeorder(request):
         # If new form have invalid data return same form and chekout page to retry
         else:
             pricing = cart_pricing_breakdown(request)
-            loa = request.user.myaddress.all()
+            loa = request.user.myaddress.all() if request.user.is_authenticated else []
             sloa = [item.serialize() for item in loa]
             return render(request, "cart/checkout.html", {
                 "form": order[1],

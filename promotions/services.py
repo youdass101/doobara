@@ -325,7 +325,7 @@ def record_coupon_usage(order, pricing):
 
         return CouponUsage.objects.create(
             coupon=locked_coupon,
-            user=order.user if order.user.is_authenticated else None,
+            user=order.user if order.user and order.user.is_authenticated else None,
             order=order,
             coupon_code_snapshot=pricing.get("coupon_code", locked_coupon.code),
             discount_amount=discount,

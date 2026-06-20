@@ -72,14 +72,13 @@ def updatecart(request):
     return JsonResponse({"result":"done"}, status=201)
 
 @never_cache
-@login_required
 def checkout(request):
     # is instance object | (loc: modules.cartmanager)
     # create new cart manager instance 
     cm = CartManager(request)
     # is list | (loc: models)
     # all user address instances (list of address )
-    loa = request.user.myaddress.all()
+    loa = request.user.myaddress.all() if request.user.is_authenticated else []
     # is list of dict
     # create list of dict from objects
     sloa = [item.serialize() for item in loa]

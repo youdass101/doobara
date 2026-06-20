@@ -41,6 +41,7 @@ class OrdersAdmin(admin.ModelAdmin):
     list_display = (
         "id",
         "user",
+        "guest_email",
         "total",
         "status",
         "date",
@@ -56,6 +57,7 @@ class OrdersAdmin(admin.ModelAdmin):
         "user__first_name",
         "user__last_name",
         "user__email",
+        "guest_email",
         "address__phone_number",
         "address__name",
         "address__last_name",
@@ -79,6 +81,7 @@ class OrdersAdmin(admin.ModelAdmin):
             {
                 "fields": (
                     "user",
+                    "guest_email",
                     "address",
                 )
             },
