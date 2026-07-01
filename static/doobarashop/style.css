@@ -2756,12 +2756,6 @@ footer .footer-inner .footer-links a {
     display: none;
   }
 }
-@media (max-width: 420px) {
-  .shop-filter-form {
-    display: none;
-    grid-template-columns: 2fr;
-  }
-}
 .single-product-page {
   position: relative;
   padding: 44px 20px 90px;
