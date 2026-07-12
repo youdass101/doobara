@@ -3,6 +3,7 @@ import re
 from decimal import Decimal, InvalidOperation
 
 from django.http import HttpResponse
+from django.urls import NoReverseMatch
 from django.utils.html import strip_tags
 
 from ..models import Product
@@ -65,7 +66,25 @@ def _absolute_product_url(request, product):
     """
     Build an absolute canonical URL for feed export rows.
     """
-    return request.build_absolute_uri(product.get_absolute_url())
+    try:
+        return request.build_absolute_uri(product.get_absolute_url())
+    except NoReverseMatch:
+        # Legacy product records can predate slug enforcement. Use the older
+        # detail URL as a safe fallback so one bad slug cannot break the feed.
+        return request.build_absolute_uri(f"/single_product/{product.name}/")
+
+
+def _absolute_file_url(request, file_field):
+    """
+    Build an absolute media URL without letting malformed legacy file values
+    crash the entire catalog feed.
+    """
+    if not file_field:
+        return None
+    try:
+        return request.build_absolute_uri(file_field.url)
+    except (TypeError, ValueError):
+        return None
 
 
 def _absolute_image_url(request, product):
@@ -76,7 +95,7 @@ def _absolute_image_url(request, product):
     image = _primary_image(product)
     if not image:
         return None
-    return request.build_absolute_uri(image.image.url)
+    return _absolute_file_url(request, image.image)
 
 
 # NEW: Build optional "additional_image_link" from non-primary product images.
@@ -87,7 +106,9 @@ def _additional_product_image_urls(request, product):
     for image in product.images.all():
         if primary and image.id == primary.id:
             continue
-        urls.append(request.build_absolute_uri(image.image.url))
+        image_url = _absolute_file_url(request, image.image)
+        if image_url:
+            urls.append(image_url)
     return ", ".join(urls) if urls else None
 
 
@@ -223,6 +244,41 @@ def _google_price(amount, currency):
     return f"{normalized_amount} {normalized_currency}"
 
 
+def _base_product_offer_row(
+    request,
+    product,
+    *,
+    base_description,
+    base_product_type,
+    base_brand,
+    base_link,
+    base_condition,
+    base_availability,
+    google_price_format,
+):
+    """
+    Build the parent product offer used for simple products and for active
+    products whose variant/tier setup is not ready yet.
+    """
+    return {
+        "id": str(product.id),
+        "title": product.name,
+        "description": base_description,
+        "availability": base_availability,
+        "condition": base_condition,
+        "price": (
+            _google_price(product.sale_price or product.price, product.currency)
+            if google_price_format
+            else _normalized_price(product.sale_price or product.price)
+        ),
+        "link": base_link,
+        "image_link": _absolute_image_url(request, product),
+        "brand": base_brand,
+        "product_type": base_product_type,
+        "additional_image_link": _additional_product_image_urls(request, product),
+    }
+
+
 def _iter_feed_offers(request, *, google_price_format=False):
     for product in product_feed_queryset():
         base_description = _plain_text_description(
@@ -236,11 +292,28 @@ def _iter_feed_offers(request, *, google_price_format=False):
 
         # System products: one row for each active tier/variant.
         if product.is_system:
-            for variant in product.variants.filter(active=True).order_by("sort_order", "id"):
+            active_system_variants = product.variants.filter(active=True).order_by("sort_order", "id")
+            if not active_system_variants:
+                # Do not silently drop a newly active system product while its
+                # tiers are still being configured in admin.
+                yield _base_product_offer_row(
+                    request,
+                    product,
+                    base_description=base_description,
+                    base_product_type=base_product_type,
+                    base_brand=base_brand,
+                    base_link=base_link,
+                    base_condition=base_condition,
+                    base_availability=base_availability,
+                    google_price_format=google_price_format,
+                )
+                continue
+
+            for variant in active_system_variants:
                 inventory = variant.get_inventory_data()
                 variant_image = _primary_system_variant_image(variant)
                 image_url = (
-                    request.build_absolute_uri(variant_image.image.url)
+                    _absolute_file_url(request, variant_image.image)
                     if variant_image
                     else _absolute_image_url(request, product)
                 )
@@ -273,7 +346,7 @@ def _iter_feed_offers(request, *, google_price_format=False):
         if active_normal_variants:
             for variant in sorted(active_normal_variants, key=lambda item: (item.sort_order, item.id)):
                 image_url = (
-                    request.build_absolute_uri(variant.image.url)
+                    _absolute_file_url(request, variant.image)
                     if variant.image
                     else _absolute_image_url(request, product)
                 )
@@ -303,23 +376,17 @@ def _iter_feed_offers(request, *, google_price_format=False):
             continue
 
         # Simple products: one row using existing product-level purchasable fields.
-        yield {
-            "id": str(product.id),
-            "title": product.name,
-            "description": base_description,
-            "availability": base_availability,
-            "condition": base_condition,
-            "price": (
-                _google_price(product.sale_price or product.price, product.currency)
-                if google_price_format
-                else _normalized_price(product.sale_price or product.price)
-            ),
-            "link": base_link,
-            "image_link": _absolute_image_url(request, product),
-            "brand": base_brand,
-            "product_type": base_product_type,
-            "additional_image_link": _additional_product_image_urls(request, product),
-        }
+        yield _base_product_offer_row(
+            request,
+            product,
+            base_description=base_description,
+            base_product_type=base_product_type,
+            base_brand=base_brand,
+            base_link=base_link,
+            base_condition=base_condition,
+            base_availability=base_availability,
+            google_price_format=google_price_format,
+        )
 
 
 # NEW: Shared CSV response builder for scheduled catalog fetches.

@@ -1,8 +1,9 @@
-from django.test import TestCase
+from django.test import TestCase, override_settings
 
-from .models import Categorie, Product, ProductImage
+from .models import Categorie, Product, ProductImage, ProductVariant
 
 
+@override_settings(SECURE_SSL_REDIRECT=False, ALLOWED_HOSTS=["testserver"])
 class InternalProductFeedExportTests(TestCase):
     def setUp(self):
         self.camera_category = Categorie.objects.create(
@@ -106,3 +107,50 @@ class InternalProductFeedExportTests(TestCase):
         self.assertIn("manual_category_mapping_products", readiness_gaps)
         self.assertIn("manual_category_mapping_product_types", readiness_gaps)
         self.assertIn("Custom Bundle", readiness_gaps["manual_category_mapping_product_types"])
+
+
+@override_settings(SECURE_SSL_REDIRECT=False, ALLOWED_HOSTS=["testserver"])
+class MetaCatalogFeedCsvTests(TestCase):
+    def test_meta_catalog_feed_includes_active_system_product_without_active_tiers(self):
+        product = Product.objects.create(
+            name="New System Without Ready Tiers",
+            price="399.99",
+            currency="USD",
+            active=True,
+            is_system=True,
+            quantity=2,
+            availability="in stock",
+        )
+        ProductVariant.objects.create(
+            product=product,
+            tier="basic",
+            title="Draft Tier",
+            price="399.99",
+            currency="USD",
+            active=False,
+            quantity=2,
+        )
+
+        response = self.client.get("/meta-catalog-feed.csv")
+
+        self.assertEqual(response.status_code, 200)
+        csv_body = response.content.decode("utf-8")
+        self.assertIn("New System Without Ready Tiers", csv_body)
+        self.assertIn(str(product.id), csv_body)
+
+    def test_meta_catalog_feed_ignores_malformed_image_values(self):
+        product = Product.objects.create(
+            name="Product With Bad Image Value",
+            price="49.99",
+            currency="USD",
+            active=True,
+            quantity=1,
+            availability="in stock",
+        )
+        ProductImage.objects.create(product=product, image="", thumbnail=True)
+
+        response = self.client.get("/meta-catalog-feed.csv")
+
+        self.assertEqual(response.status_code, 200)
+        csv_body = response.content.decode("utf-8")
+        self.assertIn("Product With Bad Image Value", csv_body)
