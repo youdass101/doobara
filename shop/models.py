@@ -82,6 +82,11 @@ class Product(models.Model):
     # boolean ture if the product is featured, else false
     # PERF (P2): indexed because index page pulls featured products frequently.
     featured = models.BooleanField(default=False, db_index=True)
+    shop_sort_order = models.PositiveIntegerField(
+        default=0,
+        db_index=True,
+        help_text="Lower numbers appear first in the default shop product order.",
+    )
     updated_time = models.DateTimeField(auto_now=True)  # Product last updated date
 
     # video is string(url arg)

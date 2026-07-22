@@ -22,10 +22,10 @@ def filter_data(form):
     # if catergory string value is (all) default filter only apply   
     if category == "all":
         # PERF: serializer reads category/images on each product; prefetch avoids N+1 lookups.
-        lop = _with_main_prefetch(Product.objects.filter(active=True))
+        lop = _with_main_prefetch(Product.objects.filter(active=True).order_by("shop_sort_order", "name", "id"))
     else:
         # PERF: category relation used later during serialization as well.
-        lop = _with_main_prefetch(Categorie.objects.get(name=category).products.all())
+        lop = _with_main_prefetch(Categorie.objects.get(name=category).products.all().order_by("shop_sort_order", "name", "id"))
     
    # loc: shop.modeling.serialize_helper 
    # if orderby string value is (default) no filter is applied 
