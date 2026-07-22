@@ -157,11 +157,13 @@ class ProductAdmin(ImportExportActionModelAdmin):
         "quantity",
         "active",
         "featured",
+        "shop_sort_order",
         "updated_time",
     )
     search_fields = ("name", "slug", "sku", "brand")
     list_filter = ("active", "featured", "availability", "stock", "category")
-    ordering = ("-updated_time", "name")
+    list_editable = ("shop_sort_order",)
+    ordering = ("shop_sort_order", "name")
     readonly_fields = ("stock", "created_time", "updated_time")
     prepopulated_fields = {"slug": ("name",)}
     filter_horizontal = ("category",)
@@ -183,6 +185,7 @@ class ProductAdmin(ImportExportActionModelAdmin):
                     "sku",
                     "active",
                     "featured",
+                    "shop_sort_order",
                 )
             },
         ),

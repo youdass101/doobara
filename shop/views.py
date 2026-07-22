@@ -189,7 +189,7 @@ def shop(request):
     # is list of dict | (loc: shop.modeling.serialize_helper (shop.models))
     # all products objects with active TRUE, in serialized dict
     # PERF: serializer touches category/images for each product; prefetch once.
-    slop = _serialize_main_products(Product.objects.filter(active=True))
+    slop = _serialize_main_products(Product.objects.filter(active=True).order_by("shop_sort_order", "name", "id"))
     return _shop_page_response(request, slop)
 
 # I still use this function instead of orderby function for index nav category because here I can use less process
@@ -198,7 +198,7 @@ def shop(request):
 # render shop html template and filtered product objects data serialized in list of dict
 def filtering(request, locat):
     # PERF: category page serializes each product with category/images; prefetch in one query set.
-    slop = _serialize_main_products(Categorie.objects.get(name=locat).products.all())
+    slop = _serialize_main_products(Categorie.objects.get(name=locat).products.all().order_by("shop_sort_order", "name", "id"))
     return _shop_page_response(request, slop)
 
 # request * string -> render (url * dict)  
@@ -455,7 +455,7 @@ def search(request):
         # form input data dictionary (from html)
         form = request.POST['keyword']
         # PERF: search uses the same serializer path as shop list views.
-        slop = _serialize_main_products(Product.objects.filter(name__contains=form))
+        slop = _serialize_main_products(Product.objects.filter(name__contains=form).order_by("shop_sort_order", "name", "id"))
         return _shop_page_response(request, slop)
 
     return _shop_page_response(request, [])
