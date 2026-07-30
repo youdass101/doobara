@@ -24,7 +24,7 @@ from .models import (
 class ProductImageInline(admin.TabularInline):
     model = ProductImage
     extra = 1
-    fields = ("image", "image_preview", "alt_text", "thumbnail", "long_image")
+    fields = ("image", "image_preview", "alt_text", "thumbnail", "meta_image", "long_image")
     readonly_fields = ("image_preview",)
 
     def image_preview(self, obj):
@@ -364,9 +364,9 @@ class NormalProductVariantAdmin(ImportExportActionModelAdmin):
 
 @admin.register(ProductImage)
 class ProductImageAdmin(ImportExportActionModelAdmin):
-    list_display = ("product", "alt_text", "thumbnail", "long_image")
+    list_display = ("product", "alt_text", "thumbnail", "meta_image", "long_image")
     search_fields = ("product__name", "product__sku", "alt_text")
-    list_filter = ("thumbnail", "long_image")
+    list_filter = ("thumbnail", "meta_image", "long_image")
     ordering = ("product__name", "id")
 
 

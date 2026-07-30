@@ -338,6 +338,10 @@ class ProductImage(models.Model):
     # default is boolean 
     # if true the image is the main image for the product 
     thumbnail = models.BooleanField(default=False)  # True if this is a thumbnail image
+    meta_image = models.BooleanField(
+        default=False,
+        help_text="Use this image as the main image in the Meta catalog feed.",
+    )
     long_image = models.BooleanField(default=False)
 
     class Meta:
@@ -348,6 +352,11 @@ class ProductImage(models.Model):
                 condition=models.Q(thumbnail=True),
                 name="shop_one_product_thumbnail_per_product",
             ),
+            models.UniqueConstraint(
+                fields=["product"],
+                condition=models.Q(meta_image=True),
+                name="shop_one_meta_image_per_product",
+            ),
         ]
 
     # data to show on admin page 
@@ -356,18 +365,19 @@ class ProductImage(models.Model):
 
     def clean(self):
         super().clean()
-        if not self.thumbnail or not self.product_id:
+        if not self.product_id:
             return
 
-        # Provide early, user-friendly admin/form error before DB constraint.
-        duplicate_thumbnail_exists = ProductImage.objects.filter(
-            product_id=self.product_id,
-            thumbnail=True,
-        ).exclude(pk=self.pk).exists()
-        if duplicate_thumbnail_exists:
-            raise ValidationError(
-                {"thumbnail": "Only one thumbnail image is allowed per product."}
-            )
+        errors = {}
+        # Provide early, user-friendly admin/form errors before DB constraints.
+        for field, label in (("thumbnail", "thumbnail"), ("meta_image", "Meta catalog")):
+            if getattr(self, field) and ProductImage.objects.filter(
+                product_id=self.product_id,
+                **{field: True},
+            ).exclude(pk=self.pk).exists():
+                errors[field] = f"Only one {label} image is allowed per product."
+        if errors:
+            raise ValidationError(errors)
 
 
 class NormalProductVariant(models.Model):

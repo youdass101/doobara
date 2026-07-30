@@ -1,3 +1,7 @@
+import csv
+import io
+
+from django.core.exceptions import ValidationError
 from django.test import TestCase, override_settings
 
 from .models import Categorie, Product, ProductImage, ProductVariant
@@ -111,6 +115,70 @@ class InternalProductFeedExportTests(TestCase):
 
 @override_settings(SECURE_SSL_REDIRECT=False, ALLOWED_HOSTS=["testserver"])
 class MetaCatalogFeedCsvTests(TestCase):
+    def test_meta_catalog_feed_prefers_selected_meta_image(self):
+        product = Product.objects.create(
+            name="Product With Meta Creative",
+            price="49.99",
+            currency="USD",
+            active=True,
+            quantity=1,
+            availability="in stock",
+        )
+        ProductImage.objects.create(
+            product=product,
+            image="products/images/storefront.jpg",
+            thumbnail=True,
+        )
+        ProductImage.objects.create(
+            product=product,
+            image="products/images/meta-ad.jpg",
+            meta_image=True,
+        )
+
+        response = self.client.get("/meta-catalog-feed.csv")
+        rows = list(csv.DictReader(io.StringIO(response.content.decode("utf-8"))))
+        product_row = next(row for row in rows if row["id"] == str(product.id))
+
+        self.assertTrue(product_row["image_link"].endswith("/products/images/meta-ad.jpg"))
+        self.assertIn("/products/images/storefront.jpg", product_row["additional_image_link"])
+
+    def test_meta_catalog_feed_falls_back_to_thumbnail(self):
+        product = Product.objects.create(
+            name="Product Without Meta Creative",
+            price="49.99",
+            currency="USD",
+            active=True,
+            quantity=1,
+            availability="in stock",
+        )
+        ProductImage.objects.create(
+            product=product,
+            image="products/images/storefront.jpg",
+            thumbnail=True,
+        )
+
+        response = self.client.get("/meta-catalog-feed.csv")
+        rows = list(csv.DictReader(io.StringIO(response.content.decode("utf-8"))))
+        product_row = next(row for row in rows if row["id"] == str(product.id))
+
+        self.assertTrue(product_row["image_link"].endswith("/products/images/storefront.jpg"))
+
+    def test_product_allows_only_one_meta_image(self):
+        product = Product.objects.create(name="One Meta Image", price="10.00")
+        ProductImage.objects.create(
+            product=product,
+            image="products/images/meta-one.jpg",
+            meta_image=True,
+        )
+        duplicate = ProductImage(
+            product=product,
+            image="products/images/meta-two.jpg",
+            meta_image=True,
+        )
+
+        with self.assertRaises(ValidationError):
+            duplicate.full_clean()
+
     def test_meta_catalog_feed_includes_active_system_product_without_active_tiers(self):
         product = Product.objects.create(
             name="New System Without Ready Tiers",
