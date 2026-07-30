@@ -2,8 +2,10 @@ import csv
 import io
 
 from django.core.exceptions import ValidationError
+from django.forms.models import inlineformset_factory
 from django.test import TestCase, override_settings
 
+from .admin import ProductImageInlineForm, ProductImageInlineFormSet
 from .models import Categorie, Product, ProductImage, ProductVariant
 
 
@@ -200,6 +202,91 @@ class MetaCatalogFeedCsvTests(TestCase):
 
         with self.assertRaises(ValidationError):
             duplicate.full_clean()
+
+    def test_admin_inline_can_replace_meta_image_in_one_submission(self):
+        product = Product.objects.create(name="Replace Meta Image", price="10.00")
+        replacement = ProductImage.objects.create(
+            product=product,
+            image="products/images/meta-two.jpg",
+        )
+        # Create the selected row second to prove saving does not rely on the
+        # deselected row appearing first in the inline's primary-key order.
+        current = ProductImage.objects.create(
+            product=product,
+            image="products/images/meta-one.jpg",
+            meta_image=True,
+        )
+        formset_class = inlineformset_factory(
+            Product,
+            ProductImage,
+            form=ProductImageInlineForm,
+            formset=ProductImageInlineFormSet,
+            fields=("image", "meta_image"),
+            extra=0,
+        )
+        formset = formset_class(
+            instance=product,
+            data={
+                "images-TOTAL_FORMS": "2",
+                "images-INITIAL_FORMS": "2",
+                "images-MIN_NUM_FORMS": "0",
+                "images-MAX_NUM_FORMS": "1000",
+                "images-0-id": str(replacement.id),
+                "images-0-product": str(product.id),
+                "images-0-image": replacement.image.name,
+                "images-0-meta_image": "on",
+                "images-1-id": str(current.id),
+                "images-1-product": str(product.id),
+                "images-1-image": current.image.name,
+            },
+        )
+
+        self.assertTrue(formset.is_valid(), formset.errors)
+        formset.save()
+        current.refresh_from_db()
+        replacement.refresh_from_db()
+        self.assertFalse(current.meta_image)
+        self.assertTrue(replacement.meta_image)
+
+    def test_admin_inline_rejects_multiple_meta_images(self):
+        product = Product.objects.create(name="Multiple Meta Images", price="10.00")
+        first = ProductImage.objects.create(
+            product=product,
+            image="products/images/meta-one.jpg",
+        )
+        second = ProductImage.objects.create(
+            product=product,
+            image="products/images/meta-two.jpg",
+        )
+        formset_class = inlineformset_factory(
+            Product,
+            ProductImage,
+            form=ProductImageInlineForm,
+            formset=ProductImageInlineFormSet,
+            fields=("image", "meta_image"),
+            extra=0,
+        )
+        formset = formset_class(
+            instance=product,
+            data={
+                "images-TOTAL_FORMS": "2",
+                "images-INITIAL_FORMS": "2",
+                "images-MIN_NUM_FORMS": "0",
+                "images-MAX_NUM_FORMS": "1000",
+                "images-0-id": str(first.id),
+                "images-0-product": str(product.id),
+                "images-0-image": first.image.name,
+                "images-0-meta_image": "on",
+                "images-1-id": str(second.id),
+                "images-1-product": str(product.id),
+                "images-1-image": second.image.name,
+                "images-1-meta_image": "on",
+            },
+        )
+
+        self.assertFalse(formset.is_valid())
+        self.assertIn("meta_image", formset.forms[0].errors)
+        self.assertIn("meta_image", formset.forms[1].errors)
 
     def test_meta_catalog_feed_includes_active_system_product_without_active_tiers(self):
         product = Product.objects.create(

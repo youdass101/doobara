@@ -370,7 +370,10 @@ class ProductImage(models.Model):
 
         errors = {}
         # Provide early, user-friendly admin/form errors before DB constraints.
-        for field, label in (("thumbnail", "thumbnail"), ("meta_image", "Meta catalog")):
+        # Meta-image uniqueness is validated by the admin inline formset so an
+        # editor can replace the selection in one save; the DB constraint below
+        # remains the final guard for direct writes and concurrent requests.
+        for field, label in (("thumbnail", "thumbnail"),):
             if getattr(self, field) and ProductImage.objects.filter(
                 product_id=self.product_id,
                 **{field: True},
