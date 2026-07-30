@@ -48,7 +48,7 @@ _CSV_FIELDS = [
 ]
 
 
-def _primary_image(product, *, prefer_meta_image=False):
+def _primary_image(request, product, *, prefer_meta_image=False):
     """
     Return the first preferred product image object or None.
     Meta feeds may opt into the admin-selected Meta image before the storefront
@@ -57,7 +57,9 @@ def _primary_image(product, *, prefer_meta_image=False):
     """
     if prefer_meta_image:
         meta_image = product.images.filter(meta_image=True).first()
-        if meta_image:
+        # Legacy image rows can have missing or malformed file values. Only
+        # override the storefront image when the selected file has a usable URL.
+        if meta_image and _absolute_file_url(request, meta_image.image):
             return meta_image
     return product.images.filter(thumbnail=True).first() or product.images.first()
 
@@ -98,7 +100,7 @@ def _absolute_image_url(request, product, *, prefer_meta_image=False):
     Build an absolute image URL when an image exists.
     Returns None for products with no images (null-safe requirement).
     """
-    image = _primary_image(product, prefer_meta_image=prefer_meta_image)
+    image = _primary_image(request, product, prefer_meta_image=prefer_meta_image)
     if not image:
         return None
     return _absolute_file_url(request, image.image)
@@ -107,7 +109,7 @@ def _absolute_image_url(request, product, *, prefer_meta_image=False):
 # NEW: Build optional "additional_image_link" from non-primary product images.
 # Merchant feeds accept a comma-separated list in a single column for CSV exports.
 def _additional_product_image_urls(request, product, *, prefer_meta_image=False):
-    primary = _primary_image(product, prefer_meta_image=prefer_meta_image)
+    primary = _primary_image(request, product, prefer_meta_image=prefer_meta_image)
     urls = []
     for image in product.images.all():
         if primary and image.id == primary.id:

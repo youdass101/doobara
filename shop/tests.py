@@ -163,6 +163,28 @@ class MetaCatalogFeedCsvTests(TestCase):
 
         self.assertTrue(product_row["image_link"].endswith("/products/images/storefront.jpg"))
 
+    def test_meta_catalog_feed_falls_back_when_selected_meta_image_is_empty(self):
+        product = Product.objects.create(
+            name="Product With Empty Meta Creative",
+            price="49.99",
+            currency="USD",
+            active=True,
+            quantity=1,
+            availability="in stock",
+        )
+        ProductImage.objects.create(
+            product=product,
+            image="products/images/storefront.jpg",
+            thumbnail=True,
+        )
+        ProductImage.objects.create(product=product, image="", meta_image=True)
+
+        response = self.client.get("/meta-catalog-feed.csv")
+        rows = list(csv.DictReader(io.StringIO(response.content.decode("utf-8"))))
+        product_row = next(row for row in rows if row["id"] == str(product.id))
+
+        self.assertTrue(product_row["image_link"].endswith("/products/images/storefront.jpg"))
+
     def test_product_allows_only_one_meta_image(self):
         product = Product.objects.create(name="One Meta Image", price="10.00")
         ProductImage.objects.create(
