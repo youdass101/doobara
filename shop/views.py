@@ -543,7 +543,11 @@ def meta_catalog_feed_csv(request):
     NEW: Public CSV endpoint for Meta Commerce Manager scheduled fetches.
     Uses the same normalized offer rows to avoid logic drift.
     """
-    return build_catalog_csv_response(request, filename="meta-catalog-feed.csv")
+    return build_catalog_csv_response(
+        request,
+        filename="meta-catalog-feed.csv",
+        prefer_meta_image=True,
+    )
 
 
 # request -> render(url)

@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.forms.models import BaseInlineFormSet
 from django.utils.html import format_html
 from django import forms
 from import_export.admin import ImportExportActionModelAdmin
@@ -22,10 +23,68 @@ from .models import (
 )
 
 
+class ProductImageInlineForm(forms.ModelForm):
+    class Meta:
+        model = ProductImage
+        fields = "__all__"
+
+    def _get_validation_exclusions(self):
+        exclusions = super()._get_validation_exclusions()
+        # The inline formset validates this flag across the complete submitted
+        # collection, so an existing selection can be cleared and replaced at once.
+        exclusions.add("meta_image")
+        return exclusions
+
+
+class ProductImageInlineFormSet(BaseInlineFormSet):
+    def clean(self):
+        super().clean()
+        if any(self.errors):
+            return
+
+        selected_forms = [
+            form
+            for form in self.forms
+            if form.cleaned_data
+            and not form.cleaned_data.get("DELETE", False)
+            and form.cleaned_data.get("meta_image", False)
+        ]
+        if len(selected_forms) > 1:
+            message = "Only one Meta catalog image is allowed per product."
+            for form in selected_forms:
+                form.add_error("meta_image", message)
+
+    def save(self, commit=True):
+        if commit:
+            # Clear deselected rows before Django saves newly selected rows. This
+            # ordering avoids the database constraint regardless of inline order.
+            cleared_ids = [
+                form.instance.pk
+                for form in self.forms
+                if form.instance.pk
+                and form.cleaned_data
+                and not form.cleaned_data.get("DELETE", False)
+                and not form.cleaned_data.get("meta_image", False)
+                and "meta_image" in form.changed_data
+            ]
+            ProductImage.objects.filter(pk__in=cleared_ids).update(meta_image=False)
+        return super().save(commit=commit)
+
+
 class ProductImageInline(admin.TabularInline):
     model = ProductImage
+    form = ProductImageInlineForm
+    formset = ProductImageInlineFormSet
     extra = 1
-    fields = ("asset", "image", "image_preview", "alt_text", "thumbnail", "long_image")
+    fields = (
+        "asset",
+        "image",
+        "image_preview",
+        "alt_text",
+        "thumbnail",
+        "meta_image",
+        "long_image",
+    )
     autocomplete_fields = ("asset",)
     readonly_fields = ("image_preview",)
 
@@ -379,9 +438,9 @@ class NormalProductVariantAdmin(ImportExportActionModelAdmin):
 
 @admin.register(ProductImage)
 class ProductImageAdmin(ImportExportActionModelAdmin):
-    list_display = ("product", "asset", "alt_text", "thumbnail", "long_image")
+    list_display = ("product", "asset", "alt_text", "thumbnail", "meta_image", "long_image")
     search_fields = ("product__name", "product__sku", "alt_text")
-    list_filter = ("thumbnail", "long_image")
+    list_filter = ("thumbnail", "meta_image", "long_image")
     ordering = ("product__name", "id")
 
 

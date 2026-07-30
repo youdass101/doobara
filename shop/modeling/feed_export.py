@@ -48,11 +48,19 @@ _CSV_FIELDS = [
 ]
 
 
-def _primary_image(product):
+def _primary_image(request, product, *, prefer_meta_image=False):
     """
-    Return the first preferred product image object (thumbnail first) or None.
+    Return the first preferred product image object or None.
+    Meta feeds may opt into the admin-selected Meta image before the storefront
+    thumbnail; all other callers retain the existing thumbnail-first behavior.
     This stays internal so storefront serializers are not affected.
     """
+    if prefer_meta_image:
+        meta_image = product.images.filter(meta_image=True).first()
+        # Legacy image rows can have missing or malformed file values. Only
+        # override the storefront image when the selected file has a usable URL.
+        if meta_image and _absolute_file_url(request, meta_image.image):
+            return meta_image
     return product.images.filter(thumbnail=True).first() or product.images.first()
 
 
@@ -87,12 +95,12 @@ def _absolute_file_url(request, file_field):
         return None
 
 
-def _absolute_image_url(request, product):
+def _absolute_image_url(request, product, *, prefer_meta_image=False):
     """
     Build an absolute image URL when an image exists.
     Returns None for products with no images (null-safe requirement).
     """
-    image = _primary_image(product)
+    image = _primary_image(request, product, prefer_meta_image=prefer_meta_image)
     if not image:
         return None
     return _absolute_file_url(request, image.image)
@@ -100,8 +108,8 @@ def _absolute_image_url(request, product):
 
 # NEW: Build optional "additional_image_link" from non-primary product images.
 # Merchant feeds accept a comma-separated list in a single column for CSV exports.
-def _additional_product_image_urls(request, product):
-    primary = _primary_image(product)
+def _additional_product_image_urls(request, product, *, prefer_meta_image=False):
+    primary = _primary_image(request, product, prefer_meta_image=prefer_meta_image)
     urls = []
     for image in product.images.all():
         if primary and image.id == primary.id:
@@ -255,6 +263,7 @@ def _base_product_offer_row(
     base_condition,
     base_availability,
     google_price_format,
+    prefer_meta_image,
 ):
     """
     Build the parent product offer used for simple products and for active
@@ -272,14 +281,20 @@ def _base_product_offer_row(
             else _normalized_price(product.sale_price or product.price)
         ),
         "link": base_link,
-        "image_link": _absolute_image_url(request, product),
+        "image_link": _absolute_image_url(
+            request, product, prefer_meta_image=prefer_meta_image
+        ),
         "brand": base_brand,
         "product_type": base_product_type,
-        "additional_image_link": _additional_product_image_urls(request, product),
+        "additional_image_link": _additional_product_image_urls(
+            request, product, prefer_meta_image=prefer_meta_image
+        ),
     }
 
 
-def _iter_feed_offers(request, *, google_price_format=False):
+def _iter_feed_offers(
+    request, *, google_price_format=False, prefer_meta_image=False
+):
     for product in product_feed_queryset():
         base_description = _plain_text_description(
             product.short_description or product.description
@@ -289,6 +304,13 @@ def _iter_feed_offers(request, *, google_price_format=False):
         base_link = _absolute_product_url(request, product)
         base_condition = "new"
         base_availability = _normalized_availability(product)
+        # Resolve the optional Meta creative once per product so variant-heavy
+        # catalogs do not repeat the same related-image lookup for every offer.
+        selected_meta_image = (
+            product.images.filter(meta_image=True).first()
+            if prefer_meta_image
+            else None
+        )
 
         # System products: one row for each active tier/variant.
         if product.is_system:
@@ -306,6 +328,7 @@ def _iter_feed_offers(request, *, google_price_format=False):
                     base_condition=base_condition,
                     base_availability=base_availability,
                     google_price_format=google_price_format,
+                    prefer_meta_image=prefer_meta_image,
                 )
                 continue
 
@@ -313,9 +336,13 @@ def _iter_feed_offers(request, *, google_price_format=False):
                 inventory = variant.get_inventory_data()
                 variant_image = _primary_system_variant_image(variant)
                 image_url = (
+                    _absolute_file_url(request, selected_meta_image.image)
+                    if selected_meta_image
+                    else (
                     _absolute_file_url(request, variant_image.image)
                     if variant_image
                     else _absolute_image_url(request, product)
+                    )
                 )
                 offer_description = _plain_text_description(
                     variant.short_description or variant.description or base_description
@@ -335,7 +362,9 @@ def _iter_feed_offers(request, *, google_price_format=False):
                     "image_link": image_url,
                     "brand": base_brand,
                     "product_type": base_product_type,
-                    "additional_image_link": _additional_product_image_urls(request, product),
+                    "additional_image_link": _additional_product_image_urls(
+                        request, product, prefer_meta_image=prefer_meta_image
+                    ),
                 }
             continue
 
@@ -346,9 +375,13 @@ def _iter_feed_offers(request, *, google_price_format=False):
         if active_normal_variants:
             for variant in sorted(active_normal_variants, key=lambda item: (item.sort_order, item.id)):
                 image_url = (
+                    _absolute_file_url(request, selected_meta_image.image)
+                    if selected_meta_image
+                    else (
                     _absolute_file_url(request, variant.image)
                     if variant.image
                     else _absolute_image_url(request, product)
+                    )
                 )
                 offer_description = _plain_text_description(
                     variant.short_description or base_description
@@ -371,7 +404,9 @@ def _iter_feed_offers(request, *, google_price_format=False):
                     "image_link": image_url,
                     "brand": base_brand,
                     "product_type": base_product_type,
-                    "additional_image_link": _additional_product_image_urls(request, product),
+                    "additional_image_link": _additional_product_image_urls(
+                        request, product, prefer_meta_image=prefer_meta_image
+                    ),
                 }
             continue
 
@@ -386,17 +421,24 @@ def _iter_feed_offers(request, *, google_price_format=False):
             base_condition=base_condition,
             base_availability=base_availability,
             google_price_format=google_price_format,
+            prefer_meta_image=prefer_meta_image,
         )
 
 
 # NEW: Shared CSV response builder for scheduled catalog fetches.
-def build_catalog_csv_response(request, *, filename, google_price_format=False):
+def build_catalog_csv_response(
+    request, *, filename, google_price_format=False, prefer_meta_image=False
+):
     response = HttpResponse(content_type="text/csv; charset=utf-8")
     response["Content-Disposition"] = f'inline; filename="{filename}"'
 
     writer = csv.DictWriter(response, fieldnames=_CSV_FIELDS, extrasaction="ignore")
     writer.writeheader()
-    for row in _iter_feed_offers(request, google_price_format=google_price_format):
+    for row in _iter_feed_offers(
+        request,
+        google_price_format=google_price_format,
+        prefer_meta_image=prefer_meta_image,
+    ):
         writer.writerow(row)
 
     return response
