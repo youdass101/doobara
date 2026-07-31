@@ -6,6 +6,7 @@ from django.forms.models import inlineformset_factory
 from django.test import TestCase, override_settings
 
 from .admin import ProductImageInlineForm, ProductImageInlineFormSet
+from .modeling.serialize_helper import product_serialize
 from .models import Categorie, Product, ProductImage, ProductVariant
 
 
@@ -117,6 +118,33 @@ class InternalProductFeedExportTests(TestCase):
 
 @override_settings(SECURE_SSL_REDIRECT=False, ALLOWED_HOSTS=["testserver"])
 class MetaCatalogFeedCsvTests(TestCase):
+    def test_meta_catalog_feed_is_not_cached(self):
+        response = self.client.get("/meta-catalog-feed.csv")
+
+        self.assertIn("no-cache", response.headers["Cache-Control"])
+        self.assertIn("no-store", response.headers["Cache-Control"])
+
+    def test_meta_image_is_excluded_from_storefront_images(self):
+        product = Product.objects.create(name="Separate Meta Creative", price="10.00")
+        storefront = ProductImage.objects.create(
+            product=product,
+            image="products/images/storefront.jpg",
+            thumbnail=True,
+        )
+        ProductImage.objects.create(
+            product=product,
+            image="products/images/meta-only.jpg",
+            meta_image=True,
+        )
+
+        serialized = product_serialize(product, "product")
+
+        self.assertEqual(serialized["main_image"]["url"], storefront.image.url)
+        self.assertEqual(
+            [image["url"] for image in serialized["all_images"]],
+            [storefront.image.url],
+        )
+
     def test_meta_catalog_feed_prefers_selected_meta_image(self):
         product = Product.objects.create(
             name="Product With Meta Creative",

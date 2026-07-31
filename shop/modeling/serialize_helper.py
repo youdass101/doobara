@@ -3,7 +3,12 @@ import markdown
 
 
 def _get_primary_image(product):
-    primary = product.images.filter(thumbnail=True).first() or product.images.first()
+    # Meta catalog creatives are feed-only assets and must not leak into the
+    # storefront gallery or become its fallback primary image.
+    storefront_images = product.images.filter(meta_image=False)
+    primary = (
+        storefront_images.filter(thumbnail=True).first() or storefront_images.first()
+    )
     if not primary:
         return None
     return {
@@ -20,7 +25,7 @@ def _get_all_images(product):
             "alt_text": image.alt_text or product.name,
             "thumbnail": image.thumbnail,
         }
-        for image in product.images.filter(long_image=False)
+        for image in product.images.filter(long_image=False, meta_image=False)
     ]
 
 

@@ -7,6 +7,7 @@ from .models import *
 from django.urls import reverse
 from django.db.models import Q
 from django.core.serializers.json import DjangoJSONEncoder
+from django.views.decorators.cache import never_cache
 
 # Created modules to manage shop page functions
 from .modeling.serialize_helper import *
@@ -499,10 +500,12 @@ def google_product_feed_csv(request):
     )
 
 
+@never_cache
 def meta_catalog_feed_csv(request):
     """
     NEW: Public CSV endpoint for Meta Commerce Manager scheduled fetches.
-    Uses the same normalized offer rows to avoid logic drift.
+    Uses the same normalized offer rows to avoid logic drift. The response is
+    deliberately uncached so a scheduled fetch sees a newly selected creative.
     """
     return build_catalog_csv_response(
         request,
