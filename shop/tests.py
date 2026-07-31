@@ -6,7 +6,7 @@ from django.forms.models import inlineformset_factory
 from django.test import TestCase, override_settings
 
 from .admin import ProductImageInlineForm, ProductImageInlineFormSet
-from .models import Categorie, Product, ProductImage, ProductVariant
+from .models import Categorie, MediaAsset, Product, ProductImage, ProductVariant
 
 
 @override_settings(SECURE_SSL_REDIRECT=False, ALLOWED_HOSTS=["testserver"])
@@ -117,6 +117,48 @@ class InternalProductFeedExportTests(TestCase):
 
 @override_settings(SECURE_SSL_REDIRECT=False, ALLOWED_HOSTS=["testserver"])
 class MetaCatalogFeedCsvTests(TestCase):
+    def test_media_asset_meta_image_is_feed_only(self):
+        product = Product.objects.create(
+            name="Product With Reusable Meta Creative",
+            price="49.99",
+            currency="USD",
+            active=True,
+            quantity=1,
+            availability="in stock",
+        )
+        ProductImage.objects.create(
+            product=product,
+            image="products/images/storefront.jpg",
+            thumbnail=True,
+        )
+        meta_asset = MediaAsset.objects.create(
+            file="product_media/meta-creative.jpg",
+            alt_text="Catalog-only creative",
+        )
+        ProductImage.objects.create(
+            product=product,
+            asset=meta_asset,
+            meta_image=True,
+        )
+
+        response = self.client.get("/meta-catalog-feed.csv")
+        rows = list(csv.DictReader(io.StringIO(response.content.decode("utf-8"))))
+        product_row = next(row for row in rows if row["id"] == str(product.id))
+        storefront_product = product.serialize("all")
+
+        self.assertTrue(
+            product_row["image_link"].endswith("/product_media/meta-creative.jpg")
+        )
+        self.assertTrue(
+            storefront_product["main_image"]["url"].endswith(
+                "/products/images/storefront.jpg"
+            )
+        )
+        self.assertNotIn(
+            "/product_media/meta-creative.jpg",
+            [image["url"] for image in storefront_product["all_images"]],
+        )
+
     def test_meta_catalog_feed_prefers_selected_meta_image(self):
         product = Product.objects.create(
             name="Product With Meta Creative",
