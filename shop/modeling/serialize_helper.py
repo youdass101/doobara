@@ -22,7 +22,10 @@ def _resolved_alt_text(image_relation, fallback_text):
 
 
 def _get_primary_image(product):
-    primary = product.images.filter(thumbnail=True).first() or product.images.first()
+    # Meta catalog creatives are feed-only and must never replace a storefront
+    # thumbnail or appear as the storefront fallback image.
+    storefront_images = product.images.filter(meta_image=False)
+    primary = storefront_images.filter(thumbnail=True).first() or storefront_images.first()
     if not primary:
         return None
     image_url = _resolved_media_url(primary)
@@ -38,7 +41,8 @@ def _get_primary_image(product):
 def _get_all_images(product):
     return [
         payload
-        for image in product.images.filter(long_image=False)
+        # A Meta creative is intentionally hidden from every storefront gallery.
+        for image in product.images.filter(long_image=False, meta_image=False)
         if (
             payload := {
                 "url": _resolved_media_url(image),
@@ -50,7 +54,7 @@ def _get_all_images(product):
 
 
 def _get_long_image(product):
-    long_image = product.images.filter(long_image=True).first()
+    long_image = product.images.filter(long_image=True, meta_image=False).first()
     if not long_image:
         return None
     image_url = _resolved_media_url(long_image)

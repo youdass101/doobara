@@ -58,10 +58,11 @@ def _primary_image(request, product, *, prefer_meta_image=False):
     if prefer_meta_image:
         meta_image = product.images.filter(meta_image=True).first()
         # Legacy image rows can have missing or malformed file values. Only
-        # override the storefront image when the selected file has a usable URL.
-        if meta_image and _absolute_file_url(request, meta_image.image):
+        # override the default feed image when the selected file has a usable URL.
+        if meta_image and _absolute_relation_image_url(request, meta_image):
             return meta_image
-    return product.images.filter(thumbnail=True).first() or product.images.first()
+    storefront_images = product.images.filter(meta_image=False)
+    return storefront_images.filter(thumbnail=True).first() or storefront_images.first()
 
 
 # NEW: System-tier variants have their own image relation, so we mirror existing
@@ -95,6 +96,13 @@ def _absolute_file_url(request, file_field):
         return None
 
 
+def _absolute_relation_image_url(request, image_relation):
+    """Resolve reusable MediaAsset files before legacy direct uploads."""
+    if image_relation.asset and image_relation.asset.file:
+        return _absolute_file_url(request, image_relation.asset.file)
+    return _absolute_file_url(request, image_relation.image)
+
+
 def _absolute_image_url(request, product, *, prefer_meta_image=False):
     """
     Build an absolute image URL when an image exists.
@@ -103,7 +111,7 @@ def _absolute_image_url(request, product, *, prefer_meta_image=False):
     image = _primary_image(request, product, prefer_meta_image=prefer_meta_image)
     if not image:
         return None
-    return _absolute_file_url(request, image.image)
+    return _absolute_relation_image_url(request, image)
 
 
 # NEW: Build optional "additional_image_link" from non-primary product images.
@@ -111,10 +119,10 @@ def _absolute_image_url(request, product, *, prefer_meta_image=False):
 def _additional_product_image_urls(request, product, *, prefer_meta_image=False):
     primary = _primary_image(request, product, prefer_meta_image=prefer_meta_image)
     urls = []
-    for image in product.images.all():
+    for image in product.images.filter(meta_image=False):
         if primary and image.id == primary.id:
             continue
-        image_url = _absolute_file_url(request, image.image)
+        image_url = _absolute_relation_image_url(request, image)
         if image_url:
             urls.append(image_url)
     return ", ".join(urls) if urls else None
@@ -336,7 +344,7 @@ def _iter_feed_offers(
                 inventory = variant.get_inventory_data()
                 variant_image = _primary_system_variant_image(variant)
                 image_url = (
-                    _absolute_file_url(request, selected_meta_image.image)
+                    _absolute_relation_image_url(request, selected_meta_image)
                     if selected_meta_image
                     else (
                     _absolute_file_url(request, variant_image.image)
@@ -375,7 +383,7 @@ def _iter_feed_offers(
         if active_normal_variants:
             for variant in sorted(active_normal_variants, key=lambda item: (item.sort_order, item.id)):
                 image_url = (
-                    _absolute_file_url(request, selected_meta_image.image)
+                    _absolute_relation_image_url(request, selected_meta_image)
                     if selected_meta_image
                     else (
                     _absolute_file_url(request, variant.image)
