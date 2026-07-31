@@ -30,7 +30,9 @@ def _get_all_images(product):
 
 
 def _get_long_image(product):
-    long_image = product.images.filter(long_image=True).first()
+    # A Meta creative remains feed-only even if an administrator also marks it
+    # as the storefront's long image.
+    long_image = product.images.filter(long_image=True, meta_image=False).first()
     if not long_image:
         return None
     return {

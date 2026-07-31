@@ -145,6 +145,19 @@ class MetaCatalogFeedCsvTests(TestCase):
             [storefront.image.url],
         )
 
+    def test_meta_image_is_excluded_from_storefront_long_image(self):
+        product = Product.objects.create(name="Meta Long Creative", price="10.00")
+        ProductImage.objects.create(
+            product=product,
+            image="products/images/meta-long.jpg",
+            meta_image=True,
+            long_image=True,
+        )
+
+        serialized = product_serialize(product, "product")
+
+        self.assertIsNone(serialized["long_image"])
+
     def test_meta_catalog_feed_prefers_selected_meta_image(self):
         product = Product.objects.create(
             name="Product With Meta Creative",
