@@ -1,3 +1,4 @@
+import { renderProductPrice } from './productPrice.js';
 export function initProductVariants() {
   // Normal product variants are separate from system variants.
   // This initializer only handles non-system single-product variant switching.
@@ -96,7 +97,7 @@ export function initProductVariants() {
     }
 
     const activePrice = selectedVariant.sale_price ?? selectedVariant.price;
-    productPrice.innerHTML = `$ ${Number(activePrice).toFixed(2)}`;
+    renderProductPrice(productPrice, selectedVariant);
 
     addToCartButton.dataset.normalVariantId = String(selectedVariant.id);
     addToCartButton.dataset.gaItemId = String(selectedVariant.id);

@@ -1,0 +1,2 @@
+{# Retain the regular price beside the actual purchase price when a sale is set. #}
+{% if item.sale_price %}<del class="product-price-original">$ {{ item.price|floatformat:2 }}</del> <span>$ {{ item.sale_price|floatformat:2 }}</span>{% else %}<span>$ {{ item.price|floatformat:2 }}</span>{% endif %}

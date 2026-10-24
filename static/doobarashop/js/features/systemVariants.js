@@ -1,3 +1,4 @@
+import { renderProductPrice } from './productPrice.js';
 import { sendJson } from '../core/http.js';
 
 // GA4 + Meta Pixel analytics: emit add_to_cart/AddToCart for system variants only after successful add.
@@ -103,8 +104,7 @@ function renderVariant(variant) {
     });
   }
   if (price) {
-    const activePrice = variant.sale_price ?? variant.price;
-    price.textContent = `$ ${Number(activePrice).toFixed(2)}`;
+    renderProductPrice(price, variant);
   }
 
   if (availability) {

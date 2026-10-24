@@ -68,6 +68,7 @@
                     <a href="{{ row.url }}" class="shop-card__link">
 
                         <div class="shop-card__media">
+                            {% if row.has_sale %}<span class="shop-card__sale-badge">Sale</span>{% endif %}
                             {% if row.main_image %}
                                 <img src="{{ row.main_image.url }}"
                                      alt="{{ row.main_image.alt_text }}"
@@ -81,7 +82,7 @@
 
                         <div class="shop-card__content">
                             <h2 class="shop-card__title">{{ row.title }}</h2>
-                            <p class="shop-card__price">{{ row.price_display|default:"$ 0.00" }}</p>
+                            <p class="shop-card__price">{% if row.has_sale %}<del class="shop-card__price-original">{{ row.regular_price_display }}</del> {% endif %}<span>{{ row.price_display|default:"$ 0.00" }}</span></p>
                         </div>
                     </a>
 

@@ -155,6 +155,13 @@ def product_serialize(object, tag):
     # Listing price reflects selectable option price range when needed.
     price_min, price_max = _get_selectable_price_bounds(object)
     price_display = _format_price_range(price_min, price_max)
+    # Compare the same selectable options at regular prices; parent prices do not
+    # describe a configurable product's actual range.
+    selectable = list(object.variants.all()) if object.is_system else active_normal_variants
+    selectable = [variant for variant in selectable if variant.active]
+    regular_prices = [variant.price for variant in selectable] or [object.price]
+    has_sale = any(bool(variant.sale_price) for variant in selectable) if selectable else bool(object.sale_price)
+    regular_price_display = _format_price_range(min(regular_prices), max(regular_prices))
 
 
     # is a Dictionary
@@ -173,6 +180,9 @@ def product_serialize(object, tag):
             "url": object.get_absolute_url(),
             "pprice": object.price,
             "price": object.price,
+            "sale_price": object.sale_price,
+            "has_sale": has_sale,
+            "regular_price_display": regular_price_display,
             "price_display": price_display,
             "price_min": price_min,
             "price_max": price_max,
@@ -211,6 +221,9 @@ def product_serialize(object, tag):
             "url": object.get_absolute_url(),
             "pprice": object.price,
             "price": object.price,
+            "sale_price": object.sale_price,
+            "has_sale": has_sale,
+            "regular_price_display": regular_price_display,
             "price_display": price_display,
             "price_min": price_min,
             "price_max": price_max,

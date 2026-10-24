@@ -833,3 +833,44 @@ body.is-lightbox-open {
 .single-product-long-image-card { margin: 24px 0; }
 .single-product-long-image-card img { width: 100%; height: auto; display: block; border-radius: 12px; }
 
+
+// Overlay the sale label without changing image dimensions or gallery layout.
+.single-product-sale-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    z-index: 2;
+    padding: 5px 10px;
+    border-radius: var.$pill-radius;
+    background: var.$ui-danger;
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: 700;
+    line-height: 1.2;
+    pointer-events: none;
+}
+
+.single-product-sale-badge[hidden] { display: none; }
+
+// Let prices wrap on narrow screens while preserving their existing alignment.
+.product-price-original {
+    color: var.$ui-text-soft;
+    white-space: nowrap;
+}
+
+.single-product-price, .system-variant-option__price {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 4px 8px;
+}
+
+// Price children must inherit explicitly because the global reset sets a font
+// size and weight on every element, overriding normal parent inheritance.
+.single-product-price > span,
+.single-product-price > del,
+.system-variant-option__price > span,
+.system-variant-option__price > del {
+    font-size: inherit;
+    font-weight: inherit;
+}

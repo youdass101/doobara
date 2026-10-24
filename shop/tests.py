@@ -373,3 +373,55 @@ class MetaCatalogFeedCsvTests(TestCase):
         self.assertEqual(response.status_code, 200)
         csv_body = response.content.decode("utf-8")
         self.assertIn("Product With Bad Image Value", csv_body)
+
+
+class SalePriceDisplayTests(TestCase):
+    # Exercise the shared serializer and rendered price fragment so catalog and
+    # detail pages cannot silently lose the original or sale amount again.
+    def setUp(self):
+        self.product = Product.objects.create(
+            name="Sale display product", price="100.00", sale_price="80.00",
+            active=True, quantity=3,
+        )
+
+    def test_simple_sale_is_available_to_catalog_and_detail(self):
+        from decimal import Decimal
+        from django.template.loader import render_to_string
+
+        for tag in ("main", "single"):
+            with self.subTest(tag=tag):
+                data = self.product.serialize(tag)
+                self.assertEqual(data["sale_price"], Decimal("80.00"))
+                self.assertTrue(data["has_sale"])
+                self.assertEqual(data["regular_price_display"], "$ 100.00")
+                self.assertEqual(data["price_display"], "$ 80.00")
+                html = render_to_string("shop/_sale_price.html", {"item": data})
+                self.assertIn('<del class="product-price-original">$ 100.00</del>', html)
+                self.assertIn('<span>$ 80.00</span>', html)
+
+    def test_regular_price_has_no_strike_through(self):
+        from django.template.loader import render_to_string
+
+        self.product.sale_price = None
+        data = self.product.serialize("single")
+        self.assertFalse(data["has_sale"])
+        html = render_to_string("shop/_sale_price.html", {"item": data})
+        self.assertNotIn("<del", html)
+        self.assertIn('<span>$ 100.00</span>', html)
+
+    def test_normal_variant_ranges_use_active_options_not_parent_price(self):
+        from .models import NormalProductVariant
+
+        NormalProductVariant.objects.create(
+            product=self.product, title="Sale option", price="30.00", sale_price="20.00",
+        )
+        NormalProductVariant.objects.create(
+            product=self.product, title="Regular option", price="50.00",
+        )
+        NormalProductVariant.objects.create(
+            product=self.product, title="Inactive option", price="200.00", active=False,
+        )
+        data = self.product.serialize("main")
+        self.assertTrue(data["has_sale"])
+        self.assertEqual(data["regular_price_display"], "$ 30.00 - $ 50.00")
+        self.assertEqual(data["price_display"], "$ 20.00 - $ 50.00")

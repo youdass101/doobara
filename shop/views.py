@@ -114,7 +114,7 @@ def _build_product_json_ld(request, product_data, parent_product, default_varian
         ).get("url")
     # Standard product path: use base product pricing/inventory data.
     else:
-        offer_price = product_data.get("price")
+        offer_price = product_data.get("sale_price") or product_data.get("price")
         offer_currency = product_data.get("currency") or "USD"
         offer_availability = _schema_offer_availability_url(
             in_stock=bool(product_data.get("in_stock")),
